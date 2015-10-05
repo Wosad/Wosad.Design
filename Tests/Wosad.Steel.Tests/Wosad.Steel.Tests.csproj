@@ -71,6 +71,9 @@
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\AISC360_10\K_HSS\TrussConnections\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Wosad.Steel.Tests.licenseheader" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
