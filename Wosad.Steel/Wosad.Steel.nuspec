@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="Wosad.Common" version="0.0.1.3" />
+      </group>
+    </dependencies>
+    <id>Wosad.Steel</id>
+    <version>0.0.1.1</version>
+    <title>Wosad.Steel</title>
+    <authors>Wosad Inc</authors>
+    <description>Structural engineering automation library. Components for structural steel element and connection design for buildings and other structures, per AISC 360 standard.</description>
+    <language>en-US</language>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://www.wosad.com</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <developmentDependency>false</developmentDependency>
+    <copyright>Copyright Wosad Inc © 2015</copyright>
+  </metadata>
+  <files>
+    <file src="D:\Wosad\SourceDynamo2\Wosad.Design\Wosad.Steel\bin\Release\Wosad.Steel.dll" target="lib\net45" />
+  </files>
+</package>

@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5774FABD-0F85-451D-AB52-9CC1EF9ED518}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wosad.Concrete</RootNamespace>
+    <AssemblyName>Wosad.Concrete</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="clipper_library, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Clipper.6.2.10\lib\net40\clipper_library.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wosad.Common, Version=0.0.1.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.1.3\lib\net45\Wosad.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSection.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSectionFlexure.cs" />
+    <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />
+    <Compile Include="ACI\ACI318_14\C19_Concrete\Concrete.cs" />
+    <Compile Include="ACI\ACI318_14\C19_Concrete\ConcretePrestressed.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSectionShear.cs" />
+    <Compile Include="ACI\Interfaces\IShearSection.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionBase.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionBaseConcrete.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionBaseIteration.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionBaseRebar.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionBaseStrains.cs" />
+    <Compile Include="ACI\Entities\Rebar\A416.cs" />
+    <Compile Include="ACI\Entities\Rebar\A416Grade.cs" />
+    <Compile Include="ACI\Entities\Rebar\A615.cs" />
+    <Compile Include="ACI\Entities\Rebar\A706.cs" />
+    <Compile Include="ACI\Entities\Rebar\StrandType.cs" />
+    <Compile Include="ACI\Entities\Concrete\TypeOfLightweightConcrete.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\CrossSectionLocationType.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\MemberClass.cs" />
+    <Compile Include="ACI\ACI318_14\C24_Serviceability\PrestressedConcreteBeamSection.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\CrossSectionShapes\CrossSectionGeneralShape.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\CrossSectionShapes\CrossSectionRectangularShape.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\CrossSectionShapes\PrestressedConcreteSectionGeneral.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\CrossSectionShapes\PrestressedConcreteSectionRectangular.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Common\Development.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Common\DevelopmentStrings.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Common\ExcessReinforcement.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Common\LambdaCheck.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Common\Splice.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Compression\CompressionDevelopment.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Compression\CompressionDevelopmentLength.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Compression\CompressionDevelopmentStrings.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\SpacingOrCoverDimension-cb.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionConfinement-Ktr.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionDevelopment.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionDevelopmentLength.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionDevelopmentStrings.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHook-Standard.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHookDevelopmentLength.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHookKsiFactors.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHookLambda.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHookModifiers.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionHookStrings.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionKsiFactors.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionLapSplice.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionLapSpliceClass.cs" />
+    <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Tension\TensionLapSpliceLength.cs" />
+    <Compile Include="ACI\Analysis\Section\RebarPointResult.cs" />
+    <Compile Include="ACI\Analysis\Section\SectionAnalysisResult.cs" />
+    <Compile Include="ACI\Analysis\Section\SectionFlexuralAnalysisResult.cs" />
+    <Compile Include="ACI\Entities\Concrete\ConcreteTypeByWeight.cs" />
+    <Compile Include="ACI\Entities\Beam\ReinforcementArrangement.cs" />
+    <Compile Include="ACI\Entities\Beam\SectionType.cs" />
+    <Compile Include="ACI\Entities\General\MemberPrestressClassification.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarA615Grade.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarDesignation.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarSpecification.cs" />
+    <Compile Include="ACI\Entities\Rebar\ReinforcementA416Grade.cs" />
+    <Compile Include="ACI\Entities\Rebar\StirrupConfiguration.cs" />
+    <Compile Include="ACI\Entities\Shear\ShearForceState.cs" />
+    <Compile Include="ACI\Entities\Concrete\ConcreteConstants.cs" />
+    <Compile Include="ACI\Entities\AxialMember\AxialMemberBase.cs" />
+    <Compile Include="ACI\Entities\Beam\ConcreteFlexuralSectionBase.cs" />
+    <Compile Include="ACI\Entities\Beam\ConcreteFlexuralSectionBaseStrains.cs" />
+    <Compile Include="ACI\Entities\Beam\ConcreteFlexuralSectionSinglyReinforcedBase.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\LoadType.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\PrestressedBeamSectionBase.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\PSBmSectionBaseIteration.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\PSBmSectionBasePrestressing.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\PSBmSectionBaseService.cs" />
+    <Compile Include="ACI\Entities\Beam\Prestressed\StageType.cs" />
+    <Compile Include="ACI\Entities\Beam\TCIterationBound.cs" />
+    <Compile Include="ACI\Entities\Concrete\ConcreteMaterialBase.cs" />
+    <Compile Include="ACI\Entities\Concrete\ConcreteUltimateStrain.cs" />
+    <Compile Include="ACI\Entities\ForceMomentContribution.cs" />
+    <Compile Include="ACI\Entities\Rebar\DevelopmentType.cs" />
+    <Compile Include="ACI\Entities\Rebar\HookTypes.cs" />
+    <Compile Include="ACI\Entities\Rebar\Rebar.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarCoordinate.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarElement.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarFactory.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarPoint.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarPrestressed.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarPrestressingType.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarSection.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarStrain.cs" />
+    <Compile Include="ACI\Entities\Beam\Strains\ConcreteSectionIterationData.cs" />
+    <Compile Include="ACI\Entities\Beam\Strains\LinearStrainDistribution.cs" />
+    <Compile Include="ACI\Exceptions\ApproximateAnalysisNotApplicableException.cs" />
+    <Compile Include="ACI\Exceptions\CompressionFiberPositionException.cs" />
+    <Compile Include="ACI\Exceptions\InvalidStageException.cs" />
+    <Compile Include="ACI\Exceptions\NoRebarException.cs" />
+    <Compile Include="ACI\Exceptions\NotPrestressedBeamException.cs" />
+    <Compile Include="ACI\Exceptions\SectionAnalysisFailedToConvergeException.cs" />
+    <Compile Include="ACI\Exceptions\SectionFailedToConvergeException.cs" />
+    <Compile Include="ACI\Exceptions\UltimateConcreteStrainExceededException.cs" />
+    <Compile Include="ACI\Exceptions\WrongPositionOfPrestressingCentroidException.cs" />
+    <Compile Include="ACI\Interfaces\FlexuralAnalysisType.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteColumn.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteFlexuralMember.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteMaterial.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteMember.cs" />
+    <Compile Include="ACI\Interfaces\IConcretePrestressedFlexuralMember.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteSection.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteSectionRectangular.cs" />
+    <Compile Include="ACI\Interfaces\IDevelopment.cs" />
+    <Compile Include="ACI\Interfaces\INonPrestressedReinforcement.cs" />
+    <Compile Include="ACI\Interfaces\IPrestressedConcreteMaterial_.cs" />
+    <Compile Include="ACI\Interfaces\IPrestressedConcreteSection.cs" />
+    <Compile Include="ACI\Interfaces\IPrestressedRebarMaterial.cs" />
+    <Compile Include="ACI\Interfaces\IPrestressedReinforcement.cs" />
+    <Compile Include="ACI\Interfaces\IRebar.cs" />
+    <Compile Include="ACI\Interfaces\IRebarMaterial.cs" />
+    <Compile Include="ACI\Interfaces\IReinforcedConcreteMember.cs" />
+    <Compile Include="ACI\Interfaces\ISplice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ACI\ACI318_14\C09_Beams\" />
+    <Folder Include="ACI\ACI318_14\C10_Columns\" />
+    <Folder Include="ACI\Entities\Beam\Base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LICENSE" />
+    <None Include="NOTICE" />
+    <None Include="packages.config" />
+    <None Include="Resources\ACI_MildRebarProperties.txt" />
+    <None Include="Wosad.Concrete.licenseheader" />
+    <None Include="Wosad.Concrete.nuspec" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

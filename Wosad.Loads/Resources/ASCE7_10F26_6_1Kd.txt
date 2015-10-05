@@ -1,0 +1,15 @@
+C01,Main Wind Force Resisting System (MWFRS),0.85
+C02,Components and Cladding,0.85
+C03,Arched roof,0.85
+C04,Chimney, tank, or similar (Square),0.9
+C05,Chimney, tank, or similar (Hexagonal),0.95
+C06,Chimney, tank, or similar (Round),0.95
+C07,Freestanding wall,0.85
+C08,Freestanding sign,0.85
+C09,Attached sign,0.85
+C10,Lattice framework,0.85
+C11,Open sign,0.85
+C12,Trussed tower (Triangular, square, rectangular),0.85
+C13,Trussed tower (Other cross section),0.95
+
+
