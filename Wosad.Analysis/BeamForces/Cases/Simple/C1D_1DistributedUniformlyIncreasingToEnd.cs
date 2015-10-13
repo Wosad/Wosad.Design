@@ -54,7 +54,8 @@ namespace Wosad.Analysis.BeamForces.Simple
                 this.beam = beam;
                 L = beam.Length;
                 this.w = w;
-                E = beam.E; I = beam.I;
+                E = beam.ModulusOfElasticity; 
+                I = beam.MomentOfInertia;
                 ResultantCalculated =false;
 
             }
@@ -174,6 +175,8 @@ namespace Wosad.Analysis.BeamForces.Simple
 
             public double MaximumDeflection()
             {
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
 
                 double delta = 0.00652 * ((w * Math.Pow(L, 4)) / (E * I));
                 BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.deltaMax, 0,
@@ -191,6 +194,9 @@ namespace Wosad.Analysis.BeamForces.Simple
 
             public double Deflection(double X)
             {
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
+
                 double delta = ((w * X) / (360 * E * I * L)) * (3 * Math.Pow(X, 4) - 10 * L * L * X * X + 7 * Math.Pow(L, 4));
                         BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.delta, 0,
                         new Dictionary<string, double>()

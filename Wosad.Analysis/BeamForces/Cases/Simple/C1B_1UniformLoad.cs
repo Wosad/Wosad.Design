@@ -28,14 +28,12 @@ namespace Wosad.Analysis.BeamForces.Simple
             BeamSimple beam;
             double w;
             double L;
-            double E, I;
             const string CASE = "C1B_1";
 
             public UniformLoad(BeamSimple beam, double w)
 	    {
                 this.beam = beam;
                 L = beam.Length;
-                E = beam.E; I = beam.I;
                 this.w = w;
 	    }
 
@@ -137,6 +135,9 @@ namespace Wosad.Analysis.BeamForces.Simple
 
         public double MaximumDeflection()
         {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
             double delta = ((5 * w * Math.Pow(L, 4)) / (384 * E * I));
             BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.deltaMax, 0,
             new Dictionary<string, double>()
@@ -152,6 +153,9 @@ namespace Wosad.Analysis.BeamForces.Simple
 
         public double Deflection(double X)
         {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
             double delta = ((w * X) / (24 * E * I)) * (Math.Pow(L, 3) - 2 * L * X * X + Math.Pow(X, 3));
             BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.delta, 0,
             new Dictionary<string, double>()

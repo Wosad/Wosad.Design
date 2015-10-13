@@ -24,7 +24,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Analysis.BeamForces.Cantilever
 {
-    public class ConcentratedLoadAtTip : ISingleLoadCaseBeam
+    public class ConcentratedLoadAtTip : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         const string CASE = "C5A_1";
 
@@ -157,5 +157,15 @@ namespace Wosad.Analysis.BeamForces.Cantilever
         }
 
 
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+            
+            double delta = ((P * Math.Pow(L, 3)) / (3.0 * E * I));
+
+            return delta;
+        }
     }
 }

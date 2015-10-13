@@ -29,7 +29,6 @@ namespace Wosad.Analysis.BeamForces.Simple
         {
             BeamSimple beam;
            double P, a,b, L;
-           double E, I;
            const string CASE = "C1A_2";
            bool ShearForcesCalculated;
 
@@ -37,7 +36,6 @@ namespace Wosad.Analysis.BeamForces.Simple
 	    {
                 this.beam = beam;
                 L = beam.Length;
-                E = beam.E; I = beam.I;
                 this.P = P;
                 if (a>L)
                 {
@@ -245,6 +243,9 @@ namespace Wosad.Analysis.BeamForces.Simple
 
         public double MaximumDeflection()
         {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
             double delta = ((P * a * b * (a + 2 * b) * Math.Sqrt(3 * a * (a + 2 * b))) / (27 * E * I * L));
 
             BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.deltaMax, 1,
@@ -265,6 +266,8 @@ namespace Wosad.Analysis.BeamForces.Simple
         {
             double delta;
             int CaseId;
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
 
             if (X<=a)
 	        {

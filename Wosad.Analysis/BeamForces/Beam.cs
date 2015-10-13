@@ -48,21 +48,7 @@ namespace Wosad.Analysis
             set { length = value; }
         }
 
-        private double _E;
 
-        public double E
-        {
-            get { return _E; }
-            set { _E = value; }
-        }
-
-        private double _I;
-
-        public double I
-        {
-            get { return _I; }
-            set { _I = value; }
-        }
         
         
 
@@ -236,5 +222,24 @@ namespace Wosad.Analysis
 
         public bool ReportX { get; set; }
         public bool ReportMax { get; set; }
+
+
+        protected double E;
+
+        public double ModulusOfElasticity
+        {
+            get { return E; }
+            set { E = value; }
+        }
+
+
+        protected double I;
+
+        public double MomentOfInertia
+        {
+            get { return I; }
+            set { I = value; }
+        }
+        
     }
 }

@@ -25,6 +25,6 @@ namespace Wosad.Analysis
     public interface ISingleLoadCaseDeflectionBeam
     {
         double MaximumDeflection();
-        double Deflection(double X);
+
     }
 }

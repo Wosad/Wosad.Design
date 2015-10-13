@@ -28,6 +28,9 @@ namespace Wosad.Analysis
         double GetShear(double X);
         ForceDataPoint GetShearMaximumValue();
         double Length { get; set; }
+
+        double ModulusOfElasticity { get; set; }
+        double MomentOfInertia { get; set; }
         void EvaluateX(double X);
         BeamTemplatePathLocator ResourceLocator { get; } //for templates
     }

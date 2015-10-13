@@ -29,14 +29,12 @@ namespace Wosad.Analysis.BeamForces.Simple
 
         BeamSimple beam;
         double L;
-        double E, I;
         double P;
 
         public ConcentratedLoadAtCenter(BeamSimple beam, double P)
         {
             this.beam = beam;
             L = beam.Length;
-            E = beam.E; I = beam.I;
             this.P = P;
         }
 
@@ -174,6 +172,9 @@ namespace Wosad.Analysis.BeamForces.Simple
 
         public double MaximumDeflection()
         {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
             double delta = (P * Math.Pow(L, 3)) / (48 * E * I);
             BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.deltaMax, 0,
             new Dictionary<string, double>()
@@ -190,6 +191,9 @@ namespace Wosad.Analysis.BeamForces.Simple
         public double Deflection(double X)
         {
             double delta;
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
             int CaseId = 1;
             if (X<=L/2.0)
             {

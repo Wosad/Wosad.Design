@@ -23,7 +23,7 @@ using System.Text;
 namespace Wosad.Analysis.BeamForces.Cantilever
 {
 
-    public class UniformPartialLoad : ISingleLoadCaseBeam
+    public class UniformPartialLoad : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         const string CASE = "C5C_1";
 
@@ -183,6 +183,17 @@ namespace Wosad.Analysis.BeamForces.Cantilever
         }
 
 
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
+            double delta=((w*b) / (48.0*E*I))*(8.0*Math.Pow(e, 3)-24.0*Math.Pow(e, 2)*L-Math.Pow(b, 3));
+
+            return delta;
+
+        }
     }
 
 }
