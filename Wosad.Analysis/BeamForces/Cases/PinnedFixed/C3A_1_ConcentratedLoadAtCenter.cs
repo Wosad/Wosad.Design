@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Wosad.Analysis.BeamForces.PinnedFixed
 {
-    public class ConcentratedLoadAtCenter : ISingleLoadCaseBeam
+    public class ConcentratedLoadAtCenter : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         const string CASE = "C3A_1";
 
@@ -204,6 +204,14 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
 
                 return 11.0 / 16.0 * P;
             }
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+            double delta_Maximum = ((P * Math.Pow(L, 3)) / (48.0 * E * I * Math.Sqrt(5.0)));
+            return delta_Maximum;
         }
     }
 }

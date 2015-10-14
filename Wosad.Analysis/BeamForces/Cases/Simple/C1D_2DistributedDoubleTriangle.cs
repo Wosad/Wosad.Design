@@ -23,7 +23,7 @@ using System.Text;
 namespace Wosad.Analysis.BeamForces.Simple
 {
 
-        public class DistributedDoubleTriangle : ISingleLoadCaseBeam
+    public class DistributedDoubleTriangle : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
         {
             const string CASE = "C1D_2";
             BeamSimple beam;
@@ -211,6 +211,18 @@ namespace Wosad.Analysis.BeamForces.Simple
                          }, CASE, beam, true);
 
                 return new ForceDataPoint(0.0, V);
+            }
+
+            public double MaximumDeflection()
+            {
+                throw new NotImplementedException();
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
+
+                double delta_Maximum = ((w * Math.Pow(L, 4)) / (30.0 * E * I));
+
+                return delta_Maximum;
+                
             }
         }
 

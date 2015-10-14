@@ -25,7 +25,7 @@ namespace Wosad.Analysis.BeamForces.Simple
 {
 
 
-        public class MomentAtAnyPoint : ISingleLoadCaseBeam
+    public class MomentAtAnyPoint : ISingleLoadCaseBeam
         {
             const string CASE = "C1E_2";
             BeamSimple beam;
@@ -188,6 +188,8 @@ namespace Wosad.Analysis.BeamForces.Simple
                         null, CASE, beam, true);
                 }
             }
+
+
 
         }
 

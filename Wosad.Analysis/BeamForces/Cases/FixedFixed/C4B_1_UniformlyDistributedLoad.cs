@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Wosad.Analysis.BeamForces.FixedFixed
 {
-    public class UniformlyDistributedLoad : ISingleLoadCaseBeam
+    public class UniformlyDistributedLoad : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
             BeamFixedFixed beam;
             double w;
@@ -159,6 +159,17 @@ namespace Wosad.Analysis.BeamForces.FixedFixed
                            {"w",w }
                          }, CASE, beam, true);
             return new ForceDataPoint(X, V);
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
+            double delta = ((w * Math.Pow(L, 4)) / (384.0 * E * I));
+
+            return delta;
+
         }
     }
 }

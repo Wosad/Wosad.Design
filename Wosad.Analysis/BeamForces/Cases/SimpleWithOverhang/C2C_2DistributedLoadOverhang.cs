@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
 {
-    public class DistributedLoadOverhang : ISingleLoadCaseBeam
+    public class DistributedLoadOverhang : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         BeamSimpleWithOverhang beam;
         const string CASE = "C2C_2";
@@ -240,6 +240,14 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
         {
             double V = w * a;
             return V;
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+            double delta_Maximum = ((w * Math.Pow(a, 3)) / (24.0 * E * I)) * (4.0 * L + 3.0 * a);
+            return delta_Maximum;
         }
     }
 }

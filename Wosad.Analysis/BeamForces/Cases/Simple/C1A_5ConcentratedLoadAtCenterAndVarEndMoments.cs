@@ -24,7 +24,7 @@ using MoreLinq;
 namespace Wosad.Analysis.BeamForces.Simple
 {
 
-        public class ConcentratedLoadAtCenterAndVarEndMoments : ISingleLoadCaseBeam
+    public class ConcentratedLoadAtCenterAndVarEndMoments : ISingleLoadCaseBeam
         {
             BeamSimple beam;
             double L, P, M1, M2;

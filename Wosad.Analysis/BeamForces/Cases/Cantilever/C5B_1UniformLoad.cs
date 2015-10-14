@@ -23,7 +23,7 @@ using System.Text;
 namespace Wosad.Analysis.BeamForces.Cantilever
 {
 
-    public class UniformLoad : ISingleLoadCaseBeam
+    public class UniformLoad : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         BeamCantilever beam;
         double w;
@@ -131,6 +131,16 @@ namespace Wosad.Analysis.BeamForces.Cantilever
                            {"w",w }
                          }, CASE, beam);
             return V;
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
+            double delta = ((w * Math.Pow(L, 4)) / (8.0 * E * I));
+            return delta;
+
         }
     }
 

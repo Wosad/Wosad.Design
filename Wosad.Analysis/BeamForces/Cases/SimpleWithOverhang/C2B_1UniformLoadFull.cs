@@ -23,7 +23,7 @@ using MoreLinq;
 
 namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
 {
-    public class UniformLoadFull : ISingleLoadCaseBeam
+    public class UniformLoadFull : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         BeamSimpleWithOverhang beam;
         const string CASE = "C2B_1";
@@ -319,6 +319,14 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
         {
             double V3 = w / (2.0 * L) * (Math.Pow(L, 2.0) + Math.Pow(a, 2.0));
             return V3;
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+            double delta_Maximum = ((5.0 * w * Math.Pow(L, 4)) / (384.0 * E * I));
+            return delta_Maximum;
         }
     }
 }

@@ -25,7 +25,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 namespace Wosad.Analysis.BeamForces.Cantilever
 {
 
-    public class ConcentratedLoadAtAnyPoint : ISingleLoadCaseBeam
+    public class ConcentratedLoadAtAnyPoint : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
     {
         BeamCantilever beam;
         double P, a, b, L;
@@ -161,6 +161,17 @@ namespace Wosad.Analysis.BeamForces.Cantilever
                          }, CASE, beam);
 
             return new ForceDataPoint(a, V);
+        }
+
+        public double MaximumDeflection()
+        {
+            double E = beam.ModulusOfElasticity;
+            double I = beam.MomentOfInertia;
+
+            double delta = ((P * Math.Pow(b, 2)) / (6.0 * E * I)) * (3.0 * L - b);
+
+
+            return delta;
         }
     }
 

@@ -23,7 +23,7 @@ using System.Text;
 namespace Wosad.Analysis.BeamForces.Simple
 {
 
-        public class MomentAtBothEnds : ISingleLoadCaseBeam
+    public class MomentAtBothEnds : ISingleLoadCaseBeam
         {
             const string CASE = "C1E_3";
             BeamSimple beam;

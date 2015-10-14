@@ -24,7 +24,7 @@ namespace Wosad.Analysis.BeamForces.Simple
 {
 
 
-        public class MomentAtOneEnd : ISingleLoadCaseBeam
+    public class MomentAtOneEnd : ISingleLoadCaseBeam, ISingleLoadCaseDeflectionBeam
         {
 
             const string CASE = "C1E_1";
@@ -130,6 +130,14 @@ namespace Wosad.Analysis.BeamForces.Simple
             {
                 V = Mo / L;
                 ShearHasBeenCalculated = true;
+            }
+
+            public double MaximumDeflection()
+            {
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
+                double delta_Maximum = ((0.0642 * Mo * L * L) / (E * I));
+                return delta_Maximum;
             }
         }
 

@@ -445,5 +445,7 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
                     valDic, CASE, beam);
                DimensionsWereCalculated = true;
         }
+
+
     }
 }

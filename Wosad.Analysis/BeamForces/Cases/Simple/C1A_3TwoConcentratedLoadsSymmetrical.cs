@@ -34,7 +34,6 @@ namespace Wosad.Analysis.BeamForces.Simple
             double P;
             double L;
             double a;
-            double E, I;
             const string CASE = "C1A_3";
 
             public TwoConcentratedLoadsSymmetrical(BeamSimple beam, double P, double a)
@@ -42,7 +41,6 @@ namespace Wosad.Analysis.BeamForces.Simple
                 this.beam = beam;
                 this.a = a;
                 this. P = P;
-                E = beam.E; I = beam.I;
                 L = beam.Length;
                 if (a > L / 2.0)
                 {
@@ -198,6 +196,8 @@ namespace Wosad.Analysis.BeamForces.Simple
             public double MaximumDeflection()
             {
                 double delta = 0.0;
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
                 delta = ((P * a) / (24 * E * I)) * (3 * L * L - 4 * a * a);
 
             BeamEntryFactory.CreateEntry("delta", delta, BeamTemplateType.deltaMax, 0,
@@ -218,9 +218,12 @@ namespace Wosad.Analysis.BeamForces.Simple
                 double delta;
                 int CaseId;
 
+                double E = beam.ModulusOfElasticity;
+                double I = beam.MomentOfInertia;
+
                 if (X<a)
                 {
-                    delta = ((P * X) / (6 * E * I)) * (3 * L * a - 3 * a * a - X * X);
+                    delta = ((P * X) / (6.0 * E * I)) * (3.0 * L * a - 3.0 * a * a - X * X);
                     CaseId = 1;
                 }
                 else
