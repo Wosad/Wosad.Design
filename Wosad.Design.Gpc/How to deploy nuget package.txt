@@ -1,5 +1,0 @@
-1. Generate nuget package using Nuget Deploy
-2. Unzip package
-3. Add readme.txt to the package root
-4. Zip package (use the same name)
-5. Copy package to feed server using ftp client or any other approach.
