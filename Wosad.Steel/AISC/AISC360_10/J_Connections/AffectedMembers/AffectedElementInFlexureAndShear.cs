@@ -34,14 +34,14 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
     public class AffectedElementInFlexureAndShear: AffectedElementInShear, ISteelFlexuralMember
     {
 
-        public AffectedElementInFlexureAndShear(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat, CalcLog)
+        public AffectedElementInFlexureAndShear(ISteelSection Section,  ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
 
         }
 
-        public AffectedElementInFlexureAndShear(ISection Section, ISteelMaterial Material, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(Section,Material, DesignFormat, CalcLog)
+        public AffectedElementInFlexureAndShear(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
+            :base(Section,Material, CalcLog)
         {
 
         }

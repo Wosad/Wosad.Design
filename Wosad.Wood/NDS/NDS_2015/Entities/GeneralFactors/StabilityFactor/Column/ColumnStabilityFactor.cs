@@ -26,16 +26,25 @@ namespace Wosad.Wood.NDS.NDS_2015
 {
     public abstract partial class WoodMember : AnalyticalElement
     {
-        public virtual double GetColumnStabilityFactor(
-            double FcE, double FcStar, double c)
+        public virtual double GetC_P(
+             double FcStar, double E_minPrime, double l_e, double d)
         {
-
+            double FcE = GetFc_E(E_minPrime, l_e, d);
+            double c = Get_c();
             double alpha = FcE / FcStar;
             double Cp = 1.0 + alpha / (2.0 * c) - Math.Sqrt(Math.Pow((1 + alpha) / 2 * c, 2.0) - alpha / c);
 
             return Cp;
 
         }
+
+        /// <summary>
+        /// Factor from NDS 2105 section 3.7.1.5 
+        /// </summary>
+        /// <returns></returns>
+
+        protected abstract double Get_c();
+
 
 
     }

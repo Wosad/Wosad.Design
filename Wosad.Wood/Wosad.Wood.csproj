@@ -60,6 +60,7 @@
     <Compile Include="NDS\Entities\CommercialGrade.cs" />
     <Compile Include="NDS\Entities\CommercialGradeSouthern.cs" />
     <Compile Include="NDS\Entities\GluLamType.cs" />
+    <Compile Include="NDS\Entities\LoadCombinationType.cs" />
     <Compile Include="NDS\Entities\MemberMaterialCategory.cs" />
     <Compile Include="NDS\Entities\ReferenceDesignValueType.cs" />
     <Compile Include="NDS\Entities\ReferenceSourceCase.cs" />

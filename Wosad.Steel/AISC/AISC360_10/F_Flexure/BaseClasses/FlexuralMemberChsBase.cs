@@ -33,8 +33,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public abstract partial class FlexuralMemberChsBase : FlexuralMember
     {
         public FlexuralMemberChsBase(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor, DesignFormat, CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
         {
             sectionPipe = null;
             ISectionPipe s = Section as ISectionPipe;

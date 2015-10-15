@@ -30,17 +30,57 @@ namespace Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
 {
     public partial class AffectedElementInShear : AffectedElementBase
     {
-        public double GetShearYieldingComponent () 
+        /// <summary>
+        /// Calculates block shear strength per AISC J4.3
+        /// </summary>
+        /// <param name="A_gv">Gross area subject to shear</param>
+        /// <param name="A_nv">Net area subject to shear</param>
+        /// <param name="StressIsUniform"> Defines if stress is uniform on the connection group</param>
+        /// <param name="A_nt">Net area ubject to tension</param>
+        /// 
+        public double GetBlockShearStrength(double A_gv, double A_nv, double A_nt, bool StressIsUniform)
         {
-            throw new NotImplementedException ();
+            double Rn1 = GetShearYieldingComponent(A_gv)+GetTensionRuptureComponent(StressIsUniform,A_nt);
+            double Rn2 = GetShearRuptureComponent(A_nv)+GetTensionRuptureComponent(StressIsUniform,A_nt);
+            return Math.Min(Math.Abs(Rn1),Math.Abs(Rn2));
         }
-        public double GetShearRuptureComponent  () 
+
+
+        /// <summary>
+        /// Calculates shear yielding component of equation (J4-5)
+        /// </summary>
+        /// <param name="A_gv">Gross area subject to shear</param>
+        /// <returns></returns>
+        public double GetShearYieldingComponent (double A_gv) 
         {
-            throw new NotImplementedException ();
+            double F_y = this.Section.Material.YieldStress;
+            return 0.6*F_y * A_gv;
         }
-        public double GetTensionRuptureComponent() 
-        { 
-            throw new NotImplementedException(); 
+
+        /// <summary>
+        /// Calculates shear rupture component of equation (J4-5)
+        /// </summary>
+        /// <param name="A_nv">Net area subject to shear</param>
+        /// <returns></returns>
+        public double GetShearRuptureComponent(double A_nv) 
+        {
+            double F_u = this.Section.Material.UltimateStress;
+            return 0.6* F_u * A_nv;
+        }
+
+        /// <summary>
+        /// Calculates tension rupture component of equation (J4-5)
+        /// </summary>
+        /// <param name="StressIsUniform"> Defines if stress is uniform on the connection group</param>
+        /// <param name="A_nt">Net area ubject to tension</param>
+        /// <returns></returns>
+        public double GetTensionRuptureComponent(bool StressIsUniform,double A_nt) 
+        {
+            double U_bs = StressIsUniform == true ? 1.0 : 0.5;
+            double F_u = this.Section.Material.UltimateStress;
+            return U_bs * F_u * A_nt;
+
+            
         }
 
     }

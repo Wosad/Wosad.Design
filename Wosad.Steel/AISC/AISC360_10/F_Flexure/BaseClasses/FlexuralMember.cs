@@ -34,8 +34,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public abstract partial class FlexuralMember : SteelFlexuralMember, ISteelBeamFlexure
     {
         public FlexuralMember(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section,UnbracedLength, EffectiveLengthFactor, DesignFormat, CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section,UnbracedLength, EffectiveLengthFactor, CalcLog)
         {
 
         }

@@ -64,7 +64,7 @@ namespace Wosad.Wood.NDS.NDS_2015
         private double GetBendingCriticalBucklingDesignValue(double l_e, double b, double d)
         {
            double R_b=Math.Min(Math.Sqrt(((l_e*d) / (b*b))),50); //NDS eq. (3.3-5)
-           double E_m_prime = GetModulusOfElasticityBendingStability();
+           double E_m_prime = GetModulusOfElasticityForBeamAndColumnStability();
            double F_bE=((1.20*E_m_prime) / (R_b*R_b)); //from section 3.3.3.6
            return F_bE;  
         }
@@ -72,8 +72,7 @@ namespace Wosad.Wood.NDS.NDS_2015
 
         protected abstract double GetF_b_AdjustedForBeamStability();
 
-        protected abstract double GetModulusOfElasticityBendingStability();
- 
+        protected abstract double GetModulusOfElasticityForBeamAndColumnStability();
 
         protected abstract bool DetermineIfMemberIsLaterallyBraced();
 

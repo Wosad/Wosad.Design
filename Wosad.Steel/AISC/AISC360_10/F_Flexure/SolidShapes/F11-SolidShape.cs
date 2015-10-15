@@ -39,8 +39,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     {
 
         public SolidShape(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog) : 
-            base(section, UnbracedLength, EffectiveLengthFactor, DesignFormat, CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog) : 
+            base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
         {
                 GetSectionValues();
                 sectionTee = null;
@@ -53,8 +53,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         }
 
-        public SolidShape(ISteelSection section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, 0.0, 1.0, DesignFormat, CalcLog)
+        public SolidShape(ISteelSection section, ICalcLog CalcLog)
+            : base(section, 0.0, 1.0, CalcLog)
         {
             
         }

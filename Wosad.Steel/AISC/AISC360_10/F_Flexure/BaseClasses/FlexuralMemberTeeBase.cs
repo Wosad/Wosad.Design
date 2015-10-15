@@ -35,8 +35,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public abstract partial class FlexuralMemberTeeBase : FlexuralMember
     {
         public FlexuralMemberTeeBase(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor,DesignFormat,CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
             sectionTee = null;
             ISectionTee s = Section as ISectionTee;

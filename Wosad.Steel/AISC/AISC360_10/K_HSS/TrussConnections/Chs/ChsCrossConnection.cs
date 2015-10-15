@@ -31,8 +31,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public class ChsCrossConnection : ChsNonOverlapConnection
     {
-        public ChsCrossConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(chord, branches, DesignFormat, CalcLog)
+        public ChsCrossConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches,  ICalcLog CalcLog)
+            :base(chord, branches, CalcLog)
         {
 
         }

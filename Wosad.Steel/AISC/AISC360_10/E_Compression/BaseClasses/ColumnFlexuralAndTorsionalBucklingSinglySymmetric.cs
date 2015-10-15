@@ -31,8 +31,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
     public abstract partial class ColumnFlexuralAndTorsionalBucklingSinglySymmetric : ColumnFlexuralAndTorsionalBuckling
     {
-        public ColumnFlexuralAndTorsionalBucklingSinglySymmetric(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat,CalcLog)
+        public ColumnFlexuralAndTorsionalBucklingSinglySymmetric(ISteelSection Section, ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
 
         }

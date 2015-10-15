@@ -44,21 +44,21 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             set { angle = value; }
         }
 
-        public RhsLongitudinalPlateTYXAxial(SteelRhsSection Hss, SteelPlateSection Plate, double Angle, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate,  DesignFormat,CalcLog)
+        public RhsLongitudinalPlateTYXAxial(SteelRhsSection Hss, SteelPlateSection Plate, double Angle, ICalcLog CalcLog)
+            : base(Hss, Plate,  CalcLog)
         {
             this.angle = Angle;
         }
 
-        public double GetAvailableStrength(SteelDesignFormat Format, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        public double GetAvailableStrength(double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
         {
             ISteelSection s = GetHssSteelSection();
             double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength(Format, U);
+            return this.GetAvailableStrength( U);
         }
-        public double GetAvailableStrength(SteelDesignFormat Format, double UtilizationRatio)
+        public double GetAvailableStrength(double UtilizationRatio)
         {
-            this.DesignFormat = Format;
+          
             return LsHSSPlastification(UtilizationRatio);
         }
         

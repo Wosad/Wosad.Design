@@ -33,16 +33,15 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
     //Note: the difference between RhsTransversePlateTeeAxial and RhsTransversePlateCrossAxial
     //Local Crippling of HSS Sidewalls limit state
     {
-        public RhsTransversePlateTeeAxial(SteelRhsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate,DesignFormat,CalcLog)
+        public RhsTransversePlateTeeAxial(SteelRhsSection Hss, SteelPlateSection Plate,  ICalcLog CalcLog)
+            : base(Hss, Plate,CalcLog)
         {
 
         }
 
-        public double GetAvailableStrength(SteelDesignFormat format)
+        public double GetAvailableStrength( )
         {
             double R = 0.0;
-            this.DesignFormat = format;
             //TABLE K1.2 case 1
             double Fy = Hss.Material.YieldStress;
             ISectionTube tube = Hss.Section as ISectionTube;
@@ -69,14 +68,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
            double Rn = 0.0;
            Rn=1.6* Math.Pow(t,2)*(1+3.0*lb/(H-3.0*t))*Math.Sqrt(E*Fy)*Qf;
 
-           if (DesignFormat == SteelDesignFormat.LRFD)
-           {
-               R = Rn * 1.0;
-           }
-           else
-           {
-               R = Rn / 1.5;
-           }
+                R = Rn * 1.0;
+
 
            return R;
        }

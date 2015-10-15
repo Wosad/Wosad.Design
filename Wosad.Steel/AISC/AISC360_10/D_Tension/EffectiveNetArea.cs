@@ -28,13 +28,13 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
 {
     public partial class TensionMember : SteelDesignElement
     {
-        public TensionMember(SteelDesignFormat DesignFormat, ICalcLog Log): base(DesignFormat, Log)
+        public TensionMember(ICalcLog Log): base(Log)
         {
 
         }
 
-        public TensionMember(SteelDesignFormat DesignFormat)
-            : base(DesignFormat)
+        public TensionMember()
+            : base()
         {
 
         }

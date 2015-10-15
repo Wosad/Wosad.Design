@@ -22,7 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
@@ -32,13 +31,13 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public class ChsCapPlate: ChsToPlateConnection
     {
-        public ChsCapPlate(SteelChsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate, DesignFormat,CalcLog)
+        public ChsCapPlate(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
+            : base(Hss, Plate, CalcLog)
         {
            
         }
 
-        double GetAvailableStrength(SteelDesignFormat format)
+        double GetAvailableStrength()
         {
             double R = 0.0;
 
@@ -52,14 +51,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             double A = Hss.Section.Area;
             Rn = Rn < Fy * A ? Rn : Fy * A;
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
                 R = 1.0 * Rn;
-            }
-            else
-            {
-                R = Rn / 1.50;
-            }
+
 
             return R;
         }

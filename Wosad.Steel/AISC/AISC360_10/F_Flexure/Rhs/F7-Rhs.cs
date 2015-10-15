@@ -43,15 +43,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         ICalcLog CalcLog;
 
         public BeamRhs(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor,DesignFormat, CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
 
             GetSectionValues();
         }
 
-        public BeamRhs(ISteelSection section, SteelDesignFormat DesignFormat,ICalcLog CalcLog) :
-            this(section,0.0,1.0,DesignFormat,CalcLog)
+        public BeamRhs(ISteelSection section,ICalcLog CalcLog) :
+            this(section,0.0,1.0,CalcLog)
         {
 
         }
@@ -80,7 +80,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             ISectionTube cloneWeakAxisTube = SectionTube.GetWeakAxisClone() as ISectionTube;
             ISteelMaterial steelMaterial = Section.Material;
             SteelRhsSection rhsWeakAxisSection = new SteelRhsSection(cloneWeakAxisTube, steelMaterial);
-            BeamRhs WeakAxisBeam = new BeamRhs(rhsWeakAxisSection, 0, 1, DesignFormat, CalcLog); // unbraced length does not matter for tubes (per AISC)
+            BeamRhs WeakAxisBeam = new BeamRhs(rhsWeakAxisSection, 0, 1, CalcLog); // unbraced length does not matter for tubes (per AISC)
 
             FlexuralCompressionFiberPosition modifiedCompressionFiberPosition; 
             switch (compressionFiberLocation)

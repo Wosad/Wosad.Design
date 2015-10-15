@@ -33,8 +33,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
     public partial class HssToPlateConnection : SteelDesignElement 
     {
         
-        public HssToPlateConnection(SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(DesignFormat, CalcLog)
+        public HssToPlateConnection( ICalcLog CalcLog)
+            : base( CalcLog)
         {
 
         }

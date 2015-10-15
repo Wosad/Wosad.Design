@@ -30,8 +30,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public class ChsKOverlapConnection : ChsKConnection
     {
-        public ChsKOverlapConnection(HssTrussConnectionChord chord, double Gap, List<HssTrussConnectionBranch> branches, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(chord, Gap, branches,DesignFormat, CalcLog)
+        public ChsKOverlapConnection(HssTrussConnectionChord chord, double Gap, List<HssTrussConnectionBranch> branches,  ICalcLog CalcLog)
+            : base(chord, Gap, branches, CalcLog)
         {
 
         }

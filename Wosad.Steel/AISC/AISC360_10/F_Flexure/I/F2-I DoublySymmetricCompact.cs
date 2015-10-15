@@ -33,15 +33,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
     {
         public BeamIDoublySymmetricCompact(ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,DesignFormat,CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
             SectionValuesWereCalculated = false;
             //GetSectionValues();
         }
 
-        public BeamIDoublySymmetricCompact(ISteelSection section, SteelDesignFormat DesignFormat, ICalcLog CalcLog) :
-            this(section,true,0.0,1.0,DesignFormat,CalcLog)
+        public BeamIDoublySymmetricCompact(ISteelSection section, ICalcLog CalcLog) :
+            this(section,true,0.0,1.0,CalcLog)
         {
 
         }

@@ -39,8 +39,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
         public BeamIDoublySymmetricCompactWebNoncompactFlange(ISteelSection section, bool IsRolled,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section,IsRolled, UnbracedLength, EffectiveLengthFactor,DesignFormat,  CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section,IsRolled, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
             GetSectionValues();
         }

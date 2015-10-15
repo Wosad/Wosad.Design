@@ -62,8 +62,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         }
 
-        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat,CalcLog)
+        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
             if (Section.SectionBase is ISectionI)
             {

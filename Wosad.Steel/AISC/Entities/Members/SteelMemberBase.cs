@@ -34,8 +34,8 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
 {
     public abstract class SteelMemberBase : SteelDesignElement, IStructuralMember, ISteelMember
     {
-        public SteelMemberBase(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(DesignFormat, CalcLog) //, ISteelMaterial Material)
+        public SteelMemberBase(ISteelSection Section,ICalcLog CalcLog)
+            : base(CalcLog) //, ISteelMaterial Material)
         {
             //this.Material = Material;
             this.Section = Section;

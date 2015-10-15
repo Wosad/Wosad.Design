@@ -36,15 +36,15 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
         public double UnbracedLengthFlexure { get; set; }
         public double EffectiveLengthFactorFlexure { get; set; }
 
-        public SteelFlexuralMember(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :this(Section,0,1, DesignFormat, CalcLog)
+        public SteelFlexuralMember(ISteelSection Section, ICalcLog CalcLog)
+            :this(Section,0,1, CalcLog)
         {
 
         }
 
         public SteelFlexuralMember(ISteelSection Section,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section, DesignFormat, CalcLog)//, Material)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog) //, ISteelMaterial Material)
+            : base(Section, CalcLog)//, Material)
         {
             this.EffectiveLengthFactorFlexure = EffectiveLengthFactor;
             this.UnbracedLengthFlexure = UnbracedLength;

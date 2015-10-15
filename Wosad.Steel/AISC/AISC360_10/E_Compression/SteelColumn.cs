@@ -30,8 +30,8 @@ namespace Wosad.Steel.AISC.AISC360_10
 {
     public abstract class SteelColumn : SteelAxialMember
     {
-        public SteelColumn(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section,DesignFormat, CalcLog)
+        public SteelColumn(ISteelSection Section, ICalcLog CalcLog)
+            : base(Section,CalcLog)
         {
 
         }

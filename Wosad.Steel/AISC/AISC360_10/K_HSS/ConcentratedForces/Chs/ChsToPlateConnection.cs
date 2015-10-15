@@ -53,8 +53,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
         }
 
 
-        public ChsToPlateConnection(SteelChsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(DesignFormat, CalcLog)
+        public ChsToPlateConnection(SteelChsSection Hss, SteelPlateSection Plate,  ICalcLog CalcLog)
+            :base(CalcLog)
         {
             this.hss = Hss;
             this.plate = Plate;

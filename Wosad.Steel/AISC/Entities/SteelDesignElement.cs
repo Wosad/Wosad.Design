@@ -35,11 +35,11 @@ namespace Wosad.Steel.AISC.SteelEntities
             set { designFormat = value; }
         }
 
-        public SteelDesignElement(SteelDesignFormat DesignFormat)
+        public SteelDesignElement()
         {
 
         }
-        public SteelDesignElement(SteelDesignFormat DesignFormat, ICalcLog CalcLog): base(CalcLog)
+        public SteelDesignElement(ICalcLog CalcLog): base(CalcLog)
         {
 
         }

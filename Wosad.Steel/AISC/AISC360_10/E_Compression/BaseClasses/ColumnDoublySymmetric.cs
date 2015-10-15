@@ -31,8 +31,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
     public abstract class ColumnDoublySymmetric : ColumnFlexuralAndTorsionalBuckling
     {
-        public ColumnDoublySymmetric(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat, CalcLog)
+        public ColumnDoublySymmetric(ISteelSection Section, ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
 
         }

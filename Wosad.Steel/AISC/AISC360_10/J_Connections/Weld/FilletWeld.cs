@@ -27,8 +27,8 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
 {
     public class FilletWeld : FilletWeldBase
     {
-        public FilletWeld(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat, ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size, DesignFormat, Log)
+        public FilletWeld(double Fy, double Fu, double Fexx, double Size,   ICalcLog Log)
+            : base(Fy, Fu, Fexx, Size,  Log)
             {
 
             }

@@ -33,8 +33,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10
 {
     public class FlexuralBucklingSlender: SteelColumn
     {
-        public FlexuralBucklingSlender(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section,DesignFormat,CalcLog) //, Material)
+        public FlexuralBucklingSlender(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
+            : base(Section,CalcLog) //, Material)
         {
 
         }

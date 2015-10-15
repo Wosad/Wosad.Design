@@ -33,8 +33,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public abstract partial class RhsTrussConnection : HssTrussConnection
     {
-        public RhsTrussConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(chord, branches,DesignFormat, CalcLog)
+        public RhsTrussConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches, ICalcLog CalcLog)
+            : base(chord, branches, CalcLog)
         {
 
         }

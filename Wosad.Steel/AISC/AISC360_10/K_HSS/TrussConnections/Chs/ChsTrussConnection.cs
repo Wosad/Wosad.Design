@@ -22,8 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
- 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
@@ -35,8 +33,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
     public abstract partial class ChsTrussConnection : HssTrussConnection
     {
 
-        public ChsTrussConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(chord, branches, DesignFormat, CalcLog)
+        public ChsTrussConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches,ICalcLog CalcLog)
+            :base(chord, branches, CalcLog)
         {
         }
 

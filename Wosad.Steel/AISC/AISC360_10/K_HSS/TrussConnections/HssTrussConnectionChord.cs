@@ -32,8 +32,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public class HssTrussConnectionChord : SteelMemberBase
     {
-        public HssTrussConnectionChord(SteelChsSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section as ISteelSection, DesignFormat, CalcLog)
+        public HssTrussConnectionChord(SteelChsSection Section, ICalcLog CalcLog)
+            : base(Section as ISteelSection, CalcLog)
         {
 
         }

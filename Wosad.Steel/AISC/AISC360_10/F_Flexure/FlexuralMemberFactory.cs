@@ -108,7 +108,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             SteelRhsSection steelSection = new SteelRhsSection(RhsSec, Material);
             ISteelBeamFlexure beam = null;
-            beam = new BeamRhs(steelSection, DesignFormat, Log);
+            beam = new BeamRhs(steelSection, Log);
             return beam;
         }
 
@@ -121,7 +121,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             if (FlangeCompactness== CompactnessClassFlexure.Compact && WebCompactness == CompactnessClassFlexure.Compact)
             {
                 //F2
-                beam = new BeamIDoublySymmetricCompact(steelSection,DesignFormat, Log);
+                beam = new BeamIDoublySymmetricCompact(steelSection, Log);
             }
             else if (WebCompactness == CompactnessClassFlexure.Compact && FlangeCompactness!= CompactnessClassFlexure.Compact)
             {

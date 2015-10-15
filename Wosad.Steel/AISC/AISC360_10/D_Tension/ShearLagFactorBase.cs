@@ -28,13 +28,13 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
 {
     public abstract class ShearLagFactorBase: SteelDesignElement
     {
-        public ShearLagFactorBase(): base(SteelDesignFormat.LRFD)
+        public ShearLagFactorBase()
         {
 
         }
 
         public ShearLagFactorBase(ICalcLog Log)
-            : base(SteelDesignFormat.LRFD, Log)
+            : base(Log)
         {
 
         }

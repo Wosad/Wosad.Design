@@ -33,8 +33,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public class RhsCapPlateAxial : RhsToPlateConnection
     {
-        public RhsCapPlateAxial(SteelRhsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate, DesignFormat,CalcLog)
+        public RhsCapPlateAxial(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
+            : base(Hss, Plate, CalcLog)
         {
 
         }

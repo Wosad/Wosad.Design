@@ -33,14 +33,14 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
 {
     public abstract class AffectedElementBase: SteelDesignElement
     {
-        public AffectedElementBase(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(DesignFormat, CalcLog)
+        public AffectedElementBase(ISteelSection Section, ICalcLog CalcLog)
+            : base(CalcLog)
         {
             this.section = Section;
         }
 
-        public AffectedElementBase(ISection Section, ISteelMaterial Material, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(DesignFormat, CalcLog)
+        public AffectedElementBase(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
+            :base( CalcLog)
         {
             this.section = new SteelGeneralSection(Section, Material); 
         }
@@ -52,6 +52,7 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
             get { return section; }
             set { section = value; }
         }
+     
         
     }
 }

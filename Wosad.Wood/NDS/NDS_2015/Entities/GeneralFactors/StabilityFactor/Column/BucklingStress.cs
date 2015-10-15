@@ -22,21 +22,19 @@ using System.Text;
 using Wosad.Common.Entities;
 
 
-//namespace Wosad.Wood.NDS.NDS_2015
-//{
-//    public abstract partial class WoodMember : AnalyticalElement
-//    {
-//        public virtual double GetColumnStabilityFactor( 
-//            double FcE, double FcStar, double c)
-//        {
+namespace Wosad.Wood.NDS.NDS_2015
+{
+    public abstract partial class WoodMember : AnalyticalElement
+    {
+        public virtual double GetFc_E(
+            double E_minPrime, double l_e, double d)
+        {
 
-//            double alpha = FcE / FcStar;
-//            double Cp = 1.0 + alpha / (2.0 * c) - Math.Sqrt(Math.Pow((1 + alpha) / 2 * c, 2.0) - alpha / c);
+            double F_cE = ((0.822 * E_minPrime) / (Math.Pow((((l_e) / (d))), 2)));
+            return F_cE;
 
-//            return Cp;
-           
-//        }
+        }
 
 
-//    }
-//}
+    }
+}

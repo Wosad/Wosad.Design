@@ -41,8 +41,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             set { angle = value; }
         }
 
-        public ChsLongitudinalTYXAxial(SteelChsSection Hss, SteelPlateSection Plate, double Angle, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate, DesignFormat,CalcLog)
+        public ChsLongitudinalTYXAxial(SteelChsSection Hss, SteelPlateSection Plate, double Angle, ICalcLog CalcLog)
+            : base(Hss, Plate, CalcLog)
         {
             this.angle = Angle;
         }

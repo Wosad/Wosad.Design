@@ -25,9 +25,53 @@ namespace Wosad.Wood.NDS.NDS_2015
 {
     public partial class SawnLumberMember : WoodMember
     {
-        public double GetTimeEffectFactor()
+ 
+        /// <summary>
+        /// Time effect factor from NDS 2015 section N.3.3 (lambda)
+        /// </summary>
+        /// <param name="CombinationType"> Type of combination, Table N3.</param>
+        /// <param name="IsConnection">If connection, lambda greater than 1.0 will not apply. </param>
+        /// <param name="IsConnection">If pressure-treated with water-borne preservativesor fire retardant chemicals, lambda greater than 1.0 will not apply. </param>
+        /// <returns></returns>
+        /// 
+        public double GetTimeEffectFactor(LoadCombinationType CombinationType, 
+            bool IsConnection, bool IsTreated=false)
         {
-            throw new NotImplementedException();
+            switch (CombinationType)
+            {
+                case LoadCombinationType.DeadLoadOnly:
+                    return 0.6;
+                    break;
+                case LoadCombinationType.FullLiveLoadStorage:
+                    return 0.7;
+                    break;
+                case LoadCombinationType.FullLiveLoad:
+                    return 0.8;
+                    break;
+                case LoadCombinationType.FullLiveLoadImpact:
+                    if (!IsConnection && !IsTreated)
+                    {
+                        return 1.25;
+                    }
+                    else
+                    {
+                        return 1.0;
+                    }
+                    
+                    break;
+                case LoadCombinationType.FullLiveLoadWithWind:
+                    return 0.8;
+                    break;
+                case LoadCombinationType.FullWind:
+                    return 1.0;
+                    break;
+                case LoadCombinationType.FullEarthquake:
+                    return 1.0;
+                    break;
+                default:
+                    return 1.0;
+                    break;
+            }
         }
     }
 }

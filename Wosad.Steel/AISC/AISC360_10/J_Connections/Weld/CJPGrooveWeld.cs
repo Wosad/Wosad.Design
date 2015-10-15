@@ -29,14 +29,14 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
     //this class is included here as a placeholder
     public class CJPGrooveWeld: GrooveWeld
     {
-        public CJPGrooveWeld(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat, ICalcLog Log)
-            : base(Fy, Fu,Fexx, Size, DesignFormat, Log)
+        public CJPGrooveWeld(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
+            : base(Fy, Fu,Fexx, Size, Log)
         {
 
         }
 
-        public CJPGrooveWeld(double Fy, double Fu,double Fexx, double Size, SteelDesignFormat DesignFormat)
-            : base(Fy, Fu, Fexx, Size, DesignFormat)
+        public CJPGrooveWeld(double Fy, double Fu,double Fexx, double Size)
+            : base(Fy, Fu, Fexx, Size)
         {
 
         }

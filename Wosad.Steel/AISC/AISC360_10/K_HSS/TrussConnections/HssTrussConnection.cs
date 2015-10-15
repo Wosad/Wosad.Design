@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
@@ -29,7 +32,7 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
     public class HssTrussConnection : SteelDesignElement 
     {
         public HssTrussConnection(HssTrussConnectionChord chord,  List<HssTrussConnectionBranch> branches, 
-            SteelDesignFormat DesignFormat, ICalcLog CalcLog): base (DesignFormat, CalcLog)
+          ICalcLog CalcLog): base ( CalcLog)
         {
             this.branches = branches;
             this.chord = chord;

@@ -36,8 +36,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         ISectionI SectionI;
 
         public BeamISlenderWeb(ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,DesignFormat,CalcLog)
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
 
             SectionI = this.Section as ISectionI;

@@ -31,8 +31,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public class ChsKGappedConnection : ChsKConnection
     {
-        public ChsKGappedConnection(HssTrussConnectionChord chord, double Gap, List<HssTrussConnectionBranch> branches, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(chord, Gap, branches,  DesignFormat,CalcLog)
+        public ChsKGappedConnection(HssTrussConnectionChord chord, double Gap, List<HssTrussConnectionBranch> branches, ICalcLog CalcLog)
+            : base(chord, Gap, branches,  CalcLog)
         {
 
         }

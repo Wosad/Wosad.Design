@@ -35,22 +35,21 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
     //Note: the difference between RhsTransversePlateTeeAxial and RhsTransversePlateCrossAxial
     //Local Crippling of HSS Sidewalls limit state
     {
-        public RhsTransversePlateCrossAxial(SteelRhsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate,DesignFormat, CalcLog)
+        public RhsTransversePlateCrossAxial(SteelRhsSection Hss, SteelPlateSection Plate,  ICalcLog CalcLog)
+            : base(Hss, Plate,CalcLog)
         {
 
         }
 
-        public double GetAvailableStrength(SteelDesignFormat format, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        public double GetAvailableStrength( double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
         {
             ISteelSection s = GetHssSteelSection();
             double U = GetUtilizationRatio(s,RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength(format, U);
+            return this.GetAvailableStrength( U);
         }       
-        public double GetAvailableStrength(SteelDesignFormat format, double ChordUtilizationRatio)
+        public double GetAvailableStrength( double ChordUtilizationRatio)
         {
             double R = 0.0;
-            this.DesignFormat = format;
             //TABLE K1.2 case 1
             double Fy = Hss.Material.YieldStress;
             ISectionTube tube = Hss.Section as ISectionTube;

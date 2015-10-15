@@ -32,8 +32,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public abstract class RhsTransversePlateTandXAxial:RhsToPlateConnection
     {
-        public RhsTransversePlateTandXAxial(SteelRhsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate, DesignFormat,CalcLog)
+        public RhsTransversePlateTandXAxial(SteelRhsSection Hss, SteelPlateSection Plate,   ICalcLog CalcLog)
+            : base(Hss, Plate, CalcLog)
         {
 
         }
@@ -48,14 +48,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             double RnMax = Fyp * tp * Bp;
             Rn = Rn > RnMax ? RnMax : Rn;
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
                 R = Rn * 0.95;
-            }
-            else
-            {
-                R = Rn / 1.58;
-            }
+
             return R;
         }
 

@@ -32,8 +32,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
     public abstract class ColumnTee: ColumnFlexuralAndTorsionalBuckling
     {
-        public ColumnTee(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section,DesignFormat, CalcLog)
+        public ColumnTee(ISteelSection Section, ICalcLog CalcLog)
+            : base(Section,CalcLog)
         {
 
         }

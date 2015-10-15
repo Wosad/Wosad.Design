@@ -28,14 +28,14 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
     public class PJPGrooveWeld : GrooveWeld
     {
 
-        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat, ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size, DesignFormat, Log)
+        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size,   ICalcLog Log)
+            : base(Fy, Fu, Fexx, Size, Log)
         {
 
         }
 
-        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat)
-            : base(Fy, Fu, Fexx, Size, DesignFormat)
+        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size)
+            : base(Fy, Fu, Fexx, Size)
         {
 
         }
@@ -51,17 +51,17 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
             {
                 //Compressive stress need not be considered in design of welds joining the parts.
                 // Base metal provisions are specified here
-                double f1 = DesignFormat ==SteelDesignFormat.LRFD ? 0.9 : 1 / 1.67;
+                double f1 = 0.9;
                 double s1 = f1* this.BaseMaterial.YieldStress;
                 s = s1;
             }
             else if (typeOfConnection == TypeOfCompressionLoading.NonColumnFinishedToBear)
 	            {
                     //Base metal
-                    double f1 = DesignFormat == SteelDesignFormat.LRFD ? 0.9 : 1 / 1.67;
+                    double f1 = 0.9;
                     double s1 = f1* this.BaseMaterial.YieldStress;
                     //Weld metal
-                    double f2 = DesignFormat == SteelDesignFormat.LRFD ? 0.8 : 1 / 1.88;
+                    double f2 = 0.8;
                     double s2 = f2* 0.9 * this.WeldMaterial.ElectrodeStrength;
                     s =Math.Min(s1,s2);
 	            }

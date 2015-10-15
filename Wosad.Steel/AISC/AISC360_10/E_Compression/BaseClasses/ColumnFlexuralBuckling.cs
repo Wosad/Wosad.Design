@@ -33,8 +33,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
     public abstract class ColumnFlexuralBuckling: SteelColumn
     {
-        public ColumnFlexuralBuckling(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat, CalcLog)
+        public ColumnFlexuralBuckling(ISteelSection Section, ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
 
         }

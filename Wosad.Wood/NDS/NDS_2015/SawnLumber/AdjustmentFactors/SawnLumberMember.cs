@@ -14,21 +14,35 @@
    limitations under the License.
    */
 #endregion
- 
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using Wosad.Common.Entities;
-//using Wosad.Common.CalculationLogger.Interfaces;
-//using Wosad.Common.CalculationLogger;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Common.CalculationLogger;
 
 
-//namespace Wosad.Wood.NDS.NDS_2015
-//{
-//    public partial class SawnLumberMember : WoodMember
-//    {
+namespace Wosad.Wood.NDS.NDS_2015
+{
+    public partial class SawnLumberMember : WoodMember
+    {
 
+        double d;
+        double F_b;
+        double F_c;
+        double E_min;
+        double l_e;
+        double C_M;
+        double C_t;
+        double C_F;
+        double C_i;
+        double C_r;
+        double C_P;
+        double C_b;
+        double C_T;
+        double lambda;
 
-//    }
-//}
+    }
+}

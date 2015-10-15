@@ -33,8 +33,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {
     public class HssTrussConnectionBranch : SteelMemberBase
     {
-        public HssTrussConnectionBranch(SteelHssSection Section, double Angle, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section as ISteelSection, DesignFormat, CalcLog)
+        public HssTrussConnectionBranch(SteelHssSection Section, double Angle, ICalcLog CalcLog)
+            : base(Section as ISteelSection, CalcLog)
         {
             strengthValues = new List<HssConnectionBranchAvailableStrength>();
             this.angle = Angle;

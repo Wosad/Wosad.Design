@@ -32,8 +32,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10
 {
     public class ColumnFlexuralBucklingNonSlender: SteelColumn
     {
-        public ColumnFlexuralBucklingNonSlender(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section, DesignFormat, CalcLog) //, Material)
+        public ColumnFlexuralBucklingNonSlender(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
+            : base(Section,  CalcLog) //, Material)
         {
             double E       = this.Section.Material.ModulusOfElasticity;
             K_major = this.EffectiveLengthFactorY;

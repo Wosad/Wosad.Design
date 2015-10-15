@@ -34,10 +34,9 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
         /// <param name="Fu">Base metal ultimate stress</param>
         /// <param name="Fexx">Electrode strength</param>
         /// <param name="Size">Weld leg size</param>
-        /// <param name="DesignFormat">LRFD vs ASD format</param>
         /// <param name="Log">Calculation log (for report generation)</param>
-        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat, ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size, DesignFormat, Log)
+        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
+            : base(Fy, Fu, Fexx, Size,Log)
         {
 
         }
@@ -48,9 +47,8 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
         /// <param name="Fu">Base metal ultimate stress</param>
         /// <param name="Fexx">Electrode strength</param>
         /// <param name="Size">Weld leg size</param>
-        /// <param name="DesignFormat">LRFD vs ASD format</param>
-        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size, SteelDesignFormat DesignFormat)
-            : base(Fy, Fu, Fexx, Size, DesignFormat)
+        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size)
+            : base(Fy, Fu, Fexx, Size)
         {
 
         }

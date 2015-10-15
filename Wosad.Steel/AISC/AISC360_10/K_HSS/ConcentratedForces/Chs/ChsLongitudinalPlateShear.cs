@@ -37,20 +37,20 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
     {
         ICalcLog CalcLog;
 
-        public ChsLongitudinalPlateShear(SteelChsSection Hss, SteelPlateSection Plate, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Hss, Plate,DesignFormat,CalcLog)
+        public ChsLongitudinalPlateShear(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
+            : base(Hss, Plate,CalcLog)
         {
             this.CalcLog = CalcLog;
         }
 
-        double GetAvailableStrength(SteelDesignFormat format)
+        double GetAvailableStrength()
         {
             double R = 0.0;
             double tmax = GetMaximumPlateThickness();
             Plate.Section.Width = tmax;
 
             //Calculate plate shear capacity per Chapter J
-            AffectedElementInFlexureAndShear ae = new AffectedElementInFlexureAndShear(Plate,DesignFormat, this.CalcLog);
+            AffectedElementInFlexureAndShear ae = new AffectedElementInFlexureAndShear(Plate, this.CalcLog);
             double ShearCapacity = ae.GetShearCapacity();
             double MomentCapacity = ae.GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition.Top);
             //note: it is assumed that the section is symmetrical and compression fiber location does not matter

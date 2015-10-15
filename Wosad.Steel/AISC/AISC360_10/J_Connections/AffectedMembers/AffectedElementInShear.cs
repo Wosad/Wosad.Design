@@ -31,14 +31,14 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
     public partial class AffectedElementInShear: AffectedElementBase
     {
 
-        public AffectedElementInShear(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            : base(Section, DesignFormat, CalcLog)
+        public AffectedElementInShear(ISteelSection Section,ICalcLog CalcLog)
+            : base(Section, CalcLog)
         {
 
         }
 
-        public AffectedElementInShear(ISection Section, ISteelMaterial Material,  SteelDesignFormat DesignFormat, ICalcLog CalcLog)
-            :base(Section,Material,DesignFormat, CalcLog)
+        public AffectedElementInShear(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
+            :base(Section,Material, CalcLog)
         {
 
         }

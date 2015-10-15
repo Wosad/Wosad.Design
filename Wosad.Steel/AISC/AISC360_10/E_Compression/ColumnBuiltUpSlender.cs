@@ -32,8 +32,8 @@ namespace  Wosad.Analytics.Steel.AISC360_10
 {
     public class ColumnBuiltUpSlender : ColumnSlender
     {
-        public ColumnBuiltUpSlender(ISteelSection Section, SteelDesignFormat DesignFormat, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section,DesignFormat,CalcLog) //, Material)
+        public ColumnBuiltUpSlender(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
+            : base(Section,CalcLog) //, Material)
         {
 
         }
