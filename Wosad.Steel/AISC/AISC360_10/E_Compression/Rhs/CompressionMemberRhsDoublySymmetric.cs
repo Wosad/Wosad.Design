@@ -28,9 +28,8 @@ using Wosad.Steel.AISC.Code;
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
-    public partial class CompressionMemberIDoublySymmetric : ColumnDoublySymmetric
+    public partial class CompressionMemberRhsDoublySymmetric : ColumnDoublySymmetric
     {
-        public bool IsRolled { get; set; }
 
         public override double CalculateDesignCapacity()
         {
@@ -50,35 +49,27 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
             double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
             double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
-            
-            double FeTorsionalBuckling = GetTorsionalElasticBucklingStressFe();
-            double FcrTorsionalBuckling = GetCriticalStressFcr(FeTorsionalBuckling, 1.0);
-            double Qtors = GetReductionFactorQ(FcrTorsionalBuckling);
-            double FcrTors = GetCriticalStressFcr(FeTorsionalBuckling, Qtors);
 
-
-            Fcr = Math.Min(FcrFlex, FcrTors);
-            return Fcr;
+            return FcrFlex;
 
         }
 
-        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, ICalcLog CalcLog)
+        public CompressionMemberRhsDoublySymmetric(ISteelSection Section,  ICalcLog CalcLog)
             : base(Section, CalcLog)
         {
-            if (Section.SectionBase is ISectionI)
+            if (Section.SectionBase is ISectionTube)
             {
-            SectionI = Section.SectionBase as ISectionI;
+                SectionRhs = Section.SectionBase as ISectionTube;
             }
             else
             {
-                throw new Exception("Section of wrong type: Need ISectionI");
+                throw new Exception("Section of wrong type: Need ISectionTube");
             }
 
-            this.IsRolled = IsRolled;
         }
 
 
 
-        ISectionI SectionI; 
+        ISectionTube SectionRhs; 
     }
 }

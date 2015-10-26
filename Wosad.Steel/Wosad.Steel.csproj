@@ -60,8 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveNetArea.cs" />
+    <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactor.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase.cs" />
-    <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactorBase.cs" />
+    <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagFactorBase.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase8.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase7.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase6.cs" />
@@ -90,6 +91,9 @@
     <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric-Qs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\LimitState.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric-Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric-Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\SteelColumn.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElementBase.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
@@ -345,7 +349,6 @@
     <Folder Include="AISC\AISC360_10\E_Compression\2L\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Chs\" />
     <Folder Include="AISC\AISC360_10\E_Compression\L\" />
-    <Folder Include="AISC\AISC360_10\E_Compression\Rhs\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
     <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />

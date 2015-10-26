@@ -76,14 +76,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             double Qf = GetChordStressInteractionQf(UtilizationRatio, ConnectingSurfaceInTension);
 
             Rn = (5.5 * Fy * Math.Pow(t, 2) * (1.0 + 0.25 * lb / D) * Qf)/sinTheta; //(K1-2)
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 R = 0.9 * Rn;
-            }
-            else
-            {
-                R = Rn / 1.67;
-            }
+
 
             return R;
         }

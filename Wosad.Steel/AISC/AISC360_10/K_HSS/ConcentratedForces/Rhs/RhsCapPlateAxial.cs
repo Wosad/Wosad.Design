@@ -77,14 +77,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
                 Rn = Fy * A;
             }
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 R = 1.0 * Rn;
-            }
-            else
-            {
-                R = Rn / 1.5;
-            }
+ 
             return R;
 
         }
@@ -111,14 +106,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
                 //(K1-15)
                 Rn=1.6*Math.Pow(t,2)*(1.0+6.0*lb/B*Math.Pow(t/tp,1.5))*Math.Sqrt(E*Fy*tp/t);
             }
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+ 
                 R = 0.75 * Rn;
-            }
-            else
-            {
-                R = Rn / 2.0;
-            }
+ 
 
             return R;
         }

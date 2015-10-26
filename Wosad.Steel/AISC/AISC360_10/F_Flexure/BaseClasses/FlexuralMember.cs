@@ -189,14 +189,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         internal virtual double GetFlexuralDesignValue(double Mn)
         {
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 return 0.9 * Mn;
-            }
-            else
-            {
-                return Mn / 1.67;
-            }
+
 
         }
 

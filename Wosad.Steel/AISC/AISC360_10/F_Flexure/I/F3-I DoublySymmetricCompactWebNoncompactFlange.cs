@@ -45,9 +45,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             GetSectionValues();
         }
 
-        public  double GetFlexuralCapacityMajor(SteelDesignFormat designFormat)
+        public  double GetFlexuralCapacityMajor()
         {
-            this.DesignFormat = designFormat;
+ 
             GeneralFlexuralMember gm = new GeneralFlexuralMember(this.Log);
             GeneralFlexuralMember.CbData momentData = gm.GetCbData(this);
             double Cb = gm.GetCb(momentData);

@@ -62,14 +62,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 	        {
 		        double Bep = this.GetEffectivePlateWidth();
                 Rn=0.6*Fy*t*(2.0*tp+2.0*Bep); //(K1-8)
-                if (DesignFormat == SteelDesignFormat.LRFD)
-                {
+ 
 		            R = Rn*0.95;
-                }
-                else
-	            {
-                    R = Rn/1.58;
-	            }
+      
 	        }   
             else
 	        {
@@ -93,14 +88,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 	            {
                  R=double.PositiveInfinity;
 	            }
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+  
 	            R = Rn*1.0;
-            }
-                else
-	        {
-                  R = Rn/1.5;
-	        }
+
 
             return R;
 

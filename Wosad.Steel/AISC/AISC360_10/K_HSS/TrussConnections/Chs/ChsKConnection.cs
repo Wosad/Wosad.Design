@@ -143,16 +143,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
             
 
 
-
-
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
                 P = 0.9 * Pn;
-            }
-            else
-            {
-                P = Pn / 1.67;
-            }
+
             return P;
         }
 

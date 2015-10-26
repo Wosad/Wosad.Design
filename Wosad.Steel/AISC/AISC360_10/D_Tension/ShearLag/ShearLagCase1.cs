@@ -20,9 +20,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10 
 {
     // All tension members where the tension 
     // load is transmitted directly to each of the
@@ -31,6 +32,12 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
 
     public class ShearLagCase1 : ShearLagFactorBase
     {
+
+        public ShearLagCase1()
+            : this(new CalcLog())
+        {
+
+        }
         public ShearLagCase1(ICalcLog Log): base(Log)
         {
 

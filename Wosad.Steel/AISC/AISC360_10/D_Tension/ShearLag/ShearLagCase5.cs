@@ -14,15 +14,16 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10 
 {
 
     // Round HSS with a single concentric 
@@ -36,12 +37,10 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
         double l;
 
         bool IsSingleConcentricGussetPlate;
-        public ShearLagCase5(bool IsSingleConcentricGussetPlate, 
-            double Diameter, 
-            double LengthOfConnection, 
-            ICalcLog Log)
-            : base(Log)
+        public ShearLagCase5(double Diameter, 
+            double LengthOfConnection)
         {
+            base.Log = new CalcLog();
             D=Diameter;
             l = LengthOfConnection;
         }
@@ -57,11 +56,6 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
             {
                 return 1.0;
             }
-            else
-            {
-
-            }
-
 
             return 1 - x_ob / l;
         }

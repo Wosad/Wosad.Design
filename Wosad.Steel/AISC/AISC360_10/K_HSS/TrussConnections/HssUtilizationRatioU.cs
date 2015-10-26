@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.Interfaces;
@@ -35,14 +38,9 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
             double U = 0;
             double Fy = Section.Material.YieldStress;
             double Fc = 0.0;
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
-                Fc = Fy;
-            }
-            else
-            {
-                Fc = 0.6 * Fy;
-            }
+
+            Fc = Fy;
+
 
             ISection sec = Section.SectionBase;
             double Ag = sec.Area;

@@ -14,15 +14,16 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10
 {
 
 // All tension members, except plates 
@@ -33,9 +34,10 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
     {
         double x_ob;
         double l;
-        public ShearLagCase2(double EccentricityOfConnection, double LengthOfConnection, ICalcLog Log)
-            : base(Log)
+        public ShearLagCase2(double EccentricityOfConnection, double LengthOfConnection)
+            
         {
+               base.Log = new CalcLog();
                x_ob= EccentricityOfConnection;
                l = LengthOfConnection;
         }

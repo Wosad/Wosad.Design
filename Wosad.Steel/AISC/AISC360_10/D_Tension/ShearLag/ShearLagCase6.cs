@@ -14,15 +14,16 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10 
 {
     //Rectangular HSS
     public class ShearLagCase6 : ShearLagFactorBase
@@ -37,10 +38,10 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
         public ShearLagCase6(bool IsSingleConcentricGussetPlate,
             double OverallWidthOfRectangularHSSMember,
             double OverallHeightOfRectangularHSSMember,
-            double LengthOfConnection,
-            ICalcLog Log)
-            : base(Log)
+            double LengthOfConnection)
+           
         {
+            base.Log = new CalcLog();
             B = OverallWidthOfRectangularHSSMember;
             H = OverallHeightOfRectangularHSSMember;
             l = LengthOfConnection;

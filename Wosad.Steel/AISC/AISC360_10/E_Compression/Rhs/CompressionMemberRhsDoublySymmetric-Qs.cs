@@ -1,4 +1,4 @@
-﻿#region Copyright
+#region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,27 +18,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Code;
-using Wosad.Steel.AISC.SteelEntities;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
+ 
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension
+namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
-    public abstract class ShearLagFactorBase: SteelDesignElement
+    public partial class CompressionMemberRhsDoublySymmetric : ColumnDoublySymmetric
     {
-        public ShearLagFactorBase()
-        {
 
+        public override double GetReductionFactorForUnstiffenedElementQs()
+        {
+            return 1.0;
         }
 
-        public ShearLagFactorBase(ICalcLog Log)
-            : base(Log)
-        {
 
-        }
-        public abstract double GetShearLagFactor();
+
     }
-
 }

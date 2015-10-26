@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
  
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
@@ -88,7 +91,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         private double GetFlangeLambda()
         {
-            return 0;
+            double tf_top = this.SectionI.FlangeThicknessTop;
+            double tf_bot = this.SectionI.FlangeThicknessBottom;
+            double bf_top = this.SectionI.FlangeWidthTop;
+            double bf_bot = this.SectionI.FlangeWidthBottom;
+            double bt_Ratio = Math.Max(bf_top/ tf_bot, bf_bot/ tf_bot);
+
+            return bt_Ratio;
         }
 
         private double SqrtE_Fy()

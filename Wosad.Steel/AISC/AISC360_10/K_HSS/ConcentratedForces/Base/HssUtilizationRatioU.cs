@@ -40,14 +40,9 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             double U = 0;
             double Fy = Section.Material.YieldStress;
             double Fc = 0.0;
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 Fc = Fy;
-            }
-            else
-            {
-                Fc = 0.6 * Fy;
-            }
+
 
             ISection sec = Section.SectionBase;
             double Ag = sec.Area;

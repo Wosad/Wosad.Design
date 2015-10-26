@@ -59,14 +59,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
                 //(K2-1)
                 Pn = 0.6 * Fy * t * pi * Db * (1.0 + sinTheta / (2.0 * Math.Pow(sinTheta, 2)));
 
-                if (DesignFormat == SteelDesignFormat.LRFD)
-                {
-                    P = Pn * 0.95;
-                }
-                else
-                {
-                    P = Pn / 1.58;
-                } 
+                P = Pn * 0.95;
+
             }
             else
             {

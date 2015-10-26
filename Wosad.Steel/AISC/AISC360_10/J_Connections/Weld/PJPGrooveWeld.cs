@@ -68,10 +68,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
             else
 	            {
                     //Base metal
-                    double f1 = DesignFormat ==SteelDesignFormat.LRFD ? 0.9 : 1 / 1.67;
+                    double f1  =0.9 ;
                     double s1 = f1* this.BaseMaterial.YieldStress;
                     //Weld metal
-                    double f2 = DesignFormat == SteelDesignFormat.LRFD ? 0.8 : 1 / 1.88;
+                    double f2 = 0.8;
                     double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
                     s =Math.Min(s1,s2);
 	            }
@@ -85,10 +85,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
         public double GetTensionNormalToWeldAxisStrength()
         {
             //Base metal strength
-            double f1 = DesignFormat == SteelDesignFormat.LRFD? 0.75 : 1/2.00;
+            double f1 = 0.75;
             double s1 = f1 * this.BaseMaterial.UltimateStress;
             // Weld strength 
-            double f2 = DesignFormat == SteelDesignFormat.LRFD ? 0.8 : 1 / 1.88;
+            double f2 =0.8;
             double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
 
             double s = Math.Min(s1, s2);
@@ -106,7 +106,7 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
                     //double Ag = GrossAreaOfBaseMetal;
 
                     //Weld metal
-                    double f2 = DesignFormat == SteelDesignFormat.LRFD ? 0.8 : 1 / 1.88;
+            double f2 = 0.8;
                     double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
                     
             throw new NotImplementedException();

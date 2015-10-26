@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension
+namespace Wosad.Steel.AISC.AISC360_10
 {
     public enum ShearLagCase
     {
@@ -32,11 +32,11 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
         Case5,  //round HSS with concentric plate
         Case6a,  //rectangular HSS with concentric plate
         Case6b,  //rectangular HSS with side plates
-        Case7a,  //W, M, S, HP or Tees flange connected with 3 or more lines of bolts
-        Case7b,  //W, M, S, HP or Tees web connected with 4 or more lines of bolts
-        Case8a,  //Single or double angle with 4 lines of bolts
+        Case7a, //W, M, S, HP or Tees flange connected with 2 or more lines of bolts
+        Case7b,  //W, M, S, HP or Tees flange connected with 3 or more lines of bolts
+        Case7c,  //W, M, S, HP or Tees web connected with 4 or more lines of bolts
+        Case8a,  //Single or double angle with 2 lines of bolts
         Case8b,  //Single or double angle with 3 lines of bolts
-        Case8c,  //Single or double angle with 2 or less lines of bolts
-
+        Case8c,  //Single or double angle with 4 lines of bolts
     }
 }

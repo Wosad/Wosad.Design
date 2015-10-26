@@ -14,15 +14,16 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10 
 {
     //Plates where the tension load is 
     //transmitted by longitudinal welds only
@@ -31,9 +32,10 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
         double l;
         double w;
 
-        public ShearLagCase4(double PlateWidth, double LengthOfConnection, ICalcLog Log)
-            : base(Log)
+        public ShearLagCase4(double PlateWidth, double LengthOfConnection)
+            
         {
+            base.Log = new CalcLog();
             l = LengthOfConnection;
             w = PlateWidth;
         }

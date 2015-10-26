@@ -14,15 +14,16 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
+namespace Wosad.Steel.AISC.AISC360_10 
 {
     /// <summary>
     ///  W, M, S or HP  Shapes or Tees cut  from these shapes. (If U is calculated per Case 2, the larger value is permitted to be used.)
@@ -35,11 +36,13 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
         double d;
         double x_ob;
         double l;
+        bool Has4orMoreLinesOfBolts;
     
         public ShearLagCase7(int NumberOfBoltLines, double Depth, double FlangeWidth,
-            double EccentricityOfConnection, double LengthOfConnection, ICalcLog Log)
-            : base(Log)
+            double EccentricityOfConnection, double LengthOfConnection )
+            
         {
+            base.Log = new CalcLog();
             this.N = NumberOfBoltLines;
             this.bf = FlangeWidth;
             this.d = Depth;
@@ -56,7 +59,7 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
             double U;
             if (N<3)
             {
-                ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l, Log);
+                ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l);
                 U = Case2.GetShearLagFactor();
             }
             else if (N==3)
@@ -77,7 +80,7 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension.ShearLag
             // If Case 2 information is applicable
             if (x_ob>0 && l > 0)
             {
-                ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l, Log);
+                ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l);
                 double U_case2 = Case2.GetShearLagFactor();
                 U = Math.Min(U, U_case2);
             }

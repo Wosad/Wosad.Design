@@ -117,7 +117,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             }
 
 
-            double M = DesignFormat == SteelDesignFormat.LRFD ? Mn * 0.9 : Mn / 1.67;
+            double M =  Mn * 0.9;
             return M;
 
         }

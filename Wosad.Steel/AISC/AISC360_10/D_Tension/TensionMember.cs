@@ -29,10 +29,10 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
     {
 
         protected double GetDesignTensileCapacity(double YieldStress, double UltimateStress,
-           double GrossArea, double EffectiveNetArea, SteelDesignFormat format)
+           double GrossArea, double EffectiveNetArea)
         {
-            double P1 = GetYieldingInGrossSectionStrength(YieldStress, GrossArea, DesignFormat);
-            double P2 = GetYieldingInGrossSectionStrength(UltimateStress, EffectiveNetArea, DesignFormat);
+            double P1 = GetYieldingInGrossSectionStrength(YieldStress, GrossArea);
+            double P2 = GetYieldingInGrossSectionStrength(UltimateStress, EffectiveNetArea);
 
             double P = Math.Min(P1, P2);
 
@@ -43,17 +43,11 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
         /// Strength tensile yielding in the gross section
         /// </summary>
         /// <returns></returns>
-        public double GetYieldingInGrossSectionStrength(double Fy, double Ag, SteelDesignFormat format)
+        public double GetYieldingInGrossSectionStrength(double Fy, double Ag)
         {
             double P=0.0;
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
-                P = 0.9 * Ag * Fy;
-            }
-            else
-            {
-                P = Ag * Fy /1.67;
-            }
+            P = 0.9 * Ag * Fy;
+
 
             return P;
         }
@@ -62,17 +56,12 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
         /// Strength for tensile rupture in the net section
         /// </summary>
         /// <returns></returns>
-        public double GetRuptureInNetSectionStrength(double Fu, double Ae, SteelDesignFormat format)
+        public double GetRuptureInNetSectionStrength(double Fu, double Ae)
         {
             double P = 0.0;
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 P = 0.75* Ae * Fu;
-            }
-            else
-            {
-                P = Ae * Fu / 2.00;
-            }
+
 
             return P;
         }

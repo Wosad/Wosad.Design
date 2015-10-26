@@ -71,14 +71,9 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
             double beta = Db / D;
             //(K2-2)
             Pn = (Fy * Math.Pow(t, 2) * (3.1 + 15.6 * Math.Pow(beta, 2)) * Math.Pow(gamma, 0.2) * Qf) / sinTheta;
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 P = 0.9 * Pn;
-            }
-            else
-            {
-                P = Pn / 1.67;
-            }
+
             return P;
         }
     }

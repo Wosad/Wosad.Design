@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,35 +18,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
+using System.Text;
+using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
-using Wosad.Steel.AISC.SteelEntities.Members;
+using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360_10
 {
-    public abstract class SteelColumn : SteelAxialMember
+    public abstract class ShearLagFactorBase: SteelDesignElement
     {
-        public SteelColumn(ISteelSection Section, ICalcLog CalcLog)
-            : base(Section,CalcLog)
+        public ShearLagFactorBase()
         {
 
         }
 
-        protected double GetNominalAxialCapacity(double CriticalStress)
+        public ShearLagFactorBase(ICalcLog Log)
+            : base(Log)
         {
-            double A = Section.SectionBase.Area;
-            return CriticalStress*A;
-        }
 
-        protected double GetDesignAxialCapacity(double CriticalStress)
-        {
-            double Pn= GetNominalAxialCapacity(CriticalStress);
-            double Pr = Pn * 0.90;
-            return Pr;
         }
+        public abstract double GetShearLagFactor();
     }
+
 }

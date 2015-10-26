@@ -29,11 +29,11 @@ namespace Wosad.Steel.AISC.SteelEntities
     {
         private SteelDesignFormat designFormat;
 
-        public SteelDesignFormat DesignFormat
-        {
-            get { return designFormat; }
-            set { designFormat = value; }
-        }
+        //public SteelDesignFormat DesignFormat
+        //{
+        //    get { return designFormat; }
+        //    set { designFormat = value; }
+        //}
 
         public SteelDesignElement()
         {

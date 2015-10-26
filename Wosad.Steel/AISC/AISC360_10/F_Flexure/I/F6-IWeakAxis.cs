@@ -36,8 +36,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             GetSectionValues();
 
-            this.DesignFormat = DesignFormat;
-
             double Yielding = GetMinorPlasticMomentCapacity().Value;
             double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity();
 

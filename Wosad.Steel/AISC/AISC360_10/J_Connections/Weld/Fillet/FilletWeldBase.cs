@@ -75,7 +75,7 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
         {
 
             //Weld metal
-            double f1 = DesignFormat == SteelDesignFormat.LRFD ? 0.8 : 1 / 1.88;
+            double f1 = 0.8;
             double s1 = f1 * 0.6 * this.WeldMaterial.ElectrodeStrength;
             return s1;
         }
