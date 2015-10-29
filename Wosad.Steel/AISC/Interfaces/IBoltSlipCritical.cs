@@ -23,7 +23,7 @@ namespace Wosad.Steel.AISC.Interfaces
 {
     public interface IBoltSlipCritical
     {
-        FayingSurface FayingSurface { get; }
+        BoltFayingSurfaceClass FayingSurface { get; }
         BoltHoleType HoleType { get;}
         double MinimumPretension { get; }
         double GetSlipResistance();

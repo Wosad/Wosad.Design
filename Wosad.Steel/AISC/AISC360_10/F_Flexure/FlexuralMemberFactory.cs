@@ -41,13 +41,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
     public class FlexuralMemberFactory
     {
-        SteelDesignFormat DesignFormat;
+  
 
         public ISteelBeamFlexure GetBeam(ShapeTypeSteel Shape, MomentAxis MomentAxis, 
             CompactnessClassFlexure UnstiffenedElementCompactness, CompactnessClassFlexure StiffenedElementCompactness,
-            ISection Section, ISteelMaterial Material, SteelDesignFormat DesignFormat, ICalcLog Log)
+            ISection Section, ISteelMaterial Material, ICalcLog Log)
         {
-            this.DesignFormat = DesignFormat;
+            
             ISteelBeamFlexure beam = null;
             switch (Shape)
             {

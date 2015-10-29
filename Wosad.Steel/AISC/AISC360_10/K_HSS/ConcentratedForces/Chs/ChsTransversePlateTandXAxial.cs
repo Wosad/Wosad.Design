@@ -50,18 +50,18 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             this.angle = Angle;
         }
 
-        double GetAvailableStrength(SteelDesignFormat format, bool ConnectingSurfaceInTension, double UtilizationRatio)
+        double GetAvailableStrength(bool ConnectingSurfaceInTension, double UtilizationRatio)
         {
             double R = 0.0;
             R = HssLocalYieldingLS(UtilizationRatio, ConnectingSurfaceInTension);
             return R;
         }
 
-        double GetAvailableStrength(SteelDesignFormat format, bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        double GetAvailableStrength(bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
         {
             ISteelSection s = GetHssSteelSection();
             double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength(format, ConnectingSurfaceInTension, U);
+            return this.GetAvailableStrength( ConnectingSurfaceInTension, U);
         }
 
         double GetOutOfPlaneMomentForPlateBending(double UtilizationRatio,  bool ConnectingSurfaceInTension)

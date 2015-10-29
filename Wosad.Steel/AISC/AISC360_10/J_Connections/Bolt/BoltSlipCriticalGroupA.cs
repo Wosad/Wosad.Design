@@ -31,18 +31,18 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public class BoltSlipCriticalGroupA: BoltSlipCritical
     {
-        public BoltSlipCriticalGroupA(double Diameter, BoltThreadType ThreadType,
-            SteelDesignFormat DesignFormat, FayingSurface FayingSurface, BoltHoleType HoleType,
-            BoltFillers Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier = 1.13):
-            base(Diameter,ThreadType,DesignFormat,FayingSurface,HoleType,Fillers,NumberOfSlipPlanes,log,PretensionMultiplier)
+        public BoltSlipCriticalGroupA(double Diameter, BoltThreadCase ThreadType,
+            BoltFayingSurfaceClass FayingSurface, BoltHoleType HoleType,
+            BoltFillerCase Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier = 1.13):
+            base(Diameter,ThreadType,FayingSurface,HoleType,Fillers,NumberOfSlipPlanes,log,PretensionMultiplier)
         {
             switch (ThreadType)
 	        {
-		        case BoltThreadType.Included:
+		        case BoltThreadCase.Included:
                     nominalTensileStress = BoltGroupA.ThreadsIncluded.NominalTensileStress;
                     nominalShearStress = BoltGroupA.ThreadsIncluded.NominalShearStress;
                  break;
-                case BoltThreadType.Excluded:
+                case BoltThreadCase.Excluded:
                     nominalTensileStress = BoltGroupA.ThreadsExcluded.NominalTensileStress;
                     nominalShearStress = BoltGroupA.ThreadsExcluded.NominalShearStress;
                  break;

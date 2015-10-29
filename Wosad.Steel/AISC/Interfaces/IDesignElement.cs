@@ -26,7 +26,7 @@ namespace Wosad.Steel.AISC.Interfaces
 {
     public  interface IDesignElement
     {
-         SteelDesignFormat DesignFormat { get; set; }
+         
 
     }
 }

@@ -50,24 +50,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ent.Reference = "AISC Formula J3-4";
             double R = 0;
 
-            switch (DesignFormat)
-            {
-                case SteelDesignFormat.LRFD:
+
                     double phi = GetPhiFactor();
                     ent.ValueName = v.phiRn;
                     ent.DescriptionReference = d.phiRn.SlipResistance;
                     ent.FormulaID = f.J3_4.LRFD;
                     R = Rn * phi;
-                    break;
-                case SteelDesignFormat.ASD:
-                    double Omega = GetOmegaFactor();
-                    ent.ValueName = v.Rn_Omega;
-                    ent.DescriptionReference = d.Rn_Omega.SlipResistance;
-                    ent.FormulaID = f.J3_4.ASD;
-                    R = Rn / Omega;
-                    break;
+                    
 
-            }
             ent.VariableValue = R.ToString();
             AddToLog(ent);
             return R;

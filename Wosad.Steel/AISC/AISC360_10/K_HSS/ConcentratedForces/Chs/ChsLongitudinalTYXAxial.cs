@@ -47,18 +47,18 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             this.angle = Angle;
         }
 
-        double GetAvailableStrength(SteelDesignFormat format, bool ConnectingSurfaceInTension, double UtilizationRatio)
+        double GetAvailableStrength( bool ConnectingSurfaceInTension, double UtilizationRatio)
         {
             double R = 0.0;
             //R = HssLocalYieldingLS(UtilizationRatio, ConnectingSurfaceInTension);
             return R;
         }
 
-        double GetAvailableStrength(SteelDesignFormat format, bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        double GetAvailableStrength( bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
         {
             ISteelSection s = GetHssSteelSection();
             double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength(format, ConnectingSurfaceInTension, U);
+            return this.GetAvailableStrength( ConnectingSurfaceInTension, U);
         }
 
         double HssPlastification(double UtilizationRatio, bool ConnectingSurfaceInTension)
@@ -83,15 +83,15 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
             return R;
         }
 
-        double GetOutOfPlaneMomentForPlateBending(SteelDesignFormat format)
+        double GetOutOfPlaneMomentForPlateBending()
         {
             return 0.0;
         }
 
-        double GetInPlaneMomentForPlateBending(SteelDesignFormat format, bool ConnectingSurfaceInTension, double UtilizationRatio)
+        double GetInPlaneMomentForPlateBending( bool ConnectingSurfaceInTension, double UtilizationRatio)
         {
             double lb = Plate.Section.Width;
-            double R = GetAvailableStrength(format, ConnectingSurfaceInTension, UtilizationRatio);
+            double R = GetAvailableStrength(ConnectingSurfaceInTension, UtilizationRatio);
             return 0.8 * lb * R;
         }
     }

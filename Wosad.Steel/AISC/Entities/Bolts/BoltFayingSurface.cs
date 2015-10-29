@@ -23,9 +23,9 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.SteelEntities.Bolts
+namespace Wosad.Steel.AISC
 {
-    public enum FayingSurface
+    public enum BoltFayingSurfaceClass
     {
         ClassA,
         ClassB

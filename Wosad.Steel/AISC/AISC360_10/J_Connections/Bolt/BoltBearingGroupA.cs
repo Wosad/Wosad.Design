@@ -31,17 +31,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public class BoltBearingGroupA: BoltBearing
     {
-        public BoltBearingGroupA(double Diameter, BoltThreadType ThreadType,
-            SteelDesignFormat DesignFormat, ICalcLog log)
-            :base(Diameter,ThreadType,DesignFormat,log)
+        public BoltBearingGroupA(double Diameter, BoltThreadCase ThreadType,
+            ICalcLog log)
+            :base(Diameter,ThreadType,log)
         {
             switch (ThreadType)
             {
-                case BoltThreadType.Included:
+                case BoltThreadCase.Included:
                     nominalTensileStress = BoltGroupA.ThreadsIncluded.NominalTensileStress;
                     nominalShearStress = BoltGroupA.ThreadsIncluded.NominalShearStress;
                     break;
-                case BoltThreadType.Excluded:
+                case BoltThreadCase.Excluded:
                     nominalTensileStress = BoltGroupA.ThreadsExcluded.NominalTensileStress;
                     nominalShearStress = BoltGroupA.ThreadsExcluded.NominalShearStress;
                     break;

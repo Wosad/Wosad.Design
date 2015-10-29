@@ -25,10 +25,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public abstract partial class BoltSlipCritical : Bolt, IBoltSlipCritical
     {
-        public BoltSlipCritical(double Diameter, BoltThreadType ThreadType,
-            SteelDesignFormat DesignFormat, FayingSurface FayingSurface, BoltHoleType HoleType,
-            BoltFillers Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier=1.13)
-            : base(Diameter, ThreadType, DesignFormat, log)
+        public BoltSlipCritical(double Diameter, BoltThreadCase ThreadType,
+            BoltFayingSurfaceClass FayingSurface, BoltHoleType HoleType,
+            BoltFillerCase Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier=1.13)
+            : base(Diameter, ThreadType, log)
         {
             this.fayingSurface = FayingSurface;
             this.holeType = HoleType;
@@ -38,9 +38,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             this.numberOfSlipPlanes = NumberOfSlipPlanes;
         }
 
-        private FayingSurface fayingSurface;
+        private BoltFayingSurfaceClass fayingSurface;
 
-        public FayingSurface FayingSurface
+        public BoltFayingSurfaceClass FayingSurface
         {
             get { return fayingSurface; }
         }
@@ -59,9 +59,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             get { return minimumPretension; }
         }
 
-        private BoltFillers fillers;
+        private BoltFillerCase fillers;
 
-        public BoltFillers Fillers
+        public BoltFillerCase Fillers
         {
             get { return fillers; }
             set { Fillers = value; }

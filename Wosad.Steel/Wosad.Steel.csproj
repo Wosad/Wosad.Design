@@ -273,8 +273,21 @@
     <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\Rhs\RhsTrussConnection.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\Rhs\RhsTrussConnectionQf.cs" />
     <Compile Include="AISC\Entities\Bolts\BoltGroup.cs" />
+    <Compile Include="AISC\Entities\Bolts\BoltHoleDeformationType.cs" />
     <Compile Include="AISC\Entities\Bolts\BoltPoint.cs" />
     <Compile Include="AISC\Entities\DesignFormat.cs" />
+    <Compile Include="AISC\Entities\Enums\BeamCopeCase.cs" />
+    <Compile Include="AISC\Entities\Enums\BendingAxis.cs" />
+    <Compile Include="AISC\Entities\Enums\BoltMaterialId.cs" />
+    <Compile Include="AISC\Entities\Enums\BoltType.cs" />
+    <Compile Include="AISC\Entities\Enums\CombinationCaseId.cs" />
+    <Compile Include="AISC\Entities\Enums\LocalBucklingCaseID.cs" />
+    <Compile Include="AISC\Entities\Enums\LocalBucklingClassification.cs" />
+    <Compile Include="AISC\Entities\Enums\ShearCase.cs" />
+    <Compile Include="AISC\Entities\Enums\StressDistibutionType.cs" />
+    <Compile Include="AISC\Entities\Enums\WeldGroupPattern.cs" />
+    <Compile Include="AISC\Entities\Enums\WeldLoadTypeId.cs" />
+    <Compile Include="AISC\Entities\Enums\WeldType.cs" />
     <Compile Include="AISC\Entities\InstantaneousCenterGroup.cs" />
     <Compile Include="AISC\Entities\Materials\WeldMaterial.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldBase.cs" />
@@ -355,7 +368,6 @@
     <Folder Include="AISC\AISC360_10\I_Composite\" />
     <Folder Include="AISC\AISC360_10\J_Connections\WeldGroup\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
-    <Folder Include="AISC\Entities\Enums\" />
     <Folder Include="AISC\Entities\Materials\Plate\" />
     <Folder Include="AISC\Entities\Materials\Shape\" />
   </ItemGroup>

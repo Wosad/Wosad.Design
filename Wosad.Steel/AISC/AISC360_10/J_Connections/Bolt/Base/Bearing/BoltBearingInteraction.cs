@@ -48,15 +48,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             // check if interaction needs to be investigated:
             double f_available;
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
-                f_available = 0.75 * Fnv;
 
-            }
-            else
-            {
-                f_available = Fnv/2.0;
-            }
+            f_available = 0.75 * Fnv;
+
+
 
             if (f_available * 0.3 > frv)
             {
@@ -73,19 +68,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ent.DescriptionReference = d.F_pp_nt;
             AddToLog(ent);
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 ent.Reference = "AISC Formula J3-3a";
                 ent.FormulaID = f.J3_3.a;
                 F_pp_nt = 1.3 * Fnt - Fnt / (0.75 * Fnv) * frv;
 
-            }
-            else
-            {
-                ent.Reference = "AISC Formula J3-3b";
-                ent.FormulaID = f.J3_3.b;
-                F_pp_nt = 1.3 * Fnt - (Fnt * 2.0)/Fnv * frv;
-            }
+
 
             F_pp_nt = CheckMaximumAvailableTensileStrength(F_pp_nt);
 
@@ -97,18 +85,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ent2.AddDependencyValue(v.Ab,Ab);
             ent2.Reference = "AISC Formula J3-2";
 
-            if (DesignFormat== SteelDesignFormat.LRFD)
-            {
+
                 ent2.DescriptionReference = d.phiRn.AvailableTensileStrengthForCombinedLoad;
                 ent2.FormulaID = f.J3_2.LRFD;
                 R = 0.75* F_pp_nt * Ab;
-            }
-            else
-            {
-                ent2.DescriptionReference = d.Rn_Omega.AvailableTensileStrengthForCombinedLoad;
-                ent2.FormulaID = f.J3_2.ASD;
-                R = F_pp_nt * Ab / 2.0;
-            }
+
             ent2.ValueName = v.R;
             ent2.VariableValue = R.ToString();
             AddToLog(ent2);

@@ -26,9 +26,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public abstract partial class Bolt: BoltBase
     {
-        public Bolt(double Diameter, BoltThreadType ThreadType, 
-            SteelDesignFormat DesignFormat, ICalcLog log): base(Diameter,
-            ThreadType,DesignFormat,log)
+        public Bolt(double Diameter, BoltThreadCase ThreadType, 
+            ICalcLog log): base(Diameter,
+            ThreadType,log)
         {
 
         }
@@ -45,20 +45,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 
             ICalcLogEntry ent = Log.CreateNewEntry();
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
                 R = 0.75 * Rn;
                 ent.ValueName = v.phiRn;
                 ent.DescriptionReference = d.phiRn.TensileStrength;
                 ent.FormulaID = f.J3_1.LRFD;
-            }
-            else
-            {
-                R = Rn / 2.0;
-                ent.ValueName = v.Rn_Omega;
-                ent.DescriptionReference = d.Rn_Omega.TensileStrength;
-                ent.FormulaID = f.J3_1.ASD;
-            }
+
             
             ent.AddDependencyValue(v.Fnt, Fnt);
             ent.AddDependencyValue(v.Ab, Ab);
@@ -78,20 +69,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 
             ICalcLogEntry ent = Log.CreateNewEntry();
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 R = 0.75 * Rn;
                 ent.ValueName = v.phiRn;
                 ent.DescriptionReference = d.phiRn.ShearStrength;
                 ent.FormulaID = f.J3_1.LRFD;
-            }
-            else
-            {
-                R = Rn / 2.0;
-                ent.ValueName = v.Rn_Omega;
-                ent.DescriptionReference = d.Rn_Omega.ShearStrength;
-                ent.FormulaID = f.J3_1.ASD;
-            }
+
 
             ent.AddDependencyValue(v.Fnv, Fnv);
             ent.AddDependencyValue(v.Ab, Ab);

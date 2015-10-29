@@ -36,8 +36,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public abstract partial class BoltBearing : Bolt, IBoltBearing
     {
-        public BoltBearing(double Diameter, BoltThreadType ThreadType,
-            SteelDesignFormat DesignFormat, ICalcLog log): base(Diameter,ThreadType,DesignFormat,log)
+        public BoltBearing(double Diameter, BoltThreadCase ThreadType,
+            ICalcLog log): base(Diameter,ThreadType,log)
         {
 
         }

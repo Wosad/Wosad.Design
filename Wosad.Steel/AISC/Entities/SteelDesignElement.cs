@@ -27,7 +27,7 @@ namespace Wosad.Steel.AISC.SteelEntities
 {
     public abstract class SteelDesignElement:  AnalyticalElement
     {
-        private SteelDesignFormat designFormat;
+        //private SteelDesignFormat designFormat;
 
         //public SteelDesignFormat DesignFormat
         //{

@@ -38,13 +38,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
         {
             switch (fillers)
             {
-                case BoltFillers.NoFillers:
+                case BoltFillerCase.NoFillers:
                     return 1.0;
-                case BoltFillers.BoltsAddedToDistributeLoad:
+                case BoltFillerCase.BoltsAddedToDistributeLoad:
                     return 1.0;
-                case BoltFillers.One:
+                case BoltFillerCase.One:
                     return 1.0;
-                case BoltFillers.TwoOrMore:
+                case BoltFillerCase.TwoOrMore:
                     return 0.85;
                 default:
                     return 1.0;

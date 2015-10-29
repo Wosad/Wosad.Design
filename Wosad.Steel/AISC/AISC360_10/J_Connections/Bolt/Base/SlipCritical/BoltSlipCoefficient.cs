@@ -43,10 +43,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double mu=0.3;
             switch (FayingSurface)
             {
-                case FayingSurface.ClassA:
+                case BoltFayingSurfaceClass.ClassA:
                      ent.DescriptionReference = d.mu.ClassA;
                     return 0.3;
-                case FayingSurface.ClassB:
+                case BoltFayingSurfaceClass.ClassB:
                     ent.DescriptionReference = d.mu.ClassB;
                     return 0.5;
             }

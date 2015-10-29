@@ -14,12 +14,13 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
@@ -31,23 +32,23 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
     {
         public void BearingBoltGroupAReturnsTensileStrength()
         {
-            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadType.Included, SteelDesignFormat.LRFD, null);
+            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Included,  null);
             double phiPn = bolt.GetTensileCapacity();
         }
         public void BearingBoltGroupBReturnsTensileStrength()
         {
-            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadType.Included, SteelDesignFormat.LRFD, null);
+            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadCase.Included,  null);
             double phiPn = bolt.GetTensileCapacity();
         }
 
         public void BearingBoltGroupAReturnsShearStrength()
         {
-            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadType.Included, SteelDesignFormat.LRFD, null);
+            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Included,  null);
             double phiVn = bolt.GetShearCapacity();
         }                                   
         public void BearingBoltGroupBReturnsShearStrength()
         {
-            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadType.Included, SteelDesignFormat.LRFD, null);
+            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadCase.Included, null);
             double phiVn = bolt.GetShearCapacity();
         }
     }

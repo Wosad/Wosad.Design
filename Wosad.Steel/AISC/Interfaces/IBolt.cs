@@ -31,6 +31,6 @@ namespace Wosad.Steel.AISC.Interfaces
         double Area { get; }
         double GetShearCapacity();
         double GetTensileCapacity();
-        BoltThreadType ThreadType { get; }
+        BoltThreadCase ThreadType { get; }
     }
 }

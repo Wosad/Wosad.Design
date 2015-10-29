@@ -53,18 +53,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             }
             
 
-            if (DesignFormat == SteelDesignFormat.LRFD)
-            {
+
                 ksc = 1.0-T/(Du*Tb);
                 ent.AddDependencyValue(v.Tu, T);
                 ent.Reference = "AISC Formula J3-5a";
                 ent.FormulaID = f.J3_5.LRFD;
                 ent.VariableValue = ksc.ToString();
-            }
-            else
-            {
-                ksc = 1.0 - 1.5 * T / (Du * Tb);
-            }
+
 
             AddToLog(ent);
 

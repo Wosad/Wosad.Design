@@ -29,11 +29,10 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
 {
     public abstract class BoltBase : AnalyticalElementForceBased, IDesignElement, IBolt
     {
-        public BoltBase(double Diameter, BoltThreadType ThreadType, SteelDesignFormat DesignFormat,
+        public BoltBase(double Diameter, BoltThreadCase ThreadType, 
             ICalcLog log)
              : base(log)
         {
-            this.DesignFormat = DesignFormat;
             this.diameter = Diameter;
             this.threadType = ThreadType;
         }
@@ -60,16 +59,15 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
             }
         }
 
-        private BoltThreadType threadType;
+        private BoltThreadCase threadType;
 
-        public BoltThreadType ThreadType
+        public BoltThreadCase ThreadType
         {
             get { return threadType; }
             set { threadType = value; }
         }
 
 
-        public SteelDesignFormat DesignFormat { get; set; }
 
         public abstract double GetShearCapacity();
 
