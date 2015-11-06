@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.Code;
 
 namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
 {
-    public abstract class AffectedElementBase: SteelDesignElement
+    public abstract partial class AffectedElementBase: SteelDesignElement
     {
         public AffectedElementBase(ISteelSection Section, ICalcLog CalcLog)
             : base(CalcLog)
@@ -40,7 +40,7 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
         }
 
         public AffectedElementBase(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
-            :base( CalcLog)
+            :base(CalcLog)
         {
             this.section = new SteelGeneralSection(Section, Material); 
         }
