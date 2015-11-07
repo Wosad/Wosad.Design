@@ -7,9 +7,30 @@ using System.Threading.Tasks;
 namespace Wosad.Steel.AISC.AISC360_10.J_Connections.AffectedMembers.ConcentratedForces
 {
     
-        //FlangeLocalBending
-    public partial class FlangeOrWebWithConcentratedForces
-    {
 
+    public static  partial class FlangeOrWebWithConcentratedForces
+    {
+        /// <summary>
+        /// Flange Local Bending strength
+        /// </summary>
+        /// <param name="F_yf">Specified minimum yield stress of the flange (ksi)</param>
+        /// <param name="t_f">thickness of the loaded flange (in.)</param>
+        /// /// <param name="l_edge">Edge distance</param>
+        /// <returns></returns>
+        public static double GetFlangeLocalBendingStrength(double F_yf, double t_f, double l_edge)
+        {
+            double R_n = 6.25 * F_yf * Math.Pow(t_f, 2); //(J10-1)
+
+            //When the concentrated force to be resisted is applied at a distance from the member end 
+            //that is less than 10t, 
+            //Rn shall be reduced by 50%
+
+            if (l_edge < 10.0 * t_f)
+            {
+                R_n = 0.5 * R_n;
+            }
+            double phiR_n = 0.9 * R_n;
+            return phiR_n;
+        }
     }
 }
