@@ -98,6 +98,9 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElementBase.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInShear.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeBase.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeDouble.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeSingle.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltHoleBearingStrength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\FlangeLocalBending.cs" />
@@ -106,6 +109,9 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\WebLocalYielding.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\WebPanelZoneShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\WebSideswayBuckling.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionAnalysis.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesign.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingAction.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BearingAtBoltHoles.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bolt.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltA307.cs" />
@@ -121,6 +127,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltGroupB.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCoefficient.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCritical.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroup.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltSlipCriticalGroupB.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltSlipCriticalGroupA.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCriticalInteraction.cs" />
@@ -237,6 +244,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Groove\GrooveWeld.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\PJPGrooveWeld.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\PlugWeld.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\FilletWeldGroup.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsCapPlate.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsChordStressInteractionQf.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsLongitudinalPlateShear.cs" />
@@ -372,8 +380,6 @@
     <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
-    <Folder Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\" />
-    <Folder Include="AISC\AISC360_10\J_Connections\WeldGroup\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\Entities\Materials\Plate\" />
     <Folder Include="AISC\Entities\Materials\Shape\" />

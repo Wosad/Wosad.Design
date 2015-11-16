@@ -34,10 +34,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         public override double CalculateDesignCapacity()
         {
-            double Pr = 0.0;
+            double phiP_n = 0.0;
             double Fcr = CalculateCriticalStress();
-            Pr = GetDesignAxialCapacity(Fcr);
-            return Pr;
+            phiP_n = GetDesignAxialCapacity(Fcr);
+            return phiP_n;
         }
         //this method is overriden for members with slender elements
         public override double CalculateCriticalStress()

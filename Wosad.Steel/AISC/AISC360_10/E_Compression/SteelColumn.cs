@@ -45,8 +45,8 @@ namespace Wosad.Steel.AISC.AISC360_10
         protected double GetDesignAxialCapacity(double CriticalStress)
         {
             double Pn= GetNominalAxialCapacity(CriticalStress);
-            double Pr = Pn * 0.90;
-            return Pr;
+            double phiP_n = Pn * 0.90;
+            return phiP_n;
         }
     }
 }

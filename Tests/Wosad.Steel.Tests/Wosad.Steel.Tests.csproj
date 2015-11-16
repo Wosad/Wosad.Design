@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BearingBoltTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,7 +66,7 @@
     <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
-    <Folder Include="AISC\AISC360_10\J_Connections\AffectedMembers\" />
+    <Folder Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\" />
     <Folder Include="AISC\AISC360_10\J_Connections\Weld\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
