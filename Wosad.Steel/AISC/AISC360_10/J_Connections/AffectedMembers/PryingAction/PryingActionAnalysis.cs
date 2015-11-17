@@ -45,19 +45,19 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
             else if (alpha_prime<=1)
             {
                 //The bolts and the fitting both control
-                T_avail = B_bolt * Math.Pow((((t) / (t_c))), 2) * (1 + delta * alpha_prime);
+                T_avail = B_bolt * Math.Pow(((t / t_c)), 2) * (1 + delta * alpha_prime);
             }
             else
             {
                 //The fitting controls
-                T_avail = B_bolt * Math.Pow((((t) / (t_c))), 2) * (1 + delta);
+                T_avail = B_bolt * Math.Pow(((t / t_c)), 2) * (1 + delta);
             }
             return T_avail;
         }
 
         private double get_alpha_PrimeAnalysis()
         {
-            double alpha_Prime = ((1) / (delta * (1 + rho))) * (Math.Pow((((t_c) / (t))), 2) - 1);
+            double alpha_Prime = ((1) / (delta * (1 + rho))) * (Math.Pow(((t_c / t)), 2) - 1);
             return alpha_Prime;
         }
     }

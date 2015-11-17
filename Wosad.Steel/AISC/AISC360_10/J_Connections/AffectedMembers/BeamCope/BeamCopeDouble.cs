@@ -3,10 +3,98 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
+using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections.AffectedMembers.BeamCope
+namespace Wosad.Steel.AISC.AISC360_10.J_Connections
 {
-    class BeamCopeDouble
+    public class BeamCopeDouble: BeamCopeBase
     {
+
+         public BeamCopeDouble(double c, double d_c, ISectionI Section, ISteelMaterial Material):
+            base(c,d_c,Section,Material)
+        {
+
+        }
+
+         private SectionRectangular _rectangle;
+
+         public SectionRectangular rectangle
+         {
+             get
+             {
+                 if (_rectangle == null)
+                 {
+                     GetCopeSection();
+                 }
+                 return _rectangle;
+             }
+
+         }
+
+
+         private void GetCopeSection()
+         {
+             _rectangle = new SectionRectangular(this.Section.WebThickness, this.h_o);
+         }
+
+         protected override double GetS_net()
+         {
+             double S_net = 0.0;
+             if (rectangle!=null)
+             {
+                 S_net = rectangle.SectionModulusXTop;
+                 // note: top and bottom S_x are the same for rectangles
+             }
+             return S_net;
+         }
+
+         protected override double GetZ_net()
+         {
+             double Z_net = 0.0;
+             if (rectangle != null)
+             {
+                 Z_net = rectangle.PlasticSectionModulusX;
+                 // note: top and bottom S_x are the same for rectangles
+             }
+             return Z_net;
+         }
+
+
+         protected override double GetF_cr()
+         {
+             double F_cr;
+             bool PermissibleCopeGeometry = CheckCopeGeometry();
+             if (PermissibleCopeGeometry==true)
+             {
+                 double E = Material.ModulusOfElasticity;
+                 double f_d = Get_LateralTorsionalBucklingAdjustmentFactor();
+                 F_cr = 0.62 * Math.PI * E * ((Math.Pow(t_w, 2)) / (c * h_o)) * f_d; 
+             }
+             else
+             {
+                 F_cr = GetFcrGeneral();
+             }
+
+             return F_cr;
+         }
+
+         private double Get_LateralTorsionalBucklingAdjustmentFactor()
+         {
+             double d = Section.Height;
+             double f_d = 3.5 - 7.5 * (((d_c) / (d)));
+             return f_d;
+         }
+
+         protected override double Get_h_o()
+         {
+             return Section.Height - 2 * d_c;
+         }
+
+         public override double Get_t_w()
+         {
+             return Section.WebThickness;
+         }
     }
 }
