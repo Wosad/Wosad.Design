@@ -95,6 +95,11 @@
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric-Qs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\SteelColumn.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\Circular.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\IShearMember.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMember.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElementBase.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInShear.cs" />
@@ -378,7 +383,6 @@
     <Folder Include="AISC\AISC360_10\E_Compression\Chs\" />
     <Folder Include="AISC\AISC360_10\E_Compression\L\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
-    <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
