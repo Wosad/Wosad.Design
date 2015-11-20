@@ -1,4 +1,21 @@
-﻿using System;
+﻿#region Copyright
+   /*Copyright (C) 2015 Wosad Inc
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+   */
+#endregion
+ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +46,7 @@ namespace Wosad.Steel.AISC.AISC360_10.G_Shear
             double phi = 0.9;
             double A_g = GetArea();
             double F_cr = Get_F_cr();
-            double V_n = ((F_cr * A_g) / (2));
+            double V_n = ((F_cr * A_g) / 2.0);
             double phiV_n = phi * V_n;
             return phiV_n;
         }
@@ -47,8 +64,8 @@ namespace Wosad.Steel.AISC.AISC360_10.G_Shear
             double F_y = material.YieldStress;
             double t = Is_SAW_member == true ? t_nom : 0.93 * t_nom;
 
-            double F_cr1=((1.6*E) / (Math.Sqrt(((L_v) / (D)))*Math.Pow((((D) / (t))), 54)));
-            double F_cr2=((0.78*E) / (Math.Pow((((D) / (t))), 32)));
+            double F_cr1=((1.6*E) / (Math.Sqrt((L_v / D))*Math.Pow(((D / t)), 5.0/4.0)));
+            double F_cr2=((0.78*E) / (Math.Pow((((D) / t)), 3.0/2.0)));
             double F_cr3=0.6*F_y;
             List<double> F_crList = new List<double>() { F_cr1, F_cr2, F_cr3 };
             var F_cr = F_crList.Min();

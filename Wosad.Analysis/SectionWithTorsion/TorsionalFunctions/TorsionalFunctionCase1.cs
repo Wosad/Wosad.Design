@@ -20,30 +20,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Common.CalculationLogger;
-using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10 
+namespace Wosad.Analysis.SectionWithTorsion
 {
-    // All tension members where the tension
-    // load is transmitted only by transverse
-    // welds to some but not all of the 
-    // cross-sectional elements
-
-    public class ShearLagCase3 : ShearLagFactorBase
+    public class TorsionalFunctionCase1: TorsionalFunctionBase
     {
-        public ShearLagCase3()
+        public TorsionalFunctionCase1(double G, double J, double L, double z, double T)
+            :base( G,  J,  L,  z,  0.0)
         {
-            base.Log = new CalcLog();
-
+            this.T = T;
         }
 
-        /// <summary>
-        ///Calculates shear lag factor per AISC Table D3.1 "Shear Lag Factors for Connections  to Tension Members".
-        /// </summary>
-        public override double GetShearLagFactor()
+        double T;
+        public override double Get_theta()
         {
-            return 1.0;
+            double theta = ((T * z) / (G * J));
+            return theta;
+        }
+
+        public override double Get_theta_1()
+        {
+            double theta_1 = ((T) / (G * J));
+            return theta_1;
+        }
+
+        public override double Get_theta_2()
+        {
+            return 0.0;
+        }
+
+        public override double Get_theta_3()
+        {
+            return 0.0;
         }
     }
 }
