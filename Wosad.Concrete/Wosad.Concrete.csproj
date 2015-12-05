@@ -57,6 +57,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageConcreteLimitState.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageLimitState.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageSteelLimitState.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\ConcreteAnchorageElement.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\EffectiveEmbedmentDepth.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\MinimumEdgeDistance.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\CriticalEdgeDistance.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\Interaction.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\CastInPlaceAnchor.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorageType.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorLimitState.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorLoadType.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorQualification.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorReliabilityAndSensitivityCategory.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorSteelElementFailureType.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\AnchorInstallationType.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\CastInAnchorageType.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\ConcreteCrackingCondition.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\LoadingAxis.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\SupplementalReinforcementAtAnchor.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\SupplementaryReinforcmentCondition.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Entities\TypeOfAnchorSleeve.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Shear\5.1AnchorSteelShear.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Shear\5.2ConcreteBreakoutShear.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Shear\5.3ConcretePryoutShear.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Tension\4.1AnchorSteelTension.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Tension\4.2ConcreteBreakoutTension.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Tension\4.3AnchorPulloutTension.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Tension\4.4ConcreteSideFaceBlowoutTension.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\LimitStates\Tension\4.5Bond.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\PostInstalledAdhesiveAnchor.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\PostInstalledMechanicalAnchor.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\Program.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorBase.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorCastIn.cs" />
+    <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorPostInstalled.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSection.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSectionFlexure.cs" />
     <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />
@@ -198,6 +234,9 @@
     <None Include="Resources\ACI_MildRebarProperties.txt" />
     <None Include="Wosad.Concrete.licenseheader" />
     <None Include="Wosad.Concrete.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AnchorAreas.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
