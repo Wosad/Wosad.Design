@@ -66,9 +66,9 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
         {
 
             double hef_used = Get_hef_used(h_eff, ca_MAX,  s_MAX, EdgeDistances);
-            double gamma_ec_Nx = GetGamma_ec_N_axis(e_p_Nx, hef_used);
-            double gamma_ec_Ny = GetGamma_ec_N_axis(e_p_Ny, hef_used);
-            double gamma_ec_N = GetGamma_ec_N(gamma_ec_Nx, gamma_ec_Ny);
+            double gamma_ec_Nx = GetGamma_ec_N_SingleAxis(e_p_Nx, hef_used);
+            double gamma_ec_Ny = GetGamma_ec_N_SingleAxis(e_p_Ny, hef_used);
+            double gamma_ec_N = GetGamma_ec_N_Biaxial(gamma_ec_Nx, gamma_ec_Ny);
             double gamma_ed_N = GetGamma_ed_N(ca_MIN, hef_used);
             double kc = Get_kc(AnchorType,kc_Override);
             double gamma_c_N = GetGamma_c_N(AnchorType, ConcreteCondition, AnchorQualification, kc, gamma_c_NOverwrite);
@@ -112,6 +112,7 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             return A_Nco;
         }
 
+        //The basic concrete breakout strength of a single anchor in tension in cracked concrete  per 17.4.2.2 
         private double GetNb(CastInAnchorageType CastInAnchorageType, double hef_used, double fc,double lambda, double kc)
         {
             double Nb;
@@ -119,6 +120,7 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             {
                 if (hef_used>=11 || hef_used<=25)
                 {
+                    //17.4.2.2b
                    Nb = 16*Math.Sqrt(fc)/1000*Math.Pow(hef_used,(5/3));
                 }
                 Nb = GetNbAnyAnchor(hef_used, fc, lambda, kc);
@@ -130,8 +132,10 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             return Nb;
         }
 
+        
         private double GetNbAnyAnchor(double hef_used, double fc, double lambda, double kc)
         {
+            //17.4.2.2a
             double Nb = kc* Math.Sqrt(fc) / 1000 * Math.Pow(hef_used, 1.5);
             return Nb;
 
@@ -156,7 +160,7 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
 
 
 
-
+        //The modification factor for post-installed anchors designed for uncracked concrete
         private double GetGamma_cp_N(AnchorInstallationType AnchorInstallationType,ConcreteCrackingCondition ConcreteCrackingCondition,
             bool HasSupplementalReinforcement, double c_a_Min, double c_a_c, double h_ef)
         {
@@ -185,9 +189,10 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             return Gamma_cp_N;
         }
 
-
-        private double GetGamma_ec_N_axis(double e_p_N, double hef_used)
+        //The modification factor for anchor groups loaded eccentrically
+        private double GetGamma_ec_N_SingleAxis(double e_p_N, double hef_used)
         {
+            //17.4.2.4 
             double Gamma_ec_N = 0.0;
             if (e_p_N == 0)
             {
@@ -200,8 +205,10 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             return Gamma_ec_N;
         }
 
-        private double GetGamma_ec_N(double gamma_ec_Nx, double gamma_ec_Ny)
+        private double GetGamma_ec_N_Biaxial(double gamma_ec_Nx, double gamma_ec_Ny)
         {
+            //Per 17.4.2.4
+            //In the case where eccentric loading exists about two axes, the modification factor gamma_ec,N shall be calculated for each axis individually and the product of these factors used
             double Gamma_ec_N = gamma_ec_Nx * gamma_ec_Ny;
             return Gamma_ec_N;
         }
@@ -216,6 +223,8 @@ namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
             AnchorQualification AnchorQualification, double kc, 
             double gamma_c_NOverwrite)
         {
+            //17.4.2.6
+
             double Gamma_c_N = 0.0;
             if (ConcreteCondition == ConcreteCrackingCondition.Cracked)
             {

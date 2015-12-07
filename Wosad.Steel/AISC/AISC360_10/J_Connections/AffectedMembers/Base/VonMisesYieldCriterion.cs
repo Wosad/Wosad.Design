@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,31 +20,19 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using System;
 
 namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
 {
     public abstract partial class AffectedElementBase: SteelDesignElement
     {
-        public AffectedElementBase(ISteelSection Section, ICalcLog CalcLog)
-            : base(CalcLog)
-        {
-            this.section = Section;
-        }
-
-        public AffectedElementBase(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
-            :base(CalcLog)
-        {
-            this.section = new SteelGeneralSection(Section, Material); 
-        }
-
-        private ISteelSection section;
-
-        public ISteelSection Section
-        {
-            get { return section; }
-            set { section = value; }
-        }
-     
         
+        public double GetVonMisesYieldCriterionInteractionRatio(double V_u, double phiV_n, double M_u, double phiM_n)
+        {
+            double DCR = Math.Pow(V_u / phiV_n, 2.0) + Math.Pow(M_u / phiM_n, 2.0);
+            return DCR;
+        }
+
+   
     }
 }
