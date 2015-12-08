@@ -380,8 +380,8 @@
     <None Include="NOTICE" />
     <None Include="packages.config" />
     <None Include="Resources\AISC360_10_MaterialProperties.txt" />
-    <None Include="Wosad.Steel.licenseheader" />
     <None Include="Wosad.Steel.nuspec" />
+    <None Include="Wosad.Steel.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AISC\AISC360_10\C_Stability\" />

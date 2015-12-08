@@ -1,5 +1,5 @@
 ﻿extensions: designer.cs generated.cs
-extensions: .cs
+extensions: .cs .cpp .h
 #region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
@@ -16,8 +16,13 @@ extensions: .cs
    limitations under the License.
    */
 #endregion
- 
+extensions: .aspx .ascx
+<%-- 
+Sample license text.
+--%>
+extensions: .vb
+'Sample license text.
 extensions:  .xml .config .xsd
 <!--
-	Copyright (C) 2015 Wosad Inc
+Sample license text.
 -->
