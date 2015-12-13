@@ -36,7 +36,6 @@ namespace Wosad.Steel.AISC.AISC360_10
         double d;
         double x_ob;
         double l;
-        bool Has4orMoreLinesOfBolts;
     
         public ShearLagCase7(int NumberOfBoltLines, double Depth, double FlangeWidth,
             double EccentricityOfConnection, double LengthOfConnection )
