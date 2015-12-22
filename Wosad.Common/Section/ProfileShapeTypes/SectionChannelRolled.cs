@@ -111,10 +111,10 @@ namespace Wosad.Common.Section.SectionTypes
 
 
             //Note: all insertion points are calculated from the left side of the shape
-            CompoundShapePart Web = new CompoundShapePart(Height, WebThickness,new Point2D(0, - WebThickness/2.0));
-            PartWithDoubleFillet Fillet = new PartWithDoubleFillet(k, 2 * FlangeThickness, new Point2D( 0, -WebThickness),true);
+            CompoundShapePart Web = new CompoundShapePart(Height, WebThickness,new Point2D(0,  WebThickness/2.0));
+            PartWithDoubleFillet Fillet = new PartWithDoubleFillet(k, 2 * FlangeThickness, new Point2D( 0, WebThickness),true);
             CompoundShapePart Flange = new CompoundShapePart(2 * FlangeThickness, FlangeWidth - WebThickness - k,
-                new Point2D(0,-(WebThickness+k+ (FlangeWidth-WebThickness-k)/2.0)));
+                new Point2D(0,(WebThickness+k+ (FlangeWidth-WebThickness-k)/2.0)));
              
 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()

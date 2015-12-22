@@ -32,22 +32,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
     public class BoltBearingGroupB: BoltBearing
     {
         public BoltBearingGroupB(double Diameter, BoltThreadCase ThreadType,
-             ICalcLog log)
+             ICalcLog log=null)
             :base(Diameter,ThreadType,log)
         {
-            switch (ThreadType)
-            {
-                case BoltThreadCase.Included:
-                    nominalTensileStress = BoltGroupB.ThreadsIncluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupB.ThreadsIncluded.NominalShearStress;
-                    break;
-                case BoltThreadCase.Excluded:
-                    nominalTensileStress = BoltGroupB.ThreadsExcluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupB.ThreadsExcluded.NominalShearStress;
-                    break;
+            material = new BoltGroupBMaterial();
 
-            }
+           nominalTensileStress = material.GetNominalTensileStress(ThreadType);
+           nominalShearStress = material.GetNominalTensileStress(ThreadType);
+        
         }
+
+        BoltGroupBMaterial material;
 
         private double nominalTensileStress;
 

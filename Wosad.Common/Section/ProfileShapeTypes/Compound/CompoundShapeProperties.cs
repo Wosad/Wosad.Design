@@ -85,11 +85,12 @@ namespace Wosad.Common.Section
             //iternally the RectanglesYAxis collection must provide rotated rectangles
             //therefore even though we calculate Iy,
             //we follow the procedures for calculation of Ix since the provided rectanges are not the same.
+            //except for the centroid we need to use X coordinate (again because the shape is internally rotated)
 
             foreach (var r in RectanglesYAxis)
             {
                 double thisA = r.GetArea();
-                double thisYbar = (r.Centroid.Y - this.Centroid.Y);
+                double thisYbar = (r.Centroid.Y - this.Centroid.X);
                 double thisIy = r.GetMomentOfInertia() + thisA * Math.Pow(thisYbar, 2);
                 Iy = Iy + thisIy;
             }

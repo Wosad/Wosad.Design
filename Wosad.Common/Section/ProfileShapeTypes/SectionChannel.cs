@@ -142,7 +142,7 @@ namespace Wosad.Common.Section.SectionTypes
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
                 new CompoundShapePart(Height, WebThickness, new Point2D(0, WebThickness/2.0)),
-                new CompoundShapePart(2*FlangeThickness,FlangeWidth-WebThickness, new Point2D(0, -(WebThickness+(FlangeWidth -WebThickness)/2))),
+                new CompoundShapePart(2*FlangeThickness,FlangeWidth-WebThickness, new Point2D(0, (WebThickness+(FlangeWidth -WebThickness)/2))),
             };
             return rectY;
         }

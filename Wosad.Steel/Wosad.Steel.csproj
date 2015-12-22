@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.1.3\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.1.4\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -122,7 +122,9 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingAction.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BearingAtBoltHoles.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bolt.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltA307.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\IBoltMaterial.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltBearingThreadedGeneral.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Material\BoltA307Material.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bearing\BoltBearing.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\EdgeDistance.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SpacingAndEdgeDistance.cs" />
@@ -131,10 +133,11 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bearing\BoltBearingInteraction.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltFactorForFillers.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltFillers.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltGroupA.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltGroupB.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Material\BoltGroupAMaterial.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Material\BoltGroupBMaterial.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCoefficient.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCritical.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltFactory.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroup.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltSlipCriticalGroupB.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltSlipCriticalGroupA.cs" />
@@ -241,6 +244,7 @@
     <Compile Include="AISC\AISC360_10\B_General\Compactness\Unstiffened\09-LegOfSingleAngle.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\Unstiffened\10-LegOfDoubleAngleWithSeparation.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\Unstiffened\11-StemOfTee.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Material\ThreadedBoltMaterial.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Base\DirectionOfTensionLoading.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Base\TypeOfCompressionLoading.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Base\Weld.cs" />

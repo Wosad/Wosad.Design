@@ -43,9 +43,5 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
         }
 
 
-        public double GetAvailableTensileStrength()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

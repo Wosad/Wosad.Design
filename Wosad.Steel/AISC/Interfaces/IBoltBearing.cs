@@ -24,6 +24,7 @@ namespace Wosad.Steel.AISC.Interfaces
 {
     public interface IBoltBearing
     {
-        double GetAvailableTensileStrength();
+        double GetAvailableTensileStrength(double V);
+       
     }
 }

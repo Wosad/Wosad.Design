@@ -72,9 +72,17 @@ namespace Wosad.Common.Section
         //}
         public override double GetArea()
         {
-            double A_rect = r * b_rect;
-            double A_circ = GetCircularSpandrelArea();
-            return  A_circ + A_rect;
+            if (Size>0.0)
+            {
+                double A_rect = r * b_rect;
+                double A_circ = GetCircularSpandrelArea();
+                return A_circ + A_rect;  
+            }
+            else
+            {
+                return 0.0;
+            }
+
         }
 
         Point2D centroid;
@@ -84,24 +92,31 @@ namespace Wosad.Common.Section
         /// <returns></returns>
             public override Point2D GetCentroid()
             {
-                if (centroid ==null)
-	            {
+                if (Size >0)
+                {
+                    if (centroid == null)
+                    {
                         double y_c, x_c;
                         double y_circ;
 
                         y_circ = GetCircularSpandrelCentroid();
-                        y_c = (GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect *r* r/2) / GetArea();
-                        x_c = (GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect *r* b_rect/2) / GetArea();
+                        y_c = (GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect * r * r / 2) / GetArea();
+                        x_c = (GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect * r * b_rect / 2) / GetArea();
 
-                        if (this.isTopWidened==true)
+                        if (this.isTopWidened == true)
                         {
-                            centroid = new Point2D(InsertionPoint.X+x_c, InsertionPoint.Y - y_c);
+                            centroid = new Point2D(InsertionPoint.X + x_c, InsertionPoint.Y - y_c);
                         }
                         else
                         {
-                            centroid = new Point2D(InsertionPoint.X+x_c, InsertionPoint.Y + y_c);
+                            centroid = new Point2D(InsertionPoint.X + x_c, InsertionPoint.Y + y_c);
                         }
 
+                    } 
+                }
+                else
+                {
+                    centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y);
                 }
                 return centroid;
             }

@@ -151,9 +151,9 @@ namespace Wosad.Common.Section.Predefined
         {
             //SectionGenericShape sec = new SectionGenericShape(ShapeId, null); //todo null for vertices needs to be revisited
 
-            this.A                         =A;
-            this.I_x             =Ix;
-            this.I_y             =Iy;
+            this.A  =A;
+            this.I_x  =Ix;
+            this.I_y =Iy;
             this.S_x_Top           =GetSxTop(Type);
             this.S_x_Bot           =GetSxBot(Type);
             this.S_y_Left          =GetSyLeft(Type);

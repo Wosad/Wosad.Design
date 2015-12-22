@@ -26,6 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
+using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
@@ -36,19 +37,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             BoltFillerCase Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier = 1.13):
             base(Diameter,ThreadType,FayingSurface,HoleType,Fillers,NumberOfSlipPlanes,log,PretensionMultiplier)
         {
-            switch (ThreadType)
-	        {
-		        case BoltThreadCase.Included:
-                    nominalTensileStress = BoltGroupB.ThreadsIncluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupB.ThreadsIncluded.NominalShearStress;
-                 break;
-                case BoltThreadCase.Excluded:
-                    nominalTensileStress = BoltGroupB.ThreadsExcluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupB.ThreadsExcluded.NominalShearStress;
-                 break;
+            material = new BoltGroupBMaterial();
 
-	        }
+            nominalTensileStress = material.GetNominalTensileStress(ThreadType);
+            nominalShearStress = material.GetNominalTensileStress(ThreadType);
         }
+            BoltGroupBMaterial material;
     
             private double nominalTensileStress;
 

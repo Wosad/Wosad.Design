@@ -26,28 +26,23 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
+using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
     public class BoltBearingGroupA: BoltBearing
     {
         public BoltBearingGroupA(double Diameter, BoltThreadCase ThreadType,
-            ICalcLog log)
+            ICalcLog log=null)
             :base(Diameter,ThreadType,log)
         {
-            switch (ThreadType)
-            {
-                case BoltThreadCase.Included:
-                    nominalTensileStress = BoltGroupA.ThreadsIncluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupA.ThreadsIncluded.NominalShearStress;
-                    break;
-                case BoltThreadCase.Excluded:
-                    nominalTensileStress = BoltGroupA.ThreadsExcluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupA.ThreadsExcluded.NominalShearStress;
-                    break;
+            material = new BoltGroupAMaterial();
 
-            }
+           nominalTensileStress = material.GetNominalTensileStress(ThreadType);
+           nominalShearStress = material.GetNominalShearStress(ThreadType);
+
         }
+        BoltGroupAMaterial material;
 
         private double nominalTensileStress;
 

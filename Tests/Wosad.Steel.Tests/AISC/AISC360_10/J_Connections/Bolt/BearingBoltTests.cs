@@ -15,6 +15,7 @@
    */
 #endregion
 
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,29 +28,32 @@ using Wosad.Steel.AISC.SteelEntities.Bolts;
 
 namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 {
-
+    [TestFixture]
     public class BearingBoltTests
     {
+
+        //AISC Design Guide 29
+        //Example 5.1
+
+        //Page 45
+         [Test]
         public void BearingBoltGroupAReturnsTensileStrength()
         {
             BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Included,  null);
-            double phiPn = bolt.GetTensileCapacity();
-        }
-        public void BearingBoltGroupBReturnsTensileStrength()
-        {
-            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadCase.Included,  null);
-            double phiPn = bolt.GetTensileCapacity();
+            double phi_r_nt = bolt.GetAvailableTensileStrength();
+            Assert.AreEqual(40.6, Math.Round(phi_r_nt, 1));    
         }
 
+
+
+        //Page 45
+         [Test]
         public void BearingBoltGroupAReturnsShearStrength()
         {
-            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Included,  null);
-            double phiVn = bolt.GetShearCapacity();
-        }                                   
-        public void BearingBoltGroupBReturnsShearStrength()
-        {
-            BoltBearingGroupB bolt = new BoltBearingGroupB(7.0 / 8.0, BoltThreadCase.Included, null);
-            double phiVn = bolt.GetShearCapacity();
-        }
+            BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Excluded,  null);
+            double phi_r_nv = bolt.GetAvailableShearStrength(2.0);
+            Assert.AreEqual(61.3, Math.Round(phi_r_nv,1));        
+         }                                   
+
     }
 }

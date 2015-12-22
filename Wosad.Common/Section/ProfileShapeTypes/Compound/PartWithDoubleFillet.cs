@@ -51,15 +51,33 @@ namespace Wosad.Common.Section
 
         public override double GetHeight()
         {
-            double h = Math.Abs(Centroid.Y - InsertionPoint.Y) * 2;
+            double h;
+            if (Size>0)
+            {
+                h = Math.Abs(Centroid.Y - InsertionPoint.Y) * 2;
+            }
+            else
+            {
+                h = 0.0;
+            }
+           
             return h;
         }
 
         public override double GetWidth()
         {
-            double h = Math.Abs(Centroid.Y - InsertionPoint.Y)  * 2;
-            double A = GetArea();
-            double b = A / h;
+            double b;
+            if (Size>0)
+            {
+                double h = Math.Abs(Centroid.Y - InsertionPoint.Y) * 2;
+                double A = GetArea();
+                b = A / h;  
+            }
+            else
+            {
+                b = 0.0;
+            }
+
             return b;
         }
 
@@ -120,9 +138,17 @@ namespace Wosad.Common.Section
         /// <returns></returns>
             public override double GetArea()
             {
-                double A_rect = r * b_rect;
-                double A_circ =GetCircularSpandrelArea();
-                return 2* A_circ + A_rect;
+                if (Size>0)
+                {
+                    double A_rect = r * b_rect;
+                    double A_circ = GetCircularSpandrelArea();
+                    return 2 * A_circ + A_rect;
+                }
+                else
+                {
+                    return 0.0;
+                }
+
             }
         protected double GetCircularSpandrelArea()
         {
@@ -167,22 +193,29 @@ namespace Wosad.Common.Section
         /// <returns></returns>
             public override Point2D GetCentroid()
             {
-                if (centroid == null)
+                if (Size >0)
                 {
-                    double y_c;
-                    double y_circ;
-
-                    y_circ = GetCircularSpandrelCentroid();
-                    y_c = (2 * GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect * r * r / 2) / GetArea();
-
-                    if (this.isTopWidened == true)
+                    if (centroid == null)
                     {
-                        centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y - y_c);
-                    }
-                    else
-                    {
-                        centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y + y_c);
-                    }
+                        double y_c;
+                        double y_circ;
+
+                        y_circ = GetCircularSpandrelCentroid();
+                        y_c = (2 * GetCircularSpandrelArea() * GetCircularSpandrelCentroid() + b_rect * r * r / 2) / GetArea();
+
+                        if (this.isTopWidened == true)
+                        {
+                            centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y - y_c);
+                        }
+                        else
+                        {
+                            centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y + y_c);
+                        }
+                    } 
+                }
+                else
+                {
+                    centroid = new Point2D(InsertionPoint.X, InsertionPoint.Y);
                 }
 
                 return centroid;

@@ -26,7 +26,7 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
 {
     public  partial class PryingActionElement: SteelDesignElement
     {
-            double d_hole ;
+            double d_b ;
             double d_holePrime;
             double b_stem ;
             double a_edge ;
@@ -34,10 +34,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
             double B_bolt ;
             double F_u;
             double t;
-            public PryingActionElement(double d_hole, double d_holePrime, double b_stem, double a_edge, double p, double B_bolt, double F_u)
+            public PryingActionElement(double d_b, double d_holePrime, double b_stem, double a_edge, double p, double B_bolt, double F_u)
         {
-                this.d_hole =d_hole;
-                this.d_hole = d_holePrime;
+                this.d_b =d_b;
+                this.d_holePrime = d_holePrime;
                 this.b_stem =b_stem;
                 this.a_edge =a_edge;
                 this.p      =p     ;
@@ -59,6 +59,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
             
         private double Get_t_c()
             {
+                        if (F_u==0)
+                        {
+                            throw new Exception("Prying calculation failed. Material ultimate strength cannot be zero.");
+                        }
                 double phi = 0.9;
                 double b_prime = Get_b_prime();
                 double t_c = Math.Sqrt(((4 * (B_bolt) * (b_prime)) / (phi * (p) * (F_u))));
@@ -77,6 +81,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
         
         double Get_delta()
         {
+            if (p==0)
+            {
+                throw new Exception("Prying calculation failed. Bolt pitch cannot be zero.");
+            }
             return 1 - d_holePrime / p;
         }
 
@@ -93,6 +101,10 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
         
         double Get_rho()
         {
+            if (a_prime ==0 || b_prime == 0)
+            {
+                throw new Exception("Prying calculation failed. Bolt edge distances a_prime and b_prime cannot be zero.");
+            }
             return a_prime / b_prime;
         }
 
@@ -102,13 +114,14 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
         {
             get {
                 _a_prime = Get_a_prime();
-                return a_prime; }
+                return _a_prime; }
  
         }
         
         double Get_a_prime()
         {
-            return a_edge + d_hole / 2.0;
+            return a_edge + d_b / 2.0;
+
         }
 
 
@@ -120,13 +133,13 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
             get
             {
                 _b_prime = Get_b_prime();
-                return b_prime;
+                return _b_prime;
             }
 
         }
         double Get_b_prime()
         {
-            return b_stem - d_hole / 2.0;
+            return b_stem - d_b / 2.0;
         }
     }
 }

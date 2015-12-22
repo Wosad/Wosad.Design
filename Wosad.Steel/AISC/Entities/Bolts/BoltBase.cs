@@ -69,10 +69,10 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
 
 
 
-        public abstract double GetShearCapacity();
+        public abstract double GetAvailableShearStrength(double N_ShearPlanes);
 
 
-        public abstract double GetTensileCapacity();
+        public abstract double GetAvailableTensileStrength();
 
 
        

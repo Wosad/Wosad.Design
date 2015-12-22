@@ -14,18 +14,10 @@
    limitations under the License.
    */
 #endregion
- 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
+
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Code;
-using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
+using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {
@@ -36,20 +28,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             BoltFillerCase Fillers, int NumberOfSlipPlanes, ICalcLog log, double PretensionMultiplier = 1.13):
             base(Diameter,ThreadType,FayingSurface,HoleType,Fillers,NumberOfSlipPlanes,log,PretensionMultiplier)
         {
-            switch (ThreadType)
-	        {
-		        case BoltThreadCase.Included:
-                    nominalTensileStress = BoltGroupA.ThreadsIncluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupA.ThreadsIncluded.NominalShearStress;
-                 break;
-                case BoltThreadCase.Excluded:
-                    nominalTensileStress = BoltGroupA.ThreadsExcluded.NominalTensileStress;
-                    nominalShearStress = BoltGroupA.ThreadsExcluded.NominalShearStress;
-                 break;
+            material = new BoltGroupAMaterial();
 
-	        }
+            nominalTensileStress = material.GetNominalTensileStress(ThreadType);
+            nominalShearStress = material.GetNominalTensileStress(ThreadType);
         }
-    
+
+            BoltGroupAMaterial material;
+
             private double nominalTensileStress;
 
             public override double NominalTensileStress
