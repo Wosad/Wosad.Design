@@ -22,7 +22,7 @@ using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Int
 
 namespace Wosad.Steel.AISC.Interfaces
 {
-    public interface IBoltBearing
+    public interface IBoltBearing : IBolt
     {
         double GetAvailableTensileStrength(double V);
        
