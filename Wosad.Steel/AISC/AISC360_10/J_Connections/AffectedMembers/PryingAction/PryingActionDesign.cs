@@ -32,7 +32,7 @@ namespace Wosad.Steel.AISC.AISC360_10.J_Connections
         //Slides 60-62
 
         double T;
-        public  double GetMaximumThickness(double T)
+        public  double GetMinimumThickness(double T) 
         {
             this.T = T;
             double t_min = 0.0;

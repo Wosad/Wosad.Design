@@ -68,5 +68,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             }
             return bb;
         }
+
+        public IBoltBearing GetBearingBolt(double Diameter, string ThreadType)
+        {
+            BoltThreadCase Thread;
+            if (ThreadType=="X")
+            {
+                Thread = BoltThreadCase.Excluded;
+            }
+            else
+            {
+                Thread = BoltThreadCase.Included;
+            }
+            return this.GetBearingBolt(Diameter, Thread);
+        }
     }
 }

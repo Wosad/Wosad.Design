@@ -4,7 +4,7 @@
     <dependencies>
       <group targetFramework="net45">
         <dependency id="DocumentFormat.OpenXml" version="2.5" />
-        <dependency id="Wosad.Common" version="0.0.1.4" />
+        <dependency id="Wosad.Common" version="0.0.1.5" />
       </group>
     </dependencies>
     <id>Wosad.Reporting</id>
