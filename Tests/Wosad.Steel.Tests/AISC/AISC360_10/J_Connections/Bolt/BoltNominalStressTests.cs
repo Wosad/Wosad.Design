@@ -10,7 +10,7 @@ using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 {
     [TestFixture]
-    public class BoltNominalStress
+    public class BoltNominalStressTests
     {
 
         // AISC Design examples V14

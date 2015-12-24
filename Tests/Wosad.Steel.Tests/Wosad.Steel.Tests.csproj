@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BearingBoltTests.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStress.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrength.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroupTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStressTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrengthTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

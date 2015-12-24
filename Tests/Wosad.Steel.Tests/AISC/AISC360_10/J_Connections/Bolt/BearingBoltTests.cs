@@ -23,7 +23,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
-using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 
 namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
@@ -37,7 +36,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 
         //Page 45
          [Test]
-        public void BearingBoltGroupAReturnsTensileStrength()
+        public void BearingBoltGroupAReturnsTensileStrengthA325()
         {
             BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Included,  null);
             double phi_r_nt = bolt.GetAvailableTensileStrength();
@@ -47,13 +46,25 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 
 
         //Page 45
+        //and
+        //AISC Steel Manual 14th Edition Table 7-1
          [Test]
-        public void BearingBoltGroupAReturnsShearStrength()
+        public void BearingBoltGroupAReturnsShearStrengthA325()
         {
             BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Excluded,  null);
             double phi_r_nv = bolt.GetAvailableShearStrength(2.0);
             Assert.AreEqual(61.3, Math.Round(phi_r_nv,1));        
+         }
+
+         //AISC Steel Manual 14th Edition Table 7-1
+         [Test]
+         public void BearingBoltGroupAReturnsShearStrengthA490()
+         {
+             BoltBearingGroupB bolt = new BoltBearingGroupB(1.0, BoltThreadCase.Included, null);
+             double phi_r_nv = bolt.GetAvailableShearStrength(1);
+             Assert.AreEqual(40, Math.Floor(phi_r_nv));
          }                                   
+     
 
     }
 }

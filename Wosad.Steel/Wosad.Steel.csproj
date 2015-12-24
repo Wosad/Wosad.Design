@@ -298,9 +298,10 @@
     <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\HssUtilizationRatioU.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\Rhs\RhsTrussConnection.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\Rhs\RhsTrussConnectionQf.cs" />
-    <Compile Include="AISC\Entities\Bolts\BoltGroup.cs" />
+    <Compile Include="AISC\Entities\Bolts\BoltGroupGeneral.cs" />
     <Compile Include="AISC\Entities\Bolts\BoltHoleDeformationType.cs" />
     <Compile Include="AISC\Entities\Bolts\BoltPoint.cs" />
+    <Compile Include="AISC\Entities\ConnectionGroup\Elastic.cs" />
     <Compile Include="AISC\Entities\DesignFormat.cs" />
     <Compile Include="AISC\Entities\Enums\BeamCopeCase.cs" />
     <Compile Include="AISC\Entities\Enums\BendingAxis.cs" />
@@ -314,11 +315,11 @@
     <Compile Include="AISC\Entities\Enums\WeldGroupPattern.cs" />
     <Compile Include="AISC\Entities\Enums\WeldLoadTypeId.cs" />
     <Compile Include="AISC\Entities\Enums\WeldType.cs" />
-    <Compile Include="AISC\Entities\InstantaneousCenterGroup.cs" />
+    <Compile Include="AISC\Entities\ConnectionGroup\InstantaneousCenter.cs" />
     <Compile Include="AISC\Entities\Materials\WeldMaterial.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldBase.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldSegmentBase.cs" />
-    <Compile Include="AISC\Entities\Welds\FilletWeldGroup.cs" />
+    <Compile Include="AISC\Entities\Welds\FilletWeldGroupGeneral.cs" />
     <Compile Include="AISC\Entities\Welds\Interfaces\IWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldLine.cs" />

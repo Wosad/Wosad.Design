@@ -21,15 +21,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.Interfaces;
+using Wosad.Common.Mathematics;
+using Wosad.Steel.AISC.SteelEntities.Bolts;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections
+namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
     //Inherits from base class. Added here for convenience
-    public class BoltGroup : Wosad.Steel.AISC.SteelEntities.Bolts.BoltGroup
+    public class BoltGroup : BoltGroupGeneral
     {
         public BoltGroup(List<ILocationArrayElement> Bolts):base (Bolts)
         {
 
         }
+        /// <summary>
+        /// Bolt group constructor
+        /// </summary>
+        /// <param name="NRows">Number of rows</param>
+        /// <param name="NColumns">Number of columns</param>
+        /// <param name="p_h">Horizontal pitch (spacing)</param>
+        /// <param name="p_v">Vertical pitch (spacing)</param>
+        public BoltGroup(int NRows, int NColumns, double p_h, double p_v)
+        {
+            List<ILocationArrayElement> bolts = new List<ILocationArrayElement>();
+            double L_h = (NColumns-1) * p_h;
+            double L_v = (NRows-1) * p_v;
+            double x_init = -L_h / 2.0;
+            double y_init = -L_v / 2.0;
+            for (int i = 0; i < NRows; i++)
+            {
+                for (int j = 0; j < NColumns; j++)
+                {
+                    bolts.Add(new BoltPoint(x_init + j * p_h, y_init + i * p_v));
+                }
+            }
+            base.Bolts = bolts;
+        }
+
+        
     }
 }

@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections
+namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
     public  partial class PryingActionElement: SteelDesignElement
     {

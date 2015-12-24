@@ -24,14 +24,14 @@ using Wosad.Common.Mathematics;
 
 namespace Wosad.Steel.AISC.SteelEntities
 {
-    public abstract class InstantaneousCenterGroup
+    public abstract partial class ConnectionGroup
     {
 
-        public InstantaneousCenterGroup()
+        public ConnectionGroup()
         {
 
         }
-        public InstantaneousCenterGroup(List<ILocationArrayElement> Elements)
+        public ConnectionGroup(List<ILocationArrayElement> Elements)
         {
             this.Elements = Elements;
         }
@@ -85,21 +85,13 @@ namespace Wosad.Steel.AISC.SteelEntities
                             double Rn_i = GetElementForce(el, Center, controllingElement, AngleOfLoad);
                             //Contribution of this bolt to the overall response of the group
                             M = M + (Rn_i) * ri ;                      //Moment
-
-                           //to be removed //Ry = Ry + (Rn_i) * (xi / ri) ;             //Vertical Force
-                           //to be removed //Rx = Rx + (Rn_i) * (yi / ri) ;             //Horizontal Force
                             Vector2d ForceUnitVector = GetElementForceUnitVector(el, Center);
-                            Ry = Ry + Rn_i * ForceUnitVector.Y;
-                            Rx = Rx + Rn_i * ForceUnitVector.X;
+                            Ry = Ry + Rn_i * ForceUnitVector.Y;              //Vertical Force
+                            Rx = Rx + Rn_i * ForceUnitVector.X;              //Horizontal Force
 
                             J = J + Math.Pow(ri , 2);
                         }
-                        //Determine if the obtained force distribution is in equillibrium with external forces
-                                                //to be removed  //double ro = (Ec - Center.X) * Math.Sin(Rot) + Center.Y * Math.Cos(Rot); //external force moment arm
-                                                //P = M / ro;   //resolving the internal forces into a resultant at the given moment arm
-                        
-                
-                                //Define a force vector due to unit force
+                            //Define a force vector due to unit force
                             Vector2d UnitForce = new Vector2d(Math.Sin(Rot), Math.Cos(Rot));
                             Vector2d PositionVector = new Vector2d(Ec - Center.X, -Center.Y);
                             double d = UnitForce.FindDistance(PositionVector);
@@ -196,7 +188,7 @@ namespace Wosad.Steel.AISC.SteelEntities
                 }
                 return elements;
             }
-            set { elements = value; }
+            set { elements = value; ElasticPropertiesWerCalculated = false; }
         }
 
 
@@ -220,5 +212,6 @@ namespace Wosad.Steel.AISC.SteelEntities
             Vector2d perpVector= new Vector2d(-BY, BX);
             return perpVector.GetUnit();
         }
+
     }
 }

@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             material = new BoltGroupBMaterial();
 
            nominalTensileStress = material.GetNominalTensileStress(ThreadType);
-           nominalShearStress = material.GetNominalTensileStress(ThreadType);
+           nominalShearStress = material.GetNominalShearStress(ThreadType);
         
         }
 

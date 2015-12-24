@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections.Weld
+namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
     public class PJPGrooveWeld : GrooveWeld
     {

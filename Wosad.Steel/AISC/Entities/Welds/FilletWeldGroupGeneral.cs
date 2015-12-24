@@ -28,12 +28,12 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
     /// <summary>
     /// Weld group is comprised of linear segments.
     /// </summary>
-    public class FilletWeldGroup: InstantaneousCenterGroup
+    public class FilletWeldGroupGeneral: ConnectionGroup
     {
         /// <summary>
         /// Constructor (parameterless)
         /// </summary>
-        public FilletWeldGroup()
+        public FilletWeldGroupGeneral()
         {
             
         }

@@ -14,16 +14,123 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.Mathematics;
+using Wosad.Steel.AISC.SteelEntities.Welds;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections
+namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
-    public class FilletWeldGroup : Wosad.Steel.AISC.SteelEntities.Welds.FilletWeldGroup
+    public class FilletWeldGroup : FilletWeldGroupGeneral
     {
+        public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double ElectrodeStrength  )
+        {
+            this.l_horizontal= l_horizontal;
+            this.l_vertical = l_vertical;
+            this.leg = leg;
+            this.F_EXX = ElectrodeStrength;
+            Nsub = 20;
+
+             switch (WeldPattern)
+	        {                                    
+                  case  "ParallelVertical"       :  AddParallelVertical      (); break;
+                  case  "WeldParallelHorizontal" :  AddWeldParallelHorizontal(); break;
+                  case  "Rectangle"              :  AddRectangle             (); break;
+                  case  "C"                      :  AddC                     (); break;
+                  case "L"                       :  AddL                     (); break;
+                  default: AddParallelVertical(); break;                                            
+	        }
+
+
+        }
+
+        double l_horizontal;
+        double l_vertical;
+        double leg;
+        double F_EXX;
+        int Nsub;
+
+        private void AddL()
+        {
+            Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
+            Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
+            Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
+  
+            List<FilletWeldLine> lines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub)
+            };
+            Lines = lines;
+
+        }
+
+        private void AddC()
+        {
+            Point2D p1 = new Point2D(-l_horizontal / 2.0, -l_vertical / 2.0);
+            Point2D p2 = new Point2D(-l_horizontal / 2.0, l_vertical / 2.0);
+            Point2D p3 = new Point2D(l_horizontal / 2.0, l_vertical / 2.0);
+            Point2D p4 = new Point2D(l_horizontal / 2.0, -l_vertical / 2.0);
+
+            List<FilletWeldLine> lines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+            };
+            Lines = lines;
+        }
+        private void AddRectangle()
+        {
+            Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
+            Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
+            Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
+            Point2D p4 = new Point2D(l_horizontal/2.0,-l_vertical/2.0);
+
+            List<FilletWeldLine> lines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
+                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+            };
+            Lines = lines;
+        }
+
+        private void AddWeldParallelHorizontal()
+        {
+            Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
+            Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
+            Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
+            Point2D p4 = new Point2D(l_horizontal/2.0,-l_vertical/2.0);
+
+            List<FilletWeldLine> lines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+            };
+            Lines = lines;
+        }
+
+        private void AddParallelVertical()
+        {
+            Point2D p1 = new Point2D(-l_horizontal / 2.0, -l_vertical / 2.0);
+            Point2D p2 = new Point2D(-l_horizontal / 2.0, l_vertical / 2.0);
+            Point2D p3 = new Point2D(l_horizontal / 2.0, l_vertical / 2.0);
+            Point2D p4 = new Point2D(l_horizontal / 2.0, -l_vertical / 2.0);
+
+            List<FilletWeldLine> lines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
+                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+            };
+            Lines = lines;
+        }
     }
 }

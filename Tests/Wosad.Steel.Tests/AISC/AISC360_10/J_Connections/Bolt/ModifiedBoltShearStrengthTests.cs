@@ -11,7 +11,7 @@ using Wosad.Steel.AISC.Interfaces;
 namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 {
     [TestFixture]
-    public class ModifiedBoltShearStrength
+    public class ModifiedBoltShearStrengthTests
     {
         //AISC Design Examples V14
         //EXAMPLE J.3 COMBINED TENSION AND SHEAR IN BEARING TYPE CONNECTIONS 

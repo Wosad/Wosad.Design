@@ -25,9 +25,9 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.Code
 {
-    public enum SteelDesignFormat
-    {
-        LRFD,
-        ASD
-    }
+    //public enum SteelDesignFormat
+    //{
+    //    LRFD,
+    //    ASD
+    //}
 }
