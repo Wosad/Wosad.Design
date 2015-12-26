@@ -76,23 +76,8 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
             double segDx;
             double segDy;
 
-            if (p2.X > p1.X)
-            {
-                segDx = dx / N;
-            }
-            else
-            {
-                segDx = -dx / N;
-            }
-
-            if (p2.Y > p1.Y)
-            {
-                segDy = dy / N;
-            }
-            else
-            {
-                segDy = -dy / N;
-            }
+            segDx = dx / N;
+            segDy = dy / N;
 
             for (int i = 0; i < NumberOfSubdivisions; i++)
             {

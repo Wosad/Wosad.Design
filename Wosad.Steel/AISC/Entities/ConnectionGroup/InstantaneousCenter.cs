@@ -35,73 +35,78 @@ namespace Wosad.Steel.AISC.SteelEntities
         {
             this.Elements = Elements;
         }
+
+        Point2D Center;
+        double M;
+        double J_ic;
+        double Ry;
+        double Rx;
+
         /// <summary>
-        /// Finds bolt group ultimate strength coefficient C
+        /// Finds bolt or weld group ultimate strength (force)
         /// using instantaneous center of rotation method
         /// </summary>
-        /// <param name="Eccentricity"></param>
-        /// <param name="AngleOfLoad"></param>
+        /// <param name="e_x">Horizontal component of eccentricity</param>
+        /// <param name="AngleOfLoad">Angle of load from vertical</param>
         /// <returns></returns>
-        public double FindUltimateStrengthCoefficient(double Eccentricity , double AngleOfLoad)
+        protected double FindUltimateEccentricForce(double e_x , double AngleOfLoad)
         {
             bool iterationYieldedResult = false;
             int MaxNumberOfIterations = 1999;
             //iteration variables
             double P=0.0;
-            double M=0.0; 
-            double J=0.0;
-            double Ry=0.0;
-            double Rx=0.0;
+            M=0.0;
+            J_ic = 0.0;
+            Ry=0.0;
+            Rx=0.0;
             double Pprev = 0;
             double Mapfunc =0.0;
+            ILocationArrayElement controllingElement=null ;
 
             double Rot = AngleOfLoad.ToRadians();
-            double Ec = Eccentricity;
+            double Ec = e_x;
             int N = Elements.Count();
             
             //Initial assumption of bolt center
-            Point2D Center = new Point2D(0, 0);
+            Center = new Point2D(0, 0);
             int iterationCount = 0;
             while (iterationYieldedResult == false)
             {
-               //double LiMax = FindLargestElementDistanceFromCenter(Center);
-               ILocationArrayElement controllingElement = FindUltimateDeformationElement(Center); 
+               controllingElement = FindUltimateDeformationElement(Center); 
 
-                //Iterate through all bolts and using force-displacement 
-                //relationship find the force in each bolt
-                //then find the contribution of this bolt to overall
+                //Iterate through all bolts/welds and using force-displacement 
+                //relationship find the force in each element
+                //then find the contribution of this element to overall
                 //Force and Moment of the group.
-                M  =0;
-                Ry =0;
-                Rx =0;
-                J = 0;
 
-                      foreach (var el in elements)
-	                    {
-                            // adjust coordinate
-                            double xi = el.Location.X - Center.X;  //delta X
-                            double yi = el.Location.Y - Center.Y;  //delta Y
-                            double ri =Math.Sqrt(xi*xi + yi*yi); //radial distance from center to this element
-                            double Rn_i = GetElementForce(el, Center, controllingElement, AngleOfLoad);
-                            //Contribution of this bolt to the overall response of the group
-                            M = M + (Rn_i) * ri ;                      //Moment
-                            Vector2d ForceUnitVector = GetElementForceUnitVector(el, Center);
-                            Ry = Ry + Rn_i * ForceUnitVector.Y;              //Vertical Force
-                            Rx = Rx + Rn_i * ForceUnitVector.X;              //Horizontal Force
 
-                            J = J + Math.Pow(ri , 2);
-                        }
+                //Calculate M and J for all elements
+                IterateThroughElements(controllingElement, AngleOfLoad);
+
+                      
                             //Define a force vector due to unit force
                             Vector2d UnitForce = new Vector2d(Math.Sin(Rot), Math.Cos(Rot));
-                            Vector2d PositionVector = new Vector2d(Ec - Center.X, -Center.Y);
-                            double d = UnitForce.FindDistance(PositionVector);
-                            P = M / d;   //resolving the internal forces into a resultant at the given moment arm
+                            Vector2d PositionVector;
+
+                            PositionVector = new Vector2d(Ec - Center.X, -Center.Y); 
+
+                            //Distance between IC and and Force vector
+                            double e = UnitForce.FindDistance(PositionVector); //Internal moment arm
+                            P = M / e;   //resolving the internal forces into a resultant at the given moment arm
                 
                         double Py = P * Math.Cos(Rot);
                         double Px = P * Math.Sin(Rot);
 
+                        double Fyy;
                         double Fxx = Px - Rx;       //Horizontal Unbalanced Force
-                        double Fyy = Py - Ry;       //Vertical Unbalanced Force
+                        if (Ec>=0)
+                        {
+                            Fyy = Py - Ry;          //Vertical Unbalanced Force 
+                        }
+                        else
+                        {
+                            Fyy = Py + Ry;  
+                        }
 
                         double Pp = Math.Sqrt(Fyy*Fyy+ Fxx*Fxx); //Unbalanced force resultant
 
@@ -132,29 +137,55 @@ namespace Wosad.Steel.AISC.SteelEntities
 
                 //if the solution hasn't converged update values for next iteration
        
-                Pprev = Pp  ;                                         
-                Mapfunc = J / (N * M);                        //Mapping function
-                Center.X = Center.X - Fyy * Mapfunc;          //I.C. location on x-axis from bolt group C.G.
-                Center.Y = Center.Y + Fxx * Mapfunc;          //I.C. location on y-axis from bolt group C.G.
+                Pprev = Pp  ;
+                Mapfunc = J_ic / (N * M);                        //Mapping function
+
+                //I.C. location on x-axis from bolt group C.G.
+                if (e_x >= 0)
+                {
+                    Center.X = Center.X - Fyy * Mapfunc;
+                    Center.Y = Center.Y + Fxx * Mapfunc;   
+                }
+                else
+                {
+                    Center.X = Center.X + Fyy * Mapfunc;
+                    Center.Y = Center.Y - Fxx * Mapfunc;   
+                }
+
 
            iterationCount++;
             }
             #region Final run through elelents (for debug only)
-            foreach (var el in elements)
-            {
-                ILocationArrayElement controllingElement = FindUltimateDeformationElement(Center);
-                double xi = el.Location.X + Center.X;
-                double yi = el.Location.Y + Center.Y;
-                double ri = Math.Sqrt(xi * xi + yi * yi);
-                double iRn = GetElementForce(el, Center, controllingElement, AngleOfLoad);
-            } 
+            //IterateThroughElements(controllingElement, AngleOfLoad);
             #endregion
             return P;
         }
 
+        private void IterateThroughElements(ILocationArrayElement controllingElement, double AngleOfLoad)
+        {
+            M = 0;
+            Ry = 0;
+            Rx = 0;
+            J_ic = 0;
+
+            foreach (var el in elements)
+            {
+                // adjust coordinate
+                double xi = el.Location.X - Center.X;  //delta X
+                double yi = el.Location.Y - Center.Y;  //delta Y
+                double ri = Math.Sqrt(xi * xi + yi * yi); //radial distance from center to this element
+                double Rn_i = GetElementForce(el, Center, controllingElement, AngleOfLoad);
+                //Contribution of this bolt to the overall response of the group
+                M = M + (Rn_i) * ri;                      //Moment
+                Vector2d ForceUnitVector = GetElementForceUnitVector(el, Center);
+                Ry = Ry + Rn_i * ForceUnitVector.Y;              //Vertical Force
+                Rx = Rx + Rn_i * ForceUnitVector.X;              //Horizontal Force
+
+                J_ic = J_ic + Math.Pow(ri, 2);
+            }
+        }
+
         protected abstract ILocationArrayElement FindUltimateDeformationElement(Point2D Center);
-
-
 
 
         protected abstract List<ILocationArrayElement> GetICElements();

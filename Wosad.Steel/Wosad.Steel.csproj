@@ -319,7 +319,7 @@
     <Compile Include="AISC\Entities\Materials\WeldMaterial.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldBase.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldSegmentBase.cs" />
-    <Compile Include="AISC\Entities\Welds\FilletWeldGroupGeneral.cs" />
+    <Compile Include="AISC\Entities\Welds\FilletWeldLoadDeformationGroupBase.cs" />
     <Compile Include="AISC\Entities\Welds\Interfaces\IWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldLine.cs" />

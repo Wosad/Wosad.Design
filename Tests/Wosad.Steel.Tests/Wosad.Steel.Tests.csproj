@@ -54,9 +54,11 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroupTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStressTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrengthTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToleranceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Wosad.Common\Wosad.Common.csproj">
@@ -78,7 +80,6 @@
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
     <Folder Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\" />
-    <Folder Include="AISC\AISC360_10\J_Connections\Weld\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\AISC360_10\K_HSS\TrussConnections\" />

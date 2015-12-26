@@ -10,7 +10,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
 {
 
     [TestFixture]
-    public class BoltGroupTests
+    public class BoltGroupTests : ToleranceTestBase
     {
         public BoltGroupTests()
         {
@@ -25,7 +25,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
         public void BoltGroupSingleLine0DegreesReturnsC()
         {
             BoltGroup bg = new BoltGroup(4, 1, 0, 3);
-            double C = bg.FindUltimateStrengthCoefficient(8, 0);
+            double C = bg.GetInstantaneousCenterCoefficient(8, 0);
             double refValue = 1.34; // from AISC Steel Manual
             double actualTolerance = EvaluateActualTolerance(C,refValue);
 
@@ -36,8 +36,30 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
         public void BoltGroupSingleLine45DegreesReturnsC()
         {
             BoltGroup bg = new BoltGroup(4, 1, 0, 3);
-            double C = bg.FindUltimateStrengthCoefficient(8, 45);
+            double C = bg.GetInstantaneousCenterCoefficient(8, 45);
             double refValue = 1.64; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void BoltGroup4X4ReturnsValue()
+        {
+            BoltGroup bg = new BoltGroup(2, 2, 3, 3);
+            double C = bg.GetInstantaneousCenterCoefficient(10, 0);
+            double refValue = 0.78; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void BoltGroup4X4NegativeEccentricitySameValue()
+        {
+            BoltGroup bg = new BoltGroup(2, 2, 3, 3);
+            double C = bg.GetInstantaneousCenterCoefficient(-10, 0);
+            double refValue = 0.78; // from AISC Steel Manual
             double actualTolerance = EvaluateActualTolerance(C, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);
@@ -56,13 +78,6 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
             Assert.AreEqual(100.0, Math.Round(MomentCapacity));
         }
 
-        private double EvaluateActualTolerance(double C, double refValue)
-        {
-            double smallerVal = C<refValue? C :refValue;
-            double largerVal = C>=refValue? C :refValue;
-            double thisTolerance = largerVal / smallerVal-1;
 
-            return thisTolerance;
-        }
     }
 }

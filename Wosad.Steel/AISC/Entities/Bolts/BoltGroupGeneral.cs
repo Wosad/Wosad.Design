@@ -41,14 +41,39 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
         }
 
         /// <summary>
-        /// Calculates the capacity based on the combination of design shear force and moment as well as single bolt capacity.
+        /// Calculates the capacity based on the combination of design shear and axial forces as well as moment, given single bolt shear strength
         /// </summary>
         /// <param name="V_u">Ultimate shear or axial force in the entire bolt group</param>
         /// <param name="M_u">Ultimate moment in the entire bolt group</param>
         /// <param name="phi_Rn"></param>
         /// <returns></returns>
-       public Force GetForceAndMomentCapacity(double V_u, double M_u, double phi_Rn)
+       public Force GetForceAndMomentCapacity(double V_u, double P_u, double M_u, double phi_Rn)
         {
+
+            Force Capacity = null;
+            double phi_Mn;
+            double C;
+
+            if (P_u==0 && V_u==0)
+            {
+                //If forcesare zero
+                //then elastic method is used
+                C = this.CalculateElasticGroupMomentCoefficientC();
+                phi_Mn = phi_Rn * C;
+
+                Capacity = new Force(0, 0, 0, 0, 0, phi_Mn);
+            }
+            else
+            {
+                //BoltGroupGeneral adjustedGroup = GetAdjustedGroup();
+                //double R = GetForceResultant(V_u, H_u);
+                //double ex; //todo:
+
+                //double AngleOfLoad = GetAngle(V_u, H_u);
+                //C = adjustedGroup.FindUltimateStrengthCoefficient(e_x, AngleOfLoad);
+                //double phi_Rn_Group = phi_Rn * C;
+
+            }
             throw new NotImplementedException();
         }
 

@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.SteelEntities.Welds;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
-    public class FilletWeldGroup : FilletWeldGroupGeneral
+    public class FilletWeldGroup : FilletWeldLoadDeformationGroupBase
     {
         public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double ElectrodeStrength  )
         {
@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
              switch (WeldPattern)
 	        {                                    
                   case  "ParallelVertical"       :  AddParallelVertical      (); break;
-                  case  "WeldParallelHorizontal" :  AddWeldParallelHorizontal(); break;
+                  case  "ParallelHorizontal" :  AddWeldParallelHorizontal(); break;
                   case  "Rectangle"              :  AddRectangle             (); break;
                   case  "C"                      :  AddC                     (); break;
                   case "L"                       :  AddL                     (); break;
@@ -126,11 +126,23 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
                 new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
             };
             Lines = lines;
+        }
+
+        public double GetInstantaneousCenterCoefficient(double e_x, double AngleOfLoad)
+        {
+
+           double P_n= this.FindUltimateEccentricForce(e_x , AngleOfLoad);
+            //Bring the coefficient that is in the format of the AISC manual
+
+            //adjust to 1/6 in leg size.
+            double ReductionFactor = (1.0/16.0)/this.leg;
+
+            //Divide by length
+            double C = P_n*ReductionFactor/l_vertical;
+            return C;
         }
     }
 }

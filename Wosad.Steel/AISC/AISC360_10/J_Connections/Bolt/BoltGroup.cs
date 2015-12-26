@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.Interfaces;
 using Wosad.Common.Mathematics;
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections
@@ -57,6 +58,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             base.Bolts = bolts;
         }
 
-        
+
+
+        public double GetInstantaneousCenterCoefficient(double e_x , double AngleOfLoad)
+        {
+             return FindUltimateEccentricForce(e_x , AngleOfLoad);
+        }
     }
 }
