@@ -86,6 +86,9 @@ namespace Wosad.Steel.AISC.SteelEntities
                       
                             //Define a force vector due to unit force
                             Vector2d UnitForce = new Vector2d(Math.Sin(Rot), Math.Cos(Rot));
+                            //note: it is assumed that the force goes through the coordinate origin
+                            //therefore for standard weld geometries the coordinates are by adding Ec to the 
+                            //IC location
                             Vector2d PositionVector;
 
                             PositionVector = new Vector2d(Ec - Center.X, -Center.Y); 

@@ -23,8 +23,8 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Weld
         [Test]
         public void WeldGroupChannelLinesReturnsValue()
         {
-            double L =10;
-            FilletWeldGroup wg = new FilletWeldGroup("C",5.0,L,1.0/16.0,70.0);
+            double L = 10;
+            FilletWeldGroup wg = new FilletWeldGroup("C", 5.0, L, 1.0 / 16.0, 70.0);
             double C = wg.GetInstantaneousCenterCoefficient(5.0, 0);
             double refValue = 2.85; // from AISC Steel Manual
             double P_n = refValue * L;
@@ -33,6 +33,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Weld
 
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
+
 
         [Test]
         public void WeldGroup2LinesLinesReturnsValue()
@@ -43,6 +44,29 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Weld
             double refValue = 2.44; // from AISC Steel Manual
             double P_n = refValue * L;
             double spreadsheetPn = 18.34 / 0.75; //Yakpol.net version 2008.1
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void WeldGroupRectangleReturnsValue()
+        {
+            double L = 10;
+            FilletWeldGroup wg = new FilletWeldGroup("Rectangle", 5.0, L, 1.0 / 16.0, 70.0);
+            double C = wg.GetInstantaneousCenterCoefficient(10, 0);
+            double refValue = 2.45; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void WeldGroupAngleReturnsValue()
+        {
+            double L = 10;
+            FilletWeldGroup wg = new FilletWeldGroup("L", 5.0, L, 1.0 / 16.0, 70.0);
+            double C = wg.GetInstantaneousCenterCoefficient(5.0, 0);
+            double refValue = 1.95; // from AISC Steel Manual
             double actualTolerance = EvaluateActualTolerance(C, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);

@@ -56,10 +56,24 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void AddL()
         {
-            Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
-            Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
-            Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
-  
+            Point2D p1_temp = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
+            Point2D p2_temp = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
+            Point2D p3_temp = new Point2D(l_horizontal/2.0,l_vertical/2.0);
+
+
+            List<FilletWeldLine> templines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub)
+            };
+            FilletWeldLoadDeformationGroupBase tempGroup = new FilletWeldLoadDeformationGroupBase(templines);
+            var centroid = tempGroup.GetElasticCentroid();
+
+            Point2D p1 = new Point2D(p1_temp.X - centroid.X, p1_temp.Y - centroid.Y);
+            Point2D p2 = new Point2D(p2_temp.X - centroid.X, p2_temp.Y - centroid.Y);
+            Point2D p3 = new Point2D(p3_temp.X - centroid.X, p3_temp.Y - centroid.Y);
+
+
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
@@ -71,16 +85,32 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void AddC()
         {
-            Point2D p1 = new Point2D(-l_horizontal / 2.0, -l_vertical / 2.0);
-            Point2D p2 = new Point2D(-l_horizontal / 2.0, l_vertical / 2.0);
-            Point2D p3 = new Point2D(l_horizontal / 2.0, l_vertical / 2.0);
-            Point2D p4 = new Point2D(l_horizontal / 2.0, -l_vertical / 2.0);
+            Point2D p1_temp = new Point2D(0, -l_vertical / 2.0);
+            Point2D p2_temp = new Point2D(0, l_vertical / 2.0);
+            Point2D p3_temp = new Point2D(l_horizontal, l_vertical / 2.0);
+            Point2D p4_temp = new Point2D(l_horizontal, -l_vertical / 2.0);
+
+
+            List<FilletWeldLine> templines = new List<FilletWeldLine>()
+            {
+                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub),
+                new FilletWeldLine(p1_temp,p4_temp,leg,F_EXX,Nsub),
+            };
+            FilletWeldLoadDeformationGroupBase tempGroup = new FilletWeldLoadDeformationGroupBase(templines);
+            var centroid = tempGroup.GetElasticCentroid();
+
+            Point2D p1 = new Point2D(p1_temp.X-centroid.X, p1_temp.Y-centroid.Y);
+            Point2D p2 = new Point2D(p2_temp.X-centroid.X, p2_temp.Y-centroid.Y);
+            Point2D p3 = new Point2D(p3_temp.X-centroid.X, p3_temp.Y-centroid.Y);
+            Point2D p4 = new Point2D(p4_temp.X-centroid.X, p4_temp.Y-centroid.Y);
+
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
                 new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub),
             };
             Lines = lines;
         }

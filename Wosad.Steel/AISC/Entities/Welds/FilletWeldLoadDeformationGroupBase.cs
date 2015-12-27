@@ -38,6 +38,11 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
             
         }
 
+        public FilletWeldLoadDeformationGroupBase(List<FilletWeldLine> Lines)
+        {
+            this.lines = Lines;
+        }
+
         /// <summary>
         /// Adds a straight linear segment to the weld segment collection.
         /// </summary>
