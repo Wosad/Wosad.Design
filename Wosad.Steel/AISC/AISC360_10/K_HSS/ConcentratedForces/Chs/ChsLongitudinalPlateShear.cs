@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
  
-using Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements;
+using Wosad.Steel.AISC360_10.Connections.AffectedElements;
  
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Code;
  
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
     partial class ChsLongitudinalPlateShear : ChsToPlateConnection
     {
@@ -51,12 +51,13 @@ namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
 
             //Calculate plate shear capacity per Chapter J
             AffectedElementInFlexureAndShear ae = new AffectedElementInFlexureAndShear(Plate, this.CalcLog);
-            double ShearCapacity = ae.GetShearCapacity();
-            double MomentCapacity = ae.GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition.Top);
-            //note: it is assumed that the section is symmetrical and compression fiber location does not matter
-            double VmaxF = MomentCapacity / Plate.Section.Height;
+            //double ShearCapacity = ae.GetShearCapacity();
+            throw new NotImplementedException();
+            //double MomentCapacity = ae.GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition.Top);
+            ////note: it is assumed that the section is symmetrical and compression fiber location does not matter
+            //double VmaxF = MomentCapacity / Plate.Section.Height;
 
-            R = Math.Min(ShearCapacity, VmaxF);
+            //R = Math.Min(ShearCapacity, VmaxF);
 
             return R;
         }

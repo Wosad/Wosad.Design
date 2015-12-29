@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.SteelEntities;
  
  
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
 
 

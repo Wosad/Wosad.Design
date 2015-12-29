@@ -25,10 +25,11 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC.SteelEntities;
 
-namespace Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
+namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
-    public partial class AffectedElementInShear : AffectedElementBase
+    public partial class AffectedElement : SteelDesignElement
     {
         /// <summary>
         /// Calculates block shear strength per AISC J4.3
@@ -42,7 +43,8 @@ namespace Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
         {
             double Rn1 = GetShearYieldingComponent(A_gv)+GetTensionRuptureComponent(StressIsUniform,A_nt);
             double Rn2 = GetShearRuptureComponent(A_nv)+GetTensionRuptureComponent(StressIsUniform,A_nt);
-            return Math.Min(Math.Abs(Rn1),Math.Abs(Rn2));
+            double phi = 0.75;
+            return phi*Math.Min(Math.Abs(Rn1), Math.Abs(Rn2));
         }
 
 

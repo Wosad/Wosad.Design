@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 
-namespace Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
+namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
     public  class AffectedElementWithHoles : SteelDesignElement
     {
@@ -43,11 +43,21 @@ namespace Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
         {
 
         }
-        public double GetBearingStrengthAtBoltHole(double l_c, double d_b, double t, ISteelMaterial Material, BoltHoleType BoltHoleType, 
-            BoltHoleDeformationType BoltHoleDeformationType, bool IsUnstiffenedHollowSection)
+        /// <summary>
+        /// Bearing Strength at Bolt Holes
+        /// </summary>
+        /// <param name="l_c">Clear distance, in the direction of the force, between the edge of the hole and the edge of the adjacent hole or edge of the material</param>
+        /// <param name="d_b">Nominal bolt diameter</param>
+        /// <param name="t">Thickness of connected material</param>
+        /// <param name="F_y">Yield stress of base metal</param>
+        /// <param name="F_u">Ultimate stress of base metal</param>
+        /// <param name="BoltHoleType">Type of bolt hole</param>
+        /// <param name="BoltHoleDeformationType">Identifies whetehr deformation at the bolt hole at service load is a design consideration</param>
+        /// <param name="IsUnstiffenedHollowSection">Identifies whether this is a connection made using bolts that pass completely through an unstiffened box member or HSS</param>
+        /// <returns></returns>
+        public double GetBearingStrengthAtBoltHole(double l_c, double d_b, double t, double F_y, double F_u, BoltHoleType BoltHoleType, 
+            BoltHoleDeformationType BoltHoleDeformationType, bool IsUnstiffenedHollowSection=false)
         {
-            double F_u = Material.UltimateStress;
-            double F_y = Material.YieldStress;
             double phiR_n;
             if (IsUnstiffenedHollowSection == false)
             {

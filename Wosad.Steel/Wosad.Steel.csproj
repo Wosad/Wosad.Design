@@ -101,7 +101,7 @@
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInTension.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElementBase.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElement.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\VonMisesYieldCriterion.cs" />
@@ -122,8 +122,10 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingAction.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BearingAtBoltHoles.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bolt.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltHole.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\IBoltMaterial.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltBearingThreadedGeneral.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGeneral.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Material\BoltA307Material.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\Bearing\BoltBearing.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\EdgeDistance.cs" />
@@ -410,6 +412,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AISC360_10TableJ3_4_Minimum Edge Distance.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AISC360_10TableJ3_3NominalHoleDimensions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

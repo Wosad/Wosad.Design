@@ -49,9 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShearTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltBearingTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BearingBoltTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroupTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltHoleTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStressTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrengthTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupTests.cs" />
@@ -73,7 +77,6 @@
   <ItemGroup>
     <Folder Include="AISC\AISC360_10\B_General\Compactness\" />
     <Folder Include="AISC\AISC360_10\C_Stability\" />
-    <Folder Include="AISC\AISC360_10\D_Tension\" />
     <Folder Include="AISC\AISC360_10\E_Compression\" />
     <Folder Include="AISC\AISC360_10\F_Flexure\" />
     <Folder Include="AISC\AISC360_10\G_Shear\" />

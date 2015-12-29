@@ -39,25 +39,35 @@ namespace Wosad.Steel.AISC.AISC360_10.D_Tension
 
         }
 
-       /// <summary>
+        /// <summary>
         /// Calculates effective net area per AISC section D3
-       /// </summary>
-       /// <param name="An"></param>
-       /// <param name="U"></param>
-       /// <param name="Ag"></param>
-       /// <param name="IsBoltedSplice"></param>
-       /// <returns></returns>
-        public double GetEffectiveNetArea(double An, double U, double Ag, bool IsBoltedSplice)
+        /// </summary>
+        /// <param name="A_n">Net area</param>
+        /// <param name="U">Shear Lag factor</param>
+        /// <param name="A_g">Gross area of section</param>
+        /// <param name="A_connected">Area of elements, connected with transverse welds</param>
+        /// <param name="PartiallyWeldedWithTransverseWelds">Identifies whether this is a tension members where the tension load is transmitted only by transverse welds to some but not all of the cross-sectional elements</param>
+        /// <param name="IsBoltedSplice">Identifies whether member is spliced using bolted plates</param>
+        /// <returns>Effective net area A_e</returns>
+        public double GetEffectiveNetArea(double A_n, double U, double A_g, double A_connected, bool PartiallyWeldedWithTransverseWelds,
+            bool IsBoltedSplice)
         {
-            double Ae = An * U; //D3-1
+            double Ae = A_n * U; //D3-1
             if (IsBoltedSplice!=true)
             {
-                return Ae;
+                if (PartiallyWeldedWithTransverseWelds == false)
+                {
+                    return Ae; 
+                }
+                else
+                {
+                    return A_connected;
+                }
             }
             else
             {
                 //For bolted splice plates Ae=An =0.85Ag, according to Section J4.1
-                double AeMax = 0.85 * Ag;
+                double AeMax = 0.85 * A_g;
                 Ae = Ae < AeMax ? AeMax : Ae;
                 return Ae;
             }

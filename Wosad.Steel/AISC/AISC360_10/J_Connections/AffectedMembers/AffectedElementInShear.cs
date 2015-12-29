@@ -25,10 +25,13 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC.SteelEntities.Materials;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.SteelEntities.Sections;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
+namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
-    public partial class AffectedElementInShear: AffectedElementBase
+    public partial class AffectedElementInShear: AffectedElement
     {
 
         public AffectedElementInShear(ISteelSection Section,ICalcLog CalcLog)
@@ -43,9 +46,42 @@ namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
 
         }
 
-        public double GetShearCapacity()
+        public AffectedElementInShear(double F_y, double F_u): base(F_y,F_u)
         {
-            throw new NotImplementedException();
+
+        }
+
+        /// <summary>
+        /// The available strength of affected or connecting element in shear
+        /// </summary>
+        /// <param name="A_gv">Gross area subject to shear</param>
+        /// <param name="A_nv">Net area subject to shear</param>
+        /// <returns></returns>
+        public double GetShearCapacity(double A_gv, double A_nv)
+        {
+            double F_y = Section.Material.YieldStress;
+            double F_u = Section.Material.UltimateStress;
+
+            double phiR_nY = GetShearYieldingStrength(F_y,A_nv);
+            double phiR_nU = GetShearRuptureStrength(F_y, A_nv);
+
+            double phiR_n = Math.Min(phiR_nY, phiR_nU);
+            return phiR_n;
+        }
+
+        private double GetShearRuptureStrength(double F_u, double A_nv)
+        {
+
+            double R_n = 0.6 * F_u * A_nv; // (J4-4)
+            double phi = 0.75;
+            return phi * R_n;
+        }
+
+        private double GetShearYieldingStrength(double F_y, double A_gv)
+        {
+            double R_n = 0.6 * F_y * A_gv; // (J4-3)
+            double phi = 1.0;
+            return phi * R_n;
         }
     }
 }

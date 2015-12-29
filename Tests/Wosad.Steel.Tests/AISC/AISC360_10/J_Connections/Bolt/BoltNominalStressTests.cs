@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Bolt
+namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
 {
     [TestFixture]
     public class BoltNominalStressTests

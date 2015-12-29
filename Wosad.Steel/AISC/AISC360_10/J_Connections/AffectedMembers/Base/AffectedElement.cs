@@ -20,18 +20,24 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.SteelEntities.Materials;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
+namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
-    public abstract partial class AffectedElementBase: SteelDesignElement
+    public partial class AffectedElement: SteelDesignElement
     {
-        public AffectedElementBase(ISteelSection Section, ICalcLog CalcLog)
+        public AffectedElement(double F_y, double F_u)
+        {
+            SteelMaterial material = new SteelMaterial(F_y, F_u, SteelConstants.ModulusOfElasticity, SteelConstants.ShearModulus);
+            this.Section = new SteelGeneralSection(null, material);
+        }
+        public AffectedElement(ISteelSection Section, ICalcLog CalcLog)
             : base(CalcLog)
         {
             this.section = Section;
         }
 
-        public AffectedElementBase(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
+        public AffectedElement(ISection Section, ISteelMaterial Material, ICalcLog CalcLog)
             :base(CalcLog)
         {
             this.section = new SteelGeneralSection(Section, Material); 

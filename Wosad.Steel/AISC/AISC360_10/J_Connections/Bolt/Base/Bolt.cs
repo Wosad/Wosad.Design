@@ -30,7 +30,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ICalcLog log): base(Diameter,
             ThreadType,log)
         {
+            BoltHoleSizeCalculated = false;
+        }
 
+        public Bolt(double Diameter,ICalcLog log)
+            : base(Diameter,
+                BoltThreadCase.Included, log)
+        {
+            BoltHoleSizeCalculated = false;
         }
 
         public override abstract double NominalTensileStress { get; }

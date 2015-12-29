@@ -25,14 +25,14 @@ using Wosad.Steel.AISC.Interfaces;
 ////using Wosad.Analytics.Section;
  
 using Wosad.Common.Mathematics;
-using Wosad.Analytics.Steel.AISC360_10.HSS;
+using Wosad.Steel.AISC360_10.HSS;
  
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Code;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public  class RhsLongitudinalPlateTYXAxial: RhsToPlateConnection
     {

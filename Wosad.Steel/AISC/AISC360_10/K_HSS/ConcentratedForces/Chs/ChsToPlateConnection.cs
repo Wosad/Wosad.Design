@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Code;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public abstract partial class ChsToPlateConnection :HssToPlateConnection //: IHssConcentratedForceConnection
     {

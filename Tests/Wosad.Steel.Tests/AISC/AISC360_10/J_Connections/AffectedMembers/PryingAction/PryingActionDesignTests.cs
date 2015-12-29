@@ -25,7 +25,7 @@ using System.Threading.Tasks;
 using Wosad.Steel.AISC.AISC360_10.Connections;
 
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections
+namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections
 {
 
     [TestFixture]

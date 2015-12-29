@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public enum PlateOrientation
     {

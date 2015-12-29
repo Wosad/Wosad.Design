@@ -32,7 +32,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Code;
 
 
-namespace  Wosad.Analytics.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 {
     public class ChsTransversePlateTandXAxial : ChsToPlateConnection
     {

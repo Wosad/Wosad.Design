@@ -22,9 +22,9 @@ using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using System;
 
-namespace  Wosad.Analytics.Steel.AISC360_10.Connections.AffectedElements
+namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
-    public abstract partial class AffectedElementBase: SteelDesignElement
+    public partial class AffectedElement: SteelDesignElement
     {
         
         public double GetVonMisesYieldCriterionInteractionRatio(double V_u, double phiV_n, double M_u, double phiM_n)

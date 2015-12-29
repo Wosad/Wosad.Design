@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.Code;
  
  
 
-namespace  Wosad.Analytics.Steel.AISC360_10
+namespace  Wosad.Steel.AISC360_10
 {
     public class FlexuralBucklingSlender: SteelColumn
     {
