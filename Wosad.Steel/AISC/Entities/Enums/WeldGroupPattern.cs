@@ -25,5 +25,10 @@ namespace Wosad.Steel.AISC
 {
     public enum WeldGroupPattern
     {
+        ParallelVertical,
+        ParallelHorizontal,
+        Rectangle,
+        C,
+        L,      
     }
 }

@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using Wosad.Common.Mathematics;
+using Wosad.Steel.AISC.AISC360_10.Connections.Weld;
 
 namespace Wosad.Steel.AISC.SteelEntities.Welds
 {
@@ -29,8 +30,13 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
     /// </summary>
     public class FilletWeldLine : WeldSegmentBase
     {
-        private Point2D p1;
-        private Point2D p2;
+        public Point2D NodeI{get; set;}
+        public Point2D NodeJ { get; set; }
+
+        /// <summary>
+        /// Angle from vertical (degrees)
+        /// </summary>
+        public double theta { get; set; }
 
         private double length;
 
@@ -44,31 +50,48 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
 
         }
 
+        public virtual double GetStength()
+        {
+            FilletWeld weld =new FilletWeld(this.ElectrodeStrength,this.Leg);
+            double F_nw = weld.GetShearDesignStress(theta);
+            double A_nw = weld.GetEffectiveAreaPerUnitLength() * Length;
+            return F_nw * A_nw;
+        }
+
         private double GetLength()
         {
-            double dx2 = Math.Pow(p2.X-p1.X,2);
-            double dy2 = Math.Pow(p2.Y-p1.Y,2);
+            double dx2 = Math.Pow(NodeJ.X-NodeI.X,2);
+            double dy2 = Math.Pow(NodeJ.Y-NodeI.Y,2);
             double L = Math.Sqrt(dx2 + dy2);
             return L;
         }
 
-        public FilletWeldLine(Point2D p1, Point2D p2, double leg, double ElectrodeStrength, int NumberOfSubdivisions)
+        /// <summary>
+        /// Fillet weld line constructor
+        /// </summary>
+        /// <param name="p1">Point i</param>
+        /// <param name="p2">Point j</param>
+        /// <param name="leg">Weld size (leg)</param>
+        /// <param name="F_EXX">Electrode stength</param>
+        /// <param name="NumberOfSubdivisions">Number of sub-segments, used for instantaneous center of rotation calculations</param>
+        /// <param name="theta">Angle from vertical (degrees)</param>
+        public FilletWeldLine(Point2D p1, Point2D p2, double leg, double F_EXX, int NumberOfSubdivisions,double theta=0.0)
         {
             // TODO: Complete member initialization
-            this.p1 = p1;
-            this.p2 = p2;
+            this.NodeI = p1;
+            this.NodeJ = p2;
             this.Leg = leg;
-            this.ElectrodeStrength = ElectrodeStrength;
+            this.ElectrodeStrength = F_EXX;
             this.NumberOfSubdivisions = NumberOfSubdivisions;
-            
+            this.theta = theta;
         }
 
 
         protected override void CalculateElements()
         {
             WeldElements = new List<IWeldElement>();
-            double dx = p2.X - p1.X;
-            double dy = p2.Y - p1.Y;
+            double dx = NodeJ.X - NodeI.X;
+            double dy = NodeJ.Y - NodeI.Y;
             
             Vector seg = new Vector(dx, dy);
             int N = NumberOfSubdivisions;
@@ -81,8 +104,8 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
 
             for (int i = 0; i < NumberOfSubdivisions; i++)
             {
-                Point2D stPt = new Point2D(p1.X + i * segDx, p1.Y + i * segDy);
-                Point2D enPt = new Point2D(p1.X + (i + 1) * segDx, p1.Y + (i + 1) * segDy);
+                Point2D stPt = new Point2D(NodeI.X + i * segDx, NodeI.Y + i * segDy);
+                Point2D enPt = new Point2D(NodeI.X + (i + 1) * segDx, NodeI.Y + (i + 1) * segDy);
                 //Need to change this to be independent of fillet weld type
                 FilletWeldElement weld = new FilletWeldElement(stPt, enPt, Leg, ElectrodeStrength);
                 WeldElements.Add(weld);
@@ -107,7 +130,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
             }
 
             // Return true if the fields match:
-            return (p1 == line.p1) && (p2 == line.p2);
+            return (NodeI == line.NodeI) && (NodeJ == line.NodeJ);
         }
 
         public override int GetHashCode()
@@ -178,8 +201,8 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
 
         public Point2D GetCentroid()
         {
-            double X = (p1.X + p2.X) / 2.0;
-            double Y = (p1.Y + p2.Y) / 2.0;
+            double X = (NodeI.X + NodeJ.X) / 2.0;
+            double Y = (NodeI.Y + NodeJ.Y) / 2.0;
             return new Point2D(X, Y);
         }
     }

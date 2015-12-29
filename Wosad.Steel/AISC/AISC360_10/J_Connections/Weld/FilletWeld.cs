@@ -27,10 +27,23 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
     public class FilletWeld : FilletWeldBase
     {
-        public FilletWeld(double Fy, double Fu, double Fexx, double Size,   ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size,  Log)
+        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg, ICalcLog Log)
+            : base(F_y, F_u, F_EXX, Leg,  Log)
             {
 
             }
-    }
+        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg)
+            : this(F_y, F_u, F_EXX, Leg, null)
+        {
+
+        }
+
+        public FilletWeld(double F_EXX, double Leg)
+            : this(0, 0, F_EXX, Leg, null)
+        {
+
+        }
+
+
+   }
 }

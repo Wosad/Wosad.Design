@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShearTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltBearingTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
@@ -58,7 +59,8 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltHoleTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStressTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrengthTests.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,7 +84,6 @@
     <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
-    <Folder Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\AISC360_10\K_HSS\TrussConnections\" />

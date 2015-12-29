@@ -27,32 +27,46 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
     public class FilletWeldGroup : FilletWeldLoadDeformationGroupBase
     {
-        public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double ElectrodeStrength  )
+        /// <summary>
+        /// Weld group constructor, based on weld pattern
+        /// </summary>
+        /// <param name="WeldPattern">ParallelVertical,ParallelHorizontal,Rectangle,C or L pattern </param>
+        /// <param name="l_horizontal"> Vertical dimension of group (for C length of "web")</param>
+        /// <param name="l_vertical">Horizontal dimension of group</param>
+        /// <param name="leg">Follet weld size (leg)</param>
+        /// <param name="F_EXX">Electrode strength</param>
+        public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX )
         {
             this.l_horizontal= l_horizontal;
             this.l_vertical = l_vertical;
             this.leg = leg;
-            this.F_EXX = ElectrodeStrength;
+            this.F_EXX = F_EXX;
             Nsub = 20;
 
              switch (WeldPattern)
-	        {                                    
-                  case  "ParallelVertical"       :  AddParallelVertical      (); break;
-                  case  "ParallelHorizontal" :  AddWeldParallelHorizontal(); break;
-                  case  "Rectangle"              :  AddRectangle             (); break;
-                  case  "C"                      :  AddC                     (); break;
-                  case "L"                       :  AddL                     (); break;
-                  default: AddParallelVertical(); break;                                            
+	        {
+                case "ParallelVertical": AddParallelVertical(); pattern = WeldGroupPattern.ParallelVertical; break;
+                case "ParallelHorizontal": AddWeldParallelHorizontal(); pattern = WeldGroupPattern.ParallelHorizontal; break;
+                case "Rectangle": AddRectangle(); pattern = WeldGroupPattern.Rectangle; break;
+                case "C": AddC(); pattern = WeldGroupPattern.C; break;
+                case "L": AddL(); pattern = WeldGroupPattern.L; break;
+                default: AddParallelVertical(); pattern = WeldGroupPattern.ParallelVertical; break;                                            
 	        }
 
 
         }
 
-        double l_horizontal;
-        double l_vertical;
+        public FilletWeldGroup(WeldGroupPattern WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX):
+            this(WeldPattern.ToString(),l_horizontal,l_vertical,leg,F_EXX)
+        {
+        }
+
+        int Nsub;
+        WeldGroupPattern pattern;
+        double l_horizontal; 
+        double l_vertical; 
         double leg;
         double F_EXX;
-        int Nsub;
 
         private void AddL()
         {
@@ -77,7 +91,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub)
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0) //horizontal leg
             };
             Lines = lines;
 
@@ -109,8 +123,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
-                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0),
+                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub,90.0),
             };
             Lines = lines;
         }
@@ -124,9 +138,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
                 new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0), //horizontal leg
                 new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0), //horizontal leg
             };
             Lines = lines;
         }
@@ -140,8 +154,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0),
             };
             Lines = lines;
         }
@@ -173,6 +187,25 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             //Divide by length
             double C = P_n*ReductionFactor/l_vertical;
             return C;
+        }
+
+        /// <summary>
+        /// Calculates weld group strength for concentric load per AISC J2.4(c)
+        /// page 16.1–116  of specification.
+        /// </summary>
+        /// <param name="theta">Angle from vertical (degrees)</param>
+        /// <returns></returns>
+        public double GetConcentricLoadStrenth(double theta=0.0)
+        {
+            List<FilletWeldLine> calculationLines =Lines.ConvertAll(x => new FilletWeldLine(
+             x.NodeI, x.NodeJ,x.Leg,x.ElectrodeStrength, x.NumberOfSubdivisions, x.theta+theta));
+
+            double phiRn = 0.0;
+            foreach (var l in calculationLines)
+	        {
+                phiRn = phiRn+l.GetStength();
+	        }
+            return phiRn;
         }
     }
 }

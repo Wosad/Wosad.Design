@@ -21,6 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Common.Mathematics;
 using Wosad.Steel.AISC.Code;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
@@ -30,25 +31,25 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="Fy">Base metal yield stress</param>
-        /// <param name="Fu">Base metal ultimate stress</param>
-        /// <param name="Fexx">Electrode strength</param>
-        /// <param name="Size">Weld leg size</param>
+        /// <param name="F_y">Base metal yield stress</param>
+        /// <param name="F_u">Base metal ultimate stress</param>
+        /// <param name="F_EXX">Electrode strength</param>
+        /// <param name="Leg">Weld leg size</param>
         /// <param name="Log">Calculation log (for report generation)</param>
-        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size,Log)
+        public FilletWeldBase(double F_y, double F_u, double F_EXX, double Leg, ICalcLog Log)
+            : base(F_y, F_u, F_EXX, Leg,Log)
         {
 
         }
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="Fy">Base metal yield stress</param>
-        /// <param name="Fu">Base metal ultimate stress</param>
-        /// <param name="Fexx">Electrode strength</param>
-        /// <param name="Size">Weld leg size</param>
-        public FilletWeldBase(double Fy, double Fu, double Fexx, double Size)
-            : base(Fy, Fu, Fexx, Size)
+        /// <param name="F_y">Base metal yield stress</param>
+        /// <param name="F_u">Base metal ultimate stress</param>
+        /// <param name="F_EXX">Electrode strength</param>
+        /// <param name="Leg">Weld leg size</param>
+        public FilletWeldBase(double F_y, double F_u, double F_EXX, double Leg)
+            : base(F_y, F_u, F_EXX, Leg)
         {
 
         }
@@ -59,11 +60,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 
         private double b;
 
-        public double Size
-        {
-            get { return b; }
-            set { b = value; }
-        }
         
 
         /// <summary>
@@ -71,13 +67,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// </summary>
         /// <param name="typeOfConnection"></param>
         /// <returns></returns>
-        public double GetShearStrength()
+        public double GetShearDesignStress(double theta=0.0)
         {
-
             //Weld metal
-            double f1 = 0.8;
-            double s1 = f1 * 0.6 * this.WeldMaterial.ElectrodeStrength;
-            return s1;
+            double phi1 = 0.75;
+            double F_EXX = this.WeldMaterial.ElectrodeStrength;
+            double F_nw = 0.6 * F_EXX * (1 + 0.5 * Math.Pow(Math.Sin(theta.ToRadians()), 1.5)); // (J2-5)
+            double phiR_n1 = phi1 * F_nw;
+            return phiR_n1;
         }
 
         /// <summary>

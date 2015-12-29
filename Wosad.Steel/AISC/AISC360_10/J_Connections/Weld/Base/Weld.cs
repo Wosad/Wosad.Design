@@ -30,11 +30,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
     public abstract class Weld : SteelDesignElement
     {
-        public Weld(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
+        public Weld(double F_y, double F_u, double F_EXX, double Size, ICalcLog Log)
             : base( Log)
         {
-            this.WeldMaterial = new WeldMaterial(Fexx);
-            this.BaseMaterial = new SteelMaterial(Fy, Fu, 0.0, 0.0);
+            this.WeldMaterial = new WeldMaterial(F_EXX);
+            this.BaseMaterial = new SteelMaterial(F_y, F_u, 0.0, 0.0);
+            this.Size = Size;
         }
 
         public Weld(double Fy, double Fu, double Fexx, double Size)
@@ -42,6 +43,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         {
             this.WeldMaterial = new WeldMaterial(Fexx);
             this.BaseMaterial = new SteelMaterial(Fy, Fu, 0.0, 0.0);
+            this.Size = Size;
         }
 
         //ctor for welds where base material is checked independently
@@ -49,10 +51,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
             : base()
         {
             this.WeldMaterial = new WeldMaterial(Fexx);
+            this.Size = Size;
         }
 
         public WeldMaterial WeldMaterial { get; set; }
         public SteelMaterial BaseMaterial { get; set; }
+
+        public double Size { get; set; }
 
     }
 }

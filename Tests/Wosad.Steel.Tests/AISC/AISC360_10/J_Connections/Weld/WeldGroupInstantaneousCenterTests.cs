@@ -10,9 +10,9 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
 {
 
     [TestFixture]
-    public class WeldGroupTests : ToleranceTestBase
+    public class WeldGroupInstantaneousCenterTests : ToleranceTestBase
     {
-        public WeldGroupTests()
+        public WeldGroupInstantaneousCenterTests()
         {
             tolerance = 0.05; //5% can differ from number of sub-elements
         }

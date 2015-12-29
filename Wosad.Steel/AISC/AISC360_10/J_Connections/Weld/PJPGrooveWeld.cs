@@ -44,36 +44,36 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// </summary>
         /// <param name="typeOfConnection"></param>
         /// <returns></returns>
-        public double GetCompressionStrength(TypeOfCompressionLoading typeOfConnection)
+        public double GetCompressionDesignStress(TypeOfCompressionLoading typeOfConnection)
         {
             double s = 0.0;
             if (typeOfConnection == TypeOfCompressionLoading.Column)
             {
                 //Compressive stress need not be considered in design of welds joining the parts.
                 // Base metal provisions are specified here
-                double f1 = 0.9;
-                double s1 = f1* this.BaseMaterial.YieldStress;
-                s = s1;
+                double phi1 = 0.9;
+                double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
+                s = phiR_n1;
             }
             else if (typeOfConnection == TypeOfCompressionLoading.NonColumnFinishedToBear)
 	            {
                     //Base metal
-                    double f1 = 0.9;
-                    double s1 = f1* this.BaseMaterial.YieldStress;
+                    double phi1 = 0.9;
+                    double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
                     //Weld metal
-                    double f2 = 0.8;
-                    double s2 = f2* 0.9 * this.WeldMaterial.ElectrodeStrength;
-                    s =Math.Min(s1,s2);
+                    double phi2 = 0.8;
+                    double phiR_n2 = phi2* 0.9 * this.WeldMaterial.ElectrodeStrength;
+                    s =Math.Min(phiR_n1,phiR_n2);
 	            }
             else
 	            {
                     //Base metal
-                    double f1  =0.9 ;
-                    double s1 = f1* this.BaseMaterial.YieldStress;
+                    double phi1  =0.9 ;
+                    double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
                     //Weld metal
-                    double f2 = 0.8;
-                    double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
-                    s =Math.Min(s1,s2);
+                    double phi2 = 0.8;
+                    double phiR_n2 = phi2* 0.6 * this.WeldMaterial.ElectrodeStrength;
+                    s =Math.Min(phiR_n1,phiR_n2);
 	            }
             return s;
          }
@@ -82,16 +82,16 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// </summary>
         /// <param name="typeOfConnection"></param>
         /// <returns></returns>
-        public double GetTensionNormalToWeldAxisStrength()
+        public double GetTensionNormalToWeldAxisDesignStress()
         {
             //Base metal strength
-            double f1 = 0.75;
-            double s1 = f1 * this.BaseMaterial.UltimateStress;
+            double phi_1 = 0.75;
+            double phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
             // Weld strength 
-            double f2 =0.8;
-            double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
+            double phi2 =0.8;
+            double phiR_n2 = phi2* 0.6 * this.WeldMaterial.ElectrodeStrength;
 
-            double s = Math.Min(s1, s2);
+            double s = Math.Min(phiR_n1, phiR_n2);
             return s;
         }
         /// <summary>
@@ -99,15 +99,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// </summary>
         /// <param name="typeOfConnection"></param>
         /// <returns></returns>
-        public double GetShearStrength()
+        public double GetShearDesignStress()
         {
-                    //Base metal
-                    //double Ae = EffectiveNetAreaOfBaseMetal;
-                    //double Ag = GrossAreaOfBaseMetal;
 
-                    //Weld metal
-            double f2 = 0.8;
-                    double s2 = f2* 0.6 * this.WeldMaterial.ElectrodeStrength;
+           //Weld metal
+            double phi = 0.75;
+            double phiR_n = phi* 0.6 * this.WeldMaterial.ElectrodeStrength;
                     
             throw new NotImplementedException();
         }
