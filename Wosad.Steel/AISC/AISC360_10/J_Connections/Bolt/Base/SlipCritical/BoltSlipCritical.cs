@@ -32,7 +32,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
         {
             this.fayingSurface = FayingSurface;
             this.holeType = HoleType;
-            this.minimumPretension = Math.Round(0.7* Area * NominalTensileStress,0);
             this.fillers = Fillers;
             this.pretensionMultiplier = PretensionMultiplier;
             this.numberOfSlipPlanes = NumberOfSlipPlanes;
@@ -52,11 +51,22 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             get { return holeType; }
         }
 
-        private double minimumPretension;
+        private double _T_b;
 
-        public double MinimumPretension
+        public double T_b
         {
-            get { return minimumPretension; }
+            get {
+                if (_T_b==0)
+                {
+                    _T_b=GetMinimumPretension();
+                }
+                return _T_b; }
+        }
+
+        private double GetMinimumPretension()
+        {
+            _T_b = Math.Round(0.7 * Area * NominalTensileStress, 0); //Per footnote to Table J3.1
+            return _T_b;
         }
 
         private BoltFillerCase fillers;

@@ -197,15 +197,37 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         /// <returns></returns>
         public double GetConcentricLoadStrenth(double theta=0.0)
         {
+
             List<FilletWeldLine> calculationLines =Lines.ConvertAll(x => new FilletWeldLine(
              x.NodeI, x.NodeJ,x.Leg,x.ElectrodeStrength, x.NumberOfSubdivisions, x.theta+theta));
 
-            double phiRn = 0.0;
+            double phiRn1 = 0.0;
+            //Case i
             foreach (var l in calculationLines)
 	        {
-                phiRn = phiRn+l.GetStength();
+                phiRn1 = phiRn1+l.GetStength();
 	        }
-            return phiRn;
+            double phiRn2 = double.PositiveInfinity;
+            if (Math.Abs(theta)<5.0) //set threshold of 5 degrees 
+            {
+                //Case ii
+                phiRn2 = 0.0;
+                foreach (var l in calculationLines)
+                {
+                    if (l.theta==90)
+                    {
+                        phiRn2 = phiRn2 + l.GetStength()*1.5;  
+                    }
+                    else
+                    {
+                        phiRn2 = phiRn2 + l.GetStength()*0.85;
+                    }
+                    
+                }
+            }
+            double phiR_n = Math.Min(phiRn1, phiRn2);
+
+            return phiR_n;
         }
     }
 }

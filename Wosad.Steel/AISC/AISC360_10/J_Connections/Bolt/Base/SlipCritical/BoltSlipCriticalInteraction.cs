@@ -29,20 +29,28 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
     public abstract partial class BoltSlipCritical : Bolt, IBoltSlipCritical
     {
 
-        public double GetSlipResistanceReductionFactor()
+        public double GetReducedSlipResistance(double T_u)
+        {
+            double phiR_n = this.GetSlipResistance();
+            double k_sc = GetSlipResistanceReductionFactor(T_u);
+            return k_sc * phiR_n;
+        }
+        public double GetSlipResistanceReductionFactor(double T_u)
         {
             double ksc = 0.0;
             //Get tension per bolt
-            double T= Math.Abs(this.FindMaximumForce(ForceType.F1, true).F1);
-            double Tb = MinimumPretension;
             double Du = pretensionMultiplier;
+            double phiR_n = this.GetAvailableTensileStrength();
 
-            
+            if (T_u>phiR_n)
+            {
+                throw new Exception("Bolt factored force exceeeds capacity. Reduced slip strength cannot be calculated.");
+            }
             ICalcLogEntry ent = Log.CreateNewEntry();
             ent.ValueName = v.ksc;
             ent.DescriptionReference = d.ksc;
 
-            if (Tb==0.0)
+            if (T_b==0.0)
             {
                 throw new Exception("Bolt pretension cannot be zero");
             }
@@ -51,11 +59,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             {
                 throw new Exception("Multiplier that reflects the ratio of the mean installed bolt pretension to the specified minimum bolt pretension cannot be zero");
             }
-            
 
-
-                ksc = 1.0-T/(Du*Tb);
-                ent.AddDependencyValue(v.Tu, T);
+                ksc = 1.0-T_u/(Du*T_b);
+                ent.AddDependencyValue(v.Tu, T_u);
                 ent.Reference = "AISC Formula J3-5a";
                 ent.FormulaID = f.J3_5.LRFD;
                 ent.VariableValue = ksc.ToString();

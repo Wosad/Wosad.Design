@@ -47,12 +47,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
         {
             double Ab = this.Area;//nominal unthreaded bolt area
             double Fnt = NominalTensileStress;
-            double R;
+            double phiR_n;
             double Rn = Ab*Fnt; //Formula  J3-1
 
             ICalcLogEntry ent = Log.CreateNewEntry();
 
-                R = 0.75 * Rn;
+                phiR_n = 0.75 * Rn;
                 ent.ValueName = v.phiRn;
                 ent.DescriptionReference = d.phiRn.TensileStrength;
                 ent.FormulaID = f.J3_1.LRFD;
@@ -64,7 +64,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ent.VariableValue = Rn.ToString();
             AddToLog(ent);
 
-            return R;
+            return phiR_n;
         }
 
         public override double GetAvailableShearStrength(double N_ShearPlanes)

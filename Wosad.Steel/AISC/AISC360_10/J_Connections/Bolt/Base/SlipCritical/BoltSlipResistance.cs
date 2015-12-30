@@ -32,11 +32,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double mu = GetSlipCoefficient();
             double Du =pretensionMultiplier;
             double hf = GetFactorForFillers();
-            double Tb = MinimumPretension;
+            double Tb = T_b;
             int ns = numberOfSlipPlanes;
 
             //(J3-4)
-            double Rn = mu * Du * hf * Tb * ns;
+            double R_n = mu * Du * hf * Tb * ns;
 
             
             ICalcLogEntry ent = Log.CreateNewEntry();
@@ -48,19 +48,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             ent.AddDependencyValue(v.ns, ns);
 
             ent.Reference = "AISC Formula J3-4";
-            double R = 0;
+            double phiR_n = 0;
 
 
                     double phi = GetPhiFactor();
                     ent.ValueName = v.phiRn;
                     ent.DescriptionReference = d.phiRn.SlipResistance;
                     ent.FormulaID = f.J3_4.LRFD;
-                    R = Rn * phi;
+                    phiR_n = R_n * phi;
                     
 
-            ent.VariableValue = R.ToString();
+            ent.VariableValue = phiR_n.ToString();
             AddToLog(ent);
-            return R;
+            return phiR_n;
         }
 
         internal double GetPhiFactor()
@@ -84,26 +84,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
  
             }
         }
-        internal double GetOmegaFactor()
-        {
-            switch (HoleType)
-            {
-                case BoltHoleType.Standard:
-                    return 1.5;
-                case BoltHoleType.ShortSlottedPerpendicular:
-                    return 1.5;
-                case BoltHoleType.ShortSlottedParallel:
-                    return 1.76;
-                case BoltHoleType.Oversized:
-                    return 1.76;
-                case BoltHoleType.LongSlottedParallel:
-                    return 2.14;
-                case BoltHoleType.LongSlottedPerpendicular:
-                    return 2.14;
-                default:
-                    return 1.76;
 
-            }
-        }
     }
 }

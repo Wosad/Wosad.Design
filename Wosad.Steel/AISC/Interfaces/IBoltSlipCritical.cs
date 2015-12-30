@@ -25,7 +25,7 @@ namespace Wosad.Steel.AISC.Interfaces
     {
         BoltFayingSurfaceClass FayingSurface { get; }
         BoltHoleType HoleType { get;}
-        double MinimumPretension { get; }
+        double T_b { get; }
         double GetSlipResistance();
     }
 }
