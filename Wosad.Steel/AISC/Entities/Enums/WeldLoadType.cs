@@ -23,7 +23,12 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC
 {
-    public enum WeldLoadTypeId
+    public enum WeldLoadType
     {
+        WeldTensionNormal,     
+        WeldCompressionNormal,
+        WeldShear,  
+        WeldCompressionSpliceFinishedToBear,
+        WeldCompressionSpliceNotFinishedToBear,   
     }
 }

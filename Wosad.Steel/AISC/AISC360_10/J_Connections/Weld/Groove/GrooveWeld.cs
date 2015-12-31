@@ -28,13 +28,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
     public abstract class GrooveWeld: Weld
     {
 
-        public GrooveWeld(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size, Log)
+        public GrooveWeld(double Fy, double Fu, double Fexx, double Size, double A_nBase,double l, ICalcLog Log)
+            : base(Fy, Fu, Fexx, Size,A_nBase,l, Log)
         {
 
         }
-        public GrooveWeld(double Fy, double Fu, double Fexx, double Size)
-            : base(Fy, Fu, Fexx, Size)
+        public GrooveWeld(double Fy, double Fu, double Fexx, double Size, double A_nBase, double l)
+            : base(Fy, Fu, Fexx, Size,A_nBase,l)
         {
 
         }

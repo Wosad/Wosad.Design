@@ -22,28 +22,53 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC.Entities.Welds.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
-    public class FilletWeld : FilletWeldBase
+    public class FilletWeld : FilletWeldBase, IWeld
     {
-        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg, ICalcLog Log)
-            : base(F_y, F_u, F_EXX, Leg,  Log)
+        /// <summary>
+        /// Weld full constructor
+        /// </summary>
+        /// <param name="F_y">Base metal yield stress</param>
+        /// <param name="F_u">Base metal tensile stress</param>
+        /// <param name="F_EXX">Electrode strength</param>
+        /// <param name="Leg"> Weld leg (size)</param>
+        /// <param name="A_nBase">Net area of base metal</param>
+        /// <param name="Length">Length of weld</param>
+        /// <param name="Log">Calculation log</param>
+        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg, double A_nBase, double Length, ICalcLog Log)
+            : base(F_y, F_u, F_EXX, Leg,A_nBase,Length,  Log)
             {
 
             }
-        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg)
-            : this(F_y, F_u, F_EXX, Leg, null)
+        public FilletWeld(double F_y, double F_u, double F_EXX, double Leg, double A_nBase, double Length)
+            : this(F_y, F_u, F_EXX, Leg, A_nBase, Length,null)
         {
 
         }
 
-        public FilletWeld(double F_EXX, double Leg)
-            : this(0, 0, F_EXX, Leg, null)
+        public double GetStrength(WeldLoadType LoadType, double theta, bool IgnoreBaseMetal)
         {
+            double baseMetalStrength;
+            if (IgnoreBaseMetal == true)
+            {
+                baseMetalStrength = double.PositiveInfinity;
+            }
+            else
+            {
+                baseMetalStrength = GetBaseMetalShearDesignStress() * A_nBase;
+            }
 
+            double weldMetalStrength = GetWeldMetalShearDesignStress(theta)*GetWeldArea();
+            return Math.Min(baseMetalStrength, weldMetalStrength);
         }
 
 
-   }
+        public double GetWeldArea()
+        {
+            return GetEffectiveAreaPerUnitLength() * Length;
+        }
+    }
 }

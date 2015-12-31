@@ -62,6 +62,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\SlipCriticalBoltTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldStrengthTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

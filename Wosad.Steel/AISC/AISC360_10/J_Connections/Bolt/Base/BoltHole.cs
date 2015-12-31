@@ -41,7 +41,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double d_h = 0.0;
             if (BoltHoleSizeCalculated == false)
             {
-                GetBoltHoleDimensions(HoleType);
+                GetBoltHoleDimensions(HoleType, IsTensionOrShearCalculation);
             }
             return d_hWidth;
         }
@@ -52,13 +52,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 
             if (BoltHoleSizeCalculated == false)
             {
-                GetBoltHoleDimensions(HoleType);
+                GetBoltHoleDimensions(HoleType, IsTensionOrShearCalculation);
             }
             return d_hLength;
 
         }
 
-        private void GetBoltHoleDimensions(BoltHoleType HoleType)
+        private void GetBoltHoleDimensions(BoltHoleType HoleType, bool IsTensionOrShearCalculation=true)
         {
 
             #region Read Table Data
@@ -101,33 +101,74 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 
             #endregion
 
-            var closest_d_b = AllBoltsList.Aggregate((x,y) => Math.Abs(x.d_b-Diameter) < Math.Abs(y.d_b-Diameter) ? x : y);
-            switch (HoleType)
+            if (Diameter >= 1 + 1.0 / 8.0)
             {
-                case BoltHoleType.Standard:
-                    d_hWidth = closest_d_b.STD;
-                    d_hLength = closest_d_b.STD;
-                    break;
-                case BoltHoleType.ShortSlottedPerpendicular:
-                    d_hWidth = closest_d_b.SSL_Width;
-                    d_hLength = closest_d_b.SSL_Length;
-                    break;
-                case BoltHoleType.ShortSlottedParallel:
-                    d_hWidth = closest_d_b.SSL_Width;
-                    d_hLength = closest_d_b.SSL_Length;
-                    break;
-                case BoltHoleType.Oversized:
-                    d_hWidth = closest_d_b.OVS;
-                    d_hLength = closest_d_b.OVS;
-                    break;
-                case BoltHoleType.LongSlottedPerpendicular:
-                    d_hWidth =  closest_d_b.LSL_Width;
-                    d_hLength = closest_d_b.LSL_Length;
-                    break;
-                case BoltHoleType.LongSlottedParallel:
-                    d_hWidth =  closest_d_b.LSL_Width;
-                    d_hLength = closest_d_b.LSL_Length;
-                    break;
+                switch (HoleType)
+                {
+                    case BoltHoleType.Standard:
+                        d_hWidth = Diameter + 1 / 16.0;
+                        d_hLength = Diameter + 1 / 16.0;
+                        break;
+                    case BoltHoleType.ShortSlottedPerpendicular:
+                        d_hWidth = Diameter + 1 / 16.0;
+                        d_hLength = Diameter +3 / 8.0;
+                        break;
+                    case BoltHoleType.ShortSlottedParallel:
+                        d_hWidth = Diameter + 1 / 16.0;
+                        d_hLength = Diameter +3 / 8.0;
+                        break;
+                    case BoltHoleType.Oversized:
+                        d_hWidth = Diameter + 5 / 16.0;
+                        d_hLength = Diameter +5 / 16.0;
+                        break;
+                    case BoltHoleType.LongSlottedPerpendicular:
+                        d_hWidth = Diameter + 1 / 16.0;
+                        d_hLength = Diameter*2.5;
+                        break;
+                    case BoltHoleType.LongSlottedParallel:
+                        d_hWidth = Diameter + 1 / 16.0;
+                       d_hLength = Diameter*2.5;
+                        break;
+                }
+            }
+            else
+            {
+
+
+                var closest_d_b = AllBoltsList.Aggregate((x, y) => Math.Abs(x.d_b - Diameter) < Math.Abs(y.d_b - Diameter) ? x : y);
+                switch (HoleType)
+                {
+                    case BoltHoleType.Standard:
+                        d_hWidth = closest_d_b.STD;
+                        d_hLength = closest_d_b.STD;
+                        break;
+                    case BoltHoleType.ShortSlottedPerpendicular:
+                        d_hWidth = closest_d_b.SSL_Width;
+                        d_hLength = closest_d_b.SSL_Length;
+                        break;
+                    case BoltHoleType.ShortSlottedParallel:
+                        d_hWidth = closest_d_b.SSL_Width;
+                        d_hLength = closest_d_b.SSL_Length;
+                        break;
+                    case BoltHoleType.Oversized:
+                        d_hWidth = closest_d_b.OVS;
+                        d_hLength = closest_d_b.OVS;
+                        break;
+                    case BoltHoleType.LongSlottedPerpendicular:
+                        d_hWidth = closest_d_b.LSL_Width;
+                        d_hLength = closest_d_b.LSL_Length;
+                        break;
+                    case BoltHoleType.LongSlottedParallel:
+                        d_hWidth = closest_d_b.LSL_Width;
+                        d_hLength = closest_d_b.LSL_Length;
+                        break;
+                }
+            }
+            // Per AISC add 
+            if (IsTensionOrShearCalculation==true)
+            {
+                d_hWidth = d_hWidth+ 1.0/16.0;
+                d_hLength = d_hLength + 1.0 / 16.0; 
             }
 
             BoltHoleSizeCalculated = true;

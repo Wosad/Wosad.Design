@@ -21,7 +21,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         public void BoltHoleSTDReturnsSize()
         {
             b.BoltGeneral b = new b.BoltGeneral(0.75,0,0);
-            double d_h =b.GetBoltHoleWidth(BoltHoleType.Standard,false);
+            double d_h = b.GetBoltHoleWidth(BoltHoleType.Standard, false);
             Assert.AreEqual(13.0 / 16.0, d_h);
         }
 

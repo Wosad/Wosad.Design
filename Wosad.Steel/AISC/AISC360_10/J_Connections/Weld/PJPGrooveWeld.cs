@@ -22,92 +22,98 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC.Entities.Welds.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
-    public class PJPGrooveWeld : GrooveWeld
+    public class PJPGrooveWeld : GrooveWeld, IWeld
     {
-
-        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size,   ICalcLog Log)
-            : base(Fy, Fu, Fexx, Size, Log)
-        {
-
-        }
-
-        public PJPGrooveWeld(double Fy, double Fu, double Fexx, double Size)
-            : base(Fy, Fu, Fexx, Size)
-        {
-
-        }
         /// <summary>
-        /// Gets design compression stress per AISC Table J2.5 Available Strength of Welded Joints
+        /// 
         /// </summary>
-        /// <param name="typeOfConnection"></param>
-        /// <returns></returns>
-        public double GetCompressionDesignStress(TypeOfCompressionLoading typeOfConnection)
+        /// <param name="F_y">Base metal yield stress</param>
+        /// <param name="F_u">Base metal tensile stress</param>
+        /// <param name="F_EXX">Electrode strength</param>
+        /// <param name="t_weld">Weld throat</param>
+        /// <param name="A_nBase">Net area of base metal</param>
+        /// <param name="l">Length of weld</param>
+        /// <param name="Log">Calculation log</param>
+        public PJPGrooveWeld(double F_y, double F_u, double F_EXX, double t_weld, double A_nBase,double l,  ICalcLog Log)
+            : base(F_y, F_u, F_EXX, t_weld,A_nBase, l, Log)
         {
-            double s = 0.0;
-            if (typeOfConnection == TypeOfCompressionLoading.Column)
+        }
+
+        public PJPGrooveWeld(double F_y, double F_u, double F_EXX, double t_weld,  double A_nBase, double l)
+            : base(F_y, F_u, F_EXX, t_weld, A_nBase, l)
+        {
+
+        }
+
+        public double GetBaseMetalDesignStress(WeldLoadType loadType )
+        {
+            double phiR_n1 = 0.0;
+            double phi_1 = 0.0;
+            switch (loadType)
             {
-                //Compressive stress need not be considered in design of welds joining the parts.
-                // Base metal provisions are specified here
-                double phi1 = 0.9;
-                double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
-                s = phiR_n1;
+                case WeldLoadType.WeldTensionNormal:
+                        phi_1 = 0.75;
+                        phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
+                    break;
+                case WeldLoadType.WeldCompressionNormal:
+                        //Compressive stress need not be considered in design of welds joining the parts.
+                        phi_1 = 0.9;
+                        phiR_n1 = phi_1 * this.BaseMaterial.YieldStress;
+                    break;
+                case WeldLoadType.WeldShear:
+                        phi_1 = 0.75;
+                        phiR_n1 = phi_1 *0.6* this.BaseMaterial.UltimateStress; //per J4
+                    break;
+                case WeldLoadType.WeldCompressionSpliceFinishedToBear:
+                        phi_1 = 0.9;
+                        phiR_n1 = phi_1 * this.BaseMaterial.YieldStress;
+                    break;
+                case WeldLoadType.WeldCompressionSpliceNotFinishedToBear:
+                        phi_1 = 0.9;
+                        phiR_n1 = phi_1 * this.BaseMaterial.YieldStress;
+                    break;
+
             }
-            else if (typeOfConnection == TypeOfCompressionLoading.NonColumnFinishedToBear)
-	            {
-                    //Base metal
-                    double phi1 = 0.9;
-                    double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
-                    //Weld metal
-                    double phi2 = 0.8;
-                    double phiR_n2 = phi2* 0.9 * this.WeldMaterial.ElectrodeStrength;
-                    s =Math.Min(phiR_n1,phiR_n2);
-	            }
-            else
-	            {
-                    //Base metal
-                    double phi1  =0.9 ;
-                    double phiR_n1 = phi1* this.BaseMaterial.YieldStress;
-                    //Weld metal
-                    double phi2 = 0.8;
-                    double phiR_n2 = phi2* 0.6 * this.WeldMaterial.ElectrodeStrength;
-                    s =Math.Min(phiR_n1,phiR_n2);
-	            }
-            return s;
-         }
-        /// <summary>
-        /// Gets design tension stress per AISC Table J2.5 Available Strength of Welded Joints
-        /// </summary>
-        /// <param name="typeOfConnection"></param>
-        /// <returns></returns>
-        public double GetTensionNormalToWeldAxisDesignStress()
-        {
-            //Base metal strength
-            double phi_1 = 0.75;
-            double phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
-            // Weld strength 
-            double phi2 =0.8;
-            double phiR_n2 = phi2* 0.6 * this.WeldMaterial.ElectrodeStrength;
-
-            double s = Math.Min(phiR_n1, phiR_n2);
-            return s;
+            return phiR_n1;
         }
-        /// <summary>
-        /// Gets design shear stress per AISC Table J2.5 Available Strength of Welded Joints
-        /// </summary>
-        /// <param name="typeOfConnection"></param>
-        /// <returns></returns>
-        public double GetShearDesignStress()
-        {
 
-           //Weld metal
-            double phi = 0.75;
-            double phiR_n = phi* 0.6 * this.WeldMaterial.ElectrodeStrength;
-                    
-            throw new NotImplementedException();
+        public double GetWeldMetalDesignStress(WeldLoadType loadType)
+        {
+            double phiR_n1 = 0.0;
+            double phi_1 = 0.0;
+
+            switch (loadType)
+            {
+                case WeldLoadType.WeldTensionNormal:
+                    phi_1 =0.8;
+                    phiR_n1 = phi_1* 0.6 * this.WeldMaterial.ElectrodeStrength;
+                    break;
+                case WeldLoadType.WeldCompressionNormal:
+                    phiR_n1 = double.PositiveInfinity;
+                    break;
+                case WeldLoadType.WeldShear:
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1* 0.6 * this.WeldMaterial.ElectrodeStrength;
+                    break;
+                case WeldLoadType.WeldCompressionSpliceFinishedToBear:
+                    phi_1 = 0.8;
+                    phiR_n1 = phi_1* 0.6 * this.WeldMaterial.ElectrodeStrength;
+                    break;
+                case WeldLoadType.WeldCompressionSpliceNotFinishedToBear:
+                    phi_1 = 0.8;
+                     phiR_n1 = phi_1* 0.9 * this.WeldMaterial.ElectrodeStrength;
+                    break;
+
+            }
+            return phiR_n1;
         }
+
+
+
 
         public double GetMinimumEffectiveThroat(double MaterialThicknessOfThinnerPartJoined)
         {
@@ -123,6 +129,28 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
             else { t_min = 5 / 8; }
 
             return t_min;
+        }
+
+        public double GetStrength(WeldLoadType LoadType, double theta, bool IgnoreBaseMetal)
+        {
+            //ignore angle theta
+            double baseMetalStrength;
+            if (IgnoreBaseMetal==true)
+            {
+                baseMetalStrength = double.PositiveInfinity;
+            }
+            else
+            {
+                baseMetalStrength = GetBaseMetalDesignStress(LoadType) * A_nBase;
+            }
+            
+            double weldMetalStrength = GetWeldMetalDesignStress(LoadType) * GetWeldArea();
+            return Math.Min(baseMetalStrength, weldMetalStrength);
+        }
+
+        public double GetWeldArea()
+        {
+            return Size * Length;
         }
     }
 }

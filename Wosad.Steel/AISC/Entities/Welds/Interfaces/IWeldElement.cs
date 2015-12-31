@@ -34,7 +34,6 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
             double GetLineMomentOfInertiaXAroundPoint(Point2D center);
             double GetLinePolarMomentOfInetriaAroundPoint(Point2D center);
             double GetAngleBetweenElementAndProjectionFromPoint(Point2D IC);
-            //double CalculateNominalShearStrength(double l_max, double l_i, double theta);
 
 
     }

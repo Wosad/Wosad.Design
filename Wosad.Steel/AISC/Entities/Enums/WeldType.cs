@@ -25,5 +25,8 @@ namespace Wosad.Steel.AISC
 {
     public enum WeldType
     {
+        CJP,      
+        PJP,      
+        Fillet
     }
 }

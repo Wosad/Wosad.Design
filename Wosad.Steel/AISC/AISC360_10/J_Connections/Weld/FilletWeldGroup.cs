@@ -225,7 +225,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
                     
                 }
             }
-            double phiR_n = Math.Min(phiRn1, phiRn2);
+            double phiR_n = Math.Max(phiRn1, phiRn2);
 
             return phiR_n;
         }

@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
-    public class PlugWeld
-    {
-    }
+    //public class PlugWeld
+    //{
+    //}
 }

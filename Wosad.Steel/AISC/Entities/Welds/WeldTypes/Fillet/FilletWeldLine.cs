@@ -52,10 +52,9 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
 
         public virtual double GetStength()
         {
-            FilletWeld weld =new FilletWeld(this.ElectrodeStrength,this.Leg);
-            double F_nw = weld.GetShearDesignStress(theta);
-            double A_nw = weld.GetEffectiveAreaPerUnitLength() * Length;
-            return F_nw * A_nw;
+            FilletWeld weld = new FilletWeld(0, 0, this.ElectrodeStrength, this.Leg, 0, Length);
+            double phiR_n = weld.GetStrength(WeldLoadType.WeldShear,theta,true); 
+            return phiR_n;
         }
 
         private double GetLength()

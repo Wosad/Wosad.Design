@@ -259,6 +259,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\PJPGrooveWeld.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\PlugWeld.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\FilletWeldGroup.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldFactory.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsCapPlate.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsChordStressInteractionQf.cs" />
     <Compile Include="AISC\AISC360_10\K_HSS\ConcentratedForces\Chs\ChsLongitudinalPlateShear.cs" />
@@ -315,13 +316,14 @@
     <Compile Include="AISC\Entities\Enums\ShearCase.cs" />
     <Compile Include="AISC\Entities\Enums\StressDistibutionType.cs" />
     <Compile Include="AISC\Entities\Enums\WeldGroupPattern.cs" />
-    <Compile Include="AISC\Entities\Enums\WeldLoadTypeId.cs" />
+    <Compile Include="AISC\Entities\Enums\WeldLoadType.cs" />
     <Compile Include="AISC\Entities\Enums\WeldType.cs" />
     <Compile Include="AISC\Entities\ConnectionGroup\InstantaneousCenter.cs" />
     <Compile Include="AISC\Entities\Materials\WeldMaterial.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldBase.cs" />
     <Compile Include="AISC\Entities\Welds\BaseClasses\WeldSegmentBase.cs" />
     <Compile Include="AISC\Entities\Welds\FilletWeldLoadDeformationGroupBase.cs" />
+    <Compile Include="AISC\Entities\Welds\Interfaces\IWeld.cs" />
     <Compile Include="AISC\Entities\Welds\Interfaces\IWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldElement.cs" />
     <Compile Include="AISC\Entities\Welds\WeldTypes\Fillet\FilletWeldLine.cs" />

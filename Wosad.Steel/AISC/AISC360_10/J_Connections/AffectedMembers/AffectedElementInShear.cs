@@ -48,7 +48,9 @@ namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
 
         public AffectedElementInShear(double F_y, double F_u): base(F_y,F_u)
         {
-
+            SteelMaterial mat = new SteelMaterial(F_y, F_u, SteelConstants.ModulusOfElasticity,
+                SteelConstants.ShearModulus);
+           
         }
 
         /// <summary>

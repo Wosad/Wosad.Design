@@ -22,23 +22,62 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC.Entities.Welds.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
     //CJP groove weld strength never governs over  base material
     //this class is included here as a placeholder
-    public class CJPGrooveWeld: GrooveWeld
+    public class CJPGrooveWeld : GrooveWeld, IWeld
     {
-        public CJPGrooveWeld(double Fy, double Fu, double Fexx, double Size, ICalcLog Log)
-            : base(Fy, Fu,Fexx, Size, Log)
+        public CJPGrooveWeld(double F_y, double F_u, double F_EXX, double Size,double A_nBase, double l, ICalcLog Log)
+            : base(F_y, F_u,F_EXX, Size,A_nBase,l, Log)
         {
 
         }
 
-        public CJPGrooveWeld(double Fy, double Fu,double Fexx, double Size)
-            : base(Fy, Fu, Fexx, Size)
+        public CJPGrooveWeld(double Fy, double Fu, double F_EXX, double Size, double A_nBase, double l)
+            : base(Fy, Fu, F_EXX, Size, A_nBase,l)
         {
 
+        }
+
+        public double GetStrength(WeldLoadType LoadType, double theta, bool IgnoreBaseMetal)
+        {
+
+            double phiR_n1 = 0.0;
+            double phi_1 = 0.0;
+            switch (LoadType)
+            {
+                case WeldLoadType.WeldTensionNormal:
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
+                    break;
+                case WeldLoadType.WeldCompressionNormal:
+                    //Compressive stress need not be considered in design of welds joining the parts.
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
+                    break;
+                case WeldLoadType.WeldShear:
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1 * 0.6 * this.BaseMaterial.UltimateStress; //per J4
+                    break;
+                case WeldLoadType.WeldCompressionSpliceFinishedToBear:
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
+                    break;
+                case WeldLoadType.WeldCompressionSpliceNotFinishedToBear:
+                    phi_1 = 0.75;
+                    phiR_n1 = phi_1 * this.BaseMaterial.UltimateStress;
+                    break;
+
+            }
+            return phiR_n1*A_nBase;
+        }
+
+        public double GetWeldArea()
+        {
+            return Size * Length;
         }
     }
 }
