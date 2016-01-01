@@ -79,7 +79,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
          }
 
 
-         protected override double GetF_cr()
+         public override double GetF_cr()
          {
              double F_cr;
              bool PermissibleCopeGeometry = CheckCopeGeometry();

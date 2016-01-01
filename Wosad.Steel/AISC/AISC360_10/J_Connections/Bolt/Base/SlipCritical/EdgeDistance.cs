@@ -36,10 +36,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double s = 0.0;
             switch (HoleType)
             {
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.Standard:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.STD:
                     s = 0.0;
                     break;
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.ShortSlottedPerpendicular:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.SSL_Perpendicular:
                     if (Diameter <= 1)
                     {
                         s = 1 / 8.0;
@@ -49,10 +49,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
                         s = 3 / 16.0;
                     }
                     break;
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.ShortSlottedParallel:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.SSL_Parallel:
                     s = 0.0;
                     break;
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.Oversized:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.OVS:
                     if (Diameter>=1)
                     {
                         s = 1 / 8.0;
@@ -62,10 +62,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
                         s = 1 / 16.0;
                     }
                     break;
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LongSlottedPerpendicular:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LSL_Perpendicular:
                     s = 3.0 / 4.0 * Diameter;
                     break;
-                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LongSlottedParallel:
+                case Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LSL_Parallel:
                     s = 0.0;
                     break;
                 default:

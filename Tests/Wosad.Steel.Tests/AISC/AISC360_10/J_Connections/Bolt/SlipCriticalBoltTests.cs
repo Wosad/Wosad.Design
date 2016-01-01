@@ -27,7 +27,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         public void BoltSlipCritical_SSL_ReturnsSlipResistance()
         {
             BoltSlipCriticalGroupA bolt = new BoltSlipCriticalGroupA(0.75, BoltThreadCase.Included, BoltFayingSurfaceClass.ClassA,
-            BoltHoleType.ShortSlottedPerpendicular, BoltFillerCase.One, 2, null);
+            BoltHoleType.SSL_Perpendicular, BoltFillerCase.One, 2, null);
             double phiR_n = bolt.GetSlipResistance();
             double refValue = 19.0; // from Design Examples
             double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
@@ -41,7 +41,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         public void BoltSlipCritical_LSL_ReturnsSlipResistance()
         {
             BoltSlipCriticalGroupA bolt = new BoltSlipCriticalGroupA(0.75, BoltThreadCase.Included, BoltFayingSurfaceClass.ClassA,
-            BoltHoleType.LongSlottedParallel, BoltFillerCase.One, 2, null);
+            BoltHoleType.LSL_Parallel, BoltFillerCase.One, 2, null);
             double phiR_n = bolt.GetSlipResistance();
             double refValue = 13.3; // from Design Examples
             double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
@@ -55,7 +55,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         public void BoltSlipCriticalSTDReturnsReducedSlipResistance()
         {
             BoltSlipCriticalGroupA bolt = new BoltSlipCriticalGroupA(0.75, BoltThreadCase.Included, BoltFayingSurfaceClass.ClassA,
-            BoltHoleType.Standard, BoltFillerCase.One, 1, null);
+            BoltHoleType.STD, BoltFillerCase.One, 1, null);
             double T_u = 72.0/8.0;
             double phiR_n = bolt.GetReducedSlipResistance(T_u);
             double refValue = 54.4/8.0; // from Design Examples

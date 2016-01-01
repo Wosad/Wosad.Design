@@ -31,13 +31,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
     public partial class CompressionMemberRhsDoublySymmetric : ColumnDoublySymmetric
     {
 
-        public override double CalculateDesignCapacity()
-        {
-            double Pr = 0.0;
-            double Fcr = CalculateCriticalStress();
-            Pr = GetDesignAxialCapacity(Fcr);
-            return Pr;
-        }
+        //public override double CalculateDesignCapacity()
+        //{
+        //    double Pr = 0.0;
+        //    double Fcr = CalculateCriticalStress();
+        //    Pr = GetDesignAxialCapacity(Fcr);
+        //    return Pr;
+        //}
         //this method is overriden for members with slender elements
         public override double CalculateCriticalStress()
         {
@@ -54,8 +54,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         }
 
-        public CompressionMemberRhsDoublySymmetric(ISteelSection Section,  ICalcLog CalcLog)
-            : base(Section, CalcLog)
+        public CompressionMemberRhsDoublySymmetric(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y,K_x,K_y, CalcLog)
         {
             if (Section.SectionBase is ISectionTube)
             {

@@ -105,27 +105,27 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             {
                 switch (HoleType)
                 {
-                    case BoltHoleType.Standard:
+                    case BoltHoleType.STD:
                         d_hWidth = Diameter + 1 / 16.0;
                         d_hLength = Diameter + 1 / 16.0;
                         break;
-                    case BoltHoleType.ShortSlottedPerpendicular:
+                    case BoltHoleType.SSL_Perpendicular:
                         d_hWidth = Diameter + 1 / 16.0;
                         d_hLength = Diameter +3 / 8.0;
                         break;
-                    case BoltHoleType.ShortSlottedParallel:
+                    case BoltHoleType.SSL_Parallel:
                         d_hWidth = Diameter + 1 / 16.0;
                         d_hLength = Diameter +3 / 8.0;
                         break;
-                    case BoltHoleType.Oversized:
+                    case BoltHoleType.OVS:
                         d_hWidth = Diameter + 5 / 16.0;
                         d_hLength = Diameter +5 / 16.0;
                         break;
-                    case BoltHoleType.LongSlottedPerpendicular:
+                    case BoltHoleType.LSL_Perpendicular:
                         d_hWidth = Diameter + 1 / 16.0;
                         d_hLength = Diameter*2.5;
                         break;
-                    case BoltHoleType.LongSlottedParallel:
+                    case BoltHoleType.LSL_Parallel:
                         d_hWidth = Diameter + 1 / 16.0;
                        d_hLength = Diameter*2.5;
                         break;
@@ -138,27 +138,27 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
                 var closest_d_b = AllBoltsList.Aggregate((x, y) => Math.Abs(x.d_b - Diameter) < Math.Abs(y.d_b - Diameter) ? x : y);
                 switch (HoleType)
                 {
-                    case BoltHoleType.Standard:
+                    case BoltHoleType.STD:
                         d_hWidth = closest_d_b.STD;
                         d_hLength = closest_d_b.STD;
                         break;
-                    case BoltHoleType.ShortSlottedPerpendicular:
+                    case BoltHoleType.SSL_Perpendicular:
                         d_hWidth = closest_d_b.SSL_Width;
                         d_hLength = closest_d_b.SSL_Length;
                         break;
-                    case BoltHoleType.ShortSlottedParallel:
+                    case BoltHoleType.SSL_Parallel:
                         d_hWidth = closest_d_b.SSL_Width;
                         d_hLength = closest_d_b.SSL_Length;
                         break;
-                    case BoltHoleType.Oversized:
+                    case BoltHoleType.OVS:
                         d_hWidth = closest_d_b.OVS;
                         d_hLength = closest_d_b.OVS;
                         break;
-                    case BoltHoleType.LongSlottedPerpendicular:
+                    case BoltHoleType.LSL_Perpendicular:
                         d_hWidth = closest_d_b.LSL_Width;
                         d_hLength = closest_d_b.LSL_Length;
                         break;
-                    case BoltHoleType.LongSlottedParallel:
+                    case BoltHoleType.LSL_Parallel:
                         d_hWidth = closest_d_b.LSL_Width;
                         d_hLength = closest_d_b.LSL_Length;
                         break;

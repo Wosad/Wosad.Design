@@ -64,7 +64,7 @@ namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
                         double phiR_n1;
                         double phiR_n2;
            
-                if (BoltHoleType == Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LongSlottedPerpendicular)
+                if (BoltHoleType == Wosad.Steel.AISC.SteelEntities.Bolts.BoltHoleType.LSL_Perpendicular)
                 {
                         //(J3-6c)
                         phiR_n1=0.75*(1.0*l_c*t*F_u);

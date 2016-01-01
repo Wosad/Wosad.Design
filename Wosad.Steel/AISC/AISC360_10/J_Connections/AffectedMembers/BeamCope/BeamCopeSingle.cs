@@ -88,7 +88,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             return Math.Min(S_top, S_bot);
         }
 
-        protected override double GetF_cr()
+        public override double GetF_cr()
         {
             double f = GetPlateBucklingModelAdjustmentFactor();
             double k = GetPlateBucklingCoefficient();

@@ -53,7 +53,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
         }
 
 
-        public SteelAxialMember(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
+        public SteelAxialMember(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
             :base(Section,  CalcLog) //,Material)
         {
 

@@ -28,7 +28,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.AffectedMembers
         public void BoltBearingInnerBoltsReturnsValue()
         {
             AffectedElementWithHoles element = new AffectedElementWithHoles();
-            double phiR_n = element.GetBearingStrengthAtBoltHole(2.06, 7.0 / 8.0, 1, 50.0, 65.0,BoltHoleType.Standard, BoltHoleDeformationType.ConsideredUnderServiceLoad, false);
+            double phiR_n = element.GetBearingStrengthAtBoltHole(2.06, 7.0 / 8.0, 1, 50.0, 65.0,BoltHoleType.STD, BoltHoleDeformationType.ConsideredUnderServiceLoad, false);
             double refValue = 102.0;
             double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
             Assert.LessOrEqual(actualTolerance, tolerance);
@@ -38,7 +38,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.AffectedMembers
          public void BoltBearingEndBoltsReturnsValue()
          {
              AffectedElementWithHoles element = new AffectedElementWithHoles();
-             double phiR_n = element.GetBearingStrengthAtBoltHole(1.03, 7.0 / 8.0, 1, 50.0, 65.0, BoltHoleType.Standard, BoltHoleDeformationType.ConsideredUnderServiceLoad, false);
+             double phiR_n = element.GetBearingStrengthAtBoltHole(1.03, 7.0 / 8.0, 1, 50.0, 65.0, BoltHoleType.STD, BoltHoleDeformationType.ConsideredUnderServiceLoad, false);
              double refValue = 60.3;
              double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
              Assert.LessOrEqual(actualTolerance, tolerance);

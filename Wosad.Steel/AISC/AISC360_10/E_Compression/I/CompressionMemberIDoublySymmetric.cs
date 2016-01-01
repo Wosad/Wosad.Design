@@ -32,13 +32,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
     {
         public bool IsRolled { get; set; }
 
-        public override double CalculateDesignCapacity()
-        {
-            double phiP_n = 0.0;
-            double Fcr = CalculateCriticalStress();
-            phiP_n = GetDesignAxialCapacity(Fcr);
-            return phiP_n;
-        }
+        //public override double CalculateDesignCapacity()
+        //{
+        //    double phiP_n = 0.0;
+        //    double Fcr = CalculateCriticalStress();
+        //    phiP_n = GetDesignAxialCapacity(Fcr);
+        //    return phiP_n;
+        //}
         //this method is overriden for members with slender elements
         public override double CalculateCriticalStress()
         {
@@ -62,8 +62,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         }
 
-        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, ICalcLog CalcLog)
-            : base(Section, CalcLog)
+        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y,K_x,K_y, CalcLog)
         {
             if (Section.SectionBase is ISectionI)
             {

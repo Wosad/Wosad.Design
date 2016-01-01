@@ -242,9 +242,16 @@ namespace Wosad.Steel.AISC.SteelEntities
             // cross product definition
             //AXB=(AyBz -AzBy)i -(AxBz -AzBx)j +(AxBy -AyBx)k
             //assuming AZ = 1, AX =AY =0;
+            if (BX==0 && BY == 0)
+            {
+                return new Vector2d(0, 0);
+            }
+            else
+            {
 
-            Vector2d perpVector= new Vector2d(-BY, BX);
-            return perpVector.GetUnit();
+                Vector2d perpVector = new Vector2d(-BY, BX);
+                return perpVector.GetUnit();
+            }
         }
 
     }

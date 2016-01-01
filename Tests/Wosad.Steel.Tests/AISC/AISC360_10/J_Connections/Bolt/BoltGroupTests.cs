@@ -79,5 +79,16 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         }
 
 
+        [Test]
+        public void BoltGroupTripleLine0DegreesReturnsC()
+        {
+            BoltGroup bg = new BoltGroup(3, 3, 3, 3);
+            double C = bg.GetInstantaneousCenterCoefficient(3, 0);
+            double refValue = 5.79; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
     }
 }

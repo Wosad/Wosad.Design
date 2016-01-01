@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
-    public abstract partial class BeamCopeBase
+    public abstract partial class BeamCopeBase : IBeamCope
     {
         protected double GetFcrGeneral()
         {

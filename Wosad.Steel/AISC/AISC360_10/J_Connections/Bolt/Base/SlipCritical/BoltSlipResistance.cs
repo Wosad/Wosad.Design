@@ -67,17 +67,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
         {
             switch (HoleType)
             {
-                case BoltHoleType.Standard:
+                case BoltHoleType.STD:
                     return 1.0;
-                case BoltHoleType.ShortSlottedPerpendicular:
+                case BoltHoleType.SSL_Perpendicular:
                     return 1.0;
-                case BoltHoleType.ShortSlottedParallel:
+                case BoltHoleType.SSL_Parallel:
                     return 0.85;
-                case BoltHoleType.Oversized:
+                case BoltHoleType.OVS:
                     return 0.85;
-                case BoltHoleType.LongSlottedParallel:
+                case BoltHoleType.LSL_Parallel:
                     return 0.7;
-                case BoltHoleType.LongSlottedPerpendicular:
+                case BoltHoleType.LSL_Perpendicular:
                     return 0.7;
                 default:
                     return 0.85;

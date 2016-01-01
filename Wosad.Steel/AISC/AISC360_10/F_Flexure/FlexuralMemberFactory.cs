@@ -126,6 +126,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             else if (WebCompactness == CompactnessClassFlexure.Compact && FlangeCompactness!= CompactnessClassFlexure.Compact)
             {
                 //F3
+                throw new NotImplementedException();
             }
 
             return beam;

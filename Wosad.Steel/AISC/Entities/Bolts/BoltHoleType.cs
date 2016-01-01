@@ -27,11 +27,12 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
 {
     public enum BoltHoleType
     {
-        Standard,
-        ShortSlottedPerpendicular,
-        ShortSlottedParallel,
-        Oversized,
-        LongSlottedPerpendicular,
-        LongSlottedParallel,
+        STD,
+        SSL_Perpendicular,
+        SSL_Parallel,
+        OVS,
+        LSL_Perpendicular,
+        LSL_Parallel,
+   
     }
 }

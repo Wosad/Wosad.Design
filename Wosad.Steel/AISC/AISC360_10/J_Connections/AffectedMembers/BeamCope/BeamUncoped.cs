@@ -1,5 +1,5 @@
-#region Copyright
-   /*Copyright (C) 2015 Wosad Inc
+﻿#region Copyright
+/*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,39 +14,32 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using System.Threading.Tasks;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.AISC360_10;
-using Wosad.Steel.AISC.Code;
+using Wosad.Steel.AISC360_10.Connections.AffectedElements;
 
- 
- 
-
-namespace  Wosad.Steel.AISC360_10
+namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
-    public class ColumnSingleAngle:SteelColumn
+    public class BeamUncoped : IBeamCope
     {
-        public ColumnSingleAngle(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section, CalcLog) //, Material)
+        public BeamUncoped(ISectionI Section, ISteelMaterial Material)
         {
 
         }
 
-        public override double CalculateDesignCapacity()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override double CalculateCriticalStress()
+        public double GetFlexuralStrength()
         {
             throw new NotImplementedException();
         }
+
+        public ISectionI Section { get; set; }
+        public ISteelMaterial Material { get; set; }
     }
 }

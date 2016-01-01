@@ -23,30 +23,26 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Steel.AISC.AISC360_10;
 using Wosad.Steel.AISC.Code;
-using Wosad.Steel.AISC.SteelEntities.Members;
 
-namespace Wosad.Steel.AISC.AISC360_10
+ 
+ 
+
+namespace  Wosad.Steel.AISC360_10
 {
-    public abstract class SteelColumn : SteelAxialMember
+    public class ColumnSingleAngle:SteelColumn
     {
-        public SteelColumn(ISteelSection Section, ICalcLog CalcLog)
-            : base(Section,CalcLog)
+        public ColumnSingleAngle(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) 
+            : base(Section, L_x,L_y,K_x,K_y, CalcLog) 
         {
 
         }
 
-        protected double GetNominalAxialCapacity(double CriticalStress)
-        {
-            double A = Section.SectionBase.Area;
-            return CriticalStress*A;
-        }
 
-        protected double GetDesignAxialCapacity(double CriticalStress)
+        public override double CalculateCriticalStress()
         {
-            double Pn= GetNominalAxialCapacity(CriticalStress);
-            double phiP_n = Pn * 0.90;
-            return phiP_n;
+            throw new NotImplementedException();
         }
     }
 }
