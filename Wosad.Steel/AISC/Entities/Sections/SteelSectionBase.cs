@@ -35,7 +35,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
 
         }
 
-        public abstract ISection SectionBase { get;}
+        public abstract ISection Shape { get;}
 
         public SteelSectionBase(ISteelMaterial Material)
         {

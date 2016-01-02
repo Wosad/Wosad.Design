@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
@@ -65,9 +65,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
         public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
             : base(Section,L_x,L_y,K_x,K_y, CalcLog)
         {
-            if (Section.SectionBase is ISectionI)
+            if (Section.Shape is ISectionI)
             {
-            SectionI = Section.SectionBase as ISectionI;
+            SectionI = Section.Shape as ISectionI;
             }
             else
             {

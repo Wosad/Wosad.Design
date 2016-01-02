@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
  
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
@@ -57,14 +57,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             {
                 L = UnbracedLengthX;
                 K = EffectiveLengthFactorX;
-                r = Section.SectionBase.RadiusOfGyrationX;
+                r = Section.Shape.RadiusOfGyrationX;
                 
             }
             else
             {
                 L = UnbracedLengthY;
                 K = EffectiveLengthFactorY;
-                r = Section.SectionBase.RadiusOfGyrationY;
+                r = Section.Shape.RadiusOfGyrationY;
 
             }
 

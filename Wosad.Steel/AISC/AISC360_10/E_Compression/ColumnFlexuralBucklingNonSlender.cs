@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.AISC360_10;
-using Wosad.Steel.AISC.Code;
+
  
  
 
@@ -40,8 +40,8 @@ namespace  Wosad.Steel.AISC360_10
             K_minor = this.EffectiveLengthFactorZ;
             L_major=this.UnbracedLengthY ;
             L_minor=this.UnbracedLengthZ ;
-            r_major=this.Section.SectionBase.RadiusOfGyrationX ;
-            r_minor=this.Section.SectionBase.RadiusOfGyrationY ;
+            r_major=this.Section.Shape.RadiusOfGyrationX ;
+            r_minor=this.Section.Shape.RadiusOfGyrationY ;
 
         }
 

@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Common.CalculationLogger;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Exceptions;
  using Wosad.Common.CalculationLogger;
 
@@ -55,7 +55,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             double ho;
 
-            ISectionI section = this.Section.SectionBase as ISectionI;
+            ISectionI section = this.Section.Shape as ISectionI;
             if (section != null)
             {
                 //ho = section.FlangeCentroidDistance;

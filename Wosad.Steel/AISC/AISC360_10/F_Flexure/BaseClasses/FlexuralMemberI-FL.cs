@@ -56,8 +56,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             Fy = Section.Material.YieldStress;
 
-            Sxt = Section.SectionBase.SectionModulusXTop;
-            Sxc = Section.SectionBase.SectionModulusXBot;
+            Sxt = Section.Shape.SectionModulusXTop;
+            Sxc = Section.Shape.SectionModulusXBot;
 
             FL = GetStressFL(Sxt, Sxc, Fy);
 

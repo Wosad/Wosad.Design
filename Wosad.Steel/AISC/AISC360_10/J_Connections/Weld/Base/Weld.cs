@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Entities.Materials;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Materials;

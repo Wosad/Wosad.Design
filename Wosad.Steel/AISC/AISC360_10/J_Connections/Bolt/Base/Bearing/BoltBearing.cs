@@ -30,7 +30,7 @@ using d = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltDescriptions;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
 {

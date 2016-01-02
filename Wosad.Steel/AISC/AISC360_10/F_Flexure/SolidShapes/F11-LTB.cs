@@ -55,9 +55,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
-            if (this.Section.SectionBase is ISectionRectangular)
+            if (this.Section.Shape is ISectionRectangular)
             {
-                ISectionRectangular rectSection = this.Section.SectionBase as ISectionRectangular;
+                ISectionRectangular rectSection = this.Section.Shape as ISectionRectangular;
                 double E = this.Section.Material.ModulusOfElasticity;
                 double Fy = this.Section.Material.YieldStress;
                 double d = rectSection.Height;
@@ -78,9 +78,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
-            if (this.Section.SectionBase is ISectionRectangular)
+            if (this.Section.Shape is ISectionRectangular)
             {
-                ISectionRectangular rectSection = this.Section.SectionBase as ISectionRectangular;
+                ISectionRectangular rectSection = this.Section.Shape as ISectionRectangular;
                 double E = this.Section.Material.ModulusOfElasticity;
                 double Fy = this.Section.Material.YieldStress;
                 double d = rectSection.Height;

@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
-    public partial class CompressionMemberRhsDoublySymmetric : ColumnDoublySymmetric
+    public partial class CompressionMemberRhs : ColumnDoublySymmetric
     {
 
         public override double GetReductionFactorForStiffenedElementQa(double Fcr = 0)
@@ -65,7 +65,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         private double GetSectionGrossArea()
         {
-            return Section.SectionBase.Area;
+            return Section.Shape.Area;
         }
 
         protected virtual double GetWebThickness()

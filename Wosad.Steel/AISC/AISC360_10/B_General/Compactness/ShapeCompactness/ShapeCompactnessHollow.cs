@@ -40,7 +40,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
            public HollowMember(ISteelSection section,
                 FlexuralCompressionFiberPosition compressionFiberPosition, MomentAxis MomentAxis)
             {
-                ISection Section = section.SectionBase;
+                ISection Section = section.Shape;
                 if (Section is ISectionTube|| Section is ISectionPipe || Section is ISectionBox)
                 {
                     if (Section is ISectionTube)

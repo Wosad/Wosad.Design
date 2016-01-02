@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Entities;
-using Wosad.Steel.AISC.Code;
+
 
 
 namespace Wosad.Steel.AISC.Interfaces

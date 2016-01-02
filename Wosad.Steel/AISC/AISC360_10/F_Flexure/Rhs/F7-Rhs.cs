@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.SteelEntities;
@@ -105,7 +105,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.SectionBase.PlasticSectionModulusX;
+            double Zx = Section.Shape.PlasticSectionModulusX;
 
             double M = Fy * Zx;
             Mp = M / 12.0;
@@ -136,7 +136,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.SectionBase.PlasticSectionModulusY;
+            double Zy = Section.Shape.PlasticSectionModulusY;
 
             Mp = Fy * Zy;
             double M = Mp / 1000.0;

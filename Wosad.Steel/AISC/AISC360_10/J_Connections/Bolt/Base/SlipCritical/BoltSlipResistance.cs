@@ -16,7 +16,6 @@
 #endregion
  
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Code;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 using d = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltDescriptions;

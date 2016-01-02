@@ -26,6 +26,10 @@ namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
     public partial class AffectedElement: SteelDesignElement
     {
+        public AffectedElement()
+        {
+
+        }
         public AffectedElement(double F_y, double F_u)
         {
             SteelMaterial material = new SteelMaterial(F_y, F_u, SteelConstants.ModulusOfElasticity, SteelConstants.ShearModulus);

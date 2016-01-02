@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Exceptions;
-using Wosad.Steel.AISC.Code;
+
 
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
@@ -37,7 +37,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             : base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
         {
             sectionTube = null;
-            ISectionTube s = Section.SectionBase as ISectionTube;
+            ISectionTube s = Section.Shape as ISectionTube;
 
             if (s == null)
             {

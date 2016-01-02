@@ -24,21 +24,13 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
-    public partial class CompressionMemberRhsDoublySymmetric : ColumnDoublySymmetric
+    public partial class CompressionMemberRhs : ColumnDoublySymmetric
     {
 
-        //public override double CalculateDesignCapacity()
-        //{
-        //    double Pr = 0.0;
-        //    double Fcr = CalculateCriticalStress();
-        //    Pr = GetDesignAxialCapacity(Fcr);
-        //    return Pr;
-        //}
-        //this method is overriden for members with slender elements
         public override double CalculateCriticalStress()
         {
             double Fcr = 0.0;
@@ -54,12 +46,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         }
 
-        public CompressionMemberRhsDoublySymmetric(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+        public CompressionMemberRhs(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
             : base(Section,L_x,L_y,K_x,K_y, CalcLog)
         {
-            if (Section.SectionBase is ISectionTube)
+            if (Section.Shape is ISectionTube)
             {
-                SectionRhs = Section.SectionBase as ISectionTube;
+                SectionRhs = Section.Shape as ISectionTube;
             }
             else
             {
@@ -67,7 +59,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             }
 
         }
-
 
 
         ISectionTube SectionRhs; 

@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.Flexure.SolidShapes;
 using Wosad.Steel.AISC.Exceptions;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.SteelEntities;
  
  

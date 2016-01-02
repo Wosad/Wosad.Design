@@ -26,7 +26,7 @@ using Wosad.Common.Mathematics;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.SteelEntities;
 
 namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces

@@ -43,9 +43,9 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 double tf;
 
 
-                if (Section.SectionBase is ISectionChannel)
+                if (Section.Shape is ISectionChannel)
 	            {
-                    ISectionChannel sectChannel = Section.SectionBase as ISectionChannel;
+                    ISectionChannel sectChannel = Section.Shape as ISectionChannel;
 
                 switch (compressionFiberPosition)
                 {

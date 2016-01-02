@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360_10.D_Tension

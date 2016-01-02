@@ -39,9 +39,9 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             public AngleMember(ISteelSection Section)
             {
 
-                if (Section.SectionBase is ISectionAngle)
+                if (Section.Shape is ISectionAngle)
                 {
-                    ISectionAngle ang = Section.SectionBase as ISectionAngle;
+                    ISectionAngle ang = Section.Shape as ISectionAngle;
                     VerticalLegCompactness = new LegOfSingleAngle(Section.Material, ang.Height, ang.Thickness);
                     HorizontalLegCompactness = new LegOfSingleAngle(Section.Material, ang.Width, ang.Thickness);
                 }

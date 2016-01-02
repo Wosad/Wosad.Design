@@ -26,7 +26,7 @@ namespace Wosad.Steel.AISC.Interfaces
 {
     public interface ISteelSection
     {
-        ISection SectionBase { get; }
+        ISection Shape { get; }
         ISteelMaterial Material { get; }
     }
 }

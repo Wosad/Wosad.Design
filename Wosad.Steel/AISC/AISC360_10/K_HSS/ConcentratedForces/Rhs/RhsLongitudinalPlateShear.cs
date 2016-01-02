@@ -29,7 +29,7 @@ using Wosad.Steel.AISC360_10.Connections.AffectedElements;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
-using Wosad.Steel.AISC.Code;
+
  
 
 

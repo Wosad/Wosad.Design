@@ -27,7 +27,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 

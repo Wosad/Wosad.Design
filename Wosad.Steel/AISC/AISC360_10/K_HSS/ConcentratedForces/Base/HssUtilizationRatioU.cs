@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
  
@@ -44,7 +44,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
                 Fc = Fy;
 
 
-            ISection sec = Section.SectionBase;
+            ISection sec = Section.Shape;
             double Ag = sec.Area;
             double S = Math.Min(sec.SectionModulusXBot, sec.SectionModulusXTop);
             double Pro = RequiredAxialStrenghPro;

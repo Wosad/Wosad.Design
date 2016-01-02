@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Members;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Exceptions;
 
 
@@ -53,7 +53,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             SteelLimitStateValue ls = new SteelLimitStateValue();
             ls.IsApplicable = false;
             double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.SectionBase.PlasticSectionModulusX;
+            double Zx = Section.Shape.PlasticSectionModulusX;
             double Mp = Fy * Zx;
             return ls;
         }
@@ -64,7 +64,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             //Mp is used in calculations
             //In other cases this method is overriden
             double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.SectionBase.PlasticSectionModulusY;
+            double Zy = Section.Shape.PlasticSectionModulusY;
             double Mp = Fy * Zy;
 
             SteelLimitStateValue ls = new SteelLimitStateValue();
@@ -111,10 +111,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
-                    Sxc = Section.SectionBase.SectionModulusXTop;
+                    Sxc = Section.Shape.SectionModulusXTop;
                     break;
                 case FlexuralCompressionFiberPosition.Bottom:
-                    Sxc = Section.SectionBase.SectionModulusXBot;
+                    Sxc = Section.Shape.SectionModulusXBot;
                     break;
                 default:
                     throw new CompressionFiberPositionException();
@@ -130,10 +130,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
-                    Sxt = Section.SectionBase.SectionModulusXBot;
+                    Sxt = Section.Shape.SectionModulusXBot;
                     break;
                 case FlexuralCompressionFiberPosition.Bottom:
-                    Sxt = Section.SectionBase.SectionModulusXTop;
+                    Sxt = Section.Shape.SectionModulusXTop;
                     break;
                 default:
                     throw new CompressionFiberPositionException();
@@ -149,10 +149,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Left:
-                    Syc = Section.SectionBase.SectionModulusYLeft;
+                    Syc = Section.Shape.SectionModulusYLeft;
                     break;
                 case FlexuralCompressionFiberPosition.Right:
-                    Syc = Section.SectionBase.SectionModulusYRight;
+                    Syc = Section.Shape.SectionModulusYRight;
                     break;
                 default:
                     throw new CompressionFiberPositionException();
@@ -169,10 +169,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Left:
-                    Syc = Section.SectionBase.SectionModulusYRight;
+                    Syc = Section.Shape.SectionModulusYRight;
                     break;
                 case FlexuralCompressionFiberPosition.Right:
-                    Syc = Section.SectionBase.SectionModulusYLeft;
+                    Syc = Section.Shape.SectionModulusYLeft;
                     break;
                 default:
                     throw new CompressionFiberPositionException();

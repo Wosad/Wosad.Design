@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
  using Wosad.Common.CalculationLogger;
  
  
@@ -54,8 +54,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             Fy = Section.Material.YieldStress;
             L = this.UnbracedLengthFlexure;
             K = this.EffectiveLengthFactorFlexure;
-            Zy = Section.SectionBase.PlasticSectionModulusY;
-            Sy = Math.Min(Section.SectionBase.SectionModulusYLeft, Section.SectionBase.SectionModulusYRight);
+            Zy = Section.Shape.PlasticSectionModulusY;
+            Sy = Math.Min(Section.Shape.SectionModulusYLeft, Section.Shape.SectionModulusYRight);
 
            }
 

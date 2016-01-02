@@ -44,7 +44,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             set { section = value; }
         }
 
-        public override ISection SectionBase
+        public override ISection Shape
         {
             get { return section; }
         }

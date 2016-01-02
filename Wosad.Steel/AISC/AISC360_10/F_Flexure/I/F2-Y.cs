@@ -55,7 +55,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.SectionBase.PlasticSectionModulusX;
+            double Zx = Section.Shape.PlasticSectionModulusX;
 
             double M = Fy * Zx;
             Mp = M / 12.0;
@@ -86,7 +86,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
             double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.SectionBase.PlasticSectionModulusY;
+            double Zy = Section.Shape.PlasticSectionModulusY;
             double M = Fy * Zy;
             Mp = M / 12.0;
 

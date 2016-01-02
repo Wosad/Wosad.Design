@@ -26,7 +26,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Members;
 using Wosad.Steel.AISC.SteelEntities.Sections;
-using Wosad.Steel.AISC.Code;
+
 
 namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {

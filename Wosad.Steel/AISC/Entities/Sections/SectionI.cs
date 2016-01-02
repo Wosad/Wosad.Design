@@ -33,7 +33,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             get { return section; }
         }
 
-        public override ISection SectionBase
+        public override ISection Shape
         {
             get { return section as ISection; }
         }

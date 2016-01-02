@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.Interfaces
 {
@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.Interfaces
         double EffectiveLengthFactorY { get; set; } //K for local Y-axis (major section axis)
         double EffectiveLengthFactorZ { get; set; } //K for local Z-axis (minor section axis)
 
-        double CalculateDesignCapacity();
+        double CalculateDesignStrength();
         double CalculateCriticalStress();
     }
 }

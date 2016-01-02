@@ -18,9 +18,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Code;
+
 
 
 namespace Wosad.Steel.AISC.SteelEntities

@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Interfaces;
 
 
@@ -59,7 +59,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
 
         }
 
-        public abstract double CalculateDesignCapacity();
+        public abstract double CalculateDesignStrength();
 
         public abstract double CalculateCriticalStress();
 

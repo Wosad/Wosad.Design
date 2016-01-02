@@ -65,7 +65,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         private double GetSectionGrossArea()
         {
-            return Section.SectionBase.Area;
+            return Section.Shape.Area;
         }
 
         protected virtual double GetWebThickness()

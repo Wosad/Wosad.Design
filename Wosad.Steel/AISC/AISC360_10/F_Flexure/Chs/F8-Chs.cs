@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
  using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.Exceptions;
 

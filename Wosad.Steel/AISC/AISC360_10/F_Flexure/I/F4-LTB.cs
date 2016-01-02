@@ -51,10 +51,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
-                    Sxc = Section.SectionBase.SectionModulusXTop;
+                    Sxc = Section.Shape.SectionModulusXTop;
                     break;
                 case FlexuralCompressionFiberPosition.Bottom:
-                    Sxc = Section.SectionBase.SectionModulusXBot;
+                    Sxc = Section.Shape.SectionModulusXBot;
                     break;
                 default:
                     throw new CompressionFiberPositionException();

@@ -46,9 +46,9 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 double tf;
 
 
-                if (Section.SectionBase is ISectionI)
+                if (Section.Shape is ISectionI)
 	            {
-                ISectionI sectI = Section.SectionBase as ISectionI;
+                ISectionI sectI = Section.Shape as ISectionI;
 
                 switch (compressionFiberPosition)
                 {
@@ -77,7 +77,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
                 //web compactness
 
-                bool isDoublySymmetric = IShapeSymmetry.IsDoublySymmetric(Section.SectionBase);
+                bool isDoublySymmetric = IShapeSymmetry.IsDoublySymmetric(Section.Shape);
 
 
                 if (isDoublySymmetric == true)

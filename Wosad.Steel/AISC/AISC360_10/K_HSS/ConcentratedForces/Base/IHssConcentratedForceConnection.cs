@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
  
 
 namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces

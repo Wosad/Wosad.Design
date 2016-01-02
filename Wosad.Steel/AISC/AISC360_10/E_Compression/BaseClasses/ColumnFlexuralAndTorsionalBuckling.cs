@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.AISC360_10.Compression.BaseClasses;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Compression
 {
@@ -60,9 +60,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         public double Get_roSquare()
         {
-            double Ix = Section.SectionBase.MomentOfInertiaX;
-            double Iy = Section.SectionBase.MomentOfInertiaY;
-            double Ag = Section.SectionBase.Area;
+            double Ix = Section.Shape.MomentOfInertiaX;
+            double Iy = Section.Shape.MomentOfInertiaY;
+            double Ag = Section.Shape.Area;
 
             double ro2 = xo*xo+yo*yo+(Ix+Iy)/Ag; //(E4-11)
 
@@ -74,12 +74,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
         {
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
-            double Cw = Section.SectionBase.WarpingConstant;
+            double Cw = Section.Shape.WarpingConstant;
             double Kz = EffectiveLengthFactorZ;
             double Lz = UnbracedLengthZ;
             double G = 11200; //ksi
-            double J = Section.SectionBase.TorsionalConstant;
-            double Ag = Section.SectionBase.Area;
+            double J = Section.Shape.TorsionalConstant;
+            double Ag = Section.Shape.Area;
             double r0 = Math.Pow(Get_roSquare(), 0.5);
 
 

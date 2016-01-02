@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
 

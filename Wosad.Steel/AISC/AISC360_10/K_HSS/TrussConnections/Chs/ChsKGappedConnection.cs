@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Mathematics;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 
 namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
 {

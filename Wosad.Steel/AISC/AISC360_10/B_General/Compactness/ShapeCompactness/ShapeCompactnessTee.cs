@@ -39,9 +39,9 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
            public TeeMember(ISteelSection Section)
             {
 
-                if (Section.SectionBase is ISectionTee)
+                if (Section.Shape is ISectionTee)
                 {
-                    ISectionTee tee = Section.SectionBase as ISectionTee;
+                    ISectionTee tee = Section.Shape as ISectionTee;
                     FlangeCompactness = new FlangeOfTee(Section.Material, tee);
                     WebCompactness = new StemOfTee(Section.Material, tee);
                 }

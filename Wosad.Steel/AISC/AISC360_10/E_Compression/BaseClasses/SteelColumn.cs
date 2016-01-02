@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.SteelEntities.Members;
 
 namespace Wosad.Steel.AISC.AISC360_10
@@ -38,21 +38,21 @@ namespace Wosad.Steel.AISC.AISC360_10
 
         protected double GetNominalAxialCapacity(double CriticalStress)
         {
-            double A = Section.SectionBase.Area;
+            double A = Section.Shape.Area;
             return CriticalStress*A;
         }
 
-        protected double GetDesignAxialCapacity(double CriticalStress)
+        protected double GetDesignAxialStrength(double CriticalStress)
         {
             double Pn= GetNominalAxialCapacity(CriticalStress);
             double phiP_n = Pn * 0.90;
             return phiP_n;
         }
-        public override double CalculateDesignCapacity()
+        public override double CalculateDesignStrength()
         {
             double phiP_n = 0.0;
             double Fcr = CalculateCriticalStress();
-            phiP_n = GetDesignAxialCapacity(Fcr);
+            phiP_n = GetDesignAxialStrength(Fcr);
             return phiP_n;
         }
     }

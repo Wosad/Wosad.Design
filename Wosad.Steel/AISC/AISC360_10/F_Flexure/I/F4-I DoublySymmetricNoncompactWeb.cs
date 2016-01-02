@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
  using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Steel.AISC.Exceptions;
 
 
@@ -88,20 +88,20 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             L = this.UnbracedLengthFlexure;
             K = this.EffectiveLengthFactorFlexure;
 
-            Iy = Section.SectionBase.MomentOfInertiaY;
+            Iy = Section.Shape.MomentOfInertiaY;
 
-            Sxbot = Section.SectionBase.SectionModulusXBot;
-            Sxtop = Section.SectionBase.SectionModulusXTop;
+            Sxbot = Section.Shape.SectionModulusXBot;
+            Sxtop = Section.Shape.SectionModulusXTop;
 
             Sx = Math.Min(Sxbot, Sxtop);
 
-            Zx = Section.SectionBase.PlasticSectionModulusX;
+            Zx = Section.Shape.PlasticSectionModulusX;
 
-            ry = Section.SectionBase.RadiusOfGyrationY;
+            ry = Section.Shape.RadiusOfGyrationY;
 
-            Cw = Section.SectionBase.WarpingConstant;
+            Cw = Section.Shape.WarpingConstant;
 
-            J = Section.SectionBase.TorsionalConstant;
+            J = Section.Shape.TorsionalConstant;
             Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
         }

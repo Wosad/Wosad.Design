@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Mathematics;
-using Wosad.Steel.AISC.Code;
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {

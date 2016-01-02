@@ -30,9 +30,6 @@ using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.Section.Predefined;
-using Wosad.Steel.AISC.Code;
-
-
  
  
 

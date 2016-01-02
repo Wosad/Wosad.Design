@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
-using Wosad.Steel.AISC.Code;
+
 
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
@@ -39,7 +39,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             : base(section, UnbracedLength, EffectiveLengthFactor,  CalcLog)
         {
             SectionI = null;
-            ISectionI s = Section.SectionBase as ISectionI;
+            ISectionI s = Section.Shape as ISectionI;
             this.isRolledMember = IsRolledMember;
 
             if (s == null)

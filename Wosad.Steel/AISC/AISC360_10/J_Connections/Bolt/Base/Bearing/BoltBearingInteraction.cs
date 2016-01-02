@@ -27,7 +27,7 @@ using f = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltFormulas;
 using v = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltValues;
 using d = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltDescriptions;
 using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Code;
+
 using Wosad.Common.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted

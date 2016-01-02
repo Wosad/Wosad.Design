@@ -80,10 +80,14 @@
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnTee.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ISectionIAssymetrical.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnBucklingType.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs-Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs-Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnBuiltUpNonSlender.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnBuiltUpSlender.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnFlexuralBucklingNonSlender.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnFlexuralBucklingSlender.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\CompressionMemberFactory.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\L\ColumnSingleAngle.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnSlender.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\ColumnTorsionalBucklingNonSlender.cs" />
@@ -92,15 +96,16 @@
     <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\LimitState.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rectangle\CompressionMemberRectangle.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric-Qa.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric-Qs.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhsDoublySymmetric.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\SteelColumn.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\Circular.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\IShearMember.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearMember.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInCompression.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInTension.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElement.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
@@ -309,7 +314,6 @@
     <Compile Include="AISC\Entities\Bolts\BoltHoleDeformationType.cs" />
     <Compile Include="AISC\Entities\Bolts\BoltPoint.cs" />
     <Compile Include="AISC\Entities\ConnectionGroup\Elastic.cs" />
-    <Compile Include="AISC\Entities\DesignFormat.cs" />
     <Compile Include="AISC\Entities\Enums\BeamCopeCase.cs" />
     <Compile Include="AISC\Entities\Enums\BendingAxis.cs" />
     <Compile Include="AISC\Entities\Enums\BoltMaterialId.cs" />
@@ -399,9 +403,8 @@
   <ItemGroup>
     <Folder Include="AISC\AISC360_10\C_Stability\" />
     <Folder Include="AISC\AISC360_10\E_Compression\2L\" />
-    <Folder Include="AISC\AISC360_10\E_Compression\Chs\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
-    <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
+    <Folder Include="AISC\AISC360_10\H_Combination\" />
     <Folder Include="AISC\AISC360_10\I_Composite\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\Entities\Materials\Plate\" />
