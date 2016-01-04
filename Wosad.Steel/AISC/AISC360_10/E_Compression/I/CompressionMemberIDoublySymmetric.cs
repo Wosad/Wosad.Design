@@ -79,6 +79,16 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
 
 
-        ISectionI SectionI; 
+        ISectionI SectionI;
+
+        public override double GetFlexuralBucklingStrength()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

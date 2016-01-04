@@ -30,7 +30,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace  Wosad.Steel.AISC360_10
 {
-    public  class ColumnSlender: ColumnFlexuralBucklingNonSlender
+    public abstract class ColumnSlender: ColumnFlexuralBucklingNonSlender
     {
         //section E7
         public ColumnSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)

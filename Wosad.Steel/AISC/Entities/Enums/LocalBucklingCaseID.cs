@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC
 {
-    public enum LocalBucklingCaseID
+    public enum LocalBucklingCaseId
     {
     }
 }

@@ -29,7 +29,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace  Wosad.Steel.AISC360_10
 {
-    public class ColumnBuiltUpNonSlender : ColumnFlexuralBucklingNonSlender
+    public abstract class ColumnBuiltUpNonSlender : ColumnFlexuralBucklingNonSlender
     {
         public ColumnBuiltUpNonSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
             : base(Section,L_x,L_y,K_x,K_y,  CalcLog) //, Material)

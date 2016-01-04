@@ -32,6 +32,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         //Slides 60-62
 
         double T;
+        /// <summary>
+        /// Gets minimum required plate thickness.
+        /// </summary>
+        /// <param name="T">Bolt tension force</param>
+        /// <returns></returns>
         public  double GetMinimumThickness(double T) 
         {
             this.T = T;
@@ -42,7 +47,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             }
             else
 	        {
-                double beta = GetBetaDesign();
+                double beta = GetBetaDesign(B_bolt, T);
                 double alpha_prime = 0.0;
                 if (beta >=1)
                 {
@@ -60,9 +65,16 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             return t_min;
         }
 
-        private double GetBetaDesign()
+        /// <summary>
+        /// Gets parameter beta for prying action calculations
+        /// </summary>
+        /// <param name="B">Available tensile strength of bolt (phiF_nt*A_b or phiF_nt' *A_b)  </param>
+        /// <param name="T">Bolt tension force</param>
+        /// <returns></returns>
+        private double GetBetaDesign(double B, double T)
         {
-            throw new NotImplementedException();
+            double beta = 1 / rho * (B / T - 1.0);
+            return beta;
         }
     }
 }

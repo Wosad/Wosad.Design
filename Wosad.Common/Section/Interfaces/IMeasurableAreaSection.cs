@@ -25,6 +25,6 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface IMeasurableAreaSection
     {
-        double Area { get; }
+        double A { get; }
     }
 }

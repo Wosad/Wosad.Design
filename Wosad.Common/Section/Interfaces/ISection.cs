@@ -27,23 +27,23 @@ namespace Wosad.Common.Section.Interfaces
         //void CalculateSectionProperties(); this will be added later todo:
 
         string Name { get;  }
-        double Area { get; }
-        double MomentOfInertiaX { get;}
-        double MomentOfInertiaY { get;  }
-        double SectionModulusXTop { get; }
-        double SectionModulusXBot { get;  }
-        double SectionModulusYLeft { get;  }
-        double SectionModulusYRight { get;  }
-        double PlasticSectionModulusX { get; }
-        double PlasticSectionModulusY { get;  }
-        double RadiusOfGyrationX { get;  }
-        double RadiusOfGyrationY { get; }
-        double CentroidXtoLeftEdge { get;  }
-        double CentroidYtoBottomEdge { get;  }
-        double PlasticCentroidXtoLeftEdge { get; }
-        double PlasticCentroidYtoBottomEdge { get;  }
-        double WarpingConstant { get;  }
-        double TorsionalConstant { get;  }
+        double A { get; }
+        double I_x { get;}
+        double I_y { get;  }
+        double S_xTop { get; }
+        double S_xBot { get;  }
+        double S_yLeft { get;  }
+        double S_yRight { get;  }
+        double Z_x { get; }
+        double Z_y { get;  }
+        double r_x { get;  }
+        double r_y { get; }
+        double x_Bar { get;  }
+        double y_Bar { get;  }
+        double x_pBar { get; }
+        double y_pBar { get;  }
+        double C_w { get;  }
+        double J { get;  }
 
         ISection Clone();
     }

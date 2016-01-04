@@ -235,7 +235,7 @@ namespace Wosad.Common.Section.General
 
         private IMoveableSection getSliceOfArea(double Area, SLiceType sliceType)
         {
-            double ConvergenceTolerance = this.Area * 0.0001;
+            double ConvergenceTolerance = this.A * 0.0001;
             double targetAreaDelta = 0.0;
             double AxisLocationDistanceMin = 0.0;
             double AxisLocationDistanceMax = this.YMax - this.YMin;
@@ -261,14 +261,14 @@ namespace Wosad.Common.Section.General
         private double TopAreaDeltaCalculationFunction(double SliceAxisY)
         {
             cutSection = this.GetTopSliceSection(SliceAxisY, SlicingPlaneOffsetType.Top);
-            double SliceArea = cutSection.Area;
+            double SliceArea = cutSection.A;
             return targetArea - SliceArea;
         }
 
         private double BottomAreaDeltaCalculationFunction(double SliceAxisY)
         {
             cutSection = this.GetBottomSliceSection(SliceAxisY, SlicingPlaneOffsetType.Top);
-            double SliceArea = cutSection.Area;
+            double SliceArea = cutSection.A;
             return targetArea - SliceArea;
         }
 

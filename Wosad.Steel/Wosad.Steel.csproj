@@ -319,7 +319,7 @@
     <Compile Include="AISC\Entities\Enums\BoltMaterialId.cs" />
     <Compile Include="AISC\Entities\Enums\BoltType.cs" />
     <Compile Include="AISC\Entities\Enums\CombinationCaseId.cs" />
-    <Compile Include="AISC\Entities\Enums\LocalBucklingCaseID.cs" />
+    <Compile Include="AISC\Entities\Enums\LocalBucklingCaseId.cs" />
     <Compile Include="AISC\Entities\Enums\LocalBucklingClassification.cs" />
     <Compile Include="AISC\Entities\Enums\ShearCase.cs" />
     <Compile Include="AISC\Entities\Enums\StressDistibutionType.cs" />

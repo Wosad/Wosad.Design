@@ -63,7 +63,7 @@ namespace Wosad.Common.Section
             get { throw new NotImplementedException(); }
         }
 
-        public double Area
+        public double A
         {
             get { throw new NotImplementedException(); }
         }

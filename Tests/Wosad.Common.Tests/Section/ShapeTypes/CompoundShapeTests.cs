@@ -45,7 +45,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
                 new CompoundShapePart(75,8, new Point2D(0,-112))
             };
             ArbitraryCompoundShape shape = new ArbitraryCompoundShape(rectX,null);
-            double Zx = shape.PlasticSectionModulusX;
+            double Zx = shape.Z_x;
             Assert.AreEqual(94733.3, Math.Round(Zx,1));
 
         }

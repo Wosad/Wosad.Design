@@ -146,7 +146,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             double p=2*((h-tf)+(b-tw));
             double A_p=(h-tf)*(b-tw);
-            J=((4*A_p*A_p*tw) / (p)); //need to confirm tw in this equation
+            _J=((4*A_p*A_p*tw) / (p)); //need to confirm tw in this equation
         }
     }
 }

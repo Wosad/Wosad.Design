@@ -158,7 +158,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             double b_prime = this.b-t/2;
             double d_prime = this.h-t/2;
-            this.J=(((d_prime+b_prime)*Math.Pow(t, 3)) / (3));
+            this._J=(((d_prime+b_prime)*Math.Pow(t, 3)) / (3));
         }
     }
 }

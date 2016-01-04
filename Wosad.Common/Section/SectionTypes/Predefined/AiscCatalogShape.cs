@@ -151,23 +151,23 @@ namespace Wosad.Common.Section.Predefined
         {
             //SectionGenericShape sec = new SectionGenericShape(ShapeId, null); //todo null for vertices needs to be revisited
 
-            this.A  =A;
-            this.I_x  =Ix;
-            this.I_y =Iy;
-            this.S_x_Top           =GetSxTop(Type);
-            this.S_x_Bot           =GetSxBot(Type);
-            this.S_y_Left          =GetSyLeft(Type);
-            this.S_y_Right         =GetSyRight(Type);
-            this.Z_x       =Zx;
-            this.Z_y       =Zy;
-            this.r_x            =rx;
-            this.r_y            =ry;
-            this.elasticCentroidCoordinate.X  =x;
-            this.elasticCentroidCoordinate.Y = y;
-            this.plasticCentroidCoordinate.X  =xp;
-            this.plasticCentroidCoordinate.Y = yp;
-            this.C_w              =Cw;
-            this.J            =J; 
+            base._A  =A;
+            base._I_x  =Ix;
+            base._I_y =Iy;
+            base._S_x_Top           =GetSxTop(Type);
+            base._S_xBot           =GetSxBot(Type);
+            base._S_yLeft          =GetSyLeft(Type);
+            base._S_yRight         =GetSyRight(Type);
+            base._Z_x       =Zx;
+            base._Z_y       =Zy;
+            base._r_x            =rx;
+            base._r_y            =ry;
+            base.elasticCentroidCoordinate.X  =x;
+            base.elasticCentroidCoordinate.Y = y;
+            base.plasticCentroidCoordinate.X  =xp;
+            base.plasticCentroidCoordinate.Y = yp;
+            base._C_w              =Cw;
+            base._J            =J; 
 
         }
 

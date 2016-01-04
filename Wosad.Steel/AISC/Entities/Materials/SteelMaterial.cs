@@ -47,6 +47,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Materials
         public SteelMaterial(double YieldStress)
         {
             this.YieldStress = YieldStress;
+            this.UltimateStress = double.PositiveInfinity;
         }
 
         public SteelMaterial(double YieldStress, double ModulusOfElasticity)

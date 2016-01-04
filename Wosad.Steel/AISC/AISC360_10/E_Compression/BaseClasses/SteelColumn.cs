@@ -36,6 +36,9 @@ namespace Wosad.Steel.AISC.AISC360_10
 
         }
 
+        public abstract double GetFlexuralBucklingStrength();
+        public abstract double GetTorsionalAndFlexuralTorsionalBucklingStrength();
+
         protected double GetNominalAxialCapacity(double CriticalStress)
         {
             double A = Section.Shape.Area;

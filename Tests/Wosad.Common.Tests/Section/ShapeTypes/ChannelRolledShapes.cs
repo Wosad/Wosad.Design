@@ -36,7 +36,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         public void SectionChannelRolledReturnsArea()
         {
             SectionChannelRolled shape = new SectionChannelRolled("", 8, 2.53, 0.39, 0.487, 15.0/16.0);
-            double A = shape.Area;
+            double A = shape.A;
             Assert.AreEqual(5.87, Math.Round(A, 2));
 
         }
@@ -44,7 +44,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         public void SectionChannelRolledReturnsIx()
         {
             SectionChannelRolled shape = new SectionChannelRolled("", 8, 2.53, 0.39, 0.487, 15.0 / 16.0);
-            double A = shape.MomentOfInertiaX;
+            double A = shape.I_x;
             Assert.AreEqual(48.244, Math.Round(A, 3));
 
         }
@@ -54,7 +54,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         {
             //SectionChannelRolled shape = new SectionChannelRolled("", 8, 2.53, 0.39, 0.487, 15.0 / 16.0);
             SectionChannelRolled shape = new SectionChannelRolled("", 8, 2.53, 0.39, 0.487, 0.0);
-            double A = shape.MomentOfInertiaY;
+            double A = shape.I_y;
             //Assert.AreEqual(2.455, Math.Round(A, 3));
             Assert.AreEqual(2.44, Math.Round(A, 2));
 

@@ -36,7 +36,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
          public void SectionIRolledReturnsArea()
          {
              SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
-             double A = shape.Area;
+             double A = shape.A;
              Assert.AreEqual(10.74, Math.Round(A, 2));
              //Manual gives 10.3 but actual area checked in Autocad is 10.42
          }
@@ -45,7 +45,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
          public void SectionIRolledReturnsIx()
          {
              SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
-             double Ix = shape.MomentOfInertiaX;
+             double Ix = shape.I_x;
              Assert.AreEqual(540.05, Math.Round(Ix, 2));
              //Manual gives 510 but actual area checked in Autocad is 540.0505
          }
@@ -54,7 +54,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
          public void SectionIRolledReturnsIy()
          {
              SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
-             double Ix = shape.MomentOfInertiaY;
+             double Ix = shape.I_y;
              Assert.AreEqual(15.42, Math.Round(Ix, 2));
              //Checked in Autocad is 540.0505
          }

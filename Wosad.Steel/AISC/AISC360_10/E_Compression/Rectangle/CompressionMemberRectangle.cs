@@ -54,5 +54,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
             return FcrFlexuralBuckling;
         }
+
+        public override double GetFlexuralBucklingStrength()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

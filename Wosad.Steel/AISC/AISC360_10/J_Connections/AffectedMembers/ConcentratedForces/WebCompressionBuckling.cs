@@ -35,7 +35,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers.ConcentratedFo
         /// <param name="l_edge">Edge distance</param>
         /// <param name="F_yw">Web yield strength</param>
         /// <returns></returns>
-        public static double WebCompressionBucklingStrength(double t_w, 
+        public static double GetWebCompressionBucklingStrength(double t_w, 
             double h, double d,  double l_edge, double F_yw)
         {
             double R_n = 0.0;

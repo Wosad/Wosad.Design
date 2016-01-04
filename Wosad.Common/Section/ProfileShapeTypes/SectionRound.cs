@@ -55,20 +55,20 @@ namespace Wosad.Common.Section.SectionTypes
             double R = Diameter / 2.0;
             double D = Diameter;
             //height and width in the base class 
-            h = Diameter;
-            b = Diameter;
-            A = ((Math.PI * Math.Pow(D, 2)) / (4));
-            I_x = ((Math.PI * Math.Pow(D, 4)) / (64));
-            I_y = I_x;
-            Z_x = ((Math.Pow(D, 3)) / (6));
-            Z_y = Z_x;
-            x_Bar = R;
-            x_p_Bar = R;
-            y_Bar = R;
-            y_p_Bar = R;
-            C_w = 0; //to be confirmed
+            _H = Diameter;
+            _B = Diameter;
+            _A = ((Math.PI * Math.Pow(D, 2)) / (4));
+            _I_x = ((Math.PI * Math.Pow(D, 4)) / (64));
+            _I_y = _I_x;
+            _Z_x = ((Math.Pow(D, 3)) / (6));
+            _Z_y = _Z_x;
+            _x_Bar = R;
+            _x_pBar = R;
+            _y_Bar = R;
+            _y_pBar = R;
+            _C_w = 0; //to be confirmed
             double I_p = ((Math.PI * Math.Pow(D, 4)) / (32));
-            J = I_p;
+            _J = I_p;
 
         }
 
@@ -78,14 +78,14 @@ namespace Wosad.Common.Section.SectionTypes
             return new SectionRound(cloneName, Diameter);
         }
 
-        private double area;
+        private double _A;
 
-        public override double Area
+        public override double A
         {
             get
             {
-                area = GetArea();
-                return area;
+                _A = GetArea();
+                return _A;
             }
 
         }

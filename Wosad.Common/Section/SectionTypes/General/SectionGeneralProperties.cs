@@ -74,17 +74,17 @@ namespace Wosad.Common.Section.General
             get { return name; }
         }
 
-        public double Area
+        public double A
         {
             get { return _Area; }
         }
 
-        public double MomentOfInertiaX
+        public double I_x
         {
             get { return _MomentOfInertiaX; }
         }
 
-        public double MomentOfInertiaY
+        public double I_y
         {
             get { return _MomentOfInertiaY; }
         }
@@ -94,72 +94,72 @@ namespace Wosad.Common.Section.General
             get { return _MomentOfInertiaTorsional; }
         }
 
-        public double SectionModulusXTop
+        public double S_xTop
         {
             get { return _SectionModulusXTop; }
         }
 
-        public double SectionModulusXBot
+        public double S_xBot
         {
             get { return _SectionModulusXBot; }
         }
 
-        public double SectionModulusYLeft
+        public double S_yLeft
         {
             get {return _SectionModulusYLeft;  }
         }
 
-        public double SectionModulusYRight
+        public double S_yRight
         {
             get { return _SectionModulusYRight; }
         }
 
-        public double PlasticSectionModulusX
+        public double Z_x
         {
             get { return _PlasticSectionModulusX; }
         }
 
-        public double PlasticSectionModulusY
+        public double Z_y
         {
             get { return _PlasticSectionModulusY; }
         }
 
-        public double RadiusOfGyrationX
+        public double r_x
         {
             get { return _RadiusOfGyrationX; }
         }
 
-        public double RadiusOfGyrationY
+        public double r_y
         {
             get { return _RadiusOfGyrationY; }
         }
 
-        public double CentroidXtoLeftEdge
+        public double x_Bar
         {
             get { return _CentroidXtoLeftEdge; }
         }
 
-        public double CentroidYtoBottomEdge
+        public double y_Bar
         {
             get { return _CentroidYtoBottomEdge; }
         }
 
-        public double PlasticCentroidXtoLeftEdge
+        public double x_pBar
         {
             get { return _PlasticCentroidXtoLeftEdge; }
         }
 
-        public double PlasticCentroidYtoBottomEdge
+        public double y_pBar
         {
             get {return _PlasticCentroidYtoBottomEdge;  }
         }
 
-        public double WarpingConstant
+        public double C_w
         {
             get { return _WarpingConstant; }
         }
 
-        public double TorsionalConstant
+        public double J
         {
             get { return _TorsionalConstant; }
         }

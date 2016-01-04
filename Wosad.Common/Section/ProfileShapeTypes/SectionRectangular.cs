@@ -104,7 +104,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             //From Boresi, Schmidt; Advanced Mechanics of Materials
             //Table B.1
-            J = (((b * Math.Pow(h, 3) + h * Math.Pow(b, 3))) / (12));
+            _J = (((b * Math.Pow(h, 3) + h * Math.Pow(b, 3))) / (12));
         }
 
     }

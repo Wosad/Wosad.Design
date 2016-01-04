@@ -165,6 +165,7 @@
     <Compile Include="Section\Interfaces\IWeakAxisCloneable.cs" />
     <Compile Include="Entities\SlicingPlaneOffsetType.cs" />
     <Compile Include="Section\SectionTypes\Predefined\AiscCatalogShape.cs" />
+    <Compile Include="Section\SectionTypes\Predefined\AiscShapeFactory.cs" />
     <Compile Include="Section\SectionTypes\Predefined\AiscShapeType.cs" />
     <Compile Include="Section\SectionTypes\Predefined\PredefinedSectionAngle.cs" />
     <Compile Include="Section\SectionTypes\Predefined\PredefinedSectionChannel.cs" />

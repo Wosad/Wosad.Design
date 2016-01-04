@@ -36,12 +36,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers.ConcentratedFo
         /// <param name="l_edge">Edge distance</param>
         /// <param name="F_yw">Web yield strength</param>
         /// <returns></returns>
-        public static double WebLocalCripplingStrength(double t_w, double t_f, double d, double l_b, double l_edge,
+        public static double GetWebLocalCripplingStrength(double t_w, double t_f, double d, double l_b, double l_edge,
             double F_yw)
         {
             double R_n = 0.0;
             double E = 29000;
-            if (l_b >= d)
+            if (l_edge >= d/2)
             {
                 //(J10-4)
                 R_n = 0.8 * Math.Pow(t_w, 2) * (1 + 3 * (((l_b) / (d))) * Math.Pow((((t_w) / (t_f))), 1.5)) * Math.Sqrt(((E * F_yw * t_f) / (t_w)));

@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.AISC360_10;
 
 namespace  Wosad.Steel.AISC360_10
 {
-    public class FlexuralBucklingSlender: SteelColumn
+    public abstract class FlexuralBucklingSlender: SteelColumn
     {
         public FlexuralBucklingSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
             : base(Section,L_x, L_y, K_x, K_y, CalcLog) //, Material)

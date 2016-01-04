@@ -51,167 +51,167 @@ namespace Wosad.Common.Section
             get { return name; }
         }
 
-        protected double b;
+        protected double _B;
 
-        public double Width
+        public double B
         {
-            get { return b; }
-            set { b = value; }
+            get { return _B; }
+            set { _B = value; }
         }
 
-        protected double h;
+        protected double _H;
 
-        public double Height
+        public double H
         {
-            get { return h; }
-            set { h = value; }
+            get { return _H; }
+            set { _H = value; }
         }
         
         
 
-        protected double A;
+        protected double _A;
 
-        public virtual double Area
+        public virtual double A
         {
-            get { return A; }
-            set { A = value; }
+            get { return _A; }
+            set { _A = value; }
         }
 
-        protected double I_x;
+        protected double _I_x;
 
-        public virtual double MomentOfInertiaX
+        public virtual double I_x
         {
-            get { return I_x; }
+            get { return _I_x; }
         }
 
-        protected double I_y;
+        protected double _I_y;
 
-        public virtual double MomentOfInertiaY
+        public virtual double I_y
         {
-            get { return I_y; }
+            get { return _I_y; }
 
         }
 
-        protected double S_x_Top;
+        protected double _S_x_Top;
 
-        public virtual double SectionModulusXTop
+        public virtual double S_xTop
         {
             get 
             {
-                S_x_Top = I_x / (h - y_Bar);
-                return S_x_Top; 
+                _S_x_Top = _I_x / (_H - _y_Bar);
+                return _S_x_Top; 
             }
 
         }
 
-        protected double S_x_Bot;
+        protected double _S_xBot;
 
-        public virtual double SectionModulusXBot
+        public virtual double S_xBot
         {
             get 
             {
-                S_x_Bot = I_x / y_Bar;
-                return S_x_Bot; 
+                _S_xBot = _I_x / _y_Bar;
+                return _S_xBot; 
             }
         }
 
-        protected double S_y_Left;
+        protected double _S_yLeft;
 
-        public virtual double SectionModulusYLeft
+        public virtual double S_yLeft
         {
             get 
             {
-                S_y_Left = I_y / x_Bar;
-                return S_y_Left; 
+                _S_yLeft = _I_y / _x_Bar;
+                return _S_yLeft; 
             }
 
         }
 
-        protected double S_y_Right;
+        protected double _S_yRight;
 
-        public virtual double SectionModulusYRight
+        public virtual double S_yRight
         {
             get
             {
-                S_y_Right = I_y / (b-x_Bar);
-                return S_y_Right;
+                _S_yRight = _I_y / (_B-_x_Bar);
+                return _S_yRight;
             }
         }
 
-        protected double Z_x;
+        protected double _Z_x;
 
-        public virtual double PlasticSectionModulusX
+        public virtual double Z_x
         {
-            get { return Z_x; }
+            get { return _Z_x; }
         }
 
-        protected double Z_y;
+        protected double _Z_y;
 
-        public virtual double PlasticSectionModulusY
+        public virtual double Z_y
         {
-            get { return Z_y; }
+            get { return _Z_y; }
         }
 
-        protected double r_x;
+        protected double _r_x;
 
-        public virtual double RadiusOfGyrationX
+        public virtual double r_x
         {
             get {
-                r_x = Math.Sqrt(I_x / A);
-                return r_x; }
+                _r_x = Math.Sqrt(_I_x / _A);
+                return _r_x; }
         }
 
-        protected double r_y;
+        protected double _r_y;
 
-        public virtual double RadiusOfGyrationY
+        public virtual double r_y
         {
             get {
-                r_y = Math.Sqrt(I_y / A);
-                return r_y; }
+                _r_y = Math.Sqrt(_I_y / _A);
+                return _r_y; }
         }
 
-        protected double x_Bar;
+        protected double _x_Bar;
 
-        public virtual double CentroidXtoLeftEdge
+        public virtual double x_Bar
         {
-            get { return x_Bar; }
+            get { return _x_Bar; }
         }
 
-        protected double y_Bar;
+        protected double _y_Bar;
 
-        public virtual double CentroidYtoBottomEdge
+        public virtual double y_Bar
         {
-            get { return y_Bar; }
+            get { return _y_Bar; }
         }
 
-        protected double x_p_Bar;
+        protected double _x_pBar;
 
-        public virtual double PlasticCentroidXtoLeftEdge
+        public virtual double x_pBar
         {
-            get { return x_p_Bar; }
+            get { return _x_pBar; }
         }
 
-        protected double y_p_Bar;
+        protected double _y_pBar;
 
-        public virtual double PlasticCentroidYtoBottomEdge
+        public virtual double y_pBar
         {
-            get { return y_p_Bar; }
-
-        }
-
-        protected double C_w;
-
-        public virtual double WarpingConstant
-        {
-            get { return C_w; }
+            get { return _y_pBar; }
 
         }
 
-        protected double J;
+        protected double _C_w;
 
-        public virtual double TorsionalConstant
+        public virtual double C_w
         {
-            get { return J; }
+            get { return _C_w; }
+
+        }
+
+        protected double _J;
+
+        public virtual double J
+        {
+            get { return _J; }
 
         }
 

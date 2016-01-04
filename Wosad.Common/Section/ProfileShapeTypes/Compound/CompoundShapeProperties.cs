@@ -46,7 +46,7 @@ namespace Wosad.Common.Section
         public string Name { get; set; }
 
         double Ix;
-        public double MomentOfInertiaX
+        public double I_x
         {
             get 
             {
@@ -59,7 +59,7 @@ namespace Wosad.Common.Section
         }
 
         double Iy;
-        public double MomentOfInertiaY
+        public double I_y
         {
             get 
             {
@@ -99,7 +99,7 @@ namespace Wosad.Common.Section
         }
 
         double Sxt;
-        public double SectionModulusXTop
+        public double S_xTop
         {
             get {
 
@@ -114,7 +114,7 @@ namespace Wosad.Common.Section
 
 
         double Sxb;
-        public double SectionModulusXBot
+        public double S_xBot
         {
             get {
 
@@ -127,7 +127,7 @@ namespace Wosad.Common.Section
         }
 
         double Syl;
-        public double SectionModulusYLeft
+        public double S_yLeft
         {
             get {
                 if (elasticPropertiesCalculated == false)
@@ -139,7 +139,7 @@ namespace Wosad.Common.Section
         }
 
         double Syr;
-        public double SectionModulusYRight
+        public double S_yRight
         {
             get {
 
@@ -152,7 +152,7 @@ namespace Wosad.Common.Section
         }
 
         double Zx;
-        public double PlasticSectionModulusX
+        public double Z_x
         {
             get 
             {
@@ -165,7 +165,7 @@ namespace Wosad.Common.Section
         }
 
         double Zy;
-        public double PlasticSectionModulusY
+        public double Z_y
         {
             get {
 
@@ -217,7 +217,7 @@ namespace Wosad.Common.Section
         {
         
             double Z = 0.0;
-            double Atar = Area / 2;
+            double Atar = _A / 2;
             double Sum_hi=0;  //summation of height of previous rectangles
             double Sum_Ai =0; //summation of areas of previous rectangles
 
@@ -310,7 +310,7 @@ namespace Wosad.Common.Section
         }
 
         double rx;
-        public double RadiusOfGyrationX
+        public double r_x
         {
             get {
                 if (elasticPropertiesCalculated == false)
@@ -322,7 +322,7 @@ namespace Wosad.Common.Section
         }
 
         double ry;
-        public double RadiusOfGyrationY
+        public double r_y
         {
             get {
 
@@ -339,22 +339,22 @@ namespace Wosad.Common.Section
         private void CalculateElasticProperies()
         {
             double yt = YMax - Centroid.Y;
-            double Ix = MomentOfInertiaX;
+            double Ix = I_x;
             Sxt = Ix / yt;
-            double ybot = CentroidYtoBottomEdge;
+            double ybot = y_Bar;
             Sxb = Ix / ybot;
-            double xl = CentroidXtoLeftEdge;
+            double xl = x_Bar;
             Syl = Iy / xl;
             double xr = XMax - Centroid.X;
             Syr = Iy / xr;
-            double A = this.Area;
+            double A = this._A;
             rx = Math.Sqrt(Ix / A);
             ry = Math.Sqrt(Iy / A);
            
         }
 
         double xleft;
-        public double CentroidXtoLeftEdge
+        public double x_Bar
         {
             get 
             {
@@ -363,7 +363,7 @@ namespace Wosad.Common.Section
             }
         }
         double yb;
-        public double CentroidYtoBottomEdge
+        public double y_Bar
         {
             get 
             {
@@ -373,7 +373,7 @@ namespace Wosad.Common.Section
         }
 
         double xpl;
-        public double PlasticCentroidXtoLeftEdge
+        public double x_pBar
         {
             get { 
                 
@@ -382,7 +382,7 @@ namespace Wosad.Common.Section
         }
 
         double ypb;
-        public double PlasticCentroidYtoBottomEdge
+        public double y_pBar
         {
             get { 
 
@@ -391,7 +391,7 @@ namespace Wosad.Common.Section
         }
 
         protected double Cw;
-        public double WarpingConstant
+        public double C_w
         {
             get {
 
@@ -406,8 +406,8 @@ namespace Wosad.Common.Section
         protected abstract void CalculateWarpingConstant();
 
 
-        protected double J;
-        public double TorsionalConstant
+        protected double _J;
+        public double J
         {
             get {
 
@@ -415,7 +415,7 @@ namespace Wosad.Common.Section
                 {
                     CalculateTorsionalConstant();
                 }
-                return J; 
+                return _J; 
             }
         }
 
@@ -423,7 +423,7 @@ namespace Wosad.Common.Section
         {
             foreach (var r in RectanglesXAxis)
             {
-                J = J + r.b * Math.Pow(r.h, 3) / 3;
+                _J = _J + r.b * Math.Pow(r.h, 3) / 3;
             }
 
 
@@ -435,15 +435,15 @@ namespace Wosad.Common.Section
             throw new NotImplementedException();
         }
 
-        double A;
-        public double Area
+        double _A;
+        public double A
         {
             get {
                 if (areaCalculated == false)
                 {
                     CalculateArea();
                 }
-                return A; 
+                return _A; 
             }
         }
 
@@ -452,7 +452,7 @@ namespace Wosad.Common.Section
           
             foreach (var r in RectanglesXAxis)
             {
-                A = A + r.GetArea();
+                _A = _A + r.GetArea();
             }
             areaCalculated = true;
         }

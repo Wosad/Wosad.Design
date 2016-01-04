@@ -40,23 +40,23 @@ namespace Wosad.Common.Section.Predefined
         }
         public SectionPredefinedBase(ISection sec)
         {
-           this.Area                  = sec.Area                        ;
-           this.I_x      = sec.MomentOfInertiaX            ;
-           this.I_y      = sec.MomentOfInertiaY            ;
-           this.S_x_Top    = sec.SectionModulusXTop          ;
-           this.S_x_Bot    = sec.SectionModulusXBot          ;
-           this.S_y_Left   = sec.SectionModulusYLeft         ;
-           this.S_y_Right  = sec.SectionModulusYRight        ;
-           this.Z_x= sec.PlasticSectionModulusX      ;
-           this.Z_y= sec.PlasticSectionModulusY      ;
-           this.r_x     = sec.RadiusOfGyrationX           ;
-           this.r_y     = sec.RadiusOfGyrationY           ;
-           this.elasticCentroidCoordinate.X = sec.CentroidXtoLeftEdge;
-           this.elasticCentroidCoordinate.Y = sec.CentroidYtoBottomEdge;
-           this.plasticCentroidCoordinate.X     = sec.PlasticCentroidXtoLeftEdge           ;
-           this.plasticCentroidCoordinate.Y    = sec.PlasticCentroidYtoBottomEdge         ;
-           this.C_w       = sec.WarpingConstant             ;
-           this.J     = sec.TorsionalConstant           ;
+           this.A                  = sec.A                        ;
+           this._I_x      = sec.I_x            ;
+           this._I_y      = sec.I_y            ;
+           this._S_x_Top    = sec.S_xTop          ;
+           this._S_xBot    = sec.S_xBot          ;
+           this._S_yLeft   = sec.S_yLeft         ;
+           this._S_yRight  = sec.S_yRight        ;
+           this._Z_x= sec.Z_x      ;
+           this._Z_y= sec.Z_y      ;
+           this._r_x     = sec.r_x           ;
+           this._r_y     = sec.r_y           ;
+           this.elasticCentroidCoordinate.X = sec.x_Bar;
+           this.elasticCentroidCoordinate.Y = sec.y_Bar;
+           this.plasticCentroidCoordinate.X     = sec.x_pBar           ;
+           this.plasticCentroidCoordinate.Y    = sec.y_pBar         ;
+           this._C_w       = sec.C_w             ;
+           this._J     = sec.J           ;
         }
     }
 }

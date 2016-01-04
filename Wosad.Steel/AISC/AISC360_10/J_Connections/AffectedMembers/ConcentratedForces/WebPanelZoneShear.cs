@@ -40,7 +40,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers.ConcentratedFo
         /// <param name="A_g">Gross area of column</param>
         /// <param name="PanelDeformationConsideredInAnalysis"> Defines if frame stability, including plastic panel-zone deformation, is considered in the analysis. </param>
         /// <returns></returns>
-        public static double WebCompressionBucklingStrength(double t_w, double t_cf,
+        public static double WebPanelZoneShear(double t_w, double t_cf,
             double b_cf, double d_b, double d_c, double F_y,
             double P_u, double A_g, bool PanelDeformationConsideredInAnalysis)
         {
