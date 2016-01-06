@@ -151,20 +151,31 @@
     <Compile Include="BeamForces\Factories\BeamLoadFactoryLocator.cs" />
     <Compile Include="BeamForces\Factories\BeamWithOverhangLoadFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SectionWithTorsion\SectionAnalysis\TorsionalISection.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionBase.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase1.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase10.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase11.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase12.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase2.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase3.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase4.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase5.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase6.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase7.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase8.cs" />
-    <Compile Include="SectionWithTorsion\TorsionalFunctions\TorsionalFunctionCase9.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\ITorsionalFunction.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionBase.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase1.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase10.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase11.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase12.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase2.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase3.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase4.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase5.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase6.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase7.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase8.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionCase9.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctions\TorsionalFunctionFactory.cs" />
+    <Compile Include="Section\NormalStressDueToAxialLoad.cs" />
+    <Compile Include="Section\NormalStressDueToBending.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Section\NormalStressDueToWarping.cs" />
+    <Compile Include="Section\PureTorsionStress.cs" />
+    <Compile Include="Section\ShearStressDueToAppliedShear.cs" />
+    <Compile Include="Section\ShearStressDueToWarping.cs" />
+    <Compile Include="Section\TorsionalParameter_a.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />
@@ -174,6 +185,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="NOTICE" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BeamTorsion\Enums\" />
+    <Folder Include="BeamTorsion\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

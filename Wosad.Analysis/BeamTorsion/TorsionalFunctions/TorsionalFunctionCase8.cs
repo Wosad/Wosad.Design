@@ -21,44 +21,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Analysis.SectionWithTorsion
+namespace Wosad.Analysis.Torsion
 {
-    public class TorsionalFunctionCase4: TorsionalFunctionBase
+    public class TorsionalFunctionCase8: TorsionalFunctionBase
     {
-        public TorsionalFunctionCase4(double G, double J, double L, double z, double a,
+        public TorsionalFunctionCase8(double G, double J, double L, double z, double a,
             double t)
             :base( G,  J,  L,  z,  a)
         {
             this.t = t;
         }
 
+        protected override double Get_S()
+        {
+            double S=((((a / (2*L))*(Math.Cosh((L / a))-1)-((Math.Sinh((L / a))) / 6)) / ((L / a)*Math.Sinh(L / a))+2-2*Math.Cosh((L / a))));
+            return S;
+        }
         protected override double Get_c_1()
         {
-            double c_1 = ((t) / (G * J));
+            double c_1 = ((t * Math.Pow(L, 2)) / (G * J));
             return c_1;
         }
 
+        protected override double Get_c_2()
+        {
+            double c_2 = ((a) / (2 * L)) * (Math.Cosh(((L) / (a))) - 1) - S * Math.Tanh(((L) / (2 * a)));
+            return c_2;
+        }
         public override double Get_theta()
         {
-            double theta = c_1 * Math.Pow(a, 2) * (((L) / (2 * Math.Pow(a, 2))) * (z - ((Math.Pow(z, 2)) / (L))) + Math.Cosh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Sinh(((z) / (a))) - 1);
+            double theta = c_1 * (c_2 * (Math.Cosh(((z) / (a))) - 1) + S * (Math.Sinh(((z) / (a))) - ((z) / (a))) - ((Math.Pow(z, 3)) / (6 * Math.Pow(L, 3))));
             return theta;
         }
 
         public override double Get_theta_1()
         {
-            double theta_1 = c_1 * a * (((L) / (2 * a)) * (1 - ((2 * z) / (L))) + Math.Sinh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Cosh(((z) / (a))));
+            double theta_1 = ((c_1) / (a)) * (c_2 * Math.Sinh(((z) / (a))) + S * Math.Cosh(((z) / (a))) - S - ((Math.Pow(z, 2) * a) / (2 * Math.Pow(L, 3))));
             return theta_1;
         }
 
         public override double Get_theta_2()
         {
-            double theta_2 = c_1 * (Math.Cosh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Sinh(((z) / (a))) - 1);
+            double theta_2 = ((c_1) / (Math.Pow(a, 2))) * (c_2 * Math.Cosh(((z) / (a))) + S * Math.Sinh(((z) / (a))) - ((z * Math.Pow(a, 2)) / (Math.Pow(L, 3))));
             return theta_2;
         }
 
         public override double Get_theta_3()
         {
-            double theta_3 = ((c_1) / (a)) * (Math.Sinh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Cosh(((z) / (a))));
+            double theta_3 = ((c_1) / (Math.Pow(a, 3))) * (c_2 * Math.Sinh(((z) / (a))) + S * Math.Cosh(((z) / (a))) - ((Math.Pow(a, 3)) / (Math.Pow(L, 3))));
             return theta_3;
         }
     }

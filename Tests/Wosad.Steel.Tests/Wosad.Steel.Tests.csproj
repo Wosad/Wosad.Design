@@ -53,6 +53,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShearTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltBearingTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\WebSideswayBucklingTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BearingBoltTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroupTests.cs" />

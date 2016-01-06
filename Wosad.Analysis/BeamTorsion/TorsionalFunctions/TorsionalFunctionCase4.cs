@@ -21,11 +21,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Analysis.SectionWithTorsion
+namespace Wosad.Analysis.Torsion
 {
-    public class TorsionalFunctionCase5: TorsionalFunctionBase
+    public class TorsionalFunctionCase4: TorsionalFunctionBase
     {
-        public TorsionalFunctionCase5(double G, double J, double L, double z, double a,
+        public TorsionalFunctionCase4(double G, double J, double L, double z, double a,
             double t)
             :base( G,  J,  L,  z,  a)
         {
@@ -37,27 +37,28 @@ namespace Wosad.Analysis.SectionWithTorsion
             double c_1 = ((t) / (G * J));
             return c_1;
         }
+
         public override double Get_theta()
         {
-            double theta = c_1 * L * (((z) / (6)) - ((z * Math.Pow(a, 2)) / (Math.Pow(L, 2))) + ((Math.Pow(a, 2)) / (L)) * ((Math.Sinh(((z) / (a)))) / (Math.Sinh(((L) / (a))))) - ((Math.Pow(z, 3)) / (6 * Math.Pow(L, 2))));
+            double theta = c_1 * Math.Pow(a, 2) * (((L) / (2 * Math.Pow(a, 2))) * (z - ((Math.Pow(z, 2)) / (L))) + Math.Cosh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Sinh(((z) / (a))) - 1);
             return theta;
         }
 
         public override double Get_theta_1()
         {
-            double theta_1 = c_1 * L * (((1) / (6)) - ((Math.Pow(a, 2)) / (Math.Pow(L, 2))) + ((a) / (L)) * ((Math.Cosh(((z) / (a)))) / (Math.Sinh(((L) / (a))))) - ((Math.Pow(z, 2)) / (2 * Math.Pow(L, 2))));
+            double theta_1 = c_1 * a * (((L) / (2 * a)) * (1 - ((2 * z) / (L))) + Math.Sinh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Cosh(((z) / (a))));
             return theta_1;
         }
 
         public override double Get_theta_2()
         {
-            double theta_2 = c_1 * (((Math.Sinh(((z) / (a)))) / (Math.Sinh(((L) / (a))))) - ((z) / (L)));
+            double theta_2 = c_1 * (Math.Cosh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Sinh(((z) / (a))) - 1);
             return theta_2;
         }
 
         public override double Get_theta_3()
         {
-            double theta_3 = c_1 * (((Math.Cosh(((z) / (a)))) / (a * Math.Sinh(((L) / (a))))) - ((1) / (L)));
+            double theta_3 = ((c_1) / (a)) * (Math.Sinh(((z) / (a))) - Math.Tanh(((L) / (2 * a))) * Math.Cosh(((z) / (a))));
             return theta_3;
         }
     }

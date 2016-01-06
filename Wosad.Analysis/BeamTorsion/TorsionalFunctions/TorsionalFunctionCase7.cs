@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Analysis.SectionWithTorsion
+namespace Wosad.Analysis.Torsion
 {
     public class TorsionalFunctionCase7: TorsionalFunctionBase
     {

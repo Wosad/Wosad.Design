@@ -25,7 +25,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
-    public abstract partial class FilletWeldBase : Weld
+    public static partial class FilletWeldLimits
     {
         /// <summary>
         /// Minimum weld size per AISC Specification Section J2.2b
@@ -34,7 +34,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
         /// <param name="IsLongitudinalWeldsAloneInFlatBarTensionEnd">If longitudinal fillet welds are used alone in end connections of flat-bar tension members</param>
         /// <param name="perpendicularDistanceBetweenWelds"> Perpendicular distance between longitudianal welds </param>
         /// <returns></returns>
-        public double GetMinimumLengthOfWeld(double size, bool IsLongitudinalWeldsInTensionFlatBar, double perpendicularDistanceBetweenWelds)
+        public static double GetMinimumLengthOfWeld(double size, bool IsLongitudinalWeldsInTensionFlatBar, double perpendicularDistanceBetweenWelds)
         {
             double l_min = 1.0;
             double l1 = size * 4.0;

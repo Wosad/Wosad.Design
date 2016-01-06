@@ -1,5 +1,5 @@
 ﻿#region Copyright
-   /*Copyright (C) 2015 Wosad Inc
+/*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,36 +25,33 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
 {
-    public static partial class FilletWeldLimits
+    public static  partial class FilletWeldLimits
     {
-        /// <summary>
-        /// Gets Minimum Size of Fillet Welds per Table J2.4
-        /// </summary>
-        /// <param name="MaterialThickness"> Thickness of connected material</param>
-        /// <returns></returns>
-        public static double GetMinimumWeldSize(double MaterialThickness)
+        public static double GetEffectiveLegth(double w_weld, double l, bool IsEndLoaded )
         {
-            double tmin = 0;
-            if (MaterialThickness <= 1 / 4)
+            double l_eff = l;
+            if (IsEndLoaded ==true)
             {
-                tmin = 1 / 8.0;
-            }
-            else
-            {
-                if (MaterialThickness > 3 / 4)
+                if (l <= 100 * w_weld)
                 {
-                    tmin = 5 / 16.0;
+                    l_eff = l;
                 }
-                else if (tmin <= 1 / 2)
+                else if (l > 300 * w_weld)
                 {
-                    tmin = 3 / 16.0;
+                    l_eff = 180 * w_weld;
                 }
                 else
                 {
-                    tmin = 1 / 4.0;
-                }
+                    double beta = 0.0;
+                    beta = 1.2 - 0.002 * (((l) / (w_weld)));
+                    l_eff = l * beta;
+                } 
             }
-            return tmin;
+            else
+            {
+                l_eff = l;
+            }
+            return l_eff;
         }
     }
 }

@@ -117,6 +117,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeSingle.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamUncoped.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\GeneralCase.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
     <Compile Include="AISC\Interfaces\IBeamCope.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltHoleBearingStrength.cs" />
