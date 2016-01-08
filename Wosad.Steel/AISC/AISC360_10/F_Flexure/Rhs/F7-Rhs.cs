@@ -105,7 +105,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.Shape.PlasticSectionModulusX;
+            double Zx = Section.Shape.Z_x;
 
             double M = Fy * Zx;
             Mp = M / 12.0;
@@ -136,7 +136,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.Shape.PlasticSectionModulusY;
+            double Zy = Section.Shape.Z_y;
 
             Mp = Fy * Zy;
             double M = Mp / 1000.0;

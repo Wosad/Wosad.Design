@@ -36,14 +36,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Se=0.0;
             double be = GetEffectiveFlangeWidth_beff();
             double b = GetCompressionFlangeWidth_b();
-            double AOriginal = SectionTube.Area;
+            double AOriginal = SectionTube.A;
                 
             //Find I reduced
-            double IOriginal = SectionTube.MomentOfInertiaX;
-            double tdes = SectionTube.DesignWallThickness;
+            double IOriginal = SectionTube.I_x;
+            double tdes = SectionTube.t_des;
             double bRemoved = (b - be) ;
             double ADeducted = bRemoved* tdes;
-            double  h = SectionTube.Height;
+            double  h = SectionTube.H;
             double yDeducted = (h-tdes)/2.0;
             double Ideducted = bRemoved * Math.Pow(tdes, 3) / 12.0;
             //Use parallel axis theorem:
@@ -70,11 +70,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             if (SectionTube.CornerRadiusOutside ==-1.0)
 	        {
-                b = SectionTube.Width - 3.0 * SectionTube.DesignWallThickness;
+                b = SectionTube.B - 3.0 * SectionTube.t_des;
 	        }
             else
             {
-                b = SectionTube.Width - 2.0 * SectionTube.CornerRadiusOutside;
+                b = SectionTube.B - 2.0 * SectionTube.CornerRadiusOutside;
             }
             
             return b;
@@ -84,7 +84,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         protected double GetEffectiveFlangeWidth_beff()
         {
             double b = GetCompressionFlangeWidth_b();
-            double tf = SectionTube.DesignWallThickness;
+            double tf = SectionTube.t_des;
             double be = 1.92*tf*SqrtE_Fy()*(1.0-0.38/(b/tf)*SqrtE_Fy()-0.738); //(F7-4)
             be = be > b? b :be;
             be= be<0? 0 : be;

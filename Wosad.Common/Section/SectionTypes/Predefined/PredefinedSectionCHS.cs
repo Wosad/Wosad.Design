@@ -41,22 +41,22 @@ namespace Wosad.Common.Section.Predefined
         {
             this.diameter = Diameter;
             this.wallThickness=WallThickness;
-            this.designWallThickness = DesignWallThickness;
+            this.designWallThickness = t_des;
         }
         double diameter;
-        public double Diameter
+        public double D
         {
             get { return diameter; }
         }
 
         double wallThickness;
-        public double WallThickness
+        public double t
         {
             get { return wallThickness; }
         }
 
         double designWallThickness;
-        public double DesignWallThickness
+        public double t_des
         {
             get { return designWallThickness; }
         }

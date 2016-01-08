@@ -86,8 +86,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
-            D = SectionPipe.Diameter;
-            t = SectionPipe.DesignWallThickness;
+            D = SectionPipe.D;
+            t = SectionPipe.t_des;
 
         }
 

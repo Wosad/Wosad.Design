@@ -43,7 +43,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double k = Getk();
 
             double dsection = GetHeight();
-            double yCentroid = Section.Shape.CentroidYtoBottomEdge;
+            double yCentroid = Section.Shape.y_Bar;
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
@@ -63,7 +63,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         private double Getk()
         {
-            return (SectionI.Height - SectionI.WebHeight) / 2;
+            return (SectionI.d - SectionI.h_web) / 2;
         }
     }
 }

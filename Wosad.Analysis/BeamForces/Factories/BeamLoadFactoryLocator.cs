@@ -26,23 +26,29 @@ namespace Wosad.Analysis
 {
     public class BeamLoadFactoryLocator
     {
-        IParameterExtractor extractor;
+        //IParameterExtractor extractor;
 
-        public BeamLoadFactoryLocator(IParameterExtractor Extractor)
-        {
-            extractor = Extractor;
-        }
-        public IBeamLoadFactory GetLoadFactory(string BeamCaseId)
+        //public BeamLoadFactoryLocator(IParameterExtractor Extractor)
+        //{
+        //    extractor = Extractor;
+        //}
+        public IBeamLoadFactory GetLoadFactory(string BeamCaseId, BeamFactoryData data)
         {
             string BoundaryConditionCase = BeamCaseId.Substring(0, 2);
             switch (BoundaryConditionCase)
             {
+                //case "C2":
+                //    return new BeamWithOverhangLoadFactory(extractor);
+                //case "C5":
+                //    return new BeamCantileverLoadFactory(extractor);
+                //default:
+                //    return new BeamLoadFactory(extractor);
                 case "C2":
-                    return new BeamWithOverhangLoadFactory(extractor);
+                    return new BeamWithOverhangLoadFactory(data);
                 case "C5":
-                    return new BeamCantileverLoadFactory(extractor);
+                    return new BeamCantileverLoadFactory(data);
                 default:
-                    return new BeamLoadFactory(extractor);
+                    return new BeamLoadFactory(data);
             }
 
         }

@@ -45,12 +45,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionChannel = SectionChannel;
             ISectionChannel s = SectionChannel;
-            this.Width = s.Height - (s.FlangeThickness + s.FlangeThickness + s.FilletDistance + s.FilletDistance);
+            this.Width = s.d - (s.t_f + s.t_f + s.k + s.k);
             if (this.Width<=0)
             {
                 throw new Exception("Clear web distance cannot be less than or equal to 0");
             }
-            this.Thickness = s.WebThickness;
+            this.Thickness = s.t_w;
         }
     }
 }

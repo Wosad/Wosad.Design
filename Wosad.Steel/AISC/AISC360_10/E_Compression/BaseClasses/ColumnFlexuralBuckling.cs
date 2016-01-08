@@ -59,14 +59,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             {
                 L = UnbracedLengthX;
                 K = EffectiveLengthFactorX;
-                r = Section.Shape.RadiusOfGyrationX;
+                r = Section.Shape.r_x;
                 
             }
             else
             {
                 L = UnbracedLengthY;
                 K = EffectiveLengthFactorY;
-                r = Section.Shape.RadiusOfGyrationY;
+                r = Section.Shape.r_y;
 
             }
 

@@ -49,11 +49,11 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
             {
 		        throw new Exception ("Rectangular Hss member must implement ISectionTube interface.");
             }
-            double B = tube.Width;
-            double Bp = Plate.Section.Height;
+            double B = tube.B;
+            double Bp = Plate.Section.H;
             double Fyp = Plate.Material.YieldStress;
-            double t = tube.DesignWallThickness;
-            double tp = Plate.Section.Width;
+            double t = tube.t_des;
+            double tp = Plate.Section.B;
             double beta = Bp/B;
 
             //Limit States:

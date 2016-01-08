@@ -75,7 +75,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             get {
                 if (_d == 0.0)
                 {
-                    _d = Section.Height; 
+                    _d = Section.d; 
                 }
                 return _d; }
 

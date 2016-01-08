@@ -57,7 +57,7 @@ namespace Wosad.Common.Section.SectionTypes
         public Point2D Centroid  { get; set; }
 
         private double h;
-        public double Height
+        public double H
         {
             get { return h; }
             set { h = value; }
@@ -69,7 +69,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <summary>
         /// Width
         /// </summary>
-        public double Width
+        public double B
         {
             get { return b; }
             set { b = value; }
@@ -84,14 +84,14 @@ namespace Wosad.Common.Section.SectionTypes
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
             List<CompoundShapePart> rectangles = new List<CompoundShapePart>();
-            rectangles.Add(new CompoundShapePart(Width, Height, new Point2D(0, 0)));
+            rectangles.Add(new CompoundShapePart(B, H, new Point2D(0, 0)));
             return rectangles;
         }
 
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
             List<CompoundShapePart> rectangles = new List<CompoundShapePart>();
-            rectangles.Add(new CompoundShapePart(Width, Height, new Point2D(0, 0)));
+            rectangles.Add(new CompoundShapePart(B, H, new Point2D(0, 0)));
             return rectangles;
         }
 

@@ -33,85 +33,85 @@ namespace Wosad.Common.Section.SectionTypes
     {
 
 
-        public SectionI(string Name, double Depth, double FlangeWidth, double FlangeThickness, 
-            double WebThickness)
+        public SectionI(string Name, double d, double b_f, double t_f, 
+            double t_w)
             : base(Name)
         {
-            this.height = Depth;
-            this.flangeWidth = FlangeWidth;
-            this.bf_Top = FlangeWidth;
-            this.tf_Top = FlangeThickness;
-            this.bf_Bottom = FlangeWidth;
-            this.tf_Bottom = FlangeThickness;
-            this.webThickness = WebThickness;
+            this._d = d;
+            this._b_f = b_f;
+            this._b_fTop = b_f;
+            this._t_fTop = t_f;
+            this._b_fBot = b_f;
+            this._t_fBot = t_f;
+            this._t_w = t_w;
         }
 
-        public SectionI(string Name, double Depth, double FlangeWidthTop, double FlangeWidthBottom,
-            double FlangeThicknessTop, double FlangeThicknessBottom, double WebThickness)
+        public SectionI(string Name, double d, double b_fTop, double b_fBot,
+            double t_fTop, double t_fBot, double t_w)
             : base(Name)
         {
-            this.height = Depth;
-            this.bf_Top = FlangeWidthTop;
-            this.tf_Top = FlangeThicknessTop;
-            this.bf_Bottom = FlangeWidthBottom;
-            this.tf_Bottom = FlangeThicknessBottom;
-            this.webThickness = WebThickness;
+            this._d = d;
+            this._b_fTop = b_fTop;
+            this._t_fTop = t_fTop;
+            this._b_fBot = b_fBot;
+            this._t_fBot = t_fBot;
+            this._t_w = t_w;
         }
 
         #region Properties specific to I-Beam
 
-        private double flangeWidth;
+        private double _b_f;
 
-        private double height;
+        private double _d;
 
-        public double Height
+        public double d
         {
-            get { return height; }
+            get { return _d; }
         }
 
 
-        private double flangeCentroidDistance;
+        private double _h_o;
 
-        public double FlangeCentroidDistance
+        public double h_o
         {
             get {
-                double df = height - (this.FlangeThicknessTop / 2 + this.FlangeThicknessBottom / 2);
-                return flangeCentroidDistance; }
+                double df = _d - (this.t_fTop / 2 + this.t_fBot / 2);
+                return _h_o; }
         }
 
-        private double bf_Top;
+        private double _b_fTop;
 
-        public double FlangeWidthTop
+        public double b_fTop
         {
-            get { return bf_Top; }
+            get { return _b_fTop; }
         }
 
-        private double tf_Top;
+        private double _t_fTop;
 
-        public double FlangeThicknessTop
+        public double t_fTop
         {
-            get { return tf_Top; }
+            get { return _t_fTop; }
         }
 
-        private double bf_Bottom;
+        private double _b_fBot;
 
-        public double FlangeWidthBottom
+        public double b_fBot
         {
-            get { return bf_Bottom; }
+            get { return _b_fBot; }
         }
 
-        private double tf_Bottom;
+        private double _t_fBot;
 
-        public double FlangeThicknessBottom
+        public double t_fBot
         {
-            get { return tf_Bottom; }
+            get { return _t_fBot; }
         }
 
-        private double webThickness;
+        private double _t_w;
 
-        public double WebThickness
+        public double t_w
         {
-            get { return webThickness; }
+            get { return _t_w; }
         }
 
         //private double filletDistance;
@@ -124,13 +124,13 @@ namespace Wosad.Common.Section.SectionTypes
 
 
 
-        double flangeClearDistance;
-        public double FlangeClearDistance
+        double _T;
+        public double T
         {
             get
             {
-                flangeClearDistance = height - tf_Bottom - tf_Top;
-                return flangeClearDistance;
+                _T = _d - t_fBot - t_fTop;
+                return _T;
             }
         } 
         #endregion
@@ -143,14 +143,14 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double FlangeThickness = this.FlangeThicknessTop;
-            double FlangeWidth = this.FlangeWidthTop;
+            double t_f = this.t_fTop;
+            double b_f = this.b_fTop;
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(FlangeWidth,FlangeThickness, new Point2D(0,Height/2-FlangeThickness/2)),
-                new CompoundShapePart(WebThickness,Height-2*FlangeThickness, new Point2D(0,0)),
-                new CompoundShapePart(FlangeWidth,FlangeThickness, new Point2D(0,-(Height/2-FlangeThickness/2)))
+                new CompoundShapePart(b_f,t_f, new Point2D(0,d/2-t_f/2)),
+                new CompoundShapePart(t_w,d-2*t_f, new Point2D(0,0)),
+                new CompoundShapePart(b_f,t_f, new Point2D(0,-(d/2-t_f/2)))
             };
             return rectX;
         }
@@ -163,15 +163,15 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.FlangeThicknessTop;
-            double FlangeWidth = this.FlangeWidthTop;
+            double FlangeThickness = this.t_fTop;
+            double FlangeWidth = this.b_fTop;
 
             // I-shape converted to X-shape 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-WebThickness)/2, new Point2D(0,(FlangeWidth -WebThickness)/4+WebThickness/2 )),
-                new CompoundShapePart(WebThickness,Height, new Point2D(WebThickness/2.0,0)),
-                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-WebThickness)/2, new Point2D(0,-((FlangeWidth -WebThickness)/4+WebThickness/2))),
+                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-t_w)/2, new Point2D(0,(FlangeWidth -t_w)/4+t_w/2 )),
+                new CompoundShapePart(t_w,d, new Point2D(t_w/2.0,0)),
+                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-t_w)/2, new Point2D(0,-((FlangeWidth -t_w)/4+t_w/2))),
             };
             return rectY;
         }
@@ -183,11 +183,11 @@ namespace Wosad.Common.Section.SectionTypes
         /// </summary>
         protected override void CalculateWarpingConstant()
         {
-            double d = this.Height;
-            double t_1 = tf_Top;
-            double t_2 = tf_Bottom;
-            double b_1 = bf_Top;
-            double b_2 = bf_Bottom;
+            double d = this.d;
+            double t_1 = t_fTop;
+            double t_2 = t_fBot;
+            double b_1 = b_fTop;
+            double b_2 = b_fBot;
 
             double d_p=d-((t_1+t_2) / 2);
             double a =1/(Math.Pow(1+(b_1/b_2 ),3)*(t_1/t_2 ) );
@@ -196,11 +196,11 @@ namespace Wosad.Common.Section.SectionTypes
         }
 
 
-        public double WebHeight
+        public double h_web
         {
             get 
             {
-                return Height - (FlangeThicknessTop + FlangeThicknessBottom);
+                return d - (t_fTop + t_fBot);
             }
         }
     }

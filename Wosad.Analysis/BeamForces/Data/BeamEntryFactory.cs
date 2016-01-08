@@ -53,7 +53,7 @@ namespace Wosad.Analysis
                     }
                     Entry.AddDependencyValue("CF", "1728");
                     Entry.Reference = "";
-                    Entry.DescriptionReference = beam.ResourceLocator.GetTemplatePath(TemplateType, CaseId, SubTypeIndex);
+                    //Entry.DescriptionReference = beam.ResourceLocator.GetTemplatePath(TemplateType, CaseId, SubTypeIndex);
                     Entry.FormulaID = null; //reference to formula from code
 
                     //beam.Log.AddEntry(Entry); // this bypasses the check for LogMode

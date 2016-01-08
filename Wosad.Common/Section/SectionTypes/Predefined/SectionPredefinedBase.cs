@@ -43,7 +43,7 @@ namespace Wosad.Common.Section.Predefined
            this.A                  = sec.A                        ;
            this._I_x      = sec.I_x            ;
            this._I_y      = sec.I_y            ;
-           this._S_x_Top    = sec.S_xTop          ;
+           this._S_x_Top    = sec.S_xTop         ;
            this._S_xBot    = sec.S_xBot          ;
            this._S_yLeft   = sec.S_yLeft         ;
            this._S_yRight  = sec.S_yRight        ;

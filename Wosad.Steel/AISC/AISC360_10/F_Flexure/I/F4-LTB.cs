@@ -51,16 +51,16 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
-                    Sxc = Section.Shape.SectionModulusXTop;
+                    Sxc = Section.Shape.S_xTop;
                     break;
                 case FlexuralCompressionFiberPosition.Bottom:
-                    Sxc = Section.Shape.SectionModulusXBot;
+                    Sxc = Section.Shape.S_xBot;
                     break;
                 default:
                     throw new CompressionFiberPositionException();
             }
             double rt = GetEffectiveRadiusOfGyrationrt(compressionFiberPosition);
-            double ho = this.SectionI.FlangeCentroidDistance; 
+            double ho = this.SectionI.h_o; 
             double Lr = GetLr();
 
             LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(Lb, Lp, Lr);
@@ -76,7 +76,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     break;
                 case LateralTorsionalBucklingType.Elastic:
                     double Iyc =  GetIyc(compressionFiberPosition);
-                    double Iy = SectionI.MomentOfInertiaX;
+                    double Iy = SectionI.I_x;
                     J = Iyc / Iy <= 0.23 ? 0.0 : J;
                     double Fcr = GetFcr();
                     break;

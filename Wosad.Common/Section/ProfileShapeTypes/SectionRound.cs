@@ -29,19 +29,19 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public  class SectionRound: SectionBase, ISectionRound
     {
-        private double diameter;
+        private double _D;
 
-        public double Diameter
+        public double D
         {
-            get { return diameter; }
+            get { return _D; }
 
         }
         
 
 
-        public SectionRound(string Name, double Diameter): base(Name)
+        public SectionRound(string Name, double D): base(Name)
         {
-            this.diameter = Diameter;
+            this._D = D;
             CalculateProperties();
         }
 
@@ -52,11 +52,10 @@ namespace Wosad.Common.Section.SectionTypes
         private void CalculateProperties()
         {
 
-            double R = Diameter / 2.0;
-            double D = Diameter;
+            double R = D / 2.0;
             //height and width in the base class 
-            _H = Diameter;
-            _B = Diameter;
+            _H = D;
+            _B = D;
             _A = ((Math.PI * Math.Pow(D, 2)) / (4));
             _I_x = ((Math.PI * Math.Pow(D, 4)) / (64));
             _I_y = _I_x;
@@ -75,7 +74,7 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName = this.Name + "_clone";
-            return new SectionRound(cloneName, Diameter);
+            return new SectionRound(cloneName, D);
         }
 
         private double _A;
@@ -93,13 +92,13 @@ namespace Wosad.Common.Section.SectionTypes
         double GetArea()
         {
             double pi = Math.PI;
-            double A = pi / 4.0 * (Math.Pow(Diameter, 2));
+            double A = pi / 4.0 * (Math.Pow(D, 2));
             return A;
         }
 
         public override ISection Clone()
         {
-            return new SectionRound(Name, Diameter);
+            return new SectionRound(Name, D);
         }
     }
 }

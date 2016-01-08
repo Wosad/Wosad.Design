@@ -46,12 +46,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionI = ISectionI;
             ISectionI s = ISectionI;
-            this.Width = s.WebHeight;
+            this.Width = s.h_web;
             if (this.Width<=0)
             {
                 throw new Exception("Clear web distance cannot be less than or equal to 0");
             }
-            this.Thickness = s.WebThickness;
+            this.Thickness = s.t_w;
         }
 
           public WebOfDoublySymI(ISteelMaterial Material):base(Material)

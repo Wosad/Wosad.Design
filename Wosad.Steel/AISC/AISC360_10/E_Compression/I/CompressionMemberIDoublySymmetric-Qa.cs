@@ -65,17 +65,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         private double GetSectionGrossArea()
         {
-            return Section.Shape.Area;
+            return Section.Shape.A;
         }
 
         protected virtual double GetWebThickness()
         {
-            return SectionI.WebThickness;
+            return SectionI.t_w;
         }
 
         protected virtual double GetWebClearDistance()
         {
-            return this.SectionI.Height - (SectionI.WebHeight);
+            return this.SectionI.d - (SectionI.h_web);
             //todo fillet area ...
         }
 

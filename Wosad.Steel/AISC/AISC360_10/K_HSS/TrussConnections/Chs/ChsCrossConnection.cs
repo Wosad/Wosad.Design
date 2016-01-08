@@ -64,8 +64,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
             double sinTheta = Math.Sin(theta.ToRadians());
             ISectionPipe section = GetBranchSection(branch);
             double Fy = branch.Section.Material.YieldStress;
-            double t = section.DesignWallThickness;
-            double Db = section.Diameter;
+            double t = section.t_des;
+            double Db = section.D;
             double beta = Db / D;
                //(K2-3)
            Pn = Fy*Math.Pow(t,2)*(5.7/(1.0-0.81*beta)*Qf)/sinTheta;

@@ -15,7 +15,7 @@ namespace Wosad.Analysis.Section
         /// <param name="W_ns">Normalized warping function at point s</param>
         /// <param name="theta_2der">Second derivative of angle of rotation with respect to z</param>
         /// <returns></returns>
-        public double NormalStressDueToWarpingOpenSection(double E, double W_ns, double theta_2der)
+        public double GetNormalStressDueToWarpingOpenSection(double E, double W_ns, double theta_2der)
         {
             double sigma_w = E * W_ns * theta_2der; //AISC Design Guide 9 Equation(4.3a)
             return sigma_w;

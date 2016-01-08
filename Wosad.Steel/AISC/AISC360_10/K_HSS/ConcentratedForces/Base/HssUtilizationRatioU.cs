@@ -45,8 +45,8 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 
 
             ISection sec = Section.Shape;
-            double Ag = sec.Area;
-            double S = Math.Min(sec.SectionModulusXBot, sec.SectionModulusXTop);
+            double Ag = sec.A;
+            double S = Math.Min(sec.S_xBot, sec.S_xTop);
             double Pro = RequiredAxialStrenghPro;
             double Mro = RequiredMomentStrengthMro;
             //(K1-6) from TABLE K1.2

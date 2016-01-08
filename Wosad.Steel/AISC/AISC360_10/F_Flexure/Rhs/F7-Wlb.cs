@@ -50,7 +50,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             else
             {
                 double Mp = GetMajorPlasticMomentCapacity().Value;
-                double Sx = Math.Min(SectionTube.SectionModulusXTop, SectionTube.SectionModulusXBot);
+                double Sx = Math.Min(SectionTube.S_xTop, SectionTube.S_xBot);
                 double h = GetWebWallHeight_h();
                 double lambdaWeb = GetLambdaWeb(MomentAxis);
                 Mn = Mp - (Mp - Fy * Sx) * (0.305 * lambdaWeb * Math.Sqrt(Fy / E) - 0.738); //(F7-5)

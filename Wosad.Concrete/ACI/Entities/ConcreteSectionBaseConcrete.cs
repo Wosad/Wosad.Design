@@ -99,7 +99,7 @@ namespace Wosad.Concrete.ACI
             double c = GetDistanceToNeutralAxis(StrainDistribution, compFiberPosition);
             double a = GetCompressionBlockDepth(c);
 
-            double CentroidYToTopEdge = (Section.SliceableShape.YMax-Section.SliceableShape.YMin)-Section.SliceableShape.CentroidYtoBottomEdge;
+            double CentroidYToTopEdge = (Section.SliceableShape.YMax-Section.SliceableShape.YMin)-Section.SliceableShape.y_Bar;
             double neutralAxisToBottomOfCompressedShapeOffset = CentroidYToTopEdge - a;
             IMoveableSection compressedPortion = null;
             ISliceableSection sec = this.Section.SliceableShape as ISliceableSection;
@@ -107,7 +107,7 @@ namespace Wosad.Concrete.ACI
             {
                 compressedPortion = GetCompressedConcreteSection(StrainDistribution,compFiberPosition, a);
             }
-            double A = compressedPortion.Area;
+            double A = compressedPortion.A;
             double fc = Section.Material.SpecifiedCompressiveStrength;
 
             double ConcreteResultantForce = A * 0.85 * fc;

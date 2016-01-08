@@ -32,6 +32,6 @@ namespace Wosad.Analysis
         double ModulusOfElasticity { get; set; }
         double MomentOfInertia { get; set; }
         void EvaluateX(double X);
-        BeamTemplatePathLocator ResourceLocator { get; } //for templates
+       // BeamTemplatePathLocator ResourceLocator { get; } //for templates
     }
 }

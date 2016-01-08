@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
@@ -43,10 +46,10 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionTube = sectionTube;
             ISectionTube s = sectionTube;
-            double td = s.DesignWallThickness;
+            double td = s.t_des;
             if (OutsideCornerRadius==-1.0)
             {
-                this.Width = s.Width - 3.0 * td;
+                this.Width = s.B - 3.0 * td;
             }
             else
             {
@@ -54,7 +57,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 {
                     throw new Exception("Invalid RHS corner radius. Must be over 0");
                 }
-                this.Width = s.Width - 2.0 * OutsideCornerRadius;
+                this.Width = s.B - 2.0 * OutsideCornerRadius;
             }
 
             this.Thickness = td;

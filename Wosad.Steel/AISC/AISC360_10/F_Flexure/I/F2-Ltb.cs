@@ -58,14 +58,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             ISectionI section = this.Section.Shape as ISectionI;
             if (section != null)
             {
-                //ho = section.FlangeCentroidDistance;
-                ho = section.Height - (section.FlangeThicknessTop / 2.0 + section.FlangeThicknessBottom / 2.0);
+                //ho = section.h_o;
+                ho = section.d - (section.t_fTop / 2.0 + section.t_fBot / 2.0);
                 #region ho
                 ICalcLogEntry hoEntry = new CalcLogEntry();
                 hoEntry.ValueName = "ho";
-                hoEntry.AddDependencyValue("d", Math.Round(section.Height, 3));
-                hoEntry.AddDependencyValue("tfc", Math.Round(section.FlangeThicknessTop, 3));
-                hoEntry.AddDependencyValue("tf", Math.Round(section.FlangeWidthBottom, 3));
+                hoEntry.AddDependencyValue("d", Math.Round(section.d, 3));
+                hoEntry.AddDependencyValue("tfc", Math.Round(section.t_fTop, 3));
+                hoEntry.AddDependencyValue("tf", Math.Round(section.b_fBot, 3));
                 hoEntry.Reference = "";
                 hoEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/ho_IShape.docx";
                 hoEntry.FormulaID = null; //reference to formula from code

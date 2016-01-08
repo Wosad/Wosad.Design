@@ -24,6 +24,6 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionHollow:ISection
     {
-        double DesignWallThickness { get; }
+        double t_des { get; }
     }
 }

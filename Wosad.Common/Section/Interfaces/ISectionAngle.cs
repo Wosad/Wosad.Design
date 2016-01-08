@@ -21,17 +21,17 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionAngle : ISection, IWeakAxisCloneable
     {
-        double Height { get;  }
-        double Thickness { get;  }
-        double Width { get;  }
+        double d { get;  }
+        double t { get;  }
+        double b { get;  }
 
         double MomentOfInertiaPrincipalMajor { get; }
         double MomentOfInertiaPrincipalMinor { get; }
 
-        double SectionModulusPrincipalMajor { get; }
-        double SectionModulusPrincipalMinor { get; }
+        double S_major { get; }
+        double S_minor { get; }
 
-        double RadiusOfGyrationPrincipalMajor { get; }
-        double RadiusOfGyrationPrincipalMinor { get; }
+        double r_major { get; }
+        double r_minor { get; }
     }
 }

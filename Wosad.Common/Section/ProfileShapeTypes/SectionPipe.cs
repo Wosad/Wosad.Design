@@ -29,29 +29,29 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public class SectionPipe: SectionBase,  ISectionHollow, ISectionPipe
     {
-        public double Diameter { get; set; }
-        public double WallThickness { get; set; }
+        public double D { get; set; }
+        public double t { get; set; }
 
-        private double designWallThickness;
+        private double _t_des;
 
-        public double DesignWallThickness
+        public double t_des
         {
-            get { return designWallThickness; }
-            set { designWallThickness = value; }
+            get { return _t_des; }
+            set { _t_des = value; }
         }
         
 
 
-        public SectionPipe(string Name, double Diameter, double WallThickness): this(Name, Diameter,WallThickness,WallThickness)
+        public SectionPipe(string Name, double D, double t_w): this(Name, D,t_w,t_w)
         {
         }
 
-        public SectionPipe(string Name, double Diameter, double twallNominal, double DesignWallThickness)
+        public SectionPipe(string Name, double D, double t_nom, double t_des)
             : base(Name)
         {
-            this.Diameter = Diameter;
-            this.WallThickness = twallNominal;
-            this.designWallThickness = DesignWallThickness;
+            this.D = D;
+            this.t = t_nom;
+            this._t_des = t_des;
             CalculateProperties();
 
         }
@@ -62,13 +62,13 @@ namespace Wosad.Common.Section.SectionTypes
         private void CalculateProperties()
         {
  
-            double R = Diameter/2.0;
-            double d = Diameter;
-            double t = DesignWallThickness;
+            double R = D/2.0;
+            double d = D;
+            double t = t_des;
 
-            double R_i = (Diameter-2*DesignWallThickness)/2;
-            _H = Diameter;
-            B = Diameter;
+            double R_i = (D-2*t_des)/2;
+            _H = D;
+            B = D;
             _A =Math.PI * (R * R - R_i*R_i);
             _I_x = ((Math.PI) / (4)) * (Math.Pow(R, 4) - Math.Pow(R_i, 4));
             _I_y = _I_x;
@@ -88,12 +88,12 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName = this.Name + "_clone";
-            return new SectionPipe (cloneName, Diameter,WallThickness);
+            return new SectionPipe (cloneName, D,t);
         }
 
         public override ISection Clone()
         {
-            return new SectionPipe(Name, Diameter, WallThickness);
+            return new SectionPipe(Name, D, t);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionPipe : ISection, ISectionHollow, IWeakAxisCloneable
     {
-        double Diameter { get;  }
-        double WallThickness { get;  }
+        double D { get;  }
+        double t { get;  }
     }
 }

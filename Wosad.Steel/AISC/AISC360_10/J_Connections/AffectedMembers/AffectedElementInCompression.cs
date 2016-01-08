@@ -45,12 +45,12 @@ namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
             public double GetCompressionCapacity(double K, double L)
             {
                     double F_y = Section.Material.YieldStress;
-                    double r = Section.Shape.RadiusOfGyrationY;
+                    double r = Section.Shape.r_y;
                     double phiP_n = 0.0;
                     double KLr = K*L/r;
                     if (KLr >= 25) // per J4.4
 	                {
-                        double A_g = Section.Shape.Area;
+                        double A_g = Section.Shape.A;
                         phiP_n = A_g * F_y;  // (J4-6)
 	                }
                     else

@@ -33,15 +33,15 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         public double GetEffectivePlateWidth()
         {
             double Bep;
-            double Bp = Plate.Section.Height;
-            double t = Plate.Section.Width;
+            double Bp = Plate.Section.H;
+            double t = Plate.Section.B;
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
             {
                 throw new Exception("Member must be of type SectionTube");
             }
 
-            double B = tube.Width;
+            double B = tube.B;
             //(K1-18)
             Bep = 10.0 * Bp / (B / t);
             Bep = Bep > Bp ? Bp : Bep;

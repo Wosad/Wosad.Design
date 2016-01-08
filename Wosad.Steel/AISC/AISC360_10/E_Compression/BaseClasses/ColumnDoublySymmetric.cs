@@ -41,15 +41,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
         {
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
-            double Cw = Section.Shape.WarpingConstant;
+            double Cw = Section.Shape.C_w;
             double Kz = EffectiveLengthFactorZ;
             double Lz = UnbracedLengthZ;
 
             //todo: change shear modulus to be the material property
             double G = Section.Material.ShearModulus; //ksi
-            double J = Section.Shape.TorsionalConstant;
-            double Ix = Section.Shape.MomentOfInertiaX;
-            double Iy = Section.Shape.MomentOfInertiaY;
+            double J = Section.Shape.J;
+            double Ix = Section.Shape.I_x;
+            double Iy = Section.Shape.I_y;
 
             double Fe;
             if (Kz * Lz == 0)

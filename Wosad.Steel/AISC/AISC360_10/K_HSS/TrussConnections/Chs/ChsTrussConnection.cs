@@ -51,14 +51,14 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
         internal double GetChordDiameter()
         {
             ISectionPipe chordSec = GetChordSection();
-            return chordSec.Diameter;
+            return chordSec.D;
         }
 
 
         internal double GetChordWallThickness()
         {
             ISectionPipe chordSec = GetChordSection();
-            return chordSec.DesignWallThickness;
+            return chordSec.t_des;
         }
 
 

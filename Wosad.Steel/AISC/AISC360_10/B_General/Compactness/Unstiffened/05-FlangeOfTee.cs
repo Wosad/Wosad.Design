@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
  
@@ -38,8 +41,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         public FlangeOfTee(ISteelMaterial Material, ISectionTee s)
             :base(Material)
         {
-            double bf=s.FlangeWidth;
-            double tf=s.FlangeThickness;
+            double bf=s.b_f;
+            double tf=s.t_f;
 
             base.Overhang = bf;
             base.Thickness = tf;

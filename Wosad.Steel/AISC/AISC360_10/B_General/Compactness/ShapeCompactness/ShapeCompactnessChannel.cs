@@ -50,12 +50,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 switch (compressionFiberPosition)
                 {
                     case FlexuralCompressionFiberPosition.Top:
-                        b = sectChannel.FlangeWidth;
-                        tf = sectChannel.FlangeThickness;
+                        b = sectChannel.b_f;
+                        tf = sectChannel.t_f;
                         break;
                     case FlexuralCompressionFiberPosition.Bottom:
-                        b = sectChannel.FlangeWidth;
-                        tf = sectChannel.FlangeThickness;
+                        b = sectChannel.b_f;
+                        tf = sectChannel.t_f;
                         break;
                     default:
                         throw new CompressionFiberPositionException();

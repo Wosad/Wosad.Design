@@ -26,10 +26,10 @@ namespace Wosad.Analysis
 {
     public class BeamPinnedFixed: Beam
     {
-        public BeamPinnedFixed(double Length, List<LoadBeam> Loads, ICalcLog CalcLog)
+        public BeamPinnedFixed(double Length, LoadBeam Loads, ICalcLog CalcLog)
             : base(Length, Loads, CalcLog, new BeamPinnedFixedFactory())
         {
-            LoadCases = new List<ISingleLoadCaseBeam>();
+            //LoadCases = new List<ISingleLoadCaseBeam>();
         }
 
     }

@@ -37,8 +37,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         public OutstandingLegOfAnglesWithContContact(ISteelMaterial Material, ISectionAngle s)
             :base(Material)
         {
-            double bf=s.Width;
-            double tf=s.Thickness;
+            double bf=s.b;
+            double tf=s.t;
 
             base.Overhang = bf;
             base.Thickness = tf;

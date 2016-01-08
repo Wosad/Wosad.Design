@@ -47,8 +47,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.angle = angle;
 
-            double VLeg = angle.Height;
-            double HLeg = angle.Width;
+            double VLeg = angle.d;
+            double HLeg = angle.b;
 
             double LongLeg = Math.Max(VLeg, HLeg);
             double ShortLeg = Math.Min(VLeg, HLeg);
@@ -63,7 +63,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             }
 
             base.Overhang = Overhang;
-            base.Thickness = angle.Thickness;
+            base.Thickness = angle.t;
         }
 
 

@@ -20,6 +20,6 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionRound : ISection, IWeakAxisCloneable
     {
-        double Diameter { get; }
+        double D { get; }
     }
 }

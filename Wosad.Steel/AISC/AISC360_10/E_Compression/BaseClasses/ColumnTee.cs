@@ -46,9 +46,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
         //    double Lz = UnbracedLengthZ;
 
         //    double G = 11200; //ksi
-        //    double J = Section.TorsionalConstant;
+        //    double J = Section.J;
         //    double Ix = Section.MomentOfInertiaX;
-        //    double Iy = Section.MomentOfInertiaY;
+        //    double Iy = Section.I_y;
 
 
         //    throw new NotFiniteNumberException();

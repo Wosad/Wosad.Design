@@ -53,7 +53,7 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
         internal double GetChordWallThickness()
         {
             ISectionTube chordSec = GetChordSection();
-            return chordSec.DesignWallThickness;
+            return chordSec.t_des;
         }
 
 

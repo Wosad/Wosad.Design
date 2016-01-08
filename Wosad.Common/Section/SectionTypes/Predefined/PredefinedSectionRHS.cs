@@ -45,13 +45,13 @@ namespace Wosad.Common.Section.Predefined
 
         double width;
 
-        public double Width
+        public double B
         {
             get { return width; }
         }
         double height;
 
-        public double Height
+        public double H
         {
             get { return height; }
         }
@@ -74,7 +74,7 @@ namespace Wosad.Common.Section.Predefined
 
         private double designWallThickness;
 
-        public double DesignWallThickness
+        public double t_des
         {
             get { return designWallThickness; }
         }

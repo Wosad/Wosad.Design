@@ -21,7 +21,7 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionIRolled: ISectionI
     {
-        double FilletDistance { get; }
-        double FlangeClearDistanceWithoutFillets { get;  }
+        double k { get; }
+        double T { get;  }
     }
 }

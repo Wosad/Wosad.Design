@@ -47,12 +47,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             switch (location)
             {
                 case ElementLocation.Top:
-                    bf = s.FlangeWidth;
-                    tf = s.FlangeThickness;
+                    bf = s.b_f;
+                    tf = s.t_f;
                     break;
                 case ElementLocation.Bottom:
-                    bf = s.FlangeWidth;
-                    tf = s.FlangeThickness;
+                    bf = s.b_f;
+                    tf = s.t_f;
                     break;
                 default:
                     throw new Exception("Invalid location is specified for Channel flange");

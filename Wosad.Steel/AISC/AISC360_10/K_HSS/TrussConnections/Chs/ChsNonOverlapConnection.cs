@@ -51,8 +51,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
             double pi = Math.PI;
             ISectionPipe section = GetBranchSection(branch);
             double Fy = branch.Section.Material.YieldStress;
-            double t = section.DesignWallThickness;
-            double Db = section.Diameter;
+            double t = section.t_des;
+            double Db = section.D;
 
             if (Db<(Db-2.0*t))
             {

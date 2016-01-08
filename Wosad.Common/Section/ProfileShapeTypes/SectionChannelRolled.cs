@@ -35,37 +35,37 @@ namespace Wosad.Common.Section.SectionTypes
         /// Constructor
         /// </summary>
         /// <param name="Name">Shape name</param>
-        /// <param name="Depth">Overall depth of member</param>
-        /// <param name="FlangeWidth">Flange width</param>
-        /// <param name="FlangeThickness"> Flange thickness (average)</param>
-        /// <param name="WebThickness">Web thickness</param>
-        /// <param name="FilletDistance">Fillet distance (k)</param>
-        public SectionChannelRolled(string Name, double Depth, double FlangeWidth,
-            double FlangeThickness, double WebThickness,
-            double FilletDistance)
-            : base(Name, Depth,  FlangeWidth,  FlangeThickness, WebThickness)
+        /// <param name="d">Overall depth of member</param>
+        /// <param name="b_f">Flange width</param>
+        /// <param name="t_f"> Flange thickness (average)</param>
+        /// <param name="t_w">Web thickness</param>
+        /// <param name="k">Fillet distance (k)</param>
+        public SectionChannelRolled(string Name, double d, double b_f,
+            double t_f, double t_w,
+            double k)
+            : base(Name, d,  b_f,  t_f, t_w)
         {
-            this.k = FilletDistance;
+            this._k = k;
         }
 
 
-        private double flangeClearDistanceWithoutFillets;
+        private double _T;
 
-        public double FlangeClearDistanceWithoutFillets
+        public double T
         {
             get 
             {
-                flangeClearDistanceWithoutFillets = Height - 2*FlangeThickness- 2*k ;
-                return flangeClearDistanceWithoutFillets; 
+                _T = d - 2*t_f ;
+                return _T; 
             }
 
         }
 
-        private double k;
+        private double _k;
 
-        public double FilletDistance
+        public double k
         {
-            get { return k; }
+            get { return _k; }
         }
 
 
@@ -78,14 +78,15 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            //double FlangeThickness = this.FlangeThicknessTop;
-            //double FlangeWidth = this.FlangeWidthTop;
+            //double FlangeThickness = this.t_fTop;
+            //double FlangeWidth = this.b_fTop;
 
-            CompoundShapePart TopFlange = new CompoundShapePart(FlangeWidth, FlangeThickness, new Point2D(0, Height / 2 - FlangeThickness / 2));
-            CompoundShapePart BottomFlange = new CompoundShapePart(FlangeWidth, FlangeThickness, new Point2D(0, -(Height / 2 - FlangeThickness / 2)));
-            PartWithDoubleFillet TopFillet = new PartWithSingleFillet(k, WebThickness, new Point2D(0, Height / 2 - FlangeThickness), true);
-            PartWithDoubleFillet BottomFillet = new PartWithSingleFillet(k, WebThickness, new Point2D(0, -(Height / 2 - FlangeThickness)), false);
-            CompoundShapePart Web = new CompoundShapePart(WebThickness, Height - 2 * FlangeThickness - 2 * FilletDistance, new Point2D(0, 0));
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d / 2 - t_f / 2));
+            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, -(d / 2 - t_f / 2)));
+            PartWithDoubleFillet TopFillet = new PartWithSingleFillet(k, t_w, new Point2D(0, d / 2 - t_f), true);
+            PartWithDoubleFillet BottomFillet = new PartWithSingleFillet(k, t_w, new Point2D(0, -(d / 2 - t_f)), false);
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - 2 * t_f - 2 * k, new Point2D(0, 0));
+
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
@@ -100,21 +101,21 @@ namespace Wosad.Common.Section.SectionTypes
 
         /// <summary>
         /// Defines a set of rectangles for analysis with respect to 
-        /// y-axis, each occupying full height of section. The rectangles are rotated 90 deg., 
+        /// y-axis, each occupying full d of section. The rectangles are rotated 90 deg., 
         /// because internally the properties are calculated  with respect to x-axis.
         /// </summary>
         /// <returns>List of analysis rtangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            //double FlangeThickness = this.FlangeThicknessTop;
-            //double FlangeWidth = this.FlangeWidthTop;
+            //double t_f = this.t_fTop;
+            //double b_f = this.b_fTop;
 
 
             //Note: all insertion points are calculated from the left side of the shape
-            CompoundShapePart Web = new CompoundShapePart(Height, WebThickness,new Point2D(0,  WebThickness/2.0));
-            PartWithDoubleFillet Fillet = new PartWithDoubleFillet(k, 2 * FlangeThickness, new Point2D( 0, WebThickness),true);
-            CompoundShapePart Flange = new CompoundShapePart(2 * FlangeThickness, FlangeWidth - WebThickness - k,
-                new Point2D(0,(WebThickness+k+ (FlangeWidth-WebThickness-k)/2.0)));
+            CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, t_w / 2.0));
+            PartWithDoubleFillet Fillet = new PartWithDoubleFillet(k, 2 * t_f, new Point2D(0, t_w), true);
+            CompoundShapePart Flange = new CompoundShapePart(2 * t_f, b_f - t_w - k,
+                new Point2D(0, (t_w + k + (b_f - t_w - k) / 2.0)));
              
 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()

@@ -35,7 +35,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
          [Test]
          public void SectionIRolledReturnsArea()
          {
-             SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
+             SectionIRolled shape = new SectionIRolled(null, 17.7, 6.0, 0.425, 0.3, 0.827);
              double A = shape.A;
              Assert.AreEqual(10.74, Math.Round(A, 2));
              //Manual gives 10.3 but actual area checked in Autocad is 10.42

@@ -36,7 +36,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Rpg = 0;
 
             double hc = Gethc(compressionFiberPosition);
-            double tw = this.SectionI.WebThickness;
+            double tw = this.SectionI.t_w;
             double aw = Getaw(compressionFiberPosition);
 
             double E = Section.Material.ModulusOfElasticity;

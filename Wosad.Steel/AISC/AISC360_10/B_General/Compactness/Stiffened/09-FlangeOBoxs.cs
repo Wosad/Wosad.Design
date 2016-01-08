@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
@@ -45,8 +48,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             this.SectionBox = SectionBox;
             ISectionBox s = SectionBox;
             
-            IsUniformThickness = s.FlangeThickness == s.WebThickness ? true : false;
-            this.Thickness = s.FlangeThickness; //why need  this?
+            IsUniformThickness = s.t_f == s.t_w ? true : false;
+            this.Thickness = s.t_f; //why need  this?
         }
 
         public override double GetLambda_r(StressType stress)

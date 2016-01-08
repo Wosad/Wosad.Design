@@ -46,7 +46,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionBox = sectionBox;
             ISectionBox s = sectionBox;
-            this.Thickness = s.WebThickness;
+            this.Thickness = s.t_w;
         }
 
         public override double GetLambda_r(StressType stress)

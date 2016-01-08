@@ -63,16 +63,16 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         protected void GetTypicalParameters(ref double Fy, ref double t, ref double Bp, ref double D, ref double tp )
         {
             Fy = Hss.Material.YieldStress;
-            t = Hss.Section.DesignWallThickness;
-            Bp = Plate.Section.Height;
-            tp = Plate.Section.Width;
+            t = Hss.Section.t_des;
+            Bp = Plate.Section.H;
+            tp = Plate.Section.B;
 
             ISectionPipe pipe = Hss.Section as ISectionPipe;
             if (pipe != null)
             {
                 throw new SectionWrongTypeException(typeof(ISectionPipe));
             }
-            D = pipe.Diameter;
+            D = pipe.D;
 
         }
     }

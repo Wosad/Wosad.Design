@@ -45,10 +45,10 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             :base(Material)
         {
             this.tee = tee;
-            Overhang = tee.Height;
+            Overhang = tee.d;
 
             base.Overhang = Overhang;
-            base.Thickness = tee.WebThickness;
+            base.Thickness = tee.t_w;
         }
 
 

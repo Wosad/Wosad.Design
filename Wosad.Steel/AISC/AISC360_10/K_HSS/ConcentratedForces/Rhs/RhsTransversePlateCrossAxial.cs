@@ -57,13 +57,13 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
             {
                 throw new Exception("Rectangular Hss member must implement ISectionTube interface.");
             }
-            double B = tube.Width;
-            double H = tube.Height;
+            double B = tube.B;
+            double H = tube.H;
             double E = SteelConstants.ModulusOfElasticity;
-            double Bp = Plate.Section.Height;
+            double Bp = Plate.Section.H;
             double Fyp = Plate.Material.YieldStress;
-            double t = tube.DesignWallThickness;
-            double tp = Plate.Section.Width;
+            double t = tube.t_des;
+            double tp = Plate.Section.B;
             double beta = Bp / B;
             double lb = tp; // may need to add differentiation here TODO:
             double Qf = GetChordStressInteractionQf(PlateOrientation.Transverse, ChordUtilizationRatio);

@@ -20,7 +20,7 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionRectangular : ISection, IWeakAxisCloneable
     {
-        double Height { get; set; }
-        double Width { get; set; }
+        double H { get; set; }
+        double B { get; set; }
     }
 }

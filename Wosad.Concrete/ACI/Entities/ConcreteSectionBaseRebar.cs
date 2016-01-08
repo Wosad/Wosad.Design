@@ -42,7 +42,7 @@ namespace Wosad.Concrete.ACI
             double XMin = Section.SliceableShape.XMin;
 
             double sectionHeight = Section.SliceableShape.YMax - Section.SliceableShape.YMin;
-            double distTopToSecNeutralAxis = sectionHeight - Section.SliceableShape.CentroidYtoBottomEdge;
+            double distTopToSecNeutralAxis = sectionHeight - Section.SliceableShape.y_Bar;
 
                 foreach (RebarPoint rbrPnt in LongitudinalBars)
                 {

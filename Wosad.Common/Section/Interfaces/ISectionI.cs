@@ -20,14 +20,14 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionI: ISection
     {
-        double Height { get; }
-        double FlangeCentroidDistance { get;  }
-        double FlangeThicknessBottom { get; }
-        double FlangeThicknessTop { get;  }
-        double FlangeWidthBottom { get;}
-        double FlangeWidthTop { get;  }
-        double WebThickness { get;  }
-        double WebHeight { get; }
+        double d { get; }
+        double h_o { get;  }
+        double t_fBot { get; }
+        double t_fTop { get;  }
+        double b_fBot { get;}
+        double b_fTop { get;  }
+        double t_w { get;  }
+        double h_web { get; }
         //double FilletDistance { get; }
     }
 }

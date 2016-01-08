@@ -168,7 +168,7 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
         //            ISectionPipe pipe = b.Section as ISectionPipe;
         //            if (pipe != null)
         //            {
-        //                return pipe.Diameter;
+        //                return pipe.D;
         //            }
         //            else
         //            {

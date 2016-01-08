@@ -75,8 +75,8 @@ namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
                 HssTrussConnectionBranch branch = thisLoadCaseData.CompressionBranch;
                 ISectionPipe section = GetBranchSection(branch);
                 double Fy = branch.Section.Material.YieldStress;
-                double t = section.DesignWallThickness;
-                double Db = section.Diameter;
+                double t = section.t_des;
+                double Db = section.D;
 
                 //(K2-4)
                 PnSinTheta = Fy*Math.Pow(t,2)*(2.0+11.33*Db/D)*Qg*Qf;

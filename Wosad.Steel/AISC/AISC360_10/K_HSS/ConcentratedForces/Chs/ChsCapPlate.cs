@@ -48,7 +48,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 
             //(K1-4)
             double Rn = 2.0 * Fy * t * (5.0 * tp + lb);
-            double A = Hss.Section.Area;
+            double A = Hss.Section.A;
             Rn = Rn < Fy * A ? Rn : Fy * A;
 
                 R = 1.0 * Rn;

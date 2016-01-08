@@ -47,7 +47,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double lambdapw = compactness.GetWebLambda_p(StressType.Flexure);
             double lambdarw = compactness.GetWebLambda_r(StressType.Flexure);
             double Iyc = GetIyc(compressionFiberPosition);
-            double Iy = Section.Shape.MomentOfInertiaY;
+            double Iy = Section.Shape.I_y;
 
             if (Iyc / Iy > 0.23)
             {

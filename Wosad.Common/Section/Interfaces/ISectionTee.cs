@@ -21,9 +21,9 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionTee: ISection
     {
-        double FlangeThickness { get;  }
-        double Height { get;  }
-        double WebThickness { get; }
-        double FlangeWidth { get; }
+        double t_f { get;  }
+        double d { get;  }
+        double t_w { get; }
+        double b_f { get; }
     }
 }

@@ -33,14 +33,14 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         double GetBeta()
         {
             double beta;
-            double Bp = Plate.Section.Height;
+            double Bp = Plate.Section.H;
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
             {
                 throw new Exception("Member must be of type SectionTube");
             }
 
-            double B = tube.Width;
+            double B = tube.B;
             beta = Bp/B;
             return beta;
         }

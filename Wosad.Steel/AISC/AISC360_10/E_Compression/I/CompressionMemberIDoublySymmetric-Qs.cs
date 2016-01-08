@@ -91,10 +91,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
         private double GetFlangeLambda()
         {
-            double tf_top = this.SectionI.FlangeThicknessTop;
-            double tf_bot = this.SectionI.FlangeThicknessBottom;
-            double bf_top = this.SectionI.FlangeWidthTop;
-            double bf_bot = this.SectionI.FlangeWidthBottom;
+            double tf_top = this.SectionI.t_fTop;
+            double tf_bot = this.SectionI.t_fBot;
+            double bf_top = this.SectionI.b_fTop;
+            double bf_bot = this.SectionI.b_fBot;
             double bt_Ratio = Math.Max(bf_top/ tf_bot, bf_bot/ tf_bot);
 
             return bt_Ratio;

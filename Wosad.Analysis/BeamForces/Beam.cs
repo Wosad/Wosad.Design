@@ -31,13 +31,13 @@ namespace Wosad.Analysis
         ForceDataPoint Mmax, Mmin, Vmax;
         bool isCalculated;
 
-        public Beam(double Length, List<LoadBeam> Loads, ICalcLog CalcLog, IBeamCaseFactory BeamCaseFactory)
+        public Beam(double Length, LoadBeam Load, ICalcLog CalcLog, IBeamCaseFactory BeamCaseFactory)
             : base(CalcLog)
         {
             this.length = Length;
             isCalculated = false;
             this.BeamCaseFactory = BeamCaseFactory;
-            this.Loads = Loads;
+            this.Load = Load;
         }
 
         private double length;
@@ -55,17 +55,14 @@ namespace Wosad.Analysis
         public IBeamCaseFactory BeamCaseFactory { get; set; }
 
 
-        private List<LoadBeam> loads;
+        private LoadBeam load;
 
-        public List<LoadBeam> Loads
+        public LoadBeam Load
         {
             get {
-                if (loads==null)
-                {
-                    loads = new List<LoadBeam>();
-                }
-                return loads; }
-            set { loads = value; }
+
+                return load; }
+            set { load = value; }
         }
         
  
@@ -101,20 +98,9 @@ namespace Wosad.Analysis
 
         public void CalculateValues(double X)
         {
-            //BeamSimpleFactory caseFactory = new BeamSimpleFactory();
 
-            foreach (var load in Loads)
-            {
-                ISingleLoadCaseBeam bmCase = BeamCaseFactory.GetCase(load, this);
-                LoadCases.Add(bmCase);
-            }
 
-            if (LoadCases.Count > 0)
-            {
-                if (LoadCases.Count == 1)
-                {
-                    ISingleLoadCaseBeam bm = LoadCases[0];
-                    //Switch on or off reporting mode to avoid unnecessary data
+                    ISingleLoadCaseBeam bm = BeamCaseFactory.GetCase(load, this);
                     if (ReportX ==false)
                     {
                         LogModeActive = false;
@@ -139,14 +125,7 @@ namespace Wosad.Analysis
                     Vmax = bm.ShearMax();
 
                     LogModeActive = true;
-                }
-                else
-                {
-                    //do iterations here
-                    throw new NotImplementedException();
 
-                }
-            }
             isCalculated = true;
         }
 
@@ -159,20 +138,20 @@ namespace Wosad.Analysis
             throw new NotImplementedException();
         }
 
-        private BeamTemplatePathLocator resLoc;
+        //private BeamTemplatePathLocator resLoc;
 
-        public BeamTemplatePathLocator ResourceLocator
-        {
-            get 
-            {
-                if (resLoc==null)
-                {
-                    resLoc = new BeamTemplatePathLocator();
-                }
-                return resLoc; 
-            }
+        //public BeamTemplatePathLocator ResourceLocator
+        //{
+        //    get 
+        //    {
+        //        if (resLoc==null)
+        //        {
+        //            resLoc = new BeamTemplatePathLocator();
+        //        }
+        //        return resLoc; 
+        //    }
 
-        }
+        //}
 
 
         public virtual double GetMoment(double X)

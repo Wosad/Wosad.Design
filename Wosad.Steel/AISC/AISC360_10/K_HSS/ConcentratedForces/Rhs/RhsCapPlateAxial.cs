@@ -53,17 +53,17 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         internal double GetLocalYieldingOnSidewalls()
         {
             double R = 0;
-            double tp = Plate.Section.Width;
+            double tp = Plate.Section.B;
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
             {
                 throw new Exception("Member must be of type SectionTube");
             }
 
-            double B = tube.Width;
+            double B = tube.B;
             double Fy = Hss.Material.YieldStress;
             double lb = tp; //TODO: add diferentiation between lb and tp
-            double A = tube.Area;
+            double A = tube.A;
 
             double Rn = 0.0;
             if ((5.0*tp+lb)<B)
@@ -88,7 +88,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         {
             double R = 0.0;
             double Rn = 0.0;
-            double tp = Plate.Section.Width;
+            double tp = Plate.Section.B;
             double lb = tp;
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
@@ -96,8 +96,8 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
                 throw new Exception("Member must be of type SectionTube");
             }
 
-            double B = tube.Width;
-            double t = tube.DesignWallThickness;
+            double B = tube.B;
+            double t = tube.t_des;
             double E = SteelConstants.ModulusOfElasticity;
             double Fy = Hss.Material.YieldStress;
 

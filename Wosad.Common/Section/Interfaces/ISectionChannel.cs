@@ -20,12 +20,12 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionChannel: ISection
     {
-        double Height { get; }
-        double FlangeCentroidDistance { get; }
+        double d { get; }
+        double h_o { get; }
         double FlangeClearDistance { get; }
-        double FlangeThickness{ get; }
-        double FlangeWidth { get;  }
-        double WebThickness { get;  }
-        double FilletDistance { get; }
+        double t_f{ get; }
+        double b_f { get;  }
+        double t_w { get;  }
+        double k { get; }
     }
 }

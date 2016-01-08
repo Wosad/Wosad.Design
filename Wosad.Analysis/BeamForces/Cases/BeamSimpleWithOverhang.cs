@@ -32,8 +32,8 @@ namespace Wosad.Analysis.BeamForces
         public double OverhangLength { get; set; }
         public double TotalLength { get; set; }
 
-        public BeamSimpleWithOverhang(double Length, double OverhangLength, List<LoadBeam> Loads, ICalcLog CalcLog)
-            : base(Length, Loads, CalcLog, new BeamSimpleWithOverhangFactory())
+        public BeamSimpleWithOverhang(double Length, double OverhangLength, LoadBeam load, ICalcLog CalcLog)
+            : base(Length, load, CalcLog, new BeamSimpleWithOverhangFactory())
         {
 
             this.OverhangLength = OverhangLength;

@@ -29,11 +29,11 @@ namespace Wosad.Analysis.BeamForces
     public partial class BeamSimple : Beam
     {
 
-        public BeamSimple(double Length, List<LoadBeam> Loads, ICalcLog CalcLog)
+        public BeamSimple(double Length, LoadBeam Loads, ICalcLog CalcLog)
             : base(Length, Loads, CalcLog, new BeamSimpleFactory())
         {
 
-            LoadCases = new List<ISingleLoadCaseBeam>();
+            //LoadCases = new List<ISingleLoadCaseBeam>();
 
         }
 

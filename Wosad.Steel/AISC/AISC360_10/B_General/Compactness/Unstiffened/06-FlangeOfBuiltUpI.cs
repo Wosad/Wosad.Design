@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
@@ -42,12 +45,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             switch (compressionFiberPosition)
             {
                 case FlexuralCompressionFiberPosition.Top:
-                    bf = s.FlangeWidthTop;
-                    tf = s.FlangeThicknessTop;
+                    bf = s.b_fTop;
+                    tf = s.t_fTop;
                     break;
                 case FlexuralCompressionFiberPosition.Bottom:
-                    bf = s.FlangeWidthTop;
-                    tf = s.FlangeThicknessTop;
+                    bf = s.b_fTop;
+                    tf = s.t_fTop;
                     break;
                 default:
                     throw new Exception("Compression fiber location different from to or bottom is not supported");
@@ -64,8 +67,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         public double Get_kc()
         {
             double kc;
-            double h = section.Height-(section.FlangeThicknessTop+section.FlangeThicknessBottom);
-            double tw = section.WebThickness;
+            double h = section.d-(section.t_fTop+section.t_fBot);
+            double tw = section.t_w;
             kc = 4.0 * Math.Sqrt(h / tw);
             kc = kc > 0.76 ? 0.76 : kc;
             kc = kc < 0.35 ? 0.35 : kc;
@@ -74,8 +77,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
         public double Get_FL()
         {
-            double Sxt = compressionFiberPosition == FlexuralCompressionFiberPosition.Top? section.SectionModulusXBot: section.SectionModulusXTop;
-            double Sxc = compressionFiberPosition == FlexuralCompressionFiberPosition.Bottom? section.SectionModulusXBot: section.SectionModulusXBot;
+            double Sxt = compressionFiberPosition == FlexuralCompressionFiberPosition.Top ? section.S_xBot : section.S_xTop;
+            double Sxc = compressionFiberPosition == FlexuralCompressionFiberPosition.Bottom? section.S_xBot: section.S_xBot;
             double SRatio;
             if (Sxt == 0 || Sxc==0)
             {

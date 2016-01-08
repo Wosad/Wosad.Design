@@ -62,20 +62,20 @@ namespace Wosad.Common.Section.Predefined
 
         double height;
 
-        public double Height
+        public double d
         {
             get { return height; }
             set { height = value; }
         }
         double thickness;
 
-        public double Thickness
+        public double t
         {
             get { return thickness; }
         }
         double width;
 
-        public double Width
+        public double b
         {
             get { return width; }
         }
@@ -95,26 +95,26 @@ namespace Wosad.Common.Section.Predefined
 
         double sectionModulusPrincipalMajor;
 
-        public double SectionModulusPrincipalMajor
+        public double S_major
         {
             get { return sectionModulusPrincipalMajor; }
         }
         double sectionModulusPrincipalMinor;
 
-        public double SectionModulusPrincipalMinor
+        public double S_minor
         {
             get { return sectionModulusPrincipalMinor; }
         }
 
         double radiusOfGyrationPrincipalMajor;
 
-        public double RadiusOfGyrationPrincipalMajor
+        public double r_major
         {
             get { return radiusOfGyrationPrincipalMajor; }
         }
         double radiusOfGyrationPrincipalMinor;
 
-        public double RadiusOfGyrationPrincipalMinor
+        public double r_minor
         {
             get { return radiusOfGyrationPrincipalMinor; }
         }

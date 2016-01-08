@@ -90,7 +90,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
 
         double GetInPlaneMomentForPlateBending( bool ConnectingSurfaceInTension, double UtilizationRatio)
         {
-            double lb = Plate.Section.Width;
+            double lb = Plate.Section.B;
             double R = GetAvailableStrength(ConnectingSurfaceInTension, UtilizationRatio);
             return 0.8 * lb * R;
         }

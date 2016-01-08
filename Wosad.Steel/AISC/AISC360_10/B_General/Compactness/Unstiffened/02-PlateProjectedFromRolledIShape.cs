@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
  
@@ -37,8 +40,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         public PlateProjectedFromRolledIShape(ISteelMaterial Material, ISectionRectangular s)
             :base(Material)
         {
-            double bf = s.Height;
-            double tf=s.Width;
+            double bf = s.H;
+            double tf=s.B;
 
             base.Overhang = bf;
             base.Thickness = tf;

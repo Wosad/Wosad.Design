@@ -69,10 +69,10 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionPipe = SectionPipe;
             ISectionPipe s = SectionPipe;
-            double td = s.DesignWallThickness;
+            double td = s.t_des;
 
-            this.diameter = s.Diameter;
-            this.Thickness = s.DesignWallThickness;
+            this.diameter = s.D;
+            this.Thickness = s.t_des;
         }
 
 

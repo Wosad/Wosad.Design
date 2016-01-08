@@ -54,8 +54,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             Fy = Section.Material.YieldStress;
             L = this.UnbracedLengthFlexure;
             K = this.EffectiveLengthFactorFlexure;
-            Zy = Section.Shape.PlasticSectionModulusY;
-            Sy = Math.Min(Section.Shape.SectionModulusYLeft, Section.Shape.SectionModulusYRight);
+            Zy = Section.Shape.Z_y;
+            Sy = Math.Min(Section.Shape.S_yLeft, Section.Shape.S_yRight);
 
            }
 

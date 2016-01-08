@@ -24,27 +24,35 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Analysis
 {
+    /// <summary>
+    /// Overrides beam load factory  for the cantilever beam case
+    /// </summary>
     public class BeamWithOverhangLoadFactory : BeamLoadFactory
     {
-        //overrides beam load factory  for the cantilever beam case.
-        public BeamWithOverhangLoadFactory(IParameterExtractor Extractor): base(Extractor)
+
+        //public BeamWithOverhangLoadFactory(IParameterExtractor Extractor): base(Extractor)
+        //{
+
+        //}
+
+        public BeamWithOverhangLoadFactory(BeamFactoryData data)
+            : base(data)
         {
 
         }
-
         public override LoadBeam GetConcentratedCase(string subCase)
         {
             LoadBeam Load = null;
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadConcentratedGeneral(P, LoadDimension_a);
+                    Load = new LoadConcentratedGeneral(d.P, d.a_load);
                     break;
                 case "2":
-                    Load = new LoadConcentratedSpecial(P, LoadConcentratedSpecialCase.CantileverTip);
+                    Load = new LoadConcentratedSpecial(d.P, LoadConcentratedSpecialCase.CantileverTip);
                     break;
                 default:
-                    Load = new LoadConcentratedGeneral(P, LoadDimension_a);
+                    Load = new LoadConcentratedGeneral(d.P, d.a_load);
                     break;
             }
             return Load;
@@ -55,10 +63,10 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.CantileverMainSpan);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.CantileverMainSpan);
                     break;
                 case "2":
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.CantileverOverhang);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.CantileverOverhang);
                     break;
             }
             return Load;

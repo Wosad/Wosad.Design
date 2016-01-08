@@ -27,7 +27,7 @@ namespace Wosad.Analysis
     public class BeamFixedFixed:Beam
     {
 
-        public BeamFixedFixed(double Length, List<LoadBeam> Loads, ICalcLog CalcLog)
+        public BeamFixedFixed(double Length, LoadBeam Loads, ICalcLog CalcLog)
             : base(Length, Loads, CalcLog , new BeamFixedFixedFactory())
         {
  

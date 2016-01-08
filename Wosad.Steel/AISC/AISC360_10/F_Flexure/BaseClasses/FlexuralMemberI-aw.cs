@@ -57,7 +57,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double tfc = 0.0;
 
 
-            tw = SectionI.WebThickness;
+            tw = SectionI.t_w;
 
             bfc = GetCompressionFlangeWidthbfc(compressionFiberPosition);
             hc = Gethc(compressionFiberPosition);

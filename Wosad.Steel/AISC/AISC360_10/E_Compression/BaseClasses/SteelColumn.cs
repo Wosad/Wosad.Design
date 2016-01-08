@@ -41,7 +41,7 @@ namespace Wosad.Steel.AISC.AISC360_10
 
         protected double GetNominalAxialCapacity(double CriticalStress)
         {
-            double A = Section.Shape.Area;
+            double A = Section.Shape.A;
             return CriticalStress*A;
         }
 

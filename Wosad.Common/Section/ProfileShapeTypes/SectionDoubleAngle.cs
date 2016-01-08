@@ -61,8 +61,8 @@ namespace Wosad.Common.Section.SectionTypes
             ISectionAngle a = angle;
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(2*a.Thickness,a.Height-a.Thickness, new Point2D(a.Thickness/2.0,(a.Height-a.Thickness)/2)),
-                new CompoundShapePart(2*a.Width,a.Thickness, new Point2D(a.Width/2,a.Thickness/2)),
+                new CompoundShapePart(2*a.t,a.d-a.t, new Point2D(a.t/2.0,(a.d-a.t)/2)),
+                new CompoundShapePart(2*a.b,a.t, new Point2D(a.b/2,a.t/2)),
             };
             return rectX;
         }
@@ -78,10 +78,10 @@ namespace Wosad.Common.Section.SectionTypes
             ISectionAngle a = angle;
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(a.Thickness, a.Width-a.Thickness, new Point2D(0,(a.Width-a.Thickness)/2 +gap/2)),
-                new CompoundShapePart(a.Height,a.Thickness, new Point2D(0,a.Thickness/2.0+gap/2)),
-                new CompoundShapePart(a.Height,a.Thickness, new Point2D(0,-(a.Thickness/2.0+gap/2))),
-                new CompoundShapePart(a.Thickness, a.Width-a.Thickness,new Point2D(0, -(a.Width-a.Thickness)/2+gap/2)),
+                new CompoundShapePart(a.t, a.b-a.t, new Point2D(0,(a.b-a.t)/2 +gap/2)),
+                new CompoundShapePart(a.d,a.t, new Point2D(0,a.t/2.0+gap/2)),
+                new CompoundShapePart(a.d,a.t, new Point2D(0,-(a.t/2.0+gap/2))),
+                new CompoundShapePart(a.t, a.b-a.t,new Point2D(0, -(a.b-a.t)/2+gap/2)),
             };
             return rectY;
         }

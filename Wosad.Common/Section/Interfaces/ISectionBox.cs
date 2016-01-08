@@ -20,11 +20,11 @@ namespace Wosad.Common.Section.Interfaces
 {
     public interface ISectionBox : ISection, IWeakAxisCloneable
     {
-        double Height { get; }
+        double H { get; }
         double FlangeCentroidDistance { get; }
-        double FlangeThickness { get; }
-        double WebClearDistanceWithoutFlanges { get; }
-        double WebThickness { get; }
-        double Width { get; }
+        double t_f { get; }
+        double h_web { get; }
+        double t_w { get; }
+        double B { get; }
     }
 }

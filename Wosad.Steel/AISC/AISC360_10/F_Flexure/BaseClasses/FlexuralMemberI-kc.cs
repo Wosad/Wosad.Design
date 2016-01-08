@@ -34,7 +34,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double kc = 0.0;
 
             //clear distance without fillets
-            double h = SectionI.WebHeight;
+            double h = SectionI.h_web;
             double tw = Gettw();
             kc = 4.0 / Math.Sqrt(h / tw);
             kc = kc < 0.35 ? 0.35 : kc;

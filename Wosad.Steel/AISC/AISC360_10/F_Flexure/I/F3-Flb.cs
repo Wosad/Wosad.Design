@@ -49,10 +49,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     double lambdarf = this.GetLambdarf(FlexuralCompressionFiberPosition.Top);
                     //note: section is doubly symmetric so top flange is taken
 
-                    double Sx = this.Section.Shape.SectionModulusXTop;
+                    double Sx = this.Section.Shape.S_xTop;
                     double Fy = this.Section.Material.YieldStress;
                     double E = this.Section.Material.ModulusOfElasticity;
-                    //double Zx = Section.SectionBase.PlasticSectionModulusX;
+                    //double Zx = Section.SectionBase.Z_x;
 
                     if (cClass== CompactnessClassFlexure.Noncompact)
 	                {

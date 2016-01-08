@@ -34,9 +34,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             double Mn;
             double pi = Math.PI;
-            double Iy = Section.Shape.MomentOfInertiaY;
+            double Iy = Section.Shape.I_y;
             double G = Section.Material.ShearModulus;
-            double J = sectionTee.TorsionalConstant;
+            double J = sectionTee.J;
             double B = GetB(compressionFiberLocation);
             double B2 = Math.Pow(B,2);
 
@@ -48,9 +48,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         private double GetB(FlexuralCompressionFiberPosition compressionFiberLocation)
         {
             double B;
-            double d = sectionTee.Height;
-            double Iy = sectionTee.MomentOfInertiaY;
-            double J = sectionTee.TorsionalConstant;
+            double d = sectionTee.d;
+            double Iy = sectionTee.I_y;
+            double J = sectionTee.J;
 
             double sign;
 

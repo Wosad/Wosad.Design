@@ -58,6 +58,8 @@
     <Compile Include="Section\ShapeTypes\CompoundShapeTests.cs" />
     <Compile Include="Section\ShapeTypes\GenericShapeTests.cs" />
     <Compile Include="Section\ShapeTypes\SectionIRolledTests.cs" />
+    <Compile Include="Section\ShapeTypes\ShapeTeeTests.cs" />
+    <Compile Include="ToleranceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Wosad.Common\Wosad.Common.csproj">

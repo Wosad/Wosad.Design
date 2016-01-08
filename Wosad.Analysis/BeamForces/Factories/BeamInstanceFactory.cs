@@ -27,39 +27,46 @@ namespace Wosad.Analysis
 {
     public class BeamInstanceFactory
     {
-        IParameterExtractor e;
+        //IParameterExtractor e;
 
-        public BeamInstanceFactory(IParameterExtractor Extractor)
+        //public BeamInstanceFactory(IParameterExtractor Extractor)
+        //{
+        //    this.e = Extractor;
+        //}
+
+        BeamFactoryData d;
+
+        public BeamInstanceFactory(BeamFactoryData data)
         {
-            this.e = Extractor;
+            this.d = data;
         }
 
 
-        public Beam CreateBeamInstance(string BeamCaseId, List<LoadBeam> loads, ICalcLog Log)
+        public Beam CreateBeamInstance(string BeamCaseId, LoadBeam load, ICalcLog Log)
         {
-            double L = e.GetParam("L");
-            double LoadDimension_a = e.GetParam("LoadDimension_a");
+            double L = d.L;
+            double LoadDimension_a = d.a_load;
 
             Beam bm = null;
             if (BeamCaseId.StartsWith("C1") == true)
             {
-                bm = new BeamSimple(L, loads, Log);
+                bm = new BeamSimple(d.L, load, Log);
             }
             else if (BeamCaseId.StartsWith("C2") == true)
             {
-                bm = new BeamSimpleWithOverhang(L, LoadDimension_a, loads, Log);
+                bm = new BeamSimpleWithOverhang(L, LoadDimension_a, load, Log);
             }
             else if (BeamCaseId.StartsWith("C3") == true)
             {
-                bm = new BeamPinnedFixed(L,loads, Log);
+                bm = new BeamPinnedFixed(L,load, Log);
             }
             else if (BeamCaseId.StartsWith("C4") == true)
             {
-                bm = new BeamFixedFixed(L, loads, Log);
+                bm = new BeamFixedFixed(L, load, Log);
             }
             else //else if (BeamCaseId.StartsWith("C5") == true)
             {
-                bm = new BeamCantilever(L, loads, Log);
+                bm = new BeamCantilever(L, load, Log);
             }
 
             return bm;

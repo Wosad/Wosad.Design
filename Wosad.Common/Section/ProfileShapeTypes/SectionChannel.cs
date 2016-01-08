@@ -33,60 +33,60 @@ namespace Wosad.Common.Section.SectionTypes
     public class SectionChannel : CompoundShape, ISectionChannel
     {
 
-        public SectionChannel(string Name, double Depth, double FlangeWidth, 
-            double FlangeThickness, double WebThickness)
+        public SectionChannel(string Name, double d, double b_f, 
+            double t_f, double t_w)
             : base(Name)
         {
-            this.d = Depth;
-            this.b = FlangeWidth;
-            this.tf = FlangeThickness;
-            this.tw = WebThickness;
+            this._d = d;
+            this._b_f = b_f;
+            this._t_f = t_f;
+            this._t_w = t_w;
         }
 
 
         #region Section properties specific to channel
 
-        private double d;
+        private double _d;
 
-        public double Height
+        public double d
         {
-            get { return d; }
+            get { return _d; }
         }
 
 
-        private double flangeCentroidDistance;
+        private double _h_o;
 
-        public double FlangeCentroidDistance
+        public double h_o
         {
             get
             {
-                flangeCentroidDistance = d - FlangeThickness / 2.0 - FlangeThickness / 2.0;
-                return flangeCentroidDistance;
+                _h_o = d - t_f / 2.0 - t_f / 2.0;
+                return _h_o;
             }
 
         }
 
-        private double b;
+        private double _b_f;
 
-        public double FlangeWidth
+        public double b_f
         {
-            get { return b; }
+            get { return _b_f; }
         }
 
-        private double tf;
+        private double _t_f;
 
-        public double FlangeThickness
+        public double t_f
         {
-            get { return tf; }
+            get { return _t_f; }
 
         }
 
 
-        private double tw;
+        private double _t_w;
 
-        public double WebThickness
+        public double t_w
         {
-            get { return tw; }
+            get { return _t_w; }
 
         }
 
@@ -96,18 +96,18 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get
             {
-                flangeClearDistance = d - 2*FlangeThickness;
+                flangeClearDistance = d - 2*t_f;
                 return flangeClearDistance;
             }
         }
 
 
-        private double filletDistance;
+        private double _k;
 
-        public double FilletDistance
+        public double k
         {
-            get { return filletDistance; }
-            set { filletDistance = value; }
+            get { return _k; }
+            set { _k = value; }
         }
 
         
@@ -122,9 +122,9 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(FlangeWidth,FlangeThickness, new Point2D(0,Height/2-FlangeThickness/2)),
-                new CompoundShapePart(WebThickness,Height-2*FlangeThickness, new Point2D(0,0)),
-                new CompoundShapePart(FlangeWidth,FlangeThickness, new Point2D(0,-(Height/2-FlangeThickness/2)))
+                new CompoundShapePart(b_f,t_f, new Point2D(0,d/2-t_f/2)),
+                new CompoundShapePart(t_w,d-2*t_f, new Point2D(0,0)),
+                new CompoundShapePart(b_f,t_f, new Point2D(0,-(d/2-t_f/2)))
             };
             return rectX;
         }
@@ -141,8 +141,8 @@ namespace Wosad.Common.Section.SectionTypes
             //Insertion point measured from top
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(Height, WebThickness, new Point2D(0, WebThickness/2.0)),
-                new CompoundShapePart(2*FlangeThickness,FlangeWidth-WebThickness, new Point2D(0, (WebThickness+(FlangeWidth -WebThickness)/2))),
+                new CompoundShapePart(d, t_w, new Point2D(0, t_w/2.0)),
+                new CompoundShapePart(2*t_f,b_f-t_w, new Point2D(0, (t_w+(b_f -t_w)/2))),
             };
             return rectY;
         }
@@ -156,11 +156,11 @@ namespace Wosad.Common.Section.SectionTypes
         protected override void CalculateWarpingConstant()
         {
             double d_prime = 0.0;
-            d_prime = d - tf;
+            d_prime = d - _t_f;
             double b_prime = 0.0;
-            b_prime = b - ((tw) / (2));
-            double alpha = 1 / (2 + (d_prime * tw) / (3 * b_prime * tf));
-            Cw=Math.Pow((d_prime), 3)*Math.Pow((b_prime), 3)*tf*((1-3*alpha)/6+((alpha*alpha) / (2))*(1+((d_prime*tw) / (6*b_prime*tf))));
+            b_prime = _b_f - ((_t_w) / (2));
+            double alpha = 1 / (2 + (d_prime * _t_w) / (3 * b_prime * _t_f));
+            Cw=Math.Pow((d_prime), 3)*Math.Pow((b_prime), 3)*_t_f*((1-3*alpha)/6+((alpha*alpha) / (2))*(1+((d_prime*_t_w) / (6*b_prime*_t_f))));
 
         }
     }

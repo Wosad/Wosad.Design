@@ -32,31 +32,31 @@ namespace Wosad.Common.Section.SectionTypes
     public class SectionIRolled: SectionI, ISectionIRolled
     {
 
-        public SectionIRolled(string Name, double Depth, double FlangeWidth, double FlangeThickness, 
-            double WebThickness, double FilletDistance)
-            : base(Name, Depth,FlangeWidth,FlangeThickness,WebThickness)
+        public SectionIRolled(string Name, double d, double b_f, double t_f, 
+            double t_w, double k)
+            : base(Name, d,b_f,t_f,t_w)
         {
-            this.FilletDistance = FilletDistance;
+            this.k = k;
         }
 
 
-        private double flangeClearDistanceWithoutFillets;
+        private double _T;
 
-        public double FlangeClearDistanceWithoutFillets
+        public double T
         {
             get 
             {
-                flangeClearDistanceWithoutFillets = Height - FlangeThicknessTop - FlangeThicknessBottom - 2*FilletDistance;
-                return flangeClearDistanceWithoutFillets; 
+                _T = d - t_fTop - t_fBot - 2*k;
+                return _T; 
             }
         }
 
-        private double k;
+        private double _k;
 
-        public double FilletDistance
+        public double k
         {
-            get { return k; }
-            set { k = value; }
+            get { return _k; }
+            set { _k = value; }
         }
 
 
@@ -67,14 +67,14 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double FlangeThickness = this.FlangeThicknessTop;
-            double FlangeWidth = this.FlangeWidthTop;
+            double t_f = this.t_fTop;
+            double b_f = this.b_fTop;
 
-            CompoundShapePart       TopFlange       = new CompoundShapePart(FlangeWidth, FlangeThickness, new Point2D(0, Height / 2 - FlangeThickness / 2));
-            CompoundShapePart       BottomFlange    = new CompoundShapePart(FlangeWidth, FlangeThickness, new Point2D(0, -(Height / 2 - FlangeThickness / 2)));
-            PartWithDoubleFillet    TopFillet       = new PartWithDoubleFillet(k, WebThickness, new Point2D(0, Height / 2 - FlangeThickness), true);
-            PartWithDoubleFillet    BottomFillet    = new PartWithDoubleFillet(k, WebThickness, new Point2D(0, -(Height / 2 - FlangeThickness)), false);
-            CompoundShapePart Web = new CompoundShapePart(WebThickness, Height - 2 * FlangeThickness - 2 * FilletDistance, new Point2D(0, 0));
+            CompoundShapePart       TopFlange       = new CompoundShapePart(b_f, t_f, new Point2D(0, d / 2 - t_f / 2));
+            CompoundShapePart       BottomFlange    = new CompoundShapePart(b_f, t_f, new Point2D(0, -(d / 2 - t_f / 2)));
+            PartWithDoubleFillet    TopFillet       = new PartWithDoubleFillet(k, t_w, new Point2D(0, d / 2 - t_f), true);
+            PartWithDoubleFillet    BottomFillet    = new PartWithDoubleFillet(k, t_w, new Point2D(0, -(d / 2 - t_f)), false);
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - 2 * t_f - 2 * k, new Point2D(0, 0));
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
@@ -95,16 +95,16 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.FlangeThicknessTop;
-            double FlangeWidth = this.FlangeWidthTop;
+            double FlangeThickness = this.t_fTop;
+            double FlangeWidth = this.b_fTop;
 
-            CompoundShapePart LeftFlange = new CompoundShapePart(2 * FlangeThickness, (FlangeWidth - WebThickness - 2.0 * k) / 2.0,
-                new Point2D(0,(FlangeWidth -WebThickness-2.0*k)/4.0+WebThickness/2.0+k));
-            CompoundShapePart RightFlange = new CompoundShapePart(2 * FlangeThickness, (FlangeWidth - WebThickness - 2.0 * k) / 2.0,
-                new Point2D(0, -((FlangeWidth - WebThickness - 2.0 * k) / 4.0 + WebThickness / 2.0 + k)));
-            PartWithDoubleFillet    LeftFillet       = new PartWithDoubleFillet(k, 2*FlangeThickness, new Point2D(0, (WebThickness)/2), false);
-            PartWithDoubleFillet RightFillet = new PartWithDoubleFillet(k, 2 * FlangeThickness, new Point2D(0, -(WebThickness)/2), true);
-            CompoundShapePart Web = new CompoundShapePart(Height, WebThickness, new Point2D(0, 0)); 
+            CompoundShapePart LeftFlange = new CompoundShapePart(2 * FlangeThickness, (FlangeWidth - t_w - 2.0 * k) / 2.0,
+                new Point2D(0,(FlangeWidth -t_w-2.0*k)/4.0+t_w/2.0+k));
+            CompoundShapePart RightFlange = new CompoundShapePart(2 * FlangeThickness, (FlangeWidth - t_w - 2.0 * k) / 2.0,
+                new Point2D(0, -((FlangeWidth - t_w - 2.0 * k) / 4.0 + t_w / 2.0 + k)));
+            PartWithDoubleFillet    LeftFillet       = new PartWithDoubleFillet(k, 2*FlangeThickness, new Point2D(0, (t_w)/2), false);
+            PartWithDoubleFillet RightFillet = new PartWithDoubleFillet(k, 2 * FlangeThickness, new Point2D(0, -(t_w)/2), true);
+            CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, 0)); 
 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {

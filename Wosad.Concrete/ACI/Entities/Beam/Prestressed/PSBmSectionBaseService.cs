@@ -58,9 +58,9 @@ namespace Wosad.Concrete.ACI
         {
             double e = GetPrestressingForceEccentricityAtTransfer();
             double P = Math.Abs(GetPrestressForceAtTransfer());
-            double A = this.Section.SliceableShape.Area;
-            double Sb = this.Section.SliceableShape.SectionModulusXBot;
-            double St = this.Section.SliceableShape.SectionModulusXTop;
+            double A = this.Section.SliceableShape.A;
+            double Sb = this.Section.SliceableShape.S_xBot;
+            double St = this.Section.SliceableShape.S_xTop;
 
             double Mcomp=0;
             double Mtens=0;
@@ -88,9 +88,9 @@ namespace Wosad.Concrete.ACI
 
         private double getTopStress(double P, double e, double M, FlexuralCompressionFiberPosition fiberPosition)
         {
-            double A = this.Section.SliceableShape.Area;
-            double Sb = this.Section.SliceableShape.SectionModulusXBot;
-            double St = this.Section.SliceableShape.SectionModulusXTop;
+            double A = this.Section.SliceableShape.A;
+            double Sb = this.Section.SliceableShape.S_xBot;
+            double St = this.Section.SliceableShape.S_xTop;
 
             if (fiberPosition == FlexuralCompressionFiberPosition.Top)
             {
@@ -109,9 +109,9 @@ namespace Wosad.Concrete.ACI
         }
         private double getBottomStress(double P, double e, double M, FlexuralCompressionFiberPosition fiberPosition)
         {
-            double A = this.Section.SliceableShape.Area;
-            double Sb = this.Section.SliceableShape.SectionModulusXBot;
-            double St = this.Section.SliceableShape.SectionModulusXTop;
+            double A = this.Section.SliceableShape.A;
+            double Sb = this.Section.SliceableShape.S_xBot;
+            double St = this.Section.SliceableShape.S_xTop;
 
             if (fiberPosition == FlexuralCompressionFiberPosition.Top)
             {

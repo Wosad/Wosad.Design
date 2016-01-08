@@ -39,12 +39,12 @@ namespace Wosad.Common.Section.Predefined
         public PredefinedSectionRectangle(double Width, double Height, ISection section)
             : base(section)
         {
-            this.Width = Width;
-            this.Height = Height;
+            this.B = Width;
+            this.H = Height;
         }
 
-        public double Height { get; set; }
-        public double Width { get; set; }
+        public double H { get; set; }
+        public double B { get; set; }
 
         public ISection GetWeakAxisClone()
         {

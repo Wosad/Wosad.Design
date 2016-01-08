@@ -45,7 +45,7 @@ namespace Wosad.Common.Section
 
         public string Name { get; set; }
 
-        double Ix;
+        double _Ix;
         public double I_x
         {
             get 
@@ -54,11 +54,11 @@ namespace Wosad.Common.Section
                 {
                     CalculateMomentsOfInertia();
                 }
-                return Ix;
+                return _Ix;
             }
         }
 
-        double Iy;
+        double _Iy;
         public double I_y
         {
             get 
@@ -67,7 +67,7 @@ namespace Wosad.Common.Section
                 {
                     CalculateMomentsOfInertia();
                 }
-                return Iy; 
+                return _Iy; 
             }
         }
 
@@ -79,7 +79,7 @@ namespace Wosad.Common.Section
                 double thisA = r.GetArea();
                 double thisYbar = (r.Centroid.Y - this.Centroid.Y);
                 double thisIx =  r.GetMomentOfInertia() + thisA * Math.Pow(thisYbar, 2);
-                Ix = Ix + thisIx;
+                _Ix = _Ix + thisIx;
             }
 
             //iternally the RectanglesYAxis collection must provide rotated rectangles
@@ -92,13 +92,13 @@ namespace Wosad.Common.Section
                 double thisA = r.GetArea();
                 double thisYbar = (r.Centroid.Y - this.Centroid.X);
                 double thisIy = r.GetMomentOfInertia() + thisA * Math.Pow(thisYbar, 2);
-                Iy = Iy + thisIy;
+                _Iy = _Iy + thisIy;
             }
 
             momentsOfInertiaCalculated = true;
         }
 
-        double Sxt;
+        double _S_xTop;
         public double S_xTop
         {
             get {
@@ -107,13 +107,13 @@ namespace Wosad.Common.Section
                 {
                     CalculateElasticProperies();
                 }
-                return Sxt;
+                return _S_xTop;
             }
         }
 
 
 
-        double Sxb;
+        double _S_xBot;
         public double S_xBot
         {
             get {
@@ -122,11 +122,11 @@ namespace Wosad.Common.Section
                 {
                     CalculateElasticProperies();
                 }
-                return Sxb;
+                return _S_xBot;
             }
         }
 
-        double Syl;
+        double _S_yLeft;
         public double S_yLeft
         {
             get {
@@ -134,11 +134,11 @@ namespace Wosad.Common.Section
                 {
                     CalculateElasticProperies();
                 }
-                return Syl;
+                return _S_yLeft;
             }
         }
 
-        double Syr;
+        double _S_yRight;
         public double S_yRight
         {
             get {
@@ -147,11 +147,11 @@ namespace Wosad.Common.Section
                 {
                     CalculateElasticProperies();
                 }
-                return Syr;
+                return _S_yRight;
             }
         }
 
-        double Zx;
+        double _Z_x;
         public double Z_x
         {
             get 
@@ -160,11 +160,11 @@ namespace Wosad.Common.Section
                 {
                     CalculatePlasticProperties();
                 }
-                return Zx;
+                return _Z_x;
             }
         }
 
-        double Zy;
+        double _Z_y;
         public double Z_y
         {
             get {
@@ -173,7 +173,7 @@ namespace Wosad.Common.Section
                 {
                     CalculatePlasticProperties();
                 }
-                return Zy;
+                return _Z_y;
             }
         }
 
@@ -204,7 +204,7 @@ namespace Wosad.Common.Section
         }
 
         /// <summary>
-        /// Calculates plastic newutral axis (PNA) and plastic section modulus
+        /// Calculates plastic neutral axis (PNA) and plastic section modulus
         /// in accordance with procedure in the foloowing paper:
         /// "CALCULATION OF THE PLASTIC SECTION MODULUS USING THE COMPUTER" 
         /// DOMINIQUE BERNARD BAUER 
@@ -217,7 +217,7 @@ namespace Wosad.Common.Section
         {
         
             double Z = 0.0;
-            double Atar = _A / 2;
+            double Atar = A / 2;
             double Sum_hi=0;  //summation of height of previous rectangles
             double Sum_Ai =0; //summation of areas of previous rectangles
 
@@ -299,11 +299,11 @@ namespace Wosad.Common.Section
             switch (axis)
             {
                 case AnalysisAxis.X:
-                    this.Zx = Z;
+                    this._Z_x = Z;
                     this.ypb = PNACoordinate - YMin;
                     break;
                 case AnalysisAxis.Y:
-                    this.Zy = Z;
+                    this._Z_y = Z;
                     this.xpl = PNACoordinate -XMin;
                     break;
             }
@@ -339,17 +339,17 @@ namespace Wosad.Common.Section
         private void CalculateElasticProperies()
         {
             double yt = YMax - Centroid.Y;
-            double Ix = I_x;
-            Sxt = Ix / yt;
+            //double Ix = I_x;
+            _S_xTop = I_x / yt;
             double ybot = y_Bar;
-            Sxb = Ix / ybot;
+            _S_xBot = I_x / ybot;
             double xl = x_Bar;
-            Syl = Iy / xl;
+            _S_yLeft = I_y / xl;
             double xr = XMax - Centroid.X;
-            Syr = Iy / xr;
-            double A = this._A;
-            rx = Math.Sqrt(Ix / A);
-            ry = Math.Sqrt(Iy / A);
+            _S_yRight = I_y / xr;
+            //double A = this._A;
+            rx = Math.Sqrt(I_x / A);
+            ry = Math.Sqrt(I_y / A);
            
         }
 

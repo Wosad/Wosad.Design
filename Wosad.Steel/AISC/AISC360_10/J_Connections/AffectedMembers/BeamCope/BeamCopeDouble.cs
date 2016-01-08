@@ -53,7 +53,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
          private void GetCopeSection()
          {
-             _rectangle = new SectionRectangular(this.Section.WebThickness, this.h_o);
+             _rectangle = new SectionRectangular(this.Section.t_w, this.h_o);
          }
 
          protected override double GetS_net()
@@ -61,7 +61,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
              double S_net = 0.0;
              if (rectangle!=null)
              {
-                 S_net = rectangle.SectionModulusXTop;
+                 S_net = rectangle.S_xTop;
                  // note: top and bottom S_x are the same for rectangles
              }
              return S_net;
@@ -72,7 +72,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
              double Z_net = 0.0;
              if (rectangle != null)
              {
-                 Z_net = rectangle.PlasticSectionModulusX;
+                 Z_net = rectangle.Z_x;
                  // note: top and bottom S_x are the same for rectangles
              }
              return Z_net;
@@ -82,36 +82,40 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
          public override double GetF_cr()
          {
              double F_cr;
+
              bool PermissibleCopeGeometry = CheckCopeGeometry();
              if (PermissibleCopeGeometry==true)
              {
                  double E = Material.ModulusOfElasticity;
                  double f_d = Get_LateralTorsionalBucklingAdjustmentFactor();
-                 F_cr = 0.62 * Math.PI * E * ((Math.Pow(t_w, 2)) / (c * h_o)) * f_d; 
+                 F_cr = 0.62 * Math.PI * E * ((Math.Pow(t_w, 2)) / (c * h_o)) * f_d; //Manual Eq 9-12
              }
              else
              {
                  F_cr = GetFcrGeneral();
              }
 
-             return F_cr;
+             double F;
+             double F_y = Material.YieldStress;
+             F = Math.Abs(F_cr) > F_y ? F_y : Math.Abs(F_cr);
+             return F;
          }
 
          private double Get_LateralTorsionalBucklingAdjustmentFactor()
          {
-             double d = Section.Height;
-             double f_d = 3.5 - 7.5 * (((d_c) / (d)));
+             double d = Section.d;
+             double f_d = 3.5 - 7.5 * (((d_c) / (d))); //Manual Eq 9-13
              return f_d;
          }
 
          protected override double Get_h_o()
          {
-             return Section.Height - 2 * d_c;
+             return Section.d - 2 * d_c;
          }
 
          public override double Get_t_w()
          {
-             return Section.WebThickness;
+             return Section.t_w;
          }
     }
 }

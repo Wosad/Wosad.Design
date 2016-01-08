@@ -41,7 +41,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 CompactnessClassFlexure cClass = GetCompactnessClass();
                 if (cClass == CompactnessClassFlexure.Noncompact || cClass == CompactnessClassFlexure.Slender)
                 {
-                    double Sx = Section.Shape.SectionModulusXTop;
+                    double Sx = Section.Shape.S_xTop;
                     if (cClass == CompactnessClassFlexure.Noncompact)
                     {
                         //noncompact

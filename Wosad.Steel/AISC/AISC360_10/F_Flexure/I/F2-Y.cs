@@ -36,7 +36,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //this method must be virtual as it may be not applicable for non compact sections
         {
             //double Fy = this.Section.Material.YieldStress;
-            //double Zx = Section.SectionBase.PlasticSectionModulusX;
+            //double Zx = Section.SectionBase.Z_x;
             double Mn = GetMajorPlasticMomentCapacity().Value;
             double M = GetFlexuralDesignValue(Mn);
 
@@ -55,7 +55,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
             double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.Shape.PlasticSectionModulusX;
+            double Zx = Section.Shape.Z_x;
 
             double M = Fy * Zx;
             Mp = M / 12.0;
@@ -86,7 +86,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
             double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.Shape.PlasticSectionModulusY;
+            double Zy = Section.Shape.Z_y;
             double M = Fy * Zy;
             Mp = M / 12.0;
 

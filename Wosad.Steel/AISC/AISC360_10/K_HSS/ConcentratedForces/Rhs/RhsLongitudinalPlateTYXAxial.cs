@@ -75,21 +75,21 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
             ISectionHollow hollowMember = Hss.Section as ISectionHollow;
             if (hollowMember !=null)
 	        {
-		        t = hollowMember.DesignWallThickness;
+		        t = hollowMember.t_des;
 	        }
             else
 	            {
                     throw new Exception ("Member must be of type IHollowMember");
 	            }
 
-            double tp = Plate.Section.Height;
+            double tp = Plate.Section.H;
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube ==null)
             {
                 throw new Exception("Member must be of type SectionTube");
             }
 
-            double B = tube.Width;
+            double B = tube.B;
             double lb = tp; //Can add functionality to distinguish between lb and tp TODo:
             double Qf = GetChordStressInteractionQf(PlateOrientation.Longitudinal, UtilizationRatio);
 

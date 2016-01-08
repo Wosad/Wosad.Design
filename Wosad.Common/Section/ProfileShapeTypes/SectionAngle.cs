@@ -30,34 +30,34 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public class SectionAngle : CompoundShape, ISectionAngle, ISliceableSection
     {
-        public SectionAngle(string Name, double Height, double Width, double Thickness)
+        public SectionAngle(string Name, double h, double b, double t)
             : base(Name)
         {
-            this.h = Height;
-            this.b = Width;
-            this.t = Thickness;
+            this._d = h;
+            this._b = b;
+            this._t = t;
         }
 
-        private double b;
+        private double _b;
 
-        public double Width
+        public double b
         {
-            get { return b; }
+            get { return _b; }
         }
 
-        private double h;
+        private double _d;
 
-        public double Height
+        public double d
         {
-            get { return h; }
-            set { h = value; }
+            get { return _d; }
+            set { _d = value; }
         }
 
-        private double t;
+        private double _t;
 
-        public double Thickness
+        public double t
         {
-            get { return t; }
+            get { return _t; }
         }
         
 
@@ -65,7 +65,7 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName= this.Name+"_clone";
-            return new SectionAngle(cloneName, b, h, t);
+            return new SectionAngle(cloneName, b, _d, t);
         }
 
 
@@ -82,22 +82,22 @@ namespace Wosad.Common.Section.SectionTypes
             get { throw new NotImplementedException(); }
         }
 
-        public double SectionModulusPrincipalMajor
+        public double S_major
         {
             get { throw new NotImplementedException(); }
         }
 
-        public double SectionModulusPrincipalMinor
+        public double S_minor
         {
             get { throw new NotImplementedException(); }
         }
 
-        public double RadiusOfGyrationPrincipalMajor
+        public double r_major
         {
             get { throw new NotImplementedException(); }
         }
 
-        public double RadiusOfGyrationPrincipalMinor
+        public double r_minor
         {
             get { throw new NotImplementedException(); }
         }
@@ -113,8 +113,8 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(Thickness,Height-Thickness, new Point2D(Thickness/2.0,(Height-Thickness)/2)),
-                new CompoundShapePart(Width,Thickness, new Point2D(Width/2,Thickness/2)),
+                new CompoundShapePart(t,d-t, new Point2D(t/2.0,(d-t)/2)),
+                new CompoundShapePart(b,t, new Point2D(b/2,t/2)),
             };
             return rectX;
         }
@@ -131,8 +131,8 @@ namespace Wosad.Common.Section.SectionTypes
             //Insertion point at the top of TEE
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(Height,Thickness, new Point2D(0, -Thickness/2.0)),
-                new CompoundShapePart(Thickness, Width-Thickness, new Point2D(0,-((Width-Thickness)/2+Thickness))),
+                new CompoundShapePart(d,t, new Point2D(0, -t/2.0)),
+                new CompoundShapePart(t, b-t, new Point2D(0,-((b-t)/2+t))),
             };
             return rectY;
         }
@@ -146,8 +146,8 @@ namespace Wosad.Common.Section.SectionTypes
         {
             throw new NotImplementedException();
             double b_prime = this.b-t/2;
-            double d_prime = this.h-t/2;
-            this.Cw=((Math.Pow(t, 3)) / (36))*(Math.Pow((h), 3)+Math.Pow((b), 3));
+            double d_prime = this._d-t/2;
+            this.Cw=((Math.Pow(t, 3)) / (36))*(Math.Pow((_d), 3)+Math.Pow((b), 3));
         }
         /// <summary>
         /// From:
@@ -157,7 +157,7 @@ namespace Wosad.Common.Section.SectionTypes
         protected override void CalculateTorsionalConstant()
         {
             double b_prime = this.b-t/2;
-            double d_prime = this.h-t/2;
+            double d_prime = this._d-t/2;
             this._J=(((d_prime+b_prime)*Math.Pow(t, 3)) / (3));
         }
     }

@@ -50,9 +50,9 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
             // Use equation (K1-3) to get maximum plate thickness
             double Fu = Hss.Material.UltimateStress;
             double Fyp = Plate.Material.YieldStress;
-            double t = Hss.Section.DesignWallThickness;
+            double t = Hss.Section.t_des;
             double tmax = GetMaximumPlateThickness();
-            Plate.Section.Width = tmax;
+            Plate.Section.B = tmax;
 
             //Calculate plate shear capacity per Chapter J
             AffectedElementInFlexureAndShear ae = new AffectedElementInFlexureAndShear(Plate,  this.CalcLog);
@@ -74,7 +74,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         public double GetMaximumPlateThickness()
         {
             double tpMax = 0.0;
-            double t = Hss.Section.DesignWallThickness;
+            double t = Hss.Section.t_des;
             double Fu = Hss.Material.UltimateStress;
             double Fyp = Plate.Material.YieldStress;
 

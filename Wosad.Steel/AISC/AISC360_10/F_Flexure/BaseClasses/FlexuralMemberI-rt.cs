@@ -46,7 +46,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
                 ho = this.GetFlangeCentroidDistanceho();
                 bfc = this.GetCompressionFlangeWidthbfc(compressionFiberPosition);
-                h = SectionI.WebHeight;
+                h = SectionI.h_web;
                 hc = Gethc(compressionFiberPosition);
                 tfc =  GetCompressionFlangeThicknesstfc(compressionFiberPosition);
                 tw = this.Gettw();

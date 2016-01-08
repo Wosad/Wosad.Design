@@ -80,19 +80,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             L = this.UnbracedLengthFlexure;
             K = this.EffectiveLengthFactorFlexure;
 
-            Iy = Section.Shape.MomentOfInertiaY;
+            Iy = Section.Shape.I_y;
 
-            Sxbot = Section.Shape.SectionModulusXBot;
-            Sxtop = Section.Shape.SectionModulusXTop;
+            Sxbot = Section.Shape.S_xBot;
+            Sxtop = Section.Shape.S_xTop;
 
             Sx = Math.Min(Sxbot, Sxtop);
 
-            Zx = Section.Shape.PlasticSectionModulusX;
+            Zx = Section.Shape.Z_x;
 
 
-            //Cw = Section.SectionBase.WarpingConstant;
+            //Cw = Section.SectionBase.C_w;
 
-            //J = Section.SectionBase.TorsionalConstant;
+            //J = Section.SectionBase.J;
             Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
             //c =  Get_c();

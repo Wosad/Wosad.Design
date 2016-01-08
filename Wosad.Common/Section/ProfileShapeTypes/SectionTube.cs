@@ -31,17 +31,17 @@ namespace Wosad.Common.Section.SectionTypes
     {
 
 
-        public SectionTube(string Name, double Depth, double Width, double Thickness, double DesignWallThickness,
+        public SectionTube(string Name, double H, double B, double t, double t_des,
             double CornerRadiusOutside = -1)
-            : base(Name, Depth, Width, DesignWallThickness, DesignWallThickness)
+            : base(Name, H, B, t_des, t_des)
         {
-            this.Height = Depth;
-            this.Width = Width;
-            this.WallThickness = Thickness;
-            this.t = DesignWallThickness;
+            this.H = H;
+            this.B = B;
+            this.WallThickness = t;
+            this.t = t_des;
             if (CornerRadiusOutside == -1)
             {
-                this.r_c = 1.5 * Thickness;
+                this.r_c = 1.5 * t;
             }
             else
             {
@@ -64,7 +64,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         private double h;
 
-        public double Height
+        public double H
         {
             get { return h; }
             set { h = value; }
@@ -72,7 +72,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         private double b;
 
-        public double Width
+        public double B
         {
             get { return b; }
             set { b = value; }
@@ -89,7 +89,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         private double t;
 
-        public double DesignWallThickness
+        public double t_des
         {
             get { return t; }
             set { t = value; }

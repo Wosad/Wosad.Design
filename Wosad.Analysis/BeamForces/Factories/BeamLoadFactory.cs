@@ -27,23 +27,17 @@ namespace Wosad.Analysis
     public class BeamLoadFactory : IBeamLoadFactory
     {
 
-       public double L               {get;set;}
-       public double P               {get;set;}
-       public double M               {get;set;}
-       public double w               {get;set;}
-       public double LoadDimension_a {get;set;}
-       public double LoadDimension_b {get;set;}
-       public double LoadDimension_c {get;set;}
-       public double P1              {get;set;}
-       public double P2              {get;set;}
-       public double M1              {get;set;}
-       public double M2              {get;set;}
-       public IParameterExtractor ParameterExtractor  {get;set;}
 
-        public BeamLoadFactory(IParameterExtractor Extractor)
-        {
-            this.ParameterExtractor = Extractor;
-        }
+       //public IParameterExtractor ParameterExtractor  {get;set;}
+        protected BeamFactoryData d {get;set;}
+       public BeamLoadFactory(BeamFactoryData data)
+       {
+           this.d = data;
+       }
+        //public BeamLoadFactory(IParameterExtractor Extractor)
+        //{
+        //    this.ParameterExtractor = Extractor;
+        //}
         public LoadBeam GetLoad(string BeamCaseId)
         {
             LoadBeam Load = null;
@@ -51,17 +45,17 @@ namespace Wosad.Analysis
             string loadingType = BeamCaseId.Substring(2, 1); //A-concentrated, B-distributed etc ...
             string subCase = BeamCaseId.Substring(BeamCaseId.Length - 1, 1); // specific sub-case
 
-                    L = ParameterExtractor.GetParam("L");
-                    P = ParameterExtractor.GetParam("P");
-                    M = ParameterExtractor.GetParam("M");
-                    w = ParameterExtractor.GetParam("w");
-                    LoadDimension_a = ParameterExtractor.GetParam("LoadDimension_a");
-                    LoadDimension_b = ParameterExtractor.GetParam("LoadDimension_b");
-                    LoadDimension_c= L-LoadDimension_a-LoadDimension_b; //e.GetParam("LoadDimension_c");
-                    P1 = ParameterExtractor.GetParam("P1");
-                    P2 = ParameterExtractor.GetParam("P2");
-                    M1 = ParameterExtractor.GetParam("M1");
-                    M2 = ParameterExtractor.GetParam("M2");
+                    //L = ParameterExtractor.GetParam("L");
+                    //P = ParameterExtractor.GetParam("P");
+                    //M = ParameterExtractor.GetParam("M");
+                    //w = ParameterExtractor.GetParam("w");
+                    //LoadDimension_a = ParameterExtractor.GetParam("LoadDimension_a");
+                    //LoadDimension_b = ParameterExtractor.GetParam("LoadDimension_b");
+                    //LoadDimension_c= L-LoadDimension_a-LoadDimension_b; //e.GetParam("LoadDimension_c");
+                    //P1 = ParameterExtractor.GetParam("P1");
+                    //P2 = ParameterExtractor.GetParam("P2");
+                    //M1 = ParameterExtractor.GetParam("M1");
+                    //M2 = ParameterExtractor.GetParam("M2");
 
             Load = GetBeamLoad(loadingType,subCase);
 
@@ -102,19 +96,19 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadConcentratedSpecial(P);
+                    Load = new LoadConcentratedSpecial(d.P);
                     break;
                 case "2":
-                    Load = new LoadConcentratedGeneral(P, LoadDimension_a);
+                    Load = new LoadConcentratedGeneral(d.P, d.a_load);
                     break;
                 case "3":
-                    Load = new LoadConcentratedDoubleSymmetrical(P, LoadDimension_a);
+                    Load = new LoadConcentratedDoubleSymmetrical(d.P, d.a_load);
                     break;
                 case "4":
-                    Load = new LoadConcentratedDoubleUnsymmetrical(P1, P2, LoadDimension_a, LoadDimension_b);
+                    Load = new LoadConcentratedDoubleUnsymmetrical(d.P1, d.P2, d.a_load, d.b_load);
                     break;
                 case "5":
-                    Load = new LoadConcentratedCenterWithEndMoments(P, M1, M2);
+                    Load = new LoadConcentratedCenterWithEndMoments(d.P, d.M1, d.M2);
                     break;
                 default:
                     Load = null;
@@ -128,10 +122,10 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadDistributedUniform(w);
+                    Load = new LoadDistributedUniform(d.w);
                     break;
                 case "2":
-                    Load = new LoadDistributedUniformWithEndMoments(w, M1, M2);
+                    Load = new LoadDistributedUniformWithEndMoments(d.w, d.M1, d.M2);
                     break;
             }
             return Load;
@@ -139,7 +133,7 @@ namespace Wosad.Analysis
         public virtual LoadBeam GetPartialDistributedCase(string subCase)
         {
             LoadBeam Load = null;
-                    Load = new LoadDistributedGeneral(w, LoadDimension_a, LoadDimension_a + LoadDimension_b);
+                    Load = new LoadDistributedGeneral(d.w, d.a_load, d.a_load + d.b_load);
             return Load;
         }
         public virtual LoadBeam GetVaryingCase(string subCase)
@@ -148,10 +142,10 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.Triangle);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.Triangle);
                     break;
                 case "2":
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.DoubleTriangle);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.DoubleTriangle);
                     break;
             }
             return Load;
@@ -162,16 +156,16 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadMomentLeftEnd(M);
+                    Load = new LoadMomentLeftEnd(d.M);
                     break;
                 case "2":
-                    Load = new LoadMomentGeneral(M, LoadDimension_a);
+                    Load = new LoadMomentGeneral(d.M, d.a_load);
                     break;
                 case "3":
-                    Load = new LoadMomentBothEnds(M1, M2);
+                    Load = new LoadMomentBothEnds(d.M1, d.M2);
                     break;
                 case "4":
-                    Load = new LoadMomentRightEnd(M);
+                    Load = new LoadMomentRightEnd(d.M);
                     break;
             }
             return Load;

@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
@@ -42,8 +45,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 if (Section.Shape is ISectionAngle)
                 {
                     ISectionAngle ang = Section.Shape as ISectionAngle;
-                    VerticalLegCompactness = new LegOfSingleAngle(Section.Material, ang.Height, ang.Thickness);
-                    HorizontalLegCompactness = new LegOfSingleAngle(Section.Material, ang.Width, ang.Thickness);
+                    VerticalLegCompactness = new LegOfSingleAngle(Section.Material, ang.d, ang.t);
+                    HorizontalLegCompactness = new LegOfSingleAngle(Section.Material, ang.b, ang.t);
                 }
                 else
                 {

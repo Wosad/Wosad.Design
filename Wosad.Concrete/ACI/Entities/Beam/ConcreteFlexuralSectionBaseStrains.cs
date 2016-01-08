@@ -95,7 +95,7 @@ namespace Wosad.Concrete.ACI
             //Find rebar resultant force
             // for initial estimate include only rebar below the centroid line 
             // as a reasonable estimate for most regular beams
-            double centroidY = Section.SliceableShape.YMin + Section.SliceableShape.CentroidYtoBottomEdge;
+            double centroidY = Section.SliceableShape.YMin + Section.SliceableShape.y_Bar;
             ForceMomentContribution rebarResultant = null;
 
             switch (CompressionFiberPosition)

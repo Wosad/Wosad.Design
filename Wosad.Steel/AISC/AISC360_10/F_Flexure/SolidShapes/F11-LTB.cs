@@ -60,8 +60,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 ISectionRectangular rectSection = this.Section.Shape as ISectionRectangular;
                 double E = this.Section.Material.ModulusOfElasticity;
                 double Fy = this.Section.Material.YieldStress;
-                double d = rectSection.Height;
-                double t = rectSection.Width;
+                double d = rectSection.H;
+                double t = rectSection.B;
                 double Lr = GetLr(d, E, Fy, t);
                 ls.Value = Lr; ls.IsApplicable = true;
                 return ls;
@@ -83,8 +83,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 ISectionRectangular rectSection = this.Section.Shape as ISectionRectangular;
                 double E = this.Section.Material.ModulusOfElasticity;
                 double Fy = this.Section.Material.YieldStress;
-                double d = rectSection.Height;
-                double t = rectSection.Width;
+                double d = rectSection.H;
+                double t = rectSection.B;
                 double Lp = GetLp(d, E, Fy, t);
                 ls.IsApplicable = true; ls.Value = Lp;
             }

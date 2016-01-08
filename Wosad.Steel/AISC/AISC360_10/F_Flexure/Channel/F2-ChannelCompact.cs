@@ -69,45 +69,45 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         protected override double GetHeight()
         {
-            return SectionChannel.Height;
+            return SectionChannel.d;
         }
 
         protected override double GetBfTop()
         {
-            return SectionChannel.FlangeWidth;
+            return SectionChannel.b_f;
         }
         protected override double Get_tfTop()
         {
-            return SectionChannel.FlangeThickness;
+            return SectionChannel.t_f;
         }
 
         protected override double GetBfBottom()
         {
-            return SectionChannel.FlangeWidth;
+            return SectionChannel.b_f;
         }
         protected override double Get_tfBottom()
         {
-            return SectionChannel.FlangeThickness;
+            return SectionChannel.t_f;
         }
 
         //protected override double GetkBottom()
         //{
-        //    return SectionChannel.FilletDistance;
+        //    return SectionChannel.k;
         //}
         //protected override double GetkTop()
         //{
-        //    return SectionChannel.FilletDistance;
+        //    return SectionChannel.k;
         //}
 
         protected override double Gettw()
         {
-            return SectionChannel.WebThickness;
+            return SectionChannel.t_w;
         }
 
 
         protected override double GetFlangeCentroidDistanceho()
         {
-            return SectionChannel.FlangeCentroidDistance;
+            return SectionChannel.h_o;
         }
 
 
@@ -115,9 +115,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
        public override double Get_c()
        {
            
-           double Iy = SectionChannel.MomentOfInertiaY;
-           double ho = SectionChannel.FlangeCentroidDistance;
-           double Cw = SectionChannel.WarpingConstant;
+           double Iy = SectionChannel.I_y;
+           double ho = SectionChannel.h_o;
+           double Cw = SectionChannel.C_w;
            double c=ho/2.0*Math.Sqrt(Iy/Cw);
 
            

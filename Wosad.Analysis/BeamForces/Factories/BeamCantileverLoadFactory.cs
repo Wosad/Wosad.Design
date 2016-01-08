@@ -24,11 +24,20 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Analysis
 {
+    /// <summary>
+    /// Overrides beam load factory  for the cantilever beam case
+    /// </summary>
     public class BeamCantileverLoadFactory : BeamLoadFactory
     {
-        //overrides beam load factory  for the cantilever beam case.
-        public BeamCantileverLoadFactory(IParameterExtractor Extractor)
-            : base(Extractor)
+
+        //public BeamCantileverLoadFactory(IParameterExtractor Extractor)
+        //    : base(Extractor)
+        //{
+
+        //}
+
+        public BeamCantileverLoadFactory(BeamFactoryData data)
+            : base(data)
         {
 
         }
@@ -38,10 +47,10 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "1":
-                    Load = new LoadConcentratedSpecial(P, LoadConcentratedSpecialCase.CantileverTip);
+                    Load = new LoadConcentratedSpecial(d.P, LoadConcentratedSpecialCase.CantileverTip);
                     break;
                 default:
-                    Load = new LoadConcentratedGeneral(P, LoadDimension_a);
+                    Load = new LoadConcentratedGeneral(d.P, d.a_load);
                     break;
             }
             return Load;
@@ -49,7 +58,7 @@ namespace Wosad.Analysis
 
         public override LoadBeam GetPartialDistributedCase(string subCase)
         {
-            return new  LoadDistributedGeneral(w,0.0,LoadDimension_b);
+            return new  LoadDistributedGeneral(d.w,0.0,d.b_load);
         }
 
         public override LoadBeam GetVaryingCase(string subCase)
@@ -58,10 +67,10 @@ namespace Wosad.Analysis
             switch (subCase)
             {
                 case "2":
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.InvertedTriangle);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.InvertedTriangle);
                     break;
                 default:
-                    Load = new LoadDistributedUniform(w, LoadDistributedSpecialCase.Triangle);
+                    Load = new LoadDistributedUniform(d.w, LoadDistributedSpecialCase.Triangle);
                     break;
             }
             return Load;

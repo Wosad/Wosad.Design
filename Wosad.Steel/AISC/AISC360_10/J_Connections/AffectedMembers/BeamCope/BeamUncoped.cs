@@ -36,7 +36,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         public double GetFlexuralStrength()
         {
-            throw new NotImplementedException();
+            //Confirm if need to use Z_x
+            double F_y = Material.YieldStress;
+            double S_x = Math.Min(this.Section.S_xTop, this.Section.S_xBot);
+            return F_y * S_x;
         }
 
         public ISectionI Section { get; set; }

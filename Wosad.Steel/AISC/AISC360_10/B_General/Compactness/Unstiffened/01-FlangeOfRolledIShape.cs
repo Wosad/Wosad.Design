@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Steel.AISC.Exceptions;
@@ -45,12 +48,12 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             switch (location)
             {
                 case ElementLocation.Top:
-                    bf = s.FlangeWidthTop;
-                    tf = s.FlangeThicknessTop;
+                    bf = s.b_fTop;
+                    tf = s.t_fTop;
                     break;
                 case ElementLocation.Bottom:
-                    bf = s.FlangeWidthTop;
-                    tf = s.FlangeThicknessTop;
+                    bf = s.b_fTop;
+                    tf = s.t_fTop;
                     break;
                 default:
                     throw new Exception("Invalid location is specified for I-beam flange");

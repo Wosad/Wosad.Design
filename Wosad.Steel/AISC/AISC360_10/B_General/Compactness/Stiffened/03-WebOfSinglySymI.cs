@@ -67,21 +67,21 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                 switch (compressionFiberPosition)
                 {
                     case FlexuralCompressionFiberPosition.Top:
-                        Sc = SectionI.SectionModulusXTop;
-                        hc = SectionI.Height - SectionI.CentroidYtoBottomEdge - SectionI.FlangeThicknessTop;
-                        hp = SectionI.Height - SectionI.PlasticCentroidYtoBottomEdge - SectionI.FlangeThicknessTop;
+                        Sc = SectionI.S_xTop;
+                        hc = SectionI.d - SectionI.y_Bar - SectionI.t_fTop;
+                        hp = SectionI.d - SectionI.y_pBar - SectionI.t_fTop;
                         break;
                     case FlexuralCompressionFiberPosition.Bottom:
-                        Sc = SectionI.SectionModulusXBot;
-                        hc = SectionI.CentroidYtoBottomEdge - SectionI.FlangeThicknessBottom;
-                        hp = SectionI.PlasticCentroidYtoBottomEdge - SectionI.FlangeThicknessBottom;
+                        Sc = SectionI.S_xBot;
+                        hc = SectionI.y_Bar - SectionI.t_fBot;
+                        hp = SectionI.y_pBar - SectionI.t_fBot;
                         break;
                     default:
                         throw new Exception("Left and Right Compression Fiber positions are not supported");
                 }
                 double Fy =  Material.YieldStress;
                 My = Sc * Fy;
-                double Z = SectionI.PlasticSectionModulusX;
+                double Z = SectionI.Z_x;
                 Mp = Z * Fy;
 
                 double lambda_r = this.GetLambda_r(StressType.Flexure);

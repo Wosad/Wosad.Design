@@ -67,7 +67,7 @@ namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
         double GetOutOfPlaneMomentForPlateBending(double UtilizationRatio,  bool ConnectingSurfaceInTension)
         {
             double M = 0.0;
-            double Bp = Plate.Section.Height;
+            double Bp = Plate.Section.H;
             double R = HssLocalYieldingLS(UtilizationRatio,ConnectingSurfaceInTension);
             M = 0.5 * Bp * R; //note R already contains reduction factors
 

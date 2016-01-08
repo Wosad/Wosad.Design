@@ -40,8 +40,8 @@ namespace  Wosad.Steel.AISC360_10
             K_minor = this.EffectiveLengthFactorZ;
             L_major=this.UnbracedLengthY ;
             L_minor=this.UnbracedLengthZ ;
-            r_major=this.Section.Shape.RadiusOfGyrationX ;
-            r_minor=this.Section.Shape.RadiusOfGyrationY ;
+            r_major=this.Section.Shape.r_x;
+            r_minor=this.Section.Shape.r_y;
 
         }
 

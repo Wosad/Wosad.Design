@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
  
 
@@ -31,10 +34,10 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             if (section is ISectionI)
             {
                 ISectionI s = section as ISectionI;
-                double bfTop = s.FlangeWidthTop;
-                double bfBot = s.FlangeWidthBottom;
-                double tfTop = s.FlangeThicknessTop;
-                double tfBot = s.FlangeThicknessBottom;
+                double bfTop = s.b_fTop;
+                double bfBot = s.b_fBot;
+                double tfTop = s.t_fTop;
+                double tfBot = s.t_fBot;
                 if (bfTop == bfBot && tfTop == tfBot)
                 {
                     return true;

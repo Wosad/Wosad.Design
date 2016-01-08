@@ -410,10 +410,10 @@ namespace Wosad.Common.Section
 
         private void CalculateMinAndMaxCoordinates()
         {
-            double MinX = double.PositiveInfinity;
-            double MaxX = double.PositiveInfinity;
-            double MinY = double.PositiveInfinity;
-            double MaxY = double.PositiveInfinity;
+            double MinXtemp = double.PositiveInfinity;
+            double MaxXtemp = double.NegativeInfinity;
+            double MinYtemp = double.PositiveInfinity;
+            double MaxYtemp = double.NegativeInfinity;
 
             foreach (var r in RectanglesXAxis)
             {
@@ -421,13 +421,17 @@ namespace Wosad.Common.Section
                 double thisMinX = r.Centroid.X-r.b/2.0;
                 double thisMaxX = r.Centroid.X+r.b/2.0;
                 double thisMinY = r.Centroid.Y-r.h/2.0;
-                double thisMaxY = r.Centroid.Y+r.h/2.0;  
-                
-                MinX = thisMinX < MinX ? thisMinX : MinX;
-                MaxX = thisMaxX > MaxX ? thisMaxX : MaxX;
-                MinY = thisMinY < MinY ? thisMinY : MinY;
-                MaxY = thisMaxY > MaxY ? thisMaxY : MaxY;
+                double thisMaxY = r.Centroid.Y+r.h/2.0;
+
+                MinXtemp = thisMinX < MinXtemp ? thisMinX : MinXtemp;
+                MaxXtemp = thisMaxX > MaxXtemp ? thisMaxX : MaxXtemp;
+                MinYtemp = thisMinY < MinYtemp ? thisMinY : MinYtemp;
+                MaxYtemp = thisMaxY > MaxYtemp ? thisMaxY : MaxYtemp;
             }
+            this._XMin = MinXtemp;
+            this._XMax = MaxXtemp;
+            this._YMin = MinYtemp;
+            this._YMax = MaxYtemp;
         }
 
         enum SLiceType

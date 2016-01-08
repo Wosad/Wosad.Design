@@ -50,7 +50,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void GetCopeSection()
         {
-             _tee = new SectionTee(null, d - d_c, Section.FlangeWidthTop, Section.FlangeThicknessBottom, Section.WebThickness);
+             _tee = new SectionTee(null, d - d_c, Section.b_fTop, Section.t_fBot, Section.t_w);
         }
 
         public double GetPlateBucklingModelAdjustmentFactor()
@@ -83,8 +83,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         }
         protected override double GetS_net()
         {
-            double S_top = tee.SectionModulusXTop;
-            double S_bot = tee.SectionModulusXBot;
+            double S_top = tee.S_xTop;
+            double S_bot = tee.S_xBot;
             return Math.Min(S_top, S_bot);
         }
 
@@ -97,29 +97,31 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             bool PermissibleCopeGeometry = CheckCopeGeometry();
             if (PermissibleCopeGeometry == true)
             {
-                F_cr = 26210 * Math.Pow((((t_w) / (h_o))), 2) * f * k;
+                F_cr = 26210 * Math.Pow((((t_w) / (h_o))), 2) * f * k; //Manual Eq. 9-7
             }
             else
             {
                 F_cr = GetFcrGeneral();
             }
-            
-            return F_cr;
+            double F;
+            double F_y = Material.YieldStress;
+            F = Math.Abs(F_cr) > F_y ? F_y : Math.Abs(F_cr);
+            return F;
         }
 
         protected override double GetZ_net()
         {
-            return tee.PlasticSectionModulusX;
+            return tee.Z_x;
         }
 
         protected override double Get_h_o()
         {
-            return tee.Height - d_c;
+            return tee.d - d_c;
         }
 
         public override double Get_t_w()
         {
-            return tee.WebThickness;
+            return tee.t_w;
         }
     }
 }

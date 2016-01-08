@@ -38,7 +38,7 @@ namespace Wosad.Common.Section.Predefined
         }
 
         public PredefinedSectionChannel(
-           double Heigh,
+           double d,
            double FlangeCentroidDistance,
            double FlangeClearDistance,
            double FlangeThickness,
@@ -47,24 +47,24 @@ namespace Wosad.Common.Section.Predefined
            double FilletDistance,
            ISection section): base(section)
         {
-            this.height                  =Heigh                   ;
+            this._h                  =d                   ;
             this.flangeCentroidDistance  =FlangeCentroidDistance  ;
             this.flangeClearDistance     =FlangeClearDistance     ;
             this.flangeThickness      =FlangeThickness    ;
-            this.flangeWidth       =FlangeWidth       ;
-            this.webThickness            =WebThickness            ;
-            this.filletDistance       =FilletDistance       ;
+            this._b_f       =FlangeWidth       ;
+            this._t_w            =WebThickness            ;
+            this._k       =FilletDistance       ;
         }
 
-        double height;
+        double _h;
 
-        public double Height
+        public double d
         {
-            get { return height; }
+            get { return _h; }
         }
         double flangeCentroidDistance;
 
-        public double FlangeCentroidDistance
+        public double h_o
         {
             get { return flangeCentroidDistance; }
         }
@@ -76,29 +76,29 @@ namespace Wosad.Common.Section.Predefined
         }
         double flangeThickness;
 
-        public double FlangeThickness
+        public double t_f
         {
             get { return flangeThickness; }
         }
-        double flangeWidth;
+        double _b_f;
 
-        public double FlangeWidth
+        public double b_f
         {
-            get { return flangeWidth; }
+            get { return _b_f; }
         }
-        double webThickness;
+        double _t_w;
 
-        public double WebThickness
+        public double t_w
         {
-            get { return webThickness; }
-            set { webThickness = value; }
+            get { return _t_w; }
+            set { _t_w = value; }
         }
-        double filletDistance;
+        double _k;
 
-        public double FilletDistance
+        public double k
         {
-            get { return filletDistance; }
-            set { filletDistance = value; }
+            get { return _k; }
+            set { _k = value; }
         }
 
 

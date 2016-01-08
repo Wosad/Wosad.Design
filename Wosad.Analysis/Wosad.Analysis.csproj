@@ -51,8 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wosad.Common, Version=0.0.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.1.4\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.1.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.1.8\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -84,6 +84,7 @@
     <Compile Include="BeamForces\Cases\FixedFixed\C4C_1_UniformPartialLoad.cs" />
     <Compile Include="BeamForces\Cases\FixedFixed\C4E_1_MomentAtAnyPoint.cs" />
     <Compile Include="BeamForces\Cases\FixedFixed\C4E_2_MomentAtAnyPoint.cs" />
+    <Compile Include="BeamForces\Factories\BeamFactoryData.cs" />
     <Compile Include="BeamForces\Interfaces\IAnalysisBeam.cs" />
     <Compile Include="BeamForces\Interfaces\IBeamCaseFactory.cs" />
     <Compile Include="BeamForces\Interfaces\IBeamLoadFactory.cs" />

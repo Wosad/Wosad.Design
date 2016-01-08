@@ -66,45 +66,45 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         protected virtual double GetHeight()
         {
-            return SectionI.Height;
+            return SectionI.d;
         }
 
         protected virtual double GetBfTop()
         {
-            return SectionI.FlangeWidthTop;
+            return SectionI.b_fTop;
         }
         protected virtual double Get_tfTop()
         {
-            return SectionI.FlangeThicknessTop;
+            return SectionI.t_fTop;
         }
 
         protected virtual double GetBfBottom()
         {
-            return SectionI.FlangeWidthBottom;
+            return SectionI.b_fBot;
         }
         protected virtual double Get_tfBottom()
         {
-            return SectionI.FlangeThicknessBottom;
+            return SectionI.t_fBot;
         }
 
         //protected virtual double GetkBottom()
         //{
-        //    return SectionI.FilletDistance;
+        //    return SectionI.k;
         //}
         //protected virtual double GetkTop()
         //{
-        //    return SectionI.FilletDistance;
+        //    return SectionI.k;
         //}
 
         protected virtual double Gettw()
         {
-            return SectionI.WebThickness;
+            return SectionI.t_w;
         }
 
 
         protected virtual double GetFlangeCentroidDistanceho()
         {
-            return SectionI.FlangeCentroidDistance;
+            return SectionI.h_o;
         }
 
 

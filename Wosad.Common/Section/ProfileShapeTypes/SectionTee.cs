@@ -30,49 +30,53 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public class SectionTee:CompoundShape, ISectionTee
     {
-        public SectionTee(string Name, double Depth, double Width, double FlangeThickness, double WebThickness)
+        public SectionTee(string Name, double d, double b_f, double t_f, double t_w)
             :base(Name)
         {
-
+            this._d = d;
+            this._b_f = b_f;
+            this._t_f = t_f;
+            this._t_w = t_w;
+           
         }
 
         #region Properties specific to Tees
 
-        private double h;
+        private double _d;
 
-        public double Height
+        public double d
         {
-            get { return h; }
+            get { return _d; }
 
         }
 
-        private double b_f;
+        private double _b_f;
 
-        public double FlangeWidth
+        public double b_f
         {
-            get { return b_f; }
+            get { return _b_f; }
         }
 
-        private double t_f;
+        private double _t_f;
 
-        public double FlangeThickness
+        public double t_f
         {
-            get { return t_f; }
+            get { return _t_f; }
         }
 
-        private double t_w;
+        private double _t_w;
 
-        public double WebThickness
+        public double t_w
         {
-            get { return t_w; }
+            get { return _t_w; }
         }
 
-        private double d;
+        private double _T;
 
         public double StemHeight
         {
-            get { return d; }
-            set { d = value; }
+            get { return _T; }
+            set { _T = value; }
         }
         
         #endregion
@@ -87,8 +91,8 @@ namespace Wosad.Common.Section.SectionTypes
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(FlangeWidth,FlangeThickness, new Point2D(0,-FlangeThickness/2)),
-                new CompoundShapePart(WebThickness,Height-FlangeThickness, new Point2D(0,-(Height-FlangeThickness)/2-FlangeThickness)),
+                new CompoundShapePart(b_f,t_f, new Point2D(0,-t_f/2)),
+                new CompoundShapePart(t_w,d-t_f, new Point2D(0,-(d-t_f)/2-t_f)),
             };
             return rectX;
         }
@@ -102,9 +106,9 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart((FlangeWidth-WebThickness)/2,FlangeThickness, new Point2D(-((FlangeWidth -WebThickness)/4+WebThickness/2) ,-FlangeThickness/2)),
-                new CompoundShapePart(WebThickness,Height, new Point2D(0,-Height/2)),
-                new CompoundShapePart((FlangeWidth-WebThickness)/2,FlangeThickness, new Point2D((FlangeWidth -WebThickness)/4+WebThickness/2 ,-FlangeThickness/2)),
+                new CompoundShapePart((b_f-t_w)/2,t_f, new Point2D(-((b_f -t_w)/4+t_w/2) ,-t_f/2)),
+                new CompoundShapePart(t_w,d, new Point2D(0,-d/2)),
+                new CompoundShapePart((b_f-t_w)/2,t_f, new Point2D((b_f -t_w)/4+t_w/2 ,-t_f/2)),
             };
             return rectY;
         }

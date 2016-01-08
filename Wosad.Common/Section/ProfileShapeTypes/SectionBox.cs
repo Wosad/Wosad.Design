@@ -36,57 +36,57 @@ namespace Wosad.Common.Section.SectionTypes
         #region Section properties specific to Box
         private double h;
 
-        public double Height
+        public double H
         {
             get { return h; }
         }
 
 
-        private double flangeCentroidDistance;
+        private double h_o;
 
         public double FlangeCentroidDistance
         {
-            get { return flangeCentroidDistance; }
+            get { return h_o; }
         }
 
         private double b;
 
-        public double Width
+        public double B
         {
             get { return b; }
         }
 
-        private double tf;
+        private double _t_f;
 
-        public double FlangeThickness
+        public double t_f
         {
-            get { return tf; }
+            get { return _t_f; }
         }
 
         private double tw;
 
-        public double WebThickness
+        public double t_w
         {
             get { return tw; }
         }
 
-        private double webClearDistanceWithoutFlanges;
+        private double _h_web;
 
-        public double WebClearDistanceWithoutFlanges
+        public double h_web
         {
-            get { return webClearDistanceWithoutFlanges; }
+            get { return _h_web; }
         } 
         #endregion
 
 
-        public SectionBox(string Name, double Depth, double Width, double FlangeThickness, double WebThickness): base(Name)
+        public SectionBox(string Name, double H, double B, double t_f, double t_w): base(Name)
         {
-            this.h = Depth;
-            this.b = Width;
-            this.tf = FlangeThickness;
-            this.tw = WebThickness;
-            this.flangeCentroidDistance = h - tf;
-            this.webClearDistanceWithoutFlanges = h - 2.0 * tf;
+            this.h = H;
+            this.b = B;
+            this._t_f = t_f;
+            this.tw = t_w;
+            this.h_o = H - _t_f;
+            this._h_web = H - 2.0 * _t_f;
         }
 
 
@@ -99,9 +99,9 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(Width,FlangeThickness, new Point2D(0,Height/2-FlangeThickness/2)),
-                new CompoundShapePart(WebThickness*2,Height-2*FlangeThickness, new Point2D(0,0)),
-                new CompoundShapePart(Width,FlangeThickness, new Point2D(0,-(Height/2-FlangeThickness/2)))
+                new CompoundShapePart(B,t_f, new Point2D(0,H/2-t_f/2)),
+                new CompoundShapePart(t_w*2,H-2*t_f, new Point2D(0,0)),
+                new CompoundShapePart(B,t_f, new Point2D(0,-(H/2-t_f/2)))
             };
             return rectX;
         }
@@ -116,9 +116,9 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(Height,WebThickness, new Point2D(0,Width-WebThickness/2.0)),
-                new CompoundShapePart(2*FlangeThickness, Width-2*WebThickness, new Point2D(0,0)),
-                new CompoundShapePart(Height, WebThickness, new Point2D(0, -(Width-WebThickness/2.0))),
+                new CompoundShapePart(H,t_w, new Point2D(0,B-t_w/2.0)),
+                new CompoundShapePart(2*t_f, B-2*t_w, new Point2D(0,0)),
+                new CompoundShapePart(H, t_w, new Point2D(0, -(B-t_w/2.0))),
                 
             };
             return rectY;
@@ -128,7 +128,7 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName = this.Name + "_clone";
-            return new SectionBox(cloneName, b, h, tw, tf);
+            return new SectionBox(cloneName, b, h, tw, _t_f);
         }
 
 
@@ -144,8 +144,8 @@ namespace Wosad.Common.Section.SectionTypes
         /// </summary>
         protected override void CalculateTorsionalConstant()
         {
-            double p=2*((h-tf)+(b-tw));
-            double A_p=(h-tf)*(b-tw);
+            double p=2*((h-_t_f)+(b-tw));
+            double A_p=(h-_t_f)*(b-tw);
             _J=((4*A_p*A_p*tw) / (p)); //need to confirm tw in this equation
         }
     }

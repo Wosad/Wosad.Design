@@ -57,43 +57,43 @@ namespace Wosad.Common.Section.Predefined
 
         double height;
 
-        public double Height
+        public double d
         {
             get { return height; }
         }
         double flangeCentroidDistance;
 
-        public double FlangeCentroidDistance
+        public double h_o
         {
             get { return flangeCentroidDistance; }
         }
         double flangeThicknessBottom;
 
-        public double FlangeThicknessBottom
+        public double t_fBot
         {
             get { return flangeThicknessBottom; }
         }
         double flangeThicknessTop;
 
-        public double FlangeThicknessTop
+        public double t_fTop
         {
             get { return flangeThicknessTop; }
         }
         double flangeWidthBottom;
 
-        public double FlangeWidthBottom
+        public double b_fBot
         {
             get { return flangeWidthBottom; }
         }
         double flangeWidthTop;
 
-        public double FlangeWidthTop
+        public double b_fTop
         {
             get { return flangeWidthTop; }
         }
         double webThickness;
 
-        public double WebThickness
+        public double t_w
         {
             get { return webThickness; }
         }
@@ -111,11 +111,11 @@ namespace Wosad.Common.Section.Predefined
         }
 
 
-        public double WebHeight
+        public double h_web
         {
             get {
 
-                return height - (FlangeThicknessTop + FlangeThicknessBottom) - 2 * FilletDistance;
+                return height - (t_fTop + t_fBot) - 2 * FilletDistance;
             }
         }
     }

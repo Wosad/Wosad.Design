@@ -26,7 +26,7 @@ namespace Wosad.Analysis
 {
     public class BeamCantilever: Beam
     {
-        public BeamCantilever(double Length, List<LoadBeam> Loads, ICalcLog CalcLog)
+        public BeamCantilever(double Length, LoadBeam Loads, ICalcLog CalcLog)
             : base(Length, Loads, CalcLog, new BeamCantileverFactory())
         {
         }
