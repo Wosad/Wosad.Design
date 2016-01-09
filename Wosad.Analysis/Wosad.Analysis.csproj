@@ -51,8 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wosad.Common, Version=0.0.1.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.1.8\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.1.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.1.9\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -72,6 +72,7 @@
     <Compile Include="BeamForces\Cases\Cantilever\C5D_2DistributedUniformlyDecreasingToBase.cs" />
     <Compile Include="BeamForces\Cases\Cantilever\C5E_1MomentAtTip.cs" />
     <Compile Include="BeamForces\Cases\Cantilever\PointLoadAtTip.cs" />
+    <Compile Include="BeamForces\Cases\Base\BeamCase.cs" />
     <Compile Include="BeamForces\Data\BeamEntryFactory.cs" />
     <Compile Include="BeamForces\Data\BeamForceAnalysisResult.cs" />
     <Compile Include="BeamForces\Data\BeamTemplatePathLocator.cs" />

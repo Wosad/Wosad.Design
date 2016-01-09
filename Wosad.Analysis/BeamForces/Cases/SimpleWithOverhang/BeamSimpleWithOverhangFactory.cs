@@ -27,11 +27,30 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
     {
 
         BeamSimpleWithOverhang beam;
+        const string CaseNotSupportedExceptionText = "This loading case is not supported for deflection calculations.";
 
-        public ISingleLoadCaseBeam GetCase(LoadBeam load, IAnalysisBeam beam)
+        public ISingleLoadCaseBeam GetForceCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            return bc.ForceCase;
+        }
+
+
+        public ISingleLoadCaseDeflectionBeam GetDeflectionCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            if (bc.DeflectionCase == null)
+            {
+                throw new Exception(CaseNotSupportedExceptionText);
+            }
+            return bc.DeflectionCase;
+        }
+
+        public BeamCase GetCase(LoadBeam load, IAnalysisBeam beam)
         {
             this.beam = beam as BeamSimpleWithOverhang;
-            ISingleLoadCaseBeam BeamLoadCase = null;
+            BeamCase BeamLoadCase = null;
+
             if (load is LoadConcentrated)
             {
                 BeamLoadCase = GetConcentratedLoadCase(load);
@@ -44,29 +63,36 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
             return BeamLoadCase;
         }
 
-        private ISingleLoadCaseBeam GetConcentratedLoadCase(LoadBeam load)
+        private BeamCase GetConcentratedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+ 
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
 
             if (load is LoadConcentratedGeneral) //1B.1
             {
                 LoadConcentratedGeneral cl = load as LoadConcentratedGeneral;
-                beamCase = new ConcentratedLoadBetweenSupports(beam, cl.P, cl.XLocation);
+                ConcentratedLoadBetweenSupports b = new ConcentratedLoadBetweenSupports(beam, cl.P, cl.XLocation);
+                beamForceCase = b;
+                beamDeflectionCase = b;
             }
             else if (load is LoadConcentratedSpecial)
             {
                 LoadConcentratedSpecial cl = load as LoadConcentratedSpecial;
                 if (cl.Case == LoadConcentratedSpecialCase.CantileverTip)
                 {
-                    beamCase = new ConcentratedLoadOverhang(beam, cl.P, beam.OverhangLength);
+                    beamForceCase = new ConcentratedLoadOverhang(beam, cl.P, beam.OverhangLength);
+                    beamDeflectionCase = null;
                 }
             }
-            
-            return beamCase;
+
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
-        private ISingleLoadCaseBeam GetDistributedLoadCase(LoadBeam load)
+        private BeamCase GetDistributedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
+
 
             if (load is LoadDistributedUniform) 
             {
@@ -74,19 +100,25 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
                 switch (cl.Case)
                 {
                     case LoadDistributedSpecialCase.CantileverOverhang:
-                        beamCase = new  DistributedLoadOverhang(beam,cl.Value); //2C.2
+                        DistributedLoadOverhang b1 = new  DistributedLoadOverhang(beam,cl.Value); //2C.2
+                        beamForceCase = b1;
+                        beamDeflectionCase = b1;
                         break;
                     case LoadDistributedSpecialCase.CantileverMainSpan:
-                        beamCase = new DistributedLoadBetweenSupports(beam, cl.Value); //2C.1
+                        DistributedLoadBetweenSupports b2 = new DistributedLoadBetweenSupports(beam, cl.Value); //2C.1
+                        beamForceCase = b2;
+                        beamDeflectionCase = b2;
                         break;
                     default:
-                        beamCase = new UniformLoadFull(beam, cl.Value); //2B.1
+                        UniformLoadFull b3 = new UniformLoadFull(beam, cl.Value); //2B.1
+                        beamForceCase = b3;
+                        beamDeflectionCase = b3;
                         break;
                 }
                 
             }
 
-            return beamCase;
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
     }

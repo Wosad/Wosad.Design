@@ -20,6 +20,7 @@ namespace Wosad.Analysis
 {
     public interface IBeamCaseFactory
     {
-        ISingleLoadCaseBeam GetCase(LoadBeam load, IAnalysisBeam beam);
+        ISingleLoadCaseBeam GetForceCase(LoadBeam load, IAnalysisBeam beam);
+        ISingleLoadCaseDeflectionBeam GetDeflectionCase(LoadBeam load, IAnalysisBeam beam);
     }
 }

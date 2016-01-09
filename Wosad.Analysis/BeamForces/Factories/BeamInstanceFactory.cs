@@ -42,7 +42,7 @@ namespace Wosad.Analysis
         }
 
 
-        public Beam CreateBeamInstance(string BeamCaseId, LoadBeam load, ICalcLog Log)
+        public IAnalysisBeam CreateBeamInstance(string BeamCaseId, LoadBeam load, ICalcLog Log)
         {
             double L = d.L;
             double LoadDimension_a = d.a_load;
@@ -68,6 +68,9 @@ namespace Wosad.Analysis
             {
                 bm = new BeamCantilever(L, load, Log);
             }
+
+            bm.ModulusOfElasticity = d.E;
+            bm.MomentOfInertia = d.I;
 
             return bm;
         }

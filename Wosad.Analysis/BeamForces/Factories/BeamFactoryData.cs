@@ -10,7 +10,7 @@ namespace Wosad.Analysis
     {
         public BeamFactoryData (double L, double P,double M,double w,
            double a_load, double b_load, double c_load, double P1, double P2, 
-           double M1, double M2)
+           double M1, double M2, double E=0, double I=0)
        {
                 this.L      =L;
                 this.P      =P;
@@ -23,6 +23,8 @@ namespace Wosad.Analysis
                 this.P2     =P2;
                 this.M1     =M1;
                 this.M2     =M2;
+                this.E = E;
+                this.I = I;
        }
         public double L { get; set; }
         public double P { get; set; }
@@ -35,6 +37,9 @@ namespace Wosad.Analysis
         public double P2 { get; set; }
         public double M1 { get; set; }
         public double M2 { get; set; }
+
+        public double E { get; set; }
+        public double I { get; set; }
             
     }
 }

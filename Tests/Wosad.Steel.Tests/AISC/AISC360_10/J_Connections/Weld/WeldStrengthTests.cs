@@ -33,5 +33,26 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
             Assert.LessOrEqual(actualTolerance, tolerance);
 
         }
+        [Test]
+        public void FilletWeldReturnsUnitStrength()
+        {
+            FilletWeld weld = new FilletWeld(50, 65, 70, 1 / 16.0, 100, 1); 
+            double phiF_nw = weld.GetStrength(WeldLoadType.WeldShear, 0, false);
+            double refValue = 1.392;
+            double actualTolerance = EvaluateActualTolerance(phiF_nw, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
+
+        [Test]
+        public void FilletWeldReturnsUnitStrengthWithoutBaseMetal()
+        {
+            FilletWeld weld = new FilletWeld(0, 0, 70, 1 / 16.0, 0, 1);
+            double phiF_nw = weld.GetStrength(WeldLoadType.WeldShear, 0, true);
+            double refValue = 1.392;
+            double actualTolerance = EvaluateActualTolerance(phiF_nw, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
     }
 }

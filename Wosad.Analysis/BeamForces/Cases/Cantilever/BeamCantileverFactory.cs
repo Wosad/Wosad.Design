@@ -26,11 +26,27 @@ namespace Wosad.Analysis.BeamForces.Cantilever
     public class BeamCantileverFactory : IBeamCaseFactory
     {
         BeamCantilever beam;
+        const string CaseNotSupportedExceptionText = "This loading case is not supported for deflection calculations.";
+        public ISingleLoadCaseBeam GetForceCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            return bc.ForceCase;
+        }
+        public ISingleLoadCaseDeflectionBeam GetDeflectionCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            if (bc.DeflectionCase == null || bc == null)
+            {
+                throw new Exception(CaseNotSupportedExceptionText);
+            }
+            return bc.DeflectionCase;
+        }
 
-        public ISingleLoadCaseBeam GetCase(LoadBeam load, IAnalysisBeam beam)
+
+        public BeamCase GetCase(LoadBeam load, IAnalysisBeam beam)
         {
             this.beam = beam as BeamCantilever;
-            ISingleLoadCaseBeam BeamLoadCase = null;
+            BeamCase BeamLoadCase = null;
             if (load is LoadConcentrated)
             {
                 BeamLoadCase = GetConcentratedLoadCase(load);
@@ -47,22 +63,26 @@ namespace Wosad.Analysis.BeamForces.Cantilever
             return BeamLoadCase;
         }
 
-        private ISingleLoadCaseBeam GetMomentLoadCase(LoadBeam load)
+        private BeamCase GetMomentLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
 
             if (load is LoadMomentLeftEnd)//5E.1
             {
                 LoadMomentLeftEnd cl = load as LoadMomentLeftEnd;
-                beamCase = new MomentAtTip(beam, cl.Mo);
+                MomentAtTip b = new MomentAtTip(beam, cl.Mo);
+                beamForceCase = b;
+                beamDeflectionCase = b;
             }
 
-            return beamCase;
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
-        private ISingleLoadCaseBeam GetDistributedLoadCase(LoadBeam load)
+        private BeamCase GetDistributedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
 
             if (load is LoadDistributedUniform)
             {
@@ -70,13 +90,19 @@ namespace Wosad.Analysis.BeamForces.Cantilever
                 switch (cl.Case)
                 {
                     case LoadDistributedSpecialCase.Triangle:
-                        beamCase = new DistributedUniformlyIncreasingToBase(beam, cl.Value);//5D.1
+                        DistributedUniformlyIncreasingToBase b1 = new DistributedUniformlyIncreasingToBase(beam, cl.Value);//5D.1
+                        beamForceCase = b1;
+                        beamDeflectionCase = b1;
                         break;
                     case LoadDistributedSpecialCase.InvertedTriangle:
-                        beamCase = new DistributedUniformlyDecreasingToBase(beam, cl.Value); //5D.2
+                        DistributedUniformlyDecreasingToBase b2 = new DistributedUniformlyDecreasingToBase(beam, cl.Value); //5D.2
+                        beamForceCase = b2;
+                        beamDeflectionCase = b2;
                         break;
                     default:
-                        beamCase = new UniformLoad(beam, cl.Value); //5B.1
+                        UniformLoad b3 = new UniformLoad(beam, cl.Value); //5B.1
+                        beamForceCase = b3;
+                        beamDeflectionCase = b3;
                         break;
                 }
 
@@ -84,25 +110,36 @@ namespace Wosad.Analysis.BeamForces.Cantilever
             if (load is LoadDistributedGeneral) //5C.1
             {
                 LoadDistributedGeneral cl = load as LoadDistributedGeneral;
-                beamCase = new UniformPartialLoad(beam, cl.Value, cl.XLocationEnd);
+                UniformPartialLoad b = new UniformPartialLoad(beam, cl.Value, cl.XLocationEnd);
+                beamForceCase = b;
+                beamDeflectionCase = b;
             }
-            return beamCase;
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
-        private ISingleLoadCaseBeam GetConcentratedLoadCase(LoadBeam load)
+        private BeamCase GetConcentratedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+
             if (load is LoadConcentratedSpecial) //5A.1
             {
                 LoadConcentratedSpecial cl = load as LoadConcentratedSpecial;
-                beamCase = new ConcentratedLoadAtTip(beam, cl.P);
+                ConcentratedLoadAtTip b1 = new ConcentratedLoadAtTip(beam, cl.P);
+                beamForceCase = b1;
+                beamDeflectionCase = b1;
             }
             if (load is LoadConcentratedGeneral) //5A.2
             {
                 LoadConcentratedGeneral cl = load as LoadConcentratedGeneral;
-                beamCase = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
+                ConcentratedLoadAtAnyPoint b2 = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
+                beamForceCase = b2;
+                beamDeflectionCase = b2;
             }
-            return beamCase;
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
+
+
+
     }
 }

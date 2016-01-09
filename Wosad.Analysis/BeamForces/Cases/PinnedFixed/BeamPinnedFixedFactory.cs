@@ -26,11 +26,29 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
     public class BeamPinnedFixedFactory : IBeamCaseFactory
     {
         BeamPinnedFixed beam;
-        public ISingleLoadCaseBeam GetCase(LoadBeam load, IAnalysisBeam beam)
+        const string CaseNotSupportedExceptionText = "This loading case is not supported for deflection calculations.";
+
+        public ISingleLoadCaseBeam GetForceCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            return bc.ForceCase;
+        }
+
+
+        public ISingleLoadCaseDeflectionBeam GetDeflectionCase(LoadBeam load, IAnalysisBeam beam)
+        {
+            BeamCase bc = GetCase(load, beam);
+            if (bc.DeflectionCase == null)
+            {
+                throw new Exception(CaseNotSupportedExceptionText);
+            }
+            return bc.DeflectionCase;
+        }
+        public BeamCase GetCase(LoadBeam load, IAnalysisBeam beam)
         {
             this.beam = beam as BeamPinnedFixed;
+            BeamCase BeamLoadCase = null;
 
-            ISingleLoadCaseBeam BeamLoadCase = null;
             if (load is LoadConcentrated)
             {
                 BeamLoadCase = GetConcentratedLoadCase(load);
@@ -47,48 +65,55 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
             return BeamLoadCase;
         }
 
-        private ISingleLoadCaseBeam GetDistributedLoadCase(LoadBeam load)
+        private BeamCase GetDistributedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
+
             if (load is LoadDistributedUniform)
             {
                 LoadDistributedUniform cl = load as LoadDistributedUniform;
-                beamCase = new UniformlyDistributedLoad(beam, cl.Value); //3B.1
+                beamForceCase =new UniformlyDistributedLoad(beam, cl.Value); //3B.1
 
-                return beamCase;
             }
 
             if (load is LoadDistributedGeneral) //3C.1
             {
                 LoadDistributedGeneral cl = load as LoadDistributedGeneral;
-                beamCase = new UniformPartialLoad(beam, cl.Value, cl.XLocationStart, 
+                beamForceCase = new UniformPartialLoad(beam, cl.Value, cl.XLocationStart, 
                     cl.XLocationEnd - cl.XLocationStart);
             }
-            return beamCase;
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
-        private ISingleLoadCaseBeam GetConcentratedLoadCase(LoadBeam load)
+        private BeamCase GetConcentratedLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
+
             if (load is LoadConcentratedSpecial) //3A.1
             {
                 LoadConcentratedSpecial cl = load as LoadConcentratedSpecial;
-                beamCase = new ConcentratedLoadAtCenter(beam, cl.P);
+                beamDeflectionCase = new ConcentratedLoadAtCenter(beam, cl.P);
             }
             if (load is LoadConcentratedGeneral) //3A.2
             {
                 LoadConcentratedGeneral cl = load as LoadConcentratedGeneral;
-                beamCase = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
+                beamForceCase = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
             }
-            return beamCase; 
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
-        private ISingleLoadCaseBeam GetMomentLoadCase(LoadBeam load)
+        private BeamCase GetMomentLoadCase(LoadBeam load)
         {
-            ISingleLoadCaseBeam beamCase = null;
+
+            ISingleLoadCaseBeam beamForceCase = null;
+            ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
+
             LoadMomentLeftEnd cl = load as LoadMomentLeftEnd; //3E.1
-            beamCase = new MomentAtFreeEnd(beam, cl.Mo);
-            return beamCase; 
+            beamForceCase = new MomentAtFreeEnd(beam, cl.Mo);
+
+            return new BeamCase(beamForceCase, beamDeflectionCase);
         }
 
     }

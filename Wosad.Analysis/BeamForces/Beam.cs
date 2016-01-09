@@ -28,14 +28,17 @@ namespace Wosad.Analysis
     {
 
         double Mx, Vx;
+        double delta_Max;
         ForceDataPoint Mmax, Mmin, Vmax;
-        bool isCalculated;
+        bool hasCalculatedForces;
+        bool hasCalculatedDeflections;
 
         public Beam(double Length, LoadBeam Load, ICalcLog CalcLog, IBeamCaseFactory BeamCaseFactory)
             : base(CalcLog)
         {
             this.length = Length;
-            isCalculated = false;
+            hasCalculatedForces = false;
+            hasCalculatedDeflections = false;
             this.BeamCaseFactory = BeamCaseFactory;
             this.Load = Load;
         }
@@ -66,20 +69,20 @@ namespace Wosad.Analysis
         }
         
  
-        private List<ISingleLoadCaseBeam> loadCases;
+        //private List<ISingleLoadCaseBeam> loadCases;
 
-        public List<ISingleLoadCaseBeam> LoadCases
-        {
-            get 
-            {
-                if (loadCases == null)
-                {
-                    loadCases = new List<ISingleLoadCaseBeam>();
-                }
-                return loadCases; 
-            }
-            set { loadCases = value; }
-        }
+        //public List<ISingleLoadCaseBeam> LoadCases
+        //{
+        //    get 
+        //    {
+        //        if (loadCases == null)
+        //        {
+        //            loadCases = new List<ISingleLoadCaseBeam>();
+        //        }
+        //        return loadCases; 
+        //    }
+        //    set { loadCases = value; }
+        //}
         
 
         //public abstract double GetMoment( double X);
@@ -96,11 +99,11 @@ namespace Wosad.Analysis
             }
         }
 
-        public void CalculateValues(double X)
+        public void CalculateForces(double X)
         {
 
 
-                    ISingleLoadCaseBeam bm = BeamCaseFactory.GetCase(load, this);
+                    ISingleLoadCaseBeam bm = BeamCaseFactory.GetForceCase(load, this);
                     if (ReportX ==false)
                     {
                         LogModeActive = false;
@@ -126,7 +129,14 @@ namespace Wosad.Analysis
 
                     LogModeActive = true;
 
-            isCalculated = true;
+            hasCalculatedForces = true;
+        }
+
+        private void CalculateDeflections()
+        {
+            ISingleLoadCaseDeflectionBeam bm = BeamCaseFactory.GetDeflectionCase(load, this);
+            delta_Max = bm.MaximumDeflection();
+            hasCalculatedDeflections = true;
         }
 
         protected ForceDataPoint FindForceValueMax(List<double> SpecialPoints,FindValueAtXDelegate evaluateForce)
@@ -156,45 +166,45 @@ namespace Wosad.Analysis
 
         public virtual double GetMoment(double X)
         {
-            if (isCalculated == false)
+            if (hasCalculatedForces == false)
             {
-                CalculateValues(X);
+                CalculateForces(X);
             }
             return Mx;
         }
 
         public virtual double GetShear(double X)
         {
-            if (isCalculated == false)
+            if (hasCalculatedForces == false)
             {
-                CalculateValues(X);
+                CalculateForces(X);
             }
             return Vx;
         }
 
         public virtual ForceDataPoint GetMomentMaximum()
         {
-            if (isCalculated == false)
+            if (hasCalculatedForces == false)
             {
-                CalculateValues(Length / 2.0); // if no other X is provided
+                CalculateForces(Length / 2.0); // if no other X is provided
             }
             return Mmax;
         }
 
         public virtual ForceDataPoint GetMomentMinimum()
         {
-            if (isCalculated == false)
+            if (hasCalculatedForces == false)
             {
-                CalculateValues(0.0); // if no other X is provided
+                CalculateForces(0.0); // if no other X is provided
             }
             return Mmin;
         }
 
         public virtual ForceDataPoint GetShearMaximumValue()
         {
-            if (isCalculated == false)
+            if (hasCalculatedForces == false)
             {
-                CalculateValues(0.0); // if no other X is provided
+                CalculateForces(0.0); // if no other X is provided
             }
             return Vmax;
         }
@@ -219,6 +229,18 @@ namespace Wosad.Analysis
             get { return I; }
             set { I = value; }
         }
-        
+
+
+
+        public double GetMaximumDeflection()
+        {
+            if (hasCalculatedDeflections == false)
+            {
+                CalculateDeflections();
+            }
+            return delta_Max;
+        }
+
+
     }
 }
