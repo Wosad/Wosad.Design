@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Wosad.Analysis</id>
-    <version>0.0.1.5</version>
+    <version>0.0.1.6</version>
     <title>Wosad.Analysis</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for structural analysis of beams and frames.</description>
@@ -11,7 +11,7 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <releaseNotes>Updates to beam forces</releaseNotes>
+    <releaseNotes>Updates to beam deflections</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>

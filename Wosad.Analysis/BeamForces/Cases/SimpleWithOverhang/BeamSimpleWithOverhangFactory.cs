@@ -81,8 +81,9 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
                 LoadConcentratedSpecial cl = load as LoadConcentratedSpecial;
                 if (cl.Case == LoadConcentratedSpecialCase.CantileverTip)
                 {
-                    beamForceCase = new ConcentratedLoadOverhang(beam, cl.P, beam.OverhangLength);
-                    beamDeflectionCase = null;
+                    ConcentratedLoadOverhang b = new ConcentratedLoadOverhang(beam, cl.P, beam.OverhangLength);
+                    beamForceCase = b;
+                    beamDeflectionCase = b;
                 }
             }
 

@@ -83,7 +83,6 @@
     <Compile Include="BeamForces\Cases\FixedFixed\C4A_2_ConcentratedLoadAnyPoint.cs" />
     <Compile Include="BeamForces\Cases\FixedFixed\C4B_1_UniformlyDistributedLoad.cs" />
     <Compile Include="BeamForces\Cases\FixedFixed\C4C_1_UniformPartialLoad.cs" />
-    <Compile Include="BeamForces\Cases\FixedFixed\C4E_1_MomentAtAnyPoint.cs" />
     <Compile Include="BeamForces\Cases\FixedFixed\C4E_2_MomentAtAnyPoint.cs" />
     <Compile Include="BeamForces\Factories\BeamFactoryData.cs" />
     <Compile Include="BeamForces\Interfaces\IAnalysisBeam.cs" />
