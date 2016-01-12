@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
- 
+
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;

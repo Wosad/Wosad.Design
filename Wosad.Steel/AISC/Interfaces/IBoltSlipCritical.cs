@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 

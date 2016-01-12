@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 namespace Wosad.Steel.AISC.AISC360_10.G_Shear
 {

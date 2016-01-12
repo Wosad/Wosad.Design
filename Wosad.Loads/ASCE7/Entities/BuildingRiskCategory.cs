@@ -15,7 +15,6 @@
    */
 #endregion
  
-
 namespace Wosad.Loads.ASCE7.Entities
 {
     public enum BuildingRiskCategory

@@ -15,8 +15,6 @@
    */
 #endregion
  
-
-
 using Wosad.Common.MapData;
 namespace Wosad.Loads.ASCE7.Entities
 {

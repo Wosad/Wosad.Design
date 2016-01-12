@@ -15,7 +15,6 @@
    */
 #endregion
  
-
 namespace Wosad.Common.MapData
 {
     public class MapDataInfo
