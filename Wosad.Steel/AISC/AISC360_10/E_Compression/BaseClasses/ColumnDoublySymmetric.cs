@@ -54,7 +54,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             double Fe;
             if (Kz * Lz == 0)
             {
-                return double.PositiveInfinity;
+                double F_y = this.Section.Material.YieldStress;
+                return F_y;
             }
             else
             {

@@ -33,7 +33,7 @@ using Wosad.Steel.AISC.SteelEntities.Bolts;
 
 namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
 {
-    public  class AffectedElementWithHoles : SteelDesignElement
+    public  partial class AffectedElementWithHoles : SteelDesignElement
     {
         public AffectedElementWithHoles()
         {

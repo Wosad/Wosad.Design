@@ -84,7 +84,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
 
             if (Slenderness == 0)
             {
-                Fe = double.PositiveInfinity;
+                double F_y = this.Section.Material.YieldStress;
+                Fe = F_y;
             }
             else
             {
@@ -107,7 +108,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Compression
             }
             else
             {
-                Fe = double.PositiveInfinity;
+                double F_y = this.Section.Material.YieldStress;
+                Fe = F_y;
             }
 
             return Fe;
