@@ -95,6 +95,7 @@
     <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric-Qs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\LimitState.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\General\ColumnGeneral.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rectangle\CompressionMemberRectangle.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qa.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qs.cs" />
