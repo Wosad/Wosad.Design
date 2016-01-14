@@ -120,6 +120,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\GeneralCase.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AreaCalculations\ShearAreaCalculator.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltGroupBearingStrength.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetConfigurationCompactness.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetPlateEffectiveCompressionLength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\WhitmoreSectionWidth.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />

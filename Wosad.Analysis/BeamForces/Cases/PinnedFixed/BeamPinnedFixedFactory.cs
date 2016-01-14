@@ -73,8 +73,9 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
             if (load is LoadDistributedUniform)
             {
                 LoadDistributedUniform cl = load as LoadDistributedUniform;
-                beamForceCase =new UniformlyDistributedLoad(beam, cl.Value); //3B.1
-
+                UniformlyDistributedLoad b =new UniformlyDistributedLoad(beam, cl.Value); //3B.1
+                beamForceCase = b;
+                beamDeflectionCase = b;
             }
 
             if (load is LoadDistributedGeneral) //3C.1
@@ -99,7 +100,9 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
             if (load is LoadConcentratedGeneral) //3A.2
             {
                 LoadConcentratedGeneral cl = load as LoadConcentratedGeneral;
-                beamForceCase = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
+                ConcentratedLoadAtAnyPoint b  = new ConcentratedLoadAtAnyPoint(beam, cl.P, cl.XLocation);
+                beamForceCase = b;
+                beamDeflectionCase = b;
             }
             return new BeamCase(beamForceCase, beamDeflectionCase);
         }
@@ -111,7 +114,9 @@ namespace Wosad.Analysis.BeamForces.PinnedFixed
             ISingleLoadCaseDeflectionBeam beamDeflectionCase = null;
 
             LoadMomentLeftEnd cl = load as LoadMomentLeftEnd; //3E.1
-            beamForceCase = new MomentAtFreeEnd(beam, cl.Mo);
+            MomentAtFreeEnd b = new MomentAtFreeEnd(beam, cl.Mo);
+            beamForceCase = b;
+            beamDeflectionCase = b;
 
             return new BeamCase(beamForceCase, beamDeflectionCase);
         }

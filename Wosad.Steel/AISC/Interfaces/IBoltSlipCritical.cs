@@ -27,5 +27,6 @@ namespace Wosad.Steel.AISC.Interfaces
         BoltHoleType HoleType { get;}
         double T_b { get; }
         double GetSlipResistance();
+        double GetReducedSlipResistance(double T_u);
     }
 }
