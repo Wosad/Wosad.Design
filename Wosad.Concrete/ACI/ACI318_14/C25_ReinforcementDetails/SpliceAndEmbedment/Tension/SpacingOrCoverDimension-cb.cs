@@ -22,11 +22,6 @@ using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
 using Wosad.Concrete.ACI.Infrastructure.Entities;
-using p = Wosad.Concrete.ACI318_11.TensionDevelopmentParagraphs;
-using f = Wosad.Concrete.ACI318_11.TensionDevelopmentFormulas;
-using v = Wosad.Concrete.ACI318_11.TensionDevelopmentValues;
-using d = Wosad.Concrete.ACI318_11.TensionDevelopmentDescriptions;
-using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
 using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Concrete.ACI318_11
@@ -46,19 +41,7 @@ namespace Wosad.Concrete.ACI318_11
             double cb= Math.Min(DistFromCenterToSurface, HalfOfCenterToCenterDistance);
 
             
-            ICalcLogEntry ent = Log.CreateNewEntry();
-            ent.ValueName = v.cb;
-            ent.AddDependencyValue(v.cc, clearCover);
-            ent.AddDependencyValue(v.cl_s, clearSpacing);
-            ent.AddDependencyValue(v.bar_surface_distance_center, DistFromCenterToSurface);
-            ent.AddDependencyValue(v.bar_half_distance_center, HalfOfCenterToCenterDistance);
-            ent.Reference = "ACI Section R12.2";
-            ent.DescriptionReference = d.cb;
-            ent.FormulaID = f.cb;
-            ent.VariableValue = cb.ToString();
-            AddToLog(ent);
-
-            return cb;
+           return cb;
         }
     }
 }

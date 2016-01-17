@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.1.9, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.1.9\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.2.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.2.3\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -106,6 +106,8 @@
     <Compile Include="AISC\AISC360_10\G_Shear\ShearMember.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Flexure\CompositeBeamSection.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Flexure\Deflection\MomentOfInertia.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInCompression.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInTension.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElement.cs" />
@@ -414,7 +416,8 @@
     <Folder Include="AISC\AISC360_10\E_Compression\2L\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
     <Folder Include="AISC\AISC360_10\H_Combination\" />
-    <Folder Include="AISC\AISC360_10\I_Composite\" />
+    <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
+    <Folder Include="AISC\AISC360_10\I_Composite\Flexure\Strength\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\Entities\Materials\Plate\" />
     <Folder Include="AISC\Entities\Materials\Shape\" />

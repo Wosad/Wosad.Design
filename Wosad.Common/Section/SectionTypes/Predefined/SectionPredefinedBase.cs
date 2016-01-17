@@ -32,7 +32,7 @@ namespace Wosad.Common.Section.Predefined
     public abstract class SectionPredefinedBase : SectionBase
     {
 
-        public abstract override ISection Clone();
+        //public abstract override ISection Clone();
 
         public SectionPredefinedBase()
         {

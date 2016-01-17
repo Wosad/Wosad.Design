@@ -355,9 +355,9 @@ namespace Wosad.Common.Section.Predefined
         public double PB          { get; set; }
 
 
-        public override Interfaces.ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override Interfaces.ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

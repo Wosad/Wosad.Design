@@ -44,9 +44,9 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             this.section = Section;
         }
 
-        public override ISection Clone()
-        {
-            return section.Clone();
-        }
+        //public override ISection Clone()
+        //{
+        //    return section.Clone();
+        //}
     }
 }

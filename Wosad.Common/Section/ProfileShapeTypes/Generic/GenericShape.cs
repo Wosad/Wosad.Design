@@ -282,9 +282,9 @@ namespace Wosad.Common.Section.General
 
 
 
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -21,7 +21,9 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.CalculationLogger.Interfaces;
 
@@ -101,41 +103,22 @@ namespace Wosad.Concrete.ACI318_11
             return confinementModifier;
         }
 
-[ReportElement(
-new string[] {"SideCoverModifier" },
-new string[] { "P-12.5.3-1"},
-new string[] { "SideCoverModifier"})]
                    
         private double SetSideCoverModifier()
         {
             double SideCoverModifier;
-            ICalcLogEntry ent1 = Log.CreateNewEntry();
-            ent1.ValueName = "SideCoverModifier";
-            ent1.Reference = "ACI Section 12.5.3";
-            ent1.DescriptionReference = "SideCoverModifier";
-            ent1.FormulaID = "P-12.5.3-1";
                 SideCoverModifier = 0.7;
-            ent1.VariableValue = SideCoverModifier.ToString();
-            AddToLog(ent1);
+
             return SideCoverModifier;
         }
 
-[ReportElement(
-new string[] { "ConfinementModifier", },
-new string[] { "P-12.5.3-1" },
-new string[] { "ConfinementModifier" })]
                    
         private double SetConfinementModifier()
         {
             double ConfinementModifier;
-            ICalcLogEntry ent1 = Log.CreateNewEntry();
-            ent1.ValueName = "ConfinementModifier";
-            ent1.Reference = "ACI Section 12.5.3";
-            ent1.DescriptionReference = "ConfinementModifier";
-            ent1.FormulaID = "P-12.5.3-1";
+
                 ConfinementModifier = 0.8;
-            ent1.VariableValue = ConfinementModifier.ToString();
-            AddToLog(ent1);
+
             return ConfinementModifier;
         }
     }

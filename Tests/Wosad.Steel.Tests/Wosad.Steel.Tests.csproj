@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Flexure\CompositeBeamDeflections.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShearTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltBearingTests.cs" />
@@ -89,7 +90,7 @@
     <Folder Include="AISC\AISC360_10\F_Flexure\" />
     <Folder Include="AISC\AISC360_10\G_Shear\" />
     <Folder Include="AISC\AISC360_10\H_CombinedForce\" />
-    <Folder Include="AISC\AISC360_10\I_Composite\" />
+    <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\AISC360_10\K_HSS\TrussConnections\" />

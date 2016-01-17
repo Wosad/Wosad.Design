@@ -21,15 +21,9 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
-using p = Wosad.Concrete.ACI318_11.TensionHookParagraphs;
-using f = Wosad.Concrete.ACI318_11.TensionHookFormulas;
-using v = Wosad.Concrete.ACI318_11.TensionHookValues;
-using d = Wosad.Concrete.ACI318_11.TensionHookDescriptions;
-using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
-using gv = Wosad.Concrete.ACI318_11.GeneralValues;
-using gd = Wosad.Concrete.ACI318_11.GeneralDescriptions;
-using gf = Wosad.Concrete.ACI318_11.GeneralFormulas;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.CalculationLogger.Interfaces;
 
@@ -47,28 +41,15 @@ namespace Wosad.Concrete.ACI318_11
             double sqrt_fc = GetSqrt_fc();
             double fc = Concrete.SpecifiedCompressiveStrength;
 
-            ICalcLogEntry ent1 = Log.CreateNewEntry();
-            ent1.ValueName = v.ldh;
-            ent1.AddDependencyValue(gv.lambda, lambda);
-            ent1.AddDependencyValue(dv.ksi_e, ksi_e);
-            ent1.AddDependencyValue(gv.fy, fy);
-            ent1.AddDependencyValue(gv.fc, fc);
-            ent1.Reference = "ACI Section 12.5.2";
-            ent1.DescriptionReference = d.ldh;
-            ent1.FormulaID = p._5._2_1;
+
             ldh = 0.02 * ksi_e * fy / (lambda * sqrt_fc) * db;
-            ent1.VariableValue = ldh.ToString();
-            AddToLog(ent1);
+
             
             
             return ldh;
 
         }
 
-        [ReportElement(
-        new string[] { v.ldh },
-        new string[] { p._5._2_1, p._5._1_1 },
-        new string[] { d.ldh, d.ldhMin })]
 
         internal double GetDevelopmentLength()
         {
@@ -100,10 +81,7 @@ namespace Wosad.Concrete.ACI318_11
           }
 
 
-[ReportElement(
-new string[] { v.ldh },
-new string[] { p._5._1_1 },
-new string[] { d.ldhMin })]
+
 
     private double CheckDevelopmentLengthForExcessAndMinimum(double ldh)
     {
@@ -120,15 +98,8 @@ new string[] { d.ldhMin })]
 
     if (ldhMin>ldh)
     {
-        ICalcLogEntry ent3 = Log.CreateNewEntry();
-        ent3.ValueName = v.ldh;
-        ent3.AddDependencyValue(gv.db, db);
-        ent3.Reference = "ACI Section 12.5.1";
-        ent3.DescriptionReference = d.ldhMin;
-        ent3.FormulaID = p._5._1_1;
         ldh = ldhMin;
-        ent3.VariableValue = ldh.ToString();
-        AddToLog(ent3); 
+
     }
 
     return ldh;

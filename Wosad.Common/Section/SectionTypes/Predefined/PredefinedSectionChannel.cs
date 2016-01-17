@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -30,43 +31,47 @@ namespace Wosad.Common.Section.Predefined
     /// </summary>
     public class PredefinedSectionChannel : SectionPredefinedBase, ISectionChannel
     {
-
-        public PredefinedSectionChannel(ISection section)
+        AiscCatalogShape s;
+        public PredefinedSectionChannel(AiscCatalogShape section)
             : base(section)
         {
-
+            s = section;
+            this._d = section.d;
+            this._b_f = section.bf;
+            this._t_f = section.tf;
+            this._t_w = section.tw;
+            this._k = section.kdes;
+            OverrideCentroids();
         }
 
-        public PredefinedSectionChannel(
-           double d,
-           double FlangeCentroidDistance,
-           double FlangeClearDistance,
-           double FlangeThickness,
-           double FlangeWidth,
-           double WebThickness,
-           double FilletDistance,
-           ISection section): base(section)
+        private void OverrideCentroids()
         {
-            this._h                  =d                   ;
-            this.flangeCentroidDistance  =FlangeCentroidDistance  ;
-            this.flangeClearDistance     =FlangeClearDistance     ;
-            this.flangeThickness      =FlangeThickness    ;
-            this._b_f       =FlangeWidth       ;
-            this._t_w            =WebThickness            ;
-            this._k       =FilletDistance       ;
+            _x_Bar = s.x_Bar;
+            _y_Bar = d / 2;
+            _x_pBar = s.x_pBar;
+            _y_pBar = d / 2;
+
+            ElasticCentroidCoordinate = new Mathematics.Point2D(x_Bar, y_Bar);
+            PlasticCentroidCoordinate = new Mathematics.Point2D(x_pBar, y_pBar);
         }
 
-        double _h;
+        public ISliceableSection GetSliceableShape()
+        {
+            SectionChannelRolled secI = new SectionChannelRolled("", this.d, this.b_f, this.t_f, this.t_w,this.k);
+            return secI;
+        }
+
+        double _d;
 
         public double d
         {
-            get { return _h; }
+            get { return _d; }
         }
-        double flangeCentroidDistance;
+        double _h_o;
 
         public double h_o
         {
-            get { return flangeCentroidDistance; }
+            get { return _h_o; }
         }
         double flangeClearDistance;
 
@@ -74,11 +79,11 @@ namespace Wosad.Common.Section.Predefined
         {
             get { return flangeClearDistance; }
         }
-        double flangeThickness;
+        double _t_f;
 
         public double t_f
         {
-            get { return flangeThickness; }
+            get { return _t_f; }
         }
         double _b_f;
 
@@ -102,9 +107,9 @@ namespace Wosad.Common.Section.Predefined
         }
 
 
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

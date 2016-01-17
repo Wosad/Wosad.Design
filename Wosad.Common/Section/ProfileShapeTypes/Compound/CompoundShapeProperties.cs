@@ -298,13 +298,13 @@ namespace Wosad.Common.Section
 
             switch (axis)
             {
-                case AnalysisAxis.X:
+                case AnalysisAxis.X: //internally the coordinate is measured from the top
                     this._Z_x = Z;
-                    this.ypb = PNACoordinate - YMin;
+                    this.ypb = PNACoordinate; // - YMin;
                     break;
-                case AnalysisAxis.Y:
+                case AnalysisAxis.Y: 
                     this._Z_y = Z;
-                    this.xpl = PNACoordinate -XMin;
+                    this.xpl = PNACoordinate; // -XMin;
                     break;
             }
         }
@@ -382,11 +382,17 @@ namespace Wosad.Common.Section
         }
 
         double ypb;
+        /// <summary>
+        /// Plastic neutral axis location 
+        /// THE REPORTED PLASTIC NEUTRAL LOCATION IS GIVEN AS THE DISTANCE FROM BOTTOM FIBER
+        /// IN THE PAPER DISTANCE FROM THE TOP IS USED. Therefore conversion is made here.
+        /// </summary>
         public double y_pBar
         {
-            get { 
+            get {
 
-                return ypb;
+                double height = YMax - YMin;
+                return height-ypb;
             }
         }
 

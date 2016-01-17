@@ -23,11 +23,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.Mathematics;
 using Wosad.Common.Section;
+using Wosad.Common.Section.Predefined;
 
 namespace Wosad.Common.Tests.Section.ShapeTypes
 {
     [TestFixture]
-    public class CompoundShapeTests
+    public class CompoundShapeTests : ToleranceTestBase
     {
         /// <summary>
         /// Example from paper:
@@ -47,6 +48,48 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             ArbitraryCompoundShape shape = new ArbitraryCompoundShape(rectX,null);
             double Zx = shape.Z_x;
             Assert.AreEqual(94733.3, Math.Round(Zx,1));
+
+        }
+
+        public CompoundShapeTests()
+        {
+            tolerance = 0.07; //7% can differ from fillet areas and rounding in the manual
+        }
+
+        double tolerance;
+
+        /// <summary>
+        /// WT8X50 Plastic neutral axis location
+        /// </summary>
+        [Test]
+        public void CompoundShapeReturnsPNA()
+        {
+
+
+            //Properties
+            double d	=	8.49 ;
+            double b_f	=	10.4 ;
+            double t_w	=	0.585;
+            double t_f = 0.985;
+            double k = 1.39;
+            double y_p = 0.706;
+            double refValue = d - y_p;
+
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d  - t_f / 2));
+            PartWithDoubleFillet TopFillet = new PartWithDoubleFillet(k, t_w, new Point2D(0, d  - t_f), true);
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - t_f - k, new Point2D(0, d/2));
+
+            List<CompoundShapePart> tee = new List<CompoundShapePart>()
+            {
+                 TopFlange,  
+                 TopFillet,
+                 Web,
+            };
+
+            ArbitraryCompoundShape shape = new ArbitraryCompoundShape(tee, null);
+            double y_pCalculated = shape.y_pBar;
+            double actualTolerance = EvaluateActualTolerance(y_pCalculated, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
 
         }
     }

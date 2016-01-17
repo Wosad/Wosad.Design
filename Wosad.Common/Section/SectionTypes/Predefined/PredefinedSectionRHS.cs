@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -30,31 +31,55 @@ namespace Wosad.Common.Section.Predefined
     /// </summary>
     public class PredefinedSectionRHS : SectionPredefinedBase, ISectionTube
     {
-        public PredefinedSectionRHS(ISection section)
+        public PredefinedSectionRHS(AiscCatalogShape section)
             : base(section)
         {
-
+            this._B = section.B;
+            this._H = section.H;
+            this._t_des = section.tdes;
+            this._t_nom = section.tnom;
+            OverrideCentroids();
         }
-        public PredefinedSectionRHS(double Width, double Height, double CornerRadiusOutside, ISection section)
-            : base(section)
+        //public PredefinedSectionRHS(double B, double H, double CornerRadiusOutside, ISection section)
+        //    : base(section)
+        //{
+        //    this._B=B;
+        //    this._H=H;
+        //    this.cornerRadiusOutside=CornerRadiusOutside;
+
+        //}
+        private void OverrideCentroids()
         {
-            this.width=Width;
-            this.height=Height;
-            this.cornerRadiusOutside=CornerRadiusOutside;
+           _x_Bar = B / 2;
+           _y_Bar = H / 2;
+           _x_pBar = B / 2;
+           _y_pBar = H / 2;
+
+
+            ElasticCentroidCoordinate = new Mathematics.Point2D(x_Bar, y_Bar);
+            PlasticCentroidCoordinate = new Mathematics.Point2D(x_pBar, y_pBar);
         }
 
-        double width;
+        public ISliceableSection GetSliceableShape()
+        {
+            SectionTube secI = new SectionTube("", this.H, this.B, this.t_nom, this.t_des, CornerRadiusOutside);
+            return secI;
+        }
+
+
+        double _B;
 
         public double B
         {
-            get { return width; }
+            get { return _B; }
         }
-        double height;
+        double _H;
 
         public double H
         {
-            get { return height; }
+            get { return _H; }
         }
+
 
 
         public ISection GetWeakAxisClone()
@@ -62,21 +87,26 @@ namespace Wosad.Common.Section.Predefined
             throw new NotImplementedException();
         }
 
-        public override ISection Clone()
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
+        private double _t_nom;
+
+        public double t_nom
         {
-            throw new NotImplementedException();
+            get { return _t_nom; }
         }
-
-
-
  
 
 
-        private double designWallThickness;
+        private double _t_des;
 
         public double t_des
         {
-            get { return designWallThickness; }
+            get { return _t_des; }
         }
 
         double cornerRadiusOutside;

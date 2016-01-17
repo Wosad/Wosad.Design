@@ -51,11 +51,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 case ShapeTypeSteel.IShapeRolled:
                     PredefinedSectionI ISec;
                     ISec = Section as PredefinedSectionI;
-                    if (ISec == null)
+                    if (ISec != null)
                     {
-                        ISec = new PredefinedSectionI(Section);
+                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log);
                     }
-                   beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log);
+                   
                     break;
                 case ShapeTypeSteel.IShapeBuiltUp:
                     if (Section is ISectionI)
@@ -77,14 +77,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 case ShapeTypeSteel.CircularHSS:
                     break;
                 case ShapeTypeSteel.RectangularHSS:
-                    PredefinedSectionRHS RhsSec;
-                    RhsSec = Section as PredefinedSectionRHS;
-                    if (RhsSec == null)
+                    ISectionTube RhsSec;
+                    RhsSec = Section as ISectionTube;
+                    if (RhsSec != null)
                     {
-                        RhsSec = new PredefinedSectionRHS(Section);
+                        beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, Log);
                     }
-                    beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, Log);
-
                     break;
                 case ShapeTypeSteel.Box:
                     break;
@@ -100,8 +98,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return beam;
         }
 
-        private ISteelBeamFlexure CreateRhsBeam(CompactnessClassFlexure FlangeCompactness, CompactnessClassFlexure WebCompactness, 
-            PredefinedSectionRHS RhsSec, ISteelMaterial Material,  ICalcLog Log)
+        private ISteelBeamFlexure CreateRhsBeam(CompactnessClassFlexure FlangeCompactness, CompactnessClassFlexure WebCompactness,
+            ISectionTube RhsSec, ISteelMaterial Material, ICalcLog Log)
         {
             SteelRhsSection steelSection = new SteelRhsSection(RhsSec, Material);
             ISteelBeamFlexure beam = null;

@@ -50,9 +50,9 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             get { return section as ISection; }
         }
 
-        public override ISection Clone()
-        {
-            return section.Clone();
-        }
+        //public override ISection Clone()
+        //{
+        //    return section.Clone();
+        //}
     }
 }

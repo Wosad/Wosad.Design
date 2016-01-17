@@ -21,11 +21,10 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
-using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
-using v = Wosad.Concrete.ACI318_11.TensionHookValues;
-using d = Wosad.Concrete.ACI318_11.TensionHookDescriptions;
-using f = Wosad.Concrete.ACI318_11.TensionHookFormulas;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
+
 
 
 namespace Wosad.Concrete.ACI318_11
@@ -33,19 +32,10 @@ namespace Wosad.Concrete.ACI318_11
     public partial class StandardHookInTension : Development
     {
 
-[ReportElement(
-new string[] { v.ksi_e },
-new string[] { f._5._2_2},
-new string[] { d.ksi_e  })]
-           
         private double GetKsi_e()
         {
-            ICalcLogEntry ent = Log.CreateNewEntry();
-            ent.ValueName = v.ksi_e;
-            ent.Reference = "ACI Section 12.5.2";
             double ksi_e;
-            ent.DescriptionReference = d.ksi_e;
-            ent.FormulaID = f._5._2_2;
+
 
             if (Rebar.IsEpoxyCoated==true)
             {
@@ -56,8 +46,6 @@ new string[] { d.ksi_e  })]
             {
                 ksi_e = 1.0;
             }
-            ent.VariableValue = ksi_e.ToString();
-            AddToLog(ent);
 
             return ksi_e;
         }

@@ -96,9 +96,9 @@ namespace Wosad.Common.Section.SectionTypes
             return A;
         }
 
-        public override ISection Clone()
-        {
-            return new SectionRound(Name, D);
-        }
+        //public override ISection Clone()
+        //{
+        //    return new SectionRound(Name, D);
+        //}
     }
 }

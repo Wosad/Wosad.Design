@@ -91,9 +91,9 @@ namespace Wosad.Common.Section.SectionTypes
             return new SectionPipe (cloneName, D,t);
         }
 
-        public override ISection Clone()
-        {
-            return new SectionPipe(Name, D, t);
-        }
+        //public override ISection Clone()
+        //{
+        //    return new SectionPipe(Name, D, t);
+        //}
     }
 }

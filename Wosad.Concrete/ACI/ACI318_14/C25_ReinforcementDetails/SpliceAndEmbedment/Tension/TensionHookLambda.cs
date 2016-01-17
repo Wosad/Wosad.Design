@@ -21,15 +21,9 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
-using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
-using df = Wosad.Concrete.ACI318_11.DevelopmentFormulas;
-using v = Wosad.Concrete.ACI318_11.TensionHookValues;
-using d = Wosad.Concrete.ACI318_11.TensionHookDescriptions;
-using f = Wosad.Concrete.ACI318_11.TensionHookFormulas;
-using gv = Wosad.Concrete.ACI318_11.GeneralValues;
-using gd = Wosad.Concrete.ACI318_11.GeneralDescriptions;
-using gf = Wosad.Concrete.ACI318_11.GeneralFormulas;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Concrete.ACI.Entities;
 
@@ -38,20 +32,12 @@ namespace Wosad.Concrete.ACI318_11
     public partial class StandardHookInTension : Development
     {
 
-[ReportElement(
-new string[] {gv.lambda },
-new string[] {gf.lambda },
-new string[] {d.lambda })]
+
            
         private double GetHookLambda()
         {
             double lambda;
             
-            ICalcLogEntry ent = Log.CreateNewEntry();
-            ent.ValueName = "lambda";
-            ent.Reference = "ACI Section 12.5.2";
-            ent.DescriptionReference = "lambda";
-            ent.FormulaID = "P-12.5.2-1";
 
             if (Concrete.TypeByWeight== ConcreteTypeByWeight.Lightweight)
             {
@@ -61,8 +47,6 @@ new string[] {d.lambda })]
             {
                 lambda = 1.0;     
             }
-            ent.VariableValue = lambda.ToString();
-            AddToLog(ent);
 
             return lambda;
         }

@@ -39,6 +39,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             this._d = d;
             this._b_f = b_f;
+            this._t_f = t_f;
             this._b_fTop = b_f;
             this._t_fTop = t_f;
             this._b_fBot = b_f;
@@ -60,7 +61,15 @@ namespace Wosad.Common.Section.SectionTypes
 
         #region Properties specific to I-Beam
 
+
         private double _b_f;
+
+        public double b_f
+        {
+            get { return _b_f; }
+            set { _b_f = value; }
+        }
+        
 
         private double _d;
 
@@ -75,7 +84,7 @@ namespace Wosad.Common.Section.SectionTypes
         public double h_o
         {
             get {
-                double df = _d - (this.t_fTop / 2 + this.t_fBot / 2);
+                double df = _d - (this.t_f / 2 + this.t_fBot / 2);
                 return _h_o; }
         }
 
@@ -86,11 +95,11 @@ namespace Wosad.Common.Section.SectionTypes
             get { return _b_fTop; }
         }
 
-        private double _t_fTop;
+        private double _t_f;
 
-        public double t_fTop
+        public double t_f
         {
-            get { return _t_fTop; }
+            get { return _t_f; }
         }
 
         private double _b_fBot;
@@ -105,6 +114,14 @@ namespace Wosad.Common.Section.SectionTypes
         public double t_fBot
         {
             get { return _t_fBot; }
+        }
+
+
+        private double _t_fTop;
+
+        public double t_fTop
+        {
+            get { return _t_fTop; }
         }
 
         private double _t_w;
@@ -129,7 +146,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get
             {
-                _T = _d - t_fBot - t_fTop;
+                _T = _d - t_fBot - t_f;
                 return _T;
             }
         } 
@@ -143,7 +160,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double t_f = this.t_fTop;
+            double t_f = this.t_f;
             double b_f = this.b_fTop;
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
@@ -163,7 +180,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.t_fTop;
+            double FlangeThickness = this.t_f;
             double FlangeWidth = this.b_fTop;
 
             // I-shape converted to X-shape 
@@ -184,7 +201,7 @@ namespace Wosad.Common.Section.SectionTypes
         protected override void CalculateWarpingConstant()
         {
             double d = this.d;
-            double t_1 = t_fTop;
+            double t_1 = t_f;
             double t_2 = t_fBot;
             double b_1 = b_fTop;
             double b_2 = b_fBot;
@@ -200,7 +217,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get 
             {
-                return d - (t_fTop + t_fBot);
+                return d - (t_f + t_fBot);
             }
         }
     }

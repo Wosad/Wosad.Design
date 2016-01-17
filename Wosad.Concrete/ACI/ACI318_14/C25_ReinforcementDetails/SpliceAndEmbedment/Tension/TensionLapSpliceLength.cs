@@ -22,7 +22,9 @@ using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
 using Wosad.Concrete.ACI.Infrastructure.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
 
@@ -31,10 +33,6 @@ namespace Wosad.Concrete.ACI318_11
     public partial class TensionLapSplice : Splice, ISplice
     {
 
-        [ReportElement(
-        new string[] { "lts", },
-        new string[] { "P-12.15.1-1", "P-12.15.1-2" },
-        new string[] { "lsDifferentDiameter", "lsA", "lsA" })]
            
         private double GetLs()
         {
@@ -55,20 +53,12 @@ namespace Wosad.Concrete.ACI318_11
             {
 
                
-                ICalcLogEntry ent1 = Log.CreateNewEntry();
-                ent1.ValueName = "lts";
-                    ent1.AddDependencyValue("lte1", ld1);
-                    ent1.AddDependencyValue("lte2", ld2);
-                ent1.Reference = "ACI Section 12.15.3";
-                ent1.DescriptionReference = "lsDifferentDiameter";
 
                 if (spliceClass == TensionLapSpliceClass.A)
                 {
                     ls1 = ld1;
                     ls2 = ld2;
                             ls = Math.Max(ls1, ls2);
-                    ent1.FormulaID = "P-12.15.1-1";
-                    ent1.VariableValue = ls.ToString(); 
 
                     
                 }
@@ -82,35 +72,21 @@ namespace Wosad.Concrete.ACI318_11
                         Math.Min(ls1, ls2) :
                         Math.Max(ld1, ld2);
                         
-                    ent1.FormulaID = "P-12.15.1-2";
-                    ent1.VariableValue = ls.ToString(); 
                 }
 
-                AddToLog(ent1);
             }
             else //if both diameters are same
             {
                 
-                ICalcLogEntry ent1 = Log.CreateNewEntry();
-                ent1.ValueName = "ls";
-                ent1.AddDependencyValue("ld", ld1);
-                ent1.Reference = "ACI Section 12.15.1";
-                
-                AddToLog(ent1);
                 if (spliceClass == TensionLapSpliceClass.A)
                 {
-                ent1.DescriptionReference = "lsA";
-                ent1.FormulaID = "P-12.15.1-1";
                         ls = 1.0 * ld1;
                 }
                 else
                 {
-                    ent1.DescriptionReference = "lsB";
-                    ent1.FormulaID = "P-12.15.1-2";
                         ls = 1.3 * ld1;
                 }
-                ent1.VariableValue = ls.ToString();
-                AddToLog(ent1);
+
             }
 
 

@@ -21,11 +21,13 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
-using p = Wosad.Concrete.ACI318_11.DevelopmentCompressionParagraphs;
-using f = Wosad.Concrete.ACI318_11.DevelopmentCompressionFormulas;
-using v = Wosad.Concrete.ACI318_11.DevelopmentCompressionValues;
-using d = Wosad.Concrete.ACI318_11.DevelopmentCompressionDescriptions;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
+//using p = Wosad.Concrete.ACI318_11.DevelopmentCompressionParagraphs;
+//using f = Wosad.Concrete.ACI318_11.DevelopmentCompressionFormulas;
+//using v = Wosad.Concrete.ACI318_11.DevelopmentCompressionValues;
+//using d = Wosad.Concrete.ACI318_11.DevelopmentCompressionDescriptions;
 using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
 using gv = Wosad.Concrete.ACI318_11.GeneralValues;
 using gd = Wosad.Concrete.ACI318_11.GeneralDescriptions;
@@ -38,10 +40,6 @@ namespace Wosad.Concrete.ACI318_11
     public partial class DevelopmentCompression:Development
     {
 
-        [ReportElement(
-        new string[] { v.ldc},
-        new string[] { "P-12.3.2-1", "P-12.3.2-2", "P-12.3.1-1", "P-12.3.3-2" },
-        new string[] { "ldc", })]
            
         private double GetBasicCompressionDevelopmentLength()
         {
@@ -54,30 +52,13 @@ namespace Wosad.Concrete.ACI318_11
             lambda = CheckLambda(lambda);
 
             double ldc1;
-            ICalcLogEntry ent1 = Log.CreateNewEntry();
-            ent1.ValueName = "ldc";
-            ent1.AddDependencyValue("fy", fy);
-            ent1.AddDependencyValue("lambda", lambda);
-            ent1.AddDependencyValue("fc", fc);
-            ent1.AddDependencyValue("db", db);
-            ent1.Reference = "ACI Section 12.3.2";
-            ent1.DescriptionReference = "ldc";
-            ent1.FormulaID = "P-12.3.2-1";
+
             ldc1 = 0.02 * fy / (lambda * sqrt_fc) * db;
-            ent1.VariableValue = ldc1.ToString();
-            AddToLog(ent1);
+
 
             double ldc2;
-            ICalcLogEntry ent2 = Log.CreateNewEntry();
-            ent2.ValueName = "ldc";
-            ent2.AddDependencyValue("fy", fy);
-            ent2.AddDependencyValue("db", db);
-            ent2.Reference = "ACI Section 12.3.2";
-            ent2.DescriptionReference = "ldc";
-            ent2.FormulaID = "P-12.3.2-2";
+
             ldc2 = (0.0003 * fy) * db;
-            ent2.VariableValue = ldc2.ToString();
-            AddToLog(ent2);
 
             ldc = Math.Min(ldc1, ldc2);
 
@@ -98,15 +79,7 @@ namespace Wosad.Concrete.ACI318_11
             //confined bars
             if (isConfinedCompressionRebar == true)
             {
-
-                ICalcLogEntry ent3 = Log.CreateNewEntry();
-                ent3.ValueName = "ldc";
-                ent3.Reference = "ACI Section 12.3.3";
-                ent3.DescriptionReference = "ldc";
-                ent3.FormulaID = "P-12.3.3-2";
                 ldc = 0.75 * ldc;
-                ent3.VariableValue = ldc.ToString();
-                AddToLog(ent3);
             }
             
             ldc = CheckExcessRatioAndMinimumLength(ldc);
@@ -121,14 +94,7 @@ namespace Wosad.Concrete.ACI318_11
             //minimum length
             if (ldc < 8.0)
             {
-                ICalcLogEntry ent4 = Log.CreateNewEntry();
-                ent4.ValueName = "ldc";
-                ent4.AddDependencyValue("ldc", ldc);
-                ent4.Reference = "ACI Section 12.3.1";
-                ent4.DescriptionReference = "ldCompressionMinimum";
-                ent4.FormulaID = "P-12.3.1-1";
                 ldc = 8.0;
-                ent4.VariableValue = ldc.ToString();
             }
             return ldc;
         }

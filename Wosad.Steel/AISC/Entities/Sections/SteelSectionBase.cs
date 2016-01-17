@@ -43,6 +43,6 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             this.material = Material;
         }
 
-        public abstract ISection Clone();
+        //public abstract ISection Clone();
     }
 }

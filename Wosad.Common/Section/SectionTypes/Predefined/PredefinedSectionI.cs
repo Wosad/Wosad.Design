@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -30,93 +31,105 @@ namespace Wosad.Common.Section.Predefined
     /// </summary>
     public class PredefinedSectionI : SectionPredefinedBase, ISectionI
     {
-        public PredefinedSectionI(ISection section)
+        AiscCatalogShape s;
+        public PredefinedSectionI(AiscCatalogShape section)
             : base(section)
         {
-
+            this._d = section.d;
+            this._b_f = section.bf;
+            this._t_f = section.tf;
+            this._t_w = section.tw;
+            this._k = section.kdes;
+            s = section;
+            OverrideCentroids();
         }
-        public PredefinedSectionI(double Height,
-        double FlangeCentroidDistance,
-        double FlangeThicknessBottom,
-        double FlangeThicknessTop,
-        double FlangeWidthBottom,
-        double FlangeWidthTop,
-        double WebThickness,
-        double FilletDistance, ISection section)
-            : base(section)
+
+        private void OverrideCentroids()
         {
-            this.height = Height;
-            this.flangeCentroidDistance = FlangeCentroidDistance;
-            this.flangeThicknessBottom = FlangeThicknessBottom;
-            this.flangeThicknessTop = FlangeThicknessTop;
-            this.flangeWidthBottom = FlangeWidthBottom;
-            this.flangeWidthTop = FlangeWidthTop;
-            this.webThickness = WebThickness;
-            this.filletDistance = FilletDistance;
+           _x_Bar =b_f / 2;
+           _y_Bar = d / 2;
+           _x_pBar = b_f / 2;
+           _y_pBar = d / 2;
+            ElasticCentroidCoordinate = new Mathematics.Point2D(x_Bar, y_Bar);
+            PlasticCentroidCoordinate = new Mathematics.Point2D(x_pBar, y_pBar);
+
         }
 
-        double height;
+        public ISliceableSection GetSliceableShape()
+        {
+            SectionIRolled secI = new SectionIRolled("",this.d,this.b_f,this.t_f,this.t_w,this._k);
+            return secI;
+        }
+
+        double _d;
 
         public double d
         {
-            get { return height; }
+            get { return _d; }
         }
-        double flangeCentroidDistance;
 
-        public double h_o
-        {
-            get { return flangeCentroidDistance; }
-        }
-        double flangeThicknessBottom;
 
-        public double t_fBot
-        {
-            get { return flangeThicknessBottom; }
-        }
-        double flangeThicknessTop;
+        double _t_f;
 
-        public double t_fTop
+        public double t_f
         {
-            get { return flangeThicknessTop; }
+            get { return _t_f; }
         }
-        double flangeWidthBottom;
 
-        public double b_fBot
-        {
-            get { return flangeWidthBottom; }
-        }
-        double flangeWidthTop;
+        double _b_f;
 
-        public double b_fTop
+        public double b_f
         {
-            get { return flangeWidthTop; }
+            get { return _b_f; }
         }
-        double webThickness;
+        double _t_w;
 
         public double t_w
         {
-            get { return webThickness; }
+            get { return _t_w; }
         }
-        double filletDistance;
+        double _k;
 
-        public double FilletDistance
+        public double k
         {
-            get { return filletDistance; }
+            get { return _k; }
         }
 
-
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
 
 
         public double h_web
         {
             get {
 
-                return height - (t_fTop + t_fBot) - 2 * FilletDistance;
+                return _d - (t_f + t_fBot) - 2 * k;
             }
+        }
+
+
+        public double h_o
+        {
+            get { return d - t_f; }
+        }
+
+        public double t_fBot
+        {
+            get { return t_f; }
+        }
+
+        public double b_fBot
+        {
+            get { return b_f; }
+        }
+
+        public double b_fTop
+        {
+            get { return b_f; }
+        }
+
+
+        public double t_fTop
+        {
+            get { return t_f; }
         }
     }
 }

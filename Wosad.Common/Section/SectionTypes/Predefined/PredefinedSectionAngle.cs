@@ -31,11 +31,15 @@ namespace Wosad.Common.Section.Predefined
     public class PredefinedSectionAngle : SectionPredefinedBase, ISectionAngle
     {
 
-        public PredefinedSectionAngle(ISection section)
+        public PredefinedSectionAngle(AiscCatalogShape section)
             : base(section)
         {
-
+            this._d = section.d;
+            this._b = section.b;
+            this._t = section.t;
+            //OverrideCentroids(); not necessary
         }
+
 
         public PredefinedSectionAngle(
                                     double Height,
@@ -49,9 +53,9 @@ namespace Wosad.Common.Section.Predefined
                                     double RadiusOfGyrationPrincipalMinor, ISection section)
             : base(section)
         {
-            this.height                         =Height                         ;
-            this.thickness                      =Thickness                      ;
-            this.width                          =Width                          ;
+            this._d                         =Height                         ;
+            this._t                      =Thickness                      ;
+            this._b                          =Width                          ;
             this.momentOfInertiaPrincipalMajor  =MomentOfInertiaPrincipalMajor  ;
             this.momentOfInertiaPrincipalMinor  =MomentOfInertiaPrincipalMinor  ;
             this.sectionModulusPrincipalMajor   =SectionModulusPrincipalMajor   ;
@@ -60,24 +64,24 @@ namespace Wosad.Common.Section.Predefined
             this.radiusOfGyrationPrincipalMinor =RadiusOfGyrationPrincipalMinor ;
         }
 
-        double height;
+        double _d;
 
         public double d
         {
-            get { return height; }
-            set { height = value; }
+            get { return _d; }
+            set { _d = value; }
         }
-        double thickness;
+        double _t;
 
         public double t
         {
-            get { return thickness; }
+            get { return _t; }
         }
-        double width;
+        double _b;
 
         public double b
         {
-            get { return width; }
+            get { return _b; }
         }
 
         double momentOfInertiaPrincipalMajor;
@@ -125,9 +129,9 @@ namespace Wosad.Common.Section.Predefined
             throw new NotImplementedException();
         }
 
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -30,35 +31,58 @@ namespace Wosad.Common.Section.Predefined
     /// </summary>
     public class PredefinedSectionCHS : SectionPredefinedBase, ISectionPipe
     {
-        public PredefinedSectionCHS(ISection section)
+        public PredefinedSectionCHS(AiscCatalogShape section)
             : base(section)
         {
+            this._D = section.OD;
+            this._t = section.tnom;
+            this._t_des = section.tdes;
+            OverrideCentroids();
+        }
 
+        private void OverrideCentroids()
+        {
+            _x_Bar = D / 2;
+            _y_Bar = D / 2;
+            _x_pBar = D / 2;
+            _y_pBar = D / 2;
+
+
+            ElasticCentroidCoordinate = new Mathematics.Point2D(x_Bar, y_Bar);
+            PlasticCentroidCoordinate = new Mathematics.Point2D(x_pBar, y_pBar);
         }
         public PredefinedSectionCHS(
-        double Diameter,
-        double WallThickness,ISection section): base(section)
+        double D,
+        double t,ISection section): base(section)
         {
-            this.diameter = Diameter;
-            this.wallThickness=WallThickness;
-            this.designWallThickness = t_des;
+            this._D = D;
+            this._t=t;
+            this._t_des = t_des;
         }
-        double diameter;
+
+
+        //public ISliceableSection GetSliceableShape()
+        //{
+        //    SectionPipe secI = new SectionPipe("",this.D,this.t_des);
+        //    return secI;
+        //}
+
+        double _D;
         public double D
         {
-            get { return diameter; }
+            get { return _D; }
         }
 
-        double wallThickness;
+        double _t;
         public double t
         {
-            get { return wallThickness; }
+            get { return _t; }
         }
 
-        double designWallThickness;
+        double _t_des;
         public double t_des
         {
-            get { return designWallThickness; }
+            get { return _t_des; }
         }
 
         public ISection GetWeakAxisClone()
@@ -66,9 +90,9 @@ namespace Wosad.Common.Section.Predefined
             throw new NotImplementedException();
         }
 
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

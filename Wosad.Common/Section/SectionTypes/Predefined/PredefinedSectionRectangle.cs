@@ -51,9 +51,9 @@ namespace Wosad.Common.Section.Predefined
             throw new NotImplementedException();
         }
 
-        public override ISection Clone()
-        {
-            throw new NotImplementedException();
-        }
+        //public override ISection Clone()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
