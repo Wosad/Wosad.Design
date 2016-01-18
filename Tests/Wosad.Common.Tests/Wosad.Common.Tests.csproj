@@ -55,7 +55,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Section\Predefined\ShapeFactoryTests.cs" />
     <Compile Include="Section\ShapeTypes\ChannelRolledShapes.cs" />
-    <Compile Include="Section\ShapeTypes\CompoundShapeTests.cs" />
+    <Compile Include="Section\ShapeTypes\CompoundShapePropertyTests.cs" />
+    <Compile Include="Section\ShapeTypes\CompoundShapeSlicingTests.cs" />
     <Compile Include="Section\ShapeTypes\GenericShapeTests.cs" />
     <Compile Include="Section\ShapeTypes\SectionIRolledTests.cs" />
     <Compile Include="Section\ShapeTypes\ShapeTeeTests.cs" />

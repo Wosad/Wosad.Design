@@ -127,6 +127,7 @@
     <Compile Include="Reports\ReportElementAttribute.cs" />
     <Compile Include="Section\Interfaces\IMeasurableAreaSection.cs" />
     <Compile Include="Section\Exceptions\FailedToCalculateSectionPropertiesException.cs" />
+    <Compile Include="Section\ProfileShapeTypes\Compound\CompoundShapeSlicing.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\PartWithSingleFillet.cs" />
     <Compile Include="Section\ProfileShapeTypes\Generic\GenericShape.cs" />
     <Compile Include="Section\ProfileShapeTypes\Generic\GenericShapeCentroid.cs" />

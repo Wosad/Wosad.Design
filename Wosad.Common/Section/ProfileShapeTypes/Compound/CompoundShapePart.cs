@@ -147,5 +147,26 @@ namespace Wosad.Common.Section
         {
             return insertionPoint;
         }
+
+
+        public double Ymax
+        {
+            get { return GetYmax(); }
+        }
+
+
+        public double Ymin
+        {
+            get { return GetYmin(); }
+        }
+
+        protected virtual double GetYmax()
+        {
+            return this.InsertionPoint.Y+h/2;
+        }
+        protected virtual double GetYmin()
+        {
+            return this.InsertionPoint.Y - h / 2;
+        }
     }
 }

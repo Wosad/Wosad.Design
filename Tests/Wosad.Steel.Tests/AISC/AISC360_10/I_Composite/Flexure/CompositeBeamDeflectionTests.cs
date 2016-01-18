@@ -10,35 +10,41 @@ using Wosad.Common.Section.Predefined;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.AISC360_10.Composite;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.I_Composite.Flexure
+namespace Wosad.Steel.Tests.AISC.AISC360_10.Composite.Flexure
 {
     [TestFixture]
-    public class CompositeBeamDeflectionTests: ToleranceTestBase
+    public partial class CompositeBeamTests: ToleranceTestBase
     {
-        public CompositeBeamDeflectionTests()
+        public CompositeBeamTests()
         {
             tolerance = 0.05; //5% can differ from rounding in the manual
         }
 
         double tolerance;
 
-        [Test]
-        public void CompositeBeamSectionReturnsLowerBoundMomentOfInertia()
+        private CompositeBeamSection GetBeamForTests(double SumQ_n)
         {
-            double SumQ_n = 387;
             double Y_2 = 5;
             double f_cPrime = 4;
             double h_solid = 3;
             double b_eff;
             double h_rib = 3;
             b_eff = SumQ_n / ((h_rib + h_solid - Y_2) * 2 * 0.85 * f_cPrime); //Back calculate b_eff to get the round number from AISC manual
-            double Y_2T =h_solid-( SumQ_n / (0.85 * f_cPrime * b_eff) / 2) + h_rib; //test
-            
+            double Y_2T = h_solid - (SumQ_n / (0.85 * f_cPrime * b_eff) / 2) + h_rib; //test
+
             AiscShapeFactory factory = new AiscShapeFactory();
-            ISection section = factory.GetShape("W18X35",ShapeTypeSteel.IShapeRolled);
+            ISection section = factory.GetShape("W18X35", ShapeTypeSteel.IShapeRolled);
             PredefinedSectionI catI = section as PredefinedSectionI;
-            SectionIRolled secI = new SectionIRolled("", catI.d, catI.b_fTop, catI.t_f, catI.t_w,catI.k);
+            SectionIRolled secI = new SectionIRolled("", catI.d, catI.b_fTop, catI.t_f, catI.t_w, catI.k);
             CompositeBeamSection cs = new CompositeBeamSection(secI, b_eff, h_solid, h_rib, 50.0, f_cPrime);
+            return cs;
+        }
+
+        [Test]
+        public void CompositeBeamSectionReturnsLowerBoundMomentOfInertia()
+        {
+            double SumQ_n = 387;
+            CompositeBeamSection cs = GetBeamForTests(SumQ_n);
             double I_LB = cs.GetLowerBoundMomentOfInertia(SumQ_n);
 
             double refValue = 1360; // from AISC Steel Manual

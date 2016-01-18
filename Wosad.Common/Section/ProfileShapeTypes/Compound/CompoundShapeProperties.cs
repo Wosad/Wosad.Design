@@ -234,7 +234,7 @@ namespace Wosad.Common.Section
                 double hn_actual = 0; //actual height used for fillet areas
                 double yn = 0;
                 plasticRectangle pr = null;
-                //Create a new rectangle and swith Z ad Y 
+
                     switch (axis)
                     {
                         case AnalysisAxis.X:

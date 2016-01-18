@@ -31,7 +31,6 @@ namespace Wosad.Common.Section
     public class ArbitraryCompoundShape : CompoundShape
     {
 
-        private List<CompoundShapePart> rectanglesXAxis;
 
         public ArbitraryCompoundShape(List<CompoundShapePart> rectanglesXAxis, List<CompoundShapePart> rectanglesYAxis)
         {

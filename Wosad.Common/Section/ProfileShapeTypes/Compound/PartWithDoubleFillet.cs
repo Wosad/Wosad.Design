@@ -86,6 +86,15 @@ namespace Wosad.Common.Section
             return b;
         }
 
+        protected override double GetYmax()
+        {
+            return this.InsertionPoint.Y;
+        }
+        protected override double GetYmin()
+        {
+            return this.InsertionPoint.Y - this.Size;
+        }
+ 
         protected bool isTopWidened;
 
         public bool IsTopWidened

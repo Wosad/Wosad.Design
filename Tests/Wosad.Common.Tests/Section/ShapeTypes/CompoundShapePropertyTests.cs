@@ -28,7 +28,7 @@ using Wosad.Common.Section.Predefined;
 namespace Wosad.Common.Tests.Section.ShapeTypes
 {
     [TestFixture]
-    public class CompoundShapeTests : ToleranceTestBase
+    public partial class CompoundShapeTests : ToleranceTestBase
     {
         /// <summary>
         /// Example from paper:
