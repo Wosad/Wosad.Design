@@ -56,7 +56,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.AffectedMembers
             double refValue = 7.0;
             Assert.AreEqual(refValue, A_nt);
         }
-        [Test]
+
         private ShearAreaCalculator GetShearAreaCalc()
         {
             double d_hole = 7.0/8.0+2*(1.0/16.0);

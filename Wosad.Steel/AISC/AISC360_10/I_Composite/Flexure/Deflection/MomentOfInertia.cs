@@ -29,15 +29,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Composite
         {
             double d_1;
 
-            double A_c = SumQ_n / (0.85 * f_cPrime);
-            double a = A_c / SlabEffectiveWidth;
+            double a =SumQ_n / (0.85 * f_cPrime* SlabEffectiveWidth);
+
             if (a>SlabSolidThickness)
             {
                 d_1 = SlabSolidThickness / 2+SlabDeckThickness;
             }
             else
             {
-                d_1 = a / 2 + SlabDeckThickness;
+                d_1 = (SlabSolidThickness - a / 2) + SlabDeckThickness;
             }
             return d_1;
         }

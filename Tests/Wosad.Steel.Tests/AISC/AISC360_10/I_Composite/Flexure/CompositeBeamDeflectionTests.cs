@@ -13,8 +13,15 @@ using Wosad.Steel.AISC.AISC360_10.Composite;
 namespace Wosad.Steel.Tests.AISC.AISC360_10.I_Composite.Flexure
 {
     [TestFixture]
-    public class CompositeBeamDeflections
+    public class CompositeBeamDeflectionTests: ToleranceTestBase
     {
+        public CompositeBeamDeflectionTests()
+        {
+            tolerance = 0.05; //5% can differ from rounding in the manual
+        }
+
+        double tolerance;
+
         [Test]
         public void CompositeBeamSectionReturnsLowerBoundMomentOfInertia()
         {
@@ -30,11 +37,14 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.I_Composite.Flexure
             AiscShapeFactory factory = new AiscShapeFactory();
             ISection section = factory.GetShape("W18X35",ShapeTypeSteel.IShapeRolled);
             PredefinedSectionI catI = section as PredefinedSectionI;
-            SectionI secI = new SectionI("", catI.d, catI.b_fTop, catI.t_f, catI.t_w);
+            SectionIRolled secI = new SectionIRolled("", catI.d, catI.b_fTop, catI.t_f, catI.t_w,catI.k);
             CompositeBeamSection cs = new CompositeBeamSection(secI, b_eff, h_solid, h_rib, 50.0, f_cPrime);
             double I_LB = cs.GetLowerBoundMomentOfInertia(SumQ_n);
-            Assert.AreEqual(1360, I_LB);
 
+            double refValue = 1360; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(I_LB, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
         }
     }
 }
