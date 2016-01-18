@@ -29,16 +29,25 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
     /// Compare calculated properties to W18X35 listed properties.
     /// </summary>
      [TestFixture]
-    public class SectionIRolledTests
+    public class SectionIRolledTests : ToleranceTestBase
     {
+
+         public SectionIRolledTests()
+        {
+            tolerance = 0.05; //7% can differ from fillet areas and rounding in the manual
+        }
+
+        double tolerance;
 
          [Test]
          public void SectionIRolledReturnsArea()
          {
              SectionIRolled shape = new SectionIRolled(null, 17.7, 6.0, 0.425, 0.3, 0.827);
              double A = shape.A;
-             Assert.AreEqual(10.74, Math.Round(A, 2));
+             double refValue = 10.3;
              //Manual gives 10.3 but actual area checked in Autocad is 10.42
+             double actualTolerance = EvaluateActualTolerance(A, refValue);
+             Assert.LessOrEqual(actualTolerance, tolerance);
          }
 
          [Test]
@@ -46,17 +55,20 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
          {
              SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
              double Ix = shape.I_x;
-             Assert.AreEqual(540.05, Math.Round(Ix, 2));
              //Manual gives 510 but actual area checked in Autocad is 540.0505
+             double refValue = 510;
+             double actualTolerance = EvaluateActualTolerance(Ix, refValue);
+             Assert.LessOrEqual(actualTolerance, tolerance);
          }
 
          [Test]
          public void SectionIRolledReturnsIy()
          {
              SectionIRolled shape = new SectionIRolled("", 17.7, 6.0, 0.425, 0.3, 0.827);
-             double Ix = shape.I_y;
-             Assert.AreEqual(15.42, Math.Round(Ix, 2));
-             //Checked in Autocad is 540.0505
+             double Iy = shape.I_y;
+             double refValue = 15.3;
+             double actualTolerance = EvaluateActualTolerance(Iy, refValue);
+             Assert.LessOrEqual(actualTolerance, tolerance);
          }
 
     }

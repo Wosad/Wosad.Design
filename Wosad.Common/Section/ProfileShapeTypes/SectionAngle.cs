@@ -147,7 +147,7 @@ namespace Wosad.Common.Section.SectionTypes
             throw new NotImplementedException();
             double b_prime = this.b-t/2;
             double d_prime = this._d-t/2;
-            this.Cw=((Math.Pow(t, 3)) / (36))*(Math.Pow((_d), 3)+Math.Pow((b), 3));
+            this._C_w=((Math.Pow(t, 3)) / (36))*(Math.Pow((_d), 3)+Math.Pow((b), 3));
         }
         /// <summary>
         /// From:

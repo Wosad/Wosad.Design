@@ -64,6 +64,11 @@ namespace Wosad.Common.Section
             return h;
         }
 
+        protected override double GetActualHeight()
+        {
+            return this.Size;
+        }
+
         public override double GetWidth()
         {
             double b;

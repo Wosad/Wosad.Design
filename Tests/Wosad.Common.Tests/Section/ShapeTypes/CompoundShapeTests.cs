@@ -41,9 +41,9 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(125,8, new Point2D(0,-4)),
-                new CompoundShapePart(6,100, new Point2D(0,-58)),
-                new CompoundShapePart(75,8, new Point2D(0,-112))
+                new CompoundShapePart(125,8, new Point2D(0,112)),
+                new CompoundShapePart(6,100, new Point2D(0,58)),
+                new CompoundShapePart(75,8, new Point2D(0,4))
             };
             ArbitraryCompoundShape shape = new ArbitraryCompoundShape(rectX,null);
             double Zx = shape.Z_x;
@@ -53,7 +53,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
 
         public CompoundShapeTests()
         {
-            tolerance = 0.07; //7% can differ from fillet areas and rounding in the manual
+            tolerance = 0.03; //7% can differ from fillet areas and rounding in the manual
         }
 
         double tolerance;
@@ -62,7 +62,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         /// WT8X50 Plastic neutral axis location
         /// </summary>
         [Test]
-        public void CompoundShapeReturnsPNA()
+        public void CompoundShapeReturnsPNA_WT()
         {
 
 
@@ -91,6 +91,72 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             double actualTolerance = EvaluateActualTolerance(y_pCalculated, refValue);
             Assert.LessOrEqual(actualTolerance, tolerance);
 
+        }
+
+        [Test]
+        public void CompoundShapeReturnsPNA_W()
+        {
+
+
+            //Properties
+            double d	=	17.7 ;
+            double b_f	=	6.00 ;
+            double t_w	=	0.300;
+            double t_f	=	0.425;
+            double k = 0.827;
+
+            double refValue = d/2;
+
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
+            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, t_f / 2));
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - 2 * (t_f+k), new Point2D(0, d / 2));
+            PartWithDoubleFillet TopFillet = new PartWithDoubleFillet(k, t_w, new Point2D(0, d - t_f), true);
+            PartWithDoubleFillet BottomFillet = new PartWithDoubleFillet(k, t_w, new Point2D(0,  t_f), false);
+
+
+            List<CompoundShapePart> Ishape = new List<CompoundShapePart>()
+            {
+                BottomFlange,
+                BottomFillet,
+                Web,
+                TopFillet,
+                TopFlange,  
+            };
+
+            ArbitraryCompoundShape shape = new ArbitraryCompoundShape(Ishape, null);
+            double y_pCalculated = shape.y_pBar;
+            double actualTolerance = EvaluateActualTolerance(y_pCalculated, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void CompoundShapeReturnsPNA_SymmetricIShape()
+        {
+
+
+            //Properties
+            double d = 10;
+            double b_f = 8;
+            double t_w = 1;
+            double t_f = 1;
+ 
+            double refValue = d / 2;
+
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
+            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, t_f/2));
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - 2 * t_f , new Point2D(0, d/2));
+
+            List<CompoundShapePart> Ishape = new List<CompoundShapePart>()
+            {
+                 BottomFlange,
+                   Web,
+                 TopFlange  
+            };
+
+            ArbitraryCompoundShape shape = new ArbitraryCompoundShape(Ishape, null);
+            double y_pCalculated = shape.y_pBar;
+            double actualTolerance = EvaluateActualTolerance(y_pCalculated, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
         }
     }
 }

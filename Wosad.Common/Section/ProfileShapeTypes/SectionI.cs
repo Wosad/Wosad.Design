@@ -163,11 +163,15 @@ namespace Wosad.Common.Section.SectionTypes
             double t_f = this.t_f;
             double b_f = this.b_fTop;
 
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
+            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, t_f / 2));
+            CompoundShapePart Web = new CompoundShapePart(t_w, d - 2 * t_f, new Point2D(0, d / 2));
+
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(b_f,t_f, new Point2D(0,d/2-t_f/2)),
-                new CompoundShapePart(t_w,d-2*t_f, new Point2D(0,0)),
-                new CompoundShapePart(b_f,t_f, new Point2D(0,-(d/2-t_f/2)))
+                 TopFlange,  
+                 Web,
+                 BottomFlange
             };
             return rectX;
         }
@@ -184,11 +188,16 @@ namespace Wosad.Common.Section.SectionTypes
             double FlangeWidth = this.b_fTop;
 
             // I-shape converted to X-shape 
+            double FlangeOverhang = (b_f - t_w) / 2.0;
+            CompoundShapePart LeftFlange = new CompoundShapePart(2* t_f, FlangeOverhang, new Point2D(0, d - FlangeOverhang/2));
+            CompoundShapePart RightFlange = new CompoundShapePart(2*t_f, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
+            CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, b_f / 2));
+
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-t_w)/2, new Point2D(0,(FlangeWidth -t_w)/4+t_w/2 )),
-                new CompoundShapePart(t_w,d, new Point2D(t_w/2.0,0)),
-                new CompoundShapePart(2*FlangeThickness,(FlangeWidth-t_w)/2, new Point2D(0,-((FlangeWidth -t_w)/4+t_w/2))),
+                LeftFlange,
+                Web,
+                RightFlange
             };
             return rectY;
         }
@@ -208,7 +217,7 @@ namespace Wosad.Common.Section.SectionTypes
 
             double d_p=d-((t_1+t_2) / 2);
             double a =1/(Math.Pow(1+(b_1/b_2 ),3)*(t_1/t_2 ) );
-            this.Cw =(Math.Pow(d_p,2)*Math.Pow(b_1,3)* t_1*a)/12;
+            this._C_w =(Math.Pow(d_p,2)*Math.Pow(b_1,3)* t_1*a)/12;
 
         }
 

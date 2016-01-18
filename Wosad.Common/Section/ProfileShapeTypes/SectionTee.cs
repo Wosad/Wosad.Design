@@ -91,8 +91,8 @@ namespace Wosad.Common.Section.SectionTypes
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(b_f,t_f, new Point2D(0,-t_f/2)),
-                new CompoundShapePart(t_w,d-t_f, new Point2D(0,-(d-t_f)/2-t_f)),
+                new CompoundShapePart(b_f,t_f, new Point2D(0,d-t_f/2)),
+                new CompoundShapePart(t_w,d-t_f, new Point2D(0,(d-t_f)/2))
             };
             return rectX;
         }
@@ -104,19 +104,21 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
+            double FlangeOverhang = (b_f - t_w) / 2;
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart((b_f-t_w)/2,t_f, new Point2D(-((b_f -t_w)/4+t_w/2) ,-t_f/2)),
-                new CompoundShapePart(t_w,d, new Point2D(0,-d/2)),
-                new CompoundShapePart((b_f-t_w)/2,t_f, new Point2D((b_f -t_w)/4+t_w/2 ,-t_f/2)),
+                new CompoundShapePart(t_f,FlangeOverhang, new Point2D(0 ,b_f-FlangeOverhang/2)),
+                new CompoundShapePart(d,t_w, new Point2D(0,b_f/2)),
+                new CompoundShapePart(FlangeOverhang,t_f, new Point2D(0,FlangeOverhang/2)),
             };
             return rectY;
         }
 
 
-protected override void CalculateWarpingConstant()
-{
-    throw new NotImplementedException();
-}
+        protected override void CalculateWarpingConstant()
+        {
+            double d_prime = d - ((t_f) / (2.0));
+            _C_w = ((Math.Pow(b_f, 3) * Math.Pow(t_f, 3)) / (144.0)) + ((Math.Pow(d_prime, 3) * Math.Pow(t_w, 3)) / (36.0));
+        }
     }
 }

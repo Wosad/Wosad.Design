@@ -95,7 +95,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// </summary>
         protected override void CalculateWarpingConstant()
         {
-            this.Cw = 2 * C_w;
+            this._C_w = 2 * C_w;
         }
         /// <summary>
         /// From:

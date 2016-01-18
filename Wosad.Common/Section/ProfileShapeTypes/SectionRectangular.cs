@@ -97,7 +97,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         protected override void CalculateWarpingConstant()
         {
-            Cw = 0.0;
+            _C_w = 0.0;
         }
 
         protected override void CalculateTorsionalConstant()

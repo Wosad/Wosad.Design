@@ -84,7 +84,10 @@ namespace Wosad.Common.Section
             }
 
         }
-
+        protected override double GetActualHeight()
+        {
+            return this.Size;
+        }
         Point2D centroid;
         /// <summary>
         /// Gets centroid of combined component quarter-circle + rectangle.

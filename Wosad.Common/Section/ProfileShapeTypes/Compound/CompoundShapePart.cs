@@ -68,6 +68,26 @@ namespace Wosad.Common.Section
         {
             return _h;
         }
+
+        /// <summary>
+        /// Actual Height
+        /// </summary>
+
+        private double _h_a;
+
+        public double h_a
+        {
+            get
+            {
+                double heightActual = GetActualHeight();
+                return heightActual;
+            }
+        }
+
+        protected virtual double GetActualHeight()
+        {
+            return _h;
+        }
         
 
         private Point2D insertionPoint;

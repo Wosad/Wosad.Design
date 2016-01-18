@@ -231,6 +231,7 @@ namespace Wosad.Common.Section
 
                 double bn=0;
                 double hn = 0;
+                double hn_actual = 0; //actual height used for fillet areas
                 double yn = 0;
                 plasticRectangle pr = null;
                 //Create a new rectangle and swith Z ad Y 
@@ -240,11 +241,14 @@ namespace Wosad.Common.Section
                                 pr = new plasticRectangle(r.b,r.h,r.InsertionPoint);
                                 bn = pr.b;
                                 hn = pr.h;
+                                hn_actual = r.h_a;
                             break;
                         case AnalysisAxis.Y:
-                                pr = new plasticRectangle(r.h,r.b,new Point2D(r.InsertionPoint.Y,r.InsertionPoint.X));
+                                //pr = new plasticRectangle(r.h,r.b,new Point2D(r.InsertionPoint.Y,r.InsertionPoint.X));
+                            pr = new plasticRectangle(r.b, r.h, r.InsertionPoint);
                                 bn = pr.b;
                                 hn = pr.h;
+                                hn_actual = r.h_a;
                             break;
                     }
                     
@@ -263,7 +267,15 @@ namespace Wosad.Common.Section
 	                {
                         //this condition is met only for one rectangle
 		                Y_n_tilda = Sum_hi+h_n_tilda;
-                        PNACoordinate = this.YMax - Y_n_tilda;
+                        if (axis == AnalysisAxis.X)
+                        {
+                            PNACoordinate = Y_n_tilda - this.YMin; //PNA coordinate is meeasured from top
+                        }
+                        else
+                        {
+                            PNACoordinate = Y_n_tilda; //PNA coordinate is meeasured from left
+                        }
+                        
                         pr.h_n_tilda = h_n_tilda;
 	                }
                     else
@@ -274,21 +286,33 @@ namespace Wosad.Common.Section
                     
                     pRects.Add(pr);
                     Sum_Ai+=An;
-                    Sum_hi +=hn;
+                    //Sum_hi +=hn;
+                    Sum_hi += hn_actual;
             }
             //Calculate contribution of this rectangle
+                double sectionHeight;
+                if (axis == AnalysisAxis.X)
+	            {
+		                sectionHeight= YMax - YMin;
+	            }
+                else
+	            {
+                        sectionHeight= XMax - XMin;
+	            }
+
+            double distanceFromBottomToPNA = sectionHeight - PNACoordinate;
             foreach (var pr in pRects)
             {
              double Zn;
              if (pr.Y_n_tilda!=0)
 	            {
-		            double ZnTop = pr.b*Math.Pow(pr.h_n_tilda,2)/2      ;
+		            double ZnTop = pr.b*Math.Pow(pr.h_n_tilda,2)/2 ;
                     double ZnBot = pr.b * Math.Pow((pr.h - pr.h_n_tilda), 2) / 2;
                     Zn = ZnTop + ZnBot;
 	            }
             else
 	            {
-                    double dn = pr.InsertionPoint.Y - PNACoordinate ;
+                    double dn = pr.InsertionPoint.Y - distanceFromBottomToPNA; //PNACoordinate ;
                     Zn = Math.Abs(dn) * pr.An;
 
                 } 
@@ -298,13 +322,13 @@ namespace Wosad.Common.Section
 
             switch (axis)
             {
-                case AnalysisAxis.X: //internally the coordinate is measured from the top
+                case AnalysisAxis.X: 
                     this._Z_x = Z;
-                    this.ypb = PNACoordinate; // - YMin;
+                    this.ypb = distanceFromBottomToPNA; 
                     break;
                 case AnalysisAxis.Y: 
                     this._Z_y = Z;
-                    this.xpl = PNACoordinate; // -XMin;
+                    this.xpl = distanceFromBottomToPNA; 
                     break;
             }
         }
@@ -385,18 +409,19 @@ namespace Wosad.Common.Section
         /// <summary>
         /// Plastic neutral axis location 
         /// THE REPORTED PLASTIC NEUTRAL LOCATION IS GIVEN AS THE DISTANCE FROM BOTTOM FIBER
-        /// IN THE PAPER DISTANCE FROM THE TOP IS USED. Therefore conversion is made here.
         /// </summary>
         public double y_pBar
         {
             get {
-
-                double height = YMax - YMin;
-                return height-ypb;
+                if (plasticPropertiesCalculated == false)
+                {
+                    CalculatePlasticProperties();
+                }
+                return ypb;
             }
         }
 
-        protected double Cw;
+        protected double _C_w;
         public double C_w
         {
             get {
@@ -405,7 +430,7 @@ namespace Wosad.Common.Section
                 {
                     CalculateWarpingConstant();
                 }
-                return Cw; 
+                return _C_w; 
             }
         }
 

@@ -160,7 +160,7 @@ namespace Wosad.Common.Section.SectionTypes
             double b_prime = 0.0;
             b_prime = _b_f - ((_t_w) / (2));
             double alpha = 1 / (2 + (d_prime * _t_w) / (3 * b_prime * _t_f));
-            Cw=Math.Pow((d_prime), 3)*Math.Pow((b_prime), 3)*_t_f*((1-3*alpha)/6+((alpha*alpha) / (2))*(1+((d_prime*_t_w) / (6*b_prime*_t_f))));
+            _C_w=Math.Pow((d_prime), 3)*Math.Pow((b_prime), 3)*_t_f*((1-3*alpha)/6+((alpha*alpha) / (2))*(1+((d_prime*_t_w) / (6*b_prime*_t_f))));
 
         }
     }
