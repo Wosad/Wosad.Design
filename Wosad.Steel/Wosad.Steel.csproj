@@ -106,8 +106,12 @@
     <Compile Include="AISC\AISC360_10\G_Shear\ShearMember.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorGroupFactor.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorPlacementFactor.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorShearStrength.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\CompositeBeamSection.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\Deflection\MomentOfInertia.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Flexure\EffectiveSlabWidth.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\Strength\FlexuralStrength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInCompression.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInTension.cs" />
@@ -128,6 +132,8 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\WhitmoreSectionWidth.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
+    <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />
+    <Compile Include="AISC\Entities\Enums\HeadedAnchorWeldCase.cs" />
     <Compile Include="AISC\Entities\Enums\ShearAreaCase.cs" />
     <Compile Include="AISC\Interfaces\IBeamCope.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShear.cs" />

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorTests.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\CompositeBeamDeflectionTests.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\CompositeBeamFlexureTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BeamCope\BeamCopeTests.cs" />
