@@ -32,6 +32,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
     {
         public Point2D NodeI{get; set;}
         public Point2D NodeJ { get; set; }
+        public bool IsLoadedOutOfPlane { get; set; }
 
         /// <summary>
         /// Angle from vertical (degrees)
@@ -74,7 +75,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
         /// <param name="F_EXX">Electrode stength</param>
         /// <param name="NumberOfSubdivisions">Number of sub-segments, used for instantaneous center of rotation calculations</param>
         /// <param name="theta">Angle from vertical (degrees)</param>
-        public FilletWeldLine(Point2D p1, Point2D p2, double leg, double F_EXX, int NumberOfSubdivisions,double theta=0.0)
+        public FilletWeldLine(Point2D p1, Point2D p2, double leg, double F_EXX, int NumberOfSubdivisions,double theta=0.0,  bool IsLoadedOutOfPlane=false)
         {
             // TODO: Complete member initialization
             this.NodeI = p1;
@@ -83,6 +84,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
             this.ElectrodeStrength = F_EXX;
             this.NumberOfSubdivisions = NumberOfSubdivisions;
             this.theta = theta;
+            this.IsLoadedOutOfPlane = IsLoadedOutOfPlane;
         }
 
 
@@ -106,7 +108,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
                 Point2D stPt = new Point2D(NodeI.X + i * segDx, NodeI.Y + i * segDy);
                 Point2D enPt = new Point2D(NodeI.X + (i + 1) * segDx, NodeI.Y + (i + 1) * segDy);
                 //Need to change this to be independent of fillet weld type
-                FilletWeldElement weld = new FilletWeldElement(stPt, enPt, Leg, ElectrodeStrength);
+                FilletWeldElement weld = new FilletWeldElement(stPt, enPt, Leg, ElectrodeStrength, IsLoadedOutOfPlane);
                 WeldElements.Add(weld);
             }
         }

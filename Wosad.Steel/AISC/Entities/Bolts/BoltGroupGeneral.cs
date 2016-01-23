@@ -89,6 +89,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
             return iRn;
         }
 
+
         protected override List<ILocationArrayElement> GetICElements()
         {
             return Bolts;
@@ -107,6 +108,40 @@ namespace Wosad.Steel.AISC.SteelEntities.Bolts
             var ControllingBolt = Bolts.Where(b => b.GetDistanceToPoint(Center) == LiMax).FirstOrDefault();
             ControllingBolt.LimitDeformation = DeltaMax;
             return ControllingBolt;
+        }
+
+        public double GetPureMomentCoefficient()
+        {
+            Point2D centerOfGravity = GetGroupCenterOfGravity();
+
+            ILocationArrayElement furthestBolt = FindUltimateDeformationElement(centerOfGravity);
+            double LiMax = FindLargestElementDistanceFromCenter(centerOfGravity);
+            double C_prime = 0;
+            double Delta_Max = 0.34;
+
+            foreach (var bolt in Bolts)
+            {
+                double l_i = bolt.GetDistanceToPoint(centerOfGravity);
+                double C_primeThis = l_i * Math.Pow(1 - Math.Exp(-(10.0 *l_i* Delta_Max) / LiMax), 0.55); 
+                //Manual Equation 7-21
+                C_prime = C_prime + C_primeThis;
+            }
+
+            return C_prime;
+        }
+
+        private Point2D GetGroupCenterOfGravity()
+        {
+            double SumX=0;
+            double SumY=0;
+            foreach (var b in Bolts)
+            {
+                SumX = SumX + b.Location.X;
+                SumY = SumY + b.Location.Y;
+            }
+            double centroidX = SumX / Bolts.Count();
+            double centroidY = SumY / Bolts.Count();
+            return new Point2D(centroidX, centroidY);
         }
     }
 }

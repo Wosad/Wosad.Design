@@ -31,12 +31,14 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
     {
         public Point2D NodeI { get; set; }
         public Point2D NodeJ { get; set; }
+        public bool IsLoadedOutOfPlane { get; set; }
 
-        public FilletWeldElement(Point2D StartNode, Point2D EndNode, double Leg, double ElectrodeStrength)
+        public FilletWeldElement(Point2D StartNode, Point2D EndNode, double Leg, double ElectrodeStrength, bool IsLoadedOutOfPlane =false)
             :base(Leg,ElectrodeStrength)
         {
             this.NodeI = StartNode;
             this.NodeJ = EndNode;
+            this.IsLoadedOutOfPlane = IsLoadedOutOfPlane;
         }
 
 
@@ -95,8 +97,18 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
         {
             get
             {
-                double x = (NodeJ.X + NodeI.X) / 2.0;
-                double y = (NodeJ.Y + NodeI.Y) / 2.0;
+                double x;
+                double y;
+                if (IsLoadedOutOfPlane ==true)
+                {
+                    x = 0;
+                }
+                else
+                {
+                    x = (NodeJ.X + NodeI.X) / 2.0;
+                }
+                
+                y = (NodeJ.Y + NodeI.Y) / 2.0;
                 if (location == null)
                 {
                     location = new Point2D(x, y);

@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.2.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.2.5\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.2.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.2.6\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -130,6 +130,10 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetConfigurationCompactness.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetPlateEffectiveCompressionLength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\WhitmoreSectionWidth.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedPlateMaximumPlateThickness.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedPlateStabilizerPlate.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedSinglePlate.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\StabilizedExtendedPlateMoment.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />

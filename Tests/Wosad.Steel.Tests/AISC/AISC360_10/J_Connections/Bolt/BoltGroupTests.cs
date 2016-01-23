@@ -39,7 +39,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         /// AISC manual 14th Edition Table 7-6
         /// </summary>
         [Test]
-        public void BoltGroupSingleLine0DegreesReturnsC()
+        public void BoltGroupSingleLine0DegreesReturnsCValue()
         {
             BoltGroup bg = new BoltGroup(4, 1, 0, 3);
             double C = bg.GetInstantaneousCenterCoefficient(8, 0);
@@ -61,7 +61,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         }
 
         [Test]
-        public void BoltGroup4X4ReturnsValue()
+        public void BoltGroup4X4ReturnsCValue()
         {
             BoltGroup bg = new BoltGroup(2, 2, 3, 3);
             double C = bg.GetInstantaneousCenterCoefficient(10, 0);
@@ -72,7 +72,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         }
 
         [Test]
-        public void BoltGroup4X4NegativeEccentricitySameValue()
+        public void BoltGroup4X4NegativeEccentricitySameCValue()
         {
             BoltGroup bg = new BoltGroup(2, 2, 3, 3);
             double C = bg.GetInstantaneousCenterCoefficient(-10, 0);
@@ -86,7 +86,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         /// Elastic moment. Checked against spreadsheet calculation
         /// </summary>
         [Test]
-        public void BoltGroupElasticReturnsMoment()
+        public void BoltGroupElasticReturnsElasticMoment()
         {
             BoltGroup bg = new BoltGroup(4, 2, 3, 3);
             double C = bg.CalculateElasticGroupMomentCoefficientC();
@@ -97,12 +97,23 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
 
 
         [Test]
-        public void BoltGroupTripleLine0DegreesReturnsC()
+        public void BoltGroupTripleLine0DegreesReturnsCValue()
         {
             BoltGroup bg = new BoltGroup(3, 3, 3, 3);
             double C = bg.GetInstantaneousCenterCoefficient(3, 0);
             double refValue = 5.79; // from AISC Steel Manual
             double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void BoltGroup3X2ReturnsC_primePureMomentValue()
+        {
+            BoltGroup bg = new BoltGroup(3, 2, 3, 3);
+            double C_prime = bg.GetPureMomentCoefficient();
+            double refValue = 15.8; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C_prime, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);
         }

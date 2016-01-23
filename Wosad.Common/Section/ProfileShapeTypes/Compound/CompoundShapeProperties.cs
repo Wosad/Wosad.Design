@@ -220,76 +220,92 @@ namespace Wosad.Common.Section
             double Atar = A / 2;
             double Sum_hi=0;  //summation of height of previous rectangles
             double Sum_Ai =0; //summation of areas of previous rectangles
+            double Sum_AiPreviousStep = 0;//summation of areas of previous rectangles in the step before this one
 
             //find location of PNA
             //and store the information in a list
             List<plasticRectangle> pRects = new List<plasticRectangle>();
             double PNACoordinate= 0;
 
+            #region Find PNA
             foreach (var r in rects)
             {
 
-                double bn=0;
+                double bn = 0;
                 double hn = 0;
                 double hn_actual = 0; //actual height used for fillet areas
                 double yn = 0;
                 plasticRectangle pr = null;
 
-                    switch (axis)
+                switch (axis)
+                {
+                    case AnalysisAxis.X:
+                        pr = new plasticRectangle(r.b, r.h, r.InsertionPoint);
+                        bn = pr.b;
+                        hn = pr.h;
+                        hn_actual = r.h_a;
+                        break;
+                    case AnalysisAxis.Y:
+                        //pr = new plasticRectangle(r.h,r.b,new Point2D(r.InsertionPoint.Y,r.InsertionPoint.X));
+                        pr = new plasticRectangle(r.b, r.h, r.InsertionPoint);
+                        bn = pr.b;
+                        hn = pr.h;
+                        hn_actual = r.h_a;
+                        break;
+                }
+
+
+                yn = pr.InsertionPoint.Y; //centroid of this rectangle
+                double An = bn * hn;
+                pr.An = An;
+                //distance from top of the rectangle to the PNA
+                //this number is meaningful only for one rectangle
+                double h_n_tilda;
+
+                if (An == 0 && Sum_Ai == Atar) // case when the rectangle represents a hole at the center of the section
+                {
+                    h_n_tilda = hn / 2;
+                }
+                else //all other cases when rectangles are "stacked" on top of each other
+                {
+                    h_n_tilda = (Atar - Sum_Ai) / bn;
+                }
+
+                double Y_n_tilda = 0;
+
+                //check if this rectangle is the one where
+                //PNA is located
+                if (h_n_tilda > 0 && h_n_tilda < hn) // remove equal?
+                {
+                    //this condition is met only for one rectangle
+                    Y_n_tilda = Sum_hi + h_n_tilda;
+                    if (axis == AnalysisAxis.X)
                     {
-                        case AnalysisAxis.X:
-                                pr = new plasticRectangle(r.b,r.h,r.InsertionPoint);
-                                bn = pr.b;
-                                hn = pr.h;
-                                hn_actual = r.h_a;
-                            break;
-                        case AnalysisAxis.Y:
-                                //pr = new plasticRectangle(r.h,r.b,new Point2D(r.InsertionPoint.Y,r.InsertionPoint.X));
-                            pr = new plasticRectangle(r.b, r.h, r.InsertionPoint);
-                                bn = pr.b;
-                                hn = pr.h;
-                                hn_actual = r.h_a;
-                            break;
+                        PNACoordinate = Y_n_tilda - this.YMin; //PNA coordinate is meeasured from top
                     }
-                    
-
-                    yn = pr.InsertionPoint.Y; //centroid of this rectangle
-                    double An = bn*hn;
-                    pr.An = An;
-                    //distance from top of the rectangle to the PNA
-                    //this number is meaningful only for one rectangle
-                    double h_n_tilda = (Atar - Sum_Ai) / bn; 
-                    double Y_n_tilda=0;
-
-                    //check if this rectangle is the one where
-                    //PNA is located
-                    if (h_n_tilda > 0 && h_n_tilda <= hn)
-	                {
-                        //this condition is met only for one rectangle
-		                Y_n_tilda = Sum_hi+h_n_tilda;
-                        if (axis == AnalysisAxis.X)
-                        {
-                            PNACoordinate = Y_n_tilda - this.YMin; //PNA coordinate is meeasured from top
-                        }
-                        else
-                        {
-                            PNACoordinate = Y_n_tilda; //PNA coordinate is meeasured from left
-                        }
-                        
-                        pr.h_n_tilda = h_n_tilda;
-	                }
                     else
                     {
-                        pr.h_n_tilda = 0;
+                        PNACoordinate = Y_n_tilda; //PNA coordinate is meeasured from left
                     }
-                    pr.Y_n_tilda = Y_n_tilda;
-                    
-                    pRects.Add(pr);
-                    Sum_Ai+=An;
-                    //Sum_hi +=hn;
-                    Sum_hi += hn_actual;
-            }
-            //Calculate contribution of this rectangle
+
+                    pr.h_n_tilda = h_n_tilda;
+                }
+                else
+                {
+                    pr.h_n_tilda = 0;
+                }
+                pr.Y_n_tilda = Y_n_tilda;
+
+                pRects.Add(pr);
+                Sum_AiPreviousStep = Sum_Ai;
+                Sum_Ai += An;
+                //Sum_hi +=hn;
+                Sum_hi += hn_actual;
+            } 
+
+
+
+
                 double sectionHeight;
                 if (axis == AnalysisAxis.X)
 	            {
@@ -298,13 +314,16 @@ namespace Wosad.Common.Section
                 else
 	            {
                         sectionHeight= XMax - XMin;
-	            }
+                }
 
-            double distanceFromBottomToPNA = sectionHeight - PNACoordinate;
+double distanceFromBottomToPNA = sectionHeight - PNACoordinate;
+
+            #endregion
+                
             foreach (var pr in pRects)
             {
              double Zn;
-             if (pr.Y_n_tilda!=0)
+             if (pr.Y_n_tilda!=0) //special case when rectangle is cut by PNA
 	            {
 		            double ZnTop = pr.b*Math.Pow(pr.h_n_tilda,2)/2 ;
                     double ZnBot = pr.b * Math.Pow((pr.h - pr.h_n_tilda), 2) / 2;

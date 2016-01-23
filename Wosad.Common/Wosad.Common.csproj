@@ -133,6 +133,7 @@
     <Compile Include="Section\ProfileShapeTypes\Generic\GenericShapeCentroid.cs" />
     <Compile Include="Section\ProfileShapeTypes\Generic\GenericShapeSlicing.cs" />
     <Compile Include="Section\ProfileShapeTypes\Generic\SectionSliceRectangular.cs" />
+    <Compile Include="Section\ProfileShapeTypes\SectionOfPlateWithHoles.cs" />
     <Compile Include="Section\ProfileShapeTypes\SectionTeeRolled.cs" />
     <Compile Include="Section\SectionTypes\General\SectionGeneralProperties.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\ArbitraryCompoundShape.cs" />

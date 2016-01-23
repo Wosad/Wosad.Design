@@ -28,7 +28,7 @@ namespace Wosad.Steel.AISC.SteelEntities
     {
 
 
-        bool ElasticPropertiesWerCalculated;
+        bool ElasticPropertiesWereCalculated;
         /// <summary>
         /// Calculates elastic coefficient C. This coefficient, multiplied by
         /// maximum element force will produce the moment that will cause the
@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.SteelEntities
         public double CalculateElasticGroupMomentCoefficientC()
         {
 
-            if (ElasticPropertiesWerCalculated == false)
+            if (ElasticPropertiesWereCalculated == false)
             {
                 CalculateElastcCentroid();
                 CalculatePolarMomentOfInertia();

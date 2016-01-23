@@ -35,13 +35,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         /// <param name="l_vertical">Horizontal dimension of group</param>
         /// <param name="leg">Follet weld size (leg)</param>
         /// <param name="F_EXX">Electrode strength</param>
-        public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX )
+        public FilletWeldGroup(string WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX, bool IsLoadedOutOfPlane=false)
         {
             this.l_horizontal= l_horizontal;
             this.l_vertical = l_vertical;
             this.leg = leg;
             this.F_EXX = F_EXX;
             Nsub = 20;
+            this.IsLoadedOutOfPlane = IsLoadedOutOfPlane;
 
              switch (WeldPattern)
 	        {
@@ -56,8 +57,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         }
 
-        public FilletWeldGroup(WeldGroupPattern WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX):
-            this(WeldPattern.ToString(),l_horizontal,l_vertical,leg,F_EXX)
+        public FilletWeldGroup(WeldGroupPattern WeldPattern, double l_horizontal, double l_vertical, double leg, double F_EXX, bool IsLoadedOutOfPlane=false):
+            this(WeldPattern.ToString(), l_horizontal, l_vertical, leg, F_EXX, IsLoadedOutOfPlane)
         {
         }
 
@@ -67,6 +68,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         double l_vertical; 
         double leg;
         double F_EXX;
+        bool IsLoadedOutOfPlane;
 
         private void AddL()
         {
@@ -77,8 +79,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> templines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub)
+                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane)
             };
             FilletWeldLoadDeformationGroupBase tempGroup = new FilletWeldLoadDeformationGroupBase(templines);
             var centroid = tempGroup.GetElasticCentroid();
@@ -90,8 +92,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0) //horizontal leg
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane) //horizontal leg
             };
             Lines = lines;
 
@@ -107,9 +109,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> templines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub),
-                new FilletWeldLine(p1_temp,p4_temp,leg,F_EXX,Nsub),
+                new FilletWeldLine(p1_temp,p2_temp,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2_temp,p3_temp,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p1_temp,p4_temp,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
             };
             FilletWeldLoadDeformationGroupBase tempGroup = new FilletWeldLoadDeformationGroupBase(templines);
             var centroid = tempGroup.GetElasticCentroid();
@@ -122,9 +124,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0),
-                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub,90.0),
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
             };
             Lines = lines;
         }
@@ -137,10 +139,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0), //horizontal leg
-                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0), //horizontal leg
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0, IsLoadedOutOfPlane), //horizontal leg
+                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane), //horizontal leg
             };
             Lines = lines;
         }
@@ -154,8 +156,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
             };
             Lines = lines;
         }
@@ -169,8 +171,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub),
-                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub),
+                new FilletWeldLine(p1,p2,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p3,p4,leg,F_EXX,Nsub,0,IsLoadedOutOfPlane),
             };
             Lines = lines;
         }

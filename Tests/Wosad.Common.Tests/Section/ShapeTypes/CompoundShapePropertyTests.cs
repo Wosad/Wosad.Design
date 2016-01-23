@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using Wosad.Common.Mathematics;
 using Wosad.Common.Section;
 using Wosad.Common.Section.Predefined;
+using Wosad.Common.Section.SectionTypes;
 
 namespace Wosad.Common.Tests.Section.ShapeTypes
 {
@@ -156,6 +157,33 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             ArbitraryCompoundShape shape = new ArbitraryCompoundShape(Ishape, null);
             double y_pCalculated = shape.y_pBar;
             double actualTolerance = EvaluateActualTolerance(y_pCalculated, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void CompoundShapeReturnsZ_netWithMidHole()
+        {
+            double t_p = 0.5;
+            double d_pl = 9.0;
+            double n = 3;
+            double d_hole = 13.0 / 16.0 + 1.0 / 16.0;
+            SectionOfPlateWithHoles plate = new SectionOfPlateWithHoles("", t_p, d_pl, n, d_hole, 1.5, 1.5, new Point2D(0, 0));
+            double Z_net = plate.Z_x;
+            double refValue = 7.4;
+            double actualTolerance = EvaluateActualTolerance(Z_net, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+        [Test]
+        public void CompoundShapeReturnsZ_netWith2Holes()
+        {
+            double t_p = 0.5;
+            double d_pl = 6.0;
+            double n = 2;
+            double d_hole = 13.0 / 16.0 + 1.0 / 16.0;
+            SectionOfPlateWithHoles plate = new SectionOfPlateWithHoles("", t_p, d_pl, n, d_hole, 1.5, 1.5, new Point2D(0, 0));
+            double Z_net = plate.Z_x;
+            double refValue = 3.19;
+            double actualTolerance = EvaluateActualTolerance(Z_net, refValue);
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
     }

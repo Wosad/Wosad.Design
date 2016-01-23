@@ -39,6 +39,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Composite
         public double SlabSolidThickness { get; set; }
         public double SlabDeckThickness { get; set; }
         public double SumQ_n { get; set; }
+        public double C_Slab { get; set; }
         public double F_y { get; set; }
         public double f_cPrime { get; set; }
     }

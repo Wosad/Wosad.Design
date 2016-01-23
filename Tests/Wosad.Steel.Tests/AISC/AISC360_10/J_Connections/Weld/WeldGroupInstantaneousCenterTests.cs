@@ -38,7 +38,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
 
 
         [Test]
-        public void WeldGroupChannelLinesReturnsValue()
+        public void WeldGroupChannelReturnsValue()
         {
             double L = 10;
             FilletWeldGroup wg = new FilletWeldGroup("C", 5.0, L, 1.0 / 16.0, 70.0);
@@ -53,7 +53,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
 
 
         [Test]
-        public void WeldGroup2LinesLinesReturnsValue()
+        public void WeldGroup2LinesReturnsValue()
         {
             double L = 10;
             FilletWeldGroup wg = new FilletWeldGroup("ParallelVertical", 5.0, L, 1.0 / 16.0, 70.0);
@@ -84,6 +84,19 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
             FilletWeldGroup wg = new FilletWeldGroup("L", 5.0, L, 1.0 / 16.0, 70.0);
             double C = wg.GetInstantaneousCenterCoefficient(5.0, 0);
             double refValue = 1.95; // from AISC Steel Manual
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void WeldGroup2LinesOutOfPlaneReturnsValue()
+        {
+            double L = 10;
+            FilletWeldGroup wg = new FilletWeldGroup("ParallelVertical", 5.0, L, 1.0 / 16.0, 70.0,true);
+            double C = wg.GetInstantaneousCenterCoefficient(10.0, 0);
+            double refValue = 1.28; // from AISC Steel Manual
+            double P_n = refValue * L;
             double actualTolerance = EvaluateActualTolerance(C, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);

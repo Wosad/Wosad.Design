@@ -222,7 +222,7 @@ namespace Wosad.Steel.AISC.SteelEntities
                 }
                 return elements;
             }
-            set { elements = value; ElasticPropertiesWerCalculated = false; }
+            set { elements = value; ElasticPropertiesWereCalculated = false; }
         }
 
 

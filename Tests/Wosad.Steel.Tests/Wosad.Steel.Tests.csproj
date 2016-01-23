@@ -67,6 +67,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltNominalStressTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\ModifiedBoltShearStrengthTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\SlipCriticalBoltTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialType\ExtendedSinglePlateTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldStrengthTests.cs" />
