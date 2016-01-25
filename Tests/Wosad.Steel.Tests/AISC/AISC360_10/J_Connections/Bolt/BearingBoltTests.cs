@@ -52,7 +52,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
         public void BearingBoltGroupAReturnsShearStrengthA325()
         {
             BoltBearingGroupA bolt = new BoltBearingGroupA(7.0 / 8.0, BoltThreadCase.Excluded,  null);
-            double phi_r_nv = bolt.GetAvailableShearStrength(2.0);
+            double phi_r_nv = bolt.GetAvailableShearStrength(2.0, false);
             Assert.AreEqual(61.3, Math.Round(phi_r_nv,1));        
          }
 
@@ -61,7 +61,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
          public void BearingBoltGroupAReturnsShearStrengthA490()
          {
              BoltBearingGroupB bolt = new BoltBearingGroupB(1.0, BoltThreadCase.Included, null);
-             double phi_r_nv = bolt.GetAvailableShearStrength(1);
+             double phi_r_nv = bolt.GetAvailableShearStrength(1,false);
              Assert.AreEqual(40, Math.Floor(phi_r_nv));
          }                                   
      

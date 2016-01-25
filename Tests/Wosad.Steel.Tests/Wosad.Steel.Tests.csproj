@@ -57,6 +57,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShearTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltBearingTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ConcentratedForces\WebSideswayBucklingTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\FlexuralStrengthTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlateTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ShearAreaCalculatorTests.cs" />

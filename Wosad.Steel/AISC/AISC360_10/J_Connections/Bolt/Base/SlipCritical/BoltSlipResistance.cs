@@ -38,27 +38,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double R_n = mu * Du * hf * Tb * ns;
 
             
-            ICalcLogEntry ent = Log.CreateNewEntry();
 
-            ent.AddDependencyValue(v.mu, mu);
-            ent.AddDependencyValue(v.Du, Du);
-            ent.AddDependencyValue(v.hf, hf);
-            ent.AddDependencyValue(v.Tb, Tb);
-            ent.AddDependencyValue(v.ns, ns);
-
-            ent.Reference = "AISC Formula J3-4";
             double phiR_n = 0;
 
 
                     double phi = GetPhiFactor();
-                    ent.ValueName = v.phiRn;
-                    ent.DescriptionReference = d.phiRn.SlipResistance;
-                    ent.FormulaID = f.J3_4.LRFD;
                     phiR_n = R_n * phi;
                     
-
-            ent.VariableValue = phiR_n.ToString();
-            AddToLog(ent);
             return phiR_n;
         }
 

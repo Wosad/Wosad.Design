@@ -29,7 +29,7 @@ namespace Wosad.Steel.AISC.Interfaces
         double NominalTensileStress { get; }
         double Diameter { get; }
         double Area { get; }
-        double GetAvailableShearStrength(double N_ShearPlanes);
+        double GetAvailableShearStrength(double N_ShearPlanes, bool IsEndLoadedConnectionWithLengthEfect);
         double GetAvailableTensileStrength();
         BoltThreadCase ThreadType { get; }
     }

@@ -49,44 +49,29 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             double phiR_n;
             double Rn = Ab*Fnt; //Formula  J3-1
 
-            ICalcLogEntry ent = Log.CreateNewEntry();
-
                 phiR_n = 0.75 * Rn;
-                ent.ValueName = v.phiRn;
-                ent.DescriptionReference = d.phiRn.TensileStrength;
-                ent.FormulaID = f.J3_1.LRFD;
 
-            
-            ent.AddDependencyValue(v.Fnt, Fnt);
-            ent.AddDependencyValue(v.Ab, Ab);
-            ent.Reference = "AISC Formula J3-1";
-            ent.VariableValue = Rn.ToString();
-            AddToLog(ent);
 
             return phiR_n;
         }
 
-        public override double GetAvailableShearStrength(double N_ShearPlanes)
+        public override double GetAvailableShearStrength(double N_ShearPlanes, bool IsEndLoadedConnectionWithLengthEfect)
         {
             double Ab = this.Area;//nominal unthreaded bolt area
             double Fnv = NominalShearStress;
             double R;
             double Rn = Ab * Fnv; //Formula  J3-1
 
-            ICalcLogEntry ent = Log.CreateNewEntry();
-
 
             R = 0.75 * Rn * N_ShearPlanes;
-                ent.ValueName = v.phiRn;
-                ent.DescriptionReference = d.phiRn.ShearStrength;
-                ent.FormulaID = f.J3_1.LRFD;
 
-
-            ent.AddDependencyValue(v.Fnv, Fnv);
-            ent.AddDependencyValue(v.Ab, Ab);
-            ent.Reference = "AISC Formula J3-1";
-            ent.VariableValue = R.ToString();
-            AddToLog(ent);
+            //For end loaded connections with a fastener pattern length greater than 38 in., Fnv shall be
+            //reduced to 83.3% of the tabulated values. Fastener pattern length is the maximum distance parallel to the
+            //line of force between the centerline of the bolts connecting two parts with one faying surface. 
+            if (IsEndLoadedConnectionWithLengthEfect =true)
+            {
+                R = R * 0.833;
+            }
 
             return R;
         }

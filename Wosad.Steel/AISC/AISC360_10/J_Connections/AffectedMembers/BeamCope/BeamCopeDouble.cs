@@ -73,7 +73,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
              if (rectangle != null)
              {
                  Z_net = rectangle.Z_x;
-                 // note: top and bottom S_x are the same for rectangles
              }
              return Z_net;
          }

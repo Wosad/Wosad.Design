@@ -114,6 +114,7 @@
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\EffectiveSlabWidth.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Flexure\Strength\FlexuralStrength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInCompression.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexure.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInTension.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\Base\AffectedElement.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\AffectedElementInFlexureAndShear.cs" />
@@ -130,10 +131,17 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetConfigurationCompactness.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\GussetPlateEffectiveCompressionLength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\GussetPlate\WhitmoreSectionWidth.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\MinimumThicknessOfMaterialSupportingFilletWeld.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\DoubleAngle\DoubleAngleConnection.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\Seated\SeatedConnection.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\Seated\TriangularSeatStiffenerStrength.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\Seated\TriangularSeatStiffenerForces.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\Seated\TriangularSeatStiffenerDimensonalLimits.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\Seated\SupportingVericalWeldStrength.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedPlateMaximumPlateThickness.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedPlateStabilizerPlate.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedSinglePlate.cs" />
-    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\StabilizedExtendedPlateMoment.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\StabilizedExtendedPlateTorsion.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />
