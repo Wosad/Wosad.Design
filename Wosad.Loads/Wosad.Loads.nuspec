@@ -7,7 +7,7 @@
       </group>
     </dependencies>
     <id>Wosad.Loads</id>
-    <version>0.0.1.2</version>
+    <version>0.0.2.1</version>
     <title>Wosad.Loads</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for minimum load calculations for buildings and structures per ASCE 7 standard.</description>

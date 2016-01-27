@@ -22,9 +22,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.G_Shear
+namespace Wosad.Steel.AISC.AISC360_10.Shear
 {
-    public abstract partial class ShearMember : Wosad.Steel.AISC.AISC360_10.G_Shear.IShearMember
+    public abstract partial class ShearMemberGeneral : IShearMember
     {
 
        protected double t_w { get; set; }
@@ -37,11 +37,11 @@ namespace Wosad.Steel.AISC.AISC360_10.G_Shear
        protected double phi { get; set; }
        protected bool IsTeeShape { get; set; }
 
-       public ShearMember()
+       public ShearMemberGeneral()
        {
 
        }
-       public ShearMember(double h, double t_w, double a, ISteelMaterial material, bool IsTeeShape = false)
+       public ShearMemberGeneral(double h, double t_w, double a, ISteelMaterial material, bool IsTeeShape = false)
         {
             this.t_w     =t_w     ;
             this.h       =h       ;

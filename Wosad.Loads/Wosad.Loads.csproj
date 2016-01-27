@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASCE7\ASCE7_10\C02_Combinations\CombinationResult.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C02_Combinations\CombinedEffects.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C02_Combinations\LoadCombination.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\SpecialCases\Base\BuildingComponentBase.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\BuildingElementComponent.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\ComponentAssembly.cs" />
@@ -259,7 +262,6 @@
     <None Include="Wosad.Loads.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ASCE7\ASCE7_10\C02_Combinations\" />
     <Folder Include="ASCE7\ASCE7_10\C05_FloodLoads\" />
     <Folder Include="ASCE7\ASCE7_10\C26_Wind\Assets\" />
     <Folder Include="ASCE7\Interfaces\" />

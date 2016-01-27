@@ -16,7 +16,7 @@
 #endregion
 
 using System;
-namespace Wosad.Steel.AISC.AISC360_10.G_Shear
+namespace Wosad.Steel.AISC.AISC360_10.Shear
 {
     public interface IShearMember
     {

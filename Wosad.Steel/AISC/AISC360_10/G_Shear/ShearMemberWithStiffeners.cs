@@ -22,31 +22,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.G_Shear
+namespace Wosad.Steel.AISC.AISC360_10.Shear
 {
-    public partial class ShearMemberSymmetricWithoutStiffeners : ShearMember
+    public partial class ShearMemberWithStiffeners: ShearMemberGeneral
     {
-        public ShearMemberSymmetricWithoutStiffeners(double h, double t_w, ISteelMaterial material, bool IsTeeShape = false) 
-        :base (h,t_w,0,material,IsTeeShape)
+        public ShearMemberWithStiffeners(double h, double t_w, double a, ISteelMaterial material, bool IsTeeShape = false)
+        :base(h,t_w,a,material,IsTeeShape)
         {
 
         }
 
         protected override double Get_k_v()
         {
-            if (h/t_w>260)
+            double k_v;
+
+            if (a/h>3 || a/h>Math.Pow((260 / ((h / t_w))), 2))
             {
-                throw new Exception("Web slenderness exceeds h/t_w =260 limit. Revise member section.");
-            }
-            //section G2.1(b)
-            if (IsTeeShape == true)
-            {
-                return 1.2;
+                k_v = 5.0;
             }
             else
-            {
-                return 5.0;
-            }
+	        {
+                //(G2-6)
+                k_v = 5.0 + ((5.0) / (Math.Pow(((a / h)), 2)));
+	        }
+
+            return k_v;
         }
     }
 }

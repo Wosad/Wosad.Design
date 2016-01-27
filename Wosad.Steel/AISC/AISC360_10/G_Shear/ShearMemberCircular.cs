@@ -22,9 +22,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.G_Shear
+namespace Wosad.Steel.AISC.AISC360_10.Shear
 {
-    public partial class CircularShearMember : IShearMember
+    public partial class ShearMemberCircular : IShearMember
 
     {
         double D;
@@ -33,7 +33,7 @@ namespace Wosad.Steel.AISC.AISC360_10.G_Shear
         ISteelMaterial material;
         double L_v;
 
-        public CircularShearMember(double D, double t_nom, bool Is_SAW_member, double L_v, ISteelMaterial material)
+        public ShearMemberCircular(double D, double t_nom, bool Is_SAW_member, double L_v, ISteelMaterial material)
         {
             this.D=              D;
             this.t_nom=              t_nom;

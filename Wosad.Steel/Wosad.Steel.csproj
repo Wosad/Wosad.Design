@@ -101,11 +101,13 @@
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\SteelColumn.cs" />
-    <Compile Include="AISC\AISC360_10\G_Shear\Circular.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberCircular.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\IShearMember.cs" />
-    <Compile Include="AISC\AISC360_10\G_Shear\ShearMember.cs" />
-    <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithoutStiffeners.cs" />
-    <Compile Include="AISC\AISC360_10\G_Shear\SymmetricMemberWithStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberFactory.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberGeneral.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberWithoutStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberWithStiffeners.cs" />
+    <Compile Include="AISC\AISC360_10\H_Combination\Combination.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorGroupFactor.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorPlacementFactor.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorShearStrength.cs" />
@@ -351,7 +353,7 @@
     <Compile Include="AISC\Entities\Enums\CombinationCaseId.cs" />
     <Compile Include="AISC\Entities\Enums\LocalBucklingCaseId.cs" />
     <Compile Include="AISC\Entities\Enums\LocalBucklingClassification.cs" />
-    <Compile Include="AISC\Entities\Enums\ShearCase.cs" />
+    <Compile Include="AISC\Entities\Enums\ShearNonCircularCase.cs" />
     <Compile Include="AISC\Entities\Enums\StressDistibutionType.cs" />
     <Compile Include="AISC\Entities\Enums\WeldGroupPattern.cs" />
     <Compile Include="AISC\Entities\Enums\WeldLoadType.cs" />
@@ -434,7 +436,6 @@
     <Folder Include="AISC\AISC360_10\C_Stability\" />
     <Folder Include="AISC\AISC360_10\E_Compression\2L\" />
     <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
-    <Folder Include="AISC\AISC360_10\H_Combination\" />
     <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
     <Folder Include="AISC\Entities\Materials\Plate\" />

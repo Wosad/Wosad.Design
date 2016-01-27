@@ -25,5 +25,11 @@ namespace Wosad.Steel.AISC
 {
     public enum CombinationCaseId
     {
+            H1,
+            H2,
+            H3,
+            Linear,
+            Elliptical,
+            Plastic
     }
 }
