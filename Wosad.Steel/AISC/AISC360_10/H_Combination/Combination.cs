@@ -81,19 +81,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Combination
                  InteractionRatio = N + Mx + My+T+V;
                  break;
                 case CombinationCaseId.Elliptical:
-                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(M_ux, 2) + Math.Pow(M_uy, 2) + Math.Pow(V, 2) + Math.Pow(T, 2);
+                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(Mx, 2) + Math.Pow(My, 2) + Math.Pow(V, 2) + Math.Pow(T, 2);
                  break;
                 case CombinationCaseId.Anchorage:
-                 InteractionRatio = Math.Pow(N, 5.0 / 3.0) + Math.Pow(M_ux, 5.0 / 3.0) + Math.Pow(M_uy, 5.0 / 3.0) + Math.Pow(V, 5.0 / 3.0) + Math.Pow(T, 5.0 / 3.02);
+                 InteractionRatio = Math.Pow(N, 5.0 / 3.0) + Math.Pow(Mx, 5.0 / 3.0) + Math.Pow(My, 5.0 / 3.0) + Math.Pow(V, 5.0 / 3.0) + Math.Pow(T, 5.0 / 3.02);
                  break;
                 case CombinationCaseId.Plastic:
                   // BO DOWSWELL
                  //Plastic Strength of Connection Elements
                  //ENGINEERING JOURNAL / FIRST QUARTER / 2015 
-                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(M_ux, 1.7) + Math.Pow(M_uy,1.7) + Math.Pow(V, 4) + Math.Pow(T, 2);
+                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(Mx, 1.7) + Math.Pow(My,1.7) + Math.Pow(V, 4) + Math.Pow(T, 2);
                  break;
                 default:
-                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(M_ux, 1.7) + Math.Pow(M_uy, 1.7) + Math.Pow(V, 4) + Math.Pow(T, 2);
+                 InteractionRatio = Math.Pow(N, 2) + Math.Pow(Mx, 1.7) + Math.Pow(My, 1.7) + Math.Pow(V, 4) + Math.Pow(T, 2);
                  break;
 	        }
 

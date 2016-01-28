@@ -64,8 +64,8 @@ namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
             double F_y = Section.Material.YieldStress;
             double F_u = Section.Material.UltimateStress;
 
-            double phiR_nY = GetShearYieldingStrength(F_y,A_nv);
-            double phiR_nU = GetShearRuptureStrength(F_y, A_nv);
+            double phiR_nY = GetShearYieldingStrength(F_y,A_gv);
+            double phiR_nU = GetShearRuptureStrength(F_u, A_nv);
 
             double phiR_n = Math.Min(phiR_nY, phiR_nU);
             return phiR_n;
