@@ -14,17 +14,26 @@
    limitations under the License.
    */
 #endregion
+ 
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Steel.AISC.AISC360_10.Combination;
 
-namespace Wosad.Steel.AISC
+namespace Wosad.Steel.Tests.AISC.AISC360_10.CombinedForce
 {
-    public enum HeadedAnchorWeldCase
+    [TestFixture]
+    public class CombinationTests
     {
-        WeldedDirectly,
-        WeldedThroughDeck
+        [Test]
+        public void CombinationEllipticNandVReturnsValue()
+        {
+            Combination combo = new Combination();
+            double IR = combo.GetInteractionRatio(Steel.AISC.CombinationCaseId.Elliptical,1,0,0,0,1.5,2,0,0,0,2);
+            Assert.AreEqual(0.8125, IR);
+        }
     }
 }
