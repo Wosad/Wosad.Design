@@ -68,7 +68,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
             //For end loaded connections with a fastener pattern length greater than 38 in., Fnv shall be
             //reduced to 83.3% of the tabulated values. Fastener pattern length is the maximum distance parallel to the
             //line of force between the centerline of the bolts connecting two parts with one faying surface. 
-            if (IsEndLoadedConnectionWithLengthEfect =true)
+            if (IsEndLoadedConnectionWithLengthEfect ==true)
             {
                 R = R * 0.833;
             }
