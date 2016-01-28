@@ -149,6 +149,7 @@
     <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorWeldCase.cs" />
     <Compile Include="AISC\Entities\Enums\ShearAreaCase.cs" />
+    <Compile Include="AISC\Exceptions\ComboForceException.cs" />
     <Compile Include="AISC\Interfaces\IBeamCope.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BlockShear.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\BoltHoleBearingStrength.cs" />
