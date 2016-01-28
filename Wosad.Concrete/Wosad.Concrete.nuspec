@@ -17,6 +17,12 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
     <copyright>Copyright Wosad Inc © 2015</copyright>
+    <frameworkAssemblies />
+    <dependencies>
+      <group targetFramework="net45">
+        <dependency id="Wosad.Common" version="0.0.2.6" />
+      </group>
+    </dependencies>
   </metadata>
   <files>
     <file src="D:\Wosad\SourceDynamo2\Wosad.Design\Wosad.Concrete\bin\Release\Wosad.Concrete.dll" target="lib\net45" />

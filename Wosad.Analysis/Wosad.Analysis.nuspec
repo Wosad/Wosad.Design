@@ -16,7 +16,7 @@
     <frameworkAssemblies />
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="Wosad.Common" version="0.0.1.5" />
+        <dependency id="Wosad.Common" version="0.0.2.6" />
       </group>
     </dependencies>
   </metadata>
