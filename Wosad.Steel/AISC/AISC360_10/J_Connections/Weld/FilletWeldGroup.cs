@@ -70,6 +70,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         double F_EXX;
         bool IsLoadedOutOfPlane;
 
+
         private void AddL()
         {
             CharacteristicDimension = l_vertical;
@@ -189,16 +190,33 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         public double GetInstantaneousCenterCoefficient(double e_x, double AngleOfLoad)
         {
 
-           double P_n= this.FindUltimateEccentricForce(e_x , AngleOfLoad);
+            double P_n =GetUltimateForce(e_x, AngleOfLoad);
             //Bring the coefficient that is in the format of the AISC manual
 
             //adjust to 1/6 in leg size.
             double ReductionFactor = (1.0/16.0)/this.leg;
 
             //Divide by length
-            double C = P_n*ReductionFactor/CharacteristicDimension; //fix this!!!
+            double C = P_n*ReductionFactor/CharacteristicDimension; 
             return C;
         }
+
+        public double GetUltimateForce(double e_x, double AngleOfLoad)
+        {
+            double P_n;
+
+            if (e_x != 0)
+            {
+                P_n = this.FindUltimateEccentricForce(e_x, AngleOfLoad);
+            }
+            else
+            {
+                P_n = this.GetConcentricLoadStrenth(AngleOfLoad);
+            }
+
+            return P_n;
+        }
+
 
         /// <summary>
         /// Calculates weld group strength for concentric load per AISC J2.4(c)
