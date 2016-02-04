@@ -29,7 +29,7 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IStructuralMember, IConcreteMember
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
     {
 
 

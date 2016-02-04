@@ -27,6 +27,12 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
         public double X { get; set; }
         public double Y { get; set; }
 
+        public RebarCoordinate()
+        {
+            this.X = 0;
+            this.Y = 0;
+        }
+
         public RebarCoordinate(double X, double Y)
         {
             this.X = X;

@@ -27,7 +27,7 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IStructuralMember, IConcreteMember
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
     {
         protected virtual SectionAnalysisResult GetSectionResult(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition, FlexuralAnalysisType AnalysisType)
         {

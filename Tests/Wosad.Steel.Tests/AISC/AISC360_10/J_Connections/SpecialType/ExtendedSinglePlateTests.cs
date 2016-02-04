@@ -14,14 +14,18 @@
    limitations under the License.
    */
 #endregion
- 
+
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
+using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.AISC360_10.Connections;
+using Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers;
+using Wosad.Steel.AISC.SteelEntities.Materials;
 
 namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.SpecialType
 {
@@ -79,5 +83,30 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.SpecialType
             Assert.LessOrEqual(actualTolerance, tolerance);
 
         }
+
+        //Tom Murray AISC webinar
+        //Fundamentals of connection design
+        //July 31, 2013 Part 4. Page 33.
+        [Test]
+        public void ExtendedPlateBucklingFlexuralStrength()
+        {
+            double phiR_n;
+            double h_o = 9.0;
+            double t_w = 0.5;
+            SectionRectangular r = new SectionRectangular(t_w, h_o);
+            SteelMaterial mat = new SteelMaterial(36);
+            CalcLog log = new CalcLog();
+
+            AffectedElementInFlexure flexuralElement = new AffectedElementInFlexure(r, mat, log);
+            double lambda = flexuralElement.GetLambda(10);
+            double refValue = 0.408;
+
+            double actualTolerance = EvaluateActualTolerance(lambda, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
+
+
     }
 }

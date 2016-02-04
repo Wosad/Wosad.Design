@@ -54,7 +54,8 @@ namespace Wosad.Common.Section
                 {
                     //this condition is met only for one rectangle
                     Y_n_tilda = Sum_hi + h_n_tilda;
-                    SlicePlaneCoordinate = Y_n_tilda - this.YMin; //PNA coordinate is meeasured from top
+                    //SlicePlaneCoordinate = Y_n_tilda - this.YMin; //PNA coordinate is measured from top
+                    SlicePlaneCoordinate = Y_n_tilda;//PNA coordinate is measured from top
                 }
                 Sum_Ai += An;
                 Sum_hi += hn_actual;
@@ -120,8 +121,10 @@ namespace Wosad.Common.Section
             return getSliceAtCoordinate(YPlane, sliceType);
         }
 
-        private IMoveableSection getSliceAtCoordinate(double YPlane, SLiceType sliceType)
+        private IMoveableSection getSliceAtCoordinate(double YCoordinate, SLiceType sliceType)
         {
+            //double YPlane = this.YMax - YOffsetFromTop;
+            double YPlane = YCoordinate;
 
             ArbitraryCompoundShape newShape = new ArbitraryCompoundShape(null, null);
             if (sliceType == SLiceType.Top)

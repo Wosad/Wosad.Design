@@ -26,17 +26,14 @@ using Wosad.Common.Reports;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Common.CalculationLogger;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class DevelopmentTension :Development
     {
 
-[ReportElement(
-new string[] { "Atr","s","n","Ktr" },
-new string[] { "Atr", "s", "n","12-2" },
-new string[] { "Atr-12.2.3", "s-12.2.3","n-12.2.3","Ktr" })]
 
-        internal double GetKtr(double transverseRebarArea, double transverseRebarSpacing, double numberOfBarsAlongSplittingPlane)
+
+        public double GetKtr(double transverseRebarArea, double transverseRebarSpacing, double numberOfBarsAlongSplittingPlane)
         {
             if (transverseRebarArea==0.0||transverseRebarSpacing==0.0 ||numberOfBarsAlongSplittingPlane==0.0)
             {
@@ -68,7 +65,7 @@ new string[] { "Atr-12.2.3", "s-12.2.3","n-12.2.3","Ktr" })]
         }
 
            
-        internal double GetConfinementTerm(double cb, double Ktr)
+        public double GetConfinementTerm(double cb, double Ktr)
         {
             if (db==0.0)
             {

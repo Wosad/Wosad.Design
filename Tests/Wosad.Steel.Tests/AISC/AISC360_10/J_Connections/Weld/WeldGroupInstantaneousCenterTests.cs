@@ -67,6 +67,19 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
         }
 
         [Test]
+        public void WeldGroup2LinesHorizontalReturnsValue()
+        {
+            double L = 10;
+            FilletWeldGroup wg = new FilletWeldGroup("ParallelHorizontal",L, 5.0, 1.0 / 16.0, 70.0);
+            double C = wg.GetInstantaneousCenterCoefficient(5.0, 0);
+            double refValue = 2.62; // from AISC Steel Manual
+            double P_n = refValue * L;
+            double actualTolerance = EvaluateActualTolerance(C, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
         public void WeldGroupRectangleReturnsValue()
         {
             double L = 10;

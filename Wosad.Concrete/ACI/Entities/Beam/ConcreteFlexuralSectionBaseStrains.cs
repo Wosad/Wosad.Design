@@ -44,14 +44,14 @@ namespace Wosad.Concrete.ACI
                 var LowestPointY = LongitudinalBars.Min(yVal => yVal.Coordinate.Y);
                 var PointsAtLowestY = LongitudinalBars.Where(point => point.Coordinate.Y == LowestPointY).Select(point => point);
                 var LimitStrain = PointsAtLowestY.Min(point => point.Rebar.Material.GetUltimateStrain(point.Rebar.Diameter));
-                MaxStrain = LimitStrain;
+                MaxStrain = -LimitStrain;
             }
             else
             {
                 var HighestPointY = LongitudinalBars.Max(yVal => yVal.Coordinate.Y);
                 var PointsAtHighestY = LongitudinalBars.Where(point => point.Coordinate.Y == HighestPointY).Select(point => point);
                 var LimitStrain = PointsAtHighestY.Min(point => point.Rebar.Material.GetUltimateStrain(point.Rebar.Diameter));
-                MaxStrain = LimitStrain;
+                MaxStrain = -LimitStrain;
             }
             return MaxStrain;
         }
@@ -227,13 +227,13 @@ namespace Wosad.Concrete.ACI
             //Step 2: Fill in data for output
             if (currentCompressionFiberPosition == FlexuralCompressionFiberPosition.Top)
             {
-                data.MinStrain = Math.Min(ApproximationStrainDistribution.BottomFiberStrain, secondApproximationStrainDistribution.BottomFiberStrain);
-                data.MaxStrain = Math.Max(ApproximationStrainDistribution.BottomFiberStrain, secondApproximationStrainDistribution.BottomFiberStrain);    
+                data.MinStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));
+                data.MaxStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));    
             }
             else
             {
-                data.MinStrain = Math.Min(ApproximationStrainDistribution.TopFiberStrain, secondApproximationStrainDistribution.TopFiberStrain);
-                data.MaxStrain = Math.Max(ApproximationStrainDistribution.TopFiberStrain, secondApproximationStrainDistribution.TopFiberStrain);   
+                data.MinStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));
+                data.MaxStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));   
             }
 
             return data;

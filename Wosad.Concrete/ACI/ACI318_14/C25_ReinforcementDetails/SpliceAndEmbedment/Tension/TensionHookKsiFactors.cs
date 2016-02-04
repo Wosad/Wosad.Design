@@ -27,12 +27,12 @@ using Wosad.Common.CalculationLogger;
 
 
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class StandardHookInTension : Development
     {
 
-        private double GetKsi_e()
+        public double GetKsi_e()
         {
             double ksi_e;
 

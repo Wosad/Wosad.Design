@@ -24,7 +24,7 @@ using Wosad.Common.Entities;
 using Wosad.Concrete.ACI.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Concrete.ACI318_11.Materials
+namespace Wosad.Concrete.ACI318_14.Materials
 {
     public class ConcretePrestressed : ConcreteMaterial, IPrestressedConcreteMaterial
     {

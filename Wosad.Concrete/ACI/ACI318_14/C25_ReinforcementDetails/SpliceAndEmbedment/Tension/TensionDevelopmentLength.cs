@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.CalculationLogger;
 
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class DevelopmentTension : Development
     {
@@ -84,7 +84,7 @@ namespace Wosad.Concrete.ACI318_11
 }
 
            
-        internal double GetTensionDevelopmentLength(double transverseRebarArea, double transverseRebarSpacing, double NumberOfSplicedBars)
+        public double GetTensionDevelopmentLength(double transverseRebarArea, double transverseRebarSpacing, double NumberOfSplicedBars)
         {
 
             double ld;
@@ -124,7 +124,7 @@ namespace Wosad.Concrete.ACI318_11
         }
 
 
-        internal double GetTensionDevelopmentLength(bool minimumShearReinforcementProvided)
+        public double GetTensionDevelopmentLength(bool minimumShearReinforcementProvided)
         {
             double ld;
 

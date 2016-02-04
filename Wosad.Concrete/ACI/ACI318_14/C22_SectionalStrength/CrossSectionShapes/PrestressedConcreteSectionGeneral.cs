@@ -22,17 +22,18 @@ using System.Text;
 using Wosad.Concrete.ACI;
  using Wosad.Common.Entities;
 using Wosad.Common.Mathematics;
+using Wosad.Concrete.ACI318_14;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
-    //public class PrestressedConcreteSectionGeneral: CrossSectionGeneralShape, IPrestressedConcreteSection
-    //{
-    //    public PrestressedConcreteSectionGeneral(IPrestressedConcreteMaterial Material, string Name, Point2D Centroid)
-    //        : base(Material, Name, Centroid)
-    //    {
-    //        this.Material = Material;
-    //    }
+    public class PrestressedConcreteSectionGeneral : CrossSectionGeneralShape, IPrestressedConcreteSection
+    {
+        public PrestressedConcreteSectionGeneral(IPrestressedConcreteMaterial Material, string Name, Point2D Centroid)
+            : base(Material, Name, Centroid)
+        {
+            this.Material = Material;
+        }
 
-    //    public new IPrestressedConcreteMaterial Material { get; set; }
-    //}
+        public new IPrestressedConcreteMaterial Material { get; set; }
+    }
 }

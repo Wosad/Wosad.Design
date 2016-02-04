@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Concrete.ACI.Entities;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class StandardHookInTension : Development
     {

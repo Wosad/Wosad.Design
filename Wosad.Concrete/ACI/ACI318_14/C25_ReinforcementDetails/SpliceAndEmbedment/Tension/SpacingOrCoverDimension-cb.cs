@@ -24,7 +24,7 @@ using Wosad.Common.Entities;
 using Wosad.Concrete.ACI.Infrastructure.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class DevelopmentTension: Development
     {
@@ -34,7 +34,7 @@ namespace Wosad.Concrete.ACI318_11
         
         //(b) one-half the center-to-center spacing of
         //bars or wires being developed, in.,
-        internal double GetCb()
+        public double GetCb()
         {
             double DistFromCenterToSurface = clearCover + Rebar.Diameter / 2.0;
             double HalfOfCenterToCenterDistance = (clearSpacing + Rebar.Diameter)/2.0;

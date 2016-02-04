@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class StandardHookInTension : Development
     {
@@ -51,7 +51,7 @@ namespace Wosad.Concrete.ACI318_11
         }
 
 
-        internal double GetDevelopmentLength()
+        public double GetDevelopmentLength()
         {
             
             double ldh = this.GetBasicDevelopmentLength();
@@ -60,7 +60,7 @@ namespace Wosad.Concrete.ACI318_11
             return ldh;
         
         }
-        internal double GetDevelopmentLength(HookType hookType, double sideCover, double barExtensionCover, bool enclosingRebarIsPerpendicular, double enclosingRebarSpacing)
+        public double GetDevelopmentLength(HookType hookType, double sideCover, double barExtensionCover, bool enclosingRebarIsPerpendicular, double enclosingRebarSpacing)
         {
             double ldh = this.GetBasicDevelopmentLength();
             //ldh modifiers per 12.5.3 

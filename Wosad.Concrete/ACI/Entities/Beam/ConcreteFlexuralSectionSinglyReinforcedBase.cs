@@ -49,20 +49,8 @@ namespace Wosad.Concrete.ACI
             double d = this.Get_d();
             double Mn = Tforce * (d - DepthOfCompressionBlock_a / 2.0);
             double M = Mn / 12.0; //kip*ft 
-            #region Mn
-            ICalcLogEntry MnEntry = new CalcLogEntry();
-            MnEntry.ValueName = "Mn";
-            MnEntry.AddDependencyValue("F", Math.Round(Tforce, 3));
-            MnEntry.AddDependencyValue("d", Math.Round(d, 3));
-            MnEntry.AddDependencyValue("a", Math.Round(DepthOfCompressionBlock_a, 3));
-            MnEntry.AddDependencyValue("M", Math.Round(M, 1));
-            MnEntry.Reference = "";
-            MnEntry.DescriptionReference = "/Templates/Concrete/ACI318_11/Flexure/NominalMomentCapacitySinglyReinforced.docx";
-            MnEntry.FormulaID = null; //reference to formula from code
-            MnEntry.VariableValue = Math.Round(Mn, 1).ToString();
-            #endregion
+
             
-            this.AddToLog(MnEntry);
 
             LinearStrainDistribution strainDistribution = GetStrainDistributionBasedOn_a(DepthOfCompressionBlock_a, CompressionFiberPosition);
             SectionFlexuralAnalysisResult Mn_result = new SectionFlexuralAnalysisResult(Mn, strainDistribution);
@@ -105,16 +93,6 @@ namespace Wosad.Concrete.ACI
             {
                 double As = LongitudinalBars.Sum(a => a.Rebar.Area);
                 Tforce = LongitudinalBars.Sum(a => a.Rebar.Area * a.Rebar.Material.YieldStress);
-
-                #region Tforce
-                ICalcLogEntry TforceEntry = new CalcLogEntry();
-                TforceEntry.ValueName = "F";
-                TforceEntry.Reference = "";
-                TforceEntry.DescriptionReference = "/Templates/Concrete/ACI318_11/Flexure/SteelTensionForceMultipleBars.docx";
-                TforceEntry.FormulaID = null; //reference to formula from code
-                TforceEntry.VariableValue = Math.Round(Tforce, 3).ToString();
-                #endregion
-                this.AddToLog(TforceEntry);
             }
             else
             {
@@ -123,18 +101,6 @@ namespace Wosad.Concrete.ACI
                 double Fy = rebar.Rebar.Material.YieldStress;
 
                 Tforce = As * Fy;
-
-                #region Tforce
-                ICalcLogEntry TforceEntry = new CalcLogEntry();
-                TforceEntry.ValueName = "Tforce";
-                TforceEntry.AddDependencyValue("A", Math.Round(As, 3));
-                TforceEntry.AddDependencyValue("fy", Math.Round(Fy, 3));
-                TforceEntry.Reference = "";
-                TforceEntry.DescriptionReference = "/Templates/Concrete/ACI318_11/Flexure/SteelTensionForce.docx";
-                TforceEntry.FormulaID = null; //reference to formula from code
-                TforceEntry.VariableValue = Math.Round(Tforce, 3).ToString();
-                #endregion
-                this.AddToLog(TforceEntry);
             }
 
             return Tforce;

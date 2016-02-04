@@ -72,6 +72,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void AddL()
         {
+            CharacteristicDimension = l_vertical;
+
             Point2D p1_temp = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
             Point2D p2_temp = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
             Point2D p3_temp = new Point2D(l_horizontal/2.0,l_vertical/2.0);
@@ -101,6 +103,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void AddC()
         {
+            CharacteristicDimension = l_vertical;
+
             Point2D p1_temp = new Point2D(0, -l_vertical / 2.0);
             Point2D p2_temp = new Point2D(0, l_vertical / 2.0);
             Point2D p3_temp = new Point2D(l_horizontal, l_vertical / 2.0);
@@ -132,6 +136,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         }
         private void AddRectangle()
         {
+            CharacteristicDimension = l_vertical;
+
             Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
             Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
             Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
@@ -149,6 +155,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         private void AddWeldParallelHorizontal()
         {
+            CharacteristicDimension = l_horizontal;
+
             Point2D p1 = new Point2D(-l_horizontal/2.0,-l_vertical/2.0);
             Point2D p2 = new Point2D(-l_horizontal/2.0,l_vertical/2.0);
             Point2D p3 = new Point2D(l_horizontal/2.0,l_vertical/2.0);
@@ -156,14 +164,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             List<FilletWeldLine> lines = new List<FilletWeldLine>()
             {
-                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
-                new FilletWeldLine(p4,p1,leg,F_EXX,Nsub,90.0,IsLoadedOutOfPlane),
+                new FilletWeldLine(p2,p3,leg,F_EXX,Nsub,90,IsLoadedOutOfPlane),
+                new FilletWeldLine(p1,p4,leg,F_EXX,Nsub,90,IsLoadedOutOfPlane),
             };
             Lines = lines;
         }
 
         private void AddParallelVertical()
         {
+            CharacteristicDimension = l_vertical;
             Point2D p1 = new Point2D(-l_horizontal / 2.0, -l_vertical / 2.0);
             Point2D p2 = new Point2D(-l_horizontal / 2.0, l_vertical / 2.0);
             Point2D p3 = new Point2D(l_horizontal / 2.0, l_vertical / 2.0);
@@ -187,7 +196,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
             double ReductionFactor = (1.0/16.0)/this.leg;
 
             //Divide by length
-            double C = P_n*ReductionFactor/l_vertical;
+            double C = P_n*ReductionFactor/CharacteristicDimension; //fix this!!!
             return C;
         }
 
@@ -231,5 +240,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
             return phiR_n;
         }
+
+        public double CharacteristicDimension { get; set; }
     }
 }

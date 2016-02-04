@@ -25,7 +25,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public abstract class Splice: AnalyticalElement, ISplice
     {

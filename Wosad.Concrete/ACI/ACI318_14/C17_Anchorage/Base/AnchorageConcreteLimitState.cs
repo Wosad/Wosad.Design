@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Concrete.ACI318_11.Anchorage.Base
+namespace Wosad.Concrete.ACI318_14.Anchorage.Base
 {
     public abstract class AnchorageConcreteLimitState : AnchorageLimitState
     {

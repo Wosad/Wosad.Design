@@ -28,7 +28,7 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-	public abstract partial class ConcreteSectionBase : AnalyticalElement, IStructuralMember, IConcreteMember
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
 	{
 
 		public ConcreteSectionBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, ICalcLog CalcLog)
@@ -37,7 +37,7 @@ namespace Wosad.Concrete.ACI
 			this.Section = Section;
 			this.longitBars = LongitudinalBars;
 		}
-		public List<IMemberForce> Forces { get; set; }
+		//public List<IMemberForce> Forces { get; set; }
 		public IConcreteSection Section { get; set; }
 
 		private List<RebarPoint> longitBars;
@@ -48,15 +48,15 @@ namespace Wosad.Concrete.ACI
 			set { longitBars = value; }
 		}
 		
-		public List<IMemberForce> GetForce(string LoadCaseName)
-		{
-			var f = Forces.Where(a => a.LoadCaseName == LoadCaseName).ToList();
-			if (f == null)
-			{
-				throw new Exception("Member force for load combination not found");
-			}
+        //public List<IMemberForce> GetForce(string LoadCaseName)
+        //{
+        //    var f = Forces.Where(a => a.LoadCaseName == LoadCaseName).ToList();
+        //    if (f == null)
+        //    {
+        //        throw new Exception("Member force for load combination not found");
+        //    }
 
-			return f;
-		}
+        //    return f;
+        //}
 	}
 }

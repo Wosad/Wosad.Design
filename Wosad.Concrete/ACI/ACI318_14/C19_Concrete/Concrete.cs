@@ -27,7 +27,7 @@ using Wosad.Concrete.ACI.Entities;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
 
 
-namespace Wosad.Concrete.ACI318_11.Materials
+namespace Wosad.Concrete.ACI318_14.Materials
 {
 	public class ConcreteMaterial: ConcreteMaterialBase
 	{

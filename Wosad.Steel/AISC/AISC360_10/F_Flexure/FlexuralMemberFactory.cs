@@ -48,6 +48,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             ISteelBeamFlexure beam = null;
             switch (Shape)
             {
+                    
                 case ShapeTypeSteel.IShapeRolled:
                     PredefinedSectionI ISec;
                     ISec = Section as PredefinedSectionI;

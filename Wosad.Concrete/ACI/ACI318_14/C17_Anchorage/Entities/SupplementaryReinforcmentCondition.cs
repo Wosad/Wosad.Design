@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Concrete.ACI318_11.Anchorage
+namespace Wosad.Concrete.ACI318_14.Anchorage
 {
 
 //  Condition A applies where the potential concrete failure surfaces are crossed by supplementary reinforcement proportioned to tie the potential concrete failure prism into the structural member. 

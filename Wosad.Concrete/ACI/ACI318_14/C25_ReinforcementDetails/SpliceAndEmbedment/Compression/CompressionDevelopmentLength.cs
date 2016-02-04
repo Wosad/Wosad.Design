@@ -24,16 +24,12 @@ using Wosad.Common.Entities;
 using Wosad.Common.Reports; 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Common.CalculationLogger;
-//using p = Wosad.Concrete.ACI318_11.DevelopmentCompressionParagraphs;
-//using f = Wosad.Concrete.ACI318_11.DevelopmentCompressionFormulas;
-//using v = Wosad.Concrete.ACI318_11.DevelopmentCompressionValues;
-//using d = Wosad.Concrete.ACI318_11.DevelopmentCompressionDescriptions;
-using dv = Wosad.Concrete.ACI318_11.DevelopmentValues;
-using gv = Wosad.Concrete.ACI318_11.GeneralValues;
-using gd = Wosad.Concrete.ACI318_11.GeneralDescriptions;
-using gf = Wosad.Concrete.ACI318_11.GeneralFormulas;
+using dv = Wosad.Concrete.ACI318_14.DevelopmentValues;
+using gv = Wosad.Concrete.ACI318_14.GeneralValues;
+using gd = Wosad.Concrete.ACI318_14.GeneralDescriptions;
+using gf = Wosad.Concrete.ACI318_14.GeneralFormulas;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
 
  

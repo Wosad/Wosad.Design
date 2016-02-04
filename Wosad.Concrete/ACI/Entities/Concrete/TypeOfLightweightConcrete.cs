@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI318_11.Materials
+namespace Wosad.Concrete.ACI318_14.Materials
 {
     public enum TypeOfLightweightConcrete
 	{

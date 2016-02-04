@@ -32,7 +32,7 @@ using Wosad.Steel.AISC360_10.Connections.AffectedElements;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
 {
-    public class AffectedElementInFlexure: AffectedElement
+    public partial class AffectedElementInFlexure: AffectedElement
     {
         double A_fg;
         double A_fn;
@@ -76,7 +76,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
             {
                 if (section is SectionOfPlateWithHoles)
                 {
-                    SectionOfPlateWithHoles plateWithHoles = Section as SectionOfPlateWithHoles;
+                    SectionOfPlateWithHoles plateWithHoles = section as SectionOfPlateWithHoles;
                     double S_g = plateWithHoles.B * Math.Pow(plateWithHoles.H, 2);
                     double Z_net = plateWithHoles.Z_x;
                     double Y = 0.9* this.Section.Material.YieldStress * S_g; //Flexural Yielding

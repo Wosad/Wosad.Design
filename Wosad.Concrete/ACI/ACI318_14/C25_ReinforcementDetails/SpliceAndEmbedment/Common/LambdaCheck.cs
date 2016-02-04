@@ -25,7 +25,7 @@ using Wosad.Concrete.ACI.Infrastructure.Entities;
 using Wosad.Concrete.ACI.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class Development : AnalyticalElement, IDevelopment
     {

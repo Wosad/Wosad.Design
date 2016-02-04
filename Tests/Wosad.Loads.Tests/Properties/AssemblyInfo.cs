@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Wosad.Loads.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Wosad")]
 [assembly: AssemblyProduct("Wosad.Loads.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]

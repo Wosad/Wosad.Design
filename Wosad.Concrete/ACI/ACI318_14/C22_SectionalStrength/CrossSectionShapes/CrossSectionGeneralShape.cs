@@ -14,41 +14,46 @@
    limitations under the License.
    */
 #endregion
- 
-//using Wosad.Common.Mathematics;
-//using Wosad.Common.Section.General;
-//using Wosad.Common.Section.Interfaces;
-//using Wosad.Concrete.ACI;
 
-//namespace Wosad.Concrete.ACI318_11
-//{
-//    public class CrossSectionGeneralShape : IConcreteSection
-//    {
+using System;
+using Wosad.Common.Mathematics;
+using Wosad.Common.Section.General;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Concrete.ACI;
 
-//        public CrossSectionGeneralShape(IConcreteMaterial Material, string Name, Point2D Centroid)
-//        {
-//            this.material = Material;
-//            //shape = new SectionGeneral(Name,);
-//        }
+namespace Wosad.Concrete.ACI318_14
+{
+    public class CrossSectionGeneralShape : IConcreteSection
+    {
 
-//        //private SectionGenericShape shape;
+        public CrossSectionGeneralShape(IConcreteMaterial Material, string Name, Point2D Centroid)
+        {
+            this.material = Material;
+            //shape = new SectionGeneral(Name,);
+        }
 
-//        //public SectionGenericShape Shape
-//        //{
-//        //    get { return shape; }
-//        //    set { shape = value; }
-//        //}
+        //private SectionGenericShape shape;
 
-//        public ISliceableSection SliceableShape
-//        {
-//            get { return shape as ISliceableSection; }
-//        }
+        //public SectionGenericShape Shape
+        //{
+        //    get { return shape; }
+        //    set { shape = value; }
+        //}
 
-//        IConcreteMaterial material;
-//        public IConcreteMaterial Material
-//        {
-//            get { return material; }
-//        }
+        public ISliceableSection SliceableShape
+        {
+            get 
+            {
+                throw new NotImplementedException();
+                //return shape as ISliceableSection; 
+            }
+        }
 
-//    }
-//}
+        IConcreteMaterial material;
+        public IConcreteMaterial Material
+        {
+            get { return material; }
+        }
+
+    }
+}

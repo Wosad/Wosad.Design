@@ -93,12 +93,11 @@
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorBase.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorCastIn.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorPostInstalled.cs" />
-    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSection.cs" />
-    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSectionFlexure.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Flexure\ConcreteSectionFlexure.cs" />
     <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\Concrete.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\ConcretePrestressed.cs" />
-    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\ConcreteSectionShear.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\ConcreteSectionOneWayShearNonPrestressed.cs" />
     <Compile Include="ACI\Interfaces\IShearSection.cs" />
     <Compile Include="ACI\Entities\ConcreteSectionBase.cs" />
     <Compile Include="ACI\Entities\ConcreteSectionBaseConcrete.cs" />
@@ -216,6 +215,7 @@
   <ItemGroup>
     <Folder Include="ACI\ACI318_14\C09_Beams\" />
     <Folder Include="ACI\ACI318_14\C10_Columns\" />
+    <Folder Include="ACI\ACI318_14\C22_SectionalStrength\Torsion\" />
     <Folder Include="ACI\Entities\Beam\Base\" />
   </ItemGroup>
   <ItemGroup>

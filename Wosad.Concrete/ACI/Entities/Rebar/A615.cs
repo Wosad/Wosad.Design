@@ -35,7 +35,7 @@ namespace Wosad.Concrete.ACI
 
         public string Name
         {
-            get { return "A706"; }
+            get { return "A615"; }
         }
 
         private double yieldStress;

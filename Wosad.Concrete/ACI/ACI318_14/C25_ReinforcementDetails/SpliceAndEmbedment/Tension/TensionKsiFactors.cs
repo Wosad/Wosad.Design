@@ -22,17 +22,19 @@ using System.Text;
 using Wosad.Concrete.ACI.Infrastructure.Entities;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Common.Reports; using Wosad.Common.CalculationLogger.Interfaces; using Wosad.Common.CalculationLogger;
+using Wosad.Common.Reports; 
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Common.CalculationLogger;
 
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public partial class DevelopmentTension:Development
     {
 
     
          
-        internal double GetKsi_t()
+        public double GetKsi_t()
         {
             //12.2.4
             //(a) Where horizontal reinforcement is placed such
@@ -56,7 +58,7 @@ namespace Wosad.Concrete.ACI318_11
         }
            
         
-        internal double GetKsi_e()
+        public double GetKsi_e()
         {
             //(b) For epoxy-coated bars or wires with cover less
             //than 3db, or clear spacing less than 6db, ?e = 1.5.
@@ -98,7 +100,7 @@ namespace Wosad.Concrete.ACI318_11
 
 
            
-        internal double GetKsi_s()
+        public double GetKsi_s()
         {
             //(c) For No. 6 and smaller bars and deformed wires,
             //ksi_s = 0.8. For No. 7 and larger bars, ?s = 1.0.
@@ -127,7 +129,7 @@ namespace Wosad.Concrete.ACI318_11
         }
 
 
-internal double Getksi_tAndKsi_eProduct(double ksi_t, double ksi_e)
+public double Getksi_tAndKsi_eProduct(double ksi_t, double ksi_e)
 {
     double ksi_tAndKsi_eProduct = ksi_t * ksi_e;
     //However, the product ksi_t  ksi_e need not be greater than 1.7.

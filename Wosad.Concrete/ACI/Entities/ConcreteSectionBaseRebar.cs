@@ -27,7 +27,7 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IStructuralMember, IConcreteMember
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
     {
 
         protected virtual  List<RebarPointResult> CalculateRebarResults(LinearStrainDistribution StrainDistribution, FlexuralAnalysisType AnalysisType)

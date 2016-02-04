@@ -20,8 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.CalculationLogger;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
+using Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities.Materials;
 
 namespace Wosad.Steel.AISC.AISC360_10.Connections
 {
@@ -29,24 +33,33 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
     {
         protected double GetFcrGeneral()
         {
-            double lambda = GetLambda();
-            double F_y = Material.YieldStress;
+            SectionRectangular r = new SectionRectangular(t_w, h_o);
+            SteelMaterial mat = new SteelMaterial(Material.YieldStress);
+            CalcLog log = new CalcLog();
 
-            double Q;
-            if (lambda<=0.7)
-            {
-                Q = 1.0;
-            }
-            else if (lambda<=1.41)
-            {
-                Q = (1.34 - 0.468 * lambda);
-            }
-            else
-            {
-                Q = ((1.3) / (Math.Pow(lambda, 2)));
-            }
-            double F_cr = F_y * Q;
-            return F_cr;
+            AffectedElementInFlexure flexuralElement = new AffectedElementInFlexure(r, mat, log);
+            return flexuralElement.GetPlateBucklingCriticalStress(c);
+
+            #region Obsolete
+            //double lambda = GetLambda();
+            //double F_y = Material.YieldStress;
+
+            //double Q;
+            //if (lambda<=0.7)
+            //{
+            //    Q = 1.0;
+            //}
+            //else if (lambda<=1.41)
+            //{
+            //    Q = (1.34 - 0.468 * lambda);
+            //}
+            //else
+            //{
+            //    Q = ((1.3) / (Math.Pow(lambda, 2)));
+            //}
+            //double F_cr = F_y * Q;
+            //return F_cr; 
+            #endregion
         }
         public abstract double Get_t_w();
 
@@ -64,11 +77,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
 
         }
 
-        private double GetLambda()
-        {
-            double F_y = Material.YieldStress;
-            double lamda = ((h_o * Math.Sqrt(F_y)) / (10 * t_w * Math.Sqrt(475 + 280 * Math.Pow((((h_o) / (c))), 2))));
-            return lamda;
-        }
+        #region Obsolete
+        //private double GetLambda()
+        //{
+        //    double F_y = Material.YieldStress;
+        //    double lamda = ((h_o * Math.Sqrt(F_y)) / (10 * t_w * Math.Sqrt(475 + 280 * Math.Pow((((h_o) / (c))), 2))));
+        //    return lamda;
+        //} 
+        #endregion
     }
 }

@@ -23,14 +23,23 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 using Wosad.Common.Section.Interfaces;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     /// <summary>
     ///  This class encpsulates all sectional (flexure, shear axial load )analysis per ACI.
     /// </summary>
-    public partial class ConcreteSection: ConcreteFlexuralSectionBase
+    public partial class ConcreteSectionFlexure: ConcreteFlexuralSectionBase
     {
 
+        /// <summary>
+        ///  Constructor used for flexure and axial load analysis.
+        /// </summary>
+        public ConcreteSectionFlexure(IConcreteSection Section, List<RebarPoint> Bars, ICalcLog log)
+            : base(Section, Bars, log)
+        {
+            //set default analysis type to strain compatibility
+            AnalysisType = FlexuralAnalysisType.StrainCompatibility;
+        }
 
 
         private FlexuralAnalysisType analysisType;

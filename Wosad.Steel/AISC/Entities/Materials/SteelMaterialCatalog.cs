@@ -110,17 +110,24 @@ namespace Wosad.Steel.AISC.SteelEntities.Materials
                 {
                     var MatPropList = Materials.Where(m =>
                     {
-                        if (FastenerDiameter > m.MinDiam && FastenerDiameter <= m.MaxDiam)
+                        if (m.MaxDiam!=0)
                         {
-                            return true;
+                            if (FastenerDiameter > m.MinDiam && FastenerDiameter <= m.MaxDiam)
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            } 
                         }
                         else
                         {
-                            return false;
+                            return true;
                         }
                     }).ToList();
 
-                    if (!MatPropList.Any())
+                    if (MatPropList.Any())
                     {
                         var MatProp = MatPropList.FirstOrDefault();
                         this.YieldStress = MatProp.Fy;

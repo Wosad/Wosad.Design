@@ -15,14 +15,14 @@
    */
 #endregion
  
-using Wosad.Concrete.ACI318_11.Anchorage.Base;
+using Wosad.Concrete.ACI318_14.Anchorage.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Concrete.ACI318_11.Anchorage.LimitStates
+namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
 {
     public class AnchorSteelShear: AnchorageSteelLimitState
     {

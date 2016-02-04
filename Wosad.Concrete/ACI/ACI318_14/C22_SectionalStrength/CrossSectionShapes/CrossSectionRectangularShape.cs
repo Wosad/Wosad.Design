@@ -25,7 +25,7 @@ using Wosad.Common.Section.SectionTypes;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Mathematics;
 
-namespace Wosad.Concrete.ACI318_11
+namespace Wosad.Concrete.ACI318_14
 {
     public class CrossSectionRectangularShape : IConcreteSection
     {

@@ -159,7 +159,7 @@ namespace Wosad.Steel.AISC.SteelEntities
            iterationCount++;
             }
             #region Final run through elelents (for debug only)
-            //IterateThroughElements(controllingElement, AngleOfLoad);
+           IterateThroughElements(controllingElement, AngleOfLoad);
             #endregion
             return P;
         }

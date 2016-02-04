@@ -29,7 +29,7 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IStructuralMember, IConcreteMember
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
     {
 
         protected double GetCompressionBlockDepth(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition CompressionFiberPosition)
@@ -113,7 +113,8 @@ namespace Wosad.Concrete.ACI
             double ConcreteResultantForce = A * 0.85 * fc;
             ConcreteCompressionContribution.Force = ConcreteResultantForce;
 
-            double concreteForceCentroidDistance = neutralAxisToBottomOfCompressedShapeOffset + compressedPortion.GetElasticCentroidCoordinate().Y;
+            //double concreteForceCentroidDistance = neutralAxisToBottomOfCompressedShapeOffset + compressedPortion.GetElasticCentroidCoordinate().Y;
+            double concreteForceCentroidDistance = compressedPortion.GetElasticCentroidCoordinate().Y;
             ConcreteCompressionContribution.Moment = concreteForceCentroidDistance * ConcreteResultantForce;
 
             return ConcreteCompressionContribution;
