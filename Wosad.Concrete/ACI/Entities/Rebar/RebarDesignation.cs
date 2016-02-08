@@ -24,16 +24,16 @@ namespace Wosad.Concrete.ACI.Entities
 {
     public enum RebarDesignation
     {
-        No3  ,
-        No4  ,
-        No5  ,
-        No6  ,
-        No7  ,
-        No8  ,
-        No9  ,
-        No10 ,
-        No11 ,
-        No14 ,
-        No18 ,
+        No3,
+        No4,
+        No5,
+        No6,
+        No7,
+        No8,
+        No9,
+        No10,
+        No11,
+        No14,
+        No18,
     }
 }

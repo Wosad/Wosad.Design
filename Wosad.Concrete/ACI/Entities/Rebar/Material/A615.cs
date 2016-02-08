@@ -26,9 +26,24 @@ namespace Wosad.Concrete.ACI
     //mild reinforcement
     public class MaterialAstmA615: IRebarMaterial
     {
-        public MaterialAstmA615()
+        public MaterialAstmA615(A615Grade Grade)
         {
-            yieldStress = 60000;
+            switch (Grade)
+            {
+                case A615Grade.Grade40:
+                    yieldStress = 40000;
+                    break;
+                case A615Grade.Grade60:
+                    yieldStress = 60000;
+                    break;
+                case A615Grade.Grade75:
+                    yieldStress = 75000;
+                    break;
+                default:
+                    yieldStress = 60000;
+                    break;
+            }
+            
         }
 
         #region IRebarMaterial Members

@@ -39,10 +39,7 @@ namespace Wosad.Concrete.ACI318_14
 //          high seismic risk or for structures assigned to high seismic performance or design categories (see 21.11.7.3 and
 //          R21.11.7.3).
 
-[ReportElement(
-new string[] { "ld","ldc","ldh" },
-new string[] { "P-12.5.3-3", "P-12.2.5-1","P-12.3.3-1" },
-new string[] { "ExcessReinforcement"})]
+
            
         public double CheckExcessReinforcement(double ld, bool IsTensionReinforcement, bool IsHook)
         {
@@ -51,41 +48,13 @@ new string[] { "ExcessReinforcement"})]
                 if (ExcessFlexureReinforcementRatio < 1.0)
                 {
                     double AsReqdToAsProvided = excessFlexureReinforcementRatio;
-                    ICalcLogEntry ent = Log.CreateNewEntry();
-                    ent.ValueName = "ld";
-                    ent.AddDependencyValue("AsReqdToAsProvided", AsReqdToAsProvided);
-                    ent.DescriptionReference = "ExcessReinforcement";
 
-                    ent.DescriptionReference = "ld";
-
-                    if (IsTensionReinforcement==true)
+                    if (IsTensionReinforcement!=true)
                     {
-                        if (IsHook==false)
-                        {
-                            ent.Reference = "ACI Section 12.2.5";
-                            ent.FormulaID = "P-12.2.5-1";  
-                        }
-                        else
-                        {
-                            ent.Reference = "ACI Section 12.5.3";
-                            ent.FormulaID = "P-12.5.3-3";  
-                        }
-                    }
-                    else
-                    {
-                        if (IsHook==false)
-                        {
-                            ent.Reference = "ACI Section 12.3.3";
-                            ent.FormulaID = "P-12.3.3-1";  
-                        }
-                        else
-                        {
                             throw new Exception("Hooks should not be used to develop rebar in compression");
-                        }
+
                     }
                     ld = excessFlexureReinforcementRatio * ld;
-                    ent.VariableValue = ld.ToString();
-                    AddToLog(ent);
                 }
             }
             else

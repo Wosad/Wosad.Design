@@ -28,7 +28,7 @@ using Wosad.Concrete.Properties;
 
 namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 {
-    public class RebarFactory
+    public class RebarSectionFactory
     {
         public RebarSection GetRebarSection(RebarDesignation BarDesignation)
         {

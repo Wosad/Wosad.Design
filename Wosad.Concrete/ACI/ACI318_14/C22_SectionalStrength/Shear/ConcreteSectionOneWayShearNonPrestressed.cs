@@ -35,7 +35,8 @@ namespace Wosad.Concrete.ACI318_14
 
         public ConcreteSectionOneWayShearNonPrestressed(double d, double b_w, double A_v, double s, IConcreteMaterial Material, IRebarMaterial RebarMaterial)
         {
-
+            this.Material = Material;
+            this.rebarMaterial = RebarMaterial;
         }
 
                 double d; 
@@ -51,8 +52,8 @@ namespace Wosad.Concrete.ACI318_14
                 IRebarMaterial rebarMaterial;
                 public IRebarMaterial RebarMaterial
                 {
-                    get {
-                        rebarMaterial = new MaterialAstmA615();
+                    get 
+                    {
                         return rebarMaterial; 
                     }
 

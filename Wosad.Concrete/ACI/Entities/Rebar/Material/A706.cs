@@ -20,12 +20,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI.Entities
+namespace Wosad.Concrete.ACI
 {
-        public enum ReinforcementA416Grade
+    //mild reinforcement (weldable)
+    public class MaterialAstmA706 : MaterialAstmA615
+    {
+        public MaterialAstmA706():base(Entities.A615Grade.Grade60)
         {
-            Grade250,
-            Grade270
+
         }
-    
+    }
+
 }

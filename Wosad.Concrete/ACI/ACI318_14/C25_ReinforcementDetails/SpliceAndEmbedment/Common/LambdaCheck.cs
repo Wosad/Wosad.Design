@@ -43,15 +43,9 @@ namespace Wosad.Concrete.ACI318_14
                     if (conc.AverageSplittingTensileStrength == 0.0)
                     {
 
-                        ICalcLogEntry ent = Log.CreateNewEntry();
-                        ent.ValueName = "lambda";
-                        ent.Reference = "ACI Section 12.2.4";
-                        ent.DescriptionReference = "lambdaMax";
-                        ent.FormulaID = "lambda";
-                        lambda = 0.75;
-                        ent.VariableValue = lambda.ToString();
 
-                        AddToLog(ent);
+                        lambda = 0.75;
+
                     }
                 }
             

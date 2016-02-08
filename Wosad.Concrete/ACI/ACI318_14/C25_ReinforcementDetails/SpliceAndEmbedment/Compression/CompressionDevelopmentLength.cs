@@ -24,7 +24,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Reports; 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Common.CalculationLogger;
-using dv = Wosad.Concrete.ACI318_14.DevelopmentValues;
+
 using gv = Wosad.Concrete.ACI318_14.GeneralValues;
 using gd = Wosad.Concrete.ACI318_14.GeneralDescriptions;
 using gf = Wosad.Concrete.ACI318_14.GeneralFormulas;

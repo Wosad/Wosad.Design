@@ -23,7 +23,7 @@ using System.Text;
 namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 {
     //this clas encapsulates rebar class and adds more functionality to it
-    //such as slice, embedment etc.
+    //such as stress, embedment etc.
 
     public abstract class RebarElement
     {

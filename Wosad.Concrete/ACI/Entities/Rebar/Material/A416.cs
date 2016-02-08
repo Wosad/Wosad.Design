@@ -24,19 +24,19 @@ using Wosad.Concrete.ACI.Entities;
 namespace Wosad.Concrete.ACI
 {
     //prestressed strand
-    public partial class AstmA416 : IPrestressedRebarMaterial
+    public partial class MaterialAstmA416 : IPrestressedRebarMaterial
     {
-        public AstmA416(Grade Grade, StrandType StrandType)
+        public MaterialAstmA416(A416Grade Grade, StrandType StrandType)
         {
             this.grade = Grade;
             this.strandType = StrandType;
-            yieldStress = Grade == Grade.Grade250 ? 225000.0 : 243000.0; //psi
-            fpu = Grade == Grade.Grade250 ? 250000.0 : 270000.0; //psi
+            yieldStress = Grade == A416Grade.Grade250 ? 225000.0 : 243000.0; //psi
+            fpu = Grade == A416Grade.Grade250 ? 250000.0 : 270000.0; //psi
         }
 
-        private Grade grade;
+        private A416Grade grade;
 
-        public Grade ReinforcementGrade
+        public A416Grade ReinforcementGrade
         {
             get { return grade; }
             set { grade = value; }

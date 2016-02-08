@@ -20,11 +20,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI.Entities
+namespace Wosad.Concrete.ACI
 {
-    public enum RebarSpecification
-    {
-        A615,
-        A706
-    }
+
+        public enum A416Grade
+        {
+            Grade250,
+            Grade270
+        }
+    
 }

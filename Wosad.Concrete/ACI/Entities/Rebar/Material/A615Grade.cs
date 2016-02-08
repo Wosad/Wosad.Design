@@ -20,14 +20,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI
+namespace Wosad.Concrete.ACI.Entities
 {
-    public partial class AstmA416 : IPrestressedRebarMaterial
+    public enum A615Grade
     {
-        public enum Grade
-        {
-            Grade250,
-            Grade270
-        }
+        Grade40,
+        Grade60,
+        Grade75
     }
 }
