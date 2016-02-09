@@ -1,13 +1,8 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
-    <dependencies>
-      <group targetFramework="net45">
-        <dependency id="Wosad.Common" version="0.0.1.5" />
-      </group>
-    </dependencies>
     <id>Wosad.Concrete</id>
-    <version>0.0.1.2</version>
+    <version>0.0.3.1</version>
     <title>Wosad.Concrete</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for reinforced concrete element design for buildings and other structures per ACI 318 standard.</description>
@@ -16,15 +11,16 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
+    <releaseNotes>Updates to shear strength and rebar calculations</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="Wosad.Common" version="0.0.2.6" />
+        <dependency id="Wosad.Common" version="0.0.3.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\Wosad\SourceDynamo2\Wosad.Design\Wosad.Concrete\bin\Release\Wosad.Concrete.dll" target="lib\net45" />
+    <file src="C:\Users\Konstantin\Documents\Wosad\GitHub\Wosad.Design\Wosad.Concrete\bin\Debug\Wosad.Concrete.dll" target="lib\net45" />
   </files>
 </package>
