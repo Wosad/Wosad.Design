@@ -26,29 +26,46 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 {
     public class RebarSection
     {
-        public RebarSection()
+        public RebarSection(RebarDesignation Designation)
         {
-
+            this.Designation = Designation;
         }
-        public RebarSection(RebarDesignation Designation, double Diameter, double Area)
+        public RebarSection(RebarDesignation Designation,double Diameter,  double Area)
         {
             this.Designation = Designation;
             this.Diameter = Diameter;
             this.Area = Area;
         }
+
+        public RebarSection(double Diameter, double Area)
+        {
+            this.Diameter = Diameter;
+            this.Area = Area;
+        }
+
+        bool DesignationSet;
+
         private RebarDesignation designation;
 
         public RebarDesignation Designation
         {
             get { return designation; }
-            set { designation = value; }
+            set {
+                DesignationSet = true;
+                designation = value; }
         }
 
         private double db;
 
         public double Diameter
         {
-            get { return db; }
+            get {
+
+                if (db == 0)
+                {
+                    CalculateProperties();
+                } 
+                return db; }
             set { db = value; }
         }
 
@@ -56,9 +73,27 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 
         public double Area
         {
-            get { return A; }
+            get {
+                if (A==0)
+                {
+                    CalculateProperties();
+                }
+                return A; }
             set { A = value; }
         }
 
+        private void CalculateProperties()
+        {
+            if (DesignationSet==true)
+            {
+                RebarSectionFactory factory = new RebarSectionFactory();
+                RebarSection sec = factory.GetRebarSection(Designation);
+                if (sec != null)
+                {
+                    this.A = sec.A;
+                    this.db = sec.Diameter;
+                } 
+            }
+        }
     }
 }

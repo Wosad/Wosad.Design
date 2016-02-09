@@ -106,7 +106,7 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 
         public Rebar(double Diameter, bool IsEpoxyCoated, IRebarMaterial rebarMaterial)
         {
-            Section = new RebarSection();
+            Section = new RebarSection(Diameter, 0);
             this.db = Diameter;
             this.isEpoxyCoated = IsEpoxyCoated;
             this.rebarMaterial = rebarMaterial;
@@ -114,7 +114,7 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
 
         public Rebar(double Area, IRebarMaterial rebarMaterial)
         {
-            Section = new RebarSection();
+            Section = new RebarSection(0,Area);
             this.A = Area;
             this.rebarMaterial = rebarMaterial;
         }

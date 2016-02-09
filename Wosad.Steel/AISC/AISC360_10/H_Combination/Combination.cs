@@ -67,12 +67,27 @@ namespace Wosad.Steel.AISC.AISC360_10.Combination
                     {
                         InteractionRatioPMM = N / 2 + (Mx + My);  //H1-1b
                     }
-                    InteractionRatio = Math.Min(Math.Abs(InteractionRatioPMM), Math.Abs(InteractionRatioV));
+                        if (InteractionRatioV!=0)
+                        {
+                            InteractionRatio = Math.Min(Math.Abs(InteractionRatioPMM), Math.Abs(InteractionRatioV));
+                        }
+                        else
+                        {
+                            InteractionRatio = Math.Abs(InteractionRatioPMM);
+                        }
+                    
                  break;
                 case CombinationCaseId.H2:
                  InteractionRatioPMM = N + Mx + My;
                  InteractionRatioV = T + V;
-                 InteractionRatio = Math.Min(Math.Abs(InteractionRatioPMM), Math.Abs(InteractionRatioV));
+                         if (InteractionRatioV != 0)
+                         {
+                             InteractionRatio = Math.Min(Math.Abs(InteractionRatioPMM), Math.Abs(InteractionRatioV));
+                         }
+                         else
+                         {
+                             InteractionRatio = Math.Abs(InteractionRatioPMM);
+                         }
                  break;
                 case CombinationCaseId.H3:
                     InteractionRatioPMM = N / 2 + (Mx + My);  //H2-1

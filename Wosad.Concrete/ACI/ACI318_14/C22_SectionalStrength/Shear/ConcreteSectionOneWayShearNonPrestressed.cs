@@ -37,6 +37,10 @@ namespace Wosad.Concrete.ACI318_14
         {
             this.Material = Material;
             this.rebarMaterial = RebarMaterial;
+            this.d   =d  ;
+            this.b_w =b_w;
+            this.A_v =A_v;
+            this.s = s;
         }
 
                 double d; 
@@ -124,18 +128,30 @@ namespace Wosad.Concrete.ACI318_14
             }
 
             V_c = V_c < 0 ? 0 : V_c;
-            return V_c;
+            double phi = 0.75;
+            return phi*V_c;
         }
 
 
         public double GetSteelShearStrength()
         {
-            throw new NotImplementedException();
+            double f_yt = rebarMaterial.YieldStress;
+            double V_s = ((A_v*f_yt * d) / (s));
+            double phi = 0.75;
+            return phi * V_s;
         }
 
-        public double GetTotalShearStrength()
+        public double GetTotalShearStrength(double phiV_c,double phiV_s)
         {
-            throw new NotImplementedException();
+            double V_t1 = phiV_c+phiV_s;
+            double V_t2 = GetMaximumShearStrength( phiV_c);
+            return Math.Min(Math.Abs(V_t1),Math.Abs(V_t2));
+        }
+
+        public double GetMaximumShearStrength(double phiV_c)
+        {
+            //Section 22.5.1.2 
+            double phiV_nMax = phiV_c+0.75*8*Math.Sqrt(f_c)*b_w*d;
         }
     }
 }
