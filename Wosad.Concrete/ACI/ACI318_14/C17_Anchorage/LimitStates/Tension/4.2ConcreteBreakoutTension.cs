@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Concrete.ACI;
 
 namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
 {
@@ -42,8 +43,10 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
         List<double> EdgeDistances { get; set; }
         bool HasSupplementalReinforcement { get; set; }
         double A_nc { get; set; }
+        public IConcreteMaterial Material { get; set; }
              
         public ConcreteBreakoutTension(
+            IConcreteMaterial Material,
             int n, 
             double h_eff,
             double e_p_Nx,
@@ -64,6 +67,7 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
             : base(n,
             h_eff, AnchorType)
         {
+            this.Material = Material;
            this.A_nc = A_nc;
            this.e_p_Nx  =e_p_Nx ;
            this.e_p_Ny  =e_p_Ny ;
@@ -138,7 +142,7 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
                 if (hef_used>=11 || hef_used<=25)
                 {
                     //17.4.2.2b
-                   Nb = 16*Math.Sqrt(fc)/1000*Math.Pow(hef_used,(5/3));
+                   Nb = 16*Material.Sqrt_f_c_prime/1000*Math.Pow(hef_used,(5/3));
                 }
                 Nb = GetNbAnyAnchor(hef_used, fc, lambda, kc);
             }
@@ -153,7 +157,7 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
         private double GetNbAnyAnchor(double hef_used, double fc, double lambda, double kc)
         {
             //17.4.2.2a
-            double Nb = kc* Math.Sqrt(fc) / 1000 * Math.Pow(hef_used, 1.5);
+            double Nb = kc* Material.Sqrt_f_c_prime / 1000 * Math.Pow(hef_used, 1.5);
             return Nb;
 
         }

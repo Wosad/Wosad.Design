@@ -28,6 +28,7 @@ namespace Wosad.Concrete.ACI
         double AverageSplittingTensileStrength { get; set; }
         double Lambda { get; }
         double SpecifiedCompressiveStrength { get; set; }
+        double Sqrt_f_c_prime { get; }
         ConcreteTypeByWeight TypeByWeight { get; set; }
         double beta1 { get; }
         double UltimateCompressiveStrain { get; }

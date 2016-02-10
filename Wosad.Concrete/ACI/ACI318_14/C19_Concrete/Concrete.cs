@@ -84,23 +84,12 @@ namespace Wosad.Concrete.ACI318_14.Materials
 			}
 		}
 	
-		[ReportElement
-			(   new string[] { "Ec" },
-				new string[] { "P-8.5.1-1", "P-8.5.1-2" },
-				new string[] { "Ec" }
-			)]
 
 		private double GetEc()
 		{
 
 			double fc = this.SpecifiedCompressiveStrength;
 			double sqrt_fc = GetSqrtFc();
-			ICalcLogEntry ent = Log.CreateNewEntry();
-			ent.AddDependencyValue("lambda", lambda);
-			ent.AddDependencyValue("fc", fc);
-			ent.Reference = "ACI Section 8.5.1";
-			ent.DescriptionReference = "Ec";
-			ent.ValueName = "Ec";
 
 			double E;
 
@@ -112,8 +101,7 @@ namespace Wosad.Concrete.ACI318_14.Materials
 			if (this.Density==0.0)
 			{
 				E = 57000 * lambda* sqrt_fc;
-				ent.FormulaID = "P-8.5.1-1";
-				ent.VariableValue = E.ToString();
+
 
 			}
 			else
@@ -121,10 +109,8 @@ namespace Wosad.Concrete.ACI318_14.Materials
 				double wc = this.Density;
 				if (wc>=90 && wc<=160)
 				{
-					ent.AddDependencyValue("wc", wc);
 						E= Math.Pow(wc, 1.5) * 33.0 * lambda * sqrt_fc;
-					ent.FormulaID = "P-8.5.1-2";
-					ent.VariableValue = E.ToString();
+
 				}
 				else
 				{
@@ -132,10 +118,7 @@ namespace Wosad.Concrete.ACI318_14.Materials
 					  
 				}
 			}
-			if (LogModeActive==true)
-			{
-				AddToLog(ent);  
-			}
+
 			return E;
 		}
 
@@ -143,7 +126,7 @@ namespace Wosad.Concrete.ACI318_14.Materials
 		{
 			double fc = this.SpecifiedCompressiveStrength;
 			lambda = GetLambda();
-			double sqrt_fc = Math.Sqrt(fc);
+			double sqrt_fc = this.Sqrt_f_c_prime;
 			return sqrt_fc;
 		}
 
@@ -170,24 +153,14 @@ namespace Wosad.Concrete.ACI318_14.Materials
 			set { lightWeightType = value; }
 		}
 
-
-[ReportElement(
-new string[] { "lambda", },
-new string[] { "lambda", "P-8.6.1-1" },
-new string[] { "lambdaNormalWeight", })]
 		   
 		private double GetLambda()
 		{
 			double lambda;
 			ICalcLogEntry ent = Log.CreateNewEntry();
 			
-			ent.ValueName = "lambda";
-			ent.Reference = "ACI Section 8.6.1";
-
 			if (this.TypeByWeight == ConcreteTypeByWeight.Normalweight)
 			{
-				ent.DescriptionReference = "lambdaNormalWeight";
-				ent.FormulaID = "lambda";
 				lambda = 1.0;
 			}
 			else
@@ -195,16 +168,13 @@ new string[] { "lambdaNormalWeight", })]
 				double fct = AverageSplittingTensileStrength;
 				if (fct>0.0)
 				{
-					//8.6.1
-					double sqrt_fc = Math.Sqrt(this.SpecifiedCompressiveStrength);
+                    double sqrt_fc = this.Sqrt_f_c_prime;
 					lambda=fct/(6.7*sqrt_fc);
-					ent.DescriptionReference = "lambdaWithSplittingTensileStrength";
-					ent.FormulaID = "P-8.6.1-1";
 				}
 				else
 				{
 					lambda = lightWeightType == TypeOfLightweightConcrete.SandLightweightConcrete ? 0.85 : 0.75;
-					ent.FormulaID = "lambda";
+
 				}
 			}
 			if (LogModeActive==true)
@@ -215,29 +185,14 @@ new string[] { "lambdaNormalWeight", })]
 			return lambda;
 		}
 
-[ReportElement(
-new string[] { "fr", },
-new string[] { "9-10"},
-new string[] { "fr" })]
 		   
 		private double GetModulusOfRupture()
 		{
-			ICalcLogEntry ent = Log.CreateNewEntry();
-			ent.ValueName = "fr";
-			ent.DescriptionReference = "fr";
-			ent.AddDependencyValue("lambda",Lambda); //calculated 1st time
-			ent.AddDependencyValue("fc", SpecifiedCompressiveStrength);
-			ent.FormulaID = "9-10";
-			ent.Reference = "ACI Eq. 9-10";
 
-			double sqrt_fc = Math.Sqrt(this.SpecifiedCompressiveStrength);
+
+            double sqrt_fc = this.Sqrt_f_c_prime;
 			double fr = 7.5 * lambda * sqrt_fc;
 
-			ent.VariableValue = fr.ToString();
-			if (LogModeActive==true)
-			{
-				AddToLog(ent);
-			}
 			return fr;
 		}
 

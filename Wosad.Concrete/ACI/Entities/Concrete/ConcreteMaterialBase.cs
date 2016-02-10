@@ -113,5 +113,25 @@ namespace Wosad.Concrete.ACI.Infrastructure.Entities.Concrete
                 ultimateCompressiveStrain = value;
             }
         }
+
+
+        public double Sqrt_f_c_prime
+        {
+            get
+            {
+                return GetSqrt_f_c_prime();
+            }
+
+        }
+
+        private double GetSqrt_f_c_prime()
+        {
+            double Sqrt_f_c_prime = Math.Sqrt(SpecifiedCompressiveStrength);
+            if (Sqrt_f_c_prime>100)
+            {
+                return 100;
+            }
+            return Sqrt_f_c_prime;
+        }
     }
 }

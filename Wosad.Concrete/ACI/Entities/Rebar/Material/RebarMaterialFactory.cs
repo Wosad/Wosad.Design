@@ -9,7 +9,7 @@ namespace Wosad.Concrete.ACI
 {
     public class RebarMaterialFactory
     {
-        IRebarMaterial GetMaterial(string SpecificationId)
+        public IRebarMaterial GetMaterial(string SpecificationId)
         {
             switch (SpecificationId)
             {

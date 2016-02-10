@@ -83,29 +83,7 @@ namespace Wosad.Concrete.ACI318_14
         
         public double GetSqrt_fc()
         {
-            double fc = conc.SpecifiedCompressiveStrength;
-            double sqrt_fc = Math.Sqrt(fc);
-
-            //12.1.2 — The values of Sqrt(fc) used in this chapter shall
-            // not exceed 100 psi.
-
-
-            if (sqrt_fc > 100)
-            {
-                sqrt_fc = 100;
-
-                ICalcLogEntry ent = Log.CreateNewEntry();
-                ent.ValueName = "sqrt_fc";
-                ent.AddDependencyValue("fc", fc);
-                ent.Reference = "ACI Section 12.1.2";
-                ent.DescriptionReference = "sqrt_fcMax";
-                ent.FormulaID = "sqrt_fc";
-                ent.VariableValue = sqrt_fc.ToString();
-                AddToLog(ent);
-            }
-
-
-            return sqrt_fc;
+            return conc.Sqrt_f_c_prime;
         }
     }
 }

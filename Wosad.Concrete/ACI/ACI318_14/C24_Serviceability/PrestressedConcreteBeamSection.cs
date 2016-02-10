@@ -61,7 +61,7 @@ namespace Wosad.Concrete.ACI318_14
             double fc = this.Section.Material.SpecifiedCompressiveStrength;
             double fci = this.prestressedSection.Material.InitialConcreteStrengthAtPrestress;
             double fct = 0;
-            double sqrt_fc = Math.Sqrt(fc);
+            double sqrt_fc = Section.Material.Sqrt_f_c_prime;
             double sqrt_fci = Math.Sqrt(fci);
           
             switch (Stage)

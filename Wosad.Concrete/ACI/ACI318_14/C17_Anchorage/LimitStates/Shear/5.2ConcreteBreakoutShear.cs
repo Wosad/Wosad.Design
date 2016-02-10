@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Concrete.ACI;
 
 namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
 {
@@ -48,7 +49,7 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
         /// <param name="d_a">Outside diameter of anchor</param>
         /// <param name="AnchorType">PostInstalled versus cast in place anchor</param>
         public ConcreteBreakoutShear
-             (int n, int nFirstRow, double h_eff, AnchorSteelElementFailureType SteelFailureType,
+              ( IConcreteMaterial Material, int n, int nFirstRow, double h_eff, AnchorSteelElementFailureType SteelFailureType,
             int NumberOfEdges, double ca_1, double ca_2, double s_Max, double e_prime_v,
             ConcreteCrackingCondition ConcreteCondition, SupplementalReinforcementAtAnchor SupplementalReinforcement, double A_vc,
             double h_a, bool IsCastContinuouslyWelded, TypeOfAnchorSleeve TypeOfAnchorSleeve, double d_a,
@@ -56,6 +57,7 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
             )
             : base(n, h_eff, AnchorType)
         {
+            this.Material = Material;
             this.SteelFailureType = SteelFailureType;
             this.NumberOfEdges = NumberOfEdges;
             this.ca_1 = ca_1;
@@ -71,6 +73,8 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
             this.TypeOfAnchorSleeve = TypeOfAnchorSleeve;
             this.d_a = d_a;
         }
+
+        public IConcreteMaterial Material { get; set; }
 
         public int NumberOfEdges { get; set; }
         public AnchorSteelElementFailureType SteelFailureType { get; set; }
@@ -245,13 +249,13 @@ namespace Wosad.Concrete.ACI318_14.Anchorage.LimitStates
             //17.5.2.2a and 17.5.2.3
             double coeff =IsCastContinuouslyWelded == true? 8.0 :7.0;
 
-            double V_b1 = coeff * (Math.Pow(le / da , 0.2) * Math.Sqrt(da) * Math.Sqrt(fc) * lambda * Math.Pow(ca1_used, 1.5)) / 1000;
+            double V_b1 = coeff * (Math.Pow(le / da , 0.2) * Math.Sqrt(da) * Material.Sqrt_f_c_prime * lambda * Math.Pow(ca1_used, 1.5)) / 1000;
             
             //TODO: implement checks described in 17.5.2.3
 
 
             //17.5.2.2b
-            double V_b2 = 9.0 * lambda * Math.Sqrt(fc) * ca_1 * Math.Pow(ca1_used, 1.5);
+            double V_b2 = 9.0 * lambda * Material.Sqrt_f_c_prime * ca_1 * Math.Pow(ca1_used, 1.5);
             double V_b = Math.Min(V_b1, V_b2);
             return V_b;
         }
