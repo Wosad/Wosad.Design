@@ -32,7 +32,7 @@ namespace Wosad.Common.Section
         /// </summary>
         /// <param name="Atar">Target area</param>
         /// <returns>Offset of the slicing plane from the top</returns>
-        public double GetSlicePlaneLocation(double Atar)
+        public double GetSlicePlaneTopOffset(double Atar)
         {
             double SlicePlaneCoordinate = 0.0;
             double Sum_hi = 0;  //summation of height of previous rectangles
@@ -104,43 +104,44 @@ namespace Wosad.Common.Section
         private IMoveableSection getSliceOfArea(double Area, SliceType sliceType)
         {
             double Atar = 0; //target area
-            double YPlane = 0;
+            double YOffsetTop = 0;
             if (Area > this.A)
             {
                 throw new Exception("Section analysis failed. Area of section sub-part exceeds the total area of cross section.");
             }
             else
             {
-                //if (sliceType == SliceType.Top) // slicing happens from top 
-                //{
+                if (sliceType == SliceType.Top) // need to return the TOP portion of given area
+                {
                     Atar = Area;
-                //}
-                //else
-                //{
-                //    Atar = this.A - Area;
-                //}
-                YPlane = GetSlicePlaneLocation(Atar);
+                }
+                else // need to return the BOTTOM portion of given area
+                {
+                    Atar = this.A - Area;
+                }
+                YOffsetTop = GetSlicePlaneTopOffset(Atar);
             }
+            double SlicePlaneYCoordinte;
 
-            IMoveableSection s = getSliceAtCoordinate(YPlane, sliceType);
+            SlicePlaneYCoordinte = this.YMax - YOffsetTop;
+            
+            IMoveableSection s = getSliceAtCoordinate(SlicePlaneYCoordinte, sliceType);
             return s;
         }
 
         /// <summary>
         /// Calculates a section based on slicing criteria
         /// </summary>
-        /// <param name="YOffset">Plane offset</param>
-        /// <param name="sliceType">type of slice (top or bottom)</param>
+        /// <param name="YCoordinate">Plane Y coordinate in local coordinate system</param>
+        /// <param name="sliceType">Indicates whether top or bottom slice is returned</param>
         /// <returns></returns>
-        private IMoveableSection getSliceAtCoordinate(double YOffset, SliceType sliceType)
+        private IMoveableSection getSliceAtCoordinate(double YCoordinate, SliceType sliceType)
         {
 
-            double YCoordinate;
 
             ArbitraryCompoundShape newShape = new ArbitraryCompoundShape(null, null);
             if (sliceType == SliceType.Top)
             {
-                YCoordinate = this.YMax - YOffset; 
                 var sortedRectanglesX = RectanglesXAxis.OrderByDescending(r => r.InsertionPoint.Y).ToList();
                 foreach (var r in sortedRectanglesX)
                 {
@@ -162,7 +163,6 @@ namespace Wosad.Common.Section
             }
             else
             {
-                YCoordinate = this.YMin + YOffset; 
                 var sortedRectanglesX = RectanglesXAxis.OrderBy(r => r.InsertionPoint.Y).ToList();
                 foreach (var r in sortedRectanglesX)
                 {
@@ -214,7 +214,7 @@ namespace Wosad.Common.Section
                     YPlane = this.Centroid.Y + PlaneOffset;
                     break;
                 case SlicingPlaneOffsetType.Bottom:
-                    YPlane = YMin - PlaneOffset;
+                    YPlane = YMin + PlaneOffset;
                     break;
                 default:
                     break;

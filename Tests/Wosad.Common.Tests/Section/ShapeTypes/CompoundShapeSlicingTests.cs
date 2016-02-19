@@ -49,7 +49,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         public void CompoundShapeReturnsSlicePlaneLocation()
         {
             ArbitraryCompoundShape shape = GetCustomTeeShape();
-            double YPlane = shape.GetSlicePlaneLocation(6.25);
+            double YPlane = shape.GetSlicePlaneTopOffset(6.25);
             Assert.AreEqual(3.5, YPlane);
         }
 
@@ -57,9 +57,9 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         public void CompoundShapeReturnsTopSliceOfArea()
         {
             ArbitraryCompoundShape shape = GetCustomTeeShape();
-            IMoveableSection topSLice = shape.GetTopSliceOfArea(6.25);
-            Assert.AreEqual(6.25, topSLice.A);
-            Assert.AreEqual(3.5, topSLice.YMin);
+            IMoveableSection topSlice = shape.GetTopSliceOfArea(6.25);
+            Assert.AreEqual(6.25, topSlice.A);
+            Assert.AreEqual(3.5, topSlice.YMin);
         }
 
         [Test]
@@ -69,6 +69,24 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             IMoveableSection bottomSlice = shape.GetBottomSliceOfArea(6);
             Assert.AreEqual(6, bottomSlice.A);
             Assert.AreEqual(-5.5, bottomSlice.YMax);
+        }
+
+        [Test]
+        public void CompoundShapeReturnsTopSliceAtCoordinate()
+        {
+            CompoundShape shape = GetRectangularShape();
+            IMoveableSection topSlice = shape.GetTopSliceSection(2, SlicingPlaneOffsetType.Top);
+            Assert.AreEqual(24, topSlice.A);
+            Assert.AreEqual(4, topSlice.YMin);
+        }
+
+        [Test]
+        public void CompoundShapeReturnsBottomSliceAtCoordinate()
+        {
+            CompoundShape shape = GetRectangularShape();
+            IMoveableSection topSlice = shape.GetBottomSliceSection(2, SlicingPlaneOffsetType.Bottom);
+            Assert.AreEqual(24, topSlice.A);
+            Assert.AreEqual(-4, topSlice.YMax);
         }
 
         private CompoundShape GetRectangularShape()

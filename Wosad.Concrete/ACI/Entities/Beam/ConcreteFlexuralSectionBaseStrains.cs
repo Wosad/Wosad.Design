@@ -226,13 +226,13 @@ namespace Wosad.Concrete.ACI
             //Step 2: Fill in data for output
             if (currentCompressionFiberPosition == FlexuralCompressionFiberPosition.Top)
             {
-                data.MinStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));
-                data.MaxStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));    
+                data.MinStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));
+                data.MaxStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.BottomFiberStrain), Math.Abs(secondApproximationStrainDistribution.BottomFiberStrain));    
             }
             else
             {
-                data.MinStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));
-                data.MaxStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));   
+                data.MinStrain = -Math.Max(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));
+                data.MaxStrain = -Math.Min(Math.Abs(ApproximationStrainDistribution.TopFiberStrain), Math.Abs(secondApproximationStrainDistribution.TopFiberStrain));   
             }
 
             return data;
