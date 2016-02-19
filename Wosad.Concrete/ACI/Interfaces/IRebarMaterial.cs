@@ -28,6 +28,9 @@ namespace Wosad.Concrete.ACI
     {
         string Name { get; }
         double YieldStress { get; }
+
+        double YieldStrain{ get; }
+
         //double GetUltimateStrain(RebarDesignation BarDesignation);
         double GetUltimateStrain(double Diameter);
         double GetStress(double Strain);

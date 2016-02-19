@@ -22,9 +22,9 @@ using System.Text;
 
 namespace Wosad.Concrete.ACI
 {
-    public enum FlexuralAnalysisType
-    {
-        StrainCompatibility,
-        Approximate
-    }
+    //public enum FlexuralAnalysisType
+    //{
+    //    StrainCompatibility,
+    //    Approximate
+    //}
 }

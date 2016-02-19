@@ -27,6 +27,11 @@ namespace Wosad.Common.Section
 {
     public abstract partial class CompoundShape : ISliceableSection, ISection 
     {
+        /// <summary>
+        /// Calculates slicing plane top offset 
+        /// </summary>
+        /// <param name="Atar">Target area</param>
+        /// <returns>Offset of the slicing plane from the top</returns>
         public double GetSlicePlaneLocation(double Atar)
         {
             double SlicePlaneCoordinate = 0.0;
@@ -43,7 +48,7 @@ namespace Wosad.Common.Section
                 
                 double An = bn * hn;
 
-                //distance from top of the rectangle to the PNA
+                //distance from top of the rectangle to the slicing plane
                 //this number is meaningful only for one rectangle
                 double h_n_tilda = (Atar - Sum_Ai) / bn;
                 double Y_n_tilda = 0;
@@ -54,8 +59,7 @@ namespace Wosad.Common.Section
                 {
                     //this condition is met only for one rectangle
                     Y_n_tilda = Sum_hi + h_n_tilda;
-                    //SlicePlaneCoordinate = Y_n_tilda - this.YMin; //PNA coordinate is measured from top
-                    SlicePlaneCoordinate = Y_n_tilda;//PNA coordinate is measured from top
+                    SlicePlaneCoordinate = Y_n_tilda;//slicing plane coordinate is measured from top
                 }
                 Sum_Ai += An;
                 Sum_hi += hn_actual;
@@ -72,7 +76,7 @@ namespace Wosad.Common.Section
         /// <returns></returns>
         public IMoveableSection GetTopSliceOfArea(double Area)
         {
-            return getSliceOfArea(Area, SLiceType.Top);
+            return getSliceOfArea(Area, SliceType.Top);
 
         }
 
@@ -83,7 +87,7 @@ namespace Wosad.Common.Section
         /// <returns></returns>
         public IMoveableSection GetBottomSliceOfArea(double Area)
         {
-            return getSliceOfArea(Area, SLiceType.Bottom);
+            return getSliceOfArea(Area, SliceType.Bottom);
         }
 
         //variables used to store iteration data for finding a slice of a given area;
@@ -97,7 +101,7 @@ namespace Wosad.Common.Section
         /// <param name="Area"></param>
         /// <param name="sliceType"></param>
         /// <returns></returns>
-        private IMoveableSection getSliceOfArea(double Area, SLiceType sliceType)
+        private IMoveableSection getSliceOfArea(double Area, SliceType sliceType)
         {
             double Atar = 0; //target area
             double YPlane = 0;
@@ -107,38 +111,46 @@ namespace Wosad.Common.Section
             }
             else
             {
-                if (sliceType == SLiceType.Top) // slicing happens from top 
-                {
+                //if (sliceType == SliceType.Top) // slicing happens from top 
+                //{
                     Atar = Area;
-                }
-                else
-                {
-                    Atar = this.A - Area;
-                }
+                //}
+                //else
+                //{
+                //    Atar = this.A - Area;
+                //}
                 YPlane = GetSlicePlaneLocation(Atar);
             }
 
-            return getSliceAtCoordinate(YPlane, sliceType);
+            IMoveableSection s = getSliceAtCoordinate(YPlane, sliceType);
+            return s;
         }
 
-        private IMoveableSection getSliceAtCoordinate(double YCoordinate, SLiceType sliceType)
+        /// <summary>
+        /// Calculates a section based on slicing criteria
+        /// </summary>
+        /// <param name="YOffset">Plane offset</param>
+        /// <param name="sliceType">type of slice (top or bottom)</param>
+        /// <returns></returns>
+        private IMoveableSection getSliceAtCoordinate(double YOffset, SliceType sliceType)
         {
-            //double YPlane = this.YMax - YOffsetFromTop;
-            double YPlane = YCoordinate;
+
+            double YCoordinate;
 
             ArbitraryCompoundShape newShape = new ArbitraryCompoundShape(null, null);
-            if (sliceType == SLiceType.Top)
+            if (sliceType == SliceType.Top)
             {
+                YCoordinate = this.YMax - YOffset; 
                 var sortedRectanglesX = RectanglesXAxis.OrderByDescending(r => r.InsertionPoint.Y).ToList();
                 foreach (var r in sortedRectanglesX)
                 {
-                    if (r.Ymax > YPlane && r.Ymin >= YPlane)
+                    if (r.Ymax > YCoordinate && r.Ymin >= YCoordinate)
                     {
                         newShape.rectanglesXAxis.Add(r);
                     }
-                    else if (r.Ymax >= YPlane && r.Ymin <= YPlane)
+                    else if (r.Ymax >= YCoordinate && r.Ymin <= YCoordinate)
                     {
-                        double thisRectHeight = r.Ymax - YPlane;
+                        double thisRectHeight = r.Ymax - YCoordinate;
                         newShape.rectanglesXAxis.Add(new CompoundShapePart(r.b, thisRectHeight, new Point2D(0, r.Ymax - thisRectHeight / 2)));
                     }
                     else
@@ -150,16 +162,17 @@ namespace Wosad.Common.Section
             }
             else
             {
+                YCoordinate = this.YMin + YOffset; 
                 var sortedRectanglesX = RectanglesXAxis.OrderBy(r => r.InsertionPoint.Y).ToList();
                 foreach (var r in sortedRectanglesX)
                 {
-                    if (r.Ymax < YPlane && r.Ymin <= YPlane)
+                    if (r.Ymax <= YCoordinate && r.Ymin < YCoordinate)
                     {
                         newShape.rectanglesXAxis.Add(r);
                     }
-                    else if (r.Ymax >= YPlane && r.Ymin <= YPlane)
+                    else if (r.Ymax > YCoordinate && r.Ymin <= YCoordinate)
                     {
-                        double thisRectHeight =  YPlane -r.Ymin;
+                        double thisRectHeight =  YCoordinate - r.Ymin;
                         newShape.rectanglesXAxis.Add(new CompoundShapePart(r.b, thisRectHeight, new Point2D(0, r.Ymin + thisRectHeight / 2)));
                     }
                     else
@@ -179,13 +192,13 @@ namespace Wosad.Common.Section
         public IMoveableSection GetTopSliceSection(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
         {
             double YPlane = GetYPlane(PlaneOffset, OffsetType);
-            return getSliceAtCoordinate(YPlane, SLiceType.Top);
+            return getSliceAtCoordinate(YPlane, SliceType.Top);
         }
 
         public IMoveableSection GetBottomSliceSection(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
         {
             double YPlane = GetYPlane(PlaneOffset, OffsetType);
-            return getSliceAtCoordinate(YPlane, SLiceType.Bottom);
+            return getSliceAtCoordinate(YPlane, SliceType.Bottom);
         }
 
         private double GetYPlane(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
@@ -210,165 +223,6 @@ namespace Wosad.Common.Section
             return YPlane;
         }
 
-        ///// <summary>
-        ///// Gets a slice of the section for further analysis.
-        ///// </summary>
-        ///// <param name="PlaneOffset">Datum (top fiber) offset.</param>
-        ///// <param name="OffsetType">Indicates which part of section after slicing to return</param>
-        ///// <returns></returns>
-        //public IMoveableSection GetTopSliceSection(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
-        //{
-
-
-        //    double currentCentroidY = this.YMax;       //offset from datum (top)
-        //    double currentMinY = this.YMax;       //offset from datum (top)
-        //    double currentMaxY = this.YMax;       //offset from datum (top)
-
-        //    double slicePlaneY = GetSlicingPlaneY(PlaneOffset, OffsetType);
-
-        //    List<CompoundShapePart> newRectangles = new List<CompoundShapePart>();
-
-        //    for (int i = 0; i < RectanglesXAxis.Count(); i++)
-        //    {
-        //        currentMinY = currentMaxY;
-        //        currentMaxY = currentMaxY + RectanglesXAxis[i].h;
-        //        currentCentroidY = (currentMinY + currentMaxY) / 2.0;
-
-        //        if (currentMinY >= slicePlaneY)
-        //        {
-        //            newRectangles.Add(RectanglesXAxis[i]);
-        //        }
-
-        //        else
-        //        {
-        //            if (currentMinY <= slicePlaneY && currentMaxY >= slicePlaneY)
-        //            {
-        //                newRectangles.Add(
-        //                    new CompoundShapePart(
-        //                        RectanglesXAxis[i].b, currentMaxY - slicePlaneY,
-        //                        new Point2D(RectanglesXAxis[i].InsertionPoint.X, currentCentroidY)));
-        //            }
-        //        }
-
-        //    }
-
-        //    ArbitraryCompoundShape shape = new ArbitraryCompoundShape(newRectangles, null);
-        //    return shape;
-        //}
-
-        #region Obsolete
-
-        ///// <summary>
-        ///// Iterates the section until a top or bottom slice (as specified) 
-        ///// is of requested area.
-        ///// </summary>
-        ///// <param name="Area"></param>
-        ///// <param name="sliceType"></param>
-        ///// <returns></returns>
-        //private IMoveableSection getSliceOfArea(double Area, SLiceType sliceType)
-        //{
-        //    double ConvergenceTolerance = this.A * 0.0001;
-        //    double targetAreaDelta = 0.0;
-        //    double AxisLocationDistanceMin = 0.0;
-        //    double AxisLocationDistanceMax = this.YMax - this.YMin;
-
-        //    //Iterate until the slice area is as required
-        //    targetArea = Area;
-        //    if (sliceType == SLiceType.Bottom)
-        //    {
-
-        //        double SliceAxisOffsetFromTop = RootFinding.Brent(new FunctionOfOneVariable(BottomAreaDeltaCalculationFunction),
-        //            AxisLocationDistanceMin, AxisLocationDistanceMax,
-        //            ConvergenceTolerance, targetAreaDelta);
-        //    }
-        //    else
-        //    {
-        //        double SliceAxisOffsetFromTop = RootFinding.Brent(new FunctionOfOneVariable(TopAreaDeltaCalculationFunction),
-        //            AxisLocationDistanceMin, AxisLocationDistanceMax,
-        //            ConvergenceTolerance, targetAreaDelta);
-        //    }
-        //    return cutSection; //the section was stored during the iteration
-        //}
-
-        //// <summary>
-        //// Calculates Y coordinate of slicing plane
-        //// </summary>
-        //// <param name="OffsetType"> The point from which the offset is measured.</param>
-        //// <returns></returns>
-        ////private double GetSlicingPlaneY(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
-        ////{
-        ////    double slicePlaneY = this.YMax;
-        ////    switch (OffsetType)
-        ////    {
-        ////        case SlicingPlaneOffsetType.Top:
-        ////            slicePlaneY = this.YMax - PlaneOffset;
-        ////            break;
-        ////        case SlicingPlaneOffsetType.Centroid:
-        ////            slicePlaneY = this.Centroid.Y - PlaneOffset;
-        ////            break;
-        ////        case SlicingPlaneOffsetType.Bottom:
-        ////            slicePlaneY = this.YMin - PlaneOffset;
-        ////            break;
-        ////    }
-        ////    return slicePlaneY;
-        ////}
-
-        //private double TopAreaDeltaCalculationFunction(double SliceAxisY)
-        //{
-        //    cutSection = this.GetTopSliceSection(SliceAxisY, SlicingPlaneOffsetType.Top);
-        //    double SliceArea = cutSection.A;
-        //    return targetArea - SliceArea;
-        //}
-
-        //private double BottomAreaDeltaCalculationFunction(double SliceAxisY)
-        //{
-        //    cutSection = this.GetBottomSliceSection(SliceAxisY, SlicingPlaneOffsetType.Top);
-        //    double SliceArea = cutSection.A;
-        //    return targetArea - SliceArea;
-        //}
-
-        #endregion
-
-        //public IMoveableSection GetBottomSliceSection(double PlaneOffset, SlicingPlaneOffsetType OffsetType)
-        //{
-
-
-        //    double currentCentroidY = this.YMax;     //offset from datum (top)
-        //    double currentMinY = this.YMax;       //offset from datum (top)
-        //    double currentMaxY = this.YMax;       //offset from datum (top)
-
-        //    double slicePlaneY = GetSlicingPlaneY(PlaneOffset, OffsetType);
-
-        //    List<CompoundShapePart> newRectangles = new List<CompoundShapePart>();
-
-        //    for (int i = 0; i < RectanglesXAxis.Count(); i++)
-        //    {
-        //        currentMinY = currentMaxY;
-        //        currentMaxY = currentMaxY + RectanglesXAxis[i].h;
-        //        currentCentroidY = (currentMinY + currentMaxY) / 2.0;
-
-        //        if (currentMaxY <= slicePlaneY)
-        //        {
-        //            newRectangles.Add(RectanglesXAxis[i]);
-        //        }
-
-        //        else
-        //        {
-        //            if (currentMinY <= slicePlaneY && currentMaxY >= slicePlaneY)
-        //            {
-        //                newRectangles.Add(
-        //                    new CompoundShapePart(
-        //                        RectanglesXAxis[i].b, slicePlaneY - currentMinY,
-        //                        new Point2D(RectanglesXAxis[i].InsertionPoint.X, currentCentroidY)));
-        //            }
-        //        }
-
-        //    }
-
-        //    ArbitraryCompoundShape shape = new ArbitraryCompoundShape(newRectangles, null);
-        //    return shape;
-
-        //}
 
 
 

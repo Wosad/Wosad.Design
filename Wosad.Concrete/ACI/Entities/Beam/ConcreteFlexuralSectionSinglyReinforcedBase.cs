@@ -29,9 +29,10 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 
 namespace Wosad.Concrete.ACI
 {
-    public class ConcreteFlexuralSectionSinglyReinforcedBase : ConcreteSectionBase, IConcreteFlexuralMember
+    public class ConcreteFlexuralSectionSinglyReinforcedBase : ConcreteFlexuralSectionBase, IConcreteFlexuralMember
     {
-        public ConcreteFlexuralSectionSinglyReinforcedBase(IConcreteSectionRectangular Section, List<RebarPoint> LongitudinalBars, ICalcLog log)
+        public ConcreteFlexuralSectionSinglyReinforcedBase(IConcreteSectionRectangular Section, 
+            List<RebarPoint> LongitudinalBars, ICalcLog log)
             : base(Section,LongitudinalBars,log)
         {
             RectangularSection = Section;
@@ -39,7 +40,7 @@ namespace Wosad.Concrete.ACI
 
         IConcreteSectionRectangular RectangularSection;
 
-        public SectionFlexuralAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition)
+        public ConcreteSectionFlexuralAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition)
         {
 
             double Tforce = this.GetTForce();
@@ -53,7 +54,7 @@ namespace Wosad.Concrete.ACI
             
 
             LinearStrainDistribution strainDistribution = GetStrainDistributionBasedOn_a(DepthOfCompressionBlock_a, CompressionFiberPosition);
-            SectionFlexuralAnalysisResult Mn_result = new SectionFlexuralAnalysisResult(Mn, strainDistribution);
+            ConcreteSectionFlexuralAnalysisResult Mn_result = new ConcreteSectionFlexuralAnalysisResult(Mn, strainDistribution,null);
             return Mn_result;
         }
 

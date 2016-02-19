@@ -29,6 +29,7 @@ namespace Wosad.Concrete.ACI318_14
 {
     public class CrossSectionRectangularShape : IConcreteSection
     {
+
         public CrossSectionRectangularShape(IConcreteMaterial Material, string Name, double Width, double Height )
         {
             this.material = Material;
@@ -56,5 +57,16 @@ namespace Wosad.Concrete.ACI318_14
         }
 
 
+
+
+        public double b_w
+        {
+            get { return this.shape.B; }
+        }
+
+        public double d
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

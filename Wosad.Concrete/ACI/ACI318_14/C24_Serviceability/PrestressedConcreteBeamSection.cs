@@ -28,9 +28,10 @@ namespace Wosad.Concrete.ACI318_14
 {
     public class PrestressedConcreteSection : PrestressedBeamSectionBase
     {
+
         public PrestressedConcreteSection(IPrestressedConcreteSection Section, List<RebarPoint> LongitudinalBars,
             CrossSectionLocationType LocationType, MemberClass MemberClass, ICalcLog log)
-            : base(Section, LongitudinalBars, log)
+            : base(Section,LongitudinalBars, log)
         {
             this.crossSectionLocationType = LocationType;
             this.memberClass = MemberClass;

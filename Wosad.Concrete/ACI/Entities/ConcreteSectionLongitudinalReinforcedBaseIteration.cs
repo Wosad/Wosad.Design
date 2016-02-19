@@ -27,12 +27,16 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
+    public abstract partial class ConcreteSectionLongitudinalReinforcedBase : ConcreteSectionBase, IConcreteSectionWithLongitudinalRebar
     {
-        protected virtual SectionAnalysisResult GetSectionResult(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition, FlexuralAnalysisType AnalysisType)
+        protected virtual SectionAnalysisResult GetSectionResult(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition)
         {
-            ForceMomentContribution CForceResultant = GetCompressionForceResultant(StrainDistribution, compFiberPosition, AnalysisType);
-            ForceMomentContribution TForceResultant = GetTensionForceResultant(StrainDistribution, AnalysisType);
+            ForceMomentContribution CForceRebarResultant = GetCompressionForceConcreteResultant(StrainDistribution, compFiberPosition);
+            ForceMomentContribution CForceConcreteResultant = GetCompressionForceRebarResultant(StrainDistribution, compFiberPosition);
+            
+            ForceMomentContribution CForceResultant = CForceRebarResultant + CForceConcreteResultant;
+
+            ForceMomentContribution TForceResultant = GetTensionForceResultant(StrainDistribution);
             SectionAnalysisResult result = new SectionAnalysisResult()
             {
                 AxialForce = CForceResultant.Force + TForceResultant.Force,
@@ -40,24 +44,29 @@ namespace Wosad.Concrete.ACI
                 TForce = TForceResultant.Force,
                 Moment = CForceResultant.Moment+ TForceResultant.Moment,
                 Rotation = 0,
-                StrainDistribution = StrainDistribution
+                StrainDistribution = StrainDistribution,
+                CompressionRebarResults = CForceRebarResultant.RebarResults,
+                TensionRebarResults =TForceResultant.RebarResults
             };
             return result;
         }
 
-        protected virtual ForceMomentContribution GetCompressionForceResultant(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition,
-            FlexuralAnalysisType AnalysisType)
+        protected virtual ForceMomentContribution GetCompressionForceConcreteResultant(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition)
         {
-            //compresion force includes concrete and steel compressed concrete contribution
             ForceMomentContribution concreteContrib = GetConcreteForceResultant(StrainDistribution, compFiberPosition);
-            ForceMomentContribution steelContrib = GetRebarResultant(StrainDistribution, ResultantType.Compression, AnalysisType);
 
-            return concreteContrib + steelContrib;
+            return concreteContrib;
+        }
+        protected virtual ForceMomentContribution GetCompressionForceRebarResultant(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPosition)
+        {
+            ForceMomentContribution steelContrib = GetRebarResultant(StrainDistribution, ResultantType.Compression);
+
+            return steelContrib;
         }
 
-        protected virtual ForceMomentContribution GetTensionForceResultant(LinearStrainDistribution StrainDistribution, FlexuralAnalysisType AnalysisType)
+        protected virtual ForceMomentContribution GetTensionForceResultant(LinearStrainDistribution StrainDistribution)
         {
-            ForceMomentContribution rebarContribution = GetRebarResultant(StrainDistribution, ResultantType.Tension, AnalysisType);
+            ForceMomentContribution rebarContribution = GetRebarResultant(StrainDistribution, ResultantType.Tension);
             return rebarContribution;
         }
 

@@ -28,35 +28,17 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
+    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember
 	{
 
-		public ConcreteSectionBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, ICalcLog CalcLog)
+		public ConcreteSectionBase(IConcreteSection Section,  ICalcLog CalcLog)
 			: base(CalcLog)
 		{
 			this.Section = Section;
-			this.longitBars = LongitudinalBars;
 		}
-		//public List<IMemberForce> Forces { get; set; }
+
 		public IConcreteSection Section { get; set; }
 
-		private List<RebarPoint> longitBars;
 
-		public List<RebarPoint> LongitudinalBars
-		{
-			get { return longitBars; }
-			set { longitBars = value; }
-		}
-		
-        //public List<IMemberForce> GetForce(string LoadCaseName)
-        //{
-        //    var f = Forces.Where(a => a.LoadCaseName == LoadCaseName).ToList();
-        //    if (f == null)
-        //    {
-        //        throw new Exception("Member force for load combination not found");
-        //    }
-
-        //    return f;
-        //}
-	}
+    }
 }

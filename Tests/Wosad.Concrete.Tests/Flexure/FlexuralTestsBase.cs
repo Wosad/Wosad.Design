@@ -73,7 +73,7 @@ namespace Wosad.Analytics.ACI318_14.Tests.Flexure
                 LongitudinalBars.Add(point);
             }
 
-            ConcreteSectionFlexure beam = new ConcreteSectionFlexure(Section, LongitudinalBars, log);
+            ConcreteSectionFlexure beam = new ConcreteSectionFlexure(Section,LongitudinalBars, log);
             return beam;
         }
     }

@@ -31,15 +31,16 @@ namespace Wosad.Concrete.ACI
 {
     public class AxialMemberBase: ConcreteFlexuralSectionBase
     {
-     
-        public AxialMemberBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, ICalcLog log)
-            : base(Section,LongitudinalBars,log)
+
+        public AxialMemberBase(IConcreteSectionRectangular Section,
+            List<RebarPoint> LongitudinalBars, ICalcLog log)
+            : base(Section, LongitudinalBars, log)
         {
 
         }
 
         public List<SectionAnalysisResult> GetInteractionDiagram(double AngleOfNeutralAxis,
-            FlexuralCompressionFiberPosition CompressionFiberPosition, FlexuralAnalysisType AnalysisType)
+            FlexuralCompressionFiberPosition CompressionFiberPosition )
         {
             //Assume number of iteration points as 30
             int NumberOfConcreteIterationPoints = 30;
@@ -69,7 +70,7 @@ namespace Wosad.Concrete.ACI
                 botFiberStrain = CompressionFiberPosition == FlexuralCompressionFiberPosition.Top ? TensionFaceStrain : CompressionFaceStrain;
 
                 LinearStrainDistribution sd = new LinearStrainDistribution(StrainDistributionHeight, topFiberStrain, botFiberStrain);
-                SectionAnalysisResult resultPoint = GetSectionResult(sd, CompressionFiberPosition, FlexuralAnalysisType.StrainCompatibility);
+                SectionAnalysisResult resultPoint = GetSectionResult(sd, CompressionFiberPosition);
 
                 if (resultPoint !=null)
                 {
@@ -93,7 +94,7 @@ namespace Wosad.Concrete.ACI
                 botFiberStrain = CompressionFiberPosition == FlexuralCompressionFiberPosition.Top ? TensionFaceStrain : CompressionFaceStrain;
 
                 LinearStrainDistribution sd = new LinearStrainDistribution(StrainDistributionHeight, topFiberStrain, botFiberStrain);
-                SectionAnalysisResult resultPoint = GetSectionResult(sd, CompressionFiberPosition, FlexuralAnalysisType.StrainCompatibility);
+                SectionAnalysisResult resultPoint = GetSectionResult(sd, CompressionFiberPosition);
 
                 if (resultPoint != null)
                 {

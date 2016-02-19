@@ -253,7 +253,7 @@ namespace Wosad.Common.Section
             this._YMax = MaxYtemp;
         }
 
-        enum SLiceType
+        enum SliceType
         {
             Top,
             Bottom

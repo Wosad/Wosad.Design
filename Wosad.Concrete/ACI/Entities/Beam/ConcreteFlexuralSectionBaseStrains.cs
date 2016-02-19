@@ -26,7 +26,7 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionBase, IConcreteFlexuralMember
+    public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionLongitudinalReinforcedBase, IConcreteFlexuralMember
     {
 
         protected double MaxSteelStrain { get; set; }
@@ -151,11 +151,10 @@ namespace Wosad.Concrete.ACI
                     throw new CompressionFiberPositionException();
             }
 
-            SectionAnalysisResult finalResult = GetSectionResult(finalStrainDistribution, CompressionFiberPosition, FlexuralAnalysisType.StrainCompatibility);
+            SectionAnalysisResult finalResult = GetSectionResult(finalStrainDistribution, CompressionFiberPosition);
             return finalResult;
         }
 
-        FlexuralAnalysisType currentAnalysisType = FlexuralAnalysisType.StrainCompatibility;
         FlexuralCompressionFiberPosition currentCompressionFiberPosition = FlexuralCompressionFiberPosition.Top;
         double StrainHeight;
 
@@ -176,7 +175,7 @@ namespace Wosad.Concrete.ACI
                     throw new CompressionFiberPositionException();
             }
             //2. Calculate result
-            SectionAnalysisResult iteratedResult = GetSectionResult(iteratedStrainDistribution, currentCompressionFiberPosition, FlexuralAnalysisType.StrainCompatibility);
+            SectionAnalysisResult iteratedResult = GetSectionResult(iteratedStrainDistribution, currentCompressionFiberPosition);
             //3. calculate difference between T and C
                 double T = iteratedResult.TForce;
                 double C = iteratedResult.CForce;

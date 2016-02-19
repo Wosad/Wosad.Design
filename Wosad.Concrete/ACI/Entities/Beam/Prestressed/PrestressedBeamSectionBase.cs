@@ -28,8 +28,8 @@ namespace Wosad.Concrete.ACI
 {
     public abstract partial class PrestressedBeamSectionBase: ConcreteFlexuralSectionBase, IConcreteFlexuralMember
     {
-        public PrestressedBeamSectionBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, 
-             ICalcLog log)
+        public PrestressedBeamSectionBase(IConcreteSection Section,
+            List<RebarPoint> LongitudinalBars, ICalcLog log)
             : base(Section, LongitudinalBars, log)
         {
 

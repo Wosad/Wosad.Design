@@ -29,7 +29,7 @@ using Wosad.Common.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
+    public abstract partial class ConcreteSectionLongitudinalReinforcedBase : ConcreteSectionBase, IConcreteSectionWithLongitudinalRebar
     {
 
         protected double GetCompressionBlockDepth(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition CompressionFiberPosition)

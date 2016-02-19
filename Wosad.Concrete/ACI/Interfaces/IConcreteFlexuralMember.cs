@@ -28,6 +28,6 @@ namespace Wosad.Concrete.ACI
 {
     public interface IConcreteFlexuralMember
     {
-        SectionFlexuralAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition);
+        ConcreteSectionFlexuralAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition);
     }
 }

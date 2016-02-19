@@ -24,13 +24,32 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.Mathematics;
 using Wosad.Common.Interfaces;
+using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
+    public abstract partial class ConcreteSectionLongitudinalReinforcedBase : ConcreteSectionBase, IConcreteSectionWithLongitudinalRebar 
     {
 
-        protected virtual  List<RebarPointResult> CalculateRebarResults(LinearStrainDistribution StrainDistribution, FlexuralAnalysisType AnalysisType)
+        public ConcreteSectionLongitudinalReinforcedBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, ICalcLog CalcLog)
+			: base(Section,CalcLog)
+		{
+			this.Section = Section;
+			this.longitBars = LongitudinalBars;
+		}
+
+        private  List<RebarPoint>  longitBars;
+
+        public  List<RebarPoint>  LongitudinalBars
+        {
+            get { return longitBars; }
+            set { longitBars = value; }
+        }
+
+       
+ 
+
+        protected virtual  List<RebarPointResult> CalculateRebarResults(LinearStrainDistribution StrainDistribution )
         {
             List<RebarPointResult> ResultList = new List<RebarPointResult>();
 
@@ -52,21 +71,12 @@ namespace Wosad.Concrete.ACI
                     double Force;
                     double Stress;
 
-                    if (AnalysisType== FlexuralAnalysisType.StrainCompatibility)
-                        {
+
                             Force = rbrPnt.Rebar.GetForce(Strain);
                             Stress = rbrPnt.Rebar.GetStress(Strain);
                             ResultList.Add(new RebarPointResult(Stress, Strain, Force, BarDistanceToNa, rbrPnt));
-                        }
-                    else
-                    {
-                        //Ignore compression rebar
-                        if (BarDistanceToNa<=0)
-                        {
-                            
-                        }
-                        //TODO: design force for tension 
-                    }
+
+
                 } 
 
 
@@ -182,11 +192,11 @@ namespace Wosad.Concrete.ACI
 
     }
 
-    protected ForceMomentContribution GetRebarResultant(LinearStrainDistribution StrainDistribution, ResultantType resType, FlexuralAnalysisType AnalysisType)
+    protected ForceMomentContribution GetRebarResultant(LinearStrainDistribution StrainDistribution, ResultantType resType )
     {
         ForceMomentContribution resultant = new ForceMomentContribution();
         //tension is negative
-        List<RebarPointResult> RebarResults = CalculateRebarResults(StrainDistribution, AnalysisType);
+        List<RebarPointResult> RebarResults = CalculateRebarResults(StrainDistribution);
         foreach (var barResult in RebarResults)
         {
             if (resType == ResultantType.Tension)
@@ -206,6 +216,7 @@ namespace Wosad.Concrete.ACI
                 }
             }
         }
+        resultant.RebarResults = RebarResults;
         return resultant;
     }
     protected ForceMomentContribution GetRebarResultant(BarCoordinateFilter CoordinateFilter, BarCoordinateLimitFilterType LimitFilter, double CutoffCoordinate)
@@ -334,6 +345,15 @@ double CutoffCoordinate)
            public double Area { get; set; }
            public double MomentX { get; set; }
            public double MomentY { get; set; }
+       }
+
+
+       public double Get_d(LinearStrainDistribution strainDistribution)
+       {
+           //TODO:
+           //Find centroid of longitudinal rebar, calculate d
+           //compare d with h
+           throw new NotImplementedException();
        }
     }
 }

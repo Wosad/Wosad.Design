@@ -57,6 +57,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACI\ACI318_14\C09_Beams\BeamMinimumFlexuralReinforcement.cs" />
+    <Compile Include="ACI\ACI318_14\C09_Beams\BeamMinimumTransverseReinforcement.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageConcreteLimitState.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageLimitState.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\Base\AnchorageSteelLimitState.cs" />
@@ -93,18 +95,24 @@
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorBase.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorCastIn.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorPostInstalled.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\ConcreteSectionFlexuralAnalysisResult.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Flexure\ConcreteSectionFlexure.cs" />
     <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\Concrete.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\ConcretePrestressed.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\ConcreteFlexuralStrengthResult.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\ConcreteSectionOneWayShearNonPrestressed.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\FlexuralFailureModeClassification.cs" />
+    <Compile Include="ACI\Entities\Rebar\ConfinementReinforcementType.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\RebarMaterialFactory.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteSectionWithTransverseRebar.cs" />
+    <Compile Include="ACI\Interfaces\IConcreteSectionWithLongitudinalRebar.cs" />
     <Compile Include="ACI\Interfaces\IShearSection.cs" />
     <Compile Include="ACI\Entities\ConcreteSectionBase.cs" />
-    <Compile Include="ACI\Entities\ConcreteSectionBaseConcrete.cs" />
-    <Compile Include="ACI\Entities\ConcreteSectionBaseIteration.cs" />
-    <Compile Include="ACI\Entities\ConcreteSectionBaseRebar.cs" />
-    <Compile Include="ACI\Entities\ConcreteSectionBaseStrains.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionLongitudinalReinforcedBaseConcrete.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionLongitudinalReinforcedBaseIteration.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionLongitudinalReinforcedBase.cs" />
+    <Compile Include="ACI\Entities\ConcreteSectionLongitudinalReinforcedBaseStrains.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\A416.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\A416Grade.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\A615.cs" />
@@ -141,8 +149,8 @@
     <Compile Include="ACI\Analysis\Section\SectionAnalysisResult.cs" />
     <Compile Include="ACI\Analysis\Section\SectionFlexuralAnalysisResult.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteTypeByWeight.cs" />
-    <Compile Include="ACI\Entities\Beam\ReinforcementArrangement.cs" />
-    <Compile Include="ACI\Entities\Beam\SectionType.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\ReinforcementArrangement.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\SectionType.cs" />
     <Compile Include="ACI\Entities\General\MemberPrestressClassification.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\A615Grade.cs" />
     <Compile Include="ACI\Entities\Rebar\RebarDesignation.cs" />
@@ -159,7 +167,7 @@
     <Compile Include="ACI\Entities\Beam\Prestressed\PSBmSectionBasePrestressing.cs" />
     <Compile Include="ACI\Entities\Beam\Prestressed\PSBmSectionBaseService.cs" />
     <Compile Include="ACI\Entities\Beam\Prestressed\StageType.cs" />
-    <Compile Include="ACI\Entities\Beam\TCIterationBound.cs" />
+    <Compile Include="ACI\Entities\Beam\Common\TCIterationBound.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteMaterialBase.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteUltimateStrain.cs" />
     <Compile Include="ACI\Entities\ForceMomentContribution.cs" />
@@ -211,10 +219,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ACI\ACI318_14\C09_Beams\" />
     <Folder Include="ACI\ACI318_14\C10_Columns\" />
     <Folder Include="ACI\ACI318_14\C22_SectionalStrength\Torsion\" />
-    <Folder Include="ACI\Entities\Beam\Base\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

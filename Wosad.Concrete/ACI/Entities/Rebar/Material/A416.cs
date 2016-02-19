@@ -96,6 +96,15 @@ namespace Wosad.Concrete.ACI
          }
 
 
+
+        /// <summary>
+        /// Per ACI section 21.2.2.2 For all prestressed reinforcement, epsilon_ty shall be taken as 0.002
+        /// </summary>
+
+         public double YieldStrain
+         {
+             get { return 0.002; }
+         }
     }
 
 

@@ -29,7 +29,7 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteSectionBase : AnalyticalElement, IConcreteMember //IStructuralMember,
+    public abstract partial class ConcreteSectionLongitudinalReinforcedBase : ConcreteSectionBase, IConcreteSectionWithLongitudinalRebar
     {
 
 
@@ -92,27 +92,5 @@ namespace Wosad.Concrete.ACI
 
     }
 
-    //    protected double GetStrainDistributionHeight(FlexuralCompressionFiberPosition CompressionFiberPosition)
-    //    {
-    //        double StrainDistributionHeight = 0.0;
-    //        double YMax = Section.SliceableShape.YMax;
-    //        double YMin = Section.SliceableShape.YMin;
-    //        double XMax = Section.SliceableShape.XMax;
-    //        double XMin = Section.SliceableShape.XMin;
 
-    //        if (CompressionFiberPosition == FlexuralCompressionFiberPosition.Top)
-    //        {
-    //            var LowestPointY = LongitudinalBars.Min(yVal => yVal.Coordinate.Y);
-    //            var PointsAtLowestY = LongitudinalBars.Where(point => point.Coordinate.Y == LowestPointY).Select(point => point);
-    //            StrainDistributionHeight = Math.Abs(YMax - LowestPointY);
-    //        }
-    //        else
-    //        {
-    //            var HighestPointY = LongitudinalBars.Max(yVal => yVal.Coordinate.Y);
-    //            var PointsAtHighestY = LongitudinalBars.Where(point => point.Coordinate.Y == HighestPointY).Select(point => point);
-    //            StrainDistributionHeight = Math.Abs(YMin - HighestPointY);
-    //        }
-    //        return StrainDistributionHeight;
-    //    }
-    //}
 }

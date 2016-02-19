@@ -24,8 +24,8 @@ namespace Wosad.Analytics.ACI318_14.Tests.Prestressed
     //    }
     //}
 
-    public class PrestressedGeneralBeamTests : PrestressedGeneralTestsBase
-    {
+    //public class PrestressedGeneralBeamTests : PrestressedGeneralTestsBase
+    //{
         //[Test]
         //public void CheckTeeServiceability()
         //{
@@ -36,5 +36,5 @@ namespace Wosad.Analytics.ACI318_14.Tests.Prestressed
             //double phiMn = MResult.Moment;
             //Assert.AreEqual(615882, Math.Round(Mn, 0));
         //}
-    }
+    //}
 }

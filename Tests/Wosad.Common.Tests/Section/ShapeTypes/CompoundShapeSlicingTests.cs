@@ -25,6 +25,7 @@ using Wosad.Common.Mathematics;
 using Wosad.Common.Section;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Section.Predefined;
+using Wosad.Common.Section.SectionTypes;
 
 namespace Wosad.Common.Tests.Section.ShapeTypes
 {
@@ -53,13 +54,29 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         }
 
         [Test]
-        public void CompoundShapeReturnsTopSLiceOfArea()
+        public void CompoundShapeReturnsTopSliceOfArea()
         {
             ArbitraryCompoundShape shape = GetCustomTeeShape();
             IMoveableSection topSLice = shape.GetTopSliceOfArea(6.25);
             Assert.AreEqual(6.25, topSLice.A);
             Assert.AreEqual(3.5, topSLice.YMin);
         }
+
+        [Test]
+        public void CompoundShapeReturnsBottomSliceOfArea()
+        {
+            CompoundShape shape = GetRectangularShape();
+            IMoveableSection bottomSlice = shape.GetBottomSliceOfArea(6);
+            Assert.AreEqual(6, bottomSlice.A);
+            Assert.AreEqual(-5.5, bottomSlice.YMax);
+        }
+
+        private CompoundShape GetRectangularShape()
+        {
+            SectionRectangular rect = new SectionRectangular(12, 12);
+            return rect;
+        }
+
 
         [Test]
         public void CompoundShapeReturnsTopSLiceAtOffset()

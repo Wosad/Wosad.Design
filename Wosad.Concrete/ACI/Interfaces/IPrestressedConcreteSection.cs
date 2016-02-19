@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Wosad.Concrete.ACI
 {
-    public interface IPrestressedConcreteSection: IConcreteSection
+    public interface IPrestressedConcreteSection : IConcreteSection
     {
         IPrestressedConcreteMaterial Material { get; set; }
     }

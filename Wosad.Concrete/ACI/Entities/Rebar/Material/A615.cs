@@ -114,5 +114,14 @@ namespace Wosad.Concrete.ACI
 
 
 
+
+        double epsilon_ty;
+        public double YieldStrain
+        {
+            get { 
+                epsilon_ty = yieldStress/ ConcreteConstants.SteelModulusOfElasticity;
+                return epsilon_ty;
+            }
+        }
     }
 }

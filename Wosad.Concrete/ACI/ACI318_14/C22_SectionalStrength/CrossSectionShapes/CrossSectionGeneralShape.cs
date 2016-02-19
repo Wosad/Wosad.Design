@@ -26,26 +26,20 @@ namespace Wosad.Concrete.ACI318_14
     public class CrossSectionGeneralShape : IConcreteSection
     {
 
-        public CrossSectionGeneralShape(IConcreteMaterial Material, string Name, Point2D Centroid)
+        public CrossSectionGeneralShape(IConcreteMaterial Material, string Name, ISliceableSection SliceableShape, double b_w, double d)
         {
             this.material = Material;
-            //shape = new SectionGeneral(Name,);
+            this._d =d;
+            this._b_w = b_w;
+            this.sliceableShape = SliceableShape;
         }
 
-        //private SectionGenericShape shape;
-
-        //public SectionGenericShape Shape
-        //{
-        //    get { return shape; }
-        //    set { shape = value; }
-        //}
-
+        ISliceableSection sliceableShape;
         public ISliceableSection SliceableShape
         {
             get 
             {
-                throw new NotImplementedException();
-                //return shape as ISliceableSection; 
+                return sliceableShape; 
             }
         }
 
@@ -55,5 +49,17 @@ namespace Wosad.Concrete.ACI318_14
             get { return material; }
         }
 
+
+        double _b_w;
+        public double b_w
+        {
+            get { return _b_w; }
+        }
+
+        double _d;
+        public double d
+        {
+            get { return _d; }
+        }
     }
 }

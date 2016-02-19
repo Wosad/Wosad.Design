@@ -27,13 +27,14 @@ using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 
 namespace Wosad.Concrete.ACI
 {
-    public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionBase, IConcreteFlexuralMember
+    public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionLongitudinalReinforcedBase, IConcreteFlexuralMember
     {
 
         public ConcreteFlexuralSectionBase(IConcreteSection Section, List<RebarPoint> LongitudinalBars, ICalcLog log, double ConvergenceToleranceStrain = 0.000002)
-            : base(Section,LongitudinalBars,log)
+            : base(Section, LongitudinalBars, log)
         {
             this.ConvergenceToleranceStrain = ConvergenceToleranceStrain;
+
         }
 
         //        public SectionFlexuralAnalysisResult GetFlexuralCapacity
@@ -42,8 +43,10 @@ namespace Wosad.Concrete.ACI
 
         double ConvergenceToleranceStrain;
 
-        public SectionFlexuralAnalysisResult GetNominalFlexuralCapacity
-            (FlexuralCompressionFiberPosition CompressionFiberPosition, FlexuralAnalysisType AnalysisType)
+
+
+        public ConcreteSectionFlexuralAnalysisResult GetNominalFlexuralCapacity
+            (FlexuralCompressionFiberPosition CompressionFiberPosition )
         {
             //note: FlexuralAnalysisType AnalysisType is by default strain compatibility
             //this parameter is overriden for cases like prestressed beams
@@ -51,7 +54,7 @@ namespace Wosad.Concrete.ACI
 
             //Step 1: Assume strain distribution with all bars below section centroid yielding
             LinearStrainDistribution TrialStrainDistribution =  GetInitialStrainEstimate(CompressionFiberPosition);
-            SectionAnalysisResult TrialSectionResult = GetSectionResult(TrialStrainDistribution, CompressionFiberPosition, AnalysisType);
+            SectionAnalysisResult TrialSectionResult = GetSectionResult(TrialStrainDistribution, CompressionFiberPosition);
             double Mn = 0;
 
                 //check id T and C force are equal
@@ -64,9 +67,9 @@ namespace Wosad.Concrete.ACI
                     {
                         TCIterationBound bound = GetSolutionBoundaries(TrialSectionResult, TrialStrainDistribution); //make sure solution exists
                         IteratedResult = FindResultByVaryingSteelStrain(CompressionFiberPosition,bound, ConvergenceToleranceStrain);
-                        double MaxSteelTensionStrain = GetMaxSteelStrain(IteratedResult.TensionRebarResults);
+                        RebarPointResult controllingBar = GetMaxSteelStrainPoint(TrialSectionResult.TensionRebarResults);
                         Mn = IteratedResult.Moment;
-                        return new SectionFlexuralAnalysisResult(Mn, IteratedResult.StrainDistribution);
+                        return new ConcreteSectionFlexuralAnalysisResult(Mn, IteratedResult.StrainDistribution,controllingBar);
                     }
                     catch (SectionAnalysisFailedToConvergeException)
                     {
@@ -77,34 +80,32 @@ namespace Wosad.Concrete.ACI
                     //if T=C
                 else
                 {
-                    double MaxSteelTensionStrain = GetMaxSteelStrain(TrialSectionResult.TensionRebarResults);
+                    
+                    RebarPointResult controllingBar = GetMaxSteelStrainPoint(TrialSectionResult.TensionRebarResults);
+
+                    double MaxSteelTensionStrain = controllingBar.Strain;
                     Mn = TrialSectionResult.Moment;
-                    SectionFlexuralAnalysisResult result = new SectionFlexuralAnalysisResult(Mn, TrialSectionResult.StrainDistribution);
+                    ConcreteSectionFlexuralAnalysisResult result = new ConcreteSectionFlexuralAnalysisResult(Mn, TrialSectionResult.StrainDistribution, controllingBar);
                     return result;
                 }
 
                     
         }
 
-        private double GetMaxSteelStrain(List<RebarPointResult> rebarResult)
+        private RebarPointResult GetMaxSteelStrainPoint(List<RebarPointResult> rebarResult)
         {
-            if (rebarResult!=null)
+            RebarPointResult maxStrainPoint= null;
+            double MaxSteelStrain = double.NegativeInfinity;
+            foreach (var bar in rebarResult)
             {
-                return rebarResult.Max(e => e.Strain);
-            }
-            else
-            {
-                return 0.0;
-            }
-        }
+                if (bar.Strain >=MaxSteelStrain)
+	        {
+		         maxStrainPoint = bar;
+	        }
+                    }
+                    return maxStrainPoint;
+                }
 
 
-
-
-
-        public SectionFlexuralAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
