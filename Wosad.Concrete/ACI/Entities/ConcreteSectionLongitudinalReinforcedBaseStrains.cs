@@ -22,9 +22,7 @@ using System.Text;
 using Wosad.Common.Entities;
 using Wosad.Common.Interfaces;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Concrete.ACI.Infrastructure.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
+
 
 
 namespace Wosad.Concrete.ACI

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Analytics.ACI318_14.Tests.Flexure
+namespace Wosad.Concrete.ACI318_14.Tests.Flexure
 {
     public class RebarInput
     {

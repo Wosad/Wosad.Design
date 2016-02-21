@@ -26,7 +26,7 @@ using Wosad.Concrete.ACI.Entities;
 using Wosad.Concrete.Properties;
 
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
+namespace Wosad.Concrete.ACI
 {
     public class RebarSectionFactory
     {

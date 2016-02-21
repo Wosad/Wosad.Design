@@ -9,10 +9,10 @@ using Wosad.Concrete.ACI;
 using Wosad.Concrete.ACI318_14;
 using Wosad.Concrete.ACI318_14.Materials;
 using Wosad.Concrete.ACI.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 
 
-namespace Wosad.Analytics.ACI318_14.Tests.Flexure
+
+namespace Wosad.Concrete.ACI318_14.Tests.Flexure
 {
     [TestFixture]
     public partial class RectangularBeamTests
@@ -40,11 +40,17 @@ namespace Wosad.Analytics.ACI318_14.Tests.Flexure
             set { mat = value; }
         }
 
+
+
+
+        double tolerance; 
+
         public RectangularBeamTests()
         {
             //ICalcLogEntry entryStub = mocks.Stub<ICalcLogEntry>();
             MockRepository mocks = new MockRepository();
             log = mocks.Stub<ICalcLog>();
+            tolerance = 0.02; //2% can differ from rounding
         }
 
         public IConcreteMaterial GetConcreteMaterial(double fc)

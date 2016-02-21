@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wosad.Common.Entities;
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains
+namespace Wosad.Concrete.ACI
 {
         public class ConcreteSectionIterationData
         {

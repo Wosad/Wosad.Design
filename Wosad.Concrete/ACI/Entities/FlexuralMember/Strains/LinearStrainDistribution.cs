@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains
+namespace Wosad.Concrete.ACI
 {
     public class LinearStrainDistribution //: ConcreteStrainDistribution
     {

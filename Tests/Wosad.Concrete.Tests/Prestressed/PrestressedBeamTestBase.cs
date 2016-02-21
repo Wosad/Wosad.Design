@@ -8,7 +8,7 @@ using Wosad.Concrete.ACI;
 using Wosad.Concrete.ACI318_14.Materials;
 using Wosad.Concrete.ACI.Entities;
 
-namespace Wosad.Analytics.ACI318_14.Tests.Prestressed
+namespace Wosad.Concrete.ACI318_14.Tests.Prestressed
 {
     public class PrestressedBeamTestBase
     {

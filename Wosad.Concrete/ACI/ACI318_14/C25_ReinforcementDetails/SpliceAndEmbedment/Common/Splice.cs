@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
-using Wosad.Concrete.ACI.Infrastructure.Entities;
 using Wosad.Common.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 

@@ -5,12 +5,12 @@ using System.Text;
 using NUnit.Framework;
 using Wosad.Concrete.ACI318_14;
 using Wosad.Concrete.ACI;
-using Wosad.Analytics.ACI318_14.Tests.Prestressed;
+using Wosad.Concrete.ACI318_14.Tests.Prestressed;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Analytics.ACI318_14.Tests.Flexure;
+using Wosad.Concrete.ACI318_14.Tests.Flexure;
 
 
-namespace Wosad.Analytics.ACI318_14.Tests.Prestressed
+namespace Wosad.Concrete.ACI318_14.Tests.Prestressed
 {
     //public class PrestressedRectangularBeamTests : PrestressedRectangularTestBase
     //{

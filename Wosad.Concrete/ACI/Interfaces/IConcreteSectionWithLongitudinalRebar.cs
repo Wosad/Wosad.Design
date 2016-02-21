@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
+using Wosad.Common.Section.Interfaces;
+
 
 namespace Wosad.Concrete.ACI
 {
@@ -12,6 +12,6 @@ namespace Wosad.Concrete.ACI
     {
         IConcreteSection Section { get;  }
         List<RebarPoint> LongitudinalBars { get; }
-        double Get_d(LinearStrainDistribution strainDistribution);
+        double Get_d(double c, double h, FlexuralCompressionFiberPosition copressionFiber);
     }
 }

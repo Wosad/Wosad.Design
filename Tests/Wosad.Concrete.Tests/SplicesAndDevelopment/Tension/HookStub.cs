@@ -8,12 +8,11 @@ using Wosad.Concrete.ACI;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Concrete.ACI.Entities;
 using Wosad.Concrete.ACI318_14;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Concrete.ACI318_14.Materials;
 
 
 
-namespace Wosad.Analytics.ACI318_14.Tests
+namespace Wosad.Concrete.ACI318_14.Tests
 {
     [TestFixture]
     public partial class StandardHookTests

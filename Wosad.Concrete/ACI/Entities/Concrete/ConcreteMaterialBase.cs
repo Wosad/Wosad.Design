@@ -25,7 +25,7 @@ using Wosad.Concrete.ACI.Entities;
 
  
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Concrete
+namespace Wosad.Concrete.ACI
 {
     //base class for all ACI materials
 

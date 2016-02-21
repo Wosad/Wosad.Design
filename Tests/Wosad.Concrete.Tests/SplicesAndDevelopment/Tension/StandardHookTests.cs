@@ -5,7 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using Wosad.Concrete.ACI318_14;
 
-namespace Wosad.Analytics.ACI318_14.Tests
+namespace Wosad.Concrete.ACI318_14.Tests
 {
     public partial class StandardHookTests
     {

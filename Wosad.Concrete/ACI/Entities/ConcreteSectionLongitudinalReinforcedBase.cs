@@ -20,11 +20,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.Mathematics;
 using Wosad.Common.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Common.Section.Interfaces;
 
 namespace Wosad.Concrete.ACI
 {
@@ -273,54 +272,38 @@ namespace Wosad.Concrete.ACI
     }
 
     protected ForceMomentContribution GetApproximateRebarResultant(BarCoordinateFilter CoordinateFilter, BarCoordinateLimitFilterType LimitFilterType,
-double CutoffCoordinate)
+    double CutoffCoordinate)
     {
         ForceMomentContribution resultant = new ForceMomentContribution();
 
-        foreach (var bar in longitBars)
-        {
             double barLimitForce = 0;
             double barLimitForceMoment = 0;
+            List<RebarPoint> filteredBars = GetFilteredBars(CutoffCoordinate, CoordinateFilter, LimitFilterType);
 
-            if (CoordinateFilter == BarCoordinateFilter.X && LimitFilterType == BarCoordinateLimitFilterType.Maximum)
+            foreach (var bar in filteredBars)
             {
-                if (bar.Coordinate.X <= CutoffCoordinate)
+
+                if (CoordinateFilter == BarCoordinateFilter.X) // && LimitFilterType == BarCoordinateLimitFilterType.Maximum)
                 {
+
                     barLimitForce = bar.Rebar.GetDesignForce();
                     barLimitForceMoment = barLimitForce * bar.Coordinate.X;
-                }
-            }
 
-            if (CoordinateFilter == BarCoordinateFilter.Y && LimitFilterType == BarCoordinateLimitFilterType.Maximum)
-            {
-                if (bar.Coordinate.Y <= CutoffCoordinate)
+                }
+
+                else
                 {
+
                     barLimitForce = bar.Rebar.GetDesignForce();
                     barLimitForceMoment = barLimitForce * bar.Coordinate.Y;
+
                 }
             }
 
-            if (CoordinateFilter == BarCoordinateFilter.X && LimitFilterType == BarCoordinateLimitFilterType.Minimum)
-            {
-                if (bar.Coordinate.X >= CutoffCoordinate)
-                {
-                    barLimitForce = bar.Rebar.GetDesignForce();
-                    barLimitForceMoment = barLimitForce * bar.Coordinate.X;
-                }
-            }
-
-            if (CoordinateFilter == BarCoordinateFilter.Y && LimitFilterType == BarCoordinateLimitFilterType.Minimum)
-            {
-                if (bar.Coordinate.Y >= CutoffCoordinate)
-                {
-                    barLimitForce = bar.Rebar.GetDesignForce();
-                    barLimitForceMoment = barLimitForce * bar.Coordinate.Y;
-                }
-            }
 
             ForceMomentContribution barResultant = new ForceMomentContribution() { Force = barLimitForce, Moment = barLimitForceMoment };
             resultant += barResultant;
-        }
+        
 
         return resultant;
 
@@ -328,13 +311,13 @@ double CutoffCoordinate)
 
 
 
-        protected enum BarCoordinateFilter
+        public enum BarCoordinateFilter
         {
             X,
             Y
         }
 
-        protected enum BarCoordinateLimitFilterType
+        public enum BarCoordinateLimitFilterType
         {
             Maximum,
             Minimum
@@ -348,12 +331,96 @@ double CutoffCoordinate)
        }
 
 
-       public double Get_d(LinearStrainDistribution strainDistribution)
+       public double Get_d(double c, double h, FlexuralCompressionFiberPosition CompressionFiber)
        {
-           //TODO:
+
            //Find centroid of longitudinal rebar, calculate d
            //compare d with h
-           throw new NotImplementedException();
+           double CutoffCoordinate;
+           if (CompressionFiber == FlexuralCompressionFiberPosition.Top)
+           {
+               CutoffCoordinate = Section.SliceableShape.YMax - c;
+               List<RebarPoint> filteredBars = GetFilteredBars(CutoffCoordinate, BarCoordinateFilter.Y, BarCoordinateLimitFilterType.Maximum);
+           }
+           else
+           {
+               CutoffCoordinate = Section.SliceableShape.YMin + c;
+               List<RebarPoint> filteredBars = GetFilteredBars(CutoffCoordinate, BarCoordinateFilter.Y, BarCoordinateLimitFilterType.Minimum);
+           }
+
+           double A_total=0;
+           double M_total = 0;
+
+           
+           foreach (var bar in longitBars)
+           {
+
+               A_total = A_total + bar.Rebar.Area;
+               M_total = M_total + bar.Rebar.Area * bar.Coordinate.Y;
+           }
+  
+           double YCentroid = M_total / A_total;
+
+           double d;
+           double d_rebar;
+
+           if (CompressionFiber == FlexuralCompressionFiberPosition.Top)
+           {
+               d_rebar = Section.SliceableShape.YMax - YCentroid;
+           }
+           else
+           {
+               d_rebar =  YCentroid - Section.SliceableShape.YMin;
+           }
+           d = Math.Max(0.8 * h, d_rebar);
+
+           return d;
+       }
+
+
+       public  List<RebarPoint> GetFilteredBars(double CutoffCoordinate, BarCoordinateFilter CoordinateFilter, BarCoordinateLimitFilterType LimitFilterType)
+       {
+
+           List<RebarPoint> barPoints = new List<RebarPoint>();
+
+           foreach (var bar in longitBars)
+           {
+
+
+               if (CoordinateFilter == BarCoordinateFilter.X && LimitFilterType == BarCoordinateLimitFilterType.Maximum)
+               {
+                   if (bar.Coordinate.X <= CutoffCoordinate)
+                   {
+                       barPoints.Add(bar);
+                   }
+               }
+
+               if (CoordinateFilter == BarCoordinateFilter.Y && LimitFilterType == BarCoordinateLimitFilterType.Maximum)
+               {
+                   if (bar.Coordinate.Y <= CutoffCoordinate)
+                   {
+                       barPoints.Add(bar);
+                   }
+               }
+
+               if (CoordinateFilter == BarCoordinateFilter.X && LimitFilterType == BarCoordinateLimitFilterType.Minimum)
+               {
+                   if (bar.Coordinate.X >= CutoffCoordinate)
+                   {
+                       barPoints.Add(bar);
+                   }
+               }
+
+               if (CoordinateFilter == BarCoordinateFilter.Y && LimitFilterType == BarCoordinateLimitFilterType.Minimum)
+               {
+                   if (bar.Coordinate.Y >= CutoffCoordinate)
+                   {
+                       barPoints.Add(bar);
+                   }
+               }
+           }
+
+           return barPoints;
        }
     }
 }

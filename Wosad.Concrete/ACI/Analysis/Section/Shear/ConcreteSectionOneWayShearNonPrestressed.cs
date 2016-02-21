@@ -24,21 +24,23 @@ using Wosad.Concrete.ACI;
 namespace Wosad.Concrete.ACI318_14
 {
     /// <summary>
-    ///  This class encpsulates all sectional shear provisions per ACI.
+    ///  This class encpsulates sectional shear provisions per ACI.
     /// </summary>
     public partial class ConcreteSectionOneWayShearNonPrestressed : AnalyticalElement
     {
-        public ConcreteSectionOneWayShearNonPrestressed(double d, double b_w, IConcreteMaterial material): this(d,b_w,0,0,material,null)
+        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IConcreteMaterial material)
+            : this(d, Section, 0, 0, material, null)
         {
 
         }
 
-        public ConcreteSectionOneWayShearNonPrestressed(double d, double b_w, double A_v, double s, IConcreteMaterial Material, IRebarMaterial RebarMaterial)
+        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, double A_v, double s, 
+            IConcreteMaterial Material, IRebarMaterial RebarMaterial)
         {
             this.Material = Material;
             this.rebarMaterial = RebarMaterial;
             this.d   =d  ;
-            this.b_w =b_w;
+            this.b_w =Section.b_w;
             this.A_v =A_v;
             this.s = s;
         }

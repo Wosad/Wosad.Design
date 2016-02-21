@@ -21,12 +21,14 @@ using System.Linq;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
+
  
 
 namespace Wosad.Concrete.ACI
 {
+    /// <summary>
+    /// Base class used for calculating nominal flexural strength. Utilized by beam or column sections
+    /// </summary>
     public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionLongitudinalReinforcedBase, IConcreteFlexuralMember
     {
 
@@ -37,10 +39,6 @@ namespace Wosad.Concrete.ACI
 
         }
 
-        //        public SectionFlexuralAnalysisResult GetFlexuralCapacity
-        //    (CompressionLocation CompressionFiberPosition, FlexuralAnalysisType AnalysisType, double ConvergenceToleranceStrain = 0.000002, bool IsSpiral =false)
-        //{
-
         double ConvergenceToleranceStrain;
 
 
@@ -48,8 +46,6 @@ namespace Wosad.Concrete.ACI
         public ConcreteSectionFlexuralAnalysisResult GetNominalFlexuralCapacity
             (FlexuralCompressionFiberPosition CompressionFiberPosition )
         {
-            //note: FlexuralAnalysisType AnalysisType is by default strain compatibility
-            //this parameter is overriden for cases like prestressed beams
 
 
             //Step 1: Assume strain distribution with all bars below section centroid yielding

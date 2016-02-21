@@ -24,7 +24,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Reports;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Concrete.ACI.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
+
 
 
 namespace Wosad.Concrete.ACI318_14.Materials

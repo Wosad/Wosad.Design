@@ -57,16 +57,11 @@ namespace Wosad.Concrete.ACI318_14
         }
 
 
-
-
         public double b_w
         {
             get { return this.shape.B; }
         }
 
-        public double d
-        {
-            get { throw new NotImplementedException(); }
-        }
+
     }
 }

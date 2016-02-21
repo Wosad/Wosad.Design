@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 
 namespace Wosad.Concrete.ACI
 {

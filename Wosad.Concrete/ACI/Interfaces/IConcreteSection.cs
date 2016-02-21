@@ -27,6 +27,7 @@ namespace Wosad.Concrete.ACI
     {
         ISliceableSection SliceableShape { get; }
         IConcreteMaterial Material { get; }
+        double b_w { get; }
 
     }
 }

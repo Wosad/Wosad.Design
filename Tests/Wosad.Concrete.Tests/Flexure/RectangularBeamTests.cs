@@ -7,18 +7,24 @@ using Wosad.Concrete.ACI318_14;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Section.Interfaces;
 
-namespace Wosad.Analytics.ACI318_14.Tests.Flexure
+namespace Wosad.Concrete.ACI318_14.Tests.Flexure
 {
     [TestFixture]
-    public partial class RectangularBeamTests
+    public partial class RectangularBeamTests: ToleranceTestBase
     {
+
         [Test]
         public void GetSimpleBeamFlexuralCapacityTop()
         {
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1));
             SectionFlexuralAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
             double M_n = MResult.Moment;
-            Assert.AreEqual(615883, Math.Round(M_n, 0));
+
+            double refValue = 615883;
+            double actualTolerance = EvaluateActualTolerance(M_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
         }
 
          [Test]
@@ -27,7 +33,11 @@ namespace Wosad.Analytics.ACI318_14.Tests.Flexure
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 11));
             SectionFlexuralAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Bottom);
             double M_n = MResult.Moment;
-            Assert.AreEqual(615882, Math.Round(M_n, 0));
+
+            double refValue = 615883;
+            double actualTolerance = EvaluateActualTolerance(M_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
         public void Get2LayerBeamFlexuralCapacity()

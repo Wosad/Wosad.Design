@@ -24,7 +24,6 @@ using System.Text;
 using Wosad.Wood.NDS.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.CalculationLogger;
-using Wosad.Analytics.Wood.NDS;
 using Wosad.Wood.NDS.Material;
 using Wosad.Wood.Properties;
 

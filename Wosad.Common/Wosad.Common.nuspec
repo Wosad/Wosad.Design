@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Wosad.Common</id>
-    <version>0.0.3.2</version>
+    <version>0.0.3.3</version>
     <title>Wosad.Common</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components common to different material standards for buildings and other structures, including section properties and shared entities.</description>

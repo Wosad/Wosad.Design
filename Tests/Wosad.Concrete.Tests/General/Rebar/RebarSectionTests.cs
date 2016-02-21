@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
+using Wosad.Concrete.ACI;
 
 namespace Wosad.Concrete.Tests.General.Rebar
 {

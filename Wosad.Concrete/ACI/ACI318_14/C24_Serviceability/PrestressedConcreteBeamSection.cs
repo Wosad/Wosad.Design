@@ -21,7 +21,6 @@ using System.Linq;
 using System.Text;
 using Wosad.Concrete.ACI;
 using Wosad.Common.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.CalculationLogger.Interfaces;
 
 namespace Wosad.Concrete.ACI318_14

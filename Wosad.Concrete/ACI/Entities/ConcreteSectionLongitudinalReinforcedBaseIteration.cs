@@ -19,10 +19,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Wosad.Common.Entities;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Interfaces;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Concrete;
+
 
 
 namespace Wosad.Concrete.ACI

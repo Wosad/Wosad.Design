@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Concrete.ACI.Entities;
 
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
+namespace Wosad.Concrete.ACI
 {
     public class RebarSection
     {

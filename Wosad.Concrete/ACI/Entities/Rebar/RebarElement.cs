@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Wosad.Concrete.ACI.Infrastructure.Entities.Rebar
+namespace Wosad.Concrete.ACI
 {
     //this clas encapsulates rebar class and adds more functionality to it
     //such as stress, embedment etc.

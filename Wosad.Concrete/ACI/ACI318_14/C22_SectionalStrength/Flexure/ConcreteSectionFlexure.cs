@@ -18,15 +18,13 @@
 using System;
 using System.Collections.Generic;
 using Wosad.Concrete.ACI;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Rebar;
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
 using Wosad.Common.Section.Interfaces;
 
 namespace Wosad.Concrete.ACI318_14
 {
     /// <summary>
-    ///  This class encpsulates all sectional (flexure, shear axial load )analysis per ACI.
+    ///  This class encpsulates  flexural analysis per ACI.
     /// </summary>
     public partial class ConcreteSectionFlexure: ConcreteFlexuralSectionBase
     {
@@ -64,7 +62,7 @@ namespace Wosad.Concrete.ACI318_14
             double epsilon_ty = controllingBarMaterial.YieldStrain;
 
             FlexuralFailureModeClassification failureMode = GetFailureMode(epsilon_t, epsilon_ty);
-            double phi = Get_phi(failureMode, ConfinementReinforcementType, epsilon_t, epsilon_ty);
+            double phi = Get_phiFlexure(failureMode, ConfinementReinforcementType, epsilon_t, epsilon_ty);
             double phiM_n = phi* nominalResult.Moment;
 
             ConcreteFlexuralStrengthResult result = new ConcreteFlexuralStrengthResult(a, phiM_n, failureMode,epsilon_t);
@@ -80,7 +78,7 @@ namespace Wosad.Concrete.ACI318_14
         /// <param name="epsilon_t">Actual calculated tensile strain</param>
         /// <param name="epsilon_ty">Yield strain</param>
         /// <returns></returns>
-        private double Get_phi(FlexuralFailureModeClassification failureMode, 
+        private double Get_phiFlexure(FlexuralFailureModeClassification failureMode, 
             ConfinementReinforcementType ConfinementReinforcementType, double epsilon_t, double epsilon_ty)
         {
             switch (failureMode)

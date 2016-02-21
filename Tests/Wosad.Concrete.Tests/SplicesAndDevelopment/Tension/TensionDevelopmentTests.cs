@@ -7,7 +7,7 @@ using Wosad.Concrete.ACI318_14;
 using Wosad.Concrete.ACI.Entities;
 
 
-namespace Wosad.Analytics.ACI318_14.Tests
+namespace Wosad.Concrete.ACI318_14.Tests
 {
     [TestFixture]
     public partial class TensionDevelopmentTests

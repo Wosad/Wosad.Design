@@ -21,7 +21,7 @@ using System.Linq;
 using Wosad.Common.Entities;
 using Wosad.Common.Mathematics;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Concrete.ACI.Infrastructure.Entities.Section.Strains;
+
  
 
 namespace Wosad.Concrete.ACI
@@ -120,7 +120,7 @@ namespace Wosad.Concrete.ACI
 
 
         protected virtual SectionAnalysisResult FindResultByVaryingSteelStrain(FlexuralCompressionFiberPosition CompressionFiberPosition,
-             TCIterationBound bound,  double StrainConvergenceTolerance = 0.00001)
+             TCIterationBound bound,  double targetTCDelta = 0, double StrainConvergenceTolerance = 0.00001)
         {
             currentCompressionFiberPosition = CompressionFiberPosition; //store this off because it will be necessary during iteration
             StrainHeight = GetStrainDistributionHeight(CompressionFiberPosition);//store this off because it will be necessary during iteration
@@ -129,7 +129,7 @@ namespace Wosad.Concrete.ACI
             double SteelStrain = 0;
             double StrainMax = bound.MaxStrain;
             double StrainMin = bound.MinStrain; 
-            double targetTCDelta = 0;
+
             
             LinearStrainDistribution finalStrainDistribution = null;
 

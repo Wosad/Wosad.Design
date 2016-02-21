@@ -63,10 +63,10 @@
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmenKtrTests.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentCbTests.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentCommonTests.cs" />
-    <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentFullTests.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentksiTests.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentStub.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\TensionDevelopmentTests.cs" />
+    <Compile Include="ToleranceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="General\Concrete\" />
