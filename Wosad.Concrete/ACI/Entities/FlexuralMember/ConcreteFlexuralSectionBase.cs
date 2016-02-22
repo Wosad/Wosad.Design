@@ -43,7 +43,7 @@ namespace Wosad.Concrete.ACI
 
 
 
-        public ConcreteSectionFlexuralAnalysisResult GetNominalFlexuralCapacity
+        public IStrainCompatibilityAnalysisResult GetNominalFlexuralCapacity
             (FlexuralCompressionFiberPosition CompressionFiberPosition )
         {
 
@@ -62,7 +62,7 @@ namespace Wosad.Concrete.ACI
                     try
                     {
                         TCIterationBound bound = GetSolutionBoundaries(TrialSectionResult, TrialStrainDistribution); //make sure solution exists
-                        IteratedResult = FindResultByVaryingSteelStrain(CompressionFiberPosition,bound, ConvergenceToleranceStrain);
+                        IteratedResult = FindPureMomentResult(CompressionFiberPosition,bound, ConvergenceToleranceStrain);
                         RebarPointResult controllingBar = GetMaxSteelStrainPoint(TrialSectionResult.TensionRebarResults);
                         Mn = IteratedResult.Moment;
                         return new ConcreteSectionFlexuralAnalysisResult(Mn, IteratedResult.StrainDistribution,controllingBar);
@@ -76,16 +76,21 @@ namespace Wosad.Concrete.ACI
                     //if T=C
                 else
                 {
-                    
-                    RebarPointResult controllingBar = GetMaxSteelStrainPoint(TrialSectionResult.TensionRebarResults);
 
-                    double MaxSteelTensionStrain = controllingBar.Strain;
-                    Mn = TrialSectionResult.Moment;
-                    ConcreteSectionFlexuralAnalysisResult result = new ConcreteSectionFlexuralAnalysisResult(Mn, TrialSectionResult.StrainDistribution, controllingBar);
+                    IStrainCompatibilityAnalysisResult result = GetResult(TrialSectionResult);
                     return result;
                 }
 
                     
+        }
+
+        protected IStrainCompatibilityAnalysisResult GetResult(SectionAnalysisResult SectionResult)
+        {
+                    RebarPointResult controllingBar = GetMaxSteelStrainPoint(SectionResult.TensionRebarResults);
+                    double MaxSteelTensionStrain = controllingBar.Strain;
+                    double Mn = SectionResult.Moment;
+                    IStrainCompatibilityAnalysisResult result = new ConcreteSectionFlexuralAnalysisResult(Mn, SectionResult.StrainDistribution, controllingBar);
+                    return result;
         }
 
         private RebarPointResult GetMaxSteelStrainPoint(List<RebarPointResult> rebarResult)

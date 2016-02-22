@@ -41,7 +41,7 @@ namespace Wosad.Concrete.ACI318_14
 
         public ConcreteFlexuralStrengthResult GetDesignFlexuralStrength(FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition, ConfinementReinforcementType ConfinementReinforcementType)
         {
-            ConcreteSectionFlexuralAnalysisResult nominalResult = this.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition);
+            IStrainCompatibilityAnalysisResult nominalResult = this.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition);
             LinearStrainDistribution strainDistribution = nominalResult.StrainDistribution;
             double a;
             double d = strainDistribution.Height;
@@ -78,7 +78,7 @@ namespace Wosad.Concrete.ACI318_14
         /// <param name="epsilon_t">Actual calculated tensile strain</param>
         /// <param name="epsilon_ty">Yield strain</param>
         /// <returns></returns>
-        private double Get_phiFlexure(FlexuralFailureModeClassification failureMode, 
+        protected double Get_phiFlexure(FlexuralFailureModeClassification failureMode, 
             ConfinementReinforcementType ConfinementReinforcementType, double epsilon_t, double epsilon_ty)
         {
             switch (failureMode)

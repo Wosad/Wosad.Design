@@ -117,10 +117,43 @@ namespace Wosad.Concrete.ACI
             return strainDistribution;
         }
 
+        protected virtual SectionAnalysisResult FindMomentResultInPresenceOfAxialForce(FlexuralCompressionFiberPosition CompressionFiberPosition,
+          double P,   double MaxSteelStrain,  double StrainConvergenceTolerance = 0.00001)
+        {
+            currentCompressionFiberPosition = CompressionFiberPosition; //store this off because it will be necessary during iteration
+            StrainHeight = GetStrainDistributionHeight(CompressionFiberPosition);//store this off because it will be necessary during iteration
+
+            double StrainMin = MaxSteelStrain;
+            double StrainMax = StrainUltimateConcrete.Value;
+                 
+            double targetP = P;
+            LinearStrainDistribution finalStrainDistribution = null;
+
+            double SteelStrain = RootFinding.Brent(new FunctionOfOneVariable(SectionAxialForceResultantFunction), StrainMin, StrainMax, 
+            StrainConvergenceTolerance, targetP);
+            switch (CompressionFiberPosition)
+            {
+                case FlexuralCompressionFiberPosition.Top:
+                    
+                        finalStrainDistribution = new LinearStrainDistribution(StrainHeight, this.MaxConcreteStrain, SteelStrain);
+
+                    break;
+                case FlexuralCompressionFiberPosition.Bottom:
+
+                        finalStrainDistribution = new LinearStrainDistribution(StrainHeight, SteelStrain, this.MaxConcreteStrain);
+
+                    break;
+                default:
+                    throw new CompressionFiberPositionException();
+            }
+
+            SectionAnalysisResult finalResult = GetSectionResult(finalStrainDistribution, CompressionFiberPosition);
+            return finalResult;
+        }
 
 
-        protected virtual SectionAnalysisResult FindResultByVaryingSteelStrain(FlexuralCompressionFiberPosition CompressionFiberPosition,
-             TCIterationBound bound,  double targetTCDelta = 0, double StrainConvergenceTolerance = 0.00001)
+        protected virtual SectionAnalysisResult FindPureMomentResult(FlexuralCompressionFiberPosition CompressionFiberPosition,
+             TCIterationBound bound,  double StrainConvergenceTolerance = 0.00001)
         {
             currentCompressionFiberPosition = CompressionFiberPosition; //store this off because it will be necessary during iteration
             StrainHeight = GetStrainDistributionHeight(CompressionFiberPosition);//store this off because it will be necessary during iteration
@@ -128,9 +161,9 @@ namespace Wosad.Concrete.ACI
 
             double SteelStrain = 0;
             double StrainMax = bound.MaxStrain;
-            double StrainMin = bound.MinStrain; 
+            double StrainMin = bound.MinStrain;
 
-            
+            double targetTCDelta = 0;
             LinearStrainDistribution finalStrainDistribution = null;
 
             //SteelStrain = RootFinding.Brent(new FunctionOfOneVariable(GetTandCDeltaForSteelStrainIteration), TCDeltaMin, TCDeltaMax, StrainConvergenceTolerance, targetTCDelta);
@@ -156,6 +189,7 @@ namespace Wosad.Concrete.ACI
         }
 
         FlexuralCompressionFiberPosition currentCompressionFiberPosition = FlexuralCompressionFiberPosition.Top;
+
         double StrainHeight;
 
         private double DeltaTCCalculationFunction(double SteelStrain)
@@ -181,6 +215,29 @@ namespace Wosad.Concrete.ACI
                 double C = iteratedResult.CForce;
 
             return Math.Abs(T)-Math.Abs(C);
+        }
+
+
+
+        private double SectionAxialForceResultantFunction(double SteelStrain)
+        {
+            //Create trial strain
+            LinearStrainDistribution iteratedStrainDistribution = null;
+            switch (currentCompressionFiberPosition)
+            {
+                case FlexuralCompressionFiberPosition.Top:
+                    iteratedStrainDistribution = new LinearStrainDistribution(StrainHeight, this.MaxConcreteStrain, SteelStrain);
+                    break;
+                case FlexuralCompressionFiberPosition.Bottom:
+                    iteratedStrainDistribution = new LinearStrainDistribution(StrainHeight, SteelStrain, this.MaxConcreteStrain);
+                    break;
+                default:
+                    throw new CompressionFiberPositionException();
+            }
+            //Calculate result
+            SectionAnalysisResult iteratedResult = GetSectionResult(iteratedStrainDistribution, currentCompressionFiberPosition);
+
+            return iteratedResult.AxialForce;
         }
 
         protected virtual TCIterationBound GetSolutionBoundaries(SectionAnalysisResult result, LinearStrainDistribution ApproximationStrainDistribution)

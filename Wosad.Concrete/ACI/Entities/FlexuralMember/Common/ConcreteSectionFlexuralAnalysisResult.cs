@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Concrete.ACI
 {
-    public class ConcreteSectionFlexuralAnalysisResult : SectionFlexuralAnalysisResult
+    public class ConcreteSectionFlexuralAnalysisResult : SectionFlexuralAnalysisResult, IStrainCompatibilityAnalysisResult
     {
         public ConcreteSectionFlexuralAnalysisResult(double Moment, LinearStrainDistribution StrainDistribution, RebarPointResult controllingTensionBar): base(Moment,StrainDistribution)
         {

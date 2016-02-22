@@ -95,7 +95,22 @@ namespace Wosad.Concrete.ACI
 
             // CalculateBeta and compression block height
             double c = GetDistanceToNeutralAxis(StrainDistribution, compFiberPosition);
-            double a = GetCompressionBlockDepth(c);
+            double h = Section.SliceableShape.YMax - Section.SliceableShape.YMin;
+            double a;
+            
+            if (c == double.PositiveInfinity)
+            {
+                a = h;
+            }
+            else
+            {
+                a = GetCompressionBlockDepth(c);
+                if (a>h)
+                {
+                    a = h;
+                }
+            }
+
 
             double CentroidYToTopEdge = (Section.SliceableShape.YMax-Section.SliceableShape.YMin)-Section.SliceableShape.y_Bar;
             double neutralAxisToBottomOfCompressedShapeOffset = CentroidYToTopEdge - a;
@@ -111,7 +126,7 @@ namespace Wosad.Concrete.ACI
             double ConcreteResultantForce = A * 0.85 * fc;
             ConcreteCompressionContribution.Force = ConcreteResultantForce;
 
-            //double concreteForceCentroidDistance = neutralAxisToBottomOfCompressedShapeOffset + compressedPortion.GetElasticCentroidCoordinate().Y;
+
             double concreteForceCentroidDistance = compressedPortion.GetElasticCentroidCoordinate().Y;
             ConcreteCompressionContribution.Moment = concreteForceCentroidDistance * ConcreteResultantForce;
 

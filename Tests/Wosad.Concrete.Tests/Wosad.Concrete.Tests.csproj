@@ -7,7 +7,7 @@
     <ProjectGuid>{381FDBB2-3657-41D3-967F-E9C1F2649FD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wosad.Concrete.Tests</RootNamespace>
+    <RootNamespace>Wosad.Concrete.ACI318_14.Tests</RootNamespace>
     <AssemblyName>Wosad.Concrete.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression\SquareColumnTests.cs" />
+    <Compile Include="ConcreteTestBase.cs" />
     <Compile Include="Flexure\FlexuralTestsBase.cs" />
     <Compile Include="Flexure\RebarInput.cs" />
     <Compile Include="Flexure\RectangularBeamTests.cs" />

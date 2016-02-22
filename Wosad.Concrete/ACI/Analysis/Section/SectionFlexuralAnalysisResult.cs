@@ -23,7 +23,7 @@ using System.Text;
 
 namespace Wosad.Concrete.ACI
 {
-    public class SectionFlexuralAnalysisResult
+    public class SectionFlexuralAnalysisResult 
     {
         public SectionFlexuralAnalysisResult()
         {

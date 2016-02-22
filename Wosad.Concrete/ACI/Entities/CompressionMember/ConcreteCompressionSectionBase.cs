@@ -38,34 +38,16 @@ namespace Wosad.Concrete.ACI
 
         }
 
-        public  double GetNominalMoment(double P_u, FlexuralCompressionFiberPosition CompressionFiberPosition )
+
+        public IStrainCompatibilityAnalysisResult GetNominalMomentResult(double P_u, FlexuralCompressionFiberPosition CompressionFiberPosition)
         {
-
-            TCIterationBound bound = GetCompressionSolutionBoundaries(CompressionFiberPosition); 
-            SectionAnalysisResult IteratedResult = FindResultByVaryingSteelStrain(CompressionFiberPosition, bound,P_u);
-            double M_n = IteratedResult.Moment;
-
-            return M_n;
-        }
-
-        private TCIterationBound GetCompressionSolutionBoundaries(FlexuralCompressionFiberPosition CompressionFiberPosition)
-        {
-            
             double MaxSteelStrain = CalculateMaximumSteelStrain(CompressionFiberPosition);
-            
-            TCIterationBound bound = new TCIterationBound();
-            bound.MaxStrain = StrainUltimateConcrete.Value;
-            bound.MinStrain = -MaxSteelStrain;
-            
-
-            if (CompressionFiberPosition == FlexuralCompressionFiberPosition.Left && CompressionFiberPosition == FlexuralCompressionFiberPosition.Right)
-            {
-                throw new Exception("Weak axis column interaction is not supported.");
-            }
-
-            return bound;
-
+            SectionAnalysisResult IteratedResult = FindMomentResultInPresenceOfAxialForce(CompressionFiberPosition, P_u, MaxSteelStrain);
+            IStrainCompatibilityAnalysisResult result = GetResult(IteratedResult);
+            return result;
         }
+
+
 
         /// <summary>
         /// Pure axial strength. Implementation here is for Non prestressed section

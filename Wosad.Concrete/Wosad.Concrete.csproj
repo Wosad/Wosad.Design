@@ -99,6 +99,9 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\ConcreteSectionCompression.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\SectionFactory.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\CompressionMemberType.cs" />
+    <Compile Include="ACI\Interfaces\IStrainCompatibilityAnalysisResult.cs" />
+    <Compile Include="ACI\Entities\CompressionMember\ConcreteCompressionStrengthResult.cs" />
+    <Compile Include="ACI\Entities\CompressionMember\ConcreteSectionCompressionAnalysisResult.cs" />
     <Compile Include="ACI\Entities\FlexuralMember\Common\ConcreteSectionFlexuralAnalysisResult.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Flexure\ConcreteSectionFlexure.cs" />
     <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />

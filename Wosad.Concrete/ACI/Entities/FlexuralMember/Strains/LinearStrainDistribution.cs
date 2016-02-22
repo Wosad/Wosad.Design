@@ -62,12 +62,12 @@ namespace Wosad.Concrete.ACI
         {
             double neutralAxisTopDistance = 0;
 
-            if (TopFiberStrain * BottomFiberStrain >0)
-            {
-                throw new Exception("Failed to locate neutral axis top and bottom strains must have different signs");
-            }
-            else
-            {
+            //if (TopFiberStrain * BottomFiberStrain >0)
+            //{
+            //    throw new Exception("Failed to locate neutral axis top and bottom strains must have different signs");
+            //}
+            //else
+            //{
                 
                 if (TopFiberStrain != BottomFiberStrain)
                 {
@@ -77,7 +77,7 @@ namespace Wosad.Concrete.ACI
                 {
                     neutralAxisTopDistance = double.PositiveInfinity;
                 } 
-            }
+            //}
 
 
             return Math.Abs(neutralAxisTopDistance);
