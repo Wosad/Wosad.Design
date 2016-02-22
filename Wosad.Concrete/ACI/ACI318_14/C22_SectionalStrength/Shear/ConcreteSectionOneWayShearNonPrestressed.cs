@@ -130,7 +130,8 @@ namespace Wosad.Concrete.ACI318_14
             }
 
             V_c = V_c < 0 ? 0 : V_c;
-            double phi = 0.75;
+            StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
+            double phi = f.Get_phi_ShearReinforced();
             return phi*V_c;
         }
 
@@ -139,7 +140,8 @@ namespace Wosad.Concrete.ACI318_14
         {
             double f_yt = rebarMaterial.YieldStress;
             double V_s = ((A_v*f_yt * d) / (s));
-            double phi = 0.75;
+            StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
+            double phi = f.Get_phi_ShearReinforced();
             return phi * V_s;
         }
 
@@ -152,8 +154,11 @@ namespace Wosad.Concrete.ACI318_14
 
         public double GetMaximumShearStrength(double phiV_c)
         {
+            StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
+            double phi = f.Get_phi_ShearReinforced();
+
             //Section 22.5.1.2 
-            double phiV_nMax = phiV_c+0.75*8*Material.Sqrt_f_c_prime*b_w*d;
+            double phiV_nMax = phiV_c+phi*8*Material.Sqrt_f_c_prime*b_w*d;
             return phiV_nMax;
         }
     }

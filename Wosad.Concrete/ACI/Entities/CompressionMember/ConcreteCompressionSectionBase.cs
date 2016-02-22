@@ -39,7 +39,8 @@ namespace Wosad.Concrete.ACI
         }
 
 
-        public IStrainCompatibilityAnalysisResult GetNominalMomentResult(double P_u, FlexuralCompressionFiberPosition CompressionFiberPosition)
+        public IStrainCompatibilityAnalysisResult GetNominalMomentResult(double P_u,
+            FlexuralCompressionFiberPosition CompressionFiberPosition)
         {
             double MaxSteelStrain = CalculateMaximumSteelStrain(CompressionFiberPosition);
             SectionAnalysisResult IteratedResult = FindMomentResultInPresenceOfAxialForce(CompressionFiberPosition, P_u, MaxSteelStrain);

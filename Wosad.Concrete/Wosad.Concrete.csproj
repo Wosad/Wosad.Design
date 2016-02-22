@@ -99,17 +99,18 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\ConcreteSectionCompression.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\SectionFactory.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\CompressionMemberType.cs" />
+    <Compile Include="ACI\ACI318_14\C_21_StrengthReductionFactors\StrengthReductionFactorFactory.cs" />
     <Compile Include="ACI\Interfaces\IStrainCompatibilityAnalysisResult.cs" />
     <Compile Include="ACI\Entities\CompressionMember\ConcreteCompressionStrengthResult.cs" />
     <Compile Include="ACI\Entities\CompressionMember\ConcreteSectionCompressionAnalysisResult.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\ConcreteSectionFlexuralAnalysisResult.cs" />
+    <Compile Include="ACI\Entities\Common\ConcreteSectionFlexuralAnalysisResult.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Flexure\ConcreteSectionFlexure.cs" />
     <Compile Include="ACI\ACI318_14\C02_Notations\GeneralStrings.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\Concrete.cs" />
     <Compile Include="ACI\ACI318_14\C19_Concrete\ConcretePrestressed.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\ConcreteFlexuralStrengthResult.cs" />
-    <Compile Include="ACI\Analysis\Section\Shear\ConcreteSectionOneWayShearNonPrestressed.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\FlexuralFailureModeClassification.cs" />
+    <Compile Include="ACI\Entities\Common\ConcreteFlexuralStrengthResult.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\ConcreteSectionOneWayShearNonPrestressed.cs" />
+    <Compile Include="ACI\Entities\Common\FlexuralFailureModeClassification.cs" />
     <Compile Include="ACI\Entities\Rebar\ConfinementReinforcementType.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\RebarMaterialFactory.cs" />
     <Compile Include="ACI\Interfaces\IConcreteSectionWithTransverseRebar.cs" />
@@ -156,9 +157,9 @@
     <Compile Include="ACI\Analysis\Section\SectionAnalysisResult.cs" />
     <Compile Include="ACI\Analysis\Section\SectionFlexuralAnalysisResult.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteTypeByWeight.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\ReinforcementArrangement.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\SectionType.cs" />
-    <Compile Include="ACI\Entities\General\MemberPrestressClassification.cs" />
+    <Compile Include="ACI\Entities\Common\ReinforcementArrangement.cs" />
+    <Compile Include="ACI\Entities\Common\SectionType.cs" />
+    <Compile Include="ACI\Entities\Common\MemberPrestressClassification.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\A615Grade.cs" />
     <Compile Include="ACI\Entities\Rebar\RebarDesignation.cs" />
     <Compile Include="ACI\Entities\Rebar\StirrupConfiguration.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="ACI\Entities\FlexuralMember\Prestressed\PSBmSectionBasePrestressing.cs" />
     <Compile Include="ACI\Entities\FlexuralMember\Prestressed\PSBmSectionBaseService.cs" />
     <Compile Include="ACI\Entities\FlexuralMember\Prestressed\StageType.cs" />
-    <Compile Include="ACI\Entities\FlexuralMember\Common\TCIterationBound.cs" />
+    <Compile Include="ACI\Entities\Common\TCIterationBound.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteMaterialBase.cs" />
     <Compile Include="ACI\Entities\Concrete\ConcreteUltimateStrain.cs" />
     <Compile Include="ACI\Entities\ForceMomentContribution.cs" />
@@ -228,6 +229,7 @@
   <ItemGroup>
     <Folder Include="ACI\ACI318_14\C10_Columns\" />
     <Folder Include="ACI\ACI318_14\C22_SectionalStrength\Torsion\" />
+    <Folder Include="ACI\Entities\General\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

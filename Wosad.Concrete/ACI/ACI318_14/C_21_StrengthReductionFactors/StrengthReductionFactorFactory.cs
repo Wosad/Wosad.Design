@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Wosad.Concrete.ACI;
+
+namespace Wosad.Concrete.ACI318_14
+{
+    public class StrengthReductionFactorFactory
+    {
+        /// <summary>
+        /// Strength reduction factor per Table 21.2.2
+        /// </summary>
+        /// <param name="failureMode">Compression, tension-controlled or transitional</param>
+        /// <param name="ConfinementReinforcementType"></param>
+        /// <param name="epsilon_t">Actual calculated tensile strain</param>
+        /// <param name="epsilon_ty">Yield strain</param>
+        /// <returns></returns>
+        public double Get_phiFlexureAndAxial(FlexuralFailureModeClassification failureMode,
+            ConfinementReinforcementType ConfinementReinforcementType, double epsilon_t, double epsilon_ty)
+        {
+            switch (failureMode)
+            {
+                case FlexuralFailureModeClassification.CompressionControlled:
+                    if (ConfinementReinforcementType == ACI.ConfinementReinforcementType.Spiral)
+                    {
+                        return 0.75;
+                    }
+                    else
+                    {
+                        return 0.65;
+                    }
+                    break;
+                case FlexuralFailureModeClassification.Transition:
+                    if (ConfinementReinforcementType == ACI.ConfinementReinforcementType.Spiral)
+                    {
+                        return 0.75 + 0.15 * (epsilon_t - epsilon_ty) / (0.005 - epsilon_ty);
+                    }
+                    else
+                    {
+                        return 0.65 + 0.25 * (epsilon_t - epsilon_ty) / (0.005 - epsilon_ty);
+                    }
+                    break;
+                case FlexuralFailureModeClassification.TensionControlled:
+                    return 0.9;
+                    break;
+                default:
+                    return 0.65;
+                    break;
+            }
+
+        }
+
+        /// <summary>
+        /// Failure mode per Table 21.2.2
+        /// </summary>
+        /// <param name="epsilon_t">Actual calculated tensile strain</param>
+        /// <param name="epsilon_ty">Yield strain</param>
+        /// <returns></returns>
+        public FlexuralFailureModeClassification GetFlexuralFailureMode(double epsilon_t, double epsilon_ty)
+        {
+            if (epsilon_t <= epsilon_ty)
+            {
+                return FlexuralFailureModeClassification.CompressionControlled;
+            }
+            else if (epsilon_t > epsilon_ty && epsilon_t < 0.005)
+            {
+                return FlexuralFailureModeClassification.Transition;
+            }
+            else
+            {
+                return FlexuralFailureModeClassification.TensionControlled;
+            }
+        }
+
+        /// <summary>
+        /// Strength reduction factor for shear
+        /// </summary>
+        /// <returns></returns>
+        public double Get_phi_ShearReinforced()
+        {
+            return 0.75;
+        }
+
+    }
+}

@@ -42,98 +42,16 @@ namespace Wosad.Concrete.ACI318_14
         public ConcreteFlexuralStrengthResult GetDesignFlexuralStrength(FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition, ConfinementReinforcementType ConfinementReinforcementType)
         {
             IStrainCompatibilityAnalysisResult nominalResult = this.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition);
-            LinearStrainDistribution strainDistribution = nominalResult.StrainDistribution;
-            double a;
-            double d = strainDistribution.Height;
-            double epsilon_t;
-
-            if (FlexuralCompressionFiberPosition == FlexuralCompressionFiberPosition.Top)
-            {
-                a = strainDistribution.NeutralAxisTopDistance * this.Section.Material.beta1;
-                epsilon_t = strainDistribution.BottomFiberStrain;
-            }
-            else
-            {
-                a = (d-strainDistribution.NeutralAxisTopDistance) * this.Section.Material.beta1;
-                epsilon_t = strainDistribution.TopFiberStrain;
-            }
-
-            IRebarMaterial controllingBarMaterial = nominalResult.ControllingTensionBar.Point.Rebar.Material;
-            double epsilon_ty = controllingBarMaterial.YieldStrain;
-
-            FlexuralFailureModeClassification failureMode = GetFailureMode(epsilon_t, epsilon_ty);
-            double phi = Get_phiFlexure(failureMode, ConfinementReinforcementType, epsilon_t, epsilon_ty);
+            ConcreteFlexuralStrengthResult result = new ConcreteFlexuralStrengthResult(nominalResult, FlexuralCompressionFiberPosition, this.Section.Material.beta1);
+            StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
+            FlexuralFailureModeClassification failureMode = f.GetFlexuralFailureMode(result.epsilon_t, result.epsilon_ty);
+            double phi = f.Get_phiFlexureAndAxial(failureMode, ConfinementReinforcementType, result.epsilon_t, result.epsilon_ty);
             double phiM_n = phi* nominalResult.Moment;
-
-            ConcreteFlexuralStrengthResult result = new ConcreteFlexuralStrengthResult(a, phiM_n, failureMode,epsilon_t);
+            result.phiM_n = phiM_n; result.FlexuralFailureModeClassification = failureMode;
             return result;
             
         }
 
-        /// <summary>
-        /// Strength reduction factor per Table 21.2.2
-        /// </summary>
-        /// <param name="failureMode">Compression, tension-controlled or transitional</param>
-        /// <param name="ConfinementReinforcementType"></param>
-        /// <param name="epsilon_t">Actual calculated tensile strain</param>
-        /// <param name="epsilon_ty">Yield strain</param>
-        /// <returns></returns>
-        protected double Get_phiFlexure(FlexuralFailureModeClassification failureMode, 
-            ConfinementReinforcementType ConfinementReinforcementType, double epsilon_t, double epsilon_ty)
-        {
-            switch (failureMode)
-            {
-                case FlexuralFailureModeClassification.CompressionControlled:
-                    if (ConfinementReinforcementType == ACI.ConfinementReinforcementType.Spiral)
-                    {
-                        return 0.75;
-                    }
-                    else
-                    {
-                        return 0.65;
-                    }
-                    break;
-                case FlexuralFailureModeClassification.Transition:
-                    if (ConfinementReinforcementType == ACI.ConfinementReinforcementType.Spiral)
-                    {
-                        return 0.75+0.15*(epsilon_t-epsilon_ty)/(0.005-epsilon_ty);
-                    }
-                    else
-                    {
-                        return 0.65 + 0.25 * (epsilon_t - epsilon_ty) / (0.005 - epsilon_ty);
-                    }
-                    break;
-                case FlexuralFailureModeClassification.TensionControlled:
-                    return 0.9;
-                    break;
-                default:
-                    return 0.65;
-                    break;
-            }
-
-        }
-
-        /// <summary>
-        /// Failure mode per Table 21.2.2
-        /// </summary>
-        /// <param name="epsilon_t">Actual calculated tensile strain</param>
-        /// <param name="epsilon_ty">Yield strain</param>
-        /// <returns></returns>
-        private FlexuralFailureModeClassification GetFailureMode(double epsilon_t, double epsilon_ty)
-        {
-            if (epsilon_t<=epsilon_ty)
-            {
-                return FlexuralFailureModeClassification.CompressionControlled;
-            }
-            else if (epsilon_t>epsilon_ty && epsilon_t <0.005)
-            {
-                return FlexuralFailureModeClassification.Transition;
-            }
-            else
-            {
-                return FlexuralFailureModeClassification.TensionControlled;
-            }
-        }
 
     }
 }
