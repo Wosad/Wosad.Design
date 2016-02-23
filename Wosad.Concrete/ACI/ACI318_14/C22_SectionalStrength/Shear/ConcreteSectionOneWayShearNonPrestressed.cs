@@ -28,20 +28,19 @@ namespace Wosad.Concrete.ACI318_14
     /// </summary>
     public partial class ConcreteSectionOneWayShearNonPrestressed : AnalyticalElement
     {
-        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IConcreteMaterial material)
-            : this(d, Section, 0, 0, material, null)
+        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IRebarMaterial RebarMaterial)
+            : this(d, Section, RebarMaterial, 0, 0)
         {
 
         }
 
-        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, double A_v, double s, 
-            IConcreteMaterial Material, IRebarMaterial RebarMaterial)
+        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IRebarMaterial TransverseRebarMaterial, double A_v, double s)
         {
-            this.Material = Material;
-            this.rebarMaterial = RebarMaterial;
-            this.d   =d  ;
-            this.b_w =Section.b_w;
-            this.A_v =A_v;
+
+            this.section = Section;
+            this.d = d;
+            this.b_w = Section.b_w;
+            this.A_v = A_v;
             this.s = s;
         }
 
@@ -49,22 +48,28 @@ namespace Wosad.Concrete.ACI318_14
                 double b_w; 
                 double A_v; 
                 double s; 
-                IConcreteMaterial Material; 
                 
                 double A_g; 
                 double N_u;
                 double rho_w;
 
-                IRebarMaterial rebarMaterial;
+                private IRebarMaterial rebarMaterial;
+
                 public IRebarMaterial RebarMaterial
                 {
-                    get 
-                    {
-                        return rebarMaterial; 
-                    }
-
+                    get { return rebarMaterial; }
+                    set { rebarMaterial = value; }
                 }
+                
 
+                private IConcreteSection  section;
+
+                public IConcreteSection  Section
+                {
+                    get { return section; }
+                    set { section = value; }
+                }
+                
          public double GetConcreteShearStrength()
                 {
                     return this.GetConcreteShearStrength(0, 0, 0, 0, 0, 0);
@@ -75,23 +80,23 @@ namespace Wosad.Concrete.ACI318_14
             this.N_u  =N_u  ;
             this.rho_w = rho_w;
             double V_c;
-            double f_c = Material.SpecifiedCompressiveStrength;
+            double f_c = Section.Material.SpecifiedCompressiveStrength;
 
-            double lambda = Material.Lambda;
+            double lambda = Section.Material.Lambda;
 
             if (N_u==0)
             {
                 if (rho_w==0 || A_g ==0|| N_u==0  || M_u ==0 || V_u==0)
                 {
-                    V_c = 2 * lambda * Material.Sqrt_f_c_prime * b_w * d; // (22.5.5.1)
+                    V_c = 2 * lambda * Section.Material.Sqrt_f_c_prime * b_w * d; // (22.5.5.1)
                 }
                 else
                 {
                     //use detailed formula
                     //Table 22.5.5.1
-                    double V_c_a = (1.9 * lambda * Material.Sqrt_f_c_prime + 2500 * rho_w * ((V_u * d) / (M_u))) * b_w * d;
-                    double V_c_b = (1.9 * lambda * Material.Sqrt_f_c_prime + 2500 * rho_w) * b_w * d;
-                    double V_c_c = 3.5 * lambda * Material.Sqrt_f_c_prime * b_w * d;
+                    double V_c_a = (1.9 * lambda * Section.Material.Sqrt_f_c_prime + 2500 * rho_w * ((V_u * d) / (M_u))) * b_w * d;
+                    double V_c_b = (1.9 * lambda * Section.Material.Sqrt_f_c_prime + 2500 * rho_w) * b_w * d;
+                    double V_c_c = 3.5 * lambda *  Section.Material.Sqrt_f_c_prime * b_w * d;
                     List<double> V_cList = new List<double>() { V_c_a, V_c_b, V_c_c };
                     V_c = V_cList.Min();
                 }
@@ -104,13 +109,13 @@ namespace Wosad.Concrete.ACI318_14
                     if (rho_w ==0 || h==0 )
                     {
                         //Use simplified formula
-                        V_c = 2 * (1 + ((N_u) / (2000 * A_g))) * lambda*Material.Sqrt_f_c_prime * b_w * d;
+                        V_c = 2 * (1 + ((N_u) / (2000 * A_g))) * lambda*Section.Material.Sqrt_f_c_prime * b_w * d;
                     }
                     else
                     {
                         //Table 22.5.6.1
 
-                        double   V_c_b = 3.5 * lambda* Material.Sqrt_f_c_prime * b_w * d * Math.Sqrt(1 + ((N_u) / (500 * A_g)));
+                        double   V_c_b = 3.5 * lambda* Section.Material.Sqrt_f_c_prime * b_w * d * Math.Sqrt(1 + ((N_u) / (500 * A_g)));
                        
                         if (M_u-N_u*(((4*h-d) / (8)))<=0)
                         {
@@ -118,14 +123,14 @@ namespace Wosad.Concrete.ACI318_14
                         }
                         else
                         {
-                            double V_c_a = (1.9 * lambda*Material.Sqrt_f_c_prime + 2500 * rho_w * ((V_u * d) / (M_u - N_u * (((4 * h - d) / (8)))))) * b_w * d;
+                            double V_c_a = (1.9 * lambda*Section.Material.Sqrt_f_c_prime + 2500 * rho_w * ((V_u * d) / (M_u - N_u * (((4 * h - d) / (8)))))) * b_w * d;
                             V_c = Math.Min(V_c_a, V_c_b);
                         }
                     }
                 }
                 else //tension 
                 {
-                    V_c = 2 * (1 + ((N_u) / (500 * A_g))) * lambda * Material.Sqrt_f_c_prime * b_w * d;  //(22.5.7.1)
+                    V_c = 2 * (1 + ((N_u) / (500 * A_g))) * lambda * Section.Material.Sqrt_f_c_prime * b_w * d;  //(22.5.7.1)
                 }
             }
 
@@ -158,7 +163,7 @@ namespace Wosad.Concrete.ACI318_14
             double phi = f.Get_phi_ShearReinforced();
 
             //Section 22.5.1.2 
-            double phiV_nMax = phiV_c+phi*8*Material.Sqrt_f_c_prime*b_w*d;
+            double phiV_nMax = phiV_c+phi*8*Section.Material.Sqrt_f_c_prime*b_w*d;
             return phiV_nMax;
         }
     }

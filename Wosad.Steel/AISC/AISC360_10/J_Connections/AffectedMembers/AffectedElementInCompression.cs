@@ -48,7 +48,7 @@ namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
                     double r = Section.Shape.r_y;
                     double phiP_n = 0.0;
                     double KLr = K*L/r;
-                    if (KLr >= 25) // per J4.4
+                    if (KLr <= 25) // per J4.4
 	                {
                         double A_g = Section.Shape.A;
                         phiP_n = A_g * F_y;  // (J4-6)
