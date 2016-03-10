@@ -32,19 +32,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMemberIBase : FlexuralMember
     {
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            GetSectionValues();
+        //public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
+        //{
+        //    GetSectionValues();
 
-            double Yielding = GetMinorPlasticMomentCapacity().Value;
-            double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity();
+        //    double Yielding = GetMinorPlasticMomentCapacity().Value;
+        //    double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity();
 
-            double[] CapacityValues = new double[2] { Yielding, CompressionFlangeLocalBuckling};
+        //    double[] CapacityValues = new double[2] { Yielding, CompressionFlangeLocalBuckling};
 
-            double Mn = CapacityValues.Min();
+        //    double Mn = CapacityValues.Min();
 
-            return GetFlexuralDesignValue(Mn);
-        }
+        //    return GetFlexuralDesignValue(Mn);
+        //}
 
 
         internal void GetSectionValues()

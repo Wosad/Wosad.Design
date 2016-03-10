@@ -28,29 +28,20 @@ using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamISlenderWeb : FlexuralMemberIBase
+    public partial class BeamIDoublySymmetricNoncompactWeb : FlexuralMemberIBase
     {
 
-// Compression Flange Yielding F5.1
+// Compression Flange Yielding F4.1
         public  double GetCompressionFlangeYieldingCapacity(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
             double Mn = 0.0;
+            double Myc = GetCompressionFiberYieldMomentMyc(compressionFiberPosition);
+            double Rpc = GetRpc(compressionFiberPosition);
 
-            double Sxc = compressionFiberPosition == FlexuralCompressionFiberPosition.Top ? Sxtop : Sxbot;
-            Rpg = GetRpg(compressionFiberPosition);
-
-            //double Myc = GetCompressionFiberYieldMomentMyc(compressionFiberPosition);
-            //double Rpc = GetRpc(compressionFiberPosition);
-
-            Mn = Rpg * Sxc*Fy; //(F5-1)
-
+            Mn = Rpc * Myc; //(F4-1)
             return Mn;
         }
 
 
-        public override double GetFlexuralCapacityMinorAxis( FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

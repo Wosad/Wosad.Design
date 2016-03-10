@@ -26,11 +26,14 @@ namespace Wosad.Steel.AISC.Interfaces
 {
     public interface ISteelBeamFlexure
     {
-        SteelLimitStateValue GetYieldingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation);
-        SteelLimitStateValue GetLateralTorsionalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation);
-        SteelLimitStateValue GetFlangeLocalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation);
-        SteelLimitStateValue GetTensionFlangeYieldingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation);
-        SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr();
-        SteelLimitStateValue GetLimitingLengthForFullYielding_Lp();
+        SteelLimitStateValue GetFlexuralYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength( FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralCompressionFlangeYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralWebOrWallBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation);
+        SteelLimitStateValue GetLimitingLengthForFullYielding_Lp(FlexuralCompressionFiberPosition CompressionLocation);
     }
 }

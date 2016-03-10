@@ -35,15 +35,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public virtual double GetYieldingMomentCapacity()
         //this method must be virtual as it may be not applicable for non compact sections
         {
-            //double Fy = this.Section.Material.YieldStress;
-            //double Zx = Section.SectionBase.Z_x;
+
             double Mn = GetMajorPlasticMomentCapacity().Value;
             double M = GetFlexuralDesignValue(Mn);
 
 
             return M;
-                
-                
+       
         }
 
 
@@ -51,31 +49,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
 
             SteelLimitStateValue ls = new SteelLimitStateValue();
-            double Mp = 0.0;
-
 
             double Fy = this.Section.Material.YieldStress;
             double Zx = Section.Shape.Z_x;
 
-            double M = Fy * Zx;
-            Mp = M / 12.0;
-
-            #region Mp
-            ICalcLogEntry MpEntry = new CalcLogEntry();
-            MpEntry.ValueName = "Mp";
-            MpEntry.AddDependencyValue("Fy", Math.Round(Fy, 3));
-            MpEntry.AddDependencyValue("Zx", Math.Round(Zx, 3));
-            MpEntry.AddDependencyValue("M", Math.Round(M, 3));
-            MpEntry.Reference = "";
-            MpEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/F2_Mp.docx";
-            MpEntry.FormulaID = null; //reference to formula from code
-            MpEntry.VariableValue = Math.Round(Mp, 3).ToString();
-            #endregion
-            this.AddToLog(MpEntry);
+            double M_p = Fy * Zx;
 
 
             ls.IsApplicable = true;
-            ls.Value = Mp;
+            ls.Value = M_p;
             return ls;
             
 
@@ -87,25 +69,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             double Fy = this.Section.Material.YieldStress;
             double Zy = Section.Shape.Z_y;
-            double M = Fy * Zy;
-            Mp = M / 12.0;
-
-            
-            #region Mp
-            ICalcLogEntry MpEntry = new CalcLogEntry();
-            MpEntry.ValueName = "Mp";
-            MpEntry.AddDependencyValue("Fy", Math.Round(Fy, 3));
-            MpEntry.AddDependencyValue("Zy", Math.Round(Zy, 3));
-            MpEntry.AddDependencyValue("M", Math.Round(M, 3));
-            MpEntry.Reference = "";
-            MpEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/F6_Mp.docx";
-            MpEntry.FormulaID = null; //reference to formula from code
-            MpEntry.VariableValue = Math.Round(Mp, 3).ToString();
-            #endregion
-            this.AddToLog(MpEntry);
-
+            double M_p = Fy * Zy;
+ 
             ls.IsApplicable = true;
-            ls.Value = Mp;
+            ls.Value = M_p;
             return ls;
         }
 

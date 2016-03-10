@@ -46,22 +46,83 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         }
 
+
+        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+
         //This section applies to doubly symmetric I-shaped members bent
         //about their major axis, having compact webs and compact flanges as defined in
         //Section B4.1 for flexure.
 
-        public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
+        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
+        //{
+        //    double MYielding = GetYieldingMomentCapacity();
+
+        //    GeneralFlexuralMember gm = new GeneralFlexuralMember(this.Log);
+        //    GeneralFlexuralMember.CbData momentData = gm.GetCbData(this);
+        //    double Cb = gm.GetCb(momentData);
+
+        //    double MLtb = GetFlexuralTorsionalBucklingMomentCapacity(Cb);
+        //    double M = Math.Min(MYielding, MLtb);
+        //    return M;
+        //}
+
+
+
+        #region Limit States
+
+        public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            double MYielding = GetYieldingMomentCapacity();
-
-            GeneralFlexuralMember gm = new GeneralFlexuralMember(this.Log);
-            GeneralFlexuralMember.CbData momentData = gm.GetCbData(this);
-            double Cb = gm.GetCb(momentData);
-
-            double MLtb = GetFlexuralTorsionalBucklingMomentCapacity(Cb);
-            double M = Math.Min(MYielding, MLtb);
-            return M;
+            SteelLimitStateValue plasticStrength = GetMajorPlasticMomentCapacity();
+            double phiM_n = 0.9*plasticStrength.Value;
+            return new SteelLimitStateValue(phiM_n, true);
         }
+
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
+        {
+
+            double phiM_n=GetFlexuralTorsionalBucklingMomentCapacity(C_b);
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, false);
+            return ls;
+        }
+
+
+        public override SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            if (SectionValuesWereCalculated == false)
+            {
+                GetSectionValues();
+            }
+            //double rts = Getrts(Iy, Cw, Sx);
+            double Lr = GetLr(rts, E, Fy, Sx, J, c, ho);  // (F2-6)
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+            ls.IsApplicable = true;
+            ls.Value = Lr;
+
+            return ls;
+        }
+
+        public override SteelLimitStateValue GetLimitingLengthForFullYielding_Lp(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            if (SectionValuesWereCalculated == false)
+            {
+                GetSectionValues();
+            }
+            double Lp = GetLp(ry, E, Fy); //(F2-5)
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+            ls.IsApplicable = true;
+            ls.Value = Lp;
+
+
+            return ls;
+
+        }
+
+
+        #endregion
 
 
         bool SectionValuesWereCalculated;
@@ -131,42 +192,5 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
 
-        #region ISteelBeamFlexure members
-
-        public override SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr()
-        {
-            if (SectionValuesWereCalculated ==false)
-            {
-                GetSectionValues();
-            }
-            //double rts = Getrts(Iy, Cw, Sx);
-            double Lr = GetLr(rts, E, Fy, Sx, J, c, ho);  // (F2-6)
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = true;
-            ls.Value = Lr;
-
-            return ls;
-        }
-        public override SteelLimitStateValue GetLimitingLengthForFullYielding_Lp()
-        {
-            if (SectionValuesWereCalculated == false)
-            {
-                GetSectionValues();
-            }
-            double Lp = GetLp(ry, E, Fy); //(F2-5)
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = true;
-            ls.Value = Lp;
-
-
-            return ls;
-        }
-
-        #endregion
-
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

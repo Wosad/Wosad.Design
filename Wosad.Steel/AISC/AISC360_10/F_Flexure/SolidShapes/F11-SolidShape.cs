@@ -83,15 +83,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         double K;
 
 
-        public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
+        //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
 
 
         #region Steel Flexural Member Limit States
@@ -99,19 +95,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //STANDARD YIELDING LIMIT STATE IS APPLICABLE
         //public override SteelLimitStateValue GetYieldingLimitState(SharedProjects.Data.General.MomentAxis MomentAxis, SharedProjects.Data.General.CompressionLocation CompressionLocation){}
 
-        public override SteelLimitStateValue GetLateralTorsionalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
         {
             throw new NotImplementedException();
         }
 
-        public override SteelLimitStateValue GetFlangeLocalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength( FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
             ls.IsApplicable = false;
             return ls;
         }
 
-        public override SteelLimitStateValue GetTensionFlangeYieldingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
             ls.IsApplicable = false;

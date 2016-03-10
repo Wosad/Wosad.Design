@@ -214,61 +214,69 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         #endregion
 
-
         #region Limit States
+        //Default implementations of limit states return 
+        //empty limit states, set as Not Applicable
+        //individual shape types must override  these default implementations
 
-
-        public virtual SteelLimitStateValue GetYieldingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            switch (MomentAxis)
-            {
-                case MomentAxis.XAxis:
-                    ls = GetMajorPlasticMomentCapacity();
-                    break;
-                case MomentAxis.YAxis:
-                    ls = GetMajorPlasticMomentCapacity();
-                    break;
-            }
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1,false);
             return ls;
         }
 
-        public virtual SteelLimitStateValue GetLateralTorsionalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
 
-        public virtual SteelLimitStateValue GetFlangeLocalBucklingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
 
-        public virtual SteelLimitStateValue GetTensionFlangeYieldingLimitState(MomentAxis MomentAxis, FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
-        } 
+        }
+
+        public virtual SteelLimitStateValue GetFlexuralCompressionFlangeYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
+        }
+
+        public SteelLimitStateValue GetFlexuralWebOrWallBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
+        }
+
+        public  SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
+        }
+
+
+
+        public virtual SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
+        }
+
+        public virtual SteelLimitStateValue GetLimitingLengthForFullYielding_Lp(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
+        }
+
 
         #endregion
 
-
-        public virtual SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr()
-        {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
-            return ls;
-        }
-
-        public virtual SteelLimitStateValue GetLimitingLengthForFullYielding_Lp()
-        {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
-            return ls;
-        }
     }
 }

@@ -22,17 +22,10 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.Entities;
 
-
-
-namespace Wosad.Steel.AISC.Interfaces
+namespace Wosad.Steel.AISC.AISC360_10.Flexure.SolidShapes
 {
-    //public interface ISteelFlexuralMember:ISteelMember  
-    //{
-    //    double UnbracedLengthFlexure { get; set; }
-    //    double EffectiveLengthFactorFlexure { get; set; }
-    //    double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation);
-    //    double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation);
-    //}
+    class ISectionSolid
+    {
+    }
 }

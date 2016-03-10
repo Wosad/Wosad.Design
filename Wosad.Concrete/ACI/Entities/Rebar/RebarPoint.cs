@@ -24,6 +24,10 @@ namespace Wosad.Concrete.ACI
 {
     public class RebarPoint
     {
+        public RebarPoint()
+        {
+
+        }
 
         public RebarPoint(IRebar Rebar, RebarCoordinate Coordinate)
         {

@@ -62,14 +62,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         double L;
         double K;
 
-        public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
+        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

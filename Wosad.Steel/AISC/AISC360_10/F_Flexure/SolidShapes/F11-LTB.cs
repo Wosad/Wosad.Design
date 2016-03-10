@@ -51,7 +51,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return L_p;
         }
 
-        public override SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr()
+        public override SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
@@ -74,7 +74,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public override SteelLimitStateValue GetLimitingLengthForFullYielding_Lp()
+        public override SteelLimitStateValue GetLimitingLengthForFullYielding_Lp(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
 

@@ -52,6 +52,28 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.J_Connections.Weld
             Assert.LessOrEqual(actualTolerance, tolerance);
 
         }
+        [Test]
+        public void WeldConcentricCShapeLinesReturnsValue()
+        {
+            FilletWeldGroup wg = new FilletWeldGroup(WeldGroupPattern.C, 1.0, 2.0, 1.0 / 16.0, 70.0);
+            double phiR_n = wg.GetConcentricLoadStrenth(0);
+            double ws1 = 4 * 1.392;
+            double ws2 =0.85*2 * 1.392+2*1.5*1.392;
+            double refValue = Math.Max(ws1, ws2);
+            double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
 
+        }
+
+        [Test]
+        public void WeldConcentricCShapeLinesReturnsValue45Degrees()
+        {
+            FilletWeldGroup wg = new FilletWeldGroup(WeldGroupPattern.C, 1.0, 2.0, 1.0 / 16.0, 70.0);
+            double phiR_n = wg.GetConcentricLoadStrenth(45);
+            double refValue = 4 * 1.392;
+            double actualTolerance = EvaluateActualTolerance(phiR_n, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
     }
 }

@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.3.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.3.2\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.3.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.3.3\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -216,27 +216,26 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\Channel\F2-ChannelCompact.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Chs\F8-Chs.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Chs\F8-Lb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\FlexuralMember.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\FlexuralMemberFactory.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-Ltb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-Flb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-CFY.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I SinglySymmetricCompactAndNoncompactWeb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-LTB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-TFY.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-CFY.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-LTB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-TFY.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-Y.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\I DoublySymmetricCompact.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\Y.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange\I-DoublySymmetricCompactWebNoncompactFlange.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\CFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-DoublySymmetricNoncompactWeb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-SinglySymmetricCompactAndNoncompactWeb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\TFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\CFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\I-SlenderWeb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\TFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\I-WeakAxis.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\Y.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-Angle.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-Yielding.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Rhs\F7-Flb.cs" />
@@ -246,7 +245,7 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-SolidShape.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\ISectionSolid.cs" />
+    <Compile Include="AISC\Interfaces\ISectionSolid.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Tee\F9-Flb.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Tee\F9-Ltb.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\Tee\F9-Stemlb.cs" />

@@ -26,6 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
@@ -45,22 +46,43 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             GetSectionValues();
         }
 
-        public  double GetFlexuralCapacityMajor()
+        #region Limit States
+        //Default implementations of limit states return 
+        //empty limit states, set as Not Applicable
+        //individual shape types must override  these default implementations
+
+        public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
- 
-            GeneralFlexuralMember gm = new GeneralFlexuralMember(this.Log);
-            GeneralFlexuralMember.CbData momentData = gm.GetCbData(this);
-            double Cb = gm.GetCb(momentData);
-            double MLtb = GetFlexuralTorsionalBucklingMomentCapacity(Cb);
-            double MFlb = GetCompressionFlangeLocalBucklingCapacity();
-            double Mn = Math.Min(MFlb, MLtb);
-            return GetFlexuralDesignValue(Mn);
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
+            return ls;
         }
 
-        //Yielding limit state does not apply
-        public double GetYieldingMomentCapacity()
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
         {
-            throw new LimitStateNotApplicableException("Section Yielding");
+            return base.GetFlexuralLateralTorsionalBucklingStrength(C_b, CompressionLocation);
         }
+
+        public virtual SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+           double phiM_n =GetCompressionFlangeLocalBucklingCapacity();
+           SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+           return ls;
+        }
+
+
+
+
+        public virtual SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            return base.GetLimitingLengthForInelasticLTB_Lr(CompressionLocation);
+        }
+
+        public virtual SteelLimitStateValue GetLimitingLengthForFullYielding_Lp(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            return base.GetLimitingLengthForFullYielding_Lp(CompressionLocation);
+        }
+
+
+        #endregion
     }
 }

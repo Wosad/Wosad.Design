@@ -51,10 +51,19 @@ namespace Wosad.Steel.AISC.SteelEntities.Welds
 
         }
 
-        public virtual double GetStength()
+        public virtual double GetStrength(bool IgnoreDirectionalityEffects=false)
         {
             FilletWeld weld = new FilletWeld(0, 0, this.ElectrodeStrength, this.Leg, 0, Length);
-            double phiR_n = weld.GetStrength(WeldLoadType.WeldShear,theta,true); 
+            double phiR_n = 0;
+            if (IgnoreDirectionalityEffects ==true)
+            {
+                 phiR_n = weld.GetStrength(WeldLoadType.WeldShear, 0, true); 
+            }
+            else
+            {
+                 phiR_n = weld.GetStrength(WeldLoadType.WeldShear, theta, true); 
+            }
+            
             return phiR_n;
         }
 

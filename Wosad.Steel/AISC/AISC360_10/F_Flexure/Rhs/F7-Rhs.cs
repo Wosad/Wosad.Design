@@ -59,43 +59,22 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public CompactnessClassFlexure FlangeCompactness { get; set; }
         public CompactnessClassFlexure WebCompactness { get; set; }
 
-//This section applies to square and rectangular HSS, and doubly symmetric boxshaped
-//members bent about either axis, having compact or noncompact webs and
-//compact, noncompact or slender flanges as defined in Section B4.1 for flexure.
+        //This section applies to square and rectangular HSS, and doubly symmetric boxshaped
+        //members bent about either axis, having compact or noncompact webs and
+        //compact, noncompact or slender flanges as defined in Section B4.1 for flexure.
 
-        public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            MomentAxis MomentAxis = MomentAxis.XAxis;
-            double MY = GetMajorPlasticMomentCapacity().Value;
-            double MFfb = GetCompressionFlangeLocalBucklingCapacity(MomentAxis, compressionFiberLocation);
-            double MWlb = GetWebLocalBucklingCapacity(MomentAxis, compressionFiberLocation);
-            double[] limitStates = new double[3] { MY, MFfb, MWlb };
-            double Mn = limitStates.Min();
-            double Mr = GetFlexuralDesignValue(Mn);
-            return Mr;
-        }
+        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    MomentAxis MomentAxis = MomentAxis.XAxis;
+        //    double MY = GetMajorPlasticMomentCapacity().Value;
+        //    double MFfb = GetCompressionFlangeLocalBucklingCapacity( compressionFiberLocation);
+        //    double MWlb = GetWebLocalBucklingCapacity(MomentAxis, compressionFiberLocation);
+        //    double[] limitStates = new double[3] { MY, MFfb, MWlb };
+        //    double Mn = limitStates.Min();
+        //    double Mr = GetFlexuralDesignValue(Mn);
+        //    return Mr;
+        //}
 
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            ISectionTube cloneWeakAxisTube = SectionTube.GetWeakAxisClone() as ISectionTube;
-            ISteelMaterial steelMaterial = Section.Material;
-            SteelRhsSection rhsWeakAxisSection = new SteelRhsSection(cloneWeakAxisTube, steelMaterial);
-            BeamRhs WeakAxisBeam = new BeamRhs(rhsWeakAxisSection, 0, 1, CalcLog); // unbraced length does not matter for tubes (per AISC)
-
-            FlexuralCompressionFiberPosition modifiedCompressionFiberPosition; 
-            switch (compressionFiberLocation)
-	        {
-                case FlexuralCompressionFiberPosition.Left:
-                    modifiedCompressionFiberPosition = FlexuralCompressionFiberPosition.Top;
-                break;
-                case FlexuralCompressionFiberPosition.Right:
-                modifiedCompressionFiberPosition = FlexuralCompressionFiberPosition.Bottom;
-                break;
-                default:
-                    throw new CompressionFiberPositionException();
-	        }
-            return WeakAxisBeam.GetFlexuralCapacityMajorAxis(modifiedCompressionFiberPosition);
-        }
 
         //Yielding F7.1
         public  override SteelLimitStateValue GetMajorPlasticMomentCapacity()

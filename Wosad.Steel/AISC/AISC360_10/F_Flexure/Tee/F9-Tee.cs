@@ -41,22 +41,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         ISectionTee sectionTee;
 
-        public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            double MYielding = GetYieldingMomentCapacity(compressionFiberLocation);
-            double MFlb = GetCompressionFlangeLocalBucklingCapacity(compressionFiberLocation);
-            double MLtb= GetFlexuralTorsionalBucklingMomentCapacity(compressionFiberLocation);
-            double MStemLb = GetCompressedStemLocalBucklingCapacity(compressionFiberLocation);
-            double[] CapacityValues = new double[4] { MYielding, MFlb, MLtb, MStemLb };
-            double Mn = CapacityValues.Min();
-            return GetFlexuralDesignValue(Mn);
-        }
+        //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
+        //{
+        //    double MYielding = GetYieldingMomentCapacity(compressionFiberLocation);
+        //    double MFlb = GetCompressionFlangeLocalBucklingCapacity(compressionFiberLocation);
+        //    double MLtb= GetFlexuralTorsionalBucklingMomentCapacity(compressionFiberLocation);
+        //    double MStemLb = GetCompressedStemLocalBucklingCapacity(compressionFiberLocation);
+        //    double[] CapacityValues = new double[4] { MYielding, MFlb, MLtb, MStemLb };
+        //    double Mn = CapacityValues.Min();
+        //    return GetFlexuralDesignValue(Mn);
+        //}
 
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            throw new NotImplementedException();
-            //read AISC commentary on this
-        }
 
 
         internal void GetSectionValues()

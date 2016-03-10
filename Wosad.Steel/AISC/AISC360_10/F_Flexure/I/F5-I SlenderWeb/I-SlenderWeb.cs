@@ -22,8 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
- 
  using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
@@ -33,13 +31,13 @@ using Wosad.Steel.AISC.Exceptions;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamIDoublySymmetricNoncompactWeb : FlexuralMemberIBase
+    public partial class BeamISlenderWeb : FlexuralMemberIBase
     {
         ISectionI SectionI;
 
-        public BeamIDoublySymmetricNoncompactWeb(ISteelSection section, bool IsRolledMember,
+        public BeamISlenderWeb(ISteelSection section, bool IsRolledMember,
             double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor, CalcLog)
+            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,CalcLog)
         {
 
             SectionI = this.Section as ISectionI;
@@ -47,7 +45,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             {
                 throw new SectionWrongTypeException(typeof(ISectionI));
             }
-
             GetSectionValues();
         }
 
@@ -57,26 +54,24 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     //attached to the mid-width of the flanges, bent about their major axis, with compact
     //or noncompact webs, as defined in Section B4.1 for flexure.
 
-        public double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberPosition, double Cb)
-        {
-           
-            double CompressionFlangeYielding = GetCompressionFlangeYieldingCapacity(compressionFiberPosition);
-            double Ltb = GetLateralTorsionalBucklingCapacity(compressionFiberPosition, Cb);
-            double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity(compressionFiberPosition);
-            double TensionFlangeYielding = GetTensionFlangeYieldingCapacity(compressionFiberPosition);
+        //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberPosition)
+        //{
+        //    double Mn = 0.0;
 
-            double[] CapacityValues = new double[4] { CompressionFlangeYielding ,Ltb, CompressionFlangeLocalBuckling,TensionFlangeYielding};
+        //    double CompressionFlangeYielding = GetCompressionFlangeYieldingCapacity(compressionFiberPosition);
+        //    double Ltb = GetLateralTorsionalBucklingCapacity(compressionFiberPosition, Cb);
+        //    double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity(compressionFiberPosition);
+        //    double TensionFlangeYielding = GetTensionFlangeYieldingCapacity(compressionFiberPosition);
 
-            double Mn = CapacityValues.Min();
+        //    double[] CapacityValues = new double[4] { CompressionFlangeYielding ,Ltb, CompressionFlangeLocalBuckling,TensionFlangeYielding};
 
-            return GetFlexuralDesignValue(Mn);
-        }
+        //    return GetFlexuralDesignValue(Mn);
+        //}
 
-        public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberPosition)
-        {
-            double Cb = 1.0;
-            return this.GetFlexuralCapacityMajorAxis(compressionFiberPosition,Cb);
-        }
+        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
 
         internal void GetSectionValues()
@@ -97,13 +92,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             Zx = Section.Shape.Z_x;
 
-            ry = Section.Shape.r_y;
 
-            Cw = Section.Shape.C_w;
+            //Cw = Section.SectionBase.C_w;
 
-            J = Section.Shape.J;
+            //J = Section.SectionBase.J;
             Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
+            //c =  Get_c();
+
+            //ho = Get_ho();
         }
 
         double Lb;
@@ -112,6 +109,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         double L;
         double K;
+
         double Iy;
 
         double Sxbot;
@@ -119,11 +117,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         double Sx;
         double Zx;
-        double ry;
-        double Cw;
-        double J;
-        double c;
-        double ho;
+
+        //double Cw;
+        //double J;
+        //double c;
+        //double ho;
+
+
 
 
 

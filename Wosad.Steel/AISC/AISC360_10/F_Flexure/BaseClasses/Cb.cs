@@ -44,11 +44,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
 
         }
-        public double GetCb(IStructuralMember member)
-        {
-            CbData data = GetCbData(member);
-            return GetCb(data);
-        }
 
         public double GetCb( double Mmax, double MA, double MB, double MC)
 
@@ -77,28 +72,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Cb = 1.0;
             Cb = 12.5 * Mmax / (2.5 * Mmax + 3.0 * M_A + 4.0 * M_B + 3.0 * M_C); //(F1-1)
 
-            
-            #region CbFactor
-            ICalcLogEntry CbFactorEntry = new CalcLogEntry();
-            CbFactorEntry.ValueName = "Cb";
-            CbFactorEntry.AddDependencyValue("Mmax", Math.Round(Mmax, 3));
-            CbFactorEntry.AddDependencyValue("M_A", Math.Round(M_A, 3));
-            CbFactorEntry.Reference = "";
-            CbFactorEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/CbFactor.docx";
-            CbFactorEntry.FormulaID = null; //reference to formula from code
-            CbFactorEntry.VariableValue = Math.Round(Cb, 3).ToString();
-            #endregion
-            this.AddToLog(CbFactorEntry);
 
             return Cb;
 
         }
 
-        internal CbData GetCbData(IStructuralMember member)
-        {
-            //go through member forces to find out the Mmax, MA, MB, MC values
-            throw new NotImplementedException();
-        }
 
      public class CbData
     {

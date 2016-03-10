@@ -222,39 +222,55 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections
         /// Calculates weld group strength for concentric load per AISC J2.4(c)
         /// page 16.1–116  of specification.
         /// </summary>
-        /// <param name="theta">Angle from vertical (degrees)</param>
+        /// <param name="theta">Angle from vertical (degrees). Value needs to be between 0 and 90 degrees. </param>
         /// <returns></returns>
         public double GetConcentricLoadStrenth(double theta=0.0)
         {
 
-            List<FilletWeldLine> calculationLines =Lines.ConvertAll(x => new FilletWeldLine(
-             x.NodeI, x.NodeJ,x.Leg,x.ElectrodeStrength, x.NumberOfSubdivisions, x.theta+theta));
-
+            double phiR_n=0.0;
             double phiRn1 = 0.0;
+            double phiRn2 = 0.0;
+
+            if (Math.Sin(theta.ToRadians())<=0.0872 || Math.Sin(theta.ToRadians())>=0.9962 )
+            {
+            //List<FilletWeldLine> calculationLines =Lines.ConvertAll(x => new FilletWeldLine(
+            // x.NodeI, x.NodeJ,x.Leg,x.ElectrodeStrength, x.NumberOfSubdivisions, x.theta+theta));
+
+                
             //Case i
-            foreach (var l in calculationLines)
+            foreach (var l in Lines)
 	        {
-                phiRn1 = phiRn1+l.GetStength();
+                phiRn1 = phiRn1+l.GetStrength(true);
 	        }
-            double phiRn2 = double.PositiveInfinity;
+             phiRn2 = double.PositiveInfinity;
             if (Math.Abs(theta)<5.0) //set threshold of 5 degrees 
             {
                 //Case ii
                 phiRn2 = 0.0;
-                foreach (var l in calculationLines)
+                foreach (var l in Lines)
                 {
                     if (l.theta==90)
                     {
-                        phiRn2 = phiRn2 + l.GetStength()*1.5;  
+                        phiRn2 = phiRn2 + l.GetStrength(true)*1.5;  
                     }
                     else
                     {
-                        phiRn2 = phiRn2 + l.GetStength()*0.85;
+                        phiRn2 = phiRn2 + l.GetStrength(true)*0.85;
                     }
                     
                 }
             }
-            double phiR_n = Math.Max(phiRn1, phiRn2);
+            phiR_n = Math.Max(phiRn1, phiRn2);
+            }
+            else
+	        {
+                //For all other cases when weld is at an angle do not take
+                //advantage of directionality
+                            foreach (var l in Lines)
+	                    {
+                            phiR_n = phiR_n + l.GetStrength(true);
+	                    }
+	        }
 
             return phiR_n;
         }

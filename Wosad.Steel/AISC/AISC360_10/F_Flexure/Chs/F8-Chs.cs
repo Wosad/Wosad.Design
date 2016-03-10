@@ -53,14 +53,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
        // This section applies to round HSS
 
 
-        public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            double MYielding = GetYieldingMomentCapacity();
-            double MLocalBuckling = GetLocalBucklingCapacity();
-            double M = Math.Min(MYielding, MLocalBuckling);
-            return M;
+        //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
+        //{
+        //    double MYielding = GetYieldingMomentCapacity();
+        //    double MLocalBuckling = GetLocalBucklingCapacity();
+        //    double M = Math.Min(MYielding, MLocalBuckling);
+        //    return M;
 
-        }
+        //}
 
         //Yielding F8.1
         public double GetYieldingMomentCapacity()
@@ -69,10 +69,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return Mn;
         }
 
-        public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        {
-            return GetFlexuralCapacityMajorAxis();
-        }
 
 
         internal void GetSectionValues()

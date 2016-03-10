@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.SteelEntities.Members
 {
-    public abstract class SteelFlexuralMember : SteelMemberBase, ISteelFlexuralMember
+    public abstract class SteelFlexuralMember : SteelMemberBase //, ISteelFlexuralMember
     {
         public double UnbracedLengthFlexure { get; set; }
         public double EffectiveLengthFactorFlexure { get; set; }
@@ -50,7 +50,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
             this.UnbracedLengthFlexure = UnbracedLength;
         }
 
-        public abstract double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation);
-        public abstract double GetFlexuralCapacityMinorAxis( FlexuralCompressionFiberPosition compressionFiberLocation);
+        //public abstract double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation);
+
     }
 }
