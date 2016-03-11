@@ -60,7 +60,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
         //Lateral Torsional Buckling F2.2
-        public double GetFlexuralTorsionalBucklingMomentCapacity(double Cb)
+        public double GetFlexuralTorsionalBucklingMomentCapacity(double L_b, double Cb)
         {
 
             double Lp = GetLp(ry, E, Fy); //(F2-5)
@@ -70,7 +70,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Lr = GetLr(rts, E, Fy, Sx, J, c, ho);  // (F2-6)
 
 
-            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(Lb, Lp, Lr);
+            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(L_b, Lp, Lr);
             double M_p;
             double M_n = 0.0;
 
@@ -84,11 +84,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 case LateralTorsionalBucklingType.Inelastic:
 
                     M_p = GetYieldingMomentCapacity();
-                    M_n = Cb * (M_p - (0.7 * Fy * Sx) * ((Lb - Lp) / (Lr - Lp))); //(F2-2)
+                    M_n = Cb * (M_p - (0.7 * Fy * Sx) * ((L_b - Lp) / (Lr - Lp))); //(F2-2)
                     M_n = M_n > M_p ? M_p : M_n;
                     break;
                 case LateralTorsionalBucklingType.Elastic:
-                    double Fcr = GetFcr(Cb, E, Lb, rts, J, c, Sx, ho);
+                    double Fcr = GetFcr(Cb, E, L_b, rts, J, c, Sx, ho);
                     M_n = Fcr * Sx; //(F2-3)
                     M_p = GetYieldingMomentCapacity();
                     M_n = M_n > M_p ? M_p : M_n;

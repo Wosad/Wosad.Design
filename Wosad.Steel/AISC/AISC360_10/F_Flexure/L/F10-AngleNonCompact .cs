@@ -23,20 +23,27 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
  using Wosad.Common.CalculationLogger;
-using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
+ 
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public class BeamISinglySymmetricCompactAndNoncompactWeb : BeamIDoublySymmetricNoncompactWeb
+    public partial class  BeamAngleNonCompact : BeamAngleCompact
     {
-        public BeamISinglySymmetricCompactAndNoncompactWeb(ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,CalcLog)
+
+        public BeamAngleNonCompact(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
-
+            
+            GetSectionValues();
         }
-    }
 
+
+
+
+
+    }
 }

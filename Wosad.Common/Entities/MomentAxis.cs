@@ -25,6 +25,7 @@ namespace Wosad.Common.Entities
     public enum MomentAxis
     {
         XAxis,
-        YAxis
+        YAxis,
+        MajorPrincipalAxis
     }
 }

@@ -30,7 +30,7 @@ using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamIDoublySymmetricNoncompactWeb : FlexuralMemberIBase
+    public partial class BeamINoncompactWeb : FlexuralMemberIBase
     {
 
         //Tension Flange Yielding F4.4

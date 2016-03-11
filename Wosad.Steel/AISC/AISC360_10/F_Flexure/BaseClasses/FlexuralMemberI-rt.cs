@@ -30,7 +30,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMemberIBase : FlexuralMember
     {
-        public  double GetEffectiveRadiusOfGyrationrt( FlexuralCompressionFiberPosition compressionFiberPosition)
+        public  double GetEffectiveRadiusOfGyration_r_t( FlexuralCompressionFiberPosition compressionFiberPosition)
         {
             //todo: add alternative calc
             // For I-shapes with a channel cap or a cover plate attached to the compression flange are not covered

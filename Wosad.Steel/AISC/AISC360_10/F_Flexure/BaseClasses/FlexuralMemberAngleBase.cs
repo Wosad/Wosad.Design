@@ -34,9 +34,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract class FlexuralMemberAngleBase: FlexuralMember
     {
-        public FlexuralMemberAngleBase(ISteelSection section, 
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
+        public FlexuralMemberAngleBase(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
             sectionAngle = null;
             ISectionAngle s = Section as ISectionAngle;

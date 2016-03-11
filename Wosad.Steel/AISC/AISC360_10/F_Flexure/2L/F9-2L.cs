@@ -31,9 +31,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class Beam2L: BeamTee
     {
-        public Beam2L(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor,CalcLog)
+        public Beam2L(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
             if (section is ISectionDoubleAngle)
             {

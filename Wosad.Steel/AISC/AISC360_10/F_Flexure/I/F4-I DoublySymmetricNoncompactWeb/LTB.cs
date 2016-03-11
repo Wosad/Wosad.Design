@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.Exceptions;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamIDoublySymmetricNoncompactWeb : FlexuralMemberIBase
+    public partial class BeamINoncompactWeb : FlexuralMemberIBase
     {
         double Cb;
         double Lp; double Lr;
@@ -40,7 +40,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         double Sxc;
 
         // Lateral-Torsional Buckling F4.2
-        public double GetLateralTorsionalBucklingCapacity(FlexuralCompressionFiberPosition compressionFiberPosition, double Cb)
+        public double GetLateralTorsionalBucklingCapacity(FlexuralCompressionFiberPosition compressionFiberPosition, double L_b, double Cb)
         {
             double M_n = 0.0;
 
@@ -59,11 +59,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 default:
                     throw new CompressionFiberPositionException();
             }
-            double r_t = GetEffectiveRadiusOfGyrationrt(compressionFiberPosition);
+            double r_t = GetEffectiveRadiusOfGyration_r_t(compressionFiberPosition);
             double h_o = this.SectionI.h_o; 
             double L_r = GetL_r();
             double L_p = GetL_p(r_t);
-            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(Lb, L_p, L_r);
+            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(L_b, L_p, L_r);
 
             switch (BucklingType)
             {
@@ -71,14 +71,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     M_n = double.PositiveInfinity;
                     break;
                 case LateralTorsionalBucklingType.Inelastic:
-                    M_n = Cb * (R_pc * M_yc - (R_pc * M_yc - F_L * Sxc) * ((Lb - L_p) / (L_r - L_p))); //(F4-2)
+                    M_n = Cb * (R_pc * M_yc - (R_pc * M_yc - F_L * Sxc) * ((L_b - L_p) / (L_r - L_p))); //(F4-2)
                     M_n = M_n > R_pc * M_yc ? R_pc * M_yc : M_n;
                     break;
                 case LateralTorsionalBucklingType.Elastic:
                     double Iyc =  GetIyc(compressionFiberPosition);
                     double Iy = SectionI.I_x;
                     J = Iyc / Iy <= 0.23 ? 0.0 : J;
-                    double Fcr = GetFcr();
+                    double Fcr = GetFcr(L_b);
                     break;
                 default:
                     break;
@@ -104,11 +104,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         //(F4-5)
 
-        internal double GetFcr()
+        internal double GetFcr(double L_b)
         {
             double Fcr;
             double pi2 = Math.Pow(Math.PI, 2);
-            Fcr = Cb * pi2 * E / (Math.Pow(Lb / rt, 2)) * Math.Sqrt(1.0 + 0.078 * J / (Sxc * ho) * Math.Pow(Lb / rt, 2)); //(F4-5)
+            Fcr = Cb * pi2 * E / (Math.Pow(L_b / rt, 2)) * Math.Sqrt(1.0 + 0.078 * J / (Sxc * ho) * Math.Pow(L_b / rt, 2)); //(F4-5)
 
             return Fcr;
         }

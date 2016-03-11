@@ -22,29 +22,26 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.Entities;
 
-using Wosad.Steel.AISC.Interfaces;
+ 
 
-
-namespace Wosad.Steel.AISC.SteelEntities.Members
+namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public abstract class SteelFlexuralMember : SteelMemberBase //, ISteelFlexuralMember
+    public partial class BeamAngleCompact : FlexuralMemberAngleBase
     {
-        //public double UnbracedLengthFlexure { get; set; }
-        //public double EffectiveLengthFactorFlexure { get; set; }
 
 
-        public SteelFlexuralMember(ISteelSection Section, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section, CalcLog)//, Material)
+        private double GetFlexuralTorsionalBucklingMomentCapacity(double L_b, double C_b,
+            FlexuralCompressionFiberPosition CompressionLocation, FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
-            //this.EffectiveLengthFactorFlexure = EffectiveLengthFactor;
-            //this.UnbracedLengthFlexure = UnbracedLength;
-        }
+            throw new NotImplementedException();
+            double M_n = 0.0;
+            //if (MomentAxis == MomentAxis.)
+            //{
 
-        //public abstract double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation);
+            //}
+
+        }
 
     }
 }

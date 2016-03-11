@@ -36,9 +36,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMemberChannelBase : BeamIDoublySymmetricCompact
     {
-        public FlexuralMemberChannelBase(ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base( section, IsRolledMember, UnbracedLength, EffectiveLengthFactor, CalcLog)
+        public FlexuralMemberChannelBase(ISteelSection section, bool IsRolledMember, ICalcLog CalcLog)
+            : base( section, IsRolledMember, CalcLog)
         {
             SectionChannel = null;
             ISectionChannel s = Section as ISectionChannel;

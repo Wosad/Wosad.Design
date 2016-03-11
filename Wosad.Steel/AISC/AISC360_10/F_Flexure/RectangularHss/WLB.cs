@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamRhs : FlexuralMemberRhsBase, ISteelBeamFlexure
+    public partial class BeamRectangularHss : FlexuralMemberRhsBase, ISteelBeamFlexure
     {
 
         public double GetWebLocalBucklingCapacity(MomentAxis MomentAxis,

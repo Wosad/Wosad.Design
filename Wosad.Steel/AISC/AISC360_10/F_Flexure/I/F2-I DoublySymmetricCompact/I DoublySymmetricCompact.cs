@@ -32,43 +32,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
     {
-        public BeamIDoublySymmetricCompact(ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, IsRolledMember, UnbracedLength, EffectiveLengthFactor,CalcLog)
+        public BeamIDoublySymmetricCompact(ISteelSection section, bool IsRolledMember, ICalcLog CalcLog)
+            : base(section, IsRolledMember, CalcLog)
         {
             SectionValuesWereCalculated = false;
             //GetSectionValues();
         }
-
-        public BeamIDoublySymmetricCompact(ISteelSection section, ICalcLog CalcLog) :
-            this(section,true,0.0,1.0,CalcLog)
-        {
-
-        }
-
-
-        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        //This section applies to doubly symmetric I-shaped members bent
-        //about their major axis, having compact webs and compact flanges as defined in
-        //Section B4.1 for flexure.
-
-        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        //{
-        //    double MYielding = GetYieldingMomentCapacity();
-
-        //    GeneralFlexuralMember gm = new GeneralFlexuralMember(this.Log);
-        //    GeneralFlexuralMember.CbData momentData = gm.GetCbData(this);
-        //    double Cb = gm.GetCb(momentData);
-
-        //    double MLtb = GetFlexuralTorsionalBucklingMomentCapacity(Cb);
-        //    double M = Math.Min(MYielding, MLtb);
-        //    return M;
-        //}
 
 
 
@@ -81,11 +50,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return new SteelLimitStateValue(phiM_n, true);
         }
 
-        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
+            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
-
-            double phiM_n=GetFlexuralTorsionalBucklingMomentCapacity(C_b);
-            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, false);
+            SteelLimitStateValue ls;
+            if (BracingType == FlexuralAndTorsionalBracingType.FullLateralBracing)
+            {
+                ls = new SteelLimitStateValue(-1, false);
+            }
+            else
+            {
+                double phiM_n = GetFlexuralTorsionalBucklingMomentCapacity(L_b, C_b);
+                ls = new SteelLimitStateValue(phiM_n, true);
+            }
             return ls;
         }
 
@@ -135,9 +112,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 E = Section.Material.ModulusOfElasticity;
                 Fy = Section.Material.YieldStress;
 
-                L = this.UnbracedLengthFlexure;
-                K = this.EffectiveLengthFactorFlexure;
-
                 Iy = Section.Shape.I_y;
 
                 Sxbot = Section.Shape.S_xBot;
@@ -152,7 +126,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 Cw = Section.Shape.C_w;
 
                 J = Section.Shape.J;
-                Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
                 c = Get_c();
 
@@ -168,12 +141,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             throw new NotImplementedException();
         }
 
-        double Lb;
+
         double E;
         double Fy;
 
-        double L;
-        double K;
 
         double Iy;
 

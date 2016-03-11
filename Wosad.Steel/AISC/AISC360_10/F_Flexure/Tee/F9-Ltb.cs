@@ -30,22 +30,22 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public partial class BeamTee : FlexuralMemberTeeBase
     {
 
-        public double GetFlexuralTorsionalBucklingMomentCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
+        public double GetFlexuralTorsionalBucklingMomentCapacity(FlexuralCompressionFiberPosition compressionFiberLocation, double L_b)
         {
             double Mn;
             double pi = Math.PI;
             double Iy = Section.Shape.I_y;
             double G = Section.Material.ShearModulus;
             double J = sectionTee.J;
-            double B = GetB(compressionFiberLocation);
+            double B = GetB(compressionFiberLocation,L_b);
             double B2 = Math.Pow(B,2);
 
-            Mn = pi * Math.Sqrt(E * Iy * G * J) / (Lb) * (B + Math.Sqrt(1.0 + B2)); //(F9-4)
+            Mn = pi * Math.Sqrt(E * Iy * G * J) / (L_b) * (B + Math.Sqrt(1.0 + B2)); //(F9-4)
             return Mn;
 
         }
 
-        private double GetB(FlexuralCompressionFiberPosition compressionFiberLocation)
+        private double GetB(FlexuralCompressionFiberPosition compressionFiberLocation, double L_b)
         {
             double B;
             double d = sectionTee.d;
@@ -68,7 +68,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     throw new CompressionFiberPositionException();
             }
 
-            B=sign*2.3*(d/Lb)*Math.Sqrt(Iy/J); //(F9-5)
+            B=sign*2.3*(d/L_b)*Math.Sqrt(Iy/J); //(F9-5)
 
             return B;
         }

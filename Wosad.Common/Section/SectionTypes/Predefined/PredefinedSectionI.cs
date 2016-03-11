@@ -36,8 +36,8 @@ namespace Wosad.Common.Section.Predefined
             : base(section)
         {
             this._d = section.d;
-            this._b_f = section.bf;
-            this._t_f = section.tf;
+            this._bf = section.bf;
+            this._tf = section.tf;
             this._t_w = section.tw;
             this._k = section.kdes;
             s = section;
@@ -46,9 +46,9 @@ namespace Wosad.Common.Section.Predefined
 
         private void OverrideCentroids()
         {
-           _x_Bar =b_f / 2;
+           _x_Bar =bf / 2;
            _y_Bar = d / 2;
-           _x_pBar = b_f / 2;
+           _x_pBar = bf / 2;
            _y_pBar = d / 2;
             ElasticCentroidCoordinate = new Mathematics.Point2D(x_Bar, y_Bar);
             PlasticCentroidCoordinate = new Mathematics.Point2D(x_pBar, y_pBar);
@@ -57,7 +57,7 @@ namespace Wosad.Common.Section.Predefined
 
         public ISliceableSection GetSliceableShape()
         {
-            SectionIRolled secI = new SectionIRolled("",this.d,this.b_f,this.t_f,this.t_w,this._k);
+            SectionIRolled secI = new SectionIRolled("",this.d,this.bf,this.tf,this.t_w,this._k);
             return secI;
         }
 
@@ -69,18 +69,18 @@ namespace Wosad.Common.Section.Predefined
         }
 
 
-        double _t_f;
+        double _tf;
 
-        public double t_f
+        public double tf
         {
-            get { return _t_f; }
+            get { return _tf; }
         }
 
-        double _b_f;
+        double _bf;
 
-        public double b_f
+        public double bf
         {
-            get { return _b_f; }
+            get { return _bf; }
         }
         double _t_w;
 
@@ -101,35 +101,35 @@ namespace Wosad.Common.Section.Predefined
         {
             get {
 
-                return _d - (t_f + t_fBot) - 2 * k;
+                return _d - (tf + t_fBot) - 2 * k;
             }
         }
 
 
         public double h_o
         {
-            get { return d - t_f; }
+            get { return d - tf; }
         }
 
         public double t_fBot
         {
-            get { return t_f; }
+            get { return tf; }
         }
 
         public double b_fBot
         {
-            get { return b_f; }
+            get { return bf; }
         }
 
         public double b_fTop
         {
-            get { return b_f; }
+            get { return bf; }
         }
 
 
         public double t_fTop
         {
-            get { return t_f; }
+            get { return tf; }
         }
     }
 }

@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.3.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.3.3\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.4.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.4.2\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -101,6 +101,13 @@
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\SteelColumn.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-NoncompactWebCompactFlange.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\I-SlenderWebCompactFlange.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleSlender.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleNonCompact .cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\LSLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\F7-RectangularHSS.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberCircular.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\IShearMember.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearMemberFactory.cs" />
@@ -147,6 +154,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedSinglePlateBuckling.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\StabilizedExtendedPlateTorsion.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
+    <Compile Include="AISC\Entities\Enums\FlexuralAndTorsionalBracingType.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorWeldCase.cs" />
@@ -224,8 +232,7 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange\I-DoublySymmetricCompactWebNoncompactFlange.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\CFY.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-DoublySymmetricNoncompactWeb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-SinglySymmetricCompactAndNoncompactWeb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-NoncompactWeb.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\TFY.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\CFY.cs" />
@@ -236,12 +243,12 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\FLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\I-WeakAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-Angle.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-Yielding.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\Rhs\F7-Flb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\Rhs\F7-Rhs.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\Rhs\F7-Se.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\Rhs\F7-Wlb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleCompact.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\Y.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\Y.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\SectionProperties.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\WLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-SolidShape.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-Y.cs" />

@@ -39,17 +39,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
 
-        public BeamIDoublySymmetricCompactWebNoncompactFlange(ISteelSection section, bool IsRolled,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section,IsRolled, UnbracedLength, EffectiveLengthFactor,CalcLog)
+        public BeamIDoublySymmetricCompactWebNoncompactFlange(ISteelSection section, bool IsRolled, ICalcLog CalcLog)
+            : base(section,IsRolled, CalcLog)
         {
             GetSectionValues();
         }
 
         #region Limit States
-        //Default implementations of limit states return 
-        //empty limit states, set as Not Applicable
-        //individual shape types must override  these default implementations
 
         public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
@@ -57,9 +53,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
+             FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
-            return base.GetFlexuralLateralTorsionalBucklingStrength(C_b, CompressionLocation);
+            return base.GetFlexuralLateralTorsionalBucklingStrength(C_b, L_b, CompressionLocation, BracingType, MomentAxis);
         }
 
         public virtual SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)

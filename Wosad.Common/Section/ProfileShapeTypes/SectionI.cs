@@ -84,7 +84,7 @@ namespace Wosad.Common.Section.SectionTypes
         public double h_o
         {
             get {
-                double df = _d - (this.t_f / 2 + this.t_fBot / 2);
+                double df = _d - (this.tf / 2 + this.t_fBot / 2);
                 return _h_o; }
         }
 
@@ -97,7 +97,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         private double _t_f;
 
-        public double t_f
+        public double tf
         {
             get { return _t_f; }
         }
@@ -146,7 +146,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get
             {
-                _T = _d - t_fBot - t_f;
+                _T = _d - t_fBot - tf;
                 return _T;
             }
         } 
@@ -160,7 +160,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double t_f = this.t_f;
+            double t_f = this.tf;
             double b_f = this.b_fTop;
 
             CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
@@ -184,13 +184,13 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.t_f;
+            double FlangeThickness = this.tf;
             double FlangeWidth = this.b_fTop;
 
             // I-shape converted to X-shape 
             double FlangeOverhang = (b_f - t_w) / 2.0;
-            CompoundShapePart LeftFlange = new CompoundShapePart(2* t_f, FlangeOverhang, new Point2D(0, d - FlangeOverhang/2));
-            CompoundShapePart RightFlange = new CompoundShapePart(2*t_f, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
+            CompoundShapePart LeftFlange = new CompoundShapePart(2* tf, FlangeOverhang, new Point2D(0, d - FlangeOverhang/2));
+            CompoundShapePart RightFlange = new CompoundShapePart(2*tf, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
             CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, b_f / 2));
 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
@@ -210,7 +210,7 @@ namespace Wosad.Common.Section.SectionTypes
         protected override void CalculateWarpingConstant()
         {
             double d = this.d;
-            double t_1 = t_f;
+            double t_1 = tf;
             double t_2 = t_fBot;
             double b_1 = b_fTop;
             double b_2 = b_fBot;
@@ -226,7 +226,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get 
             {
-                return d - (t_f + t_fBot);
+                return d - (tf + t_fBot);
             }
         }
     }

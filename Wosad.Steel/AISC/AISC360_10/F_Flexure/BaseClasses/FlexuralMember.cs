@@ -33,9 +33,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMember : SteelFlexuralMember, ISteelBeamFlexure
     {
-        public FlexuralMember(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section,UnbracedLength, EffectiveLengthFactor, CalcLog)
+        public FlexuralMember(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
 
         }
@@ -214,18 +213,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         #endregion
 
-        #region Limit States
-        //Default implementations of limit states return 
-        //empty limit states, set as Not Applicable
-        //individual shape types must override  these default implementations
 
-        public virtual SteelLimitStateValue GetFlexuralYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation)
+        #region Limit States
+
+        public virtual SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue(-1,false);
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
 
-        public virtual SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
+            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
@@ -237,7 +235,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public virtual SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
@@ -255,13 +253,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public  SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        public SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
-
-
 
         public virtual SteelLimitStateValue GetLimitingLengthForInelasticLTB_Lr(FlexuralCompressionFiberPosition CompressionLocation)
         {
@@ -277,6 +273,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
         #endregion
+
+
+
+
 
     }
 }

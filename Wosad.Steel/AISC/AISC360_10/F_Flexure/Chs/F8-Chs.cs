@@ -33,9 +33,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class BeamChs : FlexuralMemberChsBase
     {
-        public BeamChs(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor,CalcLog)
+        public BeamChs(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
             if (section is ISectionPipe)
             {
@@ -77,22 +76,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             E = Section.Material.ModulusOfElasticity;
             Fy = Section.Material.YieldStress;
 
-            L = this.UnbracedLengthFlexure;
-            K = this.EffectiveLengthFactorFlexure;
-
-            Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
-
             D = SectionPipe.D;
             t = SectionPipe.t_des;
 
         }
 
-        double Lb;
         double E;
         double Fy;
-
-        double L;
-        double K;
 
         double D;
         double t;

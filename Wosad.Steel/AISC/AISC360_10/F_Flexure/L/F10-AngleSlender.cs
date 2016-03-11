@@ -25,47 +25,25 @@ using Wosad.Steel.AISC.Interfaces;
  using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
  
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamAngle : FlexuralMemberAngleBase
+    public partial class BeamAngleSlender : BeamAngleCompact
     {
 
-        public BeamAngle(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor,CalcLog)
+        public BeamAngleSlender(ISteelSection section, ICalcLog CalcLog)
+            : base(section, CalcLog)
         {
             
             GetSectionValues();
         }
 
-        internal void GetSectionValues()
-        {
-
-            E = Section.Material.ModulusOfElasticity;
-            Fy = Section.Material.YieldStress;
-
-            L = this.UnbracedLengthFlexure;
-            K = this.EffectiveLengthFactorFlexure;
-
-            Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
 
 
-        }
 
-        double Lb;
-        double E;
-        double Fy;
-
-        double L;
-        double K;
-
-        //public override double GetFlexuralCapacityMajorAxis(FlexuralCompressionFiberPosition compressionFiberLocation)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
     }
 }

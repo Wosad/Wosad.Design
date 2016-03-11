@@ -52,7 +52,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360_10.Composite.Flexure
             AiscShapeFactory factory = new AiscShapeFactory();
             ISection section = factory.GetShape("W18X35", ShapeTypeSteel.IShapeRolled);
             PredefinedSectionI catI = section as PredefinedSectionI;
-            SectionIRolled secI = new SectionIRolled("", catI.d, catI.b_fTop, catI.t_f, catI.t_w, catI.k);
+            SectionIRolled secI = new SectionIRolled("", catI.d, catI.b_fTop, catI.tf, catI.t_w, catI.k);
             CompositeBeamSection cs = new CompositeBeamSection(secI, b_eff, h_solid, h_rib, 50.0, f_cPrime);
             return cs;
         }

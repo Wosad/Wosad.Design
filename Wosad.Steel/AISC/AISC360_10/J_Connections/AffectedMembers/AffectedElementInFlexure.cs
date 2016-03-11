@@ -38,8 +38,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
         double A_fn;
         bool HasHolesInTensionFlange;
         bool IsCompactDoublySymmetricForFlexure;
+        bool IsRolled;
 
-        public AffectedElementInFlexure(ISection section, double F_y, double F_u, bool HasHolesInTensionFlange, double A_fg, double A_fn, bool IsCompactDoublySymmetricForFlexure)
+        public AffectedElementInFlexure(ISection section, double F_y, double F_u, bool HasHolesInTensionFlange, double A_fg, double A_fn, bool IsCompactDoublySymmetricForFlexure,  bool IsRolled=false)
             : base(F_y, F_u)
         {
             SteelMaterial material = new SteelMaterial(F_y, F_u, SteelConstants.ModulusOfElasticity, SteelConstants.ShearModulus);
@@ -48,21 +49,24 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
             this.A_fn = A_fn;
             this.HasHolesInTensionFlange = HasHolesInTensionFlange;
             this.IsCompactDoublySymmetricForFlexure = IsCompactDoublySymmetricForFlexure;
+            this.IsRolled=IsRolled;
         }
-        public AffectedElementInFlexure(SectionOfPlateWithHoles Section, ISteelMaterial Material, ICalcLog CalcLog)
+        public AffectedElementInFlexure(SectionOfPlateWithHoles Section, ISteelMaterial Material, ICalcLog CalcLog, bool IsRolled = false)
             : base(Section, Material, CalcLog)
         {
             this.HasHolesInTensionFlange = false;
             this.A_fg = 0;
             this.A_fn = 0;
+            this.IsRolled = IsRolled;
         }
 
-        public AffectedElementInFlexure(SectionRectangular Section, ISteelMaterial Material, ICalcLog CalcLog)
+        public AffectedElementInFlexure(SectionRectangular Section, ISteelMaterial Material, ICalcLog CalcLog, bool IsRolled=false)
             : base(Section, Material, CalcLog)
         {
             this.HasHolesInTensionFlange = false;
             this.A_fg = 0;
             this.A_fn = 0;
+            this.IsRolled = IsRolled;
         }
 
 
@@ -93,7 +97,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
                         }
                         else
                         {
-                            BeamIDoublySymmetricCompact IBeam = new BeamIDoublySymmetricCompact(Section,Log);
+                            BeamIDoublySymmetricCompact IBeam = new BeamIDoublySymmetricCompact(Section,this.IsRolled, Log);
                             double Y = 0.9* IBeam.GetYieldingMomentCapacity();
                             phiM_n = Math.Min(Y, R);
                         }

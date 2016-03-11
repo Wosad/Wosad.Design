@@ -46,7 +46,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get 
             {
-                _T = d - t_f - t_fBot - 2*k;
+                _T = d - tf - t_fBot - 2*k;
                 return _T; 
             }
         }
@@ -68,7 +68,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double t_f = this.t_f;
+            double t_f = this.tf;
             double b_f = this.b_f;
             r = k - t_f;
             CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
@@ -96,9 +96,9 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.t_f;
+            double FlangeThickness = this.tf;
             double FlangeWidth = this.b_f;
-            r = k - t_f;
+            r = k - tf;
             double FlangeOverhang = (FlangeWidth - t_w - 2.0 * r) / 2.0;
 
             CompoundShapePart LeftFlange = new CompoundShapePart(2 * FlangeThickness, FlangeOverhang,

@@ -32,9 +32,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMemberRhsBase : FlexuralMember
     {
-        public FlexuralMemberRhsBase(ISteelSection section, 
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
-            : base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
+        public FlexuralMemberRhsBase(ISteelSection section, ICalcLog CalcLog)
+            : base(section,  CalcLog)
         {
             sectionTube = null;
             ISectionTube s = Section.Shape as ISectionTube;

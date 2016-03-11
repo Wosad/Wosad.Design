@@ -25,7 +25,7 @@ namespace Wosad.Common.Section.Interfaces
         double t_fBot { get; }
 
         double t_fTop { get; }
-        double t_f { get;  }
+        double tf { get;  }
         double b_fBot { get;}
         double b_fTop { get;  }
         double t_w { get;  }

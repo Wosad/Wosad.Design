@@ -31,22 +31,21 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     {
 
         double Cb;
-        double Lp; double Lr;
-        double rt;
+        double L_p; double Lr;
         double Rpg;
 
         // Lateral-Torsional Buckling F5.2
-        public double GetLateralTorsionalBucklingCapacity(FlexuralCompressionFiberPosition compressionFiberPosition, double Cb)
+        public double GetLateralTorsionalBucklingStrength(FlexuralCompressionFiberPosition compressionFiberPosition, double L_b, double Cb)
         {
             double Mn = 0.0;
-            rt = GetEffectiveRadiusOfGyrationrt(compressionFiberPosition);
-            Lp = GetLp();
-            Lr = GetLr();
+            double r_t = GetEffectiveRadiusOfGyration_r_t(compressionFiberPosition);
+            L_p = GetLp(r_t);
+            Lr = GetLr(r_t);
             Rpg = GetRpg(compressionFiberPosition);
             double Sxc = compressionFiberPosition == FlexuralCompressionFiberPosition.Top ? Sxtop : Sxbot;
 
 
-            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(Lb, Lp, Lr);
+            LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(L_b, L_p, Lr);
             double Fcr = 0.0;
 
             switch (BucklingType)
@@ -55,11 +54,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     Mn = double.PositiveInfinity;
                     break;
                 case LateralTorsionalBucklingType.Inelastic:
-                    Fcr = GetFcrLateralTorsionalBucklingInelastic();
+                    Fcr = GetFcrLateralTorsionalBucklingInelastic(L_b);
 
                     break;
                 case LateralTorsionalBucklingType.Elastic:
-                    Fcr = GetFcrLateralTorsionalBucklingElastic();
+                    Fcr = GetFcrLateralTorsionalBucklingElastic(r_t, L_b);
 
                     break;
 
@@ -74,34 +73,34 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
 
-        public  double GetLr()
+        public  double GetLr(double r_t)
         {
             double pi = Math.PI;
-            double Lr = pi * rt * Math.Sqrt(E / 0.7 * Fy); //(F5-5)
+            double Lr = pi * r_t * Math.Sqrt(E / 0.7 * Fy); //(F5-5)
             return Lr;
         }
 
         //(F4-7)
-        internal  double GetLp()
+        internal  double GetLp(double r_t)
         {
-            double Lp = 1.1 * rt * Math.Sqrt(E / Fy); //(F4-7)
+            double Lp = 1.1 * r_t * Math.Sqrt(E / Fy); //(F4-7)
             return Lp;
         }
 
-        public  double GetFcrLateralTorsionalBucklingInelastic()
+        public  double GetFcrLateralTorsionalBucklingInelastic(double L_b)
         {
             double Fcr = 0.0;
 
-            Fcr = Cb * (Fy - (0.3 * Fy) * ((Lb - Lp) / (Lr - Lp))); //(F5-3)
+            Fcr = Cb * (Fy - (0.3 * Fy) * ((L_b - L_p) / (Lr - L_p))); //(F5-3)
             Fcr = Fcr > Fy ? Fy : Fcr;
             return Fcr;
         }
 
-        public  double GetFcrLateralTorsionalBucklingElastic()
+        public  double GetFcrLateralTorsionalBucklingElastic(double r_t, double L_b)
         {
             double Fcr = 0.0;
             double pi2 = Math.Pow(Math.PI, 2);
-            Fcr = (Cb * pi2 * E) / Math.Pow(Lb / rt, 2); //(F5-4)
+            Fcr = (Cb * pi2 * E) / Math.Pow(L_b / r_t, 2); //(F5-4)
             Fcr = Fcr > Fy ? Fy : Fcr;
             return Fcr;
         }

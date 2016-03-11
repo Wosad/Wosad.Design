@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamAngle : FlexuralMemberAngleBase
+    public partial class BeamAngleCompact : FlexuralMemberAngleBase
     {
         //Yielding F10.1
         public double GetYieldingMomentCapacityGeometric(FlexuralCompressionFiberPosition compressionFiberLocation)

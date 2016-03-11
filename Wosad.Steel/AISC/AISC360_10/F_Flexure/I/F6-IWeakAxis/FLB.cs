@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public abstract partial class FlexuralMemberIBase : FlexuralMember
+    public abstract partial class BeamIWeakAxis : FlexuralMemberIBase
     {
         public double GetCompressionFlangeLocalBucklingCapacity()
         {

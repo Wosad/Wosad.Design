@@ -38,9 +38,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public partial class SolidShape : FlexuralMember, ISteelBeamFlexure
     {
 
-        public SolidShape(ISteelSection section,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog) : 
-            base(section, UnbracedLength, EffectiveLengthFactor, CalcLog)
+        public SolidShape(ISteelSection section, ICalcLog CalcLog) : 
+            base(section, CalcLog)
         {
                 GetSectionValues();
                 sectionTee = null;
@@ -53,11 +52,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         }
 
-        public SolidShape(ISteelSection section, ICalcLog CalcLog)
-            : base(section, 0.0, 1.0, CalcLog)
-        {
-            
-        }
 
         ISectionSolid sectionTee;
 
@@ -67,20 +61,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             E = Section.Material.ModulusOfElasticity;
             Fy = Section.Material.YieldStress;
 
-            L = this.UnbracedLengthFlexure;
-            K = this.EffectiveLengthFactorFlexure;
-
-            Lb = this.EffectiveLengthFactorFlexure * this.UnbracedLengthFlexure;
-
 
         }
 
-        double Lb;
         double E;
         double Fy;
-
-        double L;
-        double K;
 
 
         //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation)
@@ -95,7 +80,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //STANDARD YIELDING LIMIT STATE IS APPLICABLE
         //public override SteelLimitStateValue GetYieldingLimitState(SharedProjects.Data.General.MomentAxis MomentAxis, SharedProjects.Data.General.CompressionLocation CompressionLocation){}
 
-        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, FlexuralCompressionFiberPosition CompressionLocation)
+        public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
+            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
             throw new NotImplementedException();
         }

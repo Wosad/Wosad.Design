@@ -24,36 +24,49 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
  using Wosad.Common.CalculationLogger;
+using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
  
  
  
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public abstract partial class FlexuralMemberIBase : FlexuralMember
+    public abstract partial class BeamIWeakAxis : FlexuralMemberIBase
     {
-        //public override double GetFlexuralCapacityMinorAxis(FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        //{
-        //    GetSectionValues();
 
-        //    double Yielding = GetMinorPlasticMomentCapacity().Value;
-        //    double CompressionFlangeLocalBuckling = GetCompressionFlangeLocalBucklingCapacity();
+        public BeamIWeakAxis (ISteelSection section, bool IsRolledMember,
+            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+            : base(section, IsRolledMember, CalcLog)
+        {
+        }
 
-        //    double[] CapacityValues = new double[2] { Yielding, CompressionFlangeLocalBuckling};
 
-        //    double Mn = CapacityValues.Min();
+        #region Limit States
 
-        //    return GetFlexuralDesignValue(Mn);
-        //}
+        public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            return GetMinorPlasticMomentCapacity();
+        }
 
+
+        public override SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        {
+            double phiM_n = GetCompressionFlangeLocalBucklingCapacity();
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+            return ls;
+        }
+
+
+
+
+        #endregion
 
         internal void GetSectionValues()
         {
 
             E = Section.Material.ModulusOfElasticity;
             Fy = Section.Material.YieldStress;
-            L = this.UnbracedLengthFlexure;
-            K = this.EffectiveLengthFactorFlexure;
             Zy = Section.Shape.Z_y;
             Sy = Math.Min(Section.Shape.S_yLeft, Section.Shape.S_yRight);
 
@@ -61,8 +74,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         double E;
         double Fy;
-        double L;
-        double K;
         double Zy;
         double Sy;
 

@@ -39,8 +39,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Sxc = compressionFiberPosition == FlexuralCompressionFiberPosition.Top ? Sxtop : Sxbot;
             Rpg = GetRpg(compressionFiberPosition);
 
-            //double Myc = GetCompressionFiberYieldMomentMyc(compressionFiberPosition);
-            //double Rpc = GetRpc(compressionFiberPosition);
             Mn = Rpg * Sxc*Fy; //(F5-1)
             return Mn;
         }

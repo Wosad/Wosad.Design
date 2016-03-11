@@ -32,38 +32,12 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamRhs : FlexuralMemberRhsBase, ISteelBeamFlexure
+    public partial class BeamRectangularHss : FlexuralMemberRhsBase, ISteelBeamFlexure
     {
         //Compression Flange Local Buckling F7.2
 
-        public override SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength( 
-            FlexuralCompressionFiberPosition CompressionLocation)
-        {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            //ls.IsApplicable = false;
-            Compactness = new ShapeCompactness.HollowMember(Section, CompressionLocation, MomentAxis.XAxis);
 
-
-            if (this.FlangeCompactness== CompactnessClassFlexure.Compact)
-            {
-                ls.IsApplicable = false;
-            }
-            else
-            {
-                if (this.FlangeCompactness == CompactnessClassFlexure.Noncompact)
-                {
-                    
-                }
-                else //slender
-                {
-
-                }
-            }
-            return ls;
-        }
-
-        //this method may be obsolete
-        public double GetCompressionFlangeLocalBucklingCapacity(FlexuralCompressionFiberPosition CompressionLocation)
+        public double GetCompressionFlangeLocalBucklingCapacity(FlexuralCompressionFiberPosition CompressionLocation, MomentAxis MomentAxis)
         {
             double Mn = 0.0;
 
@@ -72,9 +46,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 CompactnessClassFlexure cClass = GetFlangeCompactness();
                 if (cClass == CompactnessClassFlexure.Noncompact || cClass == CompactnessClassFlexure.Slender)
                 {
-                    double lambda = this.GetLambdaCompressionFlange(CompressionLocation, MomentAxis.XAxis);
-                    double lambdapf = this.GetLambdapf(CompressionLocation, MomentAxis.XAxis);
-                    double lambdarf = this.GetLambdarf(CompressionLocation, MomentAxis.XAxis);
+                    double lambda = this.GetLambdaCompressionFlange(CompressionLocation, MomentAxis);
+                    double lambdapf = this.GetLambdapf(CompressionLocation, MomentAxis);
+                    double lambdarf = this.GetLambdarf(CompressionLocation, MomentAxis);
                     //note: section is doubly symmetric so top flange is taken
 
                     double Sx = this.Section.Shape.S_xTop;

@@ -22,56 +22,78 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Common.CalculationLogger;
-using Wosad.Steel.AISC.SteelEntities;
+ 
+ 
  using Wosad.Common.CalculationLogger;
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.CalculationLogger;
+
+using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Exceptions;
+
+
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
+    public partial class BeamRectangularHss : FlexuralMemberRhsBase, ISteelBeamFlexure
     {
-        //Yielding F2.1
-        public double GetYieldingMomentCapacity()
+
+        public SteelLimitStateValue GetPlasticMomentCapacity(MomentAxis MomentAxis)
+
         {
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+            switch (MomentAxis)
+            {
+                case MomentAxis.XAxis:
+                    ls = GetMajorPlasticMomentCapacity();
+                    break;
+                case MomentAxis.YAxis:
+                    ls = GetMinorPlasticMomentCapacity();
+                    break;
 
-            double Mn = GetMajorPlasticMomentCapacity().Value;
-            double M = GetFlexuralDesignValue(Mn);
+            }
 
-
-            return M;
-       
+            return ls;
         }
 
-
-        public override SteelLimitStateValue GetMajorPlasticMomentCapacity()
+        //Yielding F7.1
+        public  override SteelLimitStateValue GetMajorPlasticMomentCapacity()
         {
-
             SteelLimitStateValue ls = new SteelLimitStateValue();
+            double phiM_n = 0.0;
+
 
             double Fy = this.Section.Material.YieldStress;
             double Zx = Section.Shape.Z_x;
 
             double M_p = Fy * Zx;
+            phiM_n = 0.9*M_p;
 
 
             ls.IsApplicable = true;
-            ls.Value = M_p;
+            ls.Value = phiM_n;
             return ls;
-            
-
         }
+
         public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
         {
-            double Mp = 0.0;
             SteelLimitStateValue ls = new SteelLimitStateValue();
+            double Mp = 0.0;
+
 
             double Fy = this.Section.Material.YieldStress;
             double Zy = Section.Shape.Z_y;
-            double M_p = Fy * Zy;
- 
+
+            Mp = Fy * Zy;
+            double phiM_n = Mp;
+
+
+
             ls.IsApplicable = true;
-            ls.Value = M_p;
+            ls.Value = Mp;
             return ls;
         }
 

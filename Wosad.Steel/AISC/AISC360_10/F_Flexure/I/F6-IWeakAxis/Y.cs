@@ -30,7 +30,7 @@ using Wosad.Common.CalculationLogger;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public abstract partial class FlexuralMemberIBase : FlexuralMember
+    public abstract partial class BeamIWeakAxis : FlexuralMemberIBase
     {
         //Yielding
         public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
@@ -39,35 +39,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Mn = 0.0;
             double Mp = GetMinorPlasticMomentCapacity().Value;
             double M = 1.6 * Fy * Sy;
-            double My = M/12.0;
+            double My = M;
             
-            #region My
-            ICalcLogEntry MyEntry = new CalcLogEntry();
-            MyEntry.ValueName = "My";
-            MyEntry.AddDependencyValue("Fy", Math.Round(Fy, 3));
-            MyEntry.AddDependencyValue("Sy", Math.Round(Sy, 3));
-            MyEntry.AddDependencyValue("M", Math.Round(M, 3));
-            MyEntry.Reference = "";
-            MyEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/F6_Mp.docx";
-            MyEntry.FormulaID = null; //reference to formula from code
-            MyEntry.VariableValue = Math.Round(My, 3).ToString();
-            #endregion
-            this.AddToLog(MyEntry);
+
 
             M = Math.Min(Mp, My); //(F6-1)
-            Mn = M / 12.0;
-
-            
-            #region Mn
-            ICalcLogEntry MnEntry = new CalcLogEntry();
-            MnEntry.ValueName = "Mn";
-            MnEntry.AddDependencyValue("M", Math.Round(M, 3));
-            MnEntry.Reference = "";
-            MnEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/Mn.docx";
-            MnEntry.FormulaID = null; //reference to formula from code
-            MnEntry.VariableValue = Math.Round(Mn, 3).ToString();
-            #endregion
-            this.AddToLog(MnEntry);
+            Mn = M;
 
             ls.IsApplicable = true;
             ls.Value = Mn;
