@@ -45,6 +45,7 @@ namespace Wosad.Common.Section.Interfaces
         double C_w { get;  }
         double J { get;  }
 
+
         //ISection Clone();
     }
 }

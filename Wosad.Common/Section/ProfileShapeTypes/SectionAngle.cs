@@ -28,7 +28,7 @@ namespace Wosad.Common.Section.SectionTypes
     /// Generic angle shape with geometric parameters provided in a constructor.
     /// Shape properties do not account for rounded corners, typical for rolled shapes
     /// </summary>
-    public class SectionAngle : CompoundShape, ISectionAngle, ISliceableSection
+    public partial class SectionAngle : CompoundShape, ISectionAngle, ISliceableSection
     {
         public SectionAngle(string Name, double h, double b, double t)
             : base(Name)
@@ -72,37 +72,105 @@ namespace Wosad.Common.Section.SectionTypes
 
         #region Section properties specific to Angle
 
-        public double MomentOfInertiaPrincipalMajor
+        bool PrincipalAxisPropertiesCalculated;
+        
+        private double  _I_w;
+
+        public double  I_w
         {
-            get { throw new NotImplementedException(); }
+            get {
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _I_w; }
+
         }
 
-        public double MomentOfInertiaPrincipalMinor
+
+        private double _I_z;
+
+        public double I_z
         {
-            get { throw new NotImplementedException(); }
+            get {
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _I_z; }
+
         }
 
-        public double S_major
+
+        private double _S_w;
+
+        public double S_w
         {
-            get { throw new NotImplementedException(); }
+            get {
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _S_w; }
+
         }
 
-        public double S_minor
+
+        private double _S_z;
+
+        public double S_z
         {
-            get { throw new NotImplementedException(); }
+            get {
+                if (PrincipalAxisPropertiesCalculated==false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _S_z; }
+
+
         }
 
-        public double r_major
+
+        private double _r_z;
+
+        public double r_z
         {
-            get { throw new NotImplementedException(); }
+            get {
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _r_z; }
         }
 
-        public double r_minor
+        private double _r_w;
+
+        public double r_w
         {
-            get { throw new NotImplementedException(); }
+            get {
+
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _r_w; }
+
         }
         
+
+
+        private AngleOrientation angleOrientation;
+
+        public AngleOrientation AngleOrientation
+        {
+            get { return angleOrientation; }
+            set { angleOrientation = value; }
+        }
+        
+
+
         #endregion
+
 
         /// <summary>
         /// Defines a set of rectangles for analysis with respect to 
@@ -160,5 +228,11 @@ namespace Wosad.Common.Section.SectionTypes
             double d_prime = this._d-t/2;
             this._J=(((d_prime+b_prime)*Math.Pow(t, 3)) / (3));
         }
+
+        public double Angle_alpha { get; set; }
+
+
+        public double beta_w { get; set; }
+
     }
 }

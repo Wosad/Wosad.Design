@@ -37,27 +37,32 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public double GetWebLocalBucklingCapacity(MomentAxis MomentAxis,
             FlexuralCompressionFiberPosition CompressionLocation)
         {
-            double Mn = 0.0;
+            double M_n = 0.0;
+            double S;
+            double Mp;
 
-           // ShapeCompactness.HollowMember compactness = new ShapeCompactness.HollowMember(Section, CompressionLocation.Top);
-            Compactness = new ShapeCompactness.HollowMember(Section, CompressionLocation, MomentAxis);
-            CompactnessClassFlexure cClass = Compactness.GetWebCompactnessFlexure();
-
-            if (cClass == CompactnessClassFlexure.Compact)
+            if (MomentAxis ==MomentAxis.XAxis)
             {
-                return double.PositiveInfinity;
+                Mp = GetMajorPlasticMomentCapacity().Value;
+                S = Math.Min(SectionTube.S_yLeft, SectionTube.S_yRight);
+            }
+            else if (MomentAxis == MomentAxis.YAxis)
+            {
+                 Mp = GetMinorPlasticMomentCapacity().Value;
+                 S = Math.Min(SectionTube.S_xTop, SectionTube.S_xBot);
             }
             else
             {
-                double Mp = GetMajorPlasticMomentCapacity().Value;
-                double Sx = Math.Min(SectionTube.S_xTop, SectionTube.S_xBot);
-                double h = GetWebWallHeight_h();
-                double lambdaWeb = GetLambdaWeb(MomentAxis);
-                Mn = Mp - (Mp - Fy * Sx) * (0.305 * lambdaWeb * Math.Sqrt(Fy / E) - 0.738); //(F7-5)
-                Mn = Mn > Mp ? Mp : Mn;
+                throw new Exception("Principal axis bending is either X or Y axis for rectangular HSS shape. Select X or Y axis for bending");
             }
 
-            return Mn;
+
+                double lambdaWeb = GetLambdaWeb(MomentAxis);
+                M_n = Mp - (Mp - Fy * S) * (0.305 * lambdaWeb * Math.Sqrt(Fy / E) - 0.738); //(F7-5)
+                M_n = M_n > Mp ? Mp : M_n;
+
+                double phiM_n = 0.9 * M_n;
+            return phiM_n;
         }
 
     }

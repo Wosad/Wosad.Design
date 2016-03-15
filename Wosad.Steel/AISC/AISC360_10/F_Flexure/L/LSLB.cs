@@ -22,39 +22,22 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- using Wosad.Common.CalculationLogger;
-using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 
  
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class  BeamAngleNonCompact : BeamAngleCompact
+    public partial class BeamAngleCompact : FlexuralMemberAngleBase
     {
-
-        public BeamAngleNonCompact(ISteelSection section, ICalcLog CalcLog)
-            : base(section, CalcLog)
-        {
-            
-            GetSectionValues();
-        }
-
 
         public override SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation, 
             FlexuralAndTorsionalBracingType BracingType)
         {
-
-            double S_c = GetSectionModulus(CompressionLocation, true, BracingType);
-            //F10-7
-            double  M_n=F_y*S_c*(2.43-1.72*(((b) / (t)))*Math.Sqrt(((F_y) / (E))));
-            double phiM_n = 0.9*M_n;
-            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+            // for compact angles this limit state is not applicable
+            SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
-
-
 
     }
 }

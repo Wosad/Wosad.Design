@@ -30,6 +30,11 @@ namespace Wosad.Common.Mathematics
         }
 
 
+        public static double ToDegrees(this double val)
+        {
+            return (180.0/Math.PI ) * val;
+        }
+
 
         //public static double[] Minimum(this double[] values)
         //{

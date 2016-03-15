@@ -25,13 +25,19 @@ namespace Wosad.Common.Section.Interfaces
         double t { get;  }
         double b { get;  }
 
-        double MomentOfInertiaPrincipalMajor { get; }
-        double MomentOfInertiaPrincipalMinor { get; }
+        double I_w { get; }
+        double I_z { get; }
 
-        double S_major { get; }
-        double S_minor { get; }
+        double S_w { get; }
+        double S_z { get; }
 
-        double r_major { get; }
-        double r_minor { get; }
+        double r_w { get; }
+        double r_z { get; }
+
+        double Angle_alpha { get; }
+
+        double beta_w { get; }
+
+        AngleOrientation AngleOrientation { get;}
     }
 }

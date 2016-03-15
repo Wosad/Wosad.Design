@@ -43,7 +43,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 double bf = GetCompressionFlangeWidthbfc(compressionFiberPosition);
                 double tf = GetCompressionFlangeThicknesstfc(compressionFiberPosition);
 
-                ShapeCompactness.ShapeIMember compactness = new ShapeCompactness.ShapeIMember(Section, IsRolledMember, compressionFiberPosition);
+                ShapeCompactness.IShapeMember compactness = new ShapeCompactness.IShapeMember(Section, IsRolledMember, compressionFiberPosition);
                 CompactnessClassFlexure flangeCompactness = compactness.GetFlangeCompactnessFlexure();
 
                 double lambda = compactness.GetCompressionFlangeLambda();
@@ -78,7 +78,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 }
 
 
-            return Mn;
+                double phiM_n = 0.9 * Mn;
+                return phiM_n;
         }
 
     }

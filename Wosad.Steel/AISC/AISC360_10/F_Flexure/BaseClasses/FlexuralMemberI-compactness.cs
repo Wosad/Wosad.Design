@@ -31,18 +31,18 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract partial class FlexuralMemberIBase : FlexuralMember
     {
-        ShapeCompactness.ShapeIMember compactness;
+        ShapeCompactness.IShapeMember compactness;
 
         protected virtual double GetLambdapf(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
-             compactness = new ShapeCompactness.ShapeIMember
+             compactness = new ShapeCompactness.IShapeMember
                 (this.Section, this.isRolledMember, compressionFiberPosition);
             return compactness.GetFlangeLambda_p(StressType.Flexure);
         }
 
         protected virtual double GetLambdarf(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
-            compactness = new ShapeCompactness.ShapeIMember
+            compactness = new ShapeCompactness.IShapeMember
                 (this.Section, this.isRolledMember, compressionFiberPosition);
             return compactness.GetFlangeLambda_r(StressType.Flexure);
         }
@@ -50,7 +50,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public double GetLambdaCompressionFlange(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
 
-             compactness = new ShapeCompactness.ShapeIMember
+             compactness = new ShapeCompactness.IShapeMember
         (this.Section, this.isRolledMember, compressionFiberPosition);
             return compactness.GetCompressionFlangeLambda();
         }
@@ -58,7 +58,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public double GetLambdaWeb()
         {
             double Lambda = 0.0;
-            compactness = new ShapeCompactness.ShapeIMember
+            compactness = new ShapeCompactness.IShapeMember
             (this.Section, this.isRolledMember, FlexuralCompressionFiberPosition.Top);
             // for web location of compression fiber does not matter
             Lambda = compactness.GetWebLambda();

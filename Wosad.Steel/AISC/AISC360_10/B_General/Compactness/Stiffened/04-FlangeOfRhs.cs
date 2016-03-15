@@ -39,26 +39,56 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             
         }
 
-        public FlangeOfRhs(ISteelMaterial Material, ISectionTube SectionTube, double OutsideCornerRadius=-1.0)
+        public FlangeOfRhs(ISteelMaterial Material, ISectionTube SectionTube, MomentAxis MomentAxis) //double OutsideCornerRadius=-1.0)
             :base(Material)
         {
             this.SectionTube = SectionTube;
             ISectionTube s = SectionTube;
             double td = s.t_des;
-            if (OutsideCornerRadius==-1.0)
-            {
-                this.Width = s.B - 3.0 * td;
-            }
-            else
-            {
-                if (OutsideCornerRadius<0)
-                {
-                    throw new Exception("Invalid RHS corner radius. Must be over 0");
-                }
-                this.Width = s.B - 2.0 * OutsideCornerRadius;
-            }
+            //if (OutsideCornerRadius==-1.0)
+            //{
+            //    this.Width = s.B - 3.0 * td;
+            //}
+            //else
+            //{
+            //    if (OutsideCornerRadius<0)
+            //    {
+            //        throw new Exception("Invalid RHS corner radius. Must be over 0");
+            //    }
+            //    this.Width = s.B - 2.0 * OutsideCornerRadius;
+            //}
+            this.Width = GetFlangeWidth_bf(MomentAxis);
 
             this.Thickness = td;
+        }
+
+
+        protected virtual double GetFlangeWidth_bf(MomentAxis MomentAxis)
+        {
+            double b = 0 ;
+
+            double tdes = SectionTube.t_des;
+            double h;
+            //B4-1b. Stiffened Elements
+            if (MomentAxis == MomentAxis.XAxis)
+            {
+                b = SectionTube.B - 3.0 * tdes;
+            }
+            else if (MomentAxis == MomentAxis.YAxis)
+            {
+                b = SectionTube.H - 3.0 * tdes;
+            }
+
+            return b;
+            //if (sectionTube.CornerRadiusOutside == -1.0)
+            //{
+            //    b = SectionTube.B - 3.0 * sectionTube.t_des;
+            //}
+            //else
+            //{
+            //    b = sectionTube.B - 2.0 * sectionTube.CornerRadiusOutside;
+            //}
+
         }
 
         public override double GetLambda_r(StressType stress)

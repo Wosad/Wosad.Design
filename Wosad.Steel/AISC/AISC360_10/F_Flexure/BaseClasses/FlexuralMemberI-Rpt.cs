@@ -43,7 +43,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double hc = Gethc(compressionFiberPosition);
             double tw = this.Gettw();
 
-            ShapeCompactness.ShapeIMember compactness = new ShapeCompactness.ShapeIMember(Section, IsRolledMember, compressionFiberPosition);
+            ShapeCompactness.IShapeMember compactness = new ShapeCompactness.IShapeMember(Section, IsRolledMember, compressionFiberPosition);
             double lambdaWeb = compactness.GetWebLambda();
             double lambdapw = compactness.GetWebLambda_p(StressType.Flexure);
             double lambdarw = compactness.GetWebLambda_r(StressType.Flexure);

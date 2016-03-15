@@ -247,5 +247,7 @@ namespace Wosad.Common.Section
 
         //public abstract ISection Clone();
 
+
+
     }
 }

@@ -40,12 +40,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public double GetCompressionFlangeLocalBucklingCapacity(FlexuralCompressionFiberPosition CompressionLocation, MomentAxis MomentAxis)
         {
             double Mn = 0.0;
+            double phiM_n = 0.0;
 
             if (SectionTube != null)
             {
-                CompactnessClassFlexure cClass = GetFlangeCompactness();
-                if (cClass == CompactnessClassFlexure.Noncompact || cClass == CompactnessClassFlexure.Slender)
-                {
+
                     double lambda = this.GetLambdaCompressionFlange(CompressionLocation, MomentAxis);
                     double lambdapf = this.GetLambdapf(CompressionLocation, MomentAxis);
                     double lambdarf = this.GetLambdarf(CompressionLocation, MomentAxis);
@@ -54,6 +53,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     double Sx = this.Section.Shape.S_xTop;
                     double Fy = this.Section.Material.YieldStress;
                     double E = this.Section.Material.ModulusOfElasticity;
+
+                    CompactnessClassFlexure cClass = GetFlangeCompactness();
 
                     if (cClass == CompactnessClassFlexure.Noncompact)
                     {
@@ -67,15 +68,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                         Mn = GetMnSlender(Sxe, Fy);
                     }
 
-                }
-                else
-                {
-
-                }
-
                 
             }
-            return Mn;
+            phiM_n = 0.9 * Mn;
+            return phiM_n;
         }
 
         private double GetMnNoncompact(double Mp, double Fy, double S, double lambda )

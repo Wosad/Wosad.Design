@@ -32,7 +32,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
     {
         //Yielding F2.1
-        public double GetYieldingMomentCapacity()
+        public double GetYieldingMoment()
         {
 
             double Mn = GetMajorPlasticMomentCapacity().Value;
@@ -54,9 +54,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             double M_p = Fy * Zx;
 
-
+            double phiM_n = 0.9 * M_p;
+            
             ls.IsApplicable = true;
-            ls.Value = M_p;
+            ls.Value = phiM_n;
             return ls;
             
 

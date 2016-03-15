@@ -36,8 +36,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
         public class AngleMember 
         {
-            ICompactnessElement VerticalLegCompactness;
-            ICompactnessElement HorizontalLegCompactness;
+           public ICompactnessElement VerticalLegCompactness   {get; set;}
+           public ICompactnessElement HorizontalLegCompactness {get; set;}
 
             public AngleMember(ISteelSection Section)
             {
@@ -48,6 +48,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                     VerticalLegCompactness = new LegOfSingleAngle(Section.Material, ang.d, ang.t);
                     HorizontalLegCompactness = new LegOfSingleAngle(Section.Material, ang.b, ang.t);
                 }
+
+
                 else
                 {
                     throw new SectionWrongTypeException(typeof(ISectionAngle));

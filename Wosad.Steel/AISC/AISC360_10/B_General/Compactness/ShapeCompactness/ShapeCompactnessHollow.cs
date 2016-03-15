@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text; 
+using Wosad.Common.Entities; 
+using Wosad.Common.Section.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
@@ -48,13 +51,13 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
                         ISectionTube tube = Section as ISectionTube;
                         if (MomentAxis == MomentAxis.XAxis)
                         {
-                            FlangeCompactness = new FlangeOfRhs(section.Material, tube);
-                            WebCompactness = new WebOfRhs(section.Material, tube);
+                            FlangeCompactness = new FlangeOfRhs(section.Material, tube, MomentAxis);
+                            WebCompactness = new WebOfRhs(section.Material, tube, MomentAxis);
                         }
                         else
                         {
-                            WebCompactness = new FlangeOfRhs(section.Material, tube);
-                            FlangeCompactness = new WebOfRhs(section.Material, tube);
+                            WebCompactness = new FlangeOfRhs(section.Material, tube, MomentAxis);
+                            FlangeCompactness = new WebOfRhs(section.Material, tube, MomentAxis);
                         }
                         
 

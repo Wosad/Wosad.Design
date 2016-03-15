@@ -39,7 +39,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             double Mn = 0.0;
 
-            if (sectionTee != null)
+            if (SectionTee != null)
             {
                 CompactnessClassFlexure cClass = GetFlangeCompactnessClass();
                 if (cClass == CompactnessClassFlexure.Noncompact || cClass == CompactnessClassFlexure.Slender)

@@ -85,7 +85,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             }
 
 
-            return M_n;
+            double phiM_n = 0.9 * M_n;
+            return phiM_n;
         }
 
         //(F4-7)

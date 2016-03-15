@@ -31,13 +31,14 @@ namespace Wosad.Common.Section.Predefined
     public class PredefinedSectionAngle : SectionPredefinedBase, ISectionAngle
     {
 
-        public PredefinedSectionAngle(AiscCatalogShape section)
+        public PredefinedSectionAngle(AiscCatalogShape section, AngleOrientation AngleOrientation)
             : base(section)
         {
             this._d = section.d;
             this._b = section.b;
             this._t = section.t;
-            //OverrideCentroids(); not necessary
+            this.AngleOrientation = AngleOrientation;
+ 
         }
 
 
@@ -56,12 +57,12 @@ namespace Wosad.Common.Section.Predefined
             this._d                         =Height                         ;
             this._t                      =Thickness                      ;
             this._b                          =Width                          ;
-            this.momentOfInertiaPrincipalMajor  =MomentOfInertiaPrincipalMajor  ;
-            this.momentOfInertiaPrincipalMinor  =MomentOfInertiaPrincipalMinor  ;
-            this.sectionModulusPrincipalMajor   =SectionModulusPrincipalMajor   ;
-            this.sectionModulusPrincipalMinor   =SectionModulusPrincipalMinor   ;
-            this.radiusOfGyrationPrincipalMajor =RadiusOfGyrationPrincipalMajor ;
-            this.radiusOfGyrationPrincipalMinor =RadiusOfGyrationPrincipalMinor ;
+            this._I_w  =MomentOfInertiaPrincipalMajor  ;
+            this._I_z  =MomentOfInertiaPrincipalMinor  ;
+            this._S_w   =SectionModulusPrincipalMajor   ;
+            this._S_z   =SectionModulusPrincipalMinor   ;
+            this._r_w =RadiusOfGyrationPrincipalMajor ;
+            this._r_z =RadiusOfGyrationPrincipalMinor ;
         }
 
         double _d;
@@ -84,43 +85,43 @@ namespace Wosad.Common.Section.Predefined
             get { return _b; }
         }
 
-        double momentOfInertiaPrincipalMajor;
+        double _I_w;
 
-        public double MomentOfInertiaPrincipalMajor
+        public double I_w
         {
-            get { return momentOfInertiaPrincipalMajor; }
+            get { return _I_w; }
         }
-        double momentOfInertiaPrincipalMinor;
+        double _I_z;
 
-        public double MomentOfInertiaPrincipalMinor
+        public double I_z
         {
-            get { return momentOfInertiaPrincipalMinor; }
-        }
-
-        double sectionModulusPrincipalMajor;
-
-        public double S_major
-        {
-            get { return sectionModulusPrincipalMajor; }
-        }
-        double sectionModulusPrincipalMinor;
-
-        public double S_minor
-        {
-            get { return sectionModulusPrincipalMinor; }
+            get { return _I_z; }
         }
 
-        double radiusOfGyrationPrincipalMajor;
+        double _S_w;
 
-        public double r_major
+        public double S_w
         {
-            get { return radiusOfGyrationPrincipalMajor; }
+            get { return _S_w; }
         }
-        double radiusOfGyrationPrincipalMinor;
+        double _S_z;
 
-        public double r_minor
+        public double S_z
         {
-            get { return radiusOfGyrationPrincipalMinor; }
+            get { return _S_z; }
+        }
+
+        double _r_w;
+
+        public double r_w
+        {
+            get { return _r_w; }
+        }
+        double _r_z;
+
+        public double r_z
+        {
+            get { return _r_z; }
         }
 
 
@@ -133,5 +134,27 @@ namespace Wosad.Common.Section.Predefined
         //{
         //    throw new NotImplementedException();
         //}
+
+        double _Angle_alpha;
+        public double Angle_alpha
+        {
+            get
+            {
+                return _Angle_alpha;
+            }
+
+        }
+
+
+        double _beta_w;
+        public double beta_w
+        {
+            get
+            {
+                return _beta_w;
+            }
+        }
+
+        public AngleOrientation AngleOrientation { get; set; }
     }
 }

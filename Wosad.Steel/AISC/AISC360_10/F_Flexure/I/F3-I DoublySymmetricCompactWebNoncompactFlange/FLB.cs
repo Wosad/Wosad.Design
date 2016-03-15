@@ -41,7 +41,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             ISectionI sectionI = Section as ISectionI;
             if (sectionI!=null)
 	            {
-                ShapeCompactness.ShapeIMember compactness = new ShapeCompactness.ShapeIMember(Section, IsRolledMember,FlexuralCompressionFiberPosition.Top);
+                ShapeCompactness.IShapeMember compactness = new ShapeCompactness.IShapeMember(Section, IsRolledMember,FlexuralCompressionFiberPosition.Top);
                 CompactnessClassFlexure cClass = compactness.GetFlangeCompactnessFlexure();
                 if (cClass== CompactnessClassFlexure.Noncompact || cClass== CompactnessClassFlexure.Slender)
                 {

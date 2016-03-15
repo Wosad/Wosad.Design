@@ -32,34 +32,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class BeamChs : FlexuralMemberChsBase
     {
-      public double GetLocalBucklingCapacity()
-        {
-            double Mn = 0.0;
 
-            if (this.SectionPipe != null)
-            {
-                CompactnessClassFlexure cClass = GetCompactnessClass();
-                if (cClass == CompactnessClassFlexure.Noncompact || cClass == CompactnessClassFlexure.Slender)
-                {
-                    double Sx = Section.Shape.S_xTop;
-                    if (cClass == CompactnessClassFlexure.Noncompact)
-                    {
-                        //noncompact
-                        Mn = (0.021 * E / (D / t) + Fy) * Sx; //(F8-2)
-                    }
-                    else
-                    {
-                        //slender
-                        double Fcr = 0.33 * E / (D / t); //(F8-4)
-                        Mn = Fcr * Sx;  // (F8-3)
-                    }
-                }
-                else
-                {
-                    Mn = double.PositiveInfinity;
-                }
-            }
+        //Yielding F8.1
+        public double GetYieldingMomentCapacity()
+        {
+            double Mn = GetMajorPlasticMomentCapacity().Value;
             return Mn;
-      }
+        }
+
     }
 }

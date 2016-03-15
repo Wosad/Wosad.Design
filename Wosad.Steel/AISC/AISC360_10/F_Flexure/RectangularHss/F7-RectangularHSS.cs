@@ -23,11 +23,15 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             GetSectionValues();
             this.MomentAxis = MomentAxis;
+            FlangeCompactnessClass = GetFlangeCompactness();
+
         }
 
 
         public CompactnessClassFlexure FlangeCompactness { get; set; }
         public CompactnessClassFlexure WebCompactness { get; set; }
+
+        CompactnessClassFlexure FlangeCompactnessClass;
 
         //This section applies to square and rectangular HSS, and doubly symmetric boxshaped
         //members bent about either axis, having compact or noncompact webs and
@@ -46,16 +50,43 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public virtual SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            double phiM_n = GetCompressionFlangeLocalBucklingCapacity(CompressionLocation, MomentAxis);
-            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+            
+
+            if (FlangeCompactnessClass == CompactnessClassFlexure.Compact)
+            {
+                ls = new SteelLimitStateValue(-1, false);
+            }
+            else
+            {
+                double phiM_n = GetCompressionFlangeLocalBucklingCapacity(CompressionLocation, MomentAxis);
+                ls = new SteelLimitStateValue(phiM_n, true);
+            }
+
+
             return ls;
         }
 
 
         public SteelLimitStateValue GetFlexuralWebOrWallBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            double phiM_n = GetWebLocalBucklingCapacity(MomentAxis, CompressionLocation);
-            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+
+            ShapeCompactness.HollowMember Compactness = new ShapeCompactness.HollowMember(Section, CompressionLocation, MomentAxis);
+            CompactnessClassFlexure cClass = Compactness.GetWebCompactnessFlexure();
+
+            if (cClass == CompactnessClassFlexure.Compact)
+            {
+                ls = new SteelLimitStateValue(-1, false);
+
+            }
+            else
+            {
+                double phiM_n = GetWebLocalBucklingCapacity(MomentAxis, CompressionLocation);
+                ls = new SteelLimitStateValue(phiM_n, true);
+            }
             return ls;
         }
 

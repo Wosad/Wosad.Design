@@ -42,6 +42,21 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
 
+        public override SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation, 
+            FlexuralAndTorsionalBracingType BracingType)
+        {
+            //(F10-9)
+            double F_cr = ((0.71 * E) / (Math.Pow((((b) / (t))), 2)));
+
+
+            double S_c = GetSectionModulus(CompressionLocation, true, BracingType);
+            //(F10-8)
+            double M_n = F_cr * S_c;
+            double phiM_n = 0.9 * M_n;
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiM_n, true);
+            return ls;
+        }
+
 
 
 

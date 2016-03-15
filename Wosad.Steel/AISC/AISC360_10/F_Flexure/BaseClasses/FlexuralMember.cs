@@ -247,13 +247,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public SteelLimitStateValue GetFlexuralWebOrWallBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralWebOrWallBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;
         }
 
-        public SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation)
+        public virtual SteelLimitStateValue GetFlexuralLegOrStemBucklingStrength(FlexuralCompressionFiberPosition CompressionLocation, 
+            FlexuralAndTorsionalBracingType BracingType)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;

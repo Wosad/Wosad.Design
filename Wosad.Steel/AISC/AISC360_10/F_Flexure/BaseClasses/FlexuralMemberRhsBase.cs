@@ -58,30 +58,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
         
 
-        protected virtual double GetFlangeWidth_bf()
-        {
-            double b;
 
-            if (sectionTube.CornerRadiusOutside == -1.0)
-            {
-                b = SectionTube.B - 3.0 * sectionTube.t_des;
-            }
-            else
-            {
-                b = sectionTube.B - 2.0 * sectionTube.CornerRadiusOutside;
-            }
+        //protected virtual double GetFlangeThickness_tf()
+        //{
+        //    return sectionTube.t_des;
+        //}
 
-            return b;
-        }
-        protected virtual double GetFlangeThickness_tf()
-        {
-            return sectionTube.t_des;
-        }
-        protected virtual double GetWebWallHeight_h()
-        {
-            //B4-1b. Stiffened Elements
-            double tdes = sectionTube.t_des;
-            return sectionTube.t_des-3.0*tdes;
-        }
     }
 }

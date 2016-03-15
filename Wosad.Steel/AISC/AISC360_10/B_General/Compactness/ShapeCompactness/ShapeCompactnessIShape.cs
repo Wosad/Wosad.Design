@@ -35,10 +35,10 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
     public partial class ShapeCompactness
     {
-        public class ShapeIMember: ShapeCompactnessBase
+        public class IShapeMember: ShapeCompactnessBase
         {
 
-            public ShapeIMember(ISteelSection Section, bool IsRolledShape, 
+            public IShapeMember(ISteelSection Section, bool IsRolledShape, 
                 FlexuralCompressionFiberPosition compressionFiberPosition)
             {
 

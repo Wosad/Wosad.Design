@@ -32,25 +32,26 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public double GetFlexuralTorsionalBucklingMomentCapacity(FlexuralCompressionFiberPosition compressionFiberLocation, double L_b)
         {
-            double Mn;
+            double M_n;
             double pi = Math.PI;
             double Iy = Section.Shape.I_y;
             double G = Section.Material.ShearModulus;
-            double J = sectionTee.J;
+            double J = SectionTee.J;
             double B = GetB(compressionFiberLocation,L_b);
             double B2 = Math.Pow(B,2);
 
-            Mn = pi * Math.Sqrt(E * Iy * G * J) / (L_b) * (B + Math.Sqrt(1.0 + B2)); //(F9-4)
-            return Mn;
+            M_n = pi * Math.Sqrt(E * Iy * G * J) / (L_b) * (B + Math.Sqrt(1.0 + B2)); //(F9-4)
+            double phiM_n = 0.9 * M_n;
+            return phiM_n;
 
         }
 
         private double GetB(FlexuralCompressionFiberPosition compressionFiberLocation, double L_b)
         {
             double B;
-            double d = sectionTee.d;
-            double Iy = sectionTee.I_y;
-            double J = sectionTee.J;
+            double d = SectionTee.d;
+            double Iy = SectionTee.I_y;
+            double J = SectionTee.J;
 
             double sign;
 

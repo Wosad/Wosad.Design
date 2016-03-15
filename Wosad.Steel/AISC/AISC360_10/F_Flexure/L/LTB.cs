@@ -36,12 +36,64 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             throw new NotImplementedException();
             double M_n = 0.0;
-            //if (MomentAxis == MomentAxis.)
-            //{
+            double M_n1 = 0.0;
+            double M_n2 = 0.0;
+            double M_e = GetM_e(L_b, C_b, CompressionLocation, BracingType, MomentAxis);
+            double M_y = GetYieldingMomentGeometricXCapacity(CompressionLocation);
 
-            //}
+            if (M_e<=M_y)
+            {
+                //F10-2
+                M_n1=(0.92-((0.17*M_e) / (M_y)))*M_e;
+            }
+            else
+            {
+                //F10-3
+                M_n1=(1.92-1.17*Math.Sqrt(((M_y) / (M_e))))*M_y; 
+            }
 
+            M_n2 = 1.5*M_y;
+            M_n= Math.Min(M_n1,M_n2);
+            double phiM_n = 0.9 * M_n;
         }
+
+        private double GetM_e(double L_b, double C_b, FlexuralCompressionFiberPosition CompressionLocation, 
+            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
+        {
+            double M_e;
+            if (MomentAxis == MomentAxis.MajorPrincipalAxis)
+            {
+                if (IsEqualLeg == true)
+                {
+                    M_e = ((0.46 * E * Math.Pow(b, 2) * Math.Pow(t, 2) * C_b) / (L_b)); //F10-4
+                }
+                else
+                {
+                    //F10-5
+                    M_e = ((4.9 * E * I_z * C_b) / (Math.Pow(L_b, 2))) * (Math.Sqrt(Math.Pow(beta_w, 2) + 0.052 * Math.Pow((((L_b * t) / (r_z))), 2)) + beta_w);
+                }
+            }
+            else
+            {
+                if (CompressionLocation == FlexuralCompressionFiberPosition.Top)
+                {
+                    //F10-6a
+                    M_e = ((0.66 * E * Math.Pow(b, 4) * t * C_b) / (Math.Pow(L_b, 2))) * (Math.Sqrt(1 + 0.78 * Math.Pow((((L_b * t) / (Math.Pow(b, 2)))), 2)) - 1);
+                }
+                else
+                {
+                    //F10-6b
+                    M_e = ((0.66 * E * Math.Pow(b, 4) * t * C_b) / (Math.Pow(L_b, 2))) * (Math.Sqrt(1 + 0.78 * Math.Pow((((L_b * t) / (Math.Pow(b, 2)))), 2)) + 1);
+                }
+                if (BracingType == FlexuralAndTorsionalBracingType.AtPointOfMaximumMoment)
+                {
+                    M_e = 1.25 * M_e;
+                }
+            }
+            return M_e;
+        }
+
+       
 
     }
 }

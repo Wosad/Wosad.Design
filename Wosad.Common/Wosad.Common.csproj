@@ -61,6 +61,8 @@
     <Compile Include="Data\MoreLinq\MoreEnumerable.cs" />
     <Compile Include="Data\MoreLinq\OrderBy.cs" />
     <Compile Include="Data\MoreLinq\OrderByDirection.cs" />
+    <Compile Include="Entities\AngleOrientation.cs" />
+    <Compile Include="Exceptions\ShapeTypeNotSupportedException.cs" />
     <Compile Include="Interfaces\ILocationArrayElement.cs" />
     <Compile Include="Maps\Location.cs" />
     <Compile Include="Maps\LocationCollection.cs" />
@@ -126,7 +128,8 @@
     </Compile>
     <Compile Include="Reports\ReportElementAttribute.cs" />
     <Compile Include="Section\Interfaces\IMeasurableAreaSection.cs" />
-    <Compile Include="Section\Exceptions\FailedToCalculateSectionPropertiesException.cs" />
+    <Compile Include="Exceptions\FailedToCalculateSectionPropertiesException.cs" />
+    <Compile Include="Section\ProfileShapeTypes\Angle\AnglePrincialAxisProperties.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\CompoundShapeSlicing.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\PartWithSingleFillet.cs" />
     <Compile Include="Section\ProfileShapeTypes\Generic\GenericShape.cs" />
@@ -144,7 +147,6 @@
     <Compile Include="Section\ProfileShapeTypes\Compound\RoundWall.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\SectionSlice.cs" />
     <Compile Include="Section\Interfaces\ISectionSlice.cs" />
-    <Compile Include="Section\SectionTypes\General\SectionGenericShape.cs" />
     <Compile Include="Entities\CatalogNames.cs" />
     <Compile Include="Entities\FlexuralCompressionFiberPosition.cs" />
     <Compile Include="Section\Interfaces\IAsymmetricalShearCenter.cs" />
@@ -193,7 +195,7 @@
     <Compile Include="Section\ProfileShapeTypes\SectionTube.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\MapData\" />
+    <Folder Include="Section\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

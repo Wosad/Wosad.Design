@@ -36,18 +36,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
-            double Mn = 0.0;
+            double phiM_n = 0.0;
             double Mp = GetMinorPlasticMomentCapacity().Value;
-            double M = 1.6 * Fy * Sy;
-            double My = M;
+            double My = 1.6 * Fy * Sy;
             
 
 
-            M = Math.Min(Mp, My); //(F6-1)
-            Mn = M;
+            double M_n = Math.Min(Mp, My); //(F6-1)
+            phiM_n = 0.9*M_n;
 
             ls.IsApplicable = true;
-            ls.Value = Mn;
+            ls.Value = M_n;
             return ls;
         }
     }

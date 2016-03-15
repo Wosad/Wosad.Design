@@ -42,7 +42,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public ISteelBeamFlexure GetBeam(ShapeTypeSteel Shape, MomentAxis MomentAxis, 
             CompactnessClassFlexure UnstiffenedElementCompactness, CompactnessClassFlexure StiffenedElementCompactness,
-            ISection Section, ISteelMaterial Material, ICalcLog Log, bool IsRolled)
+            ISection Section, ISteelMaterial Material, ICalcLog Log)
         {
             
             ISteelBeamFlexure beam = null;
@@ -54,7 +54,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     ISec = Section as PredefinedSectionI;
                     if (ISec != null)
                     {
-                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log, IsRolled);
+                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log, true);
                     }
                    
                     break;
@@ -62,7 +62,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     if (Section is ISectionI)
                     {
                         ISectionI section = Section as ISectionI;
-                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, section, Material, Log, IsRolled);
+                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, section, Material, Log, false);
                     }
                     break;
                 case ShapeTypeSteel.Channel:
@@ -82,7 +82,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     RhsSec = Section as ISectionTube;
                     if (RhsSec != null)
                     {
-                        beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, MomentAxis, Log, IsRolled);
+                        beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, MomentAxis, Log);
                     }
                     break;
                 case ShapeTypeSteel.Box:
@@ -100,7 +100,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
         private ISteelBeamFlexure CreateRhsBeam(CompactnessClassFlexure FlangeCompactness, CompactnessClassFlexure WebCompactness,
-            ISectionTube RhsSec, ISteelMaterial Material, MomentAxis MomentAxis, ICalcLog Log, bool IsRolled)
+            ISectionTube RhsSec, ISteelMaterial Material, MomentAxis MomentAxis, ICalcLog Log)
         {
             SteelRhsSection steelSection = new SteelRhsSection(RhsSec, Material);
             ISteelBeamFlexure beam = null;

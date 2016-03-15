@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.Entities;
+using Wosad.Common.Exceptions;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Section.SectionTypes;
 
@@ -32,8 +33,8 @@ namespace Wosad.Common.Section.Predefined
     public class AiscShapeFactory
     {
 
-        public ISection GetShape(string ShapeId, ShapeTypeSteel shapeType)
-        {
+        public ISection GetShape(string ShapeId, ShapeTypeSteel shapeType, AngleOrientation AngleOrientation= AngleOrientation.LongLegVertical)
+        { 
 
             string DEFAULT_EXCEPTION_STRING = "Selected shape is not supported. Specify a different shape.";
             AiscCatalogShape cs = new AiscCatalogShape(ShapeId,null);
@@ -52,7 +53,7 @@ namespace Wosad.Common.Section.Predefined
                     sec = new PredefinedSectionChannel(cs);
                     break;
                 case ShapeTypeSteel.Angle:
-                    sec = new PredefinedSectionAngle(cs);
+                    sec = new PredefinedSectionAngle(cs, AngleOrientation);
                     break;
                 case ShapeTypeSteel.TeeRolled:
                     throw new Exception(DEFAULT_EXCEPTION_STRING);
@@ -88,6 +89,62 @@ namespace Wosad.Common.Section.Predefined
             return sec;
         }
 
+
+        public ISliceableSection GetSliceableSection(string ShapeId, ShapeTypeSteel shapeType)
+        {
+            ISection section = this.GetShape(ShapeId, ShapeTypeSteel.IShapeRolled);
+            ISliceableSection sec;
+
+            switch (shapeType)
+            {
+                case ShapeTypeSteel.IShapeRolled:
+                            PredefinedSectionI catI = section as PredefinedSectionI;
+                             sec = new SectionIRolled("", catI.d, catI.b_fTop, catI.tf, catI.t_w, catI.k);
+                    break;
+                case ShapeTypeSteel.IShapeBuiltUp:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.Channel:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.Angle:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.TeeRolled:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.TeeBuiltUp:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.DoubleAngle:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.CircularHSS:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.RectangularHSS:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.Box:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.Rectangular:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.Circular:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                case ShapeTypeSteel.IShapeAsym:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+                default:
+                    throw new ShapeTypeNotSupportedException("ISliceableSection property ");
+                    break;
+            }
+
+            return sec;
+
+        }
         private double GetAngleGap(string ShapeId)
         {
             double gap=0;

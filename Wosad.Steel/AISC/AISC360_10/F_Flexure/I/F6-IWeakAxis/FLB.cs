@@ -37,10 +37,10 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
             double Mn = 0;
 
-            ShapeCompactness.ShapeIMember compactnessTop = new ShapeCompactness.ShapeIMember(Section, IsRolledMember, FlexuralCompressionFiberPosition.Top);
+            ShapeCompactness.IShapeMember compactnessTop = new ShapeCompactness.IShapeMember(Section, IsRolledMember, FlexuralCompressionFiberPosition.Top);
             CompactnessClassFlexure flangeCompactnessTop = compactnessTop.GetFlangeCompactnessFlexure();
 
-            ShapeCompactness.ShapeIMember compactnessBot= new ShapeCompactness.ShapeIMember(Section, IsRolledMember, FlexuralCompressionFiberPosition.Top);
+            ShapeCompactness.IShapeMember compactnessBot= new ShapeCompactness.IShapeMember(Section, IsRolledMember, FlexuralCompressionFiberPosition.Top);
             CompactnessClassFlexure flangeCompactnessBot= compactnessTop.GetFlangeCompactnessFlexure();
 
             double lambda = 0.0;
@@ -48,7 +48,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double lambdaBot = compactnessBot.GetCompressionFlangeLambda();
 
             CompactnessClassFlexure flangeCompactness;
-            ShapeCompactness.ShapeIMember compactness;
+            ShapeCompactness.IShapeMember compactness;
             double b = 0;
             double tf = 0.0;
 
@@ -87,7 +87,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     Mn = Fcr * Sy; //(F6-3)
                     break;
             }
-            return Mn;
+            double phiM_n = 0.9 * Mn;
+            return phiM_n;
         }
     }
 }

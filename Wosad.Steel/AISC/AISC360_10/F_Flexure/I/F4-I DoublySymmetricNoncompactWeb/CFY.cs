@@ -39,7 +39,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Rpc = GetRpc(compressionFiberPosition);
 
             Mn = Rpc * Myc; //(F4-1)
-            return Mn;
+
+            double phiM_n = 0.9 * Mn;
+            return phiM_n;
         }
 
 

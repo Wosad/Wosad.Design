@@ -22,51 +22,37 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces; 
-
-using Wosad.Common.Section.SectionTypes;
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
+
 
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamChs : FlexuralMemberChsBase
+    public partial class BeamDoubleAngle : FlexuralMemberDoubleAngleBase
     {
-        public BeamChs(ISteelSection section, ICalcLog CalcLog)
+        public BeamDoubleAngle(ISteelSection section, ICalcLog CalcLog)
             : base(section, CalcLog)
         {
-            if (section is ISectionPipe)
+
+            if (section is ISectionDoubleAngle)
             {
-                SectionPipe = section as ISectionPipe;
+
+                    SectionDoubleAngle = section as ISectionDoubleAngle;
+
+
             }
             else
             {
                 throw new SectionWrongTypeException(typeof(ISectionTube));
             }
-                
-            
             GetSectionValues();
         }
 
-       // This section applies to round HSS
+        ISectionTee SectionTee;
+        ISectionDoubleAngle SectionDoubleAngle;
 
-
-        //public override double GetFlexuralCapacityMajorAxis( FlexuralCompressionFiberPosition compressionFiberLocation = FlexuralCompressionFiberPosition.Top)
-        //{
-        //    double MYielding = GetYieldingMomentCapacity();
-        //    double MLocalBuckling = GetLocalBucklingCapacity();
-        //    double M = Math.Min(MYielding, MLocalBuckling);
-        //    return M;
-
-        //}
-
-        //Yielding F8.1
-        public double GetYieldingMomentCapacity()
-        {
-            double Mn = GetMajorPlasticMomentCapacity().Value;
-            return Mn;
-        }
 
 
 
@@ -76,16 +62,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             E = Section.Material.ModulusOfElasticity;
             Fy = Section.Material.YieldStress;
 
-            D = SectionPipe.D;
-            t = SectionPipe.t_des;
-
         }
+
 
         double E;
         double Fy;
 
-        double D;
-        double t;
+
 
     }
 }

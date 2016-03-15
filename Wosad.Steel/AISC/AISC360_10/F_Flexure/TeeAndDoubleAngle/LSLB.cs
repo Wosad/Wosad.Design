@@ -35,7 +35,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             if (compressionFiberLocation == FlexuralCompressionFiberPosition.Top)
 	            {
 		             // stem is in tension
-                            return double.PositiveInfinity;
+                     return double.PositiveInfinity;
 	            }
                         else
 	            {

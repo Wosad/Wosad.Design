@@ -18,9 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
 
  
@@ -41,35 +42,54 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             }
             else
             {
-                My = GetYieldingMomentGeometricYCapacity(compressionFiberLocation);
+                throw new CompressionFiberPositionException();
             }
 
             Mn = 1.5 * My; //(F10-1)
 
-            return Mn;
+            double phiM_n = 0.9 * Mn;
+            return phiM_n;
         }
 
-        
-
-        private double GetYieldingMomentGeometricXCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
+        protected double GetSectionModulus(FlexuralCompressionFiberPosition compressionFiberLocation, bool UseCompressionSectionModulusOnly, FlexuralAndTorsionalBracingType BracingType)
         {
             double Sxt = GetSectionModulusTensionSxt(compressionFiberLocation);
             double Sxc = GetSectionModulusCompressionSxc(compressionFiberLocation);
-            double Sx = Math.Min(Sxc, Sxt);
+
+            double Sx;
+            if (UseCompressionSectionModulusOnly == true)
+            {
+                Sx=Sxc;
+            }
+            else
+	        {
+                Sx=Math.Min(Sxc, Sxt);
+	        }
+            if (BracingType == FlexuralAndTorsionalBracingType.NoLateralBracing)
+            {
+                Sx = 0.8 * Sx;
+            }
+
+            return Sx;
+        }
+
+        private double GetYieldingMomentGeometricXCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
+        {
+            double S_x = GetSectionModulus(compressionFiberLocation, false, FlexuralAndTorsionalBracingType.FullLateralBracing);
             double Fy = Section.Material.YieldStress;
-            double My = Sx * Fy;
+            double My = S_x * Fy;
             return My;
         }
 
-        private double GetYieldingMomentGeometricYCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
-        {
-            double Syt = GetSectionModulusTensionSyt(compressionFiberLocation);
-            double Syc = GetSectionModulusCompressionSyc(compressionFiberLocation);
-            double Sy = Math.Min(Syc, Syt);
-            double Fy = Section.Material.YieldStress;
-            double My = Sy * Fy;
-            return My;
-        }
+        //private double GetYieldingMomentGeometricYCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
+        //{
+        //    double Syt = GetSectionModulusTensionSyt(compressionFiberLocation);
+        //    double Syc = GetSectionModulusCompressionSyc(compressionFiberLocation);
+        //    double Sy = Math.Min(Syc, Syt);
+        //    double Fy = Section.Material.YieldStress;
+        //    double My = Sy * Fy;
+        //    return My;
+        //}
 
 
     }

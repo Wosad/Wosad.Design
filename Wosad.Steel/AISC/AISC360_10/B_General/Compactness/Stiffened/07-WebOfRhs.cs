@@ -41,26 +41,44 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
             
         }
 
-        public WebOfRhs(ISteelMaterial Material, ISectionTube sectionTube, double OutsideCornerRadius = -1.0)
+        public WebOfRhs(ISteelMaterial Material, ISectionTube sectionTube,MomentAxis MomentAxis) //, double OutsideCornerRadius = -1.0)
             :base(Material)
         {
             this.SectionTube = sectionTube;
             ISectionTube s = sectionTube;
             double td = s.t_des;
-            if (OutsideCornerRadius==-1.0)
+            //if (OutsideCornerRadius==-1.0)
+            //{
+            //    this.Width = s.B - 3.0 * td;
+            //}
+            //else
+            //{
+            //    if (OutsideCornerRadius<0)
+            //    {
+            //        throw new Exception("Invalid RHS corner radius. Must be over 0");
+            //    }
+            //    this.Width = s.B - 2.0 * OutsideCornerRadius;
+            //}
+
+            this.Width = GetWebWallHeight_h(MomentAxis);
+            this.Thickness = td;
+        }
+
+        protected virtual double GetWebWallHeight_h(MomentAxis MomentAxis)
+        {
+            double tdes = SectionTube.t_des;
+            double h =0;
+            //B4-1b. Stiffened Elements
+            if (MomentAxis == MomentAxis.XAxis)
             {
-                this.Width = s.B - 3.0 * td;
+                h = SectionTube.H - 3.0 * tdes;
             }
-            else
+            else if (MomentAxis == MomentAxis.YAxis)
             {
-                if (OutsideCornerRadius<0)
-                {
-                    throw new Exception("Invalid RHS corner radius. Must be over 0");
-                }
-                this.Width = s.B - 2.0 * OutsideCornerRadius;
+                h = SectionTube.B - 3.0 * tdes;
             }
 
-            this.Thickness = td;
+            return h;
         }
 
         public override double GetLambda_r(StressType stress)
