@@ -18,9 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using Wosad.Common;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
 
  
@@ -69,8 +71,65 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 }
                 else
                 {
+                    double beta_wCorrected;
                     //F10-5
-                    M_e = ((4.9 * E * I_z * C_b) / (Math.Pow(L_b, 2))) * (Math.Sqrt(Math.Pow(beta_w, 2) + 0.052 * Math.Pow((((L_b * t) / (r_z))), 2)) + beta_w);
+                    if (CompressionLocation == FlexuralCompressionFiberPosition.Top)
+                    {
+                        if (AngleRotation == AISC.AngleRotation.FlatLegBottom)
+                        {
+                            if (d < b) //short leg in compression
+                            {
+                                beta_wCorrected = beta_w;
+                            }
+                            else
+                            {
+                                beta_wCorrected = -beta_w;
+                            }
+                        }
+                        else
+                        {
+                            if (d > b) //short leg in compression
+                            {
+                                beta_wCorrected = beta_w;
+                            }
+                            else
+                            {
+                                beta_wCorrected = -beta_w;
+                            }
+                        }
+
+                    }
+                    else if (CompressionLocation == FlexuralCompressionFiberPosition.Bottom)
+                    {
+
+                        if (AngleRotation == AISC.AngleRotation.FlatLegBottom)
+                        {
+                            if (d > b) 
+                            {
+                                beta_wCorrected = beta_w;
+                            }
+                            else
+                            {
+                                beta_wCorrected = -beta_w;
+                            }
+                        }
+                        else
+                        {
+                            if (d < b)
+                            {
+                                beta_wCorrected = beta_w;
+                            }
+                            else
+                            {
+                                beta_wCorrected = -beta_w;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new CompressionFiberPositionException();
+                    }
+                    M_e = ((4.9 * E * I_z * C_b) / (Math.Pow(L_b, 2))) * (Math.Sqrt(Math.Pow(beta_wCorrected, 2) + 0.052 * Math.Pow((((L_b * t) / (r_z))), 2)) + beta_wCorrected);
                 }
             }
             else

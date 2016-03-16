@@ -181,7 +181,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(t,d-t, new Point2D(t/2.0,(d-t)/2)),
+                new CompoundShapePart(t,d-t, new Point2D(t/2.0,(d-t)/2+t)),
                 new CompoundShapePart(b,t, new Point2D(b/2,t/2)),
             };
             return rectX;
@@ -196,11 +196,11 @@ namespace Wosad.Common.Section.SectionTypes
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
             //angle is rotated 90 deg and converted to TEE
-            //Insertion point at the top of TEE
+            //Insertion point at the bottom of TEE
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()
             {
-                new CompoundShapePart(d,t, new Point2D(0, -t/2.0)),
-                new CompoundShapePart(t, b-t, new Point2D(0,-((b-t)/2+t))),
+                new CompoundShapePart(d,t, new Point2D(0, t/2.0)),
+                new CompoundShapePart(t, b-t, new Point2D(0,((b-t)/2+t))),
             };
             return rectY;
         }
@@ -229,10 +229,34 @@ namespace Wosad.Common.Section.SectionTypes
             this._J=(((d_prime+b_prime)*Math.Pow(t, 3)) / (3));
         }
 
-        public double Angle_alpha { get; set; }
 
+        private double _angle_alpha;
 
-        public double beta_w { get; set; }
+        public double Angle_alpha
+        {
+            get {
+                if (PrincipalAxisPropertiesCalculated == false)
+                {
+                    CalculatePrincipalAxisProperties();
+                }
+                return _angle_alpha; }
+      
+        }
+
+        bool beta_wCalculated;
+
+        private double _beta_w;
+
+        public double beta_w
+        {
+            get {
+                if (beta_wCalculated == false)
+                {
+                    Calculate_beta_w();
+                }
+                return _beta_w; }
+        }
+        
 
     }
 }

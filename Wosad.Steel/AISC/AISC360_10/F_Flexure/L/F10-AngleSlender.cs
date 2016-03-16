@@ -34,8 +34,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public partial class BeamAngleSlender : BeamAngleCompact
     {
 
-        public BeamAngleSlender(ISteelSection section, ICalcLog CalcLog)
-            : base(section, CalcLog)
+        public BeamAngleSlender(ISteelSection section, ICalcLog CalcLog, AngleRotation AngleRotation)
+            : base(section, CalcLog, AngleRotation)
         {
             
             GetSectionValues();
