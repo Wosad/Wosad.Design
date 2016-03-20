@@ -18,7 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.AISC360_10.B_General;
+using Wosad.Steel.AISC.Interfaces;
  
  
  
@@ -28,7 +32,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
     public partial class ShapeCompactness
     {
-        public abstract class ShapeCompactnessBase
+        public abstract class ShapeCompactnessBase : IShapeCompactness
         {
             protected ICompactnessElement FlangeCompactness { get; set; }
             protected ICompactnessElement WebCompactness { get; set; }

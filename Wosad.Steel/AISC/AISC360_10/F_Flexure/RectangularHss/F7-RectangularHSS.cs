@@ -54,8 +54,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //compact, noncompact or slender flanges as defined in Section B4.1 for flexure.
 
 
-
-
         #region Limit States
 
         public virtual SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
@@ -109,8 +107,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
         #endregion
-
-
 
 
         internal void GetSectionValues()

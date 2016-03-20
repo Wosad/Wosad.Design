@@ -40,62 +40,107 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     {
   
 
-        public ISteelBeamFlexure GetBeam(ShapeTypeSteel Shape, MomentAxis MomentAxis, 
-            CompactnessClassFlexure UnstiffenedElementCompactness, CompactnessClassFlexure StiffenedElementCompactness,
-            ISection Section, ISteelMaterial Material, ICalcLog Log)
+        public ISteelBeamFlexure GetBeam(ISection Shape, ISteelMaterial Material, ICalcLog Log, MomentAxis MomentAxis,
+                 FlexuralCompressionFiberPosition compressionFiberPosition,  bool IsRolledMember=true)
         {
-            
             ISteelBeamFlexure beam = null;
-            switch (Shape)
-            {
+
+            if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+	        {
+                    if (Shape is ISection)
+                    {
+                        ISectionI IShape = Shape as ISectionI;
+                        SteelSectionI SectionI = new SteelSectionI(IShape, Material);
+                        if (IShape.b_fBot == IShape.b_fTop && IShape.t_fBot == IShape.t_fTop) // doubly symmetric
+                        {
+                            DoublySymmetricIBeam dsBeam = new DoublySymmetricIBeam(SectionI, Log, compressionFiberPosition, IsRolledMember);
+                            beam = dsBeam.GetBeamCase();
+                        }
+                        else
+                        {
+                            SinglySymmetricIBeam ssBeam = new SinglySymmetricIBeam(SectionI, IsRolledMember, compressionFiberPosition, Log );
+                            beam = ssBeam.GetBeamCase();
+                        }
+                    }
+                    else if (Shape is ISectionTube)
+	                {
+                        ISectionTube TubeShape = Shape as ISectionTube;
+                        SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
+                        beam = new BeamRectangularHss(RectHSS_Section,MomentAxis,Log);
+	                }
+                    else if (Shape is ISectionBox )
+                    {
+                        ISectionBox BoxShape = Shape as ISectionBox;
+                        SteelBoxSection BoxSection = new SteelBoxSection(BoxShape,Material);
+                        beam = new BeamRectangularHss(BoxSection,MomentAxis,Log);
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+	        }
+            else  // weak axis
+	        {
+                if (Shape is ISection)
+                {
+                        ISectionI IShape = Shape as ISectionI;
+                        SteelSectionI SectionI = new SteelSectionI(IShape, Material);
+
+                        beam = new BeamIWeakAxis(SectionI, IsRolledMember, Log);
+                }
+                throw new NotImplementedException();
+	        }
+
+            //switch (Shape)
+            //{
                     
-                case ShapeTypeSteel.IShapeRolled:
-                    PredefinedSectionI ISec;
-                    ISec = Section as PredefinedSectionI;
-                    if (ISec != null)
-                    {
-                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log, true);
-                    }
+            //    case ShapeTypeSteel.IShapeRolled:
+            //        PredefinedSectionI ISec;
+            //        ISec = Section as PredefinedSectionI;
+            //        if (ISec != null)
+            //        {
+            //            //beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log, true);
+            //        }
                    
-                    break;
-                case ShapeTypeSteel.IShapeBuiltUp:
-                    if (Section is ISectionI)
-                    {
-                        ISectionI section = Section as ISectionI;
-                        beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, section, Material, Log, false);
-                    }
-                    break;
-                case ShapeTypeSteel.Channel:
-                    break;
-                case ShapeTypeSteel.Angle:
-                    break;
-                case ShapeTypeSteel.TeeRolled:
-                    break;
-                case ShapeTypeSteel.TeeBuiltUp:
-                    break;
-                case ShapeTypeSteel.DoubleAngle:
-                    break;
-                case ShapeTypeSteel.CircularHSS:
-                    break;
-                case ShapeTypeSteel.RectangularHSS:
-                    ISectionTube RhsSec;
-                    RhsSec = Section as ISectionTube;
-                    if (RhsSec != null)
-                    {
-                        beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, MomentAxis, Log);
-                    }
-                    break;
-                case ShapeTypeSteel.Box:
-                    break;
-                case ShapeTypeSteel.Rectangular:
-                    break;
-                case ShapeTypeSteel.Circular:
-                    break;
-                case ShapeTypeSteel.IShapeAsym:
-                    break;
-                default:
-                    break;
-            }
+            //        break;
+            //    case ShapeTypeSteel.IShapeBuiltUp:
+            //        if (Section is ISectionI)
+            //        {
+            //            ISectionI section = Section as ISectionI;
+            //            //beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, section, Material, Log, false);
+            //        }
+            //        break;
+            //    case ShapeTypeSteel.Channel:
+            //        break;
+            //    case ShapeTypeSteel.Angle:
+            //        break;
+            //    case ShapeTypeSteel.TeeRolled:
+            //        break;
+            //    case ShapeTypeSteel.TeeBuiltUp:
+            //        break;
+            //    case ShapeTypeSteel.DoubleAngle:
+            //        break;
+            //    case ShapeTypeSteel.CircularHSS:
+            //        break;
+            //    case ShapeTypeSteel.RectangularHSS:
+            //        ISectionTube RhsSec;
+            //        RhsSec = Section as ISectionTube;
+            //        if (RhsSec != null)
+            //        {
+            //           // beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, MomentAxis, Log);
+            //        }
+            //        break;
+            //    case ShapeTypeSteel.Box:
+            //        break;
+            //    case ShapeTypeSteel.Rectangular:
+            //        break;
+            //    case ShapeTypeSteel.Circular:
+            //        break;
+            //    case ShapeTypeSteel.IShapeAsym:
+            //        break;
+            //    default:
+            //        break;
+            //}
             return beam;
         }
 

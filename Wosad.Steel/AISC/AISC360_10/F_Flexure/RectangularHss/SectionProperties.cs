@@ -24,6 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.Exceptions;
 
 
 
@@ -31,60 +32,221 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class BeamRectangularHss : FlexuralMemberRhsBase, ISteelBeamFlexure
     {
-        private double GetEffectiveSectionModulusX()
+        private double GetEffectiveSectionModulusX(MomentAxis MomentAxis)
         {
             double Se=0.0;
-            double be = GetEffectiveFlangeWidth_beff();
-            double b = GetCompressionFlangeWidth_b();
-            double AOriginal = SectionTube.A;
-                
+            double be = GetEffectiveFlangeWidth_beff(MomentAxis);
+            double b = GetCompressionFlangeWidth_b(MomentAxis);
+            double AOriginal = Section.Shape.A;
+
+
+            double t_f = GetFlangeThickness(MomentAxis);
+            double bRemoved = (b - be);
+            double ADeducted = bRemoved * t_f;
+
+            double h = GetSectionHeight(MomentAxis);
+
             //Find I reduced
-            double IOriginal = SectionTube.I_x;
-            double tdes = SectionTube.t_des;
-            double bRemoved = (b - be) ;
-            double ADeducted = bRemoved* tdes;
-            double  h = SectionTube.H;
-            double yDeducted = (h-tdes)/2.0;
-            double Ideducted = bRemoved * Math.Pow(tdes, 3) / 12.0;
-            //Use parallel axis theorem:
-            double IFinal = IOriginal -(ADeducted * Math.Pow(yDeducted, 2) + Ideducted);
+            double I_Reduced = GetReducedMomentOfInertiaX(MomentAxis, ADeducted, bRemoved, t_f);
 
 
-            // since the section is symmetric, assume compression fiber is at the top
-            // this does not matter anyways
 		     double yCentroidModifiedFromBottom = h / 2 - ADeducted / AOriginal;
              double yCentroidModifiedFromTop = h / 2 + ADeducted / AOriginal;
 
-             Se = IFinal / yCentroidModifiedFromTop;
+             Se = I_Reduced / yCentroidModifiedFromTop;
             
 
             return Se;
         }
 
-        protected virtual double GetCompressionFlangeWidth_b()
+        private double GetSectionHeight(MomentAxis MomentAxis)
+        {
+            double h = 0.0;
+            if (ShapeTube != null)
+            {
+
+                if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+                {
+                    h = ShapeTube.H;
+                }
+                else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+                {
+                    h = ShapeTube.B;
+                }
+                else
+                {
+                    throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+                }
+            }
+            else if (ShapeBox != null)
+            {
+
+                if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+                {
+                    h = ShapeBox.H;
+                }
+                else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+                {
+                    h = ShapeBox.B;
+                }
+                else
+                {
+                    throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+                }
+            }
+            else
+            {
+                throw new ShapeTypeNotSupportedException(" effective moment of interia calculation for hollow section");
+            }
+            return h;
+        }
+
+        private double GetSectionWidth(MomentAxis MomentAxis)
+        {
+            double b = 0.0;
+            if (ShapeTube != null)
+            {
+
+                if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+                {
+                    b = ShapeTube.B;
+                }
+                else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+                {
+                    b = ShapeTube.H;
+                }
+                else
+                {
+                    throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+                }
+            }
+            else if (ShapeBox != null)
+            {
+
+                if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+                {
+                    b = ShapeBox.B;
+                }
+                else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+                {
+                    b = ShapeBox.H;
+                }
+                else
+                {
+                    throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+                }
+            }
+            else
+            {
+                throw new ShapeTypeNotSupportedException(" effective moment of interia calculation for hollow section");
+            }
+            return b;
+        }
+
+        private double GetMomentOfInertia(MomentAxis MomentAxis)
+        {
+            double I;
+
+            if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+            {
+                I = Section.Shape.I_x;
+            }
+            else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+            {
+                I = Section.Shape.I_y;
+            }
+            else
+            {
+                throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+            }
+            return I;
+        }
+
+        private double GetReducedMomentOfInertiaX(MomentAxis MomentAxis, double ADeducted, double bRemoved, double tdes)
+        {
+
+            double IOriginal = GetMomentOfInertia(MomentAxis); //Section.Shape.I_x;
+            double h = GetSectionHeight(MomentAxis);
+            double yDeducted = (h - tdes) / 2.0;
+            double Ideducted = bRemoved * Math.Pow(tdes, 3) / 12.0;
+            //Use parallel axis theorem:
+            double IFinal = IOriginal - (ADeducted * Math.Pow(yDeducted, 2) + Ideducted);
+            return IFinal;
+        }
+
+        private double GetFlangeThickness(MomentAxis MomentAxis )
+        {
+            double t_flange = 0.0;
+            if (ShapeTube!=null)
+            {
+                t_flange = ShapeTube.t_des;
+            }
+            else if (ShapeBox!=null)
+            {
+                
+                if (MomentAxis == Common.Entities.MomentAxis.XAxis)
+                {
+                    t_flange = ShapeBox.t_f;
+                }
+                else if (MomentAxis == Common.Entities.MomentAxis.YAxis)
+                {
+                    t_flange = ShapeBox.t_w;
+                }
+                else
+                {
+                    throw new Exception("Principal flexure calculation not supported. Select X-axis and Y-axis");
+                }
+            }
+            else
+            {
+                throw new ShapeTypeNotSupportedException(" effective moment of interia calculation for hollow section"); 
+            }
+            return t_flange;
+        }
+
+        protected virtual double GetCompressionFlangeWidth_b(MomentAxis MomentAxis)
         {
             // since section is symmetrical the location of compression fiber
             // does not matter
 
-            double b = 0;
+            double b_c = 0.0;
+            double B = 0.0;
+            B = GetSectionWidth(MomentAxis);
 
-            if (SectionTube.CornerRadiusOutside ==-1.0)
-	        {
-                b = SectionTube.B - 3.0 * SectionTube.t_des;
-	        }
+            if (ShapeTube != null)
+            {
+
+
+
+                            if (ShapeTube.CornerRadiusOutside == -1.0)
+                            {
+                                b_c = ShapeTube.B - 3.0 * ShapeTube.t_des;
+                            }
+                            else
+                            {
+                                b_c = ShapeTube.B - 2.0 * ShapeTube.CornerRadiusOutside;
+                            }
+            }
+            else if (ShapeBox != null)
+            {
+                b_c = ShapeBox.B;
+            }
             else
             {
-                b = SectionTube.B - 2.0 * SectionTube.CornerRadiusOutside;
+                throw new ShapeTypeNotSupportedException(" effective moment of interia calculation for hollow section");
             }
+            return b_c;
+
+
             
-            return b;
+            return b_c;
 
         }
 
-        protected double GetEffectiveFlangeWidth_beff()
+        protected double GetEffectiveFlangeWidth_beff(MomentAxis MomentAxis)
         {
-            double b = GetCompressionFlangeWidth_b();
-            double tf = SectionTube.t_des;
+            double b = GetCompressionFlangeWidth_b(MomentAxis);
+            double tf = GetFlangeThickness(MomentAxis);
             double be = 1.92*tf*SqrtE_Fy()*(1.0-0.38/(b/tf)*SqrtE_Fy()-0.738); //(F7-4)
             be = be > b? b :be;
             be= be<0? 0 : be;

@@ -30,7 +30,7 @@ using Wosad.Steel.AISC.Exceptions;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamIDoublySymmetricCompactWebNoncompactFlange : BeamIDoublySymmetricCompact
+    public partial class BeamIDoublySymmetricCompactWebOnly : BeamIDoublySymmetricCompact
     {
         //Compression Flange Local Buckling F3.2
 

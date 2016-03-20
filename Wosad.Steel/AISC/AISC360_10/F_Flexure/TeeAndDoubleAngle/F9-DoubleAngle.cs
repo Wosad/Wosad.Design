@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Common;
 
 
 
@@ -32,8 +33,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public partial class BeamDoubleAngle : FlexuralMemberDoubleAngleBase
     {
-        public BeamDoubleAngle(ISteelSection section, ICalcLog CalcLog)
-            : base(section, CalcLog)
+        public BeamDoubleAngle(ISteelSection section, ICalcLog CalcLog, AngleRotation AngleRotation, AngleOrientation AngleOrientation)
+            : base(section, CalcLog, AngleOrientation)
         {
 
             if (section is ISectionDoubleAngle)
@@ -47,12 +48,16 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             {
                 throw new SectionWrongTypeException(typeof(ISectionTube));
             }
+            this.AngleOrientation = AngleOrientation;
+            this.AngleRotation = AngleRotation;
+
             GetSectionValues();
         }
 
         ISectionTee SectionTee;
         ISectionDoubleAngle SectionDoubleAngle;
-
+        AngleRotation AngleRotation;
+        AngleOrientation AngleOrientation;
 
 
 

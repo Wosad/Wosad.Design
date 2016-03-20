@@ -22,32 +22,35 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.SteelEntities;
-using Wosad.Common.CalculationLogger;
- using Wosad.Common.CalculationLogger;
+using Wosad.Common.Section.Interfaces;
  
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 {
-    public  partial class BeamIWeakAxis : FlexuralMemberIBase
+    public class ShapeISymmetry
     {
-        //Yielding
-        public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
+        public static bool IsDoublySymmetric(ISection section)
         {
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            double phiM_n = 0.0;
-            double Mp = GetMinorPlasticMomentCapacity().Value;
-            double My = 1.6 * Fy * Sy;
-            
-
-
-            double M_n = Math.Min(Mp, My); //(F6-1)
-            phiM_n = 0.9*M_n;
-
-            ls.IsApplicable = true;
-            ls.Value = M_n;
-            return ls;
+            if (section is ISectionI)
+            {
+                ISectionI s = section as ISectionI;
+                double bfTop = s.b_fTop;
+                double bfBot = s.b_fBot;
+                double tfTop = s.t_fTop;
+                double tfBot = s.t_fBot;
+                if (bfTop == bfBot && tfTop == tfBot)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                } 
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

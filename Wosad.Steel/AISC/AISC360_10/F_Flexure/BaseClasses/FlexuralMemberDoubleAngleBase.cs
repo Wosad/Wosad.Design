@@ -28,6 +28,7 @@ using Wosad.Steel.AISC.Exceptions;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Common.Section.Predefined;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Common;
 
 
 
@@ -39,12 +40,14 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     {
 
         public ISectionAngle Angle { get; set; }
+        AngleOrientation AngleOrientation { get; set; }
 
-        public FlexuralMemberDoubleAngleBase(ISteelSection section, ICalcLog CalcLog)
+        public FlexuralMemberDoubleAngleBase(ISteelSection section, ICalcLog CalcLog, AngleOrientation AngleOrientation)
             : base(section, CalcLog)
         {
             sectionDoubleAngle = null;
             ISectionDoubleAngle s = Section as ISectionDoubleAngle;
+            this.AngleOrientation = AngleOrientation;
 
             if (s == null)
             {
@@ -54,8 +57,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             {
                 sectionDoubleAngle = s;
                 Angle = s.Angle;
-                SteelGeneralSection a = new SteelGeneralSection(Angle, section.Material);
-                compactness = new ShapeCompactness.AngleMember(a);
+                compactness = new ShapeCompactness.AngleMember(Angle, section.Material, AngleOrientation);
             }
         }
 

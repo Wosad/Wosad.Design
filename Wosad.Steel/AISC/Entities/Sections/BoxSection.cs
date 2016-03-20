@@ -23,34 +23,33 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
- 
+using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-    public class IShapeSymmetry
+    public class SteelBoxSection : SteelSectionBase
     {
-        public static bool IsDoublySymmetric(ISection section)
+
+        public SteelBoxSection(ISectionBox Section, ISteelMaterial Material)
+            : base( Material)
         {
-            if (section is ISectionI)
-            {
-                ISectionI s = section as ISectionI;
-                double bfTop = s.b_fTop;
-                double bfBot = s.b_fBot;
-                double tfTop = s.t_fTop;
-                double tfBot = s.t_fBot;
-                if (bfTop == bfBot && tfTop == tfBot)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                } 
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
+            this.section = Section;
         }
+
+
+        private ISectionBox section;
+
+        public ISectionBox Section
+        {
+            get { return section; }
+        }
+
+        public override ISection Shape
+        {
+            get { return section as ISection; }
+        }
+
+
+
     }
 }

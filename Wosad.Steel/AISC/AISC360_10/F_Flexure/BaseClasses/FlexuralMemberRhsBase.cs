@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Common.Exceptions;
 
 
 
@@ -35,34 +36,43 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public FlexuralMemberRhsBase(ISteelSection section, ICalcLog CalcLog)
             : base(section,  CalcLog)
         {
-            sectionTube = null;
-            ISectionTube s = Section.Shape as ISectionTube;
+            //sectionTube = null;
 
-            if (s == null)
+            if (Section.Shape is ISectionTube || Section.Shape is ISectionBox)
             {
-                throw new SectionWrongTypeException(typeof(ISectionTube));
+                this.Section = section;
+                if (Section.Shape is ISectionTube)
+                {
+                    ShapeTube = Section.Shape as ISectionTube;
+                }
+                else
+                {
+                    ShapeBox = Section.Shape as ISectionBox;
+                }
             }
             else
             {
-                sectionTube = s;
-                //compactness = new ShapeCompactness.HollowMember(section, CompressionLocation.Top);
+                throw new ShapeTypeNotSupportedException(" flexural calculation of box or rectangular HSS beam");
             }
+
         }
 
         private ISectionTube sectionTube;
 
-        public ISectionTube SectionTube
+        public ISectionTube ShapeTube
         {
             get { return sectionTube; }
             set { sectionTube = value; }
         }
+
+
+        private ISectionBox shapeBox;
+
+        public ISectionBox ShapeBox
+        {
+            get { return shapeBox; }
+            set { shapeBox = value; }
+        }
         
-
-
-        //protected virtual double GetFlangeThickness_tf()
-        //{
-        //    return sectionTube.t_des;
-        //}
-
     }
 }

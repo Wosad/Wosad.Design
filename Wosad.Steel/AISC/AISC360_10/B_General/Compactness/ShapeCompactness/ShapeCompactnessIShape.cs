@@ -77,7 +77,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 
                 //web compactness
 
-                bool isDoublySymmetric = IShapeSymmetry.IsDoublySymmetric(Section.Shape);
+                bool isDoublySymmetric = ShapeISymmetry.IsDoublySymmetric(Section.Shape);
 
 
                 if (isDoublySymmetric == true)

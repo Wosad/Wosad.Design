@@ -42,7 +42,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Mn = 0.0;
             double phiM_n = 0.0;
 
-            if (SectionTube != null)
+            if (Section != null)
             {
 
                     double lambda = this.GetLambdaCompressionFlange(CompressionLocation, MomentAxis);
@@ -50,7 +50,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     double lambdarf = this.GetLambdarf(CompressionLocation, MomentAxis);
                     //note: section is doubly symmetric so top flange is taken
 
-                    double Sx = this.Section.Shape.S_xTop;
+                    double S = GetSectionModulus(MomentAxis);
                     double Fy = this.Section.Material.YieldStress;
                     double E = this.Section.Material.ModulusOfElasticity;
 
@@ -59,12 +59,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                     if (cClass == CompactnessClassFlexure.Noncompact)
                     {
                         double Mp = this.GetMajorPlasticMomentCapacity().Value;
-                        Mn = GetMnNoncompact(Mp, Fy, Sx, lambda);
+                        Mn = GetMnNoncompact(Mp, Fy, S, lambda);
 
                     }
                     else
                     {
-                        double Sxe = GetEffectiveSectionModulusX();
+                        double Sxe = GetEffectiveSectionModulusX(MomentAxis);
                         Mn = GetMnSlender(Sxe, Fy);
                     }
 
@@ -72,6 +72,24 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             }
             phiM_n = 0.9 * Mn;
             return phiM_n;
+        }
+
+        private double GetSectionModulus(MomentAxis MomentAxis)
+        {
+            double S = 0 ;
+            if (MomentAxis == MomentAxis.XAxis)
+            {
+                S = this.Section.Shape.S_xTop;
+            }
+            else if (MomentAxis == MomentAxis.YAxis)
+            {
+                S = this.Section.Shape.S_yLeft;
+            }
+            else
+            {
+                throw new Exception("Flexural axis not supported. Select X or Y axis.");
+            }
+            return S;
         }
 
         private double GetMnNoncompact(double Mp, double Fy, double S, double lambda )

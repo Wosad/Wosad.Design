@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360_10.General.Compactness;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.AISC360_10.B_General;
 
 
 
@@ -38,20 +39,35 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             : base(section, CalcLog)
         {
             sectionTee = null;
-            ISectionTee s = Section as ISectionTee;
+            this.Section = section;
 
-            if (s == null)
+            ISectionTee sTee = section as ISectionTee;
+
+            if (sTee == null)
             {
-                throw new SectionWrongTypeException(typeof(ISectionTee));
+                ISectionDoubleAngle sDL = section as ISectionDoubleAngle;
+                if (sDL ==null)
+                {
+                    throw new Exception("Section must be of type SectionTee or SectionDoubleAngle");
+                }
+                
             }
             else
             {
-                sectionTee = s;
-                compactness = new ShapeCompactness.TeeMember(Section);
+                sectionTee = sTee;
+                Compactness = GetShapeCompactness();
             }
         }
 
-        ShapeCompactness.TeeMember compactness;
+        protected virtual IShapeCompactness GetShapeCompactness()
+        {
+            IShapeCompactness compactness = new ShapeCompactness.TeeMember(Section);
+            return compactness;
+
+        }
+
+        IShapeCompactness Compactness { get; set; }
+
 
         private ISectionTee sectionTee;
 
@@ -63,19 +79,19 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         protected virtual CompactnessClassFlexure GetFlangeCompactnessClass()
         {
-            return compactness.GetFlangeCompactnessFlexure();
+            return Compactness.GetFlangeCompactnessFlexure();
         }
 
         public virtual CompactnessClassFlexure GetStemCompactnessClass()
         {
-            return compactness.GetWebCompactnessFlexure();
+            return Compactness.GetWebCompactnessFlexure();
         }
 
         protected virtual double GetLambdaStem()
         {
             if (sectionTee != null)
             {
-                double lambdaStem = compactness.GetWebLambda();
+                double lambdaStem = Compactness.GetWebLambda();
                 return lambdaStem;
             }
             else
@@ -88,7 +104,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             if (sectionTee != null)
             {
-                double lambdaFlange = compactness.GetCompressionFlangeLambda();
+                double lambdaFlange = Compactness.GetCompressionFlangeLambda();
                 return lambdaFlange;
             }
             else
@@ -99,12 +115,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         protected virtual double GetLambdapf(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
-            return compactness.GetFlangeLambda_p(StressType.Flexure);
+            return Compactness.GetFlangeLambda_p(StressType.Flexure);
         }
 
         protected virtual double GetLambdarf(FlexuralCompressionFiberPosition compressionFiberPosition)
         {
-            return compactness.GetFlangeLambda_r(StressType.Flexure);
+            return Compactness.GetFlangeLambda_r(StressType.Flexure);
         }
     }
 }

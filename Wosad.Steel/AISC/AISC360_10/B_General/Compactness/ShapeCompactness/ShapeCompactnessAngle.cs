@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common;
  
  
 
@@ -34,29 +35,51 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
     public partial class ShapeCompactness
     {
 
-        public class AngleMember 
+        public class AngleMember : ShapeCompactnessBase
         {
-           public ICompactnessElement VerticalLegCompactness   {get; set;}
-           public ICompactnessElement HorizontalLegCompactness {get; set;}
 
-            public AngleMember(ISteelSection Section)
+            public AngleMember(ISectionAngle Section, ISteelMaterial Material, AngleOrientation AngleOrientation)
             {
-
-                if (Section.Shape is ISectionAngle)
-                {
-                    ISectionAngle ang = Section.Shape as ISectionAngle;
-                    VerticalLegCompactness = new LegOfSingleAngle(Section.Material, ang.d, ang.t);
-                    HorizontalLegCompactness = new LegOfSingleAngle(Section.Material, ang.b, ang.t);
-                }
-
-
-                else
-                {
-                    throw new SectionWrongTypeException(typeof(ISectionAngle));
-                }
+                SetCompactness( Section, Material, AngleOrientation);
 
             }
+
+            protected virtual void SetCompactness(ISectionAngle ang, ISteelMaterial Material, AngleOrientation AngleOrientation)
+           {
+
+  
+                   double shortLeg;
+                   double longLeg;
+
+                   if (ang.d >= ang.b)
+                   {
+                       longLeg = ang.d;
+                       shortLeg = ang.b;
+                   }
+                   else
+                   {
+                       longLeg = ang.b;
+                       shortLeg = ang.d;
+                   }
+
+                   //make differentiation based on angle orientation
+
+                   if (AngleOrientation == AngleOrientation.LongLegVertical)
+                   {
+                       FlangeCompactness = new LegOfSingleAngle(Material, shortLeg, ang.t);
+                       WebCompactness = new LegOfSingleAngle(Material, longLeg, ang.t);
+                   }
+                   else
+                   {
+                       FlangeCompactness = new LegOfSingleAngle(Material, longLeg, ang.t);
+                       WebCompactness = new LegOfSingleAngle(Material, shortLeg, ang.t);
+                   }
+
+               }
+
+
+          }
         }
 
-    }
+    
 }

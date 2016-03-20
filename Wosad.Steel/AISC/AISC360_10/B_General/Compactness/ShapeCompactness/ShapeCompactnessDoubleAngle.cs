@@ -1,5 +1,5 @@
-#region Copyright
-   /*Copyright (C) 2015 Wosad Inc
+﻿#region Copyright
+/*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,38 +18,35 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
+using System.Text;
+using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common;
+using Wosad.Steel.AISC.SteelEntities.Sections;
 
-namespace Wosad.Steel.AISC.SteelEntities.Sections
+
+
+namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
 {
-    public class SteelSectionI: SteelSectionBase
+
+    public partial class ShapeCompactness
     {
-        private ISectionI section;
 
-        public ISectionI Section
+        public class DoubleAngleMember : ShapeCompactness.AngleMember
         {
-            get { return section; }
+            public DoubleAngleMember(ISectionDoubleAngle Section, ISteelMaterial Material, AngleOrientation AngleOrientation)
+                : base(Section.Angle, Material, AngleOrientation)
+            {
+
+
+
+            }
+
         }
 
-        public override ISection Shape
-        {
-            get { return section as ISection; }
-        }
-
-        public SteelSectionI(ISectionI Section, ISteelMaterial Material)
-            :base(Material)
-        {
-            this.section = Section;
-        }
-
-        //public override ISection Clone()
-        //{
-        //    return section.Clone();
-        //}
     }
 }

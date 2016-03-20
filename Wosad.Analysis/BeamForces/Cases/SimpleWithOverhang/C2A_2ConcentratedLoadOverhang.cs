@@ -40,9 +40,9 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
                 X1Calculated = false;
         }
 
-        private void CalculateX1()
+        private void CalculateX1(double X)
         {
-            X1 = X1 - L;
+            X1 = X - L;
             X1Calculated = true;
         }
 
@@ -66,7 +66,7 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
             {
                 if (X1Calculated == false)
                 {
-                    CalculateX1();
+                    CalculateX1(X);
                 }
                 M = P * (a - X1);
                     BeamEntryFactory.CreateEntry("Mx", M, BeamTemplateType.Mx, 2,

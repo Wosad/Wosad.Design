@@ -44,12 +44,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             if (MomentAxis ==MomentAxis.XAxis)
             {
                 Mp = GetMajorPlasticMomentCapacity().Value;
-                S = Math.Min(SectionTube.S_yLeft, SectionTube.S_yRight);
+                S = Math.Min(Section.Shape.S_yLeft, Section.Shape.S_yRight);
             }
             else if (MomentAxis == MomentAxis.YAxis)
             {
                  Mp = GetMinorPlasticMomentCapacity().Value;
-                 S = Math.Min(SectionTube.S_xTop, SectionTube.S_xBot);
+                 S = Math.Min(Section.Shape.S_xTop, Section.Shape.S_xBot);
             }
             else
             {

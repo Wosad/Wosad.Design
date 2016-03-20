@@ -221,7 +221,7 @@ namespace Wosad.Analysis.BeamForces.SimpleWithOverhang
 
         private void CalculateX1(double X)
         {
-            X1 = X1 - L;
+            X1 = X - L;
             BeamEntryFactory.CreateEntry("X1", X1, BeamTemplateType.Mmax, 1,
             new Dictionary<string, double>()
                 {

@@ -32,11 +32,10 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public abstract partial class BeamIWeakAxis : FlexuralMemberIBase
+    public  partial class BeamIWeakAxis : FlexuralMemberIBase
     {
 
-        public BeamIWeakAxis (ISteelSection section, bool IsRolledMember,
-            double UnbracedLength, double EffectiveLengthFactor, ICalcLog CalcLog)
+        public BeamIWeakAxis (ISteelSection section, bool IsRolledMember, ICalcLog CalcLog)
             : base(section, IsRolledMember, CalcLog)
         {
         }

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeamForces\C2A_2Tests.cs" />
     <Compile Include="BeamForces\C1B_1Tests.cs" />
     <Compile Include="BeamTorsion\TorsionalFunctionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

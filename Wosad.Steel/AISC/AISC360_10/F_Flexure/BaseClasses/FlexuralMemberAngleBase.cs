@@ -27,6 +27,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
  using Wosad.Common.CalculationLogger;
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Common;
 
 
 
@@ -34,7 +35,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
     public abstract class FlexuralMemberAngleBase: FlexuralMember
     {
-        public FlexuralMemberAngleBase(ISteelSection section, ICalcLog CalcLog)
+        public FlexuralMemberAngleBase(ISteelSection section, ICalcLog CalcLog, AngleOrientation AngleOrientation)
             : base(section, CalcLog)
         {
             sectionAngle = null;
@@ -47,7 +48,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             else
             {
                 sectionAngle = s;
-                compactness = new ShapeCompactness.AngleMember(Section);
+                compactness = new ShapeCompactness.AngleMember(s, section.Material, AngleOrientation);
             }
         }
 

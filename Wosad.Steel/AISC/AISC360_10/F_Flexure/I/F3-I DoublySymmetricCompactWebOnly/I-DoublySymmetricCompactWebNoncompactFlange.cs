@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.SteelEntities;
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
 
-    public partial class BeamIDoublySymmetricCompactWebNoncompactFlange : BeamIDoublySymmetricCompact
+    public partial class BeamIDoublySymmetricCompactWebOnly : BeamIDoublySymmetricCompact
     {
         //This section applies to doubly symmetric I-shaped members bent about their major
         //axis having compact webs and noncompact or slender flanges as defined in Section
@@ -39,7 +39,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
 
 
-        public BeamIDoublySymmetricCompactWebNoncompactFlange(ISteelSection section, bool IsRolled, ICalcLog CalcLog)
+        public BeamIDoublySymmetricCompactWebOnly(ISteelSection section, bool IsRolled, ICalcLog CalcLog)
             : base(section,IsRolled, CalcLog)
         {
             GetSectionValues();

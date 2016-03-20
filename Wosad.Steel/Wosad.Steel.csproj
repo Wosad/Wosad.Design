@@ -59,6 +59,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessDoubleAngle.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\SinglySymmetricIBeamMajorAxis.cs" />
+    <Compile Include="AISC\Entities\Sections\BoxSection.cs" />
+    <Compile Include="AISC\Interfaces\IShapeCompactness.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveNetArea.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactor.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase.cs" />
@@ -103,7 +108,7 @@
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\SteelColumn.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\BaseClasses\FlexuralMemberDoubleAngleBase.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\CircularHss\Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-NoncompactWebCompactFlange.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\I-NoncompactWebCompactFlange.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\I-SlenderWebCompactFlange.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleSlender.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleNonCompact .cs" />
@@ -232,13 +237,13 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\I DoublySymmetricCompact.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F2-I DoublySymmetricCompact\Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange\FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebNoncompactFlange\I-DoublySymmetricCompactWebNoncompactFlange.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\CFY.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\FLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\I-NoncompactWeb.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\LTB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I DoublySymmetricNoncompactWeb\TFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebOnly\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F3-I DoublySymmetricCompactWebOnly\I-DoublySymmetricCompactWebNoncompactFlange.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\CFY.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\FLB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\I-NoncompactWeb.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\TFY.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\CFY.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\FLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\I-SlenderWeb.cs" />
@@ -269,7 +274,7 @@
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ElementLocation.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\Interfaces\ICompactnessElement.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\Interfaces\IShapeCompactness.cs" />
-    <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\IShapeSymmetry.cs" />
+    <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeISymmetry.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessAngle.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessBase.cs" />
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessChannel.cs" />

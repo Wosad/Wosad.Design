@@ -213,7 +213,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         #endregion
 
-
         #region Limit States
 
         public virtual SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
