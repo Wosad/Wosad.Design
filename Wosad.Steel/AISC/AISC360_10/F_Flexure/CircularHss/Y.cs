@@ -30,7 +30,7 @@ using Wosad.Common.Section;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamChs : FlexuralMemberChsBase
+    public partial class BeamCircularHss : FlexuralMemberChsBase
     {
 
         //Yielding F8.1

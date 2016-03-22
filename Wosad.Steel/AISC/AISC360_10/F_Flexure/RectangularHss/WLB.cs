@@ -53,7 +53,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             }
             else
             {
-                throw new Exception("Principal axis bending is either X or Y axis for rectangular HSS shape. Select X or Y axis for bending");
+                throw new FlexuralBendingAxisException();
             }
 
 

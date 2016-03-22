@@ -22,15 +22,24 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- using Wosad.Common.CalculationLogger;
-using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.Interfaces;
- 
- 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC
 {
-    public partial class SolidShape : FlexuralMember, ISteelBeamFlexure
+    public class FlexuralBendingAxisException : ApplicationException
     {
+        public FlexuralBendingAxisException()
+        {
+            
+        }
+
+
+        public override string Message
+        {
+            get
+            {
+                return string.Format("Specified flexural axis not supported. Select geometric X or Y axis for this calculation.");
+            }
+        }
     }
+
 }

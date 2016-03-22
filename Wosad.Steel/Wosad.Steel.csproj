@@ -63,6 +63,7 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\SinglySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\Entities\Sections\BoxSection.cs" />
+    <Compile Include="AISC\Exceptions\FlexuralBendinAxisException.cs" />
     <Compile Include="AISC\Interfaces\IShapeCompactness.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveNetArea.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactor.cs" />
@@ -258,9 +259,9 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\Y.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\SectionProperties.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\WLB.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-LTB.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-SolidShape.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\F11-Y.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\Y.cs" />
     <Compile Include="AISC\Interfaces\ISectionSolid.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\TeeAndDoubleAngle\FLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\TeeAndDoubleAngle\LTB.cs" />

@@ -23,9 +23,9 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure.SolidShapes
+namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    class ISectionSolid
+    public interface ISectionSolid
     {
     }
 }
