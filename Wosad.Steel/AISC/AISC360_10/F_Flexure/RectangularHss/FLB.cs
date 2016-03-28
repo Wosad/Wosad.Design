@@ -58,7 +58,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
                     if (cClass == CompactnessClassFlexure.Noncompact)
                     {
-                        double Mp = this.GetMajorPlasticMomentCapacity().Value;
+                        double Mp = this.GetMajorNominalPlasticMoment();
                         Mn = GetMnNoncompact(Mp, Fy, S, lambda);
 
                     }

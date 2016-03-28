@@ -45,32 +45,33 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
+            double phiM_n;
+            double M_n=0.0;
             switch (MomentAxis)
             {
                 case MomentAxis.XAxis:
-                    ls = GetMajorPlasticMomentCapacity();
+                    M_n = GetMajorNominalPlasticMoment();
                     break;
                 case MomentAxis.YAxis:
-                    ls = GetMinorPlasticMomentCapacity();
+                    M_n = GetMinorNominalPlasticMoment();
                     break;
-
-            }
-
+                default:
+                    throw new FlexuralBendingAxisException();
+                    break;
+           }
+            phiM_n =0.9*M_n;
+            ls.Value = phiM_n;
+            ls.IsApplicable = true;
             return ls;
         }
 
         //Yielding F7.1
-        public  override SteelLimitStateValue GetMajorPlasticMomentCapacity()
+        public  SteelLimitStateValue GetMajorPlasticMomentStrength()
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
-            double phiM_n = 0.0;
+            double M_p = GetMajorNominalPlasticMoment();
 
-
-            double Fy = this.Section.Material.YieldStress;
-            double Zx = Section.Shape.Z_x;
-
-            double M_p = Fy * Zx;
-            phiM_n = 0.9*M_p;
+            double phiM_n = 0.9 * M_p;
 
 
             ls.IsApplicable = true;
@@ -78,22 +79,17 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             return ls;
         }
 
-        public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
+        public SteelLimitStateValue GetMinorNominalPlasticStrength()
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
-            double Mp = 0.0;
 
-
-            double Fy = this.Section.Material.YieldStress;
-            double Zy = Section.Shape.Z_y;
-
-            Mp = Fy * Zy;
+            double Mp = GetMinorNominalPlasticMoment();
             double phiM_n = Mp;
 
 
 
             ls.IsApplicable = true;
-            ls.Value = Mp;
+            ls.Value = phiM_n;
             return ls;
         }
 

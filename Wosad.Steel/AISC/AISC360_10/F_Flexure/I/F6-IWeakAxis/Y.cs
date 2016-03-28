@@ -33,11 +33,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
     public  partial class BeamIWeakAxis : FlexuralMemberIBase
     {
         //Yielding
-        public override SteelLimitStateValue GetMinorPlasticMomentCapacity()
+        public  SteelLimitStateValue GetMinorPlasticMomentStrength()
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
             double phiM_n = 0.0;
-            double Mp = GetMinorPlasticMomentCapacity().Value;
+            double Mp = GetMinorNominalPlasticMoment();
             double My = 1.6 * Fy * Sy;
             
 

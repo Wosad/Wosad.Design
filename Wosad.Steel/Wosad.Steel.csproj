@@ -62,7 +62,10 @@
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessDoubleAngle.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\SinglySymmetricIBeamMajorAxis.cs" />
+    <Compile Include="AISC\Entities\Sections\DoubleAngleSection.cs" />
     <Compile Include="AISC\Entities\Sections\BoxSection.cs" />
+    <Compile Include="AISC\Entities\Sections\AngleSection.cs" />
+    <Compile Include="AISC\Entities\Sections\TeeSection.cs" />
     <Compile Include="AISC\Exceptions\FlexuralBendinAxisException.cs" />
     <Compile Include="AISC\Interfaces\IShapeCompactness.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveNetArea.cs" />
@@ -111,8 +114,6 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\CircularHss\Y.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F4-I NoncompactWeb\I-NoncompactWebCompactFlange.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F5-I SlenderWeb\I-SlenderWebCompactFlange.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleSlender.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleNonCompact .cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\LTB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\LSLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\F7-RectangularHss.cs" />
@@ -208,7 +209,6 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipCriticalInteraction.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\SlipCritical\BoltSlipResistance.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\Base\BoltStrings.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\2L\F9-2L.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\BaseClasses\Cb.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\BaseClasses\DoublySymmetricI.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\BaseClasses\FlexuralMember.cs" />
@@ -253,7 +253,7 @@
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\FLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\I-WeakAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\F6-IWeakAxis\Y.cs" />
-    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-AngleCompact.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\L\F10-Angle.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\L\Y.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\FLB.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHss\Y.cs" />

@@ -45,7 +45,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            return GetMinorPlasticMomentCapacity();
+            return GetMinorPlasticMomentStrength();
         }
 
 

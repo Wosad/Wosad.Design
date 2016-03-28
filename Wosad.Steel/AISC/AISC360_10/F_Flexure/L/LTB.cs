@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360_10.Flexure
 {
-    public partial class BeamAngleCompact : FlexuralMemberAngleBase
+    public partial class BeamAngle : FlexuralMemberAngleBase
     {
 
 

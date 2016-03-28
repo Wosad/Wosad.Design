@@ -36,8 +36,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //Yielding F8.1
         public double GetYieldingMomentCapacity()
         {
-            double Mn = GetMajorPlasticMomentCapacity().Value;
-            return Mn;
+            double M_n = GetMajorNominalPlasticMoment();
+            double phiM_n = 0.9 * M_n;
+            return phiM_n;
         }
 
     }

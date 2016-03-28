@@ -33,7 +33,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         //Yielding F9.1
         public double GetYieldingMomentCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
         {
-            double Mp = GetMajorPlasticMomentCapacity().Value;
+            double Mp = GetMajorNominalPlasticMoment();
             double Mn = 0;
             double My = GetYieldingMoment_My(compressionFiberLocation);
 

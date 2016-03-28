@@ -42,22 +42,21 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         #region Plastic Moment
 
 
-        public virtual SteelLimitStateValue GetMajorPlasticMomentCapacity()
+        public virtual double GetMajorNominalPlasticMoment()
         {
             //this method is used for cases when Full yielding is not an
             //applicable limit state but the Plastic moment
             //Mp is used in calculations
             //In other cases this method is overriden
 
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
             double Fy = this.Section.Material.YieldStress;
             double Zx = Section.Shape.Z_x;
             double Mp = Fy * Zx;
-            return ls;
+
+            return Mp;
         }
 
-        public virtual SteelLimitStateValue GetMinorPlasticMomentCapacity()
+        public virtual double GetMinorNominalPlasticMoment()
         {
             //applicable limit state but the Plastic moment
             //Mp is used in calculations
@@ -66,9 +65,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             double Zy = Section.Shape.Z_y;
             double Mp = Fy * Zy;
 
-            SteelLimitStateValue ls = new SteelLimitStateValue();
-            ls.IsApplicable = false;
-            return ls;
+            return Mp;
         }
 
         #endregion
@@ -183,18 +180,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         #endregion
 
-        #region Design Capacity
-        
-        internal virtual double GetFlexuralDesignValue(double Mn)
-        {
-
-
-                return 0.9 * Mn;
-
-
-        }
-
-        #endregion
 
         #region Compactness Parameter V E/Fy
 
@@ -222,7 +207,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
         public virtual SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
-            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
+            FlexuralAndTorsionalBracingType BracingType)
         {
             SteelLimitStateValue ls = new SteelLimitStateValue(-1, false);
             return ls;

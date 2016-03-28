@@ -98,7 +98,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers
                         else
                         {
                             BeamIDoublySymmetricCompact IBeam = new BeamIDoublySymmetricCompact(Section,this.IsRolled, Log);
-                            double Y = 0.9* IBeam.GetYieldingMoment();
+                            double Y = 0.9 * IBeam.GetMajorNominalPlasticMoment();
                             phiM_n = Math.Min(Y, R);
                         }
 

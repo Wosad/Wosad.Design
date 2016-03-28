@@ -45,13 +45,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
-            SteelLimitStateValue plasticStrength = GetMajorPlasticMomentCapacity();
-            double phiM_n = 0.9*plasticStrength.Value;
+           double M_n= GetMajorNominalPlasticMoment();
+           double phiM_n = 0.9 * M_n;
             return new SteelLimitStateValue(phiM_n, true);
         }
 
         public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
-            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
+            FlexuralAndTorsionalBracingType BracingType)
         {
             SteelLimitStateValue ls;
             if (BracingType == FlexuralAndTorsionalBracingType.FullLateralBracing)

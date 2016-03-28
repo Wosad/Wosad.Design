@@ -66,7 +66,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
         public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
-            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
+            FlexuralAndTorsionalBracingType BracingType)
         {
             SteelLimitStateValue ls;
             if (BracingType == FlexuralAndTorsionalBracingType.FullLateralBracing)

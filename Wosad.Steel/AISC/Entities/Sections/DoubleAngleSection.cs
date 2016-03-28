@@ -22,33 +22,37 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces; 
+
+using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Exceptions;
 
-
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-    public partial class Beam2L: BeamTee
+    public class SteelDoubleAngleSection:SteelSectionBase
     {
-        public Beam2L(ISteelSection section, ICalcLog CalcLog)
-            : base(section, CalcLog)
+
+        public SteelDoubleAngleSection(ISectionDoubleAngle Section, ISteelMaterial Material)
+            :base(Material)
         {
-            if (section is ISectionDoubleAngle)
-            {
-                section2L = section as ISectionDoubleAngle;
-            }
-            else
-            {
-                throw new SectionWrongTypeException(typeof(ISectionDoubleAngle));
-            }
-                
-            
-            GetSectionValues();
+            this.section = Section;
         }
 
+        private ISectionDoubleAngle section;
 
-        ISectionDoubleAngle section2L;
+        public ISectionDoubleAngle Section
+        {
+            get { return section; }
+            set { section = value; }
+        }
 
+        public override ISection Shape
+        {
+            get { return section as ISection; }
+        }
+
+        //public override ISection Clone()
+        //{
+        //    return section.Clone();
+        //}
     }
 }

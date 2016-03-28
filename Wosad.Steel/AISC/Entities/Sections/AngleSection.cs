@@ -22,24 +22,37 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Common.CalculationLogger;
-using Wosad.Steel.AISC.SteelEntities;
- using Wosad.Common.CalculationLogger;
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.Interfaces;
+
+namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-    public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
+    public class SteelAngleSection:SteelSectionBase
     {
-        //Yielding F2.1
-        public double GetYieldingMoment()
-        {
 
-            double phiMn = 0.9*GetMajorNominalPlasticMoment();
-            return phiMn;
-       
+        public SteelAngleSection(ISectionAngle Section, ISteelMaterial Material)
+            :base(Material)
+        {
+            this.section = Section;
         }
 
+        private ISectionAngle section;
 
+        public ISectionAngle Section
+        {
+            get { return section; }
+            set { section = value; }
+        }
+
+        public override ISection Shape
+        {
+            get { return section as ISection; }
+        }
+
+        //public override ISection Clone()
+        //{
+        //    return section.Clone();
+        //}
     }
 }

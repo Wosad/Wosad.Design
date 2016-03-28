@@ -37,7 +37,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         {
             double Rpt = 0.0;
 
-            double Mp = GetMajorPlasticMomentCapacity().Value;
+            double Mp = GetMajorNominalPlasticMoment();
             double Myt = GetTensionFiberYieldMomentMyt(compressionFiberPosition);
 
             double hc = Gethc(compressionFiberPosition);

@@ -74,6 +74,13 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                         SteelBoxSection BoxSection = new SteelBoxSection(BoxShape,Material);
                         beam = new BeamRectangularHss(BoxSection,MomentAxis,Log);
                     }
+
+                    else if (Shape is ISectionTee)
+                    {
+                        //ISectionTee TeeShape = Shape as ISectionTee;
+                        //SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
+                        //beam = new BeamTee(TeeSection, MomentAxis, Log);
+                    }
                     else
                     {
                         throw new NotImplementedException();
@@ -81,7 +88,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 	        }
             else  // weak axis
 	        {
-                if (Shape is ISection)
+                if (Shape is ISectionI)
                 {
                         ISectionI IShape = Shape as ISectionI;
                         SteelSectionI SectionI = new SteelSectionI(IShape, Material);
@@ -91,56 +98,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 throw new NotImplementedException();
 	        }
 
-            //switch (Shape)
-            //{
-                    
-            //    case ShapeTypeSteel.IShapeRolled:
-            //        PredefinedSectionI ISec;
-            //        ISec = Section as PredefinedSectionI;
-            //        if (ISec != null)
-            //        {
-            //            //beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, ISec, Material, Log, true);
-            //        }
-                   
-            //        break;
-            //    case ShapeTypeSteel.IShapeBuiltUp:
-            //        if (Section is ISectionI)
-            //        {
-            //            ISectionI section = Section as ISectionI;
-            //            //beam = CreateIBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, section, Material, Log, false);
-            //        }
-            //        break;
-            //    case ShapeTypeSteel.Channel:
-            //        break;
-            //    case ShapeTypeSteel.Angle:
-            //        break;
-            //    case ShapeTypeSteel.TeeRolled:
-            //        break;
-            //    case ShapeTypeSteel.TeeBuiltUp:
-            //        break;
-            //    case ShapeTypeSteel.DoubleAngle:
-            //        break;
-            //    case ShapeTypeSteel.CircularHSS:
-            //        break;
-            //    case ShapeTypeSteel.RectangularHSS:
-            //        ISectionTube RhsSec;
-            //        RhsSec = Section as ISectionTube;
-            //        if (RhsSec != null)
-            //        {
-            //           // beam = CreateRhsBeam(UnstiffenedElementCompactness, StiffenedElementCompactness, RhsSec, Material, MomentAxis, Log);
-            //        }
-            //        break;
-            //    case ShapeTypeSteel.Box:
-            //        break;
-            //    case ShapeTypeSteel.Rectangular:
-            //        break;
-            //    case ShapeTypeSteel.Circular:
-            //        break;
-            //    case ShapeTypeSteel.IShapeAsym:
-            //        break;
-            //    default:
-            //        break;
-            //}
             return beam;
         }
 

@@ -28,7 +28,7 @@ namespace Wosad.Steel.AISC.Interfaces
     {
         SteelLimitStateValue GetFlexuralYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation);
         SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
-            FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis);
+            FlexuralAndTorsionalBracingType BracingType);
         SteelLimitStateValue GetFlexuralFlangeLocalBucklingStrength( FlexuralCompressionFiberPosition CompressionLocation);
         SteelLimitStateValue GetFlexuralCompressionFlangeYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation);
         SteelLimitStateValue GetFlexuralTensionFlangeYieldingStrength( FlexuralCompressionFiberPosition CompressionLocation);
