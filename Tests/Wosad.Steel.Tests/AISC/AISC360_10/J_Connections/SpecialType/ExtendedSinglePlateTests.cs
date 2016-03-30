@@ -23,11 +23,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.Section.SectionTypes;
-using Wosad.Steel.AISC.AISC360_10.Connections;
-using Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers;
+using Wosad.Steel.AISC.AISC360v10.Connections;
+using Wosad.Steel.AISC.AISC360v10.Connections.AffectedMembers;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.SpecialType
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.SpecialType
 {
     [TestFixture]
     public class ExtendedSinglePlateTests: ToleranceTestBase

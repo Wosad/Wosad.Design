@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 
  
 
-namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
+namespace  Wosad.Steel.AISC360v10.Connections.AffectedElements
 {
     public class AffectedElementInFlexureAndShear: AffectedElementInShear //, ISteelFlexuralMember
     {

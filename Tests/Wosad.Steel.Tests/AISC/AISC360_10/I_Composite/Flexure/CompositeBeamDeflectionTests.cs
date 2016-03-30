@@ -25,9 +25,9 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Section.Predefined;
 using Wosad.Common.Section.SectionTypes;
-using Wosad.Steel.AISC.AISC360_10.Composite;
+using Wosad.Steel.AISC.AISC360v10.Composite;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Composite.Flexure
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Composite.Flexure
 {
     [TestFixture]
     public partial class CompositeBeamTests: ToleranceTestBase

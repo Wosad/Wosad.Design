@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
  
 
-namespace  Wosad.Steel.AISC360_10
+namespace  Wosad.Steel.AISC360v10
 {
     public abstract class ColumnBuiltUpNonSlender : ColumnFlexuralBucklingNonSlender
     {

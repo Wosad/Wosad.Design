@@ -19,9 +19,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Steel.AISC360_10.Connections.AffectedElements;
+using Wosad.Steel.AISC360v10.Connections.AffectedElements;
 
-namespace Wosad.Steel.AISC.AISC360_10.J_Connections.AffectedMembers
+namespace Wosad.Steel.AISC.AISC360v10.J_Connections.AffectedMembers
 {
     public class ShearAreaCalculator : AffectedElement
     {

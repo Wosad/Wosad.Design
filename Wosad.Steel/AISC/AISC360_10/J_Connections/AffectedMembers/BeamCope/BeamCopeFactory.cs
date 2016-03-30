@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public class BeamCopeFactory
     {

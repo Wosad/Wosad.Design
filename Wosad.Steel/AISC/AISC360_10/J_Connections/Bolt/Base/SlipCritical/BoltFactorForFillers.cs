@@ -22,15 +22,15 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using p = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltParagraphs;
-using f = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltFormulas;
-using v = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltValues;
-using d = Wosad.Steel.AISC.AISC360_10.Connections.Bolted.BoltDescriptions;
+using p = Wosad.Steel.AISC.AISC360v10.Connections.Bolted.BoltParagraphs;
+using f = Wosad.Steel.AISC.AISC360v10.Connections.Bolted.BoltFormulas;
+using v = Wosad.Steel.AISC.AISC360v10.Connections.Bolted.BoltValues;
+using d = Wosad.Steel.AISC.AISC360v10.Connections.Bolted.BoltDescriptions;
  
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
 {
     public abstract partial class BoltSlipCritical : Bolt, IBoltSlipCritical
     {

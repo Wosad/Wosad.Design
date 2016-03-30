@@ -26,7 +26,7 @@ using Wosad.Common.Section.Interfaces;
 
  
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public abstract partial  class RhsToPlateConnection
     {

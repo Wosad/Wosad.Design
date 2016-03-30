@@ -98,7 +98,11 @@ namespace Wosad.Common.Section
         {
             get 
             {
-                _S_x_Top = _I_x / (_H - _y_Bar);
+                if (_S_x_Top==0)
+                {
+                    _S_x_Top = _I_x / (_H - _y_Bar);   
+                }
+
                 return _S_x_Top; 
             }
 
@@ -110,7 +114,10 @@ namespace Wosad.Common.Section
         {
             get 
             {
-                _S_xBot = _I_x / _y_Bar;
+                if (_S_xBot == 0)
+                {
+                    _S_xBot = _I_x / _y_Bar;
+                }
                 return _S_xBot; 
             }
         }

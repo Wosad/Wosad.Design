@@ -24,7 +24,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_y_bar()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double y_bar = angle.y_Bar;
             double refValue = 1.987;
              
@@ -35,7 +35,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_x_bar()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double x_bar = angle.x_Bar;
             double refValue = 0.9868;
 
@@ -46,7 +46,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_I_x()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double I_x = angle.I_x;
             double refValue = 17.36;
 
@@ -57,7 +57,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_I_y()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double I_y = angle.I_y;
             double refValue = 6.27;
 
@@ -68,7 +68,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_alpha()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double alpha = angle.Angle_alpha;
             double refValue = 23.76;
 
@@ -79,7 +79,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_I_w()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double I_w = angle.I_w;
             double refValue = 20.02;
 
@@ -90,7 +90,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_I_z()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double I_z = angle.I_z;
             double refValue = 3.60;
 
@@ -101,7 +101,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
         [Test]
         public void SectionAngle6X4X1_2Returns_beta_w()
         {
-            SectionAngle angle = new SectionAngle("", 6, 4, 0.5);
+            SectionAngle angle = new SectionAngle("", 6, 4, 0.5, AngleRotation.FlatLegBottom, AngleOrientation.LongLegVertical);
             double beta_w = angle.beta_w;
             double refValue = 3.14;
 

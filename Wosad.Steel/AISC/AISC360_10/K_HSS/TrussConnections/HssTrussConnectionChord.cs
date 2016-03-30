@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.SteelEntities.Members;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
-namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
+namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
     public class HssTrussConnectionChord : SteelMemberBase
     {

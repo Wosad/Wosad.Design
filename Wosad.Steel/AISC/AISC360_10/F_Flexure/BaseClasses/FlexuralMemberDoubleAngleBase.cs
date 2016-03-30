@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Common.Section.SectionTypes;
@@ -34,7 +34,7 @@ using Wosad.Common;
 
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public abstract partial class FlexuralMemberDoubleAngleBase : FlexuralMember
     {

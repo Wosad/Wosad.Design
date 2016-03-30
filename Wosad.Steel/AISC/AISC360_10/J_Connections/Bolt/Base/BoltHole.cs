@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.SteelEntities.Bolts;
 using Wosad.Steel.Properties;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
 {
     public abstract partial class Bolt : BoltBase
     {

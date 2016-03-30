@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
  
  
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.AISC360v10.General.Compactness
 {
 
     public class WebOfChannel : WebOfDoublySymI
@@ -45,7 +45,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             this.SectionChannel = SectionChannel;
             ISectionChannel s = SectionChannel;
-            this.Width = s.d - (s.t_f + s.t_f + s.k + s.k);
+            this.Width = s.d - (2*s.k);
             if (this.Width<=0)
             {
                 throw new Exception("Clear web distance cannot be less than or equal to 0");

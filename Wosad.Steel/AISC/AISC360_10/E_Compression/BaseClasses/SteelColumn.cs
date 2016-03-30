@@ -26,7 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 using Wosad.Steel.AISC.SteelEntities.Members;
 
-namespace Wosad.Steel.AISC.AISC360_10
+namespace Wosad.Steel.AISC.AISC360v10
 {
     public abstract class SteelColumn : SteelAxialMember
     {

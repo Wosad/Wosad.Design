@@ -24,7 +24,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Mathematics;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Weld
 {
     public abstract partial class FilletWeldBase : Weld
     {

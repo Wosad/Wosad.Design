@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.Interfaces;
  
  
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.AISC360v10.General.Compactness
 {
     public class WebOfDoublySymI: StiffenedElementCompactness
     {
@@ -64,11 +64,11 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             if (stress== StressType.Flexure)
             {
-                return 1.03 * SqrtE_Fy();
+                return 5.7 * SqrtE_Fy();
             }
             else
             {
-                return 0.75 * SqrtE_Fy();
+                return 1.49 * SqrtE_Fy();
             }
         }
 
@@ -76,7 +76,7 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         {
             if (stress == StressType.Flexure)
             {
-                return 0.84 * SqrtE_Fy();
+                return 3.76 * SqrtE_Fy();
             }
             else
             {

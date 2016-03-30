@@ -101,7 +101,8 @@ namespace Wosad.Common.Section.Predefined
         {
             get {
 
-                return _d - (tf + t_fBot) - 2 * k;
+                //return _d - (tf + t_fBot) - 2 * k;
+                return _d - (2 * k);
             }
         }
 

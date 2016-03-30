@@ -18,7 +18,7 @@
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public abstract class BeamIDoublySymmetricBase : FlexuralMemberIBase
     {

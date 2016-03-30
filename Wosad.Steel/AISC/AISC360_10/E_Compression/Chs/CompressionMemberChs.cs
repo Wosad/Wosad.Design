@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.SectionTypes;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Compression
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public partial class CompressionMemberChs : ColumnDoublySymmetric
     {

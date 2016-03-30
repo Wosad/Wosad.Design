@@ -22,9 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
- 
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger;
@@ -32,11 +30,11 @@ using Wosad.Steel.AISC.Exceptions;
 
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
-    public abstract partial class FlexuralMemberChannelBase : BeamIDoublySymmetricCompact
+    public partial class BeamChannel : BeamIDoublySymmetricCompact
     {
-        public FlexuralMemberChannelBase(ISteelSection section, bool IsRolledMember, ICalcLog CalcLog)
+        public BeamChannel(ISteelSection section, bool IsRolledMember, ICalcLog CalcLog)
             : base( section, IsRolledMember, CalcLog)
         {
             SectionChannel = null;
@@ -104,7 +102,8 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         }
 
 
-        protected override double GetFlangeCentroidDistanceho()
+        public override double Get_ho()
+        
         {
             return SectionChannel.h_o;
         }
@@ -119,19 +118,6 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
            double Cw = SectionChannel.C_w;
            double c=ho/2.0*Math.Sqrt(Iy/Cw);
 
-           
-           #region c
-           ICalcLogEntry cEntry = new CalcLogEntry();
-           cEntry.ValueName = "c";
-           cEntry.AddDependencyValue("Iy", Math.Round(Iy, 3));
-           cEntry.AddDependencyValue("ho", Math.Round(ho, 3));
-           cEntry.AddDependencyValue("Cw", Math.Round(Cw, 3));
-           cEntry.Reference = "";
-           cEntry.DescriptionReference = "/Templates/Steel/AISC360_10/Flexure/F2_c_Channel.docx";
-           cEntry.FormulaID = null; //reference to formula from code
-           cEntry.VariableValue = Math.Round(c, 3).ToString();
-           #endregion
-           this.AddToLog(cEntry);
 
            return c;
        }

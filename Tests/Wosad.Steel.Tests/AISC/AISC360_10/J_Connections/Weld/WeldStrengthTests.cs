@@ -22,9 +22,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC;
-using Wosad.Steel.AISC.AISC360_10.Connections.Weld;
+using Wosad.Steel.AISC.AISC360v10.Connections.Weld;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Weld
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.Weld
 {
     [TestFixture]
     public class WeldStrengthTests : ToleranceTestBase

@@ -27,11 +27,11 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Common;
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 
  
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class BeamAngle : FlexuralMemberAngleBase
     {

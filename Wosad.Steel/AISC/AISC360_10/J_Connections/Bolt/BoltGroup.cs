@@ -25,7 +25,7 @@ using Wosad.Common.Mathematics;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     //Inherits from base class. Added here for convenience
     public class BoltGroup : BoltGroupGeneral

@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
+namespace Wosad.Steel.AISC360v10.Connections.AffectedElements
 {
     public partial class AffectedElement : SteelDesignElement
     {

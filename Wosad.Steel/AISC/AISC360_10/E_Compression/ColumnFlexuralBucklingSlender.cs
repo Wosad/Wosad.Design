@@ -23,13 +23,13 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
-using Wosad.Steel.AISC.AISC360_10;
+using Wosad.Steel.AISC.AISC360v10;
 
 
  
  
 
-namespace  Wosad.Steel.AISC360_10
+namespace  Wosad.Steel.AISC360v10
 {
     public abstract class FlexuralBucklingSlender: SteelColumn
     {

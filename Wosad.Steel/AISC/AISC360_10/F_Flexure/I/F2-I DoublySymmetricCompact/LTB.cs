@@ -28,7 +28,7 @@ using Wosad.Common.CalculationLogger;
 using Wosad.Steel.AISC.Exceptions;
  using Wosad.Common.CalculationLogger;
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase
     {
@@ -63,11 +63,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public double GetFlexuralTorsionalBucklingMomentCapacity(double L_b, double Cb)
         {
 
-            double Lp = GetLp(ry, E, Fy); //(F2-5)
+            double Lp = GetLp(r_y, E, F_y); //(F2-5)
 
-            double rts = Getrts(Iy, Cw, Sx);
+            double rts = Getrts(I_y, C_w, S_x);
 
-            double Lr = GetLr(rts, E, Fy, Sx, J, c, ho);  // (F2-6)
+            double Lr = GetLr(rts, E, F_y, S_x, J, c, ho);  // (F2-6)
 
 
             LateralTorsionalBucklingType BucklingType = GetLateralTorsionalBucklingType(L_b, Lp, Lr);
@@ -84,12 +84,12 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 case LateralTorsionalBucklingType.Inelastic:
 
                     M_p = GetMajorNominalPlasticMoment();
-                    M_n = Cb * (M_p - (0.7 * Fy * Sx) * ((L_b - Lp) / (Lr - Lp))); //(F2-2)
+                    M_n = Cb * (M_p - (0.7 * F_y * S_x) * ((L_b - Lp) / (Lr - Lp))); //(F2-2)
                     M_n = M_n > M_p ? M_p : M_n;
                     break;
                 case LateralTorsionalBucklingType.Elastic:
-                    double Fcr = GetFcr(Cb, E, L_b, rts, J, c, Sx, ho);
-                    M_n = Fcr * Sx; //(F2-3)
+                    double Fcr = GetFcr(Cb, E, L_b, rts, J, c, S_x, ho);
+                    M_n = Fcr * S_x; //(F2-3)
                     M_p = GetMajorNominalPlasticMoment();
                     M_n = M_n > M_p ? M_p : M_n;
                     break;

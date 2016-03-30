@@ -23,7 +23,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Shear
+namespace Wosad.Steel.AISC.AISC360v10.Shear
 {
     public class ShearMemberFactory
     {

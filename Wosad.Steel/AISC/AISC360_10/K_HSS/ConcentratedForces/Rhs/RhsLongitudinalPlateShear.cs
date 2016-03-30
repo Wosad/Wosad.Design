@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 ////using Wosad.Analytics.Section;
  
-using Wosad.Steel.AISC360_10.Connections.AffectedElements;
+using Wosad.Steel.AISC360v10.Connections.AffectedElements;
  
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
@@ -33,7 +33,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
  
 
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public class RhsLongitudinalPlateShear : RhsToPlateConnection
     {

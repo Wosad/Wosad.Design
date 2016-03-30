@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10 
+namespace Wosad.Steel.AISC.AISC360v10 
 {
     // All tension members where the tension
     // load is transmitted only by transverse

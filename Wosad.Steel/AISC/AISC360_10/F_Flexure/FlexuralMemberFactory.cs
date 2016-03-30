@@ -26,14 +26,14 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.Section.Predefined;
  
  
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
 
     public class FlexuralMemberFactory
@@ -62,12 +62,31 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                             beam = ssBeam.GetBeamCase();
                         }
                     }
+
+
+                    else if (Shape is ISectionChannel)
+                    {
+                        ISectionChannel ChannelShape = Shape as ISectionChannel;
+                        SteelChannelSection ChannelSection = new SteelChannelSection(ChannelShape, Material);
+                        beam = new BeamChannel(ChannelSection, IsRolledMember, Log);
+                    }
+
+
+                    else if (Shape is ISectionPipe)
+                    {
+                        ISectionPipe SectionPipe = Shape as ISectionPipe;
+                        SteelPipeSection PipeSection = new SteelPipeSection(SectionPipe, Material);
+                        beam = new BeamCircularHss(PipeSection,  Log);
+                    }
+
                     else if (Shape is ISectionTube)
 	                {
                         ISectionTube TubeShape = Shape as ISectionTube;
                         SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
                         beam = new BeamRectangularHss(RectHSS_Section,MomentAxis,Log);
 	                }
+
+
                     else if (Shape is ISectionBox )
                     {
                         ISectionBox BoxShape = Shape as ISectionBox;
@@ -77,9 +96,9 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
                     else if (Shape is ISectionTee)
                     {
-                        //ISectionTee TeeShape = Shape as ISectionTee;
-                        //SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
-                        //beam = new BeamTee(TeeSection, MomentAxis, Log);
+                        ISectionTee TeeShape = Shape as ISectionTee;
+                        SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
+                        beam = new BeamTee(TeeSection, Log);
                     }
                     else
                     {

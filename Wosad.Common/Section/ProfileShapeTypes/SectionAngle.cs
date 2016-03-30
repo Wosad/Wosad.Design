@@ -30,12 +30,33 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public partial class SectionAngle : CompoundShape, ISectionAngle, ISliceableSection
     {
-        public SectionAngle(string Name, double h, double b, double t)
+        public SectionAngle(string Name, double h, double b, double t, AngleRotation AngleRotation,  AngleOrientation AngleOrientation)
             : base(Name)
         {
-            this._d = h;
-            this._b = b;
+            Set_b_and_h(b, h, AngleOrientation);
+            //this._d = h;
+            //this._b = b;
             this._t = t;
+            this.AngleOrientation = AngleOrientation;
+            this.AngleRotation = AngleRotation;
+        }
+
+        private void Set_b_and_h(double b, double h, AngleOrientation AngleOrientation)
+        {
+            double LongLeg = b >= h ? b : h;
+            double ShortLeg = b < h ? b : h;
+
+            if (AngleOrientation == Common.AngleOrientation.LongLegVertical)
+            {
+                this._d = LongLeg;
+                this._b = ShortLeg;
+            }
+            else
+            {
+                this._d = ShortLeg;
+                this._b = LongLeg;
+            }
+
         }
 
         private double _b;
@@ -65,7 +86,7 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName= this.Name+"_clone";
-            return new SectionAngle(cloneName, b, _d, t);
+            return new SectionAngle(cloneName, b, _d, t, angleRotation, angleOrientation);
         }
 
 
@@ -166,8 +187,15 @@ namespace Wosad.Common.Section.SectionTypes
             get { return angleOrientation; }
             set { angleOrientation = value; }
         }
-        
 
+        private AngleRotation angleRotation;
+
+        public AngleRotation AngleRotation
+        {
+            get { return angleRotation; }
+            set { angleRotation = value; }
+        }
+        
 
         #endregion
 
@@ -256,7 +284,10 @@ namespace Wosad.Common.Section.SectionTypes
                 }
                 return _beta_w; }
         }
-        
+
+
+
+
 
     }
 }

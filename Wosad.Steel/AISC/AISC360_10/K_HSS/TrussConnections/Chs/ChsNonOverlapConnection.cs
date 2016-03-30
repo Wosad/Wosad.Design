@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 
 
-namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
+namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
     public class ChsNonOverlapConnection: ChsTrussConnection
     {

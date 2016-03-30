@@ -23,7 +23,7 @@ using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Int
  
 
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.AISC360v10.General.Compactness
 {
     public class LegOfDoubleAngleWithSeparation : LegOfSingleAngle
     {

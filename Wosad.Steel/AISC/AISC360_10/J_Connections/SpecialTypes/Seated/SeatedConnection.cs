@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 using Wosad.Common.Entities;
 using Wosad.Common.Mathematics;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public partial class SeatedConnection : AnalyticalElement
     {

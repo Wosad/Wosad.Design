@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.AISC360v10.General.Compactness
 {
     public abstract class CompactnessBase : ICompactnessElement
     {
@@ -47,8 +47,8 @@ namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
         public CompactnessClassFlexure GetCompactnessFlexure()
         {
             double lambda = GetLambda();
-            double lambda_r = GetLambda_r(StressType.Axial);
-            double lambda_p = GetLambda_p(StressType.Axial);
+            double lambda_r = GetLambda_r(StressType.Flexure);
+            double lambda_p = GetLambda_p(StressType.Flexure);
 
             if (lambda > lambda_r)
             {

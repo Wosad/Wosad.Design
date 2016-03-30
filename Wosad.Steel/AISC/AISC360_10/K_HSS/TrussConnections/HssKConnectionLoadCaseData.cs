@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text; using Wosad.Common.Entities; using Wosad.Common.Section.Interfaces; using Wosad.Steel.AISC.Interfaces;
 
-namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
+namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
     public class HssKConnectionLoadCaseData : HssConnectionLoadCaseData
     {

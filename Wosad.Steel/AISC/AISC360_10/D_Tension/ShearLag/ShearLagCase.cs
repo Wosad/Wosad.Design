@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Steel.AISC.AISC360_10
+namespace Wosad.Steel.AISC.AISC360v10
 {
     public enum ShearLagCase
     {

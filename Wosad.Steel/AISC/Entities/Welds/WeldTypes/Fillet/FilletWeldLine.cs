@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using Wosad.Common.Mathematics;
-using Wosad.Steel.AISC.AISC360_10.Connections.Weld;
+using Wosad.Steel.AISC.AISC360v10.Connections.Weld;
 
 namespace Wosad.Steel.AISC.SteelEntities.Welds
 {

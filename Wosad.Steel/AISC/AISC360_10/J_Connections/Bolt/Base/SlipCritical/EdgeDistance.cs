@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
 {
     public abstract partial class BoltSlipCritical : Bolt, IBoltSlipCritical
     {

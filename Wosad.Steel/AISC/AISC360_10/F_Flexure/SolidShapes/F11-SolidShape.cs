@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.AISC360_10.Flexure;
+using Wosad.Steel.AISC.AISC360v10.Flexure;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Common.Exceptions;
@@ -33,7 +33,7 @@ using Wosad.Common.Exceptions;
  
  
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class SolidShape : FlexuralMember, ISteelBeamFlexure
     {

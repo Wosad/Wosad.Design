@@ -29,7 +29,7 @@ using Wosad.Common;
  
  
 
-namespace Wosad.Steel.AISC.AISC360_10.General.Compactness
+namespace Wosad.Steel.AISC.AISC360v10.General.Compactness
 {
 
     public partial class ShapeCompactness

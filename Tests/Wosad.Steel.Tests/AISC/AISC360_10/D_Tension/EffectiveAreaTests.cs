@@ -21,9 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Steel.AISC.AISC360_10;
+using Wosad.Steel.AISC.AISC360v10;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.D_Tension
+namespace Wosad.Steel.Tests.AISC.AISC360v10.D_Tension
 {
     [TestFixture]
     public class ShearLagFactorTests

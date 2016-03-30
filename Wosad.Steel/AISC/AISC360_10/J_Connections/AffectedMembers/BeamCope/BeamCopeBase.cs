@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public abstract partial class BeamCopeBase : IBeamCope
     {

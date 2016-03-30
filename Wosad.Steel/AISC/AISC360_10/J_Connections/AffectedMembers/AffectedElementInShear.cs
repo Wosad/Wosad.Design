@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.SteelEntities.Materials;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 
-namespace  Wosad.Steel.AISC360_10.Connections.AffectedElements
+namespace  Wosad.Steel.AISC360v10.Connections.AffectedElements
 {
     public partial class AffectedElementInShear: AffectedElement
     {

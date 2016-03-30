@@ -23,10 +23,10 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.AISC360_10.Compression.BaseClasses;
+using Wosad.Steel.AISC.AISC360v10.Compression.BaseClasses;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Compression
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public abstract partial class ColumnFlexuralAndTorsionalBuckling: ColumnFlexuralBuckling
     {

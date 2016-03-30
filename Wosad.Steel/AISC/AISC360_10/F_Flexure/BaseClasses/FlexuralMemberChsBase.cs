@@ -21,14 +21,14 @@ using System.Linq;
 using System.Text;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.Interfaces;
 
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public abstract partial class FlexuralMemberChsBase : FlexuralMember
     {

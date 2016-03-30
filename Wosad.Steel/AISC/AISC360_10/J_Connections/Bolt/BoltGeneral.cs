@@ -19,9 +19,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using b = Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
+using b = Wosad.Steel.AISC.AISC360v10.Connections.Bolted;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.Bolt
 {
     public class BoltGeneral: b.Bolt
     {

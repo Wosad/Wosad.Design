@@ -23,9 +23,9 @@ using System.Threading.Tasks;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC360_10.Connections.AffectedElements;
+using Wosad.Steel.AISC360v10.Connections.AffectedElements;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public class BeamUncoped : IBeamCope
     {

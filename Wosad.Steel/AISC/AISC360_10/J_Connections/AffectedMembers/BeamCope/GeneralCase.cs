@@ -23,11 +23,11 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Common.Section.SectionTypes;
-using Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers;
+using Wosad.Steel.AISC.AISC360v10.Connections.AffectedMembers;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public abstract partial class BeamCopeBase : IBeamCope
     {

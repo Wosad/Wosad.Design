@@ -22,10 +22,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
-using b = Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt;
+using b = Wosad.Steel.Tests.AISC.AISC360v10.Connections.Bolt;
 
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.Bolt
 {
     /// <summary>
     /// Comparison to AISC Manual values

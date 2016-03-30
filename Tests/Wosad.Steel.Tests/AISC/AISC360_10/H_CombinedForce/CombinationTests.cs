@@ -21,9 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Steel.AISC.AISC360_10.Combination;
+using Wosad.Steel.AISC.AISC360v10.Combination;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.CombinedForce
+namespace Wosad.Steel.Tests.AISC.AISC360v10.CombinedForce
 {
     [TestFixture]
     public class CombinationTests

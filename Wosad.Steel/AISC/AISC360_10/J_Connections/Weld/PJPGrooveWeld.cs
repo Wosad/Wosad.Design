@@ -24,7 +24,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 using Wosad.Steel.AISC.Entities.Welds.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Weld
 {
     public class PJPGrooveWeld : GrooveWeld, IWeld
     {

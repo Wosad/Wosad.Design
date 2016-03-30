@@ -29,7 +29,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public class RhsTransversePlateCrossAxial: RhsTransversePlateTandXAxial
     //Note: the difference between RhsTransversePlateTeeAxial and RhsTransversePlateCrossAxial

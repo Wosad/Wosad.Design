@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.SteelEntities;
  using Wosad.Common.CalculationLogger;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
     {
@@ -45,6 +45,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         public override SteelLimitStateValue GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition CompressionLocation)
         {
+            if (SectionValuesWereCalculated == false)
+            {
+                GetSectionValues();
+            }
+
            double M_n= GetMajorNominalPlasticMoment();
            double phiM_n = 0.9 * M_n;
             return new SteelLimitStateValue(phiM_n, true);
@@ -53,6 +58,11 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
         public override SteelLimitStateValue GetFlexuralLateralTorsionalBucklingStrength(double C_b, double L_b, FlexuralCompressionFiberPosition CompressionLocation,
             FlexuralAndTorsionalBracingType BracingType)
         {
+            if (SectionValuesWereCalculated == false)
+            {
+                GetSectionValues();
+            }
+
             SteelLimitStateValue ls;
             if (BracingType == FlexuralAndTorsionalBracingType.FullLateralBracing)
             {
@@ -74,7 +84,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
                 GetSectionValues();
             }
             //double rts = Getrts(Iy, Cw, Sx);
-            double Lr = GetLr(rts, E, Fy, Sx, J, c, ho);  // (F2-6)
+            double Lr = GetLr(rts, E, F_y, S_x, J, c, ho);  // (F2-6)
             SteelLimitStateValue ls = new SteelLimitStateValue();
             ls.IsApplicable = true;
             ls.Value = Lr;
@@ -88,7 +98,7 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
             {
                 GetSectionValues();
             }
-            double Lp = GetLp(ry, E, Fy); //(F2-5)
+            double Lp = GetLp(r_y, E, F_y); //(F2-5)
             SteelLimitStateValue ls = new SteelLimitStateValue();
             ls.IsApplicable = true;
             ls.Value = Lp;
@@ -107,59 +117,58 @@ namespace Wosad.Steel.AISC.AISC360_10.Flexure
 
         internal void GetSectionValues()
         {
-            if (SectionValuesWereCalculated == false)
-            {
-                E = Section.Material.ModulusOfElasticity;
-                Fy = Section.Material.YieldStress;
-
-                Iy = Section.Shape.I_y;
-
-                Sxbot = Section.Shape.S_xBot;
-                Sxtop = Section.Shape.S_xTop;
-
-                Sx = Math.Min(Sxbot, Sxtop);
-
-                Zx = Section.Shape.Z_x;
-
-                ry = Section.Shape.r_y;
-
-                Cw = Section.Shape.C_w;
-
-                J = Section.Shape.J;
-
-                c = Get_c();
-
-                ho = Get_ho();
-
-                rts = this.GetEffectiveRadiusOfGyration();
+            //if (SectionValuesWereCalculated == false)
+            //{
+                _E = Section.Material.ModulusOfElasticity;
+                _F_y = Section.Material.YieldStress;
+                _I_y = Section.Shape.I_y;
+                _S_xBot = Section.Shape.S_xBot;
+                _S_xTop = Section.Shape.S_xTop;
+                _S_x = Math.Min(_S_xBot, _S_xTop);
+                _Z_x = Section.Shape.Z_x;
+                _r_y = Section.Shape.r_y;
+                _C_w = Section.Shape.C_w;
+                _J = Section.Shape.J;
+                _c = Get_c();
+                _ho = Get_ho();
+                _rts = this.GetEffectiveRadiusOfGyration();
                 SectionValuesWereCalculated = true;
-            }
+            //}
         }
 
         private double GetEffectiveRadiusOfGyration()
         {
-            throw new NotImplementedException();
+            double r_ts = Math.Sqrt(((Math.Sqrt(_I_y * _C_w)) / (_S_x))); //(F2-7)
+            return r_ts;
         }
 
+         double _E  ;    
+         double _F_y;    
+         double _I_y ;   
+         double _S_xBot; 
+         double _S_xTop; 
+         double _S_x  ;  
+         double _Z_x  ;  
+         double _r_y  ;  
+         double _C_w ;   
+         double _J ;     
+         double _c;      
+         double _ho;     
+         double _rts;    
 
-        double E;
-        double Fy;
-
-
-        double Iy;
-
-        double Sxbot;
-        double Sxtop;
-
-        double Sx;
-        double Zx;
-        double ry;
-        double Cw;
-        double J;
-        double c;
-        double ho;
-
-        double rts;
+        double E      {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _E  ;     }}
+        double F_y    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _F_y;     }}
+        double I_y    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _I_y ;    }}
+        double S_xBot {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _S_xBot;  }}
+        double S_xTop {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _S_xTop;  }}
+        double S_x    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _S_x  ;   }}
+        double Z_x    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _Z_x  ;   }}
+        double r_y    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _r_y  ;   }}
+        double C_w    {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _C_w ;    }}
+        double J      {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _J ;      }}
+        double c      {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _c;       }}
+        double ho     {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _ho;      }}
+        double rts   {get { if(SectionValuesWereCalculated==false) {GetSectionValues();} return  _rts;    }}
 
 
 

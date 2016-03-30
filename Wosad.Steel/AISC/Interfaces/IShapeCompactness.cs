@@ -1,6 +1,6 @@
 ﻿using System;
-using Wosad.Steel.AISC.AISC360_10.General.Compactness;
-namespace Wosad.Steel.AISC.AISC360_10.B_General
+using Wosad.Steel.AISC.AISC360v10.General.Compactness;
+namespace Wosad.Steel.AISC.AISC360v10.B_General
 {
     public interface IShapeCompactness
     {

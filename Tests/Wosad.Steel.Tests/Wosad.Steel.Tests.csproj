@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\F_Flexure\IBeam\F2_I_DoublySymmetricCompactTests.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearUnstiffenedBeamTests.cs" />
     <Compile Include="AISC\AISC360_10\H_CombinedForce\CombinationTests.cs" />
     <Compile Include="AISC\AISC360_10\I_Composite\Anchor\HeadedAnchorTests.cs" />
@@ -94,7 +95,6 @@
     <Folder Include="AISC\AISC360_10\B_General\Compactness\" />
     <Folder Include="AISC\AISC360_10\C_Stability\" />
     <Folder Include="AISC\AISC360_10\E_Compression\" />
-    <Folder Include="AISC\AISC360_10\F_Flexure\" />
     <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />

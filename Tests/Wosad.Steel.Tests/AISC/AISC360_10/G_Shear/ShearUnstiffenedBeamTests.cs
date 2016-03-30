@@ -22,10 +22,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC;
-using Wosad.Steel.AISC.AISC360_10.Shear;
+using Wosad.Steel.AISC.AISC360v10.Shear;
 using aisc = Wosad.Steel.AISC;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Shear
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Shear
 {
     [TestFixture]
     public class ShearUnstiffenedBeamTests: ToleranceTestBase

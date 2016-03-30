@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10 
+namespace Wosad.Steel.AISC.AISC360v10 
 {
     /// <summary>
     ///  W, M, S or HP  Shapes or Tees cut  from these shapes. (If U is calculated per Case 2, the larger value is permitted to be used.)

@@ -62,6 +62,7 @@
     <Compile Include="Data\MoreLinq\OrderBy.cs" />
     <Compile Include="Data\MoreLinq\OrderByDirection.cs" />
     <Compile Include="Entities\AngleOrientation.cs" />
+    <Compile Include="Entities\AngleRotation.cs" />
     <Compile Include="Exceptions\ShapeTypeNotSupportedException.cs" />
     <Compile Include="Interfaces\ILocationArrayElement.cs" />
     <Compile Include="Maps\Location.cs" />

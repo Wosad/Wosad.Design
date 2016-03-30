@@ -27,7 +27,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 
 
-namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
+namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
     public class HssTrussConnection : SteelDesignElement 
     {

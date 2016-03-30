@@ -29,7 +29,7 @@ using Wosad.Common.Interfaces;
 using Wosad.Common.CalculationLogger;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
 
     //Cb equation in section F1 (3) applies only to  singly symmetric members in single curvature 

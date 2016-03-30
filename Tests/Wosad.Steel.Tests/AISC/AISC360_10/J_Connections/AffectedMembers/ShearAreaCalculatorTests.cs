@@ -21,9 +21,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Wosad.Steel.AISC.AISC360_10.J_Connections.AffectedMembers;
+using Wosad.Steel.AISC.AISC360v10.J_Connections.AffectedMembers;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.AffectedMembers
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.AffectedMembers
 {
     [TestFixture]
     public class ShearAreaCalculatorTests

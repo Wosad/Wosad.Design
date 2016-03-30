@@ -23,9 +23,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
-using Wosad.Steel.AISC360_10.Connections.AffectedElements;
+using Wosad.Steel.AISC360v10.Connections.AffectedElements;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.AffectedMembers
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.AffectedMembers
 {
     [TestFixture]
     public class BoltBearingTests : ToleranceTestBase

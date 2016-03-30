@@ -26,7 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Compression
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public partial class CompressionMemberRectangle: ColumnDoublySymmetric
     {

@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Section.Interfaces;
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public abstract partial class FlexuralMemberIBase : FlexuralMember
     {

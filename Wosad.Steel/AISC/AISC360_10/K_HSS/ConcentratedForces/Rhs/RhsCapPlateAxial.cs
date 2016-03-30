@@ -29,7 +29,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public class RhsCapPlateAxial : RhsToPlateConnection
     {

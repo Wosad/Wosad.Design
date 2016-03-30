@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 
  
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public interface IHssConcentratedForceConnection
     {

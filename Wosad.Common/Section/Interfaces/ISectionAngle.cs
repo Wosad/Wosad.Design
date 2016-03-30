@@ -39,5 +39,6 @@ namespace Wosad.Common.Section.Interfaces
         double beta_w { get; }
 
         AngleOrientation AngleOrientation { get;}
+        AngleRotation AngleRotation { get; }
     }
 }

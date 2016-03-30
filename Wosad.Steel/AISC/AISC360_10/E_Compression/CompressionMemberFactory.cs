@@ -27,7 +27,7 @@ using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 
-namespace Wosad.Steel.AISC.AISC360_10.Compression
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public class CompressionMemberFactory
     {

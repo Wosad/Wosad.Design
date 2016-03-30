@@ -15,7 +15,7 @@
    */
 #endregion
 using System;
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public interface IBeamCope
     {

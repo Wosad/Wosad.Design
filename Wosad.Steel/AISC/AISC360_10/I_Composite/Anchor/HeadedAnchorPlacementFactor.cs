@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Entities;
 
-namespace Wosad.Steel.AISC.AISC360_10.Composite
+namespace Wosad.Steel.AISC.AISC360v10.Composite
 {
     public partial class HeadedAnchor : AnalyticalElement
     {

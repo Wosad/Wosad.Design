@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 using Wosad.Common.Mathematics;
 using Wosad.Steel.AISC.SteelEntities.Welds;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections
+namespace Wosad.Steel.AISC.AISC360v10.Connections
 {
     public class FilletWeldGroup : FilletWeldLoadDeformationGroupBase
     {

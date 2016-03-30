@@ -31,7 +31,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC;
 using Wosad.Steel.AISC.SteelEntities.Bolts;
 
-namespace Wosad.Steel.AISC360_10.Connections.AffectedElements
+namespace Wosad.Steel.AISC360v10.Connections.AffectedElements
 {
     public  partial class AffectedElementWithHoles : SteelDesignElement
     {

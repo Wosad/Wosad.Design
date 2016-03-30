@@ -27,7 +27,7 @@ using Wosad.Common.CalculationLogger;
 using Wosad.Steel.AISC.SteelEntities;
  using Wosad.Common.CalculationLogger;
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class BeamIDoublySymmetricCompact : BeamIDoublySymmetricBase, ISteelBeamFlexure
     {

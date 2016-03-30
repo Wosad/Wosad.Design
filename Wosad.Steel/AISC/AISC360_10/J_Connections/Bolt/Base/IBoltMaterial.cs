@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Bolted
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
 {
     public interface IBoltMaterial
     {

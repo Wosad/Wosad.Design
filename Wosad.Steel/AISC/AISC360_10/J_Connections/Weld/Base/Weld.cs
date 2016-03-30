@@ -26,7 +26,7 @@ using Wosad.Steel.AISC.Entities.Materials;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.Weld
+namespace Wosad.Steel.AISC.AISC360v10.Connections.Weld
 {
     public abstract class Weld : SteelDesignElement
     {

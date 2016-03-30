@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Steel.AISC.AISC360_10.Connections.AffectedMembers.ConcentratedForces
+namespace Wosad.Steel.AISC.AISC360v10.Connections.AffectedMembers.ConcentratedForces
 {
     // WebSideswayBuckling
     public static partial class FlangeOrWebWithConcentratedForces

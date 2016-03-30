@@ -29,7 +29,7 @@ using Wosad.Common;
 
 
 
-namespace Wosad.Steel.AISC.AISC360_10.Flexure
+namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
     public partial class BeamDoubleAngle : FlexuralMemberDoubleAngleBase
     {

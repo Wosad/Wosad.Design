@@ -26,7 +26,7 @@ using Wosad.Common.Mathematics;
 using Wosad.Common.CalculationLogger.Interfaces; 
 
 
-namespace  Wosad.Steel.AISC.AISC360_10.HSS.TrussConnections
+namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
     public class ChsTYConnection: ChsNonOverlapConnection
     {

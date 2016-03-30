@@ -21,7 +21,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.Entities;
 
-namespace Wosad.Steel.AISC.AISC360_10.Combination
+namespace Wosad.Steel.AISC.AISC360v10.Combination
 {
     public class Combination: AnalyticalElement
     {

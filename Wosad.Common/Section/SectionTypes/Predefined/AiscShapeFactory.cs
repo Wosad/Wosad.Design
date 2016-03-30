@@ -33,7 +33,7 @@ namespace Wosad.Common.Section.Predefined
     public class AiscShapeFactory
     {
 
-        public ISection GetShape(string ShapeId, ShapeTypeSteel shapeType, AngleOrientation AngleOrientation= AngleOrientation.LongLegVertical)
+        public ISection GetShape(string ShapeId, ShapeTypeSteel shapeType, AngleOrientation AngleOrientation = AngleOrientation.LongLegVertical, AngleRotation AngleRotation = AngleRotation.FlatLegBottom)
         { 
 
             string DEFAULT_EXCEPTION_STRING = "Selected shape is not supported. Specify a different shape.";
@@ -53,7 +53,7 @@ namespace Wosad.Common.Section.Predefined
                     sec = new PredefinedSectionChannel(cs);
                     break;
                 case ShapeTypeSteel.Angle:
-                    sec = new PredefinedSectionAngle(cs, AngleOrientation);
+                    sec = new PredefinedSectionAngle(cs, AngleOrientation,AngleRotation);
                     break;
                 case ShapeTypeSteel.TeeRolled:
                     throw new Exception(DEFAULT_EXCEPTION_STRING);

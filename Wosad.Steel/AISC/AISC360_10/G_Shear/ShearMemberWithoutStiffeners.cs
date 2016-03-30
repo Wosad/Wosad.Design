@@ -22,7 +22,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Shear
+namespace Wosad.Steel.AISC.AISC360v10.Shear
 {
     public partial class ShearMemberWithoutStiffeners : ShearMemberGeneral
     {

@@ -31,15 +31,35 @@ namespace Wosad.Common.Section.Predefined
     public class PredefinedSectionAngle : SectionPredefinedBase, ISectionAngle
     {
 
-        public PredefinedSectionAngle(AiscCatalogShape section, AngleOrientation AngleOrientation)
+        public PredefinedSectionAngle(AiscCatalogShape section, AngleOrientation AngleOrientation, AngleRotation AngleRotation)
             : base(section)
         {
-            this._d = section.d;
-            this._b = section.b;
+            //this._d = section.d;
+            //this._b = section.b;
+            Set_b_and_d(section.d, section.b, AngleOrientation);
             this._t = section.t;
             this.AngleOrientation = AngleOrientation;
+            this.AngleRotation = AngleRotation;
  
         }
+
+        private void Set_b_and_d(double d, double b, AngleOrientation AngleOrientation)
+        {
+            double LongLeg = b >= d ? b : d;
+            double ShortLeg = b < d ? b : d;
+
+            if (AngleOrientation == Common.AngleOrientation.LongLegVertical)
+            {
+                this._d = LongLeg;
+                this._b = ShortLeg;
+            }
+            else
+            {
+                this._d = ShortLeg;
+                this._b = LongLeg;
+            }
+        }
+
 
 
         public PredefinedSectionAngle(
@@ -155,6 +175,20 @@ namespace Wosad.Common.Section.Predefined
             }
         }
 
-        public AngleOrientation AngleOrientation { get; set; }
+        private AngleOrientation angleOrientation;
+
+        public AngleOrientation AngleOrientation
+        {
+            get { return angleOrientation; }
+            set { angleOrientation = value; }
+        }
+
+        private AngleRotation angleRotation;
+
+        public AngleRotation AngleRotation
+        {
+            get { return angleRotation; }
+            set { angleRotation = value; }
+        }
     }
 }

@@ -32,7 +32,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
 
-namespace  Wosad.Steel.AISC360_10.HSS.ConcentratedForces
+namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public class RhsLongitudinalThruPlateTYXAxial : RhsToPlateConnection
     {

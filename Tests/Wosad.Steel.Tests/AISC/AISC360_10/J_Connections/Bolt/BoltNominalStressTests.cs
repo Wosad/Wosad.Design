@@ -22,9 +22,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC;
-using Wosad.Steel.AISC.AISC360_10.Connections.Bolted;
+using Wosad.Steel.AISC.AISC360v10.Connections.Bolted;
 
-namespace Wosad.Steel.Tests.AISC.AISC360_10.Connections.Bolt
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.Bolt
 {
     [TestFixture]
     public class BoltNominalStressTests
