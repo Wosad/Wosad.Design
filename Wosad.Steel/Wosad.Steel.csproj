@@ -165,7 +165,6 @@
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\ExtendedSinglePlateBuckling.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\SpecialTypes\SinglePlate\StabilizedExtendedPlateTorsion.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
-    <Compile Include="AISC\Entities\Enums\AngleRotation.cs" />
     <Compile Include="AISC\Entities\Enums\FlexuralAndTorsionalBracingType.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />

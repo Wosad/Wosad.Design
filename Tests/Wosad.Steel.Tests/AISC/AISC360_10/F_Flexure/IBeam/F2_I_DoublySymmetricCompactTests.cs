@@ -54,7 +54,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
             SteelLimitStateValue LTB =
             beam.GetFlexuralLateralTorsionalBucklingStrength(1.0, 9 * 12, FlexuralCompressionFiberPosition.Top, Steel.AISC.FlexuralAndTorsionalBracingType.NoLateralBracing);
             double phiM_n = LTB.Value;
-            double refValue = 186*12; // from AISC Steel Manual Table 3-10
+            double refValue = 192*12; // from AISC Steel Manual Table 3-10
             double actualTolerance = EvaluateActualTolerance(phiM_n, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);

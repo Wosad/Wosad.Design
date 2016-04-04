@@ -75,7 +75,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     //F10-5
                     if (CompressionLocation == FlexuralCompressionFiberPosition.Top)
                     {
-                        if (AngleRotation == AISC.AngleRotation.FlatLegBottom)
+                        if (AngleRotation == AngleRotation.FlatLegBottom)
                         {
                             if (d < b) //short leg in compression
                             {
@@ -102,7 +102,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     else if (CompressionLocation == FlexuralCompressionFiberPosition.Bottom)
                     {
 
-                        if (AngleRotation == AISC.AngleRotation.FlatLegBottom)
+                        if (AngleRotation == AngleRotation.FlatLegBottom)
                         {
                             if (d > b) 
                             {

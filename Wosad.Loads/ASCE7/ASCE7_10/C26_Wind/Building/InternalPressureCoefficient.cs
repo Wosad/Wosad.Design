@@ -32,34 +32,23 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building
         {
             double GCpi = 0.0;
 
-            
-            #region EnclosureClass
-            ICalcLogEntry EnclosureClassEntry = new CalcLogEntry();
-            EnclosureClassEntry.ValueName = "GCpi";
-            EnclosureClassEntry.Reference = "";
-            EnclosureClassEntry.FormulaID = null; //reference to formula from code
-
-            #endregion
-
 
             switch (EnclosureType)
             {
                 case WindEnclosureType.Open:
                     GCpi= 0.0;
-                    EnclosureClassEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindInternalPressureOpen.docx";
+       
                     break;
                 case WindEnclosureType.PartiallyEnclosed:
                     GCpi= 0.55;
-                    EnclosureClassEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindInternalPressurePartiallyEnclosed.docx";
+                   
                     break;
                 case WindEnclosureType.Enclosed:
                     GCpi= 0.18;
-                    EnclosureClassEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindInternalPressureEnclosed.docx";
+                
                     break;
             }
 
-            EnclosureClassEntry.VariableValue = GCpi.ToString();
-            this.AddToLog(EnclosureClassEntry);
             return GCpi;
         }
 

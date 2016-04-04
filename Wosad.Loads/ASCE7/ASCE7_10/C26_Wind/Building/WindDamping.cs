@@ -1,4 +1,4 @@
-﻿#region Copyright
+#region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,17 +14,29 @@
    limitations under the License.
    */
 #endregion
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Wosad.Loads.ASCE7.Entities;
 
-namespace Wosad.Steel.AISC
+namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads
 {
-    public enum AngleRotation
+    public class WindDamping
     {
-        FlatLegBottom,
-        FlatLegTop
+        public double GetDampingRatioBeta(WindMaterialDampingType MaterialDampingType)
+        {
+            switch (MaterialDampingType)
+            {
+                case WindMaterialDampingType.Steel:
+                    return 0.01;
+                case WindMaterialDampingType.Concrete:
+                    return 0.01;
+                default:
+                    return 0.01;
+
+            }
+        }
     }
 }

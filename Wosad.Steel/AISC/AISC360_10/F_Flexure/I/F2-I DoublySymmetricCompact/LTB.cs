@@ -84,7 +84,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                 case LateralTorsionalBucklingType.Inelastic:
 
                     M_p = GetMajorNominalPlasticMoment();
-                    M_n = Cb * (M_p - (0.7 * F_y * S_x) * ((L_b - Lp) / (Lr - Lp))); //(F2-2)
+                    M_n = Cb * (M_p - (M_p-0.7 * F_y * S_x) * ((L_b - Lp) / (Lr - Lp))); //(F2-2)
                     M_n = M_n > M_p ? M_p : M_n;
                     break;
                 case LateralTorsionalBucklingType.Elastic:

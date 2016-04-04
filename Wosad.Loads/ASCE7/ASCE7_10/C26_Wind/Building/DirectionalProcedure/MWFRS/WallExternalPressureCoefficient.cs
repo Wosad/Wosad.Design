@@ -33,45 +33,21 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure.MWFR
         public double GetWallPressureCoefficient(WindFace face, double B, double L)
         {
             double Cp = 0.0;
-            ICalcLogEntry CpEntry = new CalcLogEntry();
-            CpEntry.ValueName = "Cp";
 
             switch (face)
             {
                 case WindFace.Windward:
                     Cp = 0.8;
-
-                    CpEntry.Reference = "";
-                    CpEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/PressureCoefficient/WindCpWallMWFRSWindward.docx";
-                    CpEntry.FormulaID = null; //reference to formula from code
-
-                    
-
-                    break;
+                     break;
                 case WindFace.Leeward:
                     Cp = GetLeewardPressure(B, L);
-                    CpEntry.AddDependencyValue("B", Math.Round(B, 3));
-                    CpEntry.AddDependencyValue("L", Math.Round(L, 3));
-                    CpEntry.AddDependencyValue("LB", Math.Round(L/B, 3));
-
-                    CpEntry.Reference = "";
-                    CpEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/PressureCoefficient/WindCpWallMWFRSLeeward.docx";
-                    CpEntry.FormulaID = null; //reference to formula from code
-
                     break;
                 case WindFace.Side:
                     Cp = 0.7;
-                    
-                    CpEntry.Reference = "";
-                    CpEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/PressureCoefficient/WindCpWallMWFRSside.docx";
-                    CpEntry.FormulaID = null; //reference to formula from code
-
                     break;
                 default:
                     break;
             }
-            CpEntry.VariableValue = Math.Round(Cp, 3).ToString();
-            this.AddToLog(CpEntry);
             return Cp;
             
         }

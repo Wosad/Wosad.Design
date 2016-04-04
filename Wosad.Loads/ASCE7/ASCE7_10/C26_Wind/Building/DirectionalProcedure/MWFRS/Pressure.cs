@@ -35,24 +35,6 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure.MWFR
             double p2 = qh * G * Cpl;
             double p = p1 - p2;
 
-            
-            #region p
-            ICalcLogEntry pEntry = new CalcLogEntry();
-            pEntry.ValueName = "p";
-            pEntry.AddDependencyValue("p1", Math.Round(p1, 3));
-            pEntry.AddDependencyValue("p2", Math.Round(p2, 3));
-            pEntry.AddDependencyValue("Cpl", Math.Round(Cpl, 3));
-            pEntry.AddDependencyValue("Cpw", Math.Round(Cpw, 3));
-            pEntry.AddDependencyValue("G", Math.Round(G, 3));
-            pEntry.AddDependencyValue("qz", Math.Round(qz, 3));
-            pEntry.AddDependencyValue("qh", Math.Round(qh, 3));
-
-            pEntry.Reference = "";
-            pEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindPressure/WindPressureMWFRSNoInternal.docx";
-            pEntry.FormulaID = null; //reference to formula from code
-            pEntry.VariableValue = Math.Round(p, 3).ToString();
-            #endregion
-            this.AddToLog(pEntry);
 
             return p;
         }
@@ -62,25 +44,6 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure.MWFR
            double p1 = q * G * Cp - qi * GCpi;
            double p2 = q * G * Cp + qi * GCpi;
            double p = Math.Max(Math.Abs(p1), Math.Abs(p2));
-
-
-           #region p
-           ICalcLogEntry pEntry = new CalcLogEntry();
-           pEntry.ValueName = "p";
-           pEntry.AddDependencyValue("p1", Math.Round(p1, 3));
-           pEntry.AddDependencyValue("p2", Math.Round(p2, 3));
-           pEntry.AddDependencyValue("q", Math.Round(q, 3));
-           pEntry.AddDependencyValue("qi", Math.Round(qi, 3));
-           pEntry.AddDependencyValue("GCpi", Math.Round(GCpi, 3));
-           pEntry.AddDependencyValue("Cp", Math.Round(Cp, 3));
-           pEntry.AddDependencyValue("G", Math.Round(G, 3));
-
-           pEntry.Reference = "";
-           pEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindPressure/WindPressureMWFRSWithInternal.docx";
-           pEntry.FormulaID = null; //reference to formula from code
-           pEntry.VariableValue = Math.Round(p, 3).ToString();
-           #endregion
-           this.AddToLog(pEntry);
 
            return p;
         }

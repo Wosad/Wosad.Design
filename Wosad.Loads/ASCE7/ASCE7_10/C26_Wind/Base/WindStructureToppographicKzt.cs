@@ -22,7 +22,7 @@ using System.Text;
 
 namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads
 {
-    public abstract partial class WindStructure
+    public partial class WindStructure
     {
 
         public static double GetTopographicFactorKzt()

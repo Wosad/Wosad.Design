@@ -25,7 +25,7 @@ using Wosad.Loads.ASCE7.Entities;
 
 namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads
 {
-    public abstract partial class WindStructure
+    public partial class WindStructure
     {
         public  double GetInternalPressureCoefficientGCpi()
         {

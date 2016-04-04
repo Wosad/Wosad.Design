@@ -67,6 +67,9 @@
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\Exceptions\DeadLoadIdNotFoundException.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\Exceptions\DeadLoadInvalidParametersException.cs" />
     <Compile Include="ASCE7\ASCE7_10\C07_SnowLoads\GroundSnow.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C26_Wind\WindStructureGeneral\FreestandingWallOrSignPressure.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C26_Wind\WindStructureGeneral\FreestandingWallOrSignPressureCoefficient.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C26_Wind\WindStructureGeneral\WindStructureGeneral.cs" />
     <Compile Include="ASCE7\Entities\IBuildingComponent.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\SpecialCases\CMU\BlockGroutingType.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\SpecialCases\CMU\CMUBase.cs" />
@@ -166,7 +169,7 @@
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Base\WindStructureGustFactor.cs" />
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Base\WindStructureToppographicKzt.cs" />
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\BuildingDirectionalProcedureElement.cs" />
-    <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\Damping.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\WindDamping.cs" />
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\DirectionalProcedure\CC\CCPressureResult.cs" />
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\DirectionalProcedure\CC\ComponentOrCladding.cs" />
     <Compile Include="ASCE7\ASCE7_10\C26_Wind\Building\DirectionalProcedure\CC\Pressure.cs" />

@@ -30,40 +30,20 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure
         {
             double Kz = 0;
 
-            
-            #region Kz
-            ICalcLogEntry KzEntry = new CalcLogEntry();
-            KzEntry.ValueName = "Kz";
-            KzEntry.AddDependencyValue("z", Math.Round(z, 3));
-            KzEntry.AddDependencyValue("zg", Math.Round(zg, 3));
-            KzEntry.AddDependencyValue("alpha", Math.Round(alpha, 3));
-            if (location == WindVelocityLocation.Wall)
-            {
-                KzEntry.AddDependencyValue("locType", "z");
-            }
-            else
-            {
-                KzEntry.AddDependencyValue("locType", "h");
-            }
-            
-            KzEntry.Reference = "";
-            KzEntry.FormulaID = null; //reference to formula from code
-
-            #endregion
-            
+ 
 
             if (z >= 15.0)
             {
                 if (z>zg)
                 {
                     Kz = 2.01;
-                    KzEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindVelocityPressureExposureCoefficientOver_zg.docx";
+                   
                 
                 }
                 else
                 {
                     Kz = 2.01 * Math.Pow(z / zg, 2.0 / alpha);
-                    KzEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindVelocityPressureExposureCoefficientOver15.docx";
+                   
                 
                 }
                 
@@ -71,12 +51,10 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure
             else
             {
                 Kz = 2.01 * Math.Pow(15.0 / zg, 2.0 / alpha);
-                KzEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindVelocityPressureExposureCoefficientLess15.docx";
-            
+               
             }
 
-            KzEntry.VariableValue = Math.Round(Kz, 3).ToString();
-            this.AddToLog(KzEntry);
+
             return Kz;
         }
 

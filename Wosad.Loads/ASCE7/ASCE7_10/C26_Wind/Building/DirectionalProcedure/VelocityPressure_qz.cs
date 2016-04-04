@@ -33,30 +33,6 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads.Building.DirectionalProcedure
         {
             double qz= 0.00256 * Kz * Kzt * Kd * Math.Pow(V, 2); //(28.3-1)
 
-            
-            #region qz
-            ICalcLogEntry qzEntry = new CalcLogEntry();
-            qzEntry.ValueName = "qz";
-            qzEntry.AddDependencyValue("Kz", Math.Round(Kz, 3));
-            qzEntry.AddDependencyValue("Kzt", Math.Round(Kzt, 3));
-            qzEntry.AddDependencyValue("Kd", Math.Round(Kd, 3));
-            qzEntry.AddDependencyValue("V", Math.Round(V, 3));
-            if (Location == WindVelocityLocation.Roof)
-            {
-                qzEntry.AddDependencyValue("locType", "h");
-            }
-            else
-            {
-                qzEntry.AddDependencyValue("locType", "z");
-            }
-            qzEntry.Reference = "";
-            qzEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Wind/WindVelocityPressure.docx";
-            qzEntry.FormulaID = null; //reference to formula from code
-            qzEntry.VariableValue = Math.Round(qz, 3).ToString();
-            #endregion
-
-            this.AddToLog(qzEntry);
-
             return qz;
         }
     }
