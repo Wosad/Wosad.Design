@@ -32,12 +32,16 @@ namespace  Wosad.Steel.AISC360v10
 {
     public abstract  class ColumnFlexuralBucklingNonSlender: SteelColumn
     {
-        public ColumnFlexuralBucklingNonSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section,L_x,L_y,K_x,K_y, CalcLog) //, Material)
+
+        //        public ColumnFlexuralBucklingNonSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog) //, Material)
+        //{
+        public ColumnFlexuralBucklingNonSlender(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, CalcLog) //, Material)
         {
             double E       = this.Section.Material.ModulusOfElasticity;
-            K_major = this.EffectiveLengthFactorY;
-            K_minor = this.EffectiveLengthFactorZ;
+            //K_major = this.EffectiveLengthFactorY;
+            //K_minor = this.EffectiveLengthFactorZ;
             L_major=this.UnbracedLengthY ;
             L_minor=this.UnbracedLengthZ ;
             r_major=this.Section.Shape.r_x;
@@ -46,24 +50,24 @@ namespace  Wosad.Steel.AISC360v10
         }
 
         double E        ;
-        double K_major  ;
-        double K_minor  ;
+        //double K_major  ;
+        //double K_minor  ;
         double L_major;
         double L_minor;
         double r_major;
         double r_minor;
 
-        private double GetFeFlexuralBucklingNoSlenderElements(double E, double K, double L, double r)
+        private double GetFeFlexuralBucklingNoSlenderElements(double E,  double L, double r)
         {
 
-            return Math.Pow(Math.PI, 2) * E / Math.Pow(K * L / r, 2);
+            return Math.Pow(Math.PI, 2) * E / Math.Pow( L / r, 2);
         }
 
 
         public override double CalculateCriticalStress()
         {
-            double Fe_Major = GetFeFlexuralBucklingNoSlenderElements(E, K_major, L_major, r_major);
-            double Fe_Minor = GetFeFlexuralBucklingNoSlenderElements(E, K_minor, L_minor, r_minor);
+            double Fe_Major = GetFeFlexuralBucklingNoSlenderElements(E,  L_major, r_major);
+            double Fe_Minor = GetFeFlexuralBucklingNoSlenderElements(E,  L_minor, r_minor);
             return Math.Min(Fe_Major, Fe_Minor);
         }
     }

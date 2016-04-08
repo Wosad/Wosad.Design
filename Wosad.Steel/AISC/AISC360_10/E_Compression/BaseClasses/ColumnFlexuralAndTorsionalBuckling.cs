@@ -30,8 +30,11 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public abstract partial class ColumnFlexuralAndTorsionalBuckling: ColumnFlexuralBuckling
     {
-        public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section,L_x,L_y,K_x,K_y, CalcLog)
+        //public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog)
+
+            public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, CalcLog)
         {
             if (Section is ISectionIAssymetrical)
             {
@@ -75,7 +78,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
             double Cw = Section.Shape.C_w;
-            double Kz = EffectiveLengthFactorZ;
+            //double Kz = EffectiveLengthFactorZ;
             double Lz = UnbracedLengthZ;
             double G = 11200; //ksi
             double J = Section.Shape.J;
@@ -84,7 +87,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
 
             //(E4-9)
-            double Fez = (pi2 * E * Cw / Math.Pow(Kz * Lz, 2) + G * J) / (Ag * r0);
+            double Fez = (pi2 * E * Cw / Math.Pow(Lz, 2) + G * J) / (Ag * r0);
             return Fez;
         }
 

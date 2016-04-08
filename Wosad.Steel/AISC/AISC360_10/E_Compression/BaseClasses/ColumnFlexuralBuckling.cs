@@ -34,9 +34,10 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     public abstract class ColumnFlexuralBuckling: SteelColumn
     {
 
-
-        public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section,L_x,L_y,K_x,K_y, CalcLog)
+            //    public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+            //: base(Section,L_x,L_y,K_x,K_y, CalcLog)
+        public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, CalcLog)
         {
 
         }
@@ -58,19 +59,20 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             if (IsMajorAxis==true)
             {
                 L = UnbracedLengthX;
-                K = EffectiveLengthFactorX;
+                //K = EffectiveLengthFactorX;
                 r = Section.Shape.r_x;
                 
             }
             else
             {
                 L = UnbracedLengthY;
-                K = EffectiveLengthFactorY;
+                //K = EffectiveLengthFactorY;
                 r = Section.Shape.r_y;
 
             }
 
-            double Slenderness = K * L / r;
+            //double Slenderness = K * L / r;
+            double Slenderness =  L / r;
             return Slenderness;
         }
 

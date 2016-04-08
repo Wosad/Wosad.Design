@@ -31,8 +31,12 @@ namespace  Wosad.Steel.AISC360v10
 {
     public abstract class ColumnBuiltUpNonSlender : ColumnFlexuralBucklingNonSlender
     {
-        public ColumnBuiltUpNonSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
-            : base(Section,L_x,L_y,K_x,K_y,  CalcLog) //, Material)
+
+            //    public ColumnBuiltUpNonSlender(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
+            //: base(Section,L_x,L_y,K_x,K_y,  CalcLog) //, Material)
+
+        public ColumnBuiltUpNonSlender(ISteelSection Section, double L_x, double L_y,  ICalcLog CalcLog) //, ISteelMaterial Material)
+            : base(Section,L_x,L_y,  CalcLog) //, Material)
         {
 
         }

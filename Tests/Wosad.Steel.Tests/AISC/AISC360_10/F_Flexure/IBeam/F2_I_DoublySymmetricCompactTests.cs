@@ -76,7 +76,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
         public void DoublySymmetricIReturnsFlexuralFlangeLocalBucklingStrength      ()
         {
             SteelLimitStateValue FLB =
-            beam.GetFlexuralLateralTorsionalBucklingStrength(1.0, 14 * 12, FlexuralCompressionFiberPosition.Top, Steel.AISC.FlexuralAndTorsionalBracingType.NoLateralBracing);
+            beam.GetFlexuralFlangeLocalBucklingStrength(FlexuralCompressionFiberPosition.Top);
             double phiM_n = FLB.Value;
             double refValue = -1; // Limit state not applicable
             double actualTolerance = EvaluateActualTolerance(phiM_n, refValue);

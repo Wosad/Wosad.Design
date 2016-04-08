@@ -30,14 +30,17 @@ namespace Wosad.Steel.AISC.AISC360v10
 {
     public abstract class SteelColumn : SteelAxialMember
     {
-        public SteelColumn(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section, L_x, L_y,K_x,K_y, CalcLog)
+
+            //    public SteelColumn(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+            //: base(Section, L_x, L_y,K_x,K_y, CalcLog)
+
+        public SteelColumn(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section, L_x, L_y, CalcLog)
         {
 
         }
 
-        public abstract double GetFlexuralBucklingStrength();
-        public abstract double GetTorsionalAndFlexuralTorsionalBucklingStrength();
+
 
         protected double GetNominalAxialCapacity(double CriticalStress)
         {

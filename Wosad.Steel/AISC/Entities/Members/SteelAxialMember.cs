@@ -33,14 +33,17 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
 {
     public abstract class SteelAxialMember : SteelMemberBase, ISteelCompressionMember, ISteelTensionMember
     {
+        public abstract double GetFlexuralBucklingStrength();
+        public abstract double GetTorsionalAndFlexuralTorsionalBucklingStrength();
+
         public double UnbracedLengthX { get; set; }
         public double UnbracedLengthY { get; set; }
         public double UnbracedLengthZ { get; set; }
         //public double EffectiveLengthFactorBracedX { get; set; }
         //public double EffectiveLengthFactorBracedY { get; set; }
-        public double EffectiveLengthFactorX { get; set; }    //K for local X-axis (longitudinal  axis , torsion)
-        public double EffectiveLengthFactorY { get; set; }    //K for local Y-axis (major section axis)
-        public double EffectiveLengthFactorZ { get; set; }    //K for local Z-axis (minor section axis)
+        //public double EffectiveLengthFactorX { get; set; }    //K for local X-axis (longitudinal  axis , torsion)
+        //public double EffectiveLengthFactorY { get; set; }    //K for local Y-axis (major section axis)
+        //public double EffectiveLengthFactorZ { get; set; }    //K for local Z-axis (minor section axis)
         public double CmFactorX { get; set; }
         public double CmFactorY { get; set; }
 
@@ -52,8 +55,9 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
             set { netArea = value; }
         }
 
-
-        public SteelAxialMember(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
+            //    public SteelAxialMember(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
+            //:base(Section,  CalcLog) //,Material)
+        public SteelAxialMember(ISteelSection Section, double L_x, double L_y,  ICalcLog CalcLog) //, ISteelMaterial Material)
             :base(Section,  CalcLog) //,Material)
         {
 

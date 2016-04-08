@@ -32,12 +32,16 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public abstract class ColumnTee: ColumnFlexuralAndTorsionalBuckling
     {
-        public ColumnTee(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section, L_x, L_y,K_x,K_y, CalcLog)
+        //        public ColumnTee(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+        //    : base(Section, L_x, L_y,K_x,K_y, CalcLog)
+        //{
+
+
+        public ColumnTee(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section, L_x, L_y,  CalcLog)
         {
 
-        }
-        //public override double GetTorsionalElasticBucklingStressFe()
+        }        //public override double GetTorsionalElasticBucklingStressFe()
         //{
         //    double pi2 = Math.Pow(Math.PI, 2);
         //    double E = Material.ModulusOfElasticity;

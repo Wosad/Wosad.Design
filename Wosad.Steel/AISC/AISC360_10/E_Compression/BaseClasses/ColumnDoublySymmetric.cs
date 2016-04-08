@@ -31,8 +31,10 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public abstract class ColumnDoublySymmetric : ColumnFlexuralAndTorsionalBuckling
     {
-        public ColumnDoublySymmetric(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            : base(Section,L_x,L_y,K_x,K_y, CalcLog)
+        //public ColumnDoublySymmetric(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
+        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog)
+                    public ColumnDoublySymmetric(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, CalcLog)
         {
 
         }
@@ -42,7 +44,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
             double Cw = Section.Shape.C_w;
-            double Kz = EffectiveLengthFactorZ;
+            //double Kz = EffectiveLengthFactorZ;
             double Lz = UnbracedLengthZ;
 
             //todo: change shear modulus to be the material property
@@ -52,14 +54,15 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double Iy = Section.Shape.I_y;
 
             double Fe;
-            if (Kz * Lz == 0)
+            //if (Kz * Lz == 0)
+            if (Lz == 0)
             {
                 double F_y = this.Section.Material.YieldStress;
                 return F_y;
             }
             else
             {
-                Fe = (pi2 * E * Cw / Math.Pow(Kz * Lz, 2) + G * J) * 1 / (Ix + Iy); //(E4-4)
+                Fe = (pi2 * E * Cw / Math.Pow(Lz, 2) + G * J) * 1 / (Ix + Iy); //(E4-4)
                 return Fe;
             }
 

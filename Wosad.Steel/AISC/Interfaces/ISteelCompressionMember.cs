@@ -34,11 +34,11 @@ namespace Wosad.Steel.AISC.Interfaces
         double UnbracedLengthX { get; set; }
         double UnbracedLengthY { get; set; }
         double UnbracedLengthZ { get; set; }
-        double EffectiveLengthFactorX { get; set; } //K for local X-axis (longitudinal  axis , torsion)
-        double EffectiveLengthFactorY { get; set; } //K for local Y-axis (major section axis)
-        double EffectiveLengthFactorZ { get; set; } //K for local Z-axis (minor section axis)
+        //double EffectiveLengthFactorX { get; set; } //K for local X-axis (longitudinal  axis , torsion)
+        //double EffectiveLengthFactorY { get; set; } //K for local Y-axis (major section axis)
+        //double EffectiveLengthFactorZ { get; set; } //K for local Z-axis (minor section axis)
 
-        double CalculateDesignStrength();
-        double CalculateCriticalStress();
+        double GetFlexuralBucklingStrength();
+        double GetTorsionalAndFlexuralTorsionalBucklingStrength();
     }
 }

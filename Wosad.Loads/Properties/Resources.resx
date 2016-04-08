@@ -184,4 +184,10 @@
   <data name="ASCE7_10T1_5_1RiskCategories" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ASCE7_10T1_5_1RiskCategories.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="ASCE7_10Figure29_4_1SignsCaseAB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASCE7_10Figure29_4_1Signs.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="ASCE7_10Figure29_4_1SignsCaseC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASCE7_10Figure29_4_1SignsCaseC.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>
