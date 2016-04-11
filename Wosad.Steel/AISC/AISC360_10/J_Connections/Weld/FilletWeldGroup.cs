@@ -214,6 +214,18 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections
                 P_n = this.GetConcentricLoadStrenth(AngleOfLoad);
             }
 
+            //Make adjustment for electrode strength See steel manual page 8-28
+            if (F_EXX>70)
+            {
+                if (F_EXX<=90)
+                {
+                    P_n = 0.9 * P_n;
+                }
+                else
+                {
+                    P_n = 0.85 * P_n;
+                }
+            }
             return P_n;
         }
 

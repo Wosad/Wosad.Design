@@ -40,7 +40,63 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             CalcLog log = new CalcLog();
             SteelMaterial mat = new SteelMaterial(F_y);
 
+            if (Shape is ISection)
+            {
+                ISectionI IShape = Shape as ISectionI;
+                SteelSectionI SectionI = new SteelSectionI(IShape, Material);
+                if (IShape.b_fBot == IShape.b_fTop && IShape.t_fBot == IShape.t_fTop) // doubly symmetric
+                {
+                    DoublySymmetricIBeam dsBeam = new DoublySymmetricIBeam(SectionI, Log, compressionFiberPosition, IsRolledMember);
+                    beam = dsBeam.GetBeamCase();
+                }
+                else
+                {
+                    SinglySymmetricIBeam ssBeam = new SinglySymmetricIBeam(SectionI, IsRolledMember, compressionFiberPosition, Log);
+                    beam = ssBeam.GetBeamCase();
+                }
+            }
 
+
+            else if (Shape is ISectionChannel)
+            {
+                ISectionChannel ChannelShape = Shape as ISectionChannel;
+                SteelChannelSection ChannelSection = new SteelChannelSection(ChannelShape, Material);
+                beam = new BeamChannel(ChannelSection, IsRolledMember, Log);
+            }
+
+
+            else if (Shape is ISectionPipe)
+            {
+                ISectionPipe SectionPipe = Shape as ISectionPipe;
+                SteelPipeSection PipeSection = new SteelPipeSection(SectionPipe, Material);
+                beam = new BeamCircularHss(PipeSection, Log);
+            }
+
+            else if (Shape is ISectionTube)
+            {
+                ISectionTube TubeShape = Shape as ISectionTube;
+                SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
+                beam = new BeamRectangularHss(RectHSS_Section, MomentAxis, Log);
+            }
+
+
+            else if (Shape is ISectionBox)
+            {
+                ISectionBox BoxShape = Shape as ISectionBox;
+                SteelBoxSection BoxSection = new SteelBoxSection(BoxShape, Material);
+                beam = new BeamRectangularHss(BoxSection, MomentAxis, Log);
+            }
+
+            else if (Shape is ISectionTee)
+            {
+                ISectionTee TeeShape = Shape as ISectionTee;
+                SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
+                beam = new BeamTee(TeeSection, Log);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
             //switch (shapeType)
             //{
             //    case ShapeTypeSteel.Angle:

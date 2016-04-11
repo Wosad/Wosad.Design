@@ -54,5 +54,13 @@ namespace Wosad.Common.Tests.Section.Predefined
             Assert.IsTrue(section != null);
         }
 
+        [Test]
+        public void ShapeFactoryReturnsValueForUnequalAngle()
+        {
+            AiscShapeFactory factory = new AiscShapeFactory();
+            ISection section = factory.GetShape("L3-1/2X3X1/4", Entities.ShapeTypeSteel.Angle);
+            Assert.IsTrue(section != null);
+        }
+
     }
 }
