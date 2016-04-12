@@ -25,18 +25,17 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.SectionTypes;
+using Wosad.Steel.AISC.SteelEntities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class CompressionMemberChs : ColumnDoublySymmetric
+    public partial class ChsSlender : ChsCompact
     {
 
         public override double CalculateCriticalStress()
         {
             double Fcr = 0.0;
-
-           //Flexural
 
             double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe();
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
@@ -47,10 +46,24 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
         }
 
-            //    public CompressionMemberChs(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            //: base(Section,L_x,L_y,K_x,K_y, CalcLog)
 
-        public CompressionMemberChs(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
+
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
+        {
+            double FcrFlex = CalculateCriticalStress(); 
+            double phiP_n = GetDesignAxialStrength(FcrFlex);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
+            return ls;
+        }
+
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        {
+            return  new SteelLimitStateValue(-1, false);
+
+        }
+
+        public ChsSlender(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
             : base(Section,L_x,L_y, L_z, CalcLog)
         {
             if (Section.Shape is ISectionTube)

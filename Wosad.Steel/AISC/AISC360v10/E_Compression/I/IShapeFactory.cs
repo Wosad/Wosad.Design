@@ -10,7 +10,7 @@ using Wosad.Steel.AISC.AISC360v10.Compression;
 using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.AISC360_10.Compression
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public class IShapeFactory
     {

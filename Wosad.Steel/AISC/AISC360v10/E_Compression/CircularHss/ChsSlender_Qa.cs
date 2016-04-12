@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class CompressionMemberChs : ColumnDoublySymmetric
+    public partial class ChsSlender : ChsCompact
     {
 
         public override double GetReductionFactorForStiffenedElementQa(double Fcr = 0)
@@ -77,15 +77,5 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
         }
 
 
-
-        public override SteelLimitStateValue GetFlexuralBucklingStrength()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
