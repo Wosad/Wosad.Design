@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\B_General\Compactness\ShapeCompactness\ShapeCompactnessDoubleAngle.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\I\IShapeFactory.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\I\IShapeSlenderElements.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\I\SinglySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\SolidShapes\Y.cs" />
@@ -86,34 +88,24 @@
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase2.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLag\ShearLagCase1.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\TensionMember.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnDoublySymmetric.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnFlexuralAndTorsionalBuckling.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnFlexuralAndTorsionalBucklingAssymetrical.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnFlexuralAndTorsionalBucklingSinglySymmetric.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnFlexuralBuckling.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnTee.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ISectionIAssymetrical.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\ColumnBucklingType.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs-Qa.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs-Qs.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Chs\CompressionMemberChs.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnBuiltUpNonSlender.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnBuiltUpSlender.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnFlexuralBucklingNonSlender.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnFlexuralBucklingSlender.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\TorsionalBuckling\ColumnFlexuralAndTorsionalBucklingDoublySymmetric.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\TorsionalBuckling\ColumnFlexuralAndTorsionalBuckling.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\TorsionalBuckling\ColumnFlexuralAndTorsionalBucklingSinglySymmetric.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\FlexuralBucking\ColumnFlexuralBuckling.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\TeeAndDoubleAngle\ColumnTee.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\CircularHss\CompressionMemberChs-Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\CircularHss\CompressionMemberChs-Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\CircularHss\CompressionMemberChs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\CompressionMemberFactory.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\L\ColumnSingleAngle.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnSlender.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\ColumnTorsionalBucklingNonSlender.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric-Qa.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric-Qs.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\I\CompressionMemberIDoublySymmetric.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\LimitState.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\I\IShapeSlenderElements_Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\I\IShapeSlenderElements_Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\I\IShapeCompact.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\General\ColumnGeneral.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rectangle\CompressionMemberRectangle.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qa.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs-Qs.cs" />
-    <Compile Include="AISC\AISC360_10\E_Compression\Rhs\CompressionMemberRhs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\SolidShapes\Rectangle\CompressionMemberRectangle.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\RectangularHss\CompressionMemberRhs-Qa.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\RectangularHss\CompressionMemberRhs-Qs.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\RectangularHss\CompressionMemberRhs.cs" />
     <Compile Include="AISC\AISC360_10\E_Compression\BaseClasses\SteelColumn.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\BaseClasses\FlexuralMemberDoubleAngleBase.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\CircularHss\Y.cs" />
@@ -455,8 +447,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AISC\AISC360_10\C_Stability\" />
-    <Folder Include="AISC\AISC360_10\E_Compression\2L\" />
-    <Folder Include="AISC\AISC360_10\E_Compression\Tee\" />
     <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\J_Connections\UFM\Base\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />

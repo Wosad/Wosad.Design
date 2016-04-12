@@ -34,15 +34,13 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     public abstract class ColumnFlexuralBuckling: SteelColumn
     {
 
-            //    public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-            //: base(Section,L_x,L_y,K_x,K_y, CalcLog)
         public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
             : base(Section,L_x,L_y, CalcLog)
         {
 
         }
 
-        internal double GetElasticBucklingStressFe()
+        public double GetFlexuralElasticBucklingStressFe()
         {
 
             double FeMinor = GetFeSingleAxis(false);
@@ -59,19 +57,16 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             if (IsMajorAxis==true)
             {
                 L = UnbracedLengthX;
-                //K = EffectiveLengthFactorX;
                 r = Section.Shape.r_x;
                 
             }
             else
             {
                 L = UnbracedLengthY;
-                //K = EffectiveLengthFactorY;
                 r = Section.Shape.r_y;
 
             }
 
-            //double Slenderness = K * L / r;
             double Slenderness =  L / r;
             return Slenderness;
         }
@@ -91,14 +86,14 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             }
             else
             {
-                Fe = GetFlexuralElasticBucklingStressFe(E,Slenderness);
+                Fe = GetF_e(E,Slenderness);
             }
 
             return Fe;
 
         }
 
-        private double GetFlexuralElasticBucklingStressFe(double E, double SlendernessKLr)
+        private double GetF_e(double E, double SlendernessKLr)
         {
             double Fe=0;
             double Slenderness = SlendernessKLr;
@@ -166,9 +161,15 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             return Q;
         }
 
-        public abstract double GetReductionFactorForStiffenedElementQa(double Fcr);
+        public virtual double GetReductionFactorForStiffenedElementQa(double Fcr)
+            {
+                return 1.0;
+            }
 
-        public abstract double GetReductionFactorForUnstiffenedElementQs();
+        public virtual double GetReductionFactorForUnstiffenedElementQs()
+        {
+            return 1.0;
+        }
 
     }
 }

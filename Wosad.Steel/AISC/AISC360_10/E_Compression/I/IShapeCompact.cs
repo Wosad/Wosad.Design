@@ -24,29 +24,25 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class CompressionMemberIDoublySymmetric : ColumnDoublySymmetric
+    public partial class IShapeCompact : ColumnDoublySymmetric
     {
         public bool IsRolled { get; set; }
 
-        //public override double CalculateDesignCapacity()
-        //{
-        //    double phiP_n = 0.0;
-        //    double Fcr = CalculateCriticalStress();
-        //    phiP_n = GetDesignAxialCapacity(Fcr);
-        //    return phiP_n;
-        //}
-        //this method is overriden for members with slender elements
+
+
+
         public override double CalculateCriticalStress()
         {
             double Fcr = 0.0;
 
             //Flexural
 
-            double FeFlexuralBuckling = GetElasticBucklingStressFe(); //this does not apply to unsymmetric sections
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe(); //this does not apply to unsymmetric sections
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
             double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
             double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
@@ -62,12 +58,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
         }
 
-        //        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog)
-        //{
-
-        public CompressionMemberIDoublySymmetric(ISteelSection Section, bool IsRolled, double L_x, double L_y,  ICalcLog CalcLog)
-            : base(Section,L_x,L_y, CalcLog)
+        public IShapeCompact(ISteelSection Section, bool IsRolled, double L_x, double L_y, double L_z, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, L_z, CalcLog)
         {
             if (Section.Shape is ISectionI)
             {
@@ -83,16 +75,45 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
 
 
-        ISectionI SectionI;
+        protected ISectionI SectionI;
 
-        public override double GetFlexuralBucklingStrength()
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
         {
-            throw new NotImplementedException();
+            
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe(); //this does not apply to unsymmetric sections
+            double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
+            double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
+            double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
+
+            double phiP_n = GetDesignAxialStrength(FcrFlex);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
+            return ls;
         }
 
-        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
         {
-            throw new NotImplementedException();
+            SteelLimitStateValue ls = new SteelLimitStateValue();
+
+            if (this.UnbracedLengthZ <= UnbracedLengthX && this.UnbracedLengthZ <= UnbracedLengthY)
+            {
+                ls.Value = -1;
+                ls.IsApplicable = false;
+            }
+            else
+            {
+                double FeTorsionalBuckling = GetTorsionalElasticBucklingStressFe();
+                double FcrTorsionalBuckling = GetCriticalStressFcr(FeTorsionalBuckling, 1.0);
+                double Qtors = GetReductionFactorQ(FcrTorsionalBuckling);
+                double FcrTors = GetCriticalStressFcr(FeTorsionalBuckling, Qtors);
+
+                double phiP_n = GetDesignAxialStrength(FcrTors);
+                ls.Value = phiP_n;
+                ls.IsApplicable = true;
+
+            }
+            return ls;
+
         }
     }
 }

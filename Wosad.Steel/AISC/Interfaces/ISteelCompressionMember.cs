@@ -22,6 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
 
 namespace Wosad.Steel.AISC.Interfaces
@@ -29,16 +30,13 @@ namespace Wosad.Steel.AISC.Interfaces
 
     public interface ISteelCompressionMember: ISteelMember
     {
-        //double EffectiveLengthFactorBracedX { get; set; }
-        //double EffectiveLengthFactorBracedY { get; set; }
+
         double UnbracedLengthX { get; set; }
         double UnbracedLengthY { get; set; }
         double UnbracedLengthZ { get; set; }
-        //double EffectiveLengthFactorX { get; set; } //K for local X-axis (longitudinal  axis , torsion)
-        //double EffectiveLengthFactorY { get; set; } //K for local Y-axis (major section axis)
-        //double EffectiveLengthFactorZ { get; set; } //K for local Z-axis (minor section axis)
 
-        double GetFlexuralBucklingStrength();
-        double GetTorsionalAndFlexuralTorsionalBucklingStrength();
+
+        SteelLimitStateValue GetFlexuralBucklingStrength();
+        SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
     }
 }

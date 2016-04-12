@@ -24,6 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
@@ -31,11 +32,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     public partial class ColumnGeneral : ColumnDoublySymmetric
     {
 
-            //    public ColumnGeneral(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) :
-            //base(Section, L_x, L_y, K_x, K_y, CalcLog)
 
-        public ColumnGeneral(ISteelSection Section, double L_x, double L_y,  ICalcLog CalcLog) :
-            base(Section, L_x, L_y,  CalcLog)
+        public ColumnGeneral(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog) :
+            base(Section, L_x, L_y, L_z, CalcLog)
         {
 
         }
@@ -53,17 +52,17 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
         public override double CalculateCriticalStress()
         {
-            double FeFlexuralBuckling = GetElasticBucklingStressFe();
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe();
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
             return FcrFlexuralBuckling;
         }
 
-        public override double GetFlexuralBucklingStrength()
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
         {
             throw new NotImplementedException();
         }
 
-        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
         {
             throw new NotImplementedException();
         }

@@ -24,6 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.AISC360v10;
+using Wosad.Steel.AISC.SteelEntities;
 
 
  
@@ -45,19 +46,22 @@ namespace  Wosad.Steel.AISC360v10
         }
 
 
+
         public override double CalculateCriticalStress()
         {
             throw new NotImplementedException();
         }
 
-        public override double GetFlexuralBucklingStrength()
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
         {
             throw new NotImplementedException();
         }
 
-        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

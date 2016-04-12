@@ -22,6 +22,7 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
  
 
 
@@ -77,12 +78,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
 
 
-        public override double GetFlexuralBucklingStrength()
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
         {
             throw new NotImplementedException();
         }
 
-        public override double GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
         {
             throw new NotImplementedException();
         }

@@ -23,34 +23,22 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.AISC360v10.Compression.BaseClasses;
+
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public abstract partial class ColumnFlexuralAndTorsionalBuckling: ColumnFlexuralBuckling
     {
-        //public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog)
 
-            public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
+
+            public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
             : base(Section,L_x,L_y, CalcLog)
         {
-            if (Section is ISectionIAssymetrical)
-            {
+                this.UnbracedLengthZ = L_z;
 
-                ISectionIAssymetrical secAsym = (ISectionIAssymetrical)Section;
-                xo = secAsym.ShearCenterDistanceToCentroidX;
-                yo = secAsym.ShearCenterDistanceToCentroidY;
-            }
-            else
-            {
-                xo = 0;
-                yo = 0;
-            }
         }
 
-       // public abstract double GetTorsionalElasticBucklingStressFe();
 
         double xo, yo;
 
@@ -78,7 +66,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
             double Cw = Section.Shape.C_w;
-            //double Kz = EffectiveLengthFactorZ;
             double Lz = UnbracedLengthZ;
             double G = 11200; //ksi
             double J = Section.Shape.J;

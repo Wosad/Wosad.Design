@@ -42,14 +42,14 @@ namespace Wosad.Steel.AISC360v10.Connections.AffectedElements
                 Section = new SteelPlateSection(section, material);
             }
 
-            public double GetCompressionCapacity(double K, double L)
+            public double GetCompressionCapacity(double L_e)
             {
 
-                double KL = K * L;
+             
                     double F_y = Section.Material.YieldStress;
                     double r = Section.Shape.r_y;
                     double phiP_n = 0.0;
-                    double KLr = K*L/r;
+                    double KLr = L_e/r;
                     if (KLr <= 25) // per J4.4
 	                {
                         double A_g = Section.Shape.A;
@@ -57,7 +57,7 @@ namespace Wosad.Steel.AISC360v10.Connections.AffectedElements
 	                }
                     else
                     {
-                        CompressionMemberRectangle rectangularColumn = new CompressionMemberRectangle(Section, KL, KL, null); //todo: update CalcLog
+                        CompressionMemberRectangle rectangularColumn = new CompressionMemberRectangle(Section,L_e,L_e,L_e,null); //todo: update CalcLog
                         phiP_n = rectangularColumn.CalculateDesignStrength();
                     }
 

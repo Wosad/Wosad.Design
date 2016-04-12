@@ -24,38 +24,36 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.Interfaces;
 
  
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public abstract class ColumnTee: ColumnFlexuralAndTorsionalBuckling
+    public abstract partial class ColumnFlexuralAndTorsionalBucklingSinglySymmetric : ColumnFlexuralAndTorsionalBuckling
     {
-        //        public ColumnTee(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-        //    : base(Section, L_x, L_y,K_x,K_y, CalcLog)
-        //{
 
-
-        public ColumnTee(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
-            : base(Section, L_x, L_y,  CalcLog)
+        public ColumnFlexuralAndTorsionalBucklingSinglySymmetric(ISteelSection Section, double L_x, double L_y,  double L_z, ICalcLog CalcLog)
+            : base(Section,L_x,L_y, L_z, CalcLog)
         {
 
-        }        //public override double GetTorsionalElasticBucklingStressFe()
-        //{
-        //    double pi2 = Math.Pow(Math.PI, 2);
-        //    double E = Material.ModulusOfElasticity;
+        }
 
-        //    double Kz = EffectiveLengthFactorZ;
-        //    double Lz = UnbracedLengthZ;
+        protected abstract double GetCriticalStressFey();//note: for channels Fey is diiferent
+        //from the normal orinetation of section Y-axis.
 
-        //    double G = 11200; //ksi
-        //    double J = Section.J;
-        //    double Ix = Section.MomentOfInertiaX;
-        //    double Iy = Section.I_y;
+        public  double GetTorsionalElasticBucklingStressFe()
+        {
+            double H = GetH();
+            double Fey = GetCriticalStressFey();
+            double Fez = GetFez();
+
+            double Fe;
+            //(E4-5)
+            Fe = ((Fey + Fez) / (2.0 * H)) * (1.0 - Math.Sqrt(1.0 - (4.0 * Fey * Fez * H) / Math.Pow(Fey * Fez, 2)));
+            return Fe;
+        }
 
 
-        //    throw new NotFiniteNumberException();
-        //}
+
     }
 }

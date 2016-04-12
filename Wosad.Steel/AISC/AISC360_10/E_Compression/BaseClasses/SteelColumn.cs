@@ -41,7 +41,6 @@ namespace Wosad.Steel.AISC.AISC360v10
         }
 
 
-
         protected double GetNominalAxialCapacity(double CriticalStress)
         {
             double A = Section.Shape.A;
@@ -51,7 +50,7 @@ namespace Wosad.Steel.AISC.AISC360v10
         protected double GetDesignAxialStrength(double CriticalStress)
         {
             double Pn= GetNominalAxialCapacity(CriticalStress);
-            double phiP_n = Pn * 0.90;
+            double phiP_n = Pn * 0.90; //per section E1 of specification
             return phiP_n;
         }
         public override double CalculateDesignStrength()
