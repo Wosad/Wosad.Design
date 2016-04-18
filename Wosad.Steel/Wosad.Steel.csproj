@@ -73,6 +73,7 @@
     <Compile Include="AISC\Entities\Sections\DoubleAngleSection.cs" />
     <Compile Include="AISC\Entities\Sections\BoxSection.cs" />
     <Compile Include="AISC\Entities\Sections\AngleSection.cs" />
+    <Compile Include="AISC\Entities\Sections\SectionSolid.cs" />
     <Compile Include="AISC\Entities\Sections\TeeSection.cs" />
     <Compile Include="AISC\Exceptions\FlexuralBendinAxisException.cs" />
     <Compile Include="AISC\Interfaces\IShapeCompactness.cs" />

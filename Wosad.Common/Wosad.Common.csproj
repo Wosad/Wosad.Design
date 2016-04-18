@@ -130,6 +130,7 @@
     <Compile Include="Reports\ReportElementAttribute.cs" />
     <Compile Include="Section\Interfaces\IMeasurableAreaSection.cs" />
     <Compile Include="Exceptions\FailedToCalculateSectionPropertiesException.cs" />
+    <Compile Include="Section\Interfaces\ISolidShape.cs" />
     <Compile Include="Section\ProfileShapeTypes\Angle\AnglePrincialAxisProperties.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\CompoundShapeSlicing.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\PartWithSingleFillet.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Section\ProfileShapeTypes\Generic\SectionSliceRectangular.cs" />
     <Compile Include="Section\ProfileShapeTypes\SectionOfPlateWithHoles.cs" />
     <Compile Include="Section\ProfileShapeTypes\SectionTeeRolled.cs" />
+    <Compile Include="Section\ProfileShapeTypes\SectionDoubleStacked.cs" />
     <Compile Include="Section\SectionTypes\General\SectionGeneralProperties.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\ArbitraryCompoundShape.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\CompoundShape.cs" />

@@ -24,22 +24,15 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
-
-
+using Wosad.Steel.AISC.AISC360v10.Flexure;
 
 namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-    public class SteelChsSection:SteelHssSection
+    public class SteelSectionSolid: SteelSectionBase
     {
-        public SteelChsSection(ISectionPipe Section, ISteelMaterial Material)
-            :base(Section, Material)
-        {
-            this.section = Section;
-        }
+        private ISectionSolid section;
 
-        private ISectionPipe section;
-
-        public ISectionPipe Section
+        public ISectionSolid Section
         {
             get { return section; }
         }
@@ -49,11 +42,15 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             get { return section as ISection; }
         }
 
+        public SteelSectionSolid(ISectionSolid Section, ISteelMaterial Material)
+            :base(Material)
+        {
+            this.section = Section;
+        }
 
         //public override ISection Clone()
         //{
         //    return section.Clone();
         //}
-        
     }
 }

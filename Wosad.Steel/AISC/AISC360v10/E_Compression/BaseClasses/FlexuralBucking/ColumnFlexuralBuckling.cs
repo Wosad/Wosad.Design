@@ -93,7 +93,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
         }
 
-        private double GetF_e(double E, double SlendernessKLr)
+        protected virtual double GetF_e(double E, double SlendernessKLr)
         {
             double Fe=0;
             double Slenderness = SlendernessKLr;

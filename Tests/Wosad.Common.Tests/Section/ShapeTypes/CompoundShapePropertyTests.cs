@@ -54,7 +54,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
 
         public CompoundShapeTests()
         {
-            tolerance = 0.03; //7% can differ from fillet areas and rounding in the manual
+            tolerance = 0.03; //3% can differ from fillet areas and rounding in the manual
         }
 
         double tolerance;

@@ -55,6 +55,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionChannel ChannelShape = Shape as ISectionChannel;
                 SteelChannelSection ChannelSection = new SteelChannelSection(ChannelShape, Material);
+                throw new Exception(DEFAULT_EXCEPTION_STRING);
  
             }
 
@@ -63,6 +64,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionPipe SectionPipe = Shape as ISectionPipe;
                 SteelPipeSection PipeSection = new SteelPipeSection(SectionPipe, Material);
+                throw new Exception(DEFAULT_EXCEPTION_STRING);
  
             }
 
@@ -70,6 +72,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionTube TubeShape = Shape as ISectionTube;
                 SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
+                throw new Exception(DEFAULT_EXCEPTION_STRING);
  
             }
 
@@ -78,6 +81,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionBox BoxShape = Shape as ISectionBox;
                 SteelBoxSection BoxSection = new SteelBoxSection(BoxShape, Material);
+                throw new Exception(DEFAULT_EXCEPTION_STRING);
  
             }
 
@@ -85,6 +89,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionTee TeeShape = Shape as ISectionTee;
                 SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
+                throw new Exception(DEFAULT_EXCEPTION_STRING);
             }
             else
             {
@@ -92,61 +97,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             }
 
 
-        //--------------------------------------------------------------------------------
-            //switch (shapeType)
-            //{
-            //    case ShapeTypeSteel.Angle:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.Box:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.Channel:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.Circular:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.CircularHSS:
-            //        break;
-            //    case ShapeTypeSteel.DoubleAngle:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.IShapeAsym:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.IShapeBuiltUp:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.IShapeRolled:
-            //        ISectionI secI = section as ISectionI;
-            //        if (secI != null)
-            //        {
-            //            SteelSectionI sectionI = new SteelSectionI(secI, mat);
-            //            col = new CompressionMemberIDoublySymmetric(sectionI, true, L_x, L_y, K_x, K_y, log);
-            //        }
-
-            //        break;
-            //    case ShapeTypeSteel.Rectangular:
-            //        break;
-            //    case ShapeTypeSteel.RectangularHSS:
-            //        ISectionTube secTube = section as ISectionTube;
-            //        if (secTube != null)
-            //        {
-            //            SteelRhsSection sectionTube = new SteelRhsSection(secTube, mat);
-            //            col = new CompressionMemberRhs(sectionTube, L_x, L_y, K_x, K_y, log);
-            //        }
-            //        break;
-            //    case ShapeTypeSteel.TeeBuiltUp:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    case ShapeTypeSteel.TeeRolled:
-            //        throw new Exception(DEFAULT_EXCEPTION_STRING);
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //return col;
         }
 
     }

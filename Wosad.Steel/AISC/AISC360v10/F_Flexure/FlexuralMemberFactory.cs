@@ -30,6 +30,7 @@ using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.Section.Predefined;
+using Wosad.Steel.AISC.AISC360v10.B_General;
  
  
 
@@ -47,7 +48,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
 
             if (MomentAxis == Common.Entities.MomentAxis.XAxis)
 	        {
-                    if (Shape is ISection)
+                    if (Shape is ISectionI)
                     {
                         ISectionI IShape = Shape as ISectionI;
                         SteelSectionI SectionI = new SteelSectionI(IShape, Material);
@@ -62,13 +63,29 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                             beam = ssBeam.GetBeamCase();
                         }
                     }
-
+                    else if (Shape is ISectionSolid)
+                    {
+                        ISectionSolid solidShape = Shape as ISectionSolid;
+                        SteelSectionSolid SectionSolid = new SteelSectionSolid(solidShape, Material);
+                        beam = new SolidShape(SectionSolid, Log, MomentAxis);
+                    }
 
                     else if (Shape is ISectionChannel)
                     {
                         ISectionChannel ChannelShape = Shape as ISectionChannel;
                         SteelChannelSection ChannelSection = new SteelChannelSection(ChannelShape, Material);
                         beam = new BeamChannel(ChannelSection, IsRolledMember, Log);
+
+
+                        IShapeCompactness compactness = new ShapeCompactness.ChannelMember(ChannelSection, IsRolledMember, compressionFiberPosition);
+
+                        CompactnessClassFlexure flangeCompactness = compactness.GetFlangeCompactnessFlexure();
+                        CompactnessClassFlexure webCompactness = compactness.GetWebCompactnessFlexure();
+
+                        if (flangeCompactness != CompactnessClassFlexure.Compact || webCompactness != CompactnessClassFlexure.Compact)
+                        {
+                            throw new Exception("Channels with non-compact and slender flanges or webs are not supported. Revise input.");
+                        }
                     }
 
 
@@ -76,22 +93,22 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     {
                         ISectionPipe SectionPipe = Shape as ISectionPipe;
                         SteelPipeSection PipeSection = new SteelPipeSection(SectionPipe, Material);
-                        beam = new BeamCircularHss(PipeSection,  Log);
+                        beam = new BeamCircularHss(PipeSection, Log);
                     }
 
                     else if (Shape is ISectionTube)
-	                {
+                    {
                         ISectionTube TubeShape = Shape as ISectionTube;
                         SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
-                        beam = new BeamRectangularHss(RectHSS_Section,MomentAxis,Log);
-	                }
+                        beam = new BeamRectangularHss(RectHSS_Section, MomentAxis, Log);
+                    }
 
 
-                    else if (Shape is ISectionBox )
+                    else if (Shape is ISectionBox)
                     {
                         ISectionBox BoxShape = Shape as ISectionBox;
-                        SteelBoxSection BoxSection = new SteelBoxSection(BoxShape,Material);
-                        beam = new BeamRectangularHss(BoxSection,MomentAxis,Log);
+                        SteelBoxSection BoxSection = new SteelBoxSection(BoxShape, Material);
+                        beam = new BeamRectangularHss(BoxSection, MomentAxis, Log);
                     }
 
                     else if (Shape is ISectionTee)
@@ -109,12 +126,15 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
 	        {
                 if (Shape is ISectionI)
                 {
-                        ISectionI IShape = Shape as ISectionI;
-                        SteelSectionI SectionI = new SteelSectionI(IShape, Material);
+                    ISectionI IShape = Shape as ISectionI;
+                    SteelSectionI SectionI = new SteelSectionI(IShape, Material);
 
-                        beam = new BeamIWeakAxis(SectionI, IsRolledMember, Log);
+                    beam = new BeamIWeakAxis(SectionI, IsRolledMember, Log);
                 }
-                throw new NotImplementedException();
+                else
+                {
+                    throw new NotImplementedException();
+                }
 	        }
 
             return beam;

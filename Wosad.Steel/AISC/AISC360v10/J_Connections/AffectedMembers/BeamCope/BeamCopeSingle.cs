@@ -41,7 +41,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections
             get {
                 if (_tee == null)
                 {
-                    GetCopeSection();
+                    this.GetCopeSection();
                  }
                 return _tee; }
  

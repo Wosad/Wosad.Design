@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.SteelEntities;
 
  
 
@@ -40,15 +41,27 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
         public ColumnTee(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
             : base(Section, L_x, L_y, L_z,  CalcLog)
         {
+            //(E4-2)
+        }
 
-        }        
+        public override double CalculateCriticalStress()
+        {
+            throw new NotImplementedException();
+        }
 
-        // public override double GetElasticBucklingStressFe()
-        //{
-        //    this.GetCriticalStressFcr();
-        //     //this is not required for Tee
-        //    throw new NotImplementedException();
-        //}
+
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
+        {
+
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe(); 
+            double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
+            double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
+            double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
+
+            double phiP_n = GetDesignAxialStrength(FcrFlex);
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
+            return ls;
+        }
 
     }
 }
