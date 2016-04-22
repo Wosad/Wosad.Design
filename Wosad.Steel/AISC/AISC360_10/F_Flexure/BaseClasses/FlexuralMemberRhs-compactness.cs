@@ -57,14 +57,15 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             return compactness.GetCompressionFlangeLambda();
         }
 
-        public double GetLambdaWeb(MomentAxis MomentAxis)
+        public double GetLambdaWeb(FlexuralCompressionFiberPosition compressionFiberPosition, MomentAxis MomentAxis)
         {
-            ShapeCompactness.HollowMember compactness = new ShapeCompactness.HollowMember(this.Section, FlexuralCompressionFiberPosition.Top, MomentAxis);
+            ShapeCompactness.HollowMember compactness = new ShapeCompactness.HollowMember(this.Section, compressionFiberPosition, MomentAxis);
             return compactness.GetWebLambda();
         }
 
-        public CompactnessClassFlexure GetFlangeCompactness()
+        public CompactnessClassFlexure GetFlangeCompactness(FlexuralCompressionFiberPosition compressionFiberPosition, MomentAxis MomentAxis)
         {
+            ShapeCompactness.HollowMember compactness = new ShapeCompactness.HollowMember(this.Section, compressionFiberPosition, MomentAxis);
            return compactness.GetFlangeCompactnessFlexure();
         }
     }

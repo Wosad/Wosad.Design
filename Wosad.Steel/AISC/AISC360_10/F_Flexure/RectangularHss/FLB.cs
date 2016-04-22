@@ -54,7 +54,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     double Fy = this.Section.Material.YieldStress;
                     double E = this.Section.Material.ModulusOfElasticity;
 
-                    CompactnessClassFlexure cClass = GetFlangeCompactness();
+                    CompactnessClassFlexure cClass = GetFlangeCompactness(CompressionLocation, MomentAxis);
 
                     if (cClass == CompactnessClassFlexure.Noncompact)
                     {

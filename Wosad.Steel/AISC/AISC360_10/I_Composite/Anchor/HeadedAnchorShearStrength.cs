@@ -65,7 +65,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
 
         private double GetConcreteModulusOfElsticity(double w_c, double fc_prime)
         {
-            double E_c = Math.Pow(w_c, 15) * Math.Sqrt(fc_prime);
+            double E_c = Math.Pow(w_c, 1.5) * Math.Sqrt(fc_prime);
             return E_c;
         }
 

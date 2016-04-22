@@ -57,7 +57,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             }
 
 
-                double lambdaWeb = GetLambdaWeb(MomentAxis);
+            double lambdaWeb = GetLambdaWeb(CompressionLocation,MomentAxis);
                 M_n = Mp - (Mp - Fy * S) * (0.305 * lambdaWeb * Math.Sqrt(Fy / E) - 0.738); //(F7-5)
                 M_n = M_n > Mp ? Mp : M_n;
 

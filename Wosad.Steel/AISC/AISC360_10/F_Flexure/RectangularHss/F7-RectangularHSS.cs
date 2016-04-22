@@ -34,12 +34,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
         ICalcLog CalcLog;
         MomentAxis MomentAxis;
 
-        public BeamRectangularHss(ISteelSection section, MomentAxis MomentAxis, ICalcLog CalcLog)
+        public BeamRectangularHss(ISteelSection section, FlexuralCompressionFiberPosition compressionFiberPosition, MomentAxis MomentAxis, ICalcLog CalcLog)
             : base(section, CalcLog)
         {
             GetSectionValues();
             this.MomentAxis = MomentAxis;
-            FlangeCompactnessClass = GetFlangeCompactness();
+            FlangeCompactnessClass = GetFlangeCompactness(compressionFiberPosition, MomentAxis);
 
         }
 
