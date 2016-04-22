@@ -22,21 +22,17 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.SteelEntities;
+ 
 
-
-namespace Wosad.Steel.AISC.Interfaces
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-
-    public interface ISteelCompressionMember: ISteelMember
+    public partial class ChsSlender : ChsCompact
     {
 
-        double UnbracedLengthX { get; set; }
-        double UnbracedLengthY { get; set; }
-        double UnbracedLengthZ { get; set; }
+        public override double GetReductionFactorForUnstiffenedElementQs()
+        {
+            return 1.0;
+        }
 
-
-        SteelLimitStateValue GetFlexuralBucklingStrength();
-        SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
     }
 }

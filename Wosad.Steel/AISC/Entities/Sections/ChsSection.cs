@@ -24,7 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
-//using SectionDesigner;
+
 
 
 namespace Wosad.Steel.AISC.SteelEntities.Sections

@@ -22,21 +22,35 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.AISC360v10.Flexure;
 
-
-namespace Wosad.Steel.AISC.Interfaces
+namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-
-    public interface ISteelCompressionMember: ISteelMember
+    public class SteelSectionSolid: SteelSectionBase
     {
+        private ISectionSolid section;
 
-        double UnbracedLengthX { get; set; }
-        double UnbracedLengthY { get; set; }
-        double UnbracedLengthZ { get; set; }
+        public ISectionSolid Section
+        {
+            get { return section; }
+        }
 
+        public override ISection Shape
+        {
+            get { return section as ISection; }
+        }
 
-        SteelLimitStateValue GetFlexuralBucklingStrength();
-        SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
+        public SteelSectionSolid(ISectionSolid Section, ISteelMaterial Material)
+            :base(Material)
+        {
+            this.section = Section;
+        }
+
+        //public override ISection Clone()
+        //{
+        //    return section.Clone();
+        //}
     }
 }

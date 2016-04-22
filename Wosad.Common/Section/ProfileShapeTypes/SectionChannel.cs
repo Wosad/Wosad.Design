@@ -41,8 +41,23 @@ namespace Wosad.Common.Section.SectionTypes
             this._b_f = b_f;
             this._t_f = t_f;
             this._t_w = t_w;
+            IsWeakAxis = false;
+            AreFlangeTipsDown = false;
+        }
+        public SectionChannel(string Name, double d, double b_f,
+         double t_f, double t_w, bool IsWeakAxis, bool AreFlangeTipsDown)
+            : base(Name)
+        {
+            this._d = d;
+            this._b_f = b_f;
+            this._t_f = t_f;
+            this._t_w = t_w;
+            this.IsWeakAxis = IsWeakAxis;
+            this.AreFlangeTipsDown = AreFlangeTipsDown;
         }
 
+        public bool IsWeakAxis { get; set; }
+        public bool AreFlangeTipsDown { get; set; }
 
         #region Section properties specific to channel
 
@@ -120,6 +135,18 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
+            if (IsWeakAxis == false)
+            {
+                return getXList();
+            }
+            else 
+            {
+                return getYList();
+            }
+        }
+
+        private List<CompoundShapePart> getXList()
+        {
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {
                 new CompoundShapePart(b_f,t_f, new Point2D(0,d/2-t_f/2)),
@@ -137,16 +164,45 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            //Converted to TEE
-            //Insertion point measured from top
-            List<CompoundShapePart> rectY = new List<CompoundShapePart>()
+            List<CompoundShapePart> Ylist;
+            if (IsWeakAxis == false)
             {
-                new CompoundShapePart(d, t_w, new Point2D(0, t_w/2.0)),
-                new CompoundShapePart(2*t_f,b_f-t_w, new Point2D(0, (t_w+(b_f -t_w)/2))),
-            };
-            return rectY;
+                Ylist= getYList(); 
+            }
+            else
+            {
+                Ylist = getXList(); 
+            }
+            return Ylist;
         }
 
+
+        private List<CompoundShapePart> getYList()
+        {
+            //Converted to TEE
+            //Insertion point measured from top
+            List<CompoundShapePart> rectY;
+
+            if (AreFlangeTipsDown == true)
+            {
+
+                rectY = new List<CompoundShapePart>()
+                {
+                    new CompoundShapePart(d, t_w, new Point2D(0, -t_w/2.0)),
+                    new CompoundShapePart(2*t_f,b_f-t_w, new Point2D(0, -(t_w+(b_f -t_w)/2))),
+                };
+            }
+            else
+            {
+                rectY = new List<CompoundShapePart>()
+                {
+                    new CompoundShapePart(2*t_f,b_f-t_w, new Point2D(0, ((b_f -t_w)/2))),
+                    new CompoundShapePart(d, t_w, new Point2D(0,(b_f -t_w)+t_w/2.0)),
+                    
+                };
+            }
+            return rectY;
+        }
 
         /// <summary>
         /// From:

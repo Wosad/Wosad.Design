@@ -187,9 +187,12 @@ namespace Wosad.Common.Section.SectionTypes
             double FlangeThickness = this.tf;
             double FlangeWidth = this.b_fTop;
 
+
+            //review this ....
+
             // I-shape converted to X-shape 
             double FlangeOverhang = (b_f - t_w) / 2.0;
-            CompoundShapePart LeftFlange = new CompoundShapePart(2* tf, FlangeOverhang, new Point2D(0, d - FlangeOverhang/2));
+            CompoundShapePart LeftFlange = new CompoundShapePart(2* tf, FlangeOverhang, new Point2D(0, b_f - FlangeOverhang/2));
             CompoundShapePart RightFlange = new CompoundShapePart(2*tf, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
             CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, b_f / 2));
 

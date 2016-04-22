@@ -18,7 +18,7 @@
 using System;
 namespace Wosad.Common.Section.Interfaces
 {
-    public interface ISectionRound : ISection, IWeakAxisCloneable
+    public interface ISectionRound : ISection, IWeakAxisCloneable, ISolidShape
     {
         double D { get; }
     }

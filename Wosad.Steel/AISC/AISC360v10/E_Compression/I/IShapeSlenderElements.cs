@@ -22,21 +22,20 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.CalculationLogger.Interfaces; 
+using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities;
 
 
-namespace Wosad.Steel.AISC.Interfaces
+namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-
-    public interface ISteelCompressionMember: ISteelMember
+    public partial class IShapeSlenderElements : IShapeCompact
     {
 
-        double UnbracedLengthX { get; set; }
-        double UnbracedLengthY { get; set; }
-        double UnbracedLengthZ { get; set; }
+        public IShapeSlenderElements(ISteelSection Section, bool IsRolled, double L_x, double L_y, double L_z, ICalcLog CalcLog)
+            : base(Section, IsRolled, L_x, L_y, L_z, CalcLog)
+        {
+    }
 
-
-        SteelLimitStateValue GetFlexuralBucklingStrength();
-        SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
     }
 }

@@ -30,17 +30,19 @@ namespace Wosad.Common.Section.SectionTypes
     /// </summary>
     public class SectionTee:CompoundShape, ISectionTee
     {
-        public SectionTee(string Name, double d, double b_f, double t_f, double t_w)
+        public SectionTee(string Name, double d, double b_f, double t_f, double t_w, bool IsInverted=false)
             :base(Name)
         {
             this._d = d;
             this._b_f = b_f;
             this._t_f = t_f;
             this._t_w = t_w;
-           
+            this.isInverted = IsInverted;
         }
 
         #region Properties specific to Tees
+
+        public bool isInverted { get; set; }
 
         private double _d;
 
@@ -88,12 +90,24 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-
-            List<CompoundShapePart> rectX = new List<CompoundShapePart>()
+            List<CompoundShapePart> rectX;
+            if (isInverted == false)
             {
-                new CompoundShapePart(b_f,t_f, new Point2D(0,d-t_f/2)),
-                new CompoundShapePart(t_w,d-t_f, new Point2D(0,(d-t_f)/2))
-            };
+                    rectX = new List<CompoundShapePart>()
+                    {
+                        new CompoundShapePart(b_f,t_f, new Point2D(0,d-t_f/2)),
+                        new CompoundShapePart(t_w,d-t_f, new Point2D(0,(d-t_f)/2))
+                    };
+            }
+            else
+            {
+                 rectX = new List<CompoundShapePart>()
+                    {
+                        new CompoundShapePart(t_w,d-t_f, new Point2D(0,t_f+(d-t_f)/2)),
+                        new CompoundShapePart(b_f,t_f, new Point2D(0,t_f/2))
+                    };
+            }
+
             return rectX;
         }
 

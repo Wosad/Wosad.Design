@@ -33,8 +33,8 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
 {
     public abstract class SteelAxialMember : SteelMemberBase, ISteelCompressionMember, ISteelTensionMember
     {
-        public abstract double GetFlexuralBucklingStrength();
-        public abstract double GetTorsionalAndFlexuralTorsionalBucklingStrength();
+        public abstract SteelLimitStateValue GetFlexuralBucklingStrength();
+        public abstract SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
 
         public double UnbracedLengthX { get; set; }
         public double UnbracedLengthY { get; set; }
