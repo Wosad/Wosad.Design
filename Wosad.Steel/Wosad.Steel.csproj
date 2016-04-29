@@ -53,14 +53,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.4.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.4.4\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.5.1\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AISC\AISC360v10\B_General\Compactness\ShapeCompactness\ShapeCompactnessDoubleAngle.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsSlender.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsShapeFactory.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeFactory.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeSlenderElements.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\F9-Tee.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Base\IWebOpening.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Base\WebOpeningBase.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Composite\CompositeWebOpening.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Steel\SteelWebOpening.cs" />
     <Compile Include="AISC\Entities\Sections\ChannelSection.cs" />
     <Compile Include="AISC\Entities\Sections\DoubleAngleSection.cs" />
     <Compile Include="AISC\Entities\Sections\BoxSection.cs" />

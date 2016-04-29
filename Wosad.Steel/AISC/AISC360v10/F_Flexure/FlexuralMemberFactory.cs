@@ -100,7 +100,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     {
                         ISectionTube TubeShape = Shape as ISectionTube;
                         SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
-                        beam = new BeamRectangularHss(RectHSS_Section, MomentAxis, Log);
+                        beam = new BeamRectangularHss(RectHSS_Section,compressionFiberPosition, MomentAxis, Log);
                     }
 
 
@@ -108,7 +108,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     {
                         ISectionBox BoxShape = Shape as ISectionBox;
                         SteelBoxSection BoxSection = new SteelBoxSection(BoxShape, Material);
-                        beam = new BeamRectangularHss(BoxSection, MomentAxis, Log);
+                        beam = new BeamRectangularHss(BoxSection, compressionFiberPosition, MomentAxis, Log);
                     }
 
                     else if (Shape is ISectionTee)
@@ -140,12 +140,13 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             return beam;
         }
 
-        private ISteelBeamFlexure CreateRhsBeam(CompactnessClassFlexure FlangeCompactness, CompactnessClassFlexure WebCompactness,
+        private ISteelBeamFlexure CreateRhsBeam(CompactnessClassFlexure FlangeCompactness, FlexuralCompressionFiberPosition compressionFiberPosition,
+            CompactnessClassFlexure WebCompactness,
             ISectionTube RhsSec, ISteelMaterial Material, MomentAxis MomentAxis, ICalcLog Log)
         {
             SteelRhsSection steelSection = new SteelRhsSection(RhsSec, Material);
             ISteelBeamFlexure beam = null;
-            beam = new BeamRectangularHss(steelSection, MomentAxis, Log);
+            beam = new BeamRectangularHss(steelSection,compressionFiberPosition, MomentAxis, Log);
             return beam;
         }
 

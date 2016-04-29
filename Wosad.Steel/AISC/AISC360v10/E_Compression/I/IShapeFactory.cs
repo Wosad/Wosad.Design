@@ -16,7 +16,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     {
         public ISteelCompressionMember GetIshape(ISteelSection Section, bool IsRolled, double L_x, double L_y, double L_z, ICalcLog CalcLog)
         {
-            throw new NotImplementedException();
 
             ISteelCompressionMember column = null;
             IShapeCompactness compactnessTop = new ShapeCompactness.IShapeMember(Section, IsRolled, Common.Section.Interfaces.FlexuralCompressionFiberPosition.Top);

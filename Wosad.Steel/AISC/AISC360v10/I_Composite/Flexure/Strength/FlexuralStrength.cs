@@ -45,7 +45,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
                 //Section is fully composite
                 C = MaximumTForce;
                 d_2 = 0;
-                 
+                DistanceFromTopOfSteelToPNY = 0;
             }
             else
             {
@@ -53,14 +53,32 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
                 double C_steel = (MaximumTForce -  C_Slab) / 2.0;
                 double A_sPrime = C_steel / F_y;
                 IMoveableSection compressedSteelSection = SteelSection.GetTopSliceOfArea(A_sPrime);
+                DistanceFromTopOfSteelToPNY = compressedSteelSection.YMax - compressedSteelSection.YMin;
                 var C_steelCoordinate = compressedSteelSection.GetElasticCentroidCoordinate();
                 d_2 = SteelSectionHeight - C_steelCoordinate.Y;
                 C = C_Slab + C_steel;
             }
             double P_y = MaximumTForce;
             double phiM_n = 0.9 * (C * (d_1 + d_2) + P_y * (d_3 - d_2)); // (C-I3-10)
+            PNYCalculated = true;
             return phiM_n;
         }
+
+
+        bool PNYCalculated;
+
+        private double DistanceFromTopOfSteelToPNY { get; set; }
+
+        public double GetDistanceFromTopOfSteelToPNY(double SumQ_n)
+        {
+            if (PNYCalculated ==false)
+            {
+                double M_n = GetFlexuralStrength(SumQ_n);
+
+            }
+            return DistanceFromTopOfSteelToPNY;
+        }
+        
 
         private double GetCForce()
         {
