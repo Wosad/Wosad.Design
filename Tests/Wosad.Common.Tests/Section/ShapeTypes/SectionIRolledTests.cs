@@ -34,7 +34,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
 
          public SectionIRolledTests()
         {
-            tolerance = 0.05; //7% can differ from fillet areas and rounding in the manual
+            tolerance = 0.05; //5% can differ from fillet areas and rounding in the manual
         }
 
         double tolerance;
