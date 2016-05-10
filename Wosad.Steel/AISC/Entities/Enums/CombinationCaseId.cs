@@ -30,6 +30,7 @@ namespace Wosad.Steel.AISC
             H3,
             Linear,
             Elliptical,
+            Cubic,
             Anchorage,
             Plastic
     }

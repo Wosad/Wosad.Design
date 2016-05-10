@@ -19,10 +19,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
             double SlabSolidThickness, double SlabDeckThickness, double F_y, double f_cPrime, double N_studs, double Q_n, double N_o,
             double a_o, double h_o, double e, double t_r, double b_r, bool IsSingleSideReinforcement = false, double PlateOffset=0) : base(Section,a_o,h_o,e,F_y, t_r,b_r)
         {
-             
 
-            compositeSection = new CompositeBeamSection(Section, SlabEffectiveWidth, SlabSolidThickness, SlabDeckThickness,
-                F_y, f_cPrime);
+            ISection = Section;
 
                     if (IsSingleSideReinforcement==false)
                     {
@@ -46,6 +44,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         
         }
 
+        SectionI ISection { get; set; }
         public double  Q_n { get; set; }
 
         double SumQ_n;
@@ -70,7 +69,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
 
         public override double Get_nu_Top()
         {
-            throw new NotImplementedException();
 
              double nu = 0.0;
             if (A_r ==0) //unreinforced
@@ -103,7 +101,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
 
         public override double Get_mu_Top()
         {
-            throw new NotImplementedException();
 
             double P_r = GetP_r();
             double d_r = Get_d_rTop(PlateOffset);
@@ -203,7 +200,10 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         }
         public override double GetFlexuralStrength()
         {
+            SectionIWithReinfWebOpening Section = new SectionIWithReinfWebOpening(null, ISection.d, ISection.b_f, ISection.tf, ISection.t_w, h_o, e, b_r, t_r, IsSingleSideReinforcement);
             throw new NotImplementedException();
+            //compositeSection = new CompositeBeamSection(Section, SlabEffectiveWidth, SlabSolidThickness, SlabDeckThickness,
+            //    F_y, f_cPrime);
         }
 
         private double Get_s_bar(double s, double b_f)

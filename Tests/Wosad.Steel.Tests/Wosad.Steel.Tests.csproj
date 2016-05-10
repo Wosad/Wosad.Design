@@ -76,6 +76,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldStrengthTests.cs" />
+    <Compile Include="AISC\UFC\UFMGeneralTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA572Tests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992Tests.cs" />

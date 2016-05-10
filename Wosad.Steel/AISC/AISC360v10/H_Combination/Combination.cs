@@ -98,6 +98,10 @@ namespace Wosad.Steel.AISC.AISC360v10.Combination
                 case CombinationCaseId.Elliptical:
                  InteractionRatio = Math.Pow(N, 2) + Math.Pow(Mx, 2) + Math.Pow(My, 2) + Math.Pow(V, 2) + Math.Pow(T, 2);
                  break;
+                case CombinationCaseId.Cubic: //Used in Design Guide 2 for web openings
+                 InteractionRatio = Math.Pow(N, 3) + Math.Pow(Mx, 3) + Math.Pow(My, 3) + Math.Pow(V, 3) + Math.Pow(T, 3);
+                 break;
+
                 case CombinationCaseId.Anchorage:
                  InteractionRatio = Math.Pow(N, 5.0 / 3.0) + Math.Pow(Mx, 5.0 / 3.0) + Math.Pow(My, 5.0 / 3.0) + Math.Pow(V, 5.0 / 3.0) + Math.Pow(T, 5.0 / 3.02);
                  break;
