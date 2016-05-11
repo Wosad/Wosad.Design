@@ -70,6 +70,12 @@
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\F9-Tee.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\BasePlateEccentricallyLoaded.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateCircularHss.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\BasePlateConcentricallyLoaded.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateIShape.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateRectangularHss.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateTypeBase.cs" />
     <Compile Include="AISC\Entities\UFM\Base\UFMCase.cs" />
     <Compile Include="AISC\Entities\UFM\UFMGeneralMomentAtColumnGussetInterface.cs" />
     <Compile Include="AISC\Entities\UFM\UFMGeneralMomentAtBeamGussetInterface.cs" />
@@ -84,6 +90,7 @@
     <Compile Include="AISC\Entities\Sections\SectionSolid.cs" />
     <Compile Include="AISC\Entities\Sections\TeeSection.cs" />
     <Compile Include="AISC\Exceptions\FlexuralBendinAxisException.cs" />
+    <Compile Include="AISC\Interfaces\IBasePlate.cs" />
     <Compile Include="AISC\Interfaces\IShapeCompactness.cs" />
     <Compile Include="AISC\AISC360v10\D_Tension\EffectiveNetArea.cs" />
     <Compile Include="AISC\AISC360v10\D_Tension\ShearLagFactor.cs" />

@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ASCE7\ASCE7_10\C01_General\RiskCategory.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\SolidConcreteTests.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\ConcreteOnMetalDeckTests.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\PrecastPanelTests.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\ClayMasonryTests.cs" />
