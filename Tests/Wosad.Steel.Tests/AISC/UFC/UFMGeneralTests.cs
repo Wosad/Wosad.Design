@@ -51,11 +51,44 @@ namespace Wosad.Steel.Tests.AISC
         [Test]
         public void NoMomentCaseExample5_1ReturnsValueDistortionalMomentCase()
         {
-            UFMCaseNoMomentsAtInterfaces ufmCase = new UFMCaseNoMomentsAtInterfaces(21.4, 14.0, 47.2, 17.5, 12.0, 840.0, 50.0, true, 1270, 100);
+            //Note 1270 kip*in distortional moment in gusset is calculated in design guide
+            //from equation given in Tamboli book
+            //Beam-column connection axial force H_ubc is reduced due to distorional force
+            UFMCaseNoMomentsAtInterfaces ufmCase = new UFMCaseNoMomentsAtInterfaces(21.4, 14.0, 47.2, 17.5, 12.0, 840.0, 50.0, true, 127, 100);
             double H_ubc = ufmCase.H_bc;
             double refValueH_ubc = 220.0;
             double actualToleranceV_c = EvaluateActualTolerance(H_ubc, refValueH_ubc);
             Assert.LessOrEqual(actualToleranceV_c, tolerance);
+        }
+
+        [Test]
+        public void SpecialCase1Example5_2ReturnsValue()
+        {
+            UFMCase1NonconcentricBraceForce ufmCase = new UFMCase1NonconcentricBraceForce(21.4, 14.0, 47.2,
+                17.5, 12.0, 17.5,12,0,0, 840.0, 50.0, 196, 157, false,0,100);
+
+            double V_uc = ufmCase.V_uc;
+            double refValueV_uc = 402;
+            double actualToleranceV_c = EvaluateActualTolerance(V_uc, refValueV_uc);
+            Assert.LessOrEqual(actualToleranceV_c, tolerance);
+
+            double H_uc = ufmCase.H_uc;
+            double refValueH_uc = 247;
+            double actualToleranceH_c = EvaluateActualTolerance(H_uc, refValueH_uc);
+            Assert.LessOrEqual(actualToleranceH_c, tolerance);
+
+
+            double V_ub = ufmCase.V_ub;
+            double refValueV_ub = 169;
+            double actualToleranceV_b = EvaluateActualTolerance(V_ub, refValueV_ub);
+            Assert.LessOrEqual(actualToleranceV_b, tolerance);
+
+            double H_ub = ufmCase.H_ub;
+            double refValueH_ub = 369;
+            double actualToleranceH_b = EvaluateActualTolerance(H_ub, refValueH_ub);
+            Assert.LessOrEqual(actualToleranceH_b, tolerance);
+
+
 
 
         }

@@ -66,6 +66,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\PryingAction\PryingActionDesignTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\ShearAreaCalculatorTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\AffectedMembers\WhitmoreSectionTests.cs" />
+    <Compile Include="AISC\AISC360_10\J_Connections\BasePlate\BasePlateTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BearingBoltTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltGroupTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Bolt\BoltHoleTests.cs" />

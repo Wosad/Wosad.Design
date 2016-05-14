@@ -38,13 +38,13 @@ namespace Wosad.Steel.AISC.UFM
             double M_d, double A_ub)
             : base(d_b, d_c, theta, alpha, beta, P_u, R_beam, IncludeDistortionalMomentForces, M_d, A_ub)
         {
-            alpha_bar = this.alpha_bar;
-            beta_bar = this.beta_bar;
-            x_brace = this.x;
-            y_brace = this.y;
-            P_u = this.P_u;
-            Z_beam = this.Z_beam;
-            Z_column = this.Z_column;
+            this.alpha_bar = alpha_bar;
+            this.beta_bar = beta_bar;
+            this.x_brace = x_brace;
+            this.y_brace = y_brace;
+            this.P_u = P_u;
+            this.Z_beam = Z_beam;
+            this.Z_column = Z_column;
 
             CalculateForces();
         }
@@ -55,7 +55,7 @@ namespace Wosad.Steel.AISC.UFM
             double c = Math.Cos(theta.ToRadians());
             double s = Math.Sin(theta.ToRadians());
 
-            double e = (e_b - y) * s - x * c;
+            double e = (e_b - y_brace) * s -(e_c - x_brace) * c;
             double eta = ((Z_beam) / (Z_beam + 2.0 * Z_column));
 
             double M = P_u * e;
@@ -68,15 +68,15 @@ namespace Wosad.Steel.AISC.UFM
             if (e>=0)
             {
                 _H_uc = H_c + H_prime;
-                _V_uc = V_c - V_prime;
-                _V_ub = V_b + V_prime+R_beam;
+                _V_uc = V_c + V_prime;
+                _V_ub = V_b - V_prime; // +R_beam;
                 _H_ub = H_b - H_prime;
             }
             else
             {
                 _H_uc = H_c - H_prime;
-                _V_uc = V_c + V_prime;
-                _V_ub = V_b - V_prime-R_beam;
+                _V_uc = V_c - V_prime;
+                _V_ub = V_b + V_prime; // -R_beam;
                 _H_ub = H_b + H_prime;
             }
         }
@@ -85,8 +85,8 @@ namespace Wosad.Steel.AISC.UFM
 
         double alpha_bar { get; set; }
         double beta_bar { get; set; }
-        double x { get; set; }
-        double y { get; set; }
+        double x_brace { get; set; }
+        double y_brace { get; set; }
         double P_u { get; set; }
         double Z_beam { get; set; }
         double Z_column { get; set; }
