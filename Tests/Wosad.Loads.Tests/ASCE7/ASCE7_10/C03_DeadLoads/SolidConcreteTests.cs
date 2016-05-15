@@ -14,15 +14,27 @@
    limitations under the License.
    */
 #endregion
+ 
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Loads.ASCE.ASCE7_10.DeadLoads;
 
-namespace Wosad.Steel.AISC.UFM
+namespace Wosad.Loads.Tests.ASCE7.ASCE7_10.C03_DeadLoads
 {
-    class UFMCase3NoGussetToColumnConnection
+    [TestFixture]
+    public partial class SolidConcreteTests
     {
+        [Test]
+        public void ReturnsValueFor24()
+        {
+            BuildingElementComponent bec = new BuildingElementComponent("SolidConcreteSlab",1,2,24,"");
+            ComponentReportEntry wEntr = bec.GetComponentWeight();
+            double w = wEntr.LoadValue;
+            Assert.AreEqual(300.0, w);
+        }
     }
 }
