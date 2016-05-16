@@ -76,12 +76,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
                 case "A490": bb = new BoltBearingGroupB(Diameter, ThreadType, log); break;
                 case "F1852": bb = new BoltBearingGroupA(Diameter, ThreadType, log); break;
                 case "A307": bm = new BoltA307Material(); bb=new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break;
-                case "A354 Grade BC": bb = new BoltBearingGroupA(Diameter, ThreadType, log); break;  
-                case "A354 Grade BD": bb = new BoltBearingGroupB(Diameter, ThreadType, log); break;  
+                case "A354GradeBC": bb = new BoltBearingGroupA(Diameter, ThreadType, log); break;  
+                case "A354GradeBD": bb = new BoltBearingGroupB(Diameter, ThreadType, log); break;  
                 case "A449": bb = new BoltBearingGroupA(Diameter, ThreadType, log); break;
-                case "F1554 Grade 105": bm = new ThreadedBoltMaterial(125.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break; 
-                case "F1554 Grade 55": bm = new ThreadedBoltMaterial(75.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break;   
-                case "F1554 Grade 36": bm = new ThreadedBoltMaterial(58.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break;   
+                case "F1554Grade105": bm = new ThreadedBoltMaterial(125.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break; 
+                case "F1554Grade55": bm = new ThreadedBoltMaterial(75.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break;   
+                case "F1554Grade36": bm = new ThreadedBoltMaterial(58.0); bb = new BoltBearingThreadedGeneral(Diameter, ThreadType, bm, log); break;   
                 default: throw new Exception("Unrecognized bolt material. Check input");
 
             }
@@ -98,8 +98,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
                 case "A325": bsc = new BoltSlipCriticalGroupA(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
                 case "A490": bsc = new BoltSlipCriticalGroupB(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
                 case "F1852": bsc = new BoltSlipCriticalGroupA(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
-                case "A354 Grade BC": bsc = new BoltSlipCriticalGroupA(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
-                case "A354 Grade BD": bsc = new BoltSlipCriticalGroupB(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
+                case "A354GradeBC": bsc = new BoltSlipCriticalGroupA(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
+                case "A354GradeBD": bsc = new BoltSlipCriticalGroupB(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
                 case "A449": bsc = new BoltSlipCriticalGroupA(Diameter, ThreadType, SurfaceClass, HoleType, FillerCase, NPlanes, log); break;
                 default: throw new Exception("Unrecognized bolt material or specified material cannot be used for high-strength bolting. Check input");
 
