@@ -45,15 +45,15 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.Bolted
                 //case "A36": m = new ThreadedBoltMaterial(58.0); break;
                 //case "A193 Grade B7": m = new ThreadedBoltMaterial(100.0); break; //Can use higher value, up to 125 ksi for smaller diameters
                 case "A307": m=new BoltA307Material();  break;
-                case "A354 Grade BC": m = new BoltGroupAMaterial(); break;  //This is per AISC spec. Design guide 1 gives higher values
-                case "A354 Grade BD": m = new BoltGroupBMaterial(); break;  //This is per AISC spec. Design guide 1 gives higher values
+                case "A354GradeBC": m = new BoltGroupAMaterial(); break;  //This is per AISC spec. Design guide 1 gives higher values
+                case "A354GradeBD": m = new BoltGroupBMaterial(); break;  //This is per AISC spec. Design guide 1 gives higher values
                 case "A449": m=new BoltGroupAMaterial();break;
                 //case "A572": break; //TODO: eliminate this from material selection node
                 //case "A588": m = new ThreadedBoltMaterial(70.0); break; // for large diameters (over 4") this is unconservative.
                 //case "A687": m = new ThreadedBoltMaterial(150.0); break;  //AISC indicates 150ksi MAX
-                case "F1554 Grade 105": m = new ThreadedBoltMaterial(125.0); break;  //Design guide 1 Table 2.2
-                case "F1554 Grade 55": m = new ThreadedBoltMaterial(75.0); break;    //Design guide 1 Table 2.2
-                case "F1554 Grade 36": m = new ThreadedBoltMaterial(58.0); break;    //Design guide 1 Table 2.2
+                case "F1554Grade105": m = new ThreadedBoltMaterial(125.0); break;  //Design guide 1 Table 2.2
+                case "F1554Grade55": m = new ThreadedBoltMaterial(75.0); break;    //Design guide 1 Table 2.2
+                case "F1554Grade36": m = new ThreadedBoltMaterial(58.0); break;    //Design guide 1 Table 2.2
                 //case "A572 Grade 42": m = new ThreadedBoltMaterial(60.0); break;     //AISC Manual Table 2-6
                 //case "A572 Grade 50": m = new ThreadedBoltMaterial(65.0); break;     //AISC Manual Table 2-6
                 //case "A572 Grade 55": m = new ThreadedBoltMaterial(70.0); break;     //AISC Manual Table 2-6

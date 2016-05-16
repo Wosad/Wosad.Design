@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AISC\AISC360_10\B_General\Materials\MaterialPropertiesTests.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\IBeam\F2_I_DoublySymmetricCompactTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHSS\F7-RectangularHssTests.cs" />
