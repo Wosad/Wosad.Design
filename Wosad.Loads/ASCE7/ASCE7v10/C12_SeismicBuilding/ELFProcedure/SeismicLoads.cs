@@ -29,14 +29,41 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
 {
     public partial class SeismicLateralForceResistingStructure : AnalyticalElement
     {
-        public List<StorySeismicLoad>  CalculateSeismicLoads( double T, double Cs, List<StorySeismicData> storyData)
+
+        
+        List<double> CalculateSeismicLoads(double T, double Cs, List<double> StoryElevationsFromBase, List<double> StoryWeights )
+        {
+            List<double> loads = new List<double>();
+            if (StoryElevationsFromBase.Count() != StoryWeights.Count())
+            {
+                throw new Exception("Lists for StoryElevationsFromBase and StoryWeights must have the same number of elements");
+            }
+            else
+            {
+                List<StorySeismicData> storyData = new List<StorySeismicData>();
+                for (int i = 0; i < StoryElevationsFromBase.Count(); i++)
+                {
+                    storyData.Add(new StorySeismicData()
+                        {
+                            ElevationFromBase = StoryElevationsFromBase[i],
+                            SeismicWeight = StoryWeights[i]
+                        });
+                }
+
+                double k = GetBuildingPeriodExponent_k(T);
+                loads = CalculateSeismicLevelLoads(k, Cs, storyData);
+            }
+
+            return loads;
+        }
+        public List<double>  CalculateSeismicLoads( double T, double Cs, List<StorySeismicData> storyData)
         {
             double k = GetBuildingPeriodExponent_k(T);
-            List<StorySeismicLoad> loads = CalculateSeismicLevelLoads(k, Cs, storyData);
+            List<double> loads = CalculateSeismicLevelLoads(k, Cs, storyData);
             return loads;
         }
 
-        public List<StorySeismicLoad>  CalculateSeismicLevelLoads( double k, double Cs, List<StorySeismicData> storyData)
+        public List<double>  CalculateSeismicLevelLoads( double k, double Cs, List<StorySeismicData> storyData)
         {
             List<StorySeismicLoad> loads = new List<StorySeismicLoad>();
 
@@ -55,8 +82,7 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
             }
 
             double Vb = this.GetBaseShearVb(Cs, W);
-
-            List<List<string>> ReportTableData = new List<List<string>>();
+            List<double> StoryForces = new List<double>();
 
             foreach (var story in storyData)
             {
@@ -79,34 +105,11 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
                     };
                 
                 loads.Add(load);
-                
 
-                List<string> row = new List<string>()
-                    {
-                        load.StoryId,
-                        Math.Round(load.ElevationFromBase,2).ToString(),
-                        Math.Round(load.Weight,1).ToString(),
-                        Math.Round(load.Cvx,3).ToString(),
-                        Math.Round(load.Fx,1).ToString()
-                    };
-                ReportTableData.Add(row);
-
+                StoryForces.Add(Fx);
             }
 
-
-            #region Fx
-            ICalcLogEntry FxEntry = new CalcLogEntry();
-            FxEntry.ValueName = "Fx"; // not used
-            FxEntry.Reference = "";
-            FxEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Seismic/SeismicStoryLoads.docx";
-            FxEntry.FormulaID = null; //reference to formula from code
-            FxEntry.VariableValue = Math.Round(0.0, 3).ToString(); //not used
-            FxEntry.TableData = ReportTableData;
-            FxEntry.TemplateTableTitle = "Seismic forces at levels";
-            #endregion
-
-            this.AddToLog(FxEntry);
-            return loads;
+            return StoryForces;
         }
     }
 }

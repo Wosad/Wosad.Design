@@ -96,17 +96,7 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
                 }
 
             }
-            
-            #region Cu
-            ICalcLogEntry CuEntry = new CalcLogEntry();
-            CuEntry.ValueName = "Cu";
-            CuEntry.AddDependencyValue("SD1", Math.Round(SD1, 3));
-            CuEntry.Reference = "Coefficient for Upper Limit on Calculated Period";
-            CuEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Seismic/SeismicFundamentalPeriodCu.docx";
-            CuEntry.FormulaID = "Table 12.8-1"; //reference to formula from code
-            CuEntry.VariableValue = Math.Round(UpperLimitCoefficientCU,3).ToString();
-            #endregion
-            this.AddToLog(CuEntry);
+
 
             return UpperLimitCoefficientCU;
         }

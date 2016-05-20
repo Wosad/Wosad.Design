@@ -1,4 +1,4 @@
-#region Copyright
+﻿#region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,15 +19,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
+namespace Wosad.Loads.Tests
 {
-    public class StorySeismicLoad
+    public abstract class ToleranceTestBase
     {
-        public string StoryId { get; set; }
-        public double ElevationFromBase { get; set; }
-        public double Weight { get; set; }
-        public double Cvx { get; set; }
-        public double Fx { get; set; }
+        public double EvaluateActualTolerance(double C, double refValue)
+        {
+            double smallerVal = C < refValue ? C : refValue;
+            double largerVal = C >= refValue ? C : refValue;
+            double thisTolerance = largerVal / smallerVal - 1;
+
+            return thisTolerance;
+        }
     }
 }

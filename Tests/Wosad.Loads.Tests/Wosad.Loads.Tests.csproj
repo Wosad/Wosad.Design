@@ -61,6 +61,8 @@
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\WoodDoubleFloorTests.cs" />
     <Compile Include="ASCE7\ASCE7_10\C03_DeadLoads\WoodFramingTests.cs" />
     <Compile Include="ASCE7\ASCE7_10\C04_LiveLoads\LiveLoadTests.cs" />
+    <Compile Include="ASCE7\ASCE7_10\C11_SeismicLoads\ApproximatePeriodTests.cs" />
+    <Compile Include="ASCE7\ASCE7_10\ToleranceTestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +70,6 @@
     <Folder Include="ASCE7\ASCE7_10\C05_FloodLoads\" />
     <Folder Include="ASCE7\ASCE7_10\C07_SnowLoads\" />
     <Folder Include="ASCE7\ASCE7_10\C10_IceLoads\" />
-    <Folder Include="ASCE7\ASCE7_10\C11_SeismicLoads\" />
     <Folder Include="ASCE7\ASCE7_10\C12_SeismicBuilding\" />
     <Folder Include="ASCE7\ASCE7_10\C26_Wind\" />
   </ItemGroup>

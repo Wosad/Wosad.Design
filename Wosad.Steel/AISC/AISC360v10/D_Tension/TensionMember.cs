@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace Wosad.Steel.AISC.AISC360v10.D_Tension
+namespace Wosad.Steel.AISC.AISC360v10.Tension
 {
     public partial class TensionMember : SteelDesignElement
     {
