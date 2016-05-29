@@ -55,7 +55,7 @@ namespace Wosad.Analysis.Torsion
         protected override double Get_c_4()
         {
             double c_4 = (Math.Sinh(((alpha * L) / (a))) - ((alpha * L) / (a))) * Math.Tanh(((L) / (a)));
-            return base.Get_c_4();
+            return c_4;
         }
         protected override double Get_c_5()
         {

@@ -28,7 +28,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
             E = 29000;
             t=0;
             alpha = 0.5;
-            tolerance = 0.02; //2% can differ from rounding in the manual
+            tolerance = 0.02; //2% can differ from rounding 
         }
             double L;
             double alpha;
@@ -48,7 +48,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
         double tolerance;
 
         [Test]
-        public void TorsionalFunctionReturnsFirstDerivativeAtMidspan()
+        public void TorsionalFunctionCase3ReturnsFirstDerivativeAtMidspan()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -65,7 +65,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
         }
 
         [Test]
-        public void TorsionalFunctionReturnsFirstDerivativeAtSupport()
+        public void TorsionalFunctionCase3ReturnsFirstDerivativeAtSupport()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -83,7 +83,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
         }
 
         [Test]
-        public void TorsionalFunctionReturnsSecondDerivativeAtMidspan()
+        public void TorsionalFunctionCase3ReturnsSecondDerivativeAtMidspan()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -100,7 +100,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
         }
 
         [Test]
-        public void TorsionalFunctionReturnsSecondDerivativeAtSupport()
+        public void TorsionalFunctionCase3ReturnsSecondDerivativeAtSupport()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -118,7 +118,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
 
 
         [Test]
-        public void TorsionalFunctionReturnsThirdDerivativeAtMidspan()
+        public void TorsionalFunctionCase3ReturnsThirdDerivativeAtMidspan()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -135,7 +135,7 @@ namespace Wosad.Analysis.Tests.BeamTorsion
         }
 
         [Test]
-        public void TorsionalFunctionReturnsThirdDerivativeAtSupport()
+        public void TorsionalFunctionCase3ReturnsThirdDerivativeAtSupport()
         {
             //AISC Design Guide 9 Example 5.1
             //Case 3, with alpha = 0.5:
@@ -147,6 +147,23 @@ namespace Wosad.Analysis.Tests.BeamTorsion
             double refValue = 0.22 * (-5.78) * Math.Pow(10, -3.0) / 62.1;
 
             double actualTolerance = EvaluateActualTolerance(theta_3der, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
+
+        [Test]
+        public void TorsionalFunctionCase6ReturnsSecondDerivativeAtSupport()
+        {
+
+            SetAiscDG9Example5_1Parameters();
+            z = 0.5*L;
+            TorsionalFunctionFactory tf = new TorsionalFunctionFactory();
+            ITorsionalFunction function = tf.GetTorsionalFunction(TorsionalFunctionCase.Case6, E, G, J, L, z, T_u, a, t, alpha);
+            double theta_2der = function.Get_theta_2();
+            double refValue = -0.23;
+            double ratio = L / a;
+            double GraphValuePredicted = theta_2der*G*J/T_u*a;
+            double actualTolerance = EvaluateActualTolerance(GraphValuePredicted, refValue);
             Assert.LessOrEqual(actualTolerance, tolerance);
 
         }

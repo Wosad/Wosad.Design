@@ -42,7 +42,7 @@ namespace Wosad.Analysis.Torsion
         protected override double Get_c_1()
         {
             double c_1 = ((T) / ((H + 1) * G * J));
-            return base.Get_c_1();
+            return c_1;
         }
 
         protected override double Get_c_2()
