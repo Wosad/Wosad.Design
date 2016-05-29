@@ -31,7 +31,7 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
     {
 
         
-        List<double> CalculateSeismicLoads(double T, double Cs, List<double> StoryElevationsFromBase, List<double> StoryWeights )
+        public List<double> CalculateSeismicLoads(double T, double Cs, List<double> StoryElevationsFromBase, List<double> StoryWeights )
         {
             List<double> loads = new List<double>();
             if (StoryElevationsFromBase.Count() != StoryWeights.Count())

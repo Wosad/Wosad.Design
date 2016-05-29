@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="BeamForces\C2A_2Tests.cs" />
     <Compile Include="BeamForces\C1B_1Tests.cs" />
-    <Compile Include="BeamTorsion\TorsionalFunctionsTests.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctionsTestsCommon.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase3.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase6.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToleranceTestBase.cs" />
   </ItemGroup>

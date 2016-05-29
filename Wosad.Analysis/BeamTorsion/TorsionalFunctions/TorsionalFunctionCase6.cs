@@ -48,7 +48,10 @@ namespace Wosad.Analysis.Torsion
         protected override double Get_c_2()
         {
             double c_2 = H * (((1) / (Math.Sinh(((L) / (a))))) + Math.Sinh(((alpha * L) / (a))) - ((Math.Cosh(((alpha * L) / (a)))) / (Math.Tanh(((L) / (a)))))) + Math.Sinh(((alpha * L) / (a))) - ((Math.Cosh(((alpha * L) / (a)))) / (Math.Tanh(((L) / (a))))) + ((1) / (Math.Tanh(((L) / (a)))));
+
             return c_2;
+
+
         }
 
         protected override double Get_c_3()
