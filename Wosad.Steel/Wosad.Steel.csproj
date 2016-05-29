@@ -488,6 +488,12 @@
   <ItemGroup>
     <None Include="Resources\AISC360_10TableJ3_3NominalHoleDimensions.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AISC_DG11_VibrationLimits.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AISC_DG11_ModalDamping.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -55,33 +55,37 @@ namespace Wosad.Steel.AISC.AISC360v10
         /// </summary>
         public override double GetShearLagFactor()
         {
-            double U;
+            double U, U1, U2;
             if (N<3)
             {
                 ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l);
-                U = Case2.GetShearLagFactor();
+                U1 = Case2.GetShearLagFactor();
             }
             else if (N==3)
             {
                 if (bf > 2 / 3 * d)
                 {
-                    U = 0.9;
+                    U1 = 0.9;
                 }
                 else
                 {
-                    U = 0.85;
+                    U1 = 0.85;
                 } 
             }
             else
             {
-                U = 0.7;
+                U1 = 0.7;
             }
             // If Case 2 information is applicable
             if (x_ob>0 && l > 0)
             {
                 ShearLagCase2 Case2 = new ShearLagCase2(x_ob, l);
-                double U_case2 = Case2.GetShearLagFactor();
-                U = Math.Min(U, U_case2);
+                U2 = Case2.GetShearLagFactor();
+                U = Math.Max(U1, U2);
+            }
+            else
+            {
+                U = U1;
             }
 
             return U;

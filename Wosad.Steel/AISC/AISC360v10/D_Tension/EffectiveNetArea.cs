@@ -24,7 +24,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 
 using Wosad.Steel.AISC.SteelEntities;
 
-namespace Wosad.Steel.AISC.AISC360v10.D_Tension
+namespace Wosad.Steel.AISC.AISC360v10.Tension
 {
     public partial class TensionMember : SteelDesignElement
     {
@@ -50,20 +50,24 @@ namespace Wosad.Steel.AISC.AISC360v10.D_Tension
         /// <param name="IsBoltedSplice">Identifies whether member is spliced using bolted plates</param>
         /// <returns>Effective net area A_e</returns>
         public double GetEffectiveNetArea(double A_n, double U, double A_g, double A_connected, bool PartiallyWeldedWithTransverseWelds,
-            bool IsBoltedSplice)
+            bool IsBoltedSplice )
         {
             double Ae = A_n * U; //D3-1
             if (IsBoltedSplice!=true)
             {
-                if (PartiallyWeldedWithTransverseWelds == false)
-                {
-                    return Ae; 
+
+
+                    if (PartiallyWeldedWithTransverseWelds == false)
+                    {
+                        return Ae;
+                    }
+                    else
+                    {
+                        return A_connected;
+                    } 
                 }
-                else
-                {
-                    return A_connected;
-                }
-            }
+
+            
             else
             {
                 //For bolted splice plates Ae=An =0.85Ag, according to Section J4.1

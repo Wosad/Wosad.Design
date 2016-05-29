@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wosad.Common.Data;
 using Wosad.Steel.AISC.Entities.Enums.FloorVibrations;
+using Wosad.Steel.Properties;
 
 namespace Wosad.Steel.AISC.Entities.FloorVibrations
 {
@@ -139,13 +142,18 @@ namespace Wosad.Steel.AISC.Entities.FloorVibrations
             }
           }
 
+
+        string floorVibrationOccupancyId;
+
         public double GetAccelerationLimit(string FloorVibrationOccupancyId)
         {
-            throw new NotImplementedException();
+            floorVibrationOccupancyId = FloorVibrationOccupancyId; //store value so that the retrieve function works 
+            return Limits.a_gRatio;
         }
 
         public double GetAccelerationRatio(double f_n, double W, double beta, string FloorVibrationOccupancyId )
         {
+            floorVibrationOccupancyId = FloorVibrationOccupancyId;   //store value so that the retrieve function works
             double P_o = GetP_oFromOccupancyId(FloorVibrationOccupancyId);
             double apTo_g = P_o * Math.Exp((-0.35 * f_n) / (beta * W));
             return apTo_g;
@@ -153,19 +161,138 @@ namespace Wosad.Steel.AISC.Entities.FloorVibrations
 
         private double GetP_oFromOccupancyId(string FloorVibrationOccupancyId)
         {
-            throw new NotImplementedException();
+            floorVibrationOccupancyId = FloorVibrationOccupancyId;   //store value so that the retrieve function works
+            return Limits.P_o;
         }
 
         public double GetCombinedModeFundamentalFrequency(double Delta_j, double Delta_g)
         {
             double g =386.0;
-           double f_n=0.18*Math.Sqrt(((g) / (Delta_j+Delta_g)));
+            double f_n=0.18*Math.Sqrt(((g) / (Delta_j+Delta_g)));
             return f_n;
         }
 
-        public double GetFloorModalDampingRatio(string FloorVibrationOccupancyId)
+        public double GetFloorModalDampingRatio(List<string> Components)
         {
-            throw new NotImplementedException();
+            #region Read Damping Data
+
+            var SampleValue = new { ComponentId = "", DampingRatio = 0.0}; // sample
+            var DampingVals = ListFactory.MakeList(SampleValue);
+
+            using (StringReader reader = new StringReader(Resources.AISC_DG11_ModalDamping))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] Vals = line.Split(',');
+                    if (Vals.Length == 2)
+                    {
+                        string _ComponentId = (string)Vals[0];
+                        double _DampingRatio = double.Parse((string)Vals[1]);
+                        
+                        DampingVals.Add
+                        (new
+                        {
+                            ComponentId = _ComponentId,
+                            DampingRatio = _DampingRatio,
+                        }
+
+                        );
+                    }
+                }
+
+            }
+
+            #endregion
+
+            
+            List<double> damping = new List<double>();
+            foreach (var CompId in Components)
+            {
+                if (DampingVals.Where(c => c.ComponentId ==CompId).Any())
+	                {
+		                        var betaEntry = DampingVals.First(o => o.ComponentId == CompId);
+                                damping.Add(betaEntry.DampingRatio);
+	                }
+                else
+                {
+                    throw new Exception("At least one occupancy type was not found.");
+                }
+
+            }
+            double betaTotal = damping.Sum();
+            return betaTotal;
+        }
+
+        private VibrationLimits limits;
+
+        private VibrationLimits Limits
+        {
+            get {
+
+                if (limits == null)
+                {
+                    limits = ReadLimitData(floorVibrationOccupancyId);
+                }
+                return limits; }
+
+        }
+
+        private VibrationLimits ReadLimitData(string FloorVibrationOccupancyId)
+        {
+            #region Read Limit Data
+
+            var SampleValue = new { OccId = "", ConstantForce = 0.0, Limit = 0.0}; // sample
+            var VibrationLimitVals = ListFactory.MakeList(SampleValue);
+
+            using (StringReader reader = new StringReader(Resources.AISC_DG11_VibrationLimits))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] Vals = line.Split(',');
+                    if (Vals.Length == 3)
+                    {
+                        string _OccId = (string)Vals[0];
+                        double _ConstantForce =double.Parse((string)Vals[1]);
+                        double _Limit = double.Parse((string)Vals[2]);
+                        VibrationLimitVals.Add
+                        (new
+                        {
+                            OccId = _OccId,
+                            ConstantForce = _ConstantForce,
+                            Limit = _Limit,
+                        }
+
+                        );
+                    }
+                }
+
+            }
+
+            #endregion
+
+            var VibrationLimEntryData = VibrationLimitVals.First(l => l.OccId == FloorVibrationOccupancyId);
+
+            if (VibrationLimEntryData!=null)
+            {
+                return new VibrationLimits()
+                {
+                    P_o = VibrationLimEntryData.ConstantForce,
+                    a_gRatio = VibrationLimEntryData.Limit
+                };
+            }
+            else
+            {
+                throw new Exception("Specified occupancy typenot found, please checkinput string.");
+            }
+        }
+        
+
+        class VibrationLimits
+        {
+            public double P_o { get; set; }
+            public double a_gRatio { get; set; }
         }
     }
 }

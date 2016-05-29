@@ -22,24 +22,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.AISC360v10;
+using Wosad.Steel.AISC.AISC360v10.Tension;
 
-namespace Wosad.Steel.Tests.AISC.AISC360v10.D_Tension
+namespace Wosad.Steel.Tests.AISC.AISC360v10.Tension
 {
     [TestFixture]
-    public class ShearLagFactorTests
+    public class EffectiveAreaTests : ToleranceTestBase
     {
 
-        /// <summary>
-        /// Design Guide 29. Example 5.1 
-        /// Page 46.
-        /// </summary>
-        [Test]
-        public void TensionShearLagFactorCase2ReturnsValue()
-        {
-            ShearLagFactor slf = new ShearLagFactor();
-            double U = slf.GetShearLagFactor(ShearLagCase.Case2,1.65,0.0,18.0,0,0);
-            Assert.AreEqual(0.908,Math.Round(U,3));
-        }
+ 
+    //    //AISC Design Examples 14
+    //    //EXAMPLE D.1 W-SHAPE TENSION MEMBER 
+    //    [Test]
+    //    public void EffectiveNetAreaOpenSectionReturnsValue()
+    //    {
+    //        TensionMember tm = new TensionMember();
+    //        double A_g = 6.16;
+    //        double A_connected = 2*5.27*0.4;
+    //        double A_e = tm.GetEffectiveNetArea(4.76,0,6.16,A_connected, false,false);
+    //        double U = A_e/A_g;
+    //        double refValue = 0.684;
+    //        double actualTolerance = EvaluateActualTolerance(U, refValue);
+    //        Assert.LessOrEqual(actualTolerance, tolerance);
+    //    }
+
+    //    public EffectiveAreaTests()
+    //    {
+    //        tolerance = 0.02; //5% can differ from rounding 
+    //    }
+
+    //    double tolerance;  
 
     }
 }

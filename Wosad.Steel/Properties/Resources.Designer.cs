@@ -61,6 +61,33 @@ namespace Wosad.Steel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SteelFraming,0.01
+        ///PaperOffice,0.02
+        ///.
+        /// </summary>
+        internal static string AISC_DG11_ModalDamping {
+            get {
+                return ResourceManager.GetString("AISC_DG11_ModalDamping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;OccupancyId&gt;&lt;P_o&gt;&lt;AccelerationLimit&gt;
+        ///Office,65,0.005
+        ///Residence,65,0.005
+        ///Chirch,65,0.005
+        ///Shopping mall,65,0.015
+        ///FootBridgeIndoor,92,0.05
+        ///FootBridgeOutdoor,92,0.05
+        ///.
+        /// </summary>
+        internal static string AISC_DG11_VibrationLimits {
+            get {
+                return ResourceManager.GetString("AISC_DG11_VibrationLimits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A36,36,58,0,10
         ///A36_32ksi,32,58,0,10
         ///A53GradeB,35,60

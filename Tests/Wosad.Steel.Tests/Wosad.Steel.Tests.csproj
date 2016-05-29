@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AISC\AISC360_10\B_General\Materials\MaterialPropertiesTests.cs" />
     <Compile Include="AISC\AISC360_10\D_Tension\EffectiveAreaTests.cs" />
+    <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactorTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\IBeam\F2_I_DoublySymmetricCompactTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHSS\F7-RectangularHssTests.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearUnstiffenedBeamTests.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldStrengthTests.cs" />
+    <Compile Include="AISC\FloorVibrations\FloorVibrationTests.cs" />
     <Compile Include="AISC\UFC\UFMGeneralTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA992ErrorTests.cs" />
     <Compile Include="Materials\SteelMaterialCatalogA572Tests.cs" />

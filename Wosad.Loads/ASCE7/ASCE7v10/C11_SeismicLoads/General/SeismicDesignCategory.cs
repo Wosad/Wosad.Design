@@ -50,53 +50,20 @@ namespace Wosad.Loads.ASCE.ASCE7_10.SeismicLoads
                 }
 
                 //High-seismic design category
-                #region S1 Governs High-Seismic
-                ICalcLogEntry S1Entry = new CalcLogEntry();
-                S1Entry.ValueName = "CategoryS1";
-                S1Entry.AddDependencyValue("S1", Math.Round(S1, 4));
-                S1Entry.AddDependencyValue("RiskCategory", RiskCategory.ToString());
-                S1Entry.Reference = "Seismic design rategory";
-                S1Entry.DescriptionReference = "/Templates/Loads/ASCE7_10/Seismic/SeismicSDC_S1Governs.docx";
-                S1Entry.FormulaID = "Table 11.6-1"; //reference to formula from code
-                S1Entry.VariableValue = CategoryS1.ToString(); 
-                #endregion
-
                 SDC = CategoryS1;
-                this.AddToLog(S1Entry);
             }
             else
             {
                 if ((int)CategorySDS >= (int)CategorySD1)
                 {
                     SDC = CategorySDS;
-                    
-                    #region SDSGoverns
-                    ICalcLogEntry SDSGovernsEntry = new CalcLogEntry();
-                    SDSGovernsEntry.ValueName = "CategorySDS";
-                    //SDSGovernsEntry.AddDependencyValue("CategorySDS", CategorySDS.ToString());
-                    //SDSGovernsEntry.AddDependencyValue("CategorySD1", CategorySD1.ToString());
-                    SDSGovernsEntry.Reference = "Seismic Design Category";
-                    SDSGovernsEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Seismic/SeismicSDC_SDSGoverns.docx";
-                    SDSGovernsEntry.FormulaID = null; //reference to formula from code
-                    SDSGovernsEntry.VariableValue = SDC.ToString();
-                    #endregion
-                    this.AddToLog(SDSGovernsEntry);
-                    
+                   
 
                 }
                 else
                 {
                     SDC = CategorySD1;
-                    #region SD1Governs
-                    ICalcLogEntry SD1GovernsEntry = new CalcLogEntry();
-                    SD1GovernsEntry.ValueName = "CategorySD1";
-                    //SD1GovernsEntry.AddDependencyValue("CategorySD1", CategorySD1.ToString());
-                    SD1GovernsEntry.Reference = "Seismic Design Category";
-                    SD1GovernsEntry.DescriptionReference = "/Templates/Loads/ASCE7_10/Seismic/SeismicSDC_SD1Governs.docx";
-                    SD1GovernsEntry.FormulaID = null; //reference to formula from code
-                    SD1GovernsEntry.VariableValue = SDC.ToString();
-                    #endregion
-                    this.AddToLog(SD1GovernsEntry);
+
                 }
 
             }
