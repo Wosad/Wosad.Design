@@ -40,7 +40,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.BasePlate
          [Test]
         public void BasePlateConcentricReturnsMinimumThickness()
         {
-            BasePlateIShape plate = new BasePlateIShape(16.5,18.5,12.7,12.2,990.0,3,36, 1224.0);
+            BasePlateIShape plate = new BasePlateIShape(16.5,18.5,12.7,12.2,3,36, 1224.0);
             BasePlateConcentricallyLoaded bp = new BasePlateConcentricallyLoaded(plate);
             double t_pMin = bp.GetMinimumThicknessConcentricLoad(990.0);
             double refValue = 1.51;
@@ -59,7 +59,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.BasePlate
          [Test]
          public void BasePlateTensionReturnsMinimumThickness()
          {
-             BasePlateIShape plate = new BasePlateIShape(1, 1, 1, 1, 1, 1,36, 1);
+             BasePlateIShape plate = new BasePlateIShape(1, 1, 1, 1, 1,36, 1);
              BasePlateTensionLoaded bp = new BasePlateTensionLoaded(plate);
              double t_pMin = bp.GetMinimumBasePlateBasedOnBoltTension(12.5, 2.0 - 0.55 / 2.0, 3.45);
              double refValue = 0.878;
@@ -78,7 +78,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.BasePlate
          [Test]
          public void BasePlateSmallMomentReturnsMinimumThicknessNS()
          {
-             BasePlateIShape plate = new BasePlateIShape(16.5, 18.5, 12.7, 12.2, 376, 4, 36, 0);
+             BasePlateIShape plate = new BasePlateIShape(16.5, 18.5, 12.7, 12.2, 4, 36, 0);
              BasePlateEccentricallyLoaded bp = new BasePlateEccentricallyLoaded(plate);
              double t_pMin = bp.GetMinimumThicknessEccentricLoadStrongAxis(376.0, 940, BendingAxis.Major, 8.0);
              double refValue = 1.09;
@@ -94,7 +94,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.BasePlate
          [Test]
          public void BasePlateSmallMomentReturnsMinimumThickness()
          {
-             BasePlateIShape plate = new BasePlateIShape(19, 19, 12.7, 12.2, 376, 4, 36, 0);
+             BasePlateIShape plate = new BasePlateIShape(19, 19, 12.7, 12.2, 4, 36, 0);
              BasePlateEccentricallyLoaded bp = new BasePlateEccentricallyLoaded(plate);
              double t_pMin = bp.GetMinimumThicknessEccentricLoadStrongAxis(376.0, 940, BendingAxis.Major, 8.0);
              double refValue = 1.36;
@@ -108,7 +108,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Connections.BasePlate
          [Test]
          public void BasePlateLargeMomentReturnsMinimumThickness()
          {
-             BasePlateIShape plate = new BasePlateIShape(22, 22, 12.7, 12.2, 376, 4, 36, 0);
+             BasePlateIShape plate = new BasePlateIShape(22, 22, 12.7, 12.2, 4, 36, 0);
              BasePlateEccentricallyLoaded bp = new BasePlateEccentricallyLoaded(plate);
              double t_pMin = bp.GetMinimumThicknessEccentricLoadStrongAxis(376.0, 3600, BendingAxis.Major, 9.5);
              double refValue = 2.26;

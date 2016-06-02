@@ -29,9 +29,9 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public class ChsCrossConnection : ChsNonOverlapConnection
+    public class ChsXConnection : ChsNonOverlapConnection
     {
-        public ChsCrossConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches,  ICalcLog CalcLog)
+        public ChsXConnection(HssTrussConnectionChord chord, List<HssTrussConnectionBranch> branches,  ICalcLog CalcLog)
             :base(chord, branches, CalcLog)
         {
 

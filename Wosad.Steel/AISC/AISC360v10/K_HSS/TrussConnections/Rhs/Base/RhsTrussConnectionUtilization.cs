@@ -25,7 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public abstract partial class RhsTrussConnection
+    public abstract partial class RhsTrussBranchConnection
     {
        //public double GetChordStressInteractionFactorQf()
        //{

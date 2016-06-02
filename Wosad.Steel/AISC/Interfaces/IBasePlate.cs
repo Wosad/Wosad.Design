@@ -8,7 +8,7 @@ namespace Wosad.Steel.AISC
 {
     public interface IBasePlate
     {
-        double GetLength();
+        double GetLength(double P_u);
         double Get_m();
         double Get_n();
         double  B_bp { get; set; }

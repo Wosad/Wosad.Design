@@ -10,25 +10,25 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
     {
 
         public BasePlateIShape(double B_bp, double N_bp, double d_c, double b_f,
-            double P_u, double f_c, double F_y, double A_2)
+             double f_c, double F_y, double A_2)
             :base(B_bp,N_bp, f_c, F_y, A_2)
 
         {
             this.d_c = d_c;
             this.b_f = b_f;
-            this.P_u = P_u;
+            //this.P_u = P_u;
         }
 
         double d_c;
         double b_f;
-        double P_u;
+        //double P_u;
        
 
-        public override double GetLength()
+        public override double GetLength(double P_u)
         {
             double m = Get_m();
             double n = Get_n();
-           double  lambda_n_prime = Get_lambda_n_prime();
+           double  lambda_n_prime = Get_lambda_n_prime(P_u);
 
            List<double> ls = new List<double>
            {
@@ -39,7 +39,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
            return l_max;
         }
 
-        private double Get_lambda_n_prime()
+        private double Get_lambda_n_prime(double P_u)
         {
             double phiP_p = GetphiP_p();
             double X=(((4.0*d_c*b_f) / (Math.Pow((d_c+b_f), 2))))*((P_u) / (phiP_p));

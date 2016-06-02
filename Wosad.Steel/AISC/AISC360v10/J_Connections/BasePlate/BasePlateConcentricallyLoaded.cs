@@ -24,7 +24,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
             double phi_b = 0.9;
             double B = Plate.B_bp;
             double N = Plate.N_bp;
-            double l = Plate.GetLength();
+            double l = Plate.GetLength(P_u);
             double t_minimum = l * Math.Sqrt(((2 * P_u) / (phi_b * F_y * B * N)));
             return t_minimum;
         }

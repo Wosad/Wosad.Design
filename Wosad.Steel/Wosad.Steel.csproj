@@ -77,6 +77,31 @@
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateIShape.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateRectangularHss.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateTypeBase.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussBranchConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnectionQf.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnectionShapeProps.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnectionUtilization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussGappedKConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussGappedOverlapConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussTConnection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussXConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussYConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\TypeGroups\RhsTYXTrussBranchConnection.cs" />
+    <Compile Include="AISC\Entities\Enums\BasePlateShape.cs" />
+    <Compile Include="AISC\Entities\Enums\BranchForceType.cs" />
     <Compile Include="AISC\Entities\Enums\FloorVibrations\AdjacentSpanWeightIncreaseType.cs" />
     <Compile Include="AISC\Entities\Enums\FloorVibrations\BeamFloorLocationType.cs" />
     <Compile Include="AISC\Entities\Composite\ModularRatio.cs" />
@@ -360,15 +385,15 @@
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsTransversePlateCrossAxial.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsTransversePlateTandXAxial.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsTransversePlateTeeAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsChordSlendernessRatio.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsChordStressInteractionQf.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsCrossConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsKConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsKConnectionFactorQg.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsKConnectionTensionCompression.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsChordSlendernessRatio.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsChordStressInteractionQf.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsXConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsKConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsKConnectionFactorQg.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsKConnectionTensionCompression.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsKGappedConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsKOverlapConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsNonOverlapConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsNonOverlapConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTYConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssBranchAvailableStrength.cs" />
@@ -378,8 +403,6 @@
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssTrussConnectionBranch.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssTrussConnectionChord.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssUtilizationRatioU.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussConnectionQf.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltGroupGeneral.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltHoleDeformationType.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltPoint.cs" />

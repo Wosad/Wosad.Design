@@ -16,7 +16,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
         }
 
         public double D { get; set; }
-        public override double GetLength()
+        public override double GetLength(double P_u=0)
         {
             return Get_m();
         }

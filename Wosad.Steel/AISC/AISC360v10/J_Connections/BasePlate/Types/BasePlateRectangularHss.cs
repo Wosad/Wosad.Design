@@ -20,7 +20,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
          public double B { get; set; }
 
 
-        public override double GetLength()
+        public override double GetLength(double P_u=0)
         {
 
             double m = Get_m();

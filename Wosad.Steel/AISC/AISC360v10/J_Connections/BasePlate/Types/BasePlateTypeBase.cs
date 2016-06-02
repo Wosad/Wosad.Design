@@ -48,7 +48,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.BasePlate
                 _A_2 = value; }
         }
         
-        public abstract double GetLength();
+        public abstract double GetLength(double P_u);
 
         public double B_bp { get; set; }
 
