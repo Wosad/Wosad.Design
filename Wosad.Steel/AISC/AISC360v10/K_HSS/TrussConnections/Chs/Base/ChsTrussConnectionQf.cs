@@ -18,27 +18,42 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
+using Wosad.Steel.AISC.Entities;
 using Wosad.Steel.AISC.Interfaces;
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public abstract class HssConnectionLoadCaseData
+    public abstract partial class ChsTrussBranchConnection: HssTrussConnection, IHssTrussBranchConnection
     {
-        public HssConnectionLoadCaseData(string LoadCaseName)
+        private double _Q_f;
+        BranchForceType ChordForceType { get; set; }
+
+        public double Q_f
         {
-            this.loadCaseName = LoadCaseName;
+            get {
+                _Q_f = GetQ_f();
+                return _Q_f; }
+            set { _Q_f = value; }
         }
 
-        private string loadCaseName;
-
-        public string LoadCaseName
+        private double GetQ_f()
         {
-            get { return loadCaseName; }
-            set { loadCaseName = value; }
+            if (IsTensionChord == true)
+            {
+                return 1.0;
+            }
+            else
+            {
+                return GetQ_fInCompression();
+            }
         }
+
+        protected abstract double GetQ_fInCompression();
+
 
         
         

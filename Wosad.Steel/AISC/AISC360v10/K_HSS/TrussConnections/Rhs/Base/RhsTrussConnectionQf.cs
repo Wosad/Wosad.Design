@@ -21,27 +21,29 @@ using System.Linq;
 using System.Text;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 using Wosad.Steel.AISC.Entities;
 using Wosad.Steel.AISC.Interfaces;
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public abstract partial class RhsTrussBranchConnection
+    public abstract partial class RhsTrussBranchConnection: HssTrussConnection, IHssTrussBranchConnection
     {
         private double _Q_f;
+        BranchForceType ChordForceType { get; set; }
 
         public double Q_f
         {
             get {
                 _Q_f = GetQ_f();
+                _Q_f = _Q_f > 1.0 ? 1.0 : Q_f;
                 return _Q_f; }
             set { _Q_f = value; }
         }
 
         private double GetQ_f()
         {
-            BranchForceType ForceType = ForceTypeMain;
-            if (ForceType == BranchForceType.Tension)
+            if (IsTensionChord == true)
             {
                 return 1.0;
             }
@@ -53,23 +55,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         protected abstract double GetQ_fInCompression();
 
-        private double _U;
 
-        public double U
-        {
-            get {
-                _U = GetU();
-                return _U; }
-            set { _U = value; }
-        }
-
-        private double GetU()
-        {
-            double A_g = Chord.Section.A;
-            double S = Math.Min(Chord.Section.S_xBot, Chord.Section.S_xTop);
-            double U = (((P_uChord) / (F_y*A_g)) + ((M_uChord) / (F_y * S)));
-            return U;
-        }
         
         
     }

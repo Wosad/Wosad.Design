@@ -22,8 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
- 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
@@ -36,20 +34,16 @@ using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
 
-    public abstract partial class RhsTrussBranchConnection : HssTrussConnection,IHssTrussBranchConnection
+    public abstract partial class ChsTrussBranchConnection : HssTrussConnection,IHssTrussBranchConnection
     {
 
-        public RhsTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain, BranchForceType ForceTypeMain, 
+        public ChsTrussBranchConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, BranchForceType ForceTypeMain, 
             SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord): base(IsTensionChord,P_uChord,M_uChord)
         {
             this.Chord = Chord;
             this.MainBranch       =MainBranch   ;
-            this.thetaMain        =thetaMain    ;
-            this.SecondBranch = SecondBranch;
-            this.thetaSecond = thetaSecond;
-            this.ForceTypeMain = ForceTypeMain;
-            this.ForceTypeSecond = ForceTypeSecond;
+            this.thetaMain        =thetaMain    ;             
         }
 
 
@@ -81,15 +75,14 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             return new SteelLimitStateValue(-1, false);
         }
 
-        protected SteelRhsSection Chord             { get; set; }
-        protected  SteelRhsSection MainBranch     {get; set;}
-        protected  double thetaMain               {get; set;}
-        protected  SteelRhsSection SecondBranch   {get; set;}
-        protected  double thetaSecond              { get; set; }
-        protected BranchForceType ForceTypeMain   {get; set;}
+      protected SteelChsSection Chord { get; set; }
+       protected  SteelChsSection MainBranch     {get; set;}
+       protected  double thetaMain               {get; set;}
+       protected  SteelChsSection SecondBranch   {get; set;}
+       protected  double thetaSecond              { get; set; }
+        protected BranchForceType ForceTypeMain      {get; set;}
         protected BranchForceType ForceTypeSecond { get; set; }
 
     }
-
 
 }

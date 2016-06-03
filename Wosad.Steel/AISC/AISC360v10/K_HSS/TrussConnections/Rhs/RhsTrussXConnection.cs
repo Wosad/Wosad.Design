@@ -33,32 +33,49 @@ using Wosad.Steel.AISC.Entities;
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
 
-    public abstract partial class RhsTrussXConnection : RhsTYXTrussBranchConnection
+    public  partial class RhsTrussXConnection : RhsTYXTrussBranchConnection
     {
 
 
         public RhsTrussXConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, double P_uChord, double M_uChord)
-            : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, P_uChord, M_uChord)
+            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            double P_uChord, double M_uChord)
+            : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
+            P_uChord, M_uChord)
         {
         }
 
-
+        /// <summary>
+        /// K2-11
+        /// </summary>
+        /// <returns></returns>
         public override SteelLimitStateValue GetChordSidewallLocalCripplingStrength()
         {
 
-
-
                 double P_n = 0.0;
-                double phi = 0.75;
+                double phi = 0.9;
 
                 if (beta == 1.0)
                 {
-                    if (ForceTypeMain == BranchForceType.Compression && ForceTypeMain == BranchForceType.Reversible)
+                    if (ForceTypeMain == BranchForceType.Compression || ForceTypeMain == BranchForceType.Reversible)
                     {
+                        //Note: per AISC DG24 example 8.3 Page 109
+                        //if both chords are in compression for CROSS connection
+                        //P_n isdividedby 2 (for 2 branches)
+
+                        double NPlanes = 1;
+                        if (ForceTypeMain == BranchForceType.Compression || ForceTypeMain == BranchForceType.Reversible)
+                        {
+                            if (ForceTypeSecond == BranchForceType.Compression || ForceTypeSecond == BranchForceType.Reversible)
+                            {
+                                NPlanes = 2;
+                            }
+                        }
+
                         P_n = (((((48.0 * Math.Pow(t, 3)) / (H - 3.0 * t))) * Math.Sqrt(E * F_y) * Q_f) / (sin_theta));
+                        P_n = P_n / NPlanes; //to get "per branch" force
                         double phiP_n = phi * P_n;
-                        return new SteelLimitStateValue(P_n, true);
+                        return new SteelLimitStateValue(phiP_n, true);
                     }
                     else
                     {

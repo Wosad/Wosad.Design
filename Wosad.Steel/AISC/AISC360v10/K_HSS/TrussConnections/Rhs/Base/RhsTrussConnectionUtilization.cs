@@ -18,18 +18,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 using Wosad.Steel.AISC.Interfaces;
 
-namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
+namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public abstract partial class RhsTrussBranchConnection
-    {
-       //public double GetChordStressInteractionFactorQf()
-       //{
 
-       //}
+    public abstract partial class RhsTrussBranchConnection:  HssTrussConnection,IHssTrussBranchConnection
+    {
+
+        protected override double GetSectionModulus()
+        {
+            return Math.Min(Chord.Section.S_xBot, Chord.Section.S_xTop);
+        }
+
+        protected override double GetChordArea()
+        {
+            return Chord.Section.A;
+
+        }
     }
 }

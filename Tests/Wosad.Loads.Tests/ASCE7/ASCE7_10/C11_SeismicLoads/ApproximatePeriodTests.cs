@@ -38,19 +38,19 @@ namespace Wosad.Loads.Tests.ASCE7_10.SeismicLoads
 
         double tolerance;
 
-        [Test]
-        public void CoefficientForUpperBoundReturnsValue()
-        {
-            double S_D1 = 0.01;
-            CalcLog log = new CalcLog();
-            Building building = new Building(null, log);
-            double Cu = building.GetCoefficientForUpperBoundOnCalculatedPeriod(S_D1);
+        //[Test]
+        //public void CoefficientForUpperBoundReturnsValue()
+        //{
+        //    double S_D1 = 0.01;
+        //    CalcLog log = new CalcLog();
+        //    Building building = new Building(null, log);
+        //    double Cu = building.GetCoefficientForUpperBoundOnCalculatedPeriod(S_D1);
 
-            double refValue = 1.4; 
-            double actualTolerance = EvaluateActualTolerance(Cu,refValue);
+        //    double refValue = 1.4; 
+        //    double actualTolerance = EvaluateActualTolerance(Cu,refValue);
 
-            Assert.LessOrEqual(actualTolerance, tolerance);
-        }
+        //    Assert.LessOrEqual(actualTolerance, tolerance);
+        //}
 
       
 

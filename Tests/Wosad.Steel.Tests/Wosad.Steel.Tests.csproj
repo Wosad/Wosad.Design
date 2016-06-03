@@ -79,6 +79,8 @@
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupConcentricTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldGroupInstantaneousCenterTests.cs" />
     <Compile Include="AISC\AISC360_10\J_Connections\Weld\WeldStrengthTests.cs" />
+    <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\RhsKconnectionTests.cs" />
+    <Compile Include="AISC\AISC360_10\K_HSS\TrussConnections\RhsXconnectionTests.cs" />
     <Compile Include="AISC\FloorVibrations\FloorVibrationTests.cs" />
     <Compile Include="AISC\UFC\UFMGeneralTests.cs" />
     <Compile Include="AISC\Materials\SteelMaterialCatalogA992ErrorTests.cs" />
@@ -104,7 +106,6 @@
     <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />
-    <Folder Include="AISC\AISC360_10\K_HSS\TrussConnections\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

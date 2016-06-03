@@ -66,7 +66,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             return P;
         }
 
-        internal double GetTensionBranchCapacity(HssKConnectionLoadCaseData loadCase, double D, double Qg, double Qf)
+        internal double GetTensionBranchCapacity( double D, double Qg, double Qf)
         {
             HssTrussConnectionBranch tensionBranch = loadCase.TensionBranch;
             double P_ChordPlastification = CheckChordPlastificationForTensionBranch(loadCase.LoadCaseName, D, Qf, Qg);

@@ -33,13 +33,15 @@ using Wosad.Steel.AISC.Entities;
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
 
-    public abstract partial class RhsTrussYConnection : RhsTYXTrussBranchConnection
+    public  partial class RhsTrussYConnection : RhsTYXTrussBranchConnection
     {
         //no overrides compared to base RhsTYXTrussConnection class
 
         public RhsTrussYConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, double P_uChord, double M_uChord)
-            : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, P_uChord, M_uChord)
+            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            double P_uChord, double M_uChord)
+            : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
+            P_uChord, M_uChord)
         {
 
         }

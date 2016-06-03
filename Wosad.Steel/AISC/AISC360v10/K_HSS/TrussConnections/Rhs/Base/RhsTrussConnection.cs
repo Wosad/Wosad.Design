@@ -22,19 +22,18 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
- 
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
 
-    public abstract partial class RhsTrussConnection
+    public abstract partial class RhsTrussConnection 
     {
 
         public RhsTrussConnection(SteelRhsSection Chord, SteelRhsSection Branch_i, double theta_i, SteelRhsSection Branch_j, double theta_j)

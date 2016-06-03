@@ -31,14 +31,14 @@ namespace Wosad.Common.Section.SectionTypes
     {
 
 
-        public SectionTube(string Name, double H, double B, double t, double t_des,
+        public SectionTube(string Name, double H, double B, double t, double t_des=-1,
             double CornerRadiusOutside = -1)
             : base(Name, H, B, t_des, t_des)
         {
             this.H = H;
             this.B = B;
-            this.WallThickness = t;
-            this.t = t_des;
+            this.t_nom = t;
+            this._t_des = t_des;
             if (CornerRadiusOutside == -1)
             {
                 this.r_c = 1.5 * t;
@@ -78,21 +78,27 @@ namespace Wosad.Common.Section.SectionTypes
             set { b = value; }
         }
 
-        private double t_nom;
+        private double _t_nom;
 
-        public double WallThickness
+        public double t_nom
         {
-            get { return t_nom; }
-            set { t_nom = value; }
+            get { return _t_nom; }
+            set { _t_nom = value; }
         }
 
 
-        private double t;
+        private double _t_des;
 
         public double t_des
         {
-            get { return t; }
-            set { t = value; }
+            get {
+                if (_t_des ==-1)
+                {
+                    _t_des = 0.93 * t_nom;
+                }
+
+                return _t_des; }
+            set { _t_des = value; }
         }
         
         #endregion

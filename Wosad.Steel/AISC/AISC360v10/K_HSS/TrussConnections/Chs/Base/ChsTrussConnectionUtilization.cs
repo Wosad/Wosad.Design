@@ -18,26 +18,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text; 
-using Wosad.Common.Entities; 
-using Wosad.Common.Section.Interfaces; 
+using System.Text;
+using Wosad.Common.Entities;
+using Wosad.Common.Section.Interfaces;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 using Wosad.Steel.AISC.Interfaces;
- using Wosad.Common.CalculationLogger.Interfaces; 
-using Wosad.Steel.AISC.Interfaces;
-using Wosad.Steel.AISC.SteelEntities.Members;
-using Wosad.Steel.AISC.SteelEntities.Sections;
 
-
-namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
+namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public class HssTrussConnectionChord : SteelMemberBase
-    {
-        public HssTrussConnectionChord(SteelChsSection Section, ICalcLog CalcLog)
-            : base(Section as ISteelSection, CalcLog)
-        {
 
+    public abstract partial class ChsTrussBranchConnection:  HssTrussConnection,IHssTrussBranchConnection
+    {
+        protected override double GetSectionModulus()
+        {
+            throw new NotImplementedException();
         }
 
+        protected override double GetChordArea()
+        {
+            throw new NotImplementedException();
+        }
     }
-
 }
