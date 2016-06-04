@@ -36,10 +36,10 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class RhsTYXTrussBranchConnection: RhsTrussBranchConnection
     {
 
-        public RhsTYXTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+        public RhsTYXTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection BranchMain, double thetaMain,
+            SteelRhsSection BranchSecondary, double thetaSecondary, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord)
-            : base( Chord,  MainBranch,  thetaMain, ForceTypeMain,  SecondBranch,  thetaSecond, ForceTypeSecond, IsTensionChord,  P_uChord,  M_uChord)
+            : base( Chord,  BranchMain,  thetaMain, ForceTypeMain,  BranchSecondary,  thetaSecondary, ForceTypeSecond, IsTensionChord,  P_uChord,  M_uChord)
         {
 
         }

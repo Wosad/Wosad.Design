@@ -82,6 +82,7 @@
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionShapeProps.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionUtilization.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Common\HssTrussChordUtilization.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssTrussConnectionFactory.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussBranchConnection.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -97,6 +98,9 @@
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnectionUtilization.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussNConnection.cs" />
+    <Compile Include="AISC\Entities\Enums\HssTrussConnectionClassification.cs" />
+    <Compile Include="AISC\Entities\Enums\HssTrussConnectionMemberType.cs" />
     <Compile Include="AISC\Interfaces\IRhsTrussBranchConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussGappedKConnection.cs">
       <SubType>Code</SubType>

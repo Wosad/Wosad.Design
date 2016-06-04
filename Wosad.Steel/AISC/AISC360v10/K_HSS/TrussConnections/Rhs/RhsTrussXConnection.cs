@@ -43,6 +43,15 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
             P_uChord, M_uChord)
         {
+            if (ForceTypeMain == BranchForceType.Tension && ForceTypeSecond != BranchForceType.Tension )
+            {
+                throw new Exception("Specify the same type of force for both branches or switch to K connection");
+            }
+            if (ForceTypeSecond == BranchForceType.Tension && ForceTypeMain != BranchForceType.Tension)
+            {
+                throw new Exception("Specify the same type of force for both branches or switch to K connection");
+            }
+
         }
 
         /// <summary>

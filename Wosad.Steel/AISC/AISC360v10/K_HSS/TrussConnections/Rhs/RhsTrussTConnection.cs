@@ -42,6 +42,18 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
             P_uChord,  M_uChord)
         {
+            if (thetaMain!=90)
+            {
+                throw new Exception("Please specify angles theta_Main and theta_Second as 90 degress for T connection");
+            }
+            if (thetaSecond!=thetaMain)
+            {
+                throw new Exception("Please specify same angles theta_Main and theta_Second as 90 degress for T connection");
+            }
+            if (MainBranch.Section.B != SecondBranch.Section.B || MainBranch.Section.H != SecondBranch.Section.H)
+            {
+                throw new Exception("Please specify same values for main and secondary branch for T connection.");
+            }
 
         }
     }
