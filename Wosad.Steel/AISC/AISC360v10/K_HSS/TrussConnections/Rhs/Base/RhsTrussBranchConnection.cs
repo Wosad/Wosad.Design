@@ -39,8 +39,8 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class RhsTrussBranchConnection : HssTrussConnection,IHssTrussBranchConnection
     {
 
-        public RhsTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain, BranchForceType ForceTypeMain, 
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeSecond, bool IsTensionChord,
+        public RhsTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
+            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord): base(IsTensionChord,P_uChord,M_uChord)
         {
             this.Chord = Chord;
@@ -53,7 +53,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         }
 
 
-        public virtual SteelLimitStateValue GetChordWallPlastificationStrength()
+        public virtual SteelLimitStateValue GetChordWallPlastificationStrength(bool IsMainBranch)
         {
             return new SteelLimitStateValue(-1, false);
         }
@@ -86,8 +86,8 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         protected  double thetaMain               {get; set;}
         protected  SteelRhsSection SecondBranch   {get; set;}
         protected  double thetaSecond              { get; set; }
-        protected BranchForceType ForceTypeMain   {get; set;}
-        protected BranchForceType ForceTypeSecond { get; set; }
+        protected AxialForceType ForceTypeMain   {get; set;}
+        protected AxialForceType ForceTypeSecond { get; set; }
 
     }
 

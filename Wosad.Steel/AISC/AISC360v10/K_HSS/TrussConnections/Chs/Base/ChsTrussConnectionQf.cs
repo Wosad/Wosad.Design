@@ -30,7 +30,6 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class ChsTrussBranchConnection: HssTrussConnection, IHssTrussBranchConnection
     {
         private double _Q_f;
-        BranchForceType ChordForceType { get; set; }
 
         public double Q_f
         {
@@ -52,7 +51,11 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             }
         }
 
-        protected abstract double GetQ_fInCompression();
+        protected double GetQ_fInCompression()
+        {
+            double Q_f = 1 - 0.3 * U * (1 + U);
+            return Q_f;
+        }
 
 
         

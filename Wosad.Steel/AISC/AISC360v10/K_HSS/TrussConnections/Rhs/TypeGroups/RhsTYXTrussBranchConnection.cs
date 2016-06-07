@@ -37,7 +37,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     {
 
         public RhsTYXTrussBranchConnection(SteelRhsSection Chord, SteelRhsSection BranchMain, double thetaMain,
-            SteelRhsSection BranchSecondary, double thetaSecondary, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            SteelRhsSection BranchSecondary, double thetaSecondary, AxialForceType ForceTypeMain, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord)
             : base( Chord,  BranchMain,  thetaMain, ForceTypeMain,  BranchSecondary,  thetaSecondary, ForceTypeSecond, IsTensionChord,  P_uChord,  M_uChord)
         {
@@ -49,7 +49,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         /// K2-7
         /// </summary>
         /// <returns></returns>
-        public override SteelLimitStateValue GetChordWallPlastificationStrength()
+        public override SteelLimitStateValue GetChordWallPlastificationStrength(bool IsMainBranch)
         {
             double P_n = 0.0;
             double phi = 1.0;
@@ -130,7 +130,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
             if (beta == 1.0)
             {
-                if (ForceTypeMain == BranchForceType.Compression && ForceTypeMain == BranchForceType.Reversible)
+                if (ForceTypeMain == AxialForceType.Compression && ForceTypeMain == AxialForceType.Reversible)
                 {
                     P_n = ((1.6 * Math.Pow(t, 2) * (1 + ((3 * l_b) / (H - 3 * t))) * Math.Sqrt(E * F_y) * Q_f) / (sin_theta));
                     double phiP_n = phi * P_n;

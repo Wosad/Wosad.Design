@@ -85,7 +85,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         private double Get_gamma()
         {
-            throw new NotImplementedException();
+            return D / (2.0 * t);
         }
 
 
@@ -117,8 +117,40 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         }
 
 
+        private double _D;
+
+        public double D
+        {
+            get {
+                _D = Chord.Section.D;
+                return _D; }
+            set { _D = value; }
+        }
 
 
+        private double _D_bComp;
+
+        public double D_bComp
+        {
+            get {
+                _D_bComp = MainBranch.Section.D;
+                return _D_bComp; }
+            set { _D_bComp = value; }
+        }
+
+        //private double _t_b;
+
+        //public double t_b
+        //{
+        //    get
+        //    {
+
+        //        SteelChsSection br = getBranch();
+        //        _t_b = br.Section.t_des;
+        //        return _t_b;
+        //    }
+        //    set { _t_b = value; }
+        //}
 
 
         private double _t_b;
@@ -134,22 +166,6 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         }
 
 
-        private double _beta_eop;
-
-        public double beta_eop
-        {
-            get {
-                _beta_eop = Get_beta_eop();
-                return _beta_eop; }
-            set { _beta_eop = value; }
-        }
-        
-        public double Get_beta_eop()
-        {
-            double beta_eop = ((5 * beta) / (gamma));
-            beta_eop = beta_eop > beta ? beta : beta_eop;
-            return beta_eop;
-        }
 
         private double _E;
 

@@ -77,10 +77,18 @@
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateIShape.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateRectangularHss.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateTypeBase.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussBranchPunching.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussBranchConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionQf.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionShapeProps.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionUtilization.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussOverlapConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussTConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussXConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussYConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\ChsTrussGappedKConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\TypeGroups\ChsTrussKConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\TypeGroups\ChsTrussTYConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Common\HssTrussChordUtilization.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\HssTrussConnectionFactory.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussBranchConnection.cs">
@@ -98,7 +106,6 @@
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\Base\RhsTrussConnectionUtilization.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussNConnection.cs" />
     <Compile Include="AISC\Entities\Enums\HssTrussConnectionClassification.cs" />
     <Compile Include="AISC\Entities\Enums\HssTrussConnectionMemberType.cs" />
     <Compile Include="AISC\Interfaces\IRhsTrussBranchConnection.cs" />
@@ -113,7 +120,7 @@
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussYConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\TypeGroups\RhsTYXTrussBranchConnection.cs" />
     <Compile Include="AISC\Entities\Enums\BasePlateShape.cs" />
-    <Compile Include="AISC\Entities\Enums\BranchForceType.cs" />
+    <Compile Include="AISC\Entities\Enums\AxialForceType.cs" />
     <Compile Include="AISC\Entities\Enums\FloorVibrations\AdjacentSpanWeightIncreaseType.cs" />
     <Compile Include="AISC\Entities\Enums\FloorVibrations\BeamFloorLocationType.cs" />
     <Compile Include="AISC\Entities\Composite\ModularRatio.cs" />

@@ -1,5 +1,5 @@
 #region Copyright
-   /*Copyright (C) 2015 Wosad Inc
+/*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -21,23 +21,43 @@ using System.Linq;
 using System.Text;
 using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
-using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.CalculationLogger.Interfaces;
+using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.Entities;
+using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
+
 
 namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
 
-    public abstract partial class ChsTrussBranchConnection:  HssTrussConnection,IHssTrussBranchConnection
+    public abstract partial class ChsTrussBranchConnection : HssTrussConnection, IHssTrussBranchConnection
     {
-        protected override double GetSectionModulus()
+
+
+
+
+        /// <summary>
+        /// K2-1
+        /// </summary>
+        /// <returns></returns>
+        protected virtual SteelLimitStateValue GetBranchPunchingShearStrength()
         {
-            return Math.Min(Chord.Section.S_xBot, Chord.Section.S_xTop);
+
+            double P_n = 0.0;
+            double phi = 0.90;
+
+
+            throw new NotImplementedException();
+
+            double phiP_n = phi * P_n;
+            return new SteelLimitStateValue(phiP_n, true);
         }
 
-        protected override double GetChordArea()
-        {
-            return Chord.Section.A;
 
-        }
     }
+
 }

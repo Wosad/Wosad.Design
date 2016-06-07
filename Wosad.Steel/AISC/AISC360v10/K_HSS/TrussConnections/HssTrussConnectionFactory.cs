@@ -16,8 +16,8 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         public IHssTrussBranchConnection GetConnection(HssTrussConnectionMemberType MemberType,
             HssTrussConnectionClassification Classification, ISectionHollow ChordSection, ISectionHollow MainBranchSection,
             ISectionHollow SecondaryBranchSection, double F_yChord, double F_yBranch,
-            double thetaMainBranch, double thetaSecondaryBranch, BranchForceType ForceTypeMainBranch, 
-            BranchForceType ForceTypeSecondaryBranch, bool IsTensionChord,
+            double thetaMainBranch, double thetaSecondaryBranch, AxialForceType ForceTypeMainBranch, 
+            AxialForceType ForceTypeSecondaryBranch, bool IsTensionChord,
             double P_uChord, double M_uChord,
             double O_v=0)
         {

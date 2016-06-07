@@ -12,6 +12,6 @@ namespace Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections
         SteelLimitStateValue GetChordSidewallLocalCripplingStrength();
         SteelLimitStateValue GetChordSidewallLocalYieldingStrength();
         SteelLimitStateValue GetChordSidewallShearStrength();
-        SteelLimitStateValue GetChordWallPlastificationStrength();
+        SteelLimitStateValue GetChordWallPlastificationStrength(bool IsMainBranch);
     }
 }

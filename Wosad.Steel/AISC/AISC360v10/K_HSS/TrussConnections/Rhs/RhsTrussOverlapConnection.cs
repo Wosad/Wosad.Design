@@ -36,7 +36,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public  partial class RhsTrussOverlappedConnection : RhsTrussBranchConnection
     {
         public RhsTrussOverlappedConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeMain, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord,
             double O_v)
             : base(Chord, MainBranch, thetaMain, ForceTypeMain, SecondBranch, thetaSecond, ForceTypeSecond, IsTensionChord,  P_uChord,  M_uChord)

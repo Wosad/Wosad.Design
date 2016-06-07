@@ -27,7 +27,7 @@ namespace Wosad.Steel.Tests.AISC.AISC36010.HSSTrussConnections
         {
             CreateElements();
             IHssTrussBranchConnection con = new RhsTrussXConnection(Chord, Branch, 35, Branch, 35,
-                BranchForceType.Compression, BranchForceType.Compression, true, 0, 0
+                AxialForceType.Compression, AxialForceType.Compression, true, 0, 0
                 );
 
             double phiP_n = con.GetChordSidewallLocalYieldingStrength().Value;
@@ -45,7 +45,7 @@ namespace Wosad.Steel.Tests.AISC.AISC36010.HSSTrussConnections
         {
             CreateElements();
             IHssTrussBranchConnection con = new RhsTrussXConnection(Chord, Branch, 35, Branch, 35,
-                BranchForceType.Compression, BranchForceType.Compression, true, 0, 0
+                AxialForceType.Compression, AxialForceType.Compression, true, 0, 0
                 );
 
             double phiP_n = con.GetChordSidewallLocalCripplingStrength().Value;
@@ -63,7 +63,7 @@ namespace Wosad.Steel.Tests.AISC.AISC36010.HSSTrussConnections
         {
             CreateElements();
             IHssTrussBranchConnection con = new RhsTrussXConnection(Chord, Branch, 35, Branch, 35,
-                BranchForceType.Compression, BranchForceType.Compression, true, 0, 0
+                AxialForceType.Compression, AxialForceType.Compression, true, 0, 0
                 );
 
             double phiP_n = con.GetBranchYieldingFromUnevenLoadDistributionStrength(true).Value;

@@ -1,3 +1,5 @@
+
+
 #region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
@@ -37,8 +39,8 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class ChsTrussBranchConnection : HssTrussConnection,IHssTrussBranchConnection
     {
 
-        public ChsTrussBranchConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, BranchForceType ForceTypeMain, 
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeSecond, bool IsTensionChord,
+        public ChsTrussBranchConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
+            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord): base(IsTensionChord,P_uChord,M_uChord)
         {
             this.Chord = Chord;
@@ -47,7 +49,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         }
 
 
-        public virtual SteelLimitStateValue GetChordWallPlastificationStrength()
+        public virtual SteelLimitStateValue GetChordWallPlastificationStrength(bool IsMainBranch)
         {
             return new SteelLimitStateValue(-1, false);
         }
@@ -67,7 +69,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         public virtual SteelLimitStateValue GetBranchPunchingStrength()
         {
-            return new SteelLimitStateValue(-1, false);
+            return GetBranchPunchingShearStrength();
         }
 
         public virtual SteelLimitStateValue GetBranchYieldingFromUnevenLoadDistributionStrength(bool IsMainBranch)
@@ -80,9 +82,10 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
        protected  double thetaMain               {get; set;}
        protected  SteelChsSection SecondBranch   {get; set;}
        protected  double thetaSecond              { get; set; }
-        protected BranchForceType ForceTypeMain      {get; set;}
-        protected BranchForceType ForceTypeSecond { get; set; }
+        protected AxialForceType ForceTypeMain      {get; set;}
+        protected AxialForceType ForceTypeSecond { get; set; }
 
     }
 
 }
+

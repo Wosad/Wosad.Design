@@ -38,16 +38,16 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
 
         public RhsTrussXConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeMain, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord)
             : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
             P_uChord, M_uChord)
         {
-            if (ForceTypeMain == BranchForceType.Tension && ForceTypeSecond != BranchForceType.Tension )
+            if (ForceTypeMain == AxialForceType.Tension && ForceTypeSecond != AxialForceType.Tension )
             {
                 throw new Exception("Specify the same type of force for both branches or switch to K connection");
             }
-            if (ForceTypeSecond == BranchForceType.Tension && ForceTypeMain != BranchForceType.Tension)
+            if (ForceTypeSecond == AxialForceType.Tension && ForceTypeMain != AxialForceType.Tension)
             {
                 throw new Exception("Specify the same type of force for both branches or switch to K connection");
             }
@@ -66,16 +66,16 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
                 if (beta == 1.0)
                 {
-                    if (ForceTypeMain == BranchForceType.Compression || ForceTypeMain == BranchForceType.Reversible)
+                    if (ForceTypeMain == AxialForceType.Compression || ForceTypeMain == AxialForceType.Reversible)
                     {
                         //Note: per AISC DG24 example 8.3 Page 109
                         //if both chords are in compression for CROSS connection
                         //P_n isdividedby 2 (for 2 branches)
 
                         double NPlanes = 1;
-                        if (ForceTypeMain == BranchForceType.Compression || ForceTypeMain == BranchForceType.Reversible)
+                        if (ForceTypeMain == AxialForceType.Compression || ForceTypeMain == AxialForceType.Reversible)
                         {
-                            if (ForceTypeSecond == BranchForceType.Compression || ForceTypeSecond == BranchForceType.Reversible)
+                            if (ForceTypeSecond == AxialForceType.Compression || ForceTypeSecond == AxialForceType.Reversible)
                             {
                                 NPlanes = 2;
                             }

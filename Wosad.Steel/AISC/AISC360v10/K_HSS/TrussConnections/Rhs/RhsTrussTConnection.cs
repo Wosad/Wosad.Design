@@ -37,7 +37,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     {
         //no overrides compared to base RhsTYXTrussConnection class
         public RhsTrussTConnection(SteelRhsSection Chord, SteelRhsSection MainBranch, double thetaMain,
-            SteelRhsSection SecondBranch, double thetaSecond, BranchForceType ForceTypeMain, BranchForceType ForceTypeSecond, bool IsTensionChord,
+            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeMain, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord)
             : base(Chord, MainBranch, thetaMain, SecondBranch, thetaSecond, ForceTypeMain, ForceTypeSecond, IsTensionChord,
             P_uChord,  M_uChord)

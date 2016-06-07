@@ -39,7 +39,7 @@ namespace Wosad.Steel.Tests.AISC.AISC36010.HSSTrussConnections
 
             IHssTrussBranchConnection con = new RhsTrussOverlappedConnection(Chord, MainBranch, 45, 
                 SecondaryBranch, 45,
-                BranchForceType.Compression, BranchForceType.Tension, false, 0, 0, O_v
+                AxialForceType.Compression, AxialForceType.Tension, false, 0, 0, O_v
                 );
 
             double phiP_nMain = con.GetBranchYieldingFromUnevenLoadDistributionStrength(true).Value;
@@ -74,10 +74,10 @@ namespace Wosad.Steel.Tests.AISC.AISC36010.HSSTrussConnections
 
             IHssTrussBranchConnection con = new RhsTrussGappedKConnection(Chord, MainBranch, 45,
                 SecondaryBranch, 45,
-                BranchForceType.Compression, BranchForceType.Tension, false, 430, 0
+                AxialForceType.Compression, AxialForceType.Tension, false, 430, 0
                 );
             //Note: not clear in the design guide why moment is ignored in chord utilization calculation
-            double phiP_nMain = con.GetChordWallPlastificationStrength().Value;
+            double phiP_nMain = con.GetChordWallPlastificationStrength(true).Value;
             double refValueMain = 415;
             double actualToleranceMain = EvaluateActualTolerance(phiP_nMain, refValueMain);
             Assert.LessOrEqual(actualToleranceMain, tolerance);

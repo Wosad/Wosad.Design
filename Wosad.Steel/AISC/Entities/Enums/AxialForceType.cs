@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC.Entities
 {
-    public enum BranchForceType
+    public enum AxialForceType
     {
         Tension,
         Compression,
