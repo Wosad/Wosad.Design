@@ -36,13 +36,16 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
 
         public ChsTrussYConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
-        SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
+        SteelChsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
         double P_uChord, double M_uChord): base( Chord,  MainBranch,  thetaMain,  ForceTypeMain, 
         SecondBranch,  thetaSecond,  ForceTypeSecond,  IsTensionChord,
         P_uChord,  M_uChord)
         {
 
         }
+
+        //No override = > use base class
+
         protected override SteelChsSection getBranch()
         {
             return this.MainBranch;

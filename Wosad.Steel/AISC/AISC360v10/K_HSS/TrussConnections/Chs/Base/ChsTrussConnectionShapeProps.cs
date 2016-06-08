@@ -37,7 +37,17 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class ChsTrussBranchConnection:  HssTrussConnection, IHssTrussBranchConnection
     {
 
-        public double theta { get; set; }
+        private double _theta;
+
+        public double theta
+        {
+            get
+            {
+                _theta = thetaMain;
+                return _theta;
+            }
+            set { _theta = value; }
+        }
 
         private double _sin_theta;
 
@@ -66,10 +76,32 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         private double Get_beta()
         {
-           // return B_b / B;
-            throw new NotImplementedException();
+
+           return D_b / D;
         }
 
+        private double _D_b;
+
+        public double D_b
+        {
+            get 
+            {
+                double D_b = 0.0;
+
+                if (IsMainBranch == true)
+                {
+                    D_b = MainBranch.Section.D;
+                }
+                else
+                {
+                    D_b = SecondBranch.Section.D;
+                }
+
+                return _D_b; 
+            }
+            set { _D_b = value; }
+        }
+        
         private double _gamma;
 
         /// <summary>
@@ -85,12 +117,9 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         private double Get_gamma()
         {
+
             return D / (2.0 * t);
         }
-
-
-
-
 
 
         private double _t;

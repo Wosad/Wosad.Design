@@ -49,8 +49,8 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
         public override SteelLimitStateValue GetBranchYieldingFromUnevenLoadDistributionStrength(bool IsMainBranch)
         {
-            
 
+            this.IsMainBranch = IsMainBranch;
             double P_ni = GetP_nForOverlappingBranch();
             double phi = 0.95;
             double phiP_n = 0.0;

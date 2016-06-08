@@ -80,5 +80,7 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             set { _F_yb = value; }
         }
 
+
+        protected bool IsMainBranch { get; set; }
     }
 }

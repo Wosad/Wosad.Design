@@ -34,12 +34,14 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public partial class ChsTrussXConnection : ChsTrussBranchConnection
     {
         public ChsTrussXConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
-        SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
+        SteelChsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
         double P_uChord, double M_uChord): base( Chord,  MainBranch,  thetaMain,  ForceTypeMain, 
         SecondBranch,  thetaSecond,  ForceTypeSecond,  IsTensionChord,
         P_uChord,  M_uChord)
         {
         }
+
+
         /// <summary>
         /// K2-3
         /// </summary>
@@ -49,9 +51,9 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
             double P_n = 0.0;
             double phi = 0.90;
+            this.IsMainBranch = IsMainBranch;
 
-
-            throw new NotImplementedException();
+            P_n = (((F_y * Math.Pow(t, 2) * (((5.7) / (1.0 - 0.81 * beta))) * Q_f)) / (sin_theta));
 
             double phiP_n = phi * P_n;
             return new SteelLimitStateValue(phiP_n, true);

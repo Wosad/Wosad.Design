@@ -40,12 +40,20 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     {
 
         public ChsTrussBranchConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
-            SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
+            SteelChsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord): base(IsTensionChord,P_uChord,M_uChord)
         {
             this.Chord = Chord;
             this.MainBranch       =MainBranch   ;
             this.thetaMain        =thetaMain    ;             
+        }
+
+        public ChsTrussBranchConnection(SteelChsSection Chord, bool IsTensionChord,
+    double P_uChord, double M_uChord)
+            : base(IsTensionChord, P_uChord, M_uChord)
+        {
+            this.Chord = Chord;
+
         }
 
 

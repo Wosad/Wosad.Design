@@ -35,7 +35,7 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     {
 
         public ChsTrussTYConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
-        SteelRhsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
+        SteelChsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
         double P_uChord, double M_uChord): base( Chord,  MainBranch,  thetaMain,  ForceTypeMain, 
         SecondBranch,  thetaSecond,  ForceTypeSecond,  IsTensionChord,
         P_uChord,  M_uChord)
@@ -51,7 +51,9 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 
             double P_n = 0.0;
             double phi = 0.90;
+            this.IsMainBranch = IsMainBranch;
 
+            P_n = (((F_y * Math.Pow(t, 2) * (3.1 + 15.6 * Math.Pow(beta, 2)) * Math.Pow(gamma, 0.2) * Q_f)) / (sin_theta));
 
             throw new NotImplementedException();
 

@@ -31,10 +31,9 @@ using Wosad.Steel.AISC.Entities;
 
 namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {
-    public partial class ChsTrussOverlapConnection : ChsTrussKConnection
+    public partial class ChsTrussGappedKConnection : ChsTrussKConnection
     {
-
-        public ChsTrussOverlapConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
+            public ChsTrussGappedKConnection(SteelChsSection Chord, SteelChsSection MainBranch, double thetaMain, AxialForceType ForceTypeMain, 
             SteelChsSection SecondBranch, double thetaSecond, AxialForceType ForceTypeSecond, bool IsTensionChord,
             double P_uChord, double M_uChord, double g): base( Chord,  MainBranch,  thetaMain,  ForceTypeMain, 
              SecondBranch,  thetaSecond,  ForceTypeSecond,  IsTensionChord,
@@ -42,12 +41,12 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
        {
 
        }
-        //No override = > use base class
 
-        protected override SteelChsSection getBranch()
-        {
-            return this.MainBranch;
-        }
+            //No override = > use base class
 
+            protected override SteelChsSection getBranch()
+            {
+                return this.MainBranch;
+            }
     }
 }

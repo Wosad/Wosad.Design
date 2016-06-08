@@ -37,9 +37,6 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
     public abstract partial class ChsTrussBranchConnection : HssTrussConnection, IHssTrussBranchConnection
     {
 
-
-
-
         /// <summary>
         /// K2-1
         /// </summary>
@@ -50,8 +47,7 @@ namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             double P_n = 0.0;
             double phi = 0.90;
 
-
-            throw new NotImplementedException();
+            P_n = 0.6 * F_y * t * Math.PI * D_b * (((1.0+ sin_theta) / (2.0 *Math.Pow(sin_theta, 2))));
 
             double phiP_n = phi * P_n;
             return new SteelLimitStateValue(phiP_n, true);
