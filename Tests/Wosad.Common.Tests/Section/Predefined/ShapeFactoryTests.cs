@@ -62,5 +62,29 @@ namespace Wosad.Common.Tests.Section.Predefined
             Assert.IsTrue(section != null);
         }
 
+        [Test]
+        public void ShapeFactoryReturnsValueForRectHSSParsed()
+        {
+            AiscShapeFactory factory = new AiscShapeFactory();
+            ISection section = factory.GetShape("HSS8X6X.500");
+            Assert.IsTrue(section is ISectionTube);
+        }
+
+        [Test]
+        public void ShapeFactoryReturnsValueForCircHSSParsed()
+        {
+            AiscShapeFactory factory = new AiscShapeFactory();
+            ISection section = factory.GetShape("HSS6X.500");
+            Assert.IsTrue(section is ISectionPipe);
+        }
+
+        [Test]
+        public void ShapeFactoryReturnsValueForAngleParsed()
+        {
+            AiscShapeFactory factory = new AiscShapeFactory();
+            ISection section = factory.GetShape("L3-1/2X3X1/4");
+            Assert.IsTrue(section is ISectionAngle);
+        }
+
     }
 }

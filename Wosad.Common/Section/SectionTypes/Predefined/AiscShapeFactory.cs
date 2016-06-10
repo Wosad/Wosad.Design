@@ -33,6 +33,56 @@ namespace Wosad.Common.Section.Predefined
     public class AiscShapeFactory
     {
 
+        public ISection GetShape(string ShapeId, AngleOrientation AngleOrientation = AngleOrientation.LongLegVertical, AngleRotation AngleRotation = AngleRotation.FlatLegBottom)
+        {
+            ShapeTypeSteel shapeType = DetermineShapeType(ShapeId);
+            return  GetShape( ShapeId, shapeType,  AngleOrientation, AngleRotation);
+        }
+
+        private ShapeTypeSteel DetermineShapeType(string ShapeId)
+        {
+            if (ShapeId.StartsWith("W") || ShapeId.StartsWith("S") || ShapeId.StartsWith("HP"))
+            {
+                return ShapeTypeSteel.IShapeRolled;
+            }
+            else if (ShapeId.StartsWith("C") || ShapeId.StartsWith("MC"))
+            {
+                return ShapeTypeSteel.Channel;
+            }
+            else if (ShapeId.StartsWith("L") )
+            {
+                return ShapeTypeSteel.Angle;
+            }
+            else if (ShapeId.StartsWith("2L"))
+            {
+                return ShapeTypeSteel.DoubleAngle;
+            }
+            else if (ShapeId.StartsWith("WT") || ShapeId.StartsWith("MT") || ShapeId.StartsWith("ST"))
+            {
+                return ShapeTypeSteel.TeeRolled;
+            }
+            else if (ShapeId.StartsWith("Pipe"))
+            {
+                return ShapeTypeSteel.CircularHSS;
+            }
+            else if (ShapeId.StartsWith("HSS"))
+            {
+                List<string> substrs = ShapeId.Split('X').ToList();
+                if (substrs.Count == 2)
+                {
+                    return ShapeTypeSteel.CircularHSS;
+                }
+                else
+                {
+                    return ShapeTypeSteel.RectangularHSS;
+                }
+            }
+            else
+            {
+                throw new Exception("Shape not recognized. Specify AISC database name.");
+            }
+
+        }
         public ISection GetShape(string ShapeId, ShapeTypeSteel shapeType, AngleOrientation AngleOrientation = AngleOrientation.LongLegVertical, AngleRotation AngleRotation = AngleRotation.FlatLegBottom)
         { 
 
