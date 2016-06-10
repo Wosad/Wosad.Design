@@ -24,47 +24,60 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.Section.SectionTypes;
+using Wosad.Steel.AISC.SteelEntities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class CompressionMemberRhs : ColumnDoublySymmetric
+    public partial class ChsNonSlender : ColumnDoublySymmetric
     {
 
         public override double CalculateCriticalStress()
         {
             double Fcr = 0.0;
 
-            //Flexural
-
-            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe(); //this does not apply to unsymmetric sections
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe();
             double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
-            double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
+            double Qflex = 1.0;
             double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
 
             return FcrFlex;
 
         }
 
-        //        public CompressionMemberRhs(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
-        //    : base(Section,L_x,L_y,K_x,K_y, CalcLog)
-        //{
 
-        public CompressionMemberRhs(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
+
+        public override SteelLimitStateValue GetFlexuralBucklingStrength()
+        {
+            double FcrFlex = CalculateCriticalStress(); 
+            double phiP_n = GetDesignAxialStrength(FcrFlex);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
+            return ls;
+        }
+
+        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
+        {
+            return  new SteelLimitStateValue(-1, false);
+
+        }
+
+        public ChsNonSlender(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
             : base(Section,L_x,L_y, L_z, CalcLog)
         {
             if (Section.Shape is ISectionTube)
             {
-                SectionRhs = Section.Shape as ISectionTube;
+                this.SectionPipe = Section.Shape as ISectionPipe;
             }
             else
             {
-                throw new Exception("Section of wrong type: Need ISectionTube");
+                throw new Exception("Section of wrong type: Need ISectionPipe");
             }
 
         }
 
 
-        ISectionTube SectionRhs; 
+        ISectionPipe SectionPipe { get; set; }
     }
 }

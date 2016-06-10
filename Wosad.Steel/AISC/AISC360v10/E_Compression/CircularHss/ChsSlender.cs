@@ -30,7 +30,7 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class ChsSlender : ChsCompact
+    public partial class ChsSlender : ChsNonSlender
     {
 
         public override double CalculateCriticalStress()
@@ -46,22 +46,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
         }
 
-
-
-        public override SteelLimitStateValue GetFlexuralBucklingStrength()
-        {
-            double FcrFlex = CalculateCriticalStress(); 
-            double phiP_n = GetDesignAxialStrength(FcrFlex);
-
-            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
-            return ls;
-        }
-
-        public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
-        {
-            return  new SteelLimitStateValue(-1, false);
-
-        }
 
         public ChsSlender(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
             : base(Section,L_x,L_y, L_z, CalcLog)

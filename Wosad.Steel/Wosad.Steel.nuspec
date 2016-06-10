@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Wosad.Steel</id>
-    <version>0.0.6.1</version>
+    <version>0.0.6.2</version>
     <title>Wosad.Steel</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for structural steel element and connection design for buildings and other structures, per AISC 360 standard.</description>
@@ -11,7 +11,7 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <releaseNotes>Added AISC chapter K rectangular HSS truss connections</releaseNotes>
+    <releaseNotes>Updates to AISC chapter K rectangular HSS truss connections</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>

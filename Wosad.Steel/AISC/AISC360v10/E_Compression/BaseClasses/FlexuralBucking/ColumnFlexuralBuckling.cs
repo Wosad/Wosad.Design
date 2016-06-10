@@ -34,8 +34,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     public abstract class ColumnFlexuralBuckling: SteelColumn
     {
 
-        public ColumnFlexuralBuckling(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
-            : base(Section,L_x,L_y, CalcLog)
+        public ColumnFlexuralBuckling(ISteelSection Section, double L_ex, double L_ey, ICalcLog CalcLog)
+            : base(Section,L_ex,L_ey, CalcLog)
         {
 
         }
@@ -56,13 +56,13 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double r;
             if (IsMajorAxis==true)
             {
-                L = UnbracedLengthX;
+                L = L_ex;
                 r = Section.Shape.r_x;
                 
             }
             else
             {
-                L = UnbracedLengthY;
+                L = L_ey;
                 r = Section.Shape.r_y;
 
             }
@@ -81,8 +81,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
             if (Slenderness == 0)
             {
-                double F_y = this.Section.Material.YieldStress;
-                Fe = F_y;
+                //double F_y = this.Section.Material.YieldStress;
+                //Fe = F_y;
+                Fe = double.PositiveInfinity;
             }
             else
             {
@@ -105,8 +106,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             }
             else
             {
-                double F_y = this.Section.Material.YieldStress;
-                Fe = F_y;
+                return double.PositiveInfinity;
             }
 
             return Fe;
@@ -122,6 +122,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double Fy = Section.Material.YieldStress;
 
 
+            if (Fe != double.PositiveInfinity)
+            {
                 double stressRatio = Q * Fy / Fe;
 
                 if (stressRatio > 2.25)
@@ -131,7 +133,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
                 else
                 {
                     Fcr = Q * Math.Pow(0.658, stressRatio) * Fy; //(E3-2)  if Q<1 then (E7-2)
-                } 
+                }  
+            }
+            else
+            {
+                Fcr = Fy;
+            }
 
 
             

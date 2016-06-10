@@ -12,9 +12,9 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public class ChsShapeFactory
+    public class RhsShapeFactory
     {
-        public ISteelCompressionMember GetChsShape(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
+        public ISteelCompressionMember GetRhsShape(ISteelSection Section, double L_ex, double L_ey, double L_ez, ICalcLog CalcLog)
         {
 
             ISteelCompressionMember column = null;
@@ -27,11 +27,11 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 
             if (webCompactnessX ==  CompactnessClassAxialCompression.NonSlender && webCompactnessY == CompactnessClassAxialCompression.NonSlender )
             {
-                return new ChsNonSlender(Section, L_x, L_y, L_z, CalcLog);
+                return new RhsNonSlender(Section, L_ex, L_ey, L_ez, CalcLog);
             }
             else
             {
-                return new ChsSlender(Section, L_x, L_y, L_z, CalcLog);
+                return new RhsSlender(Section, L_ex, L_ey, L_ez, CalcLog);
             }
             return column;
         }

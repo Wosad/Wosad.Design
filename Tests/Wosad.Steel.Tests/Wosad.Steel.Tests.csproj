@@ -54,6 +54,9 @@
     <Compile Include="AISC\AISC360_10\D_Tension\ShearLagFactorTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AISC\AISC360_10\E_Compression\IShape\CompressionIShapeSlenderTests.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\IShape\CompressionIShapeNonSlenderTests.cs" />
+    <Compile Include="AISC\AISC360_10\E_Compression\RectangularHSS\CompressionRhsTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\IBeam\F2_I_DoublySymmetricCompactTests.cs" />
     <Compile Include="AISC\AISC360_10\F_Flexure\RectangularHSS\F7-RectangularHssTests.cs" />
     <Compile Include="AISC\AISC360_10\G_Shear\ShearUnstiffenedBeamTests.cs" />
@@ -104,7 +107,7 @@
   <ItemGroup>
     <Folder Include="AISC\AISC360_10\B_General\Compactness\" />
     <Folder Include="AISC\AISC360_10\C_Stability\" />
-    <Folder Include="AISC\AISC360_10\E_Compression\" />
+    <Folder Include="AISC\AISC360_10\E_Compression\CircularHss\" />
     <Folder Include="AISC\AISC360_10\I_Composite\Axial\" />
     <Folder Include="AISC\AISC360_10\K_HSS\ConcentratedForces\" />
     <Folder Include="AISC\AISC360_10\K_HSS\MomentConnections\" />

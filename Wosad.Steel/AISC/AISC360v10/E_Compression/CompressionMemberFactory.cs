@@ -33,15 +33,20 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
     public class CompressionMemberFactory
     {
+        //SteelMaterial mat 
+
+        public ISteelCompressionMember GetCompressionMember(ISection Shape, ISteelMaterial mat,  double L_ex, double L_ey, double L_ez,  bool IsRolledShape = true)
+        {
+            return GetCompressionMember(Shape, L_ex, L_ey, L_ez, mat.YieldStress, mat.ModulusOfElasticity, IsRolledShape);
+        }
         public ISteelCompressionMember GetCompressionMember(ISection Shape, double L_ex, double L_ey, double L_ez, double F_y, double E, bool IsRolledShape = true)
         {
-            throw new NotImplementedException();
             string DEFAULT_EXCEPTION_STRING = "Selected shape is not supported. Select a different shape.";
             ISteelCompressionMember col = null;
             CalcLog log = new CalcLog();
-            SteelMaterial Material = new SteelMaterial(F_y);
+            SteelMaterial Material = new SteelMaterial(F_y, E);
 
-            if (Shape is ISection)
+            if (Shape is ISectionI)
             {
                 ISectionI IShape = Shape as ISectionI;
                 SteelSectionI SectionI = new SteelSectionI(IShape, Material);
@@ -64,7 +69,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionPipe SectionPipe = Shape as ISectionPipe;
                 SteelPipeSection PipeSection = new SteelPipeSection(SectionPipe, Material);
-                throw new Exception(DEFAULT_EXCEPTION_STRING);
+                ChsShapeFactory ChsFactory = new ChsShapeFactory();
+                return ChsFactory.GetChsShape(PipeSection, L_ex, L_ey, L_ez, log);
  
             }
 
@@ -72,7 +78,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionTube TubeShape = Shape as ISectionTube;
                 SteelRhsSection RectHSS_Section = new SteelRhsSection(TubeShape, Material);
-                throw new Exception(DEFAULT_EXCEPTION_STRING);
+                RhsShapeFactory RhsFactory = new RhsShapeFactory();
+                return RhsFactory.GetRhsShape(RectHSS_Section, L_ex, L_ey, L_ez, log);
  
             }
 
@@ -81,7 +88,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             {
                 ISectionBox BoxShape = Shape as ISectionBox;
                 SteelBoxSection BoxSection = new SteelBoxSection(BoxShape, Material);
-                throw new Exception(DEFAULT_EXCEPTION_STRING);
+
+                RhsShapeFactory RhsFactory = new RhsShapeFactory();
+                return RhsFactory.GetRhsShape(BoxSection, L_ex, L_ey, L_ez, log);
  
             }
 

@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class ChsSlender : ChsCompact
+    public partial class ChsSlender : ChsNonSlender
     {
 
         public override double GetReductionFactorForStiffenedElementQa(double Fcr = 0)
@@ -51,7 +51,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
                 if (D/t>0.11*SqrtE_Fy())
                 {
 
-                    Qa=((0.038*E) / (F_y*(D / t)))+((2) / (3)); //(E7-19)
+                    Qa=((0.038*E) / (F_y*(D / t)))+((2.0) / (3.0)); //(E7-19)
                 }
                 else
                 {

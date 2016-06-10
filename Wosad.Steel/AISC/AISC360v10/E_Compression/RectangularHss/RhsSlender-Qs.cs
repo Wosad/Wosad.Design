@@ -26,7 +26,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
 {
-    public partial class CompressionMemberRhs : ColumnDoublySymmetric
+    public partial class RhsSlender : RhsNonSlender
     {
 
         public override double GetReductionFactorForUnstiffenedElementQs()

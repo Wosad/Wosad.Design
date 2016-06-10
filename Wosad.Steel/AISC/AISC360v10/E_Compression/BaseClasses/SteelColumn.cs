@@ -34,8 +34,8 @@ namespace Wosad.Steel.AISC.AISC360v10
             //    public SteelColumn(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog)
             //: base(Section, L_x, L_y,K_x,K_y, CalcLog)
 
-        public SteelColumn(ISteelSection Section, double L_x, double L_y, ICalcLog CalcLog)
-            : base(Section, L_x, L_y, CalcLog)
+        public SteelColumn(ISteelSection Section, double L_ex, double L_ey, ICalcLog CalcLog)
+            : base(Section, L_ex, L_ey, CalcLog)
         {
 
         }

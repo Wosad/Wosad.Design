@@ -64,6 +64,8 @@
     <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsShapeFactory.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeFactory.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeSlenderElements.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\RhsShapeFactory.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\RhsNonSlender.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\I\DoublySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\I\SinglySymmetricIBeamMajorAxis.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\SolidShapes\Y.cs" />
@@ -164,7 +166,7 @@
     <Compile Include="AISC\AISC360v10\E_Compression\TeeAndDoubleAngle\ColumnTee.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsSlender_Qa.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsSlender_Qs.cs" />
-    <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsCompact.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\CircularHss\ChsNonSlender.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\CompressionMemberFactory.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\L\ColumnSingleAngle.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeSlenderElements_Qa.cs" />
@@ -172,9 +174,9 @@
     <Compile Include="AISC\AISC360v10\E_Compression\I\IShapeCompact.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\General\ColumnGeneral.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\SolidShapes\Rectangle\CompressionMemberRectangle.cs" />
-    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\CompressionMemberRhs-Qa.cs" />
-    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\CompressionMemberRhs-Qs.cs" />
-    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\CompressionMemberRhs.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\RhsSlender-Qa.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\RhsSlender-Qs.cs" />
+    <Compile Include="AISC\AISC360v10\E_Compression\RectangularHss\RhsSlender.cs" />
     <Compile Include="AISC\AISC360v10\E_Compression\BaseClasses\SteelColumn.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\BaseClasses\FlexuralMemberDoubleAngleBase.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\CircularHss\Y.cs" />

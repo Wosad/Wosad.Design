@@ -32,10 +32,10 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
     {
 
 
-            public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_x, double L_y, double L_z, ICalcLog CalcLog)
-            : base(Section,L_x,L_y, CalcLog)
+            public ColumnFlexuralAndTorsionalBuckling(ISteelSection Section, double L_ex, double L_ey, double L_ez, ICalcLog CalcLog)
+            : base(Section,L_ex,L_ey, CalcLog)
         {
-                this.UnbracedLengthZ = L_z;
+                this.L_ez = L_ez;
 
         }
 
@@ -66,7 +66,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double pi2 = Math.Pow(Math.PI, 2);
             double E = Section.Material.ModulusOfElasticity;
             double Cw = Section.Shape.C_w;
-            double Lz = UnbracedLengthZ;
+            double Lz = L_ez;
             double G = 11200; //ksi
             double J = Section.Shape.J;
             double Ag = Section.Shape.A;

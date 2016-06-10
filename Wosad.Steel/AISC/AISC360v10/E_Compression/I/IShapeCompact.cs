@@ -95,7 +95,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
         {
             SteelLimitStateValue ls = new SteelLimitStateValue();
 
-            if (this.UnbracedLengthZ <= UnbracedLengthX && this.UnbracedLengthZ <= UnbracedLengthY)
+            if (this.L_ez <= L_ex && this.L_ez <= L_ey)
             {
                 ls.Value = -1;
                 ls.IsApplicable = false;

@@ -45,7 +45,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
             double E = Section.Material.ModulusOfElasticity;
             double Cw = Section.Shape.C_w;
             //double Kz = EffectiveLengthFactorZ;
-            double Lz = UnbracedLengthZ;
+            double Lz = L_ez;
 
             //todo: change shear modulus to be the material property
             double G = Section.Material.ShearModulus; //ksi

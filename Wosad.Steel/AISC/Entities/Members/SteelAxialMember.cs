@@ -36,14 +36,10 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
         public abstract SteelLimitStateValue GetFlexuralBucklingStrength();
         public abstract SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength();
 
-        public double UnbracedLengthX { get; set; }
-        public double UnbracedLengthY { get; set; }
-        public double UnbracedLengthZ { get; set; }
-        //public double EffectiveLengthFactorBracedX { get; set; }
-        //public double EffectiveLengthFactorBracedY { get; set; }
-        //public double EffectiveLengthFactorX { get; set; }    //K for local X-axis (longitudinal  axis , torsion)
-        //public double EffectiveLengthFactorY { get; set; }    //K for local Y-axis (major section axis)
-        //public double EffectiveLengthFactorZ { get; set; }    //K for local Z-axis (minor section axis)
+        public double L_ex { get; set; }
+        public double L_ey { get; set; }
+        public double L_ez { get; set; }
+
         public double CmFactorX { get; set; }
         public double CmFactorY { get; set; }
 
@@ -57,10 +53,11 @@ namespace Wosad.Steel.AISC.SteelEntities.Members
 
             //    public SteelAxialMember(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) //, ISteelMaterial Material)
             //:base(Section,  CalcLog) //,Material)
-        public SteelAxialMember(ISteelSection Section, double L_x, double L_y,  ICalcLog CalcLog) //, ISteelMaterial Material)
+        public SteelAxialMember(ISteelSection Section, double L_ex, double L_ey,  ICalcLog CalcLog) //, ISteelMaterial Material)
             :base(Section,  CalcLog) //,Material)
         {
-
+            this.L_ex = L_ex;
+            this.L_ey = L_ey;
         }
 
         public abstract double CalculateDesignStrength();

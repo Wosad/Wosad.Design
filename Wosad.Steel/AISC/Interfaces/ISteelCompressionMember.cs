@@ -31,9 +31,9 @@ namespace Wosad.Steel.AISC.Interfaces
     public interface ISteelCompressionMember: ISteelMember
     {
 
-        double UnbracedLengthX { get; set; }
-        double UnbracedLengthY { get; set; }
-        double UnbracedLengthZ { get; set; }
+        double L_ex { get; set; }
+        double L_ey { get; set; }
+        double L_ez { get; set; }
 
 
         SteelLimitStateValue GetFlexuralBucklingStrength();
