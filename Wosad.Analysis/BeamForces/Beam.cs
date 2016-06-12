@@ -69,27 +69,6 @@ namespace Wosad.Analysis
         }
         
  
-        //private List<ISingleLoadCaseBeam> loadCases;
-
-        //public List<ISingleLoadCaseBeam> LoadCases
-        //{
-        //    get 
-        //    {
-        //        if (loadCases == null)
-        //        {
-        //            loadCases = new List<ISingleLoadCaseBeam>();
-        //        }
-        //        return loadCases; 
-        //    }
-        //    set { loadCases = value; }
-        //}
-        
-
-        //public abstract double GetMoment( double X);
-        //public abstract double GetShear( double X);
-        //public abstract ForceDataPoint GetMomentMaximum();
-        //public abstract ForceDataPoint GetMomentMinimum();
-        //public abstract ForceDataPoint GetShearMaximumValue();
 
         public virtual void EvaluateX(double X)
         {
@@ -148,21 +127,44 @@ namespace Wosad.Analysis
             throw new NotImplementedException();
         }
 
-        //private BeamTemplatePathLocator resLoc;
+        public double GetMaxMomentBetweenPoints(double X_min, double X_max, int Steps=20)
+        {
+            if (X_min<0 || X_max > Length)
+            {
+                throw new Exception("Invalid minimum or maximum X values for sub-segments.");
+            }
+            double segLen = X_max - X_min;
+            double segStep = segLen / Steps;
+            List<double> Ms = new List<double>();
 
-        //public BeamTemplatePathLocator ResourceLocator
-        //{
-        //    get 
-        //    {
-        //        if (resLoc==null)
-        //        {
-        //            resLoc = new BeamTemplatePathLocator();
-        //        }
-        //        return resLoc; 
-        //    }
+            for (int i = 0; i <= Steps; i++)
+            {
+                double X_pt = segStep * i + X_min;
+                double M_x = GetMoment(X_pt);
+                Ms.Add(M_x);
+            }
+            var M_max = Ms.Max();
+            return  M_max;
+        }
+        public double GetMinMomentBetweenPoints(double X_min, double X_max, int Steps=20)
+        {
+            if (X_min<0 || X_max > Length)
+            {
+                throw new Exception("Invalid minimum or maximum X values for sub-segments.");
+            }
+            double segLen = X_max - X_min;
+            double segStep = segLen / Steps;
+            List<double> Ms = new List<double>();
 
-        //}
-
+            for (int i = 0; i <= Steps; i++)
+            {
+                double X_pt = segStep * i + X_min;
+                double M_x = GetMoment(X_pt);
+                Ms.Add(M_x);
+            }
+            var M_min = Ms.Min();
+            return  M_min;
+        }
 
         public virtual double GetMoment(double X)
         {

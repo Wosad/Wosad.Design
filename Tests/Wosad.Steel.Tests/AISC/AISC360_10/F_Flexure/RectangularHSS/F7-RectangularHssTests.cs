@@ -33,7 +33,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
             AiscShapeFactory AiscShapeFactory = new AiscShapeFactory();
             ISection section = AiscShapeFactory.GetShape("HSS8X6X.500", ShapeTypeSteel.RectangularHSS);
             SteelMaterial mat = new SteelMaterial(46.0,29000);
-            beam = factory.GetBeam(section,mat,null, MomentAxis.XAxis, FlexuralCompressionFiberPosition.Top, true);
+            beam = factory.GetBeam(section,mat,null, MomentAxis.XAxis, FlexuralCompressionFiberPosition.Top);
 
         }
         [Test]

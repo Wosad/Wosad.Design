@@ -31,6 +31,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.Section.Predefined;
 using Wosad.Steel.AISC.AISC360v10.B_General;
+using Wosad.Common;
  
  
 
@@ -42,7 +43,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
   
 
         public ISteelBeamFlexure GetBeam(ISection Shape, ISteelMaterial Material, ICalcLog Log, MomentAxis MomentAxis,
-                 FlexuralCompressionFiberPosition compressionFiberPosition,  bool IsRolledMember=true)
+                 FlexuralCompressionFiberPosition compressionFiberPosition, AngleRotation AngleRotation = AngleRotation.FlatLegTop, 
+            AngleOrientation AngleOrientation = AngleOrientation.LongLegVertical,  bool IsRolledMember=true)
         {
             ISteelBeamFlexure beam = null;
 
@@ -116,6 +118,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                         ISectionTee TeeShape = Shape as ISectionTee;
                         SteelTeeSection TeeSection = new SteelTeeSection(TeeShape, Material);
                         beam = new BeamTee(TeeSection, Log);
+                    }
+                    else if (Shape is ISectionAngle)
+                    {
+                        ISectionAngle Angle = Shape as ISectionAngle;
+                        SteelAngleSection AngleSection = new SteelAngleSection(Angle,Material);
+                        beam = new BeamAngle(AngleSection, Log, AngleRotation, MomentAxis, AngleOrientation);
                     }
                     else
                     {

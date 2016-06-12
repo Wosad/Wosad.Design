@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Wosad.Analysis.Tests.BeamForces
 {
     [TestFixture]
-    public class C2A_1Tests
+    public class BeamForces_C2A_1Tests
     {
         IAnalysisBeam GetBeam (double L, double a, double P)
         {

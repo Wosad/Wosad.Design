@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Wosad.Analysis.Tests.BeamForces
 {
     [TestFixture]
-    public class C1B_1Tests
+    public class BeamForces_C1B_1Tests
     {
         IAnalysisBeam GetBeam (double L, double w)
         {
@@ -28,15 +28,27 @@ namespace Wosad.Analysis.Tests.BeamForces
             double L = 20;
             double w = 1.5;
             IAnalysisBeam bm = GetBeam(L,w);
-            double X = L / 2;
 
             double M_max = bm.GetMomentMaximum().Value;
             Assert.AreEqual(75, M_max);
-           //double M_x = bm.GetMoment(X);
-           //double V_x = bm.GetShear(X);
-           //
-           //double M_min = bm.GetMomentMinimum();
-           //double V_max = bm.GetShearMaximumValue();
+
+        }
+
+        [Test]
+        public void C1B_1ReturnsPositiveMomentAtX()
+        {
+            double L = 20;
+            double w = 1.5;
+            IAnalysisBeam bm = GetBeam(L, w);
+            double X = L / 2;
+            
+            double M_x = bm.GetMoment(X);
+
+            Assert.AreEqual(75, M_x);
+            //double V_x = bm.GetShear(X);
+            //
+            //double M_min = bm.GetMomentMinimum();
+            //double V_max = bm.GetShearMaximumValue();
         }
 
         [Test]
