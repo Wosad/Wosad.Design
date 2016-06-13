@@ -36,12 +36,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
         private double GetFlexuralTorsionalBucklingMomentCapacity(double L_b, double C_b,
             FlexuralCompressionFiberPosition CompressionLocation, FlexuralAndTorsionalBracingType BracingType, MomentAxis MomentAxis)
         {
-            throw new NotImplementedException();
+
             double M_n = 0.0;
             double M_n1 = 0.0;
             double M_n2 = 0.0;
             double M_e = GetM_e(L_b, C_b, CompressionLocation, BracingType, MomentAxis);
-            double M_y = GetYieldingMomentGeometricXCapacity(CompressionLocation);
+            double M_y = GetYieldingMomentGeometricXCapacity(CompressionLocation, BracingType);
 
             if (M_e<=M_y)
             {
@@ -57,6 +57,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             M_n2 = 1.5*M_y;
             M_n= Math.Min(M_n1,M_n2);
             double phiM_n = 0.9 * M_n;
+            return phiM_n;
         }
 
         private double GetM_e(double L_b, double C_b, FlexuralCompressionFiberPosition CompressionLocation, 

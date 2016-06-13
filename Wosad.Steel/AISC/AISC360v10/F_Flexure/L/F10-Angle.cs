@@ -46,6 +46,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             this.AngleRotation = AngleRotation;
             this.AngleOrientation = AngleOrientation;
             this.MomentAxis = MomentAxis;
+
+            GetSectionValues();
+
         }
 
 
@@ -85,7 +88,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
 
             E = Section.Material.ModulusOfElasticity;
             F_y = Section.Material.YieldStress;
-            Wosad.Common.Section.SectionTypes.SectionAngle angle = this.Section as Wosad.Common.Section.SectionTypes.SectionAngle;
+            ISectionAngle angle = this.Section.Shape as ISectionAngle;
 
             if (angle == null)
             {

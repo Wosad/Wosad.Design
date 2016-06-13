@@ -25,6 +25,9 @@ namespace Wosad.Analysis
         double GetMoment(double X);
         ForceDataPoint GetMomentMaximum();
         ForceDataPoint GetMomentMinimum();
+
+        double GetMaxMomentBetweenPoints(double X_min, double X_max, int Steps);
+        double GetMinMomentBetweenPoints(double X_min, double X_max, int Steps);
         double GetShear(double X);
         ForceDataPoint GetShearMaximumValue();
         double Length { get; set; }

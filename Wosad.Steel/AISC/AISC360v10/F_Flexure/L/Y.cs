@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
 
             if (compressionFiberLocation== FlexuralCompressionFiberPosition.Top ||compressionFiberLocation== FlexuralCompressionFiberPosition.Bottom )
             {
-                My = GetYieldingMomentGeometricXCapacity(compressionFiberLocation);
+                My = GetYieldingMomentGeometricXCapacity(compressionFiberLocation, FlexuralAndTorsionalBracingType.FullLateralBracing);
             }
             else
             {
@@ -73,9 +73,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             return Sx;
         }
 
-        private double GetYieldingMomentGeometricXCapacity(FlexuralCompressionFiberPosition compressionFiberLocation)
+        private double GetYieldingMomentGeometricXCapacity(FlexuralCompressionFiberPosition compressionFiberLocation, FlexuralAndTorsionalBracingType BracingType)
         {
-            double S_x = GetSectionModulus(compressionFiberLocation, false, FlexuralAndTorsionalBracingType.FullLateralBracing);
+            double S_x = GetSectionModulus(compressionFiberLocation, false, BracingType);
             double Fy = Section.Material.YieldStress;
             double My = S_x * Fy;
             return My;

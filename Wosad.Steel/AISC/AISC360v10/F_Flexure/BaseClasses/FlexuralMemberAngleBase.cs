@@ -39,7 +39,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             : base(section, CalcLog)
         {
             sectionAngle = null;
-            ISectionAngle s = Section as ISectionAngle;
+            ISectionAngle s = Section.Shape as ISectionAngle;
 
             if (s == null)
             {
