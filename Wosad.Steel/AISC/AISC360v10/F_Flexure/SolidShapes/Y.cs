@@ -30,7 +30,7 @@ using Wosad.Steel.AISC.Interfaces;
 
 namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
-    public partial class SolidShape : FlexuralMember, ISteelBeamFlexure
+    public partial class BeamSolid : FlexuralMember, ISteelBeamFlexure
     {
         double GetM_y()
         {

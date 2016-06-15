@@ -28,7 +28,7 @@ using Wosad.Steel.AISC.AISC360v10.Flexure;
 
 namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
-    public class SteelSectionSolid: SteelSectionBase
+    public class SteelSolidSection: SteelSectionBase
     {
         private ISectionSolid section;
 
@@ -42,7 +42,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             get { return section as ISection; }
         }
 
-        public SteelSectionSolid(ISectionSolid Section, ISteelMaterial Material)
+        public SteelSolidSection(ISectionSolid Section, ISteelMaterial Material)
             :base(Material)
         {
             this.section = Section;

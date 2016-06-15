@@ -32,7 +32,7 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
-    public partial class SolidShape : FlexuralMember
+    public partial class BeamSolid : FlexuralMember
     {
 
         public SteelLimitStateValue GetLateralTorsionalBucklingStrength(double L_b, double C_b)

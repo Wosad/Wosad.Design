@@ -35,16 +35,16 @@ using Wosad.Common.Exceptions;
 
 namespace Wosad.Steel.AISC.AISC360v10.Flexure
 {
-    public partial class SolidShape : FlexuralMember, ISteelBeamFlexure
+    public partial class BeamSolid : FlexuralMember, ISteelBeamFlexure
     {
 
-        public SolidShape(ISteelSection section, ICalcLog CalcLog, MomentAxis MomentAxis) : 
+        public BeamSolid(ISteelSection section, ICalcLog CalcLog, MomentAxis MomentAxis) : 
             base(section, CalcLog)
         {
             this.MomentAxis = MomentAxis;
                 GetSectionValues();
                 sectionSolid = null;
-                ISectionSolid s = Section as ISectionSolid;
+                ISectionSolid s = Section.Shape as ISectionSolid;
 
                 if (s == null)
                 {
@@ -133,7 +133,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             SteelLimitStateValue ls = null;
             double b, h;
 
-            if (sectionSolid is ISectionPipe)
+            if (sectionSolid is ISectionRound)
             {
                 ls = new SteelLimitStateValue();
                 ls.IsApplicable = false;

@@ -43,8 +43,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
   
 
         public ISteelBeamFlexure GetBeam(ISection Shape, ISteelMaterial Material, ICalcLog Log, MomentAxis MomentAxis,
-                 FlexuralCompressionFiberPosition compressionFiberPosition, AngleRotation AngleRotation = AngleRotation.FlatLegTop, 
-            AngleOrientation AngleOrientation = AngleOrientation.LongLegVertical,  bool IsRolledMember=true)
+                 FlexuralCompressionFiberPosition compressionFiberPosition, bool IsRolledMember=true)
         {
             ISteelBeamFlexure beam = null;
 
@@ -68,8 +67,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     else if (Shape is ISectionSolid)
                     {
                         ISectionSolid solidShape = Shape as ISectionSolid;
-                        SteelSectionSolid SectionSolid = new SteelSectionSolid(solidShape, Material);
-                        beam = new SolidShape(SectionSolid, Log, MomentAxis);
+                        SteelSolidSection SectionSolid = new SteelSolidSection(solidShape, Material);
+                        beam = new BeamSolid(SectionSolid, Log, MomentAxis);
                     }
 
                     else if (Shape is ISectionChannel)
@@ -123,11 +122,18 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                     {
                         ISectionAngle Angle = Shape as ISectionAngle;
                         SteelAngleSection AngleSection = new SteelAngleSection(Angle,Material);
-                        beam = new BeamAngle(AngleSection, Log, AngleRotation, MomentAxis, AngleOrientation);
+                        beam = new BeamAngle(AngleSection, Log, Angle.AngleRotation, MomentAxis, Angle.AngleOrientation);
+                    }
+                    else if (Shape is ISectionSolid)
+                    {
+                        ISectionSolid SolidShape = Shape as ISectionSolid;
+                        SteelSolidSection SolidSection = new SteelSolidSection(SolidShape, Material);
+                        beam = new BeamSolid(SolidSection, Log,MomentAxis);
+                        
                     }
                     else
                     {
-                        throw new NotImplementedException();
+                        throw new Exception("Specified section type is not supported for this node.");
                     }
 	        }
             else  // weak axis
