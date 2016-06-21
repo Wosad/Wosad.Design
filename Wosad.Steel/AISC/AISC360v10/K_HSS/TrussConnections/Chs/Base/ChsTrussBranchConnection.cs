@@ -1,5 +1,3 @@
-
-
 #region Copyright
    /*Copyright (C) 2015 Wosad Inc
 
