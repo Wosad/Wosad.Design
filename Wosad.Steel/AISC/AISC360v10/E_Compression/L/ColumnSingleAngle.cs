@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.AISC360v10;
 using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.AISC360v10.Compression;
 
 
  
@@ -32,7 +33,7 @@ using Wosad.Steel.AISC.SteelEntities;
 
 namespace  Wosad.Steel.AISC360v10
 {
-    public class ColumnSingleAngle:SteelColumn
+    public class ColumnSingleAngle : ColumnFlexuralBuckling
     {
 
         //        public ColumnSingleAngle(ISteelSection Section, double L_x, double L_y, double K_x, double K_y, ICalcLog CalcLog) 
@@ -54,14 +55,108 @@ namespace  Wosad.Steel.AISC360v10
 
         public override SteelLimitStateValue GetFlexuralBucklingStrength()
         {
-            throw new NotImplementedException();
+
+            double FeFlexuralBuckling = GetFlexuralElasticBucklingStressFe(); 
+            double FcrFlexuralBuckling = GetCriticalStressFcr(FeFlexuralBuckling, 1.0);
+            double Qflex = GetReductionFactorQ(FcrFlexuralBuckling);
+            double FcrFlex = GetCriticalStressFcr(FeFlexuralBuckling, Qflex);
+
+            double phiP_n = GetDesignAxialStrength(FcrFlex);
+
+            SteelLimitStateValue ls = new SteelLimitStateValue(phiP_n, true);
+            return ls;
         }
 
         public override SteelLimitStateValue GetTorsionalAndFlexuralTorsionalBucklingStrength()
         {
-            throw new NotImplementedException();
+
+            SteelLimitStateValue ls;
+
+            ISectionAngle a = this.Section.Shape as ISectionAngle;
+            if (a == null)
+            {
+                throw new Exception("Incorrect section type. Section must be of type ISectionAngle.");
+            }
+            if (Math.Max(a.b,a.d)/a.t<=20.0)
+            {
+                ls = new SteelLimitStateValue(-1, false);
+            }
+            else
+            {
+                double FeTorsionalBuckling = GetTorsionalElasticBucklingStressFe();
+                double FcrTorsionalBuckling = GetCriticalStressFcr(FeTorsionalBuckling, 1.0);
+                double Qtors = GetReductionFactorQ(FcrTorsionalBuckling);
+                double FcrTors = GetCriticalStressFcr(FeTorsionalBuckling, Qtors);
+
+                double phiP_n = GetDesignAxialStrength(FcrTors);
+                ls = new SteelLimitStateValue(phiP_n, true);
+            }
+            return ls;
         }
 
+        private double GetTorsionalElasticBucklingStressFe()
+        {
+            throw new Exception("Torsional buckling check of slender unsymmetric shapes is not supported.");
+            // For unsymmetric members, Fe is the lowest root of the cubic equation
+            //(E4-6)
+        }
+
+        protected override double GetSlendernessKLr(bool IsMajorAxis)
+        {
+            double K;
+            double L;
+            double r;
+            double KLrx;
+            double KLry;
+            double KLrz;
+
+            ISectionAngle a = this.Section.Shape as ISectionAngle;
+            if (a == null)
+            {
+                throw new Exception("Incorrect section type. Section must be of type ISectionAngle.");
+            }
+            KLrx = L_ex / a.r_x;
+            KLry= L_ey / a.r_y;
+            KLrz = L_ez / a.r_z;
+
+            List<double> KLrs = new List<double>() 
+            { KLrx,KLry,KLrz};
+
+
+
+            //for major axis buckling "major" is considered only 
+            //for geometric axis. The second case using r_z is always
+            //minor. This is because in most practical applications
+            //it is possible to reduce unbraced length in the angle
+            //geometric axii, but to ensure that principal axis bracing is
+            //provided at a skew angle is impractical.
+
+            if (IsMajorAxis == true)
+            {
+                double KLr1;
+                if (KLrx>=KLry)
+                {
+                    return Math.Min(KLrx, KLrz);
+                }
+                else
+                {
+                    return Math.Min(KLry, KLrz);
+                }
+            }
+            else
+            {
+                if (KLrx <= KLry)
+                {
+                    return Math.Min(KLrx, KLrz);
+                }
+                else
+                {
+                    return Math.Min(KLry, KLrz);
+                }
+
+            }
+
+        }
 
     }
 }

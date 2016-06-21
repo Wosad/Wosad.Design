@@ -27,7 +27,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
     public partial class HeadedAnchor : AnalyticalElement
     {
 
-      public double GetPlacementFactorR_p(HeadedAnchorDeckCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase,double e_mid_ht)
+      public double GetPlacementFactorR_p(DeckAtBeamCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase,double e_mid_ht)
         {
             double R_p;
 
@@ -38,14 +38,14 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
             }
             else
             {
-                if (HeadedAnchorDeckCondition == AISC.HeadedAnchorDeckCondition.Parallel)
+                if (HeadedAnchorDeckCondition == AISC.DeckAtBeamCondition.Parallel)
                 {
                     //(1c) steel headed stud anchors welded through steel deck, or steel sheet
                     //used as girder filler material, and embedded in a composite slab with
                     //the deck oriented parallel to the beam
                     R_p = 0.75;
                 }
-                else if (HeadedAnchorDeckCondition == AISC.HeadedAnchorDeckCondition.Perpendicular)
+                else if (HeadedAnchorDeckCondition == AISC.DeckAtBeamCondition.Perpendicular)
                 {
                     if (e_mid_ht>=2)
                     {

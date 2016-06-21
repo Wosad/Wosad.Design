@@ -35,6 +35,7 @@ namespace Wosad.Concrete.ACI318_14
             this.crossSectionLocationType = LocationType;
             this.memberClass = MemberClass;
             this.prestressedSection = Section;
+
         }
 
         IPrestressedConcreteSection prestressedSection;
@@ -137,5 +138,7 @@ namespace Wosad.Concrete.ACI318_14
             }
             return fcc;
         }
+
+
     }
 }

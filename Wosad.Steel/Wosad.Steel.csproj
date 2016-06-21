@@ -110,6 +110,8 @@
     </Compile>
     <Compile Include="AISC\Entities\Enums\HssTrussConnectionClassification.cs" />
     <Compile Include="AISC\Entities\Enums\HssTrussConnectionMemberType.cs" />
+    <Compile Include="AISC\Entities\FloorVibrations\EffectiveWeight.cs" />
+    <Compile Include="AISC\Entities\FloorVibrations\EffectiveWidth.cs" />
     <Compile Include="AISC\Interfaces\IRhsTrussBranchConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Rhs\RhsTrussGappedKConnection.cs">
       <SubType>Code</SubType>
@@ -126,7 +128,7 @@
     <Compile Include="AISC\Entities\Enums\FloorVibrations\AdjacentSpanWeightIncreaseType.cs" />
     <Compile Include="AISC\Entities\Enums\FloorVibrations\BeamFloorLocationType.cs" />
     <Compile Include="AISC\Entities\Composite\ModularRatio.cs" />
-    <Compile Include="AISC\Entities\Enums\FloorVibrations\BeamGirderPlacement.cs" />
+    <Compile Include="AISC\Entities\Enums\FloorVibrations\JoistToGirderConnectionType.cs" />
     <Compile Include="AISC\Entities\FloorVibrations\FloorVibrationBeamGirderPanel.cs" />
     <Compile Include="AISC\Entities\FloorVibrations\FloorVibrationBeamSingle.cs" />
     <Compile Include="AISC\Entities\UFM\Base\UFMCase.cs" />
@@ -234,7 +236,7 @@
     <Compile Include="AISC\AISC360v10\J_Connections\Weld\Fillet\EffectiveWeldLength.cs" />
     <Compile Include="AISC\Entities\Enums\FlexuralAndTorsionalBracingType.cs" />
     <Compile Include="AISC\Entities\Enums\GussetPlateConfiguration.cs" />
-    <Compile Include="AISC\Entities\Enums\HeadedAnchorDeckCondition.cs" />
+    <Compile Include="AISC\Entities\Enums\DeckAtBeamCondition.cs" />
     <Compile Include="AISC\Entities\Enums\HeadedAnchorWeldCase.cs" />
     <Compile Include="AISC\Entities\Enums\ShearAreaCase.cs" />
     <Compile Include="AISC\Exceptions\ComboForceException.cs" />

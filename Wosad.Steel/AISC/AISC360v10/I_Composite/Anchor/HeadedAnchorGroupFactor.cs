@@ -26,7 +26,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
 {
     public partial class HeadedAnchor : AnalyticalElement
     {
-      public double GetGroupFactorR_g(HeadedAnchorDeckCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase, double N_saRib,double h_r,double w_r)
+      public double GetGroupFactorR_g(DeckAtBeamCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase, double N_saRib,double h_r,double w_r)
         {
             double R_g;
 
@@ -38,7 +38,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
             else
             {
                 double w_rTo_h_r = w_r / h_r;
-                if (HeadedAnchorDeckCondition == AISC.HeadedAnchorDeckCondition.Parallel)
+                if (HeadedAnchorDeckCondition == AISC.DeckAtBeamCondition.Parallel)
                 {
                     if (w_r / h_r>=1.5)
                     {
@@ -63,7 +63,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
                         }
                     }
                 }
-                else if (HeadedAnchorDeckCondition == AISC.HeadedAnchorDeckCondition.Perpendicular)
+                else if (HeadedAnchorDeckCondition == AISC.DeckAtBeamCondition.Perpendicular)
 	            {
                     if (N_saRib ==1)
                     {

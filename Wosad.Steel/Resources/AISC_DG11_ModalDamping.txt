@@ -5,4 +5,4 @@ Paper office fitout,0.01
 Church finishes,0
 School finishes,0
 Mall finishes,0
-Dry Wall Partitions in bay,0.02
+Drywall partitions in bay,0.02

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC.Entities.Enums.FloorVibrations
 {
-    public enum BeamGirderPlacement
+    public enum JoistToGirderConnectionType
     {
         PlacementAtTopFlange,
         ConnectionToWeb

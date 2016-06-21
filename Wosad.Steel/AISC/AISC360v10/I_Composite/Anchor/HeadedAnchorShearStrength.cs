@@ -86,7 +86,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Composite
         }
 
         
-        public double GetNominalShearStrength(HeadedAnchorDeckCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase, 
+        public double GetNominalShearStrength(DeckAtBeamCondition HeadedAnchorDeckCondition,HeadedAnchorWeldCase HeadedAnchorWeldCase, 
             double N_saRib,double e_mid_ht,double h_r,double w_r,double d_sa, double fc_prime, double F_u, double w_c)
         {
             double R_g = GetGroupFactorR_g(HeadedAnchorDeckCondition, HeadedAnchorWeldCase, N_saRib, h_r, w_r);

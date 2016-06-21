@@ -27,7 +27,7 @@ namespace Wosad.Concrete.ACI318_14
             set { compressionMemberType = value; }
         }
 
-        public ConcreteCompressionStrengthResult GetDesignMomentWithCompressionStrength( double P_u,
+        public  ConcreteCompressionStrengthResult GetDesignMomentWithCompressionStrength( double P_u,
             FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition,
             ConfinementReinforcementType ConfinementReinforcementType)
         {
@@ -73,5 +73,9 @@ namespace Wosad.Concrete.ACI318_14
             return C * P_o;
 
         }
+
+
+
+
     }
 }

@@ -41,7 +41,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Composite
         public void HeadedAnchorNoDeckReturnsValue()
         {
             HeadedAnchor a =new HeadedAnchor();
-            double Q_n = a.GetNominalShearStrength(HeadedAnchorDeckCondition.NoDeck,HeadedAnchorWeldCase.WeldedDirectly,1,3,3,6,0.75,4,65,110);
+            double Q_n = a.GetNominalShearStrength(DeckAtBeamCondition.NoDeck,HeadedAnchorWeldCase.WeldedDirectly,1,3,3,6,0.75,4,65,110);
             double refValue = 21.2;
             double actualTolerance = EvaluateActualTolerance(Q_n, refValue);
 
@@ -52,7 +52,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Composite
         public void HeadedAnchorParalleDeckReturnsValue()
         {
             HeadedAnchor a = new HeadedAnchor();
-            double Q_n = a.GetNominalShearStrength(HeadedAnchorDeckCondition.Parallel, HeadedAnchorWeldCase.WeldedThroughDeck, 1, 3, 3, 6, 0.75, 4, 65, 110);
+            double Q_n = a.GetNominalShearStrength(DeckAtBeamCondition.Parallel, HeadedAnchorWeldCase.WeldedThroughDeck, 1, 3, 3, 6, 0.75, 4, 65, 110);
             double refValue = 21.2;
             double actualTolerance = EvaluateActualTolerance(Q_n, refValue);
 
@@ -63,7 +63,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Composite
         public void HeadedAnchorPerpendicularDeckReturnsValue()
         {
             HeadedAnchor a = new HeadedAnchor();
-            double Q_n = a.GetNominalShearStrength(HeadedAnchorDeckCondition.Perpendicular, HeadedAnchorWeldCase.WeldedThroughDeck, 2, 3, 3, 6, 0.75, 4, 65, 110);
+            double Q_n = a.GetNominalShearStrength(DeckAtBeamCondition.Perpendicular, HeadedAnchorWeldCase.WeldedThroughDeck, 2, 3, 3, 6, 0.75, 4, 65, 110);
             double refValue = 18.3;
             double actualTolerance = EvaluateActualTolerance(Q_n, refValue);
 

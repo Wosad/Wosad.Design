@@ -39,19 +39,7 @@ namespace Wosad.Concrete.ACI318_14
             
         }
 
-        public ConcreteFlexuralStrengthResult GetDesignFlexuralStrength(FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition, 
-            ConfinementReinforcementType ConfinementReinforcementType)
-        {
-            IStrainCompatibilityAnalysisResult nominalResult = this.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition);
-            ConcreteFlexuralStrengthResult result = new ConcreteFlexuralStrengthResult(nominalResult, FlexuralCompressionFiberPosition, this.Section.Material.beta1);
-            StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
-            FlexuralFailureModeClassification failureMode = f.GetFlexuralFailureMode(result.epsilon_t, result.epsilon_ty);
-            double phi = f.Get_phiFlexureAndAxial(failureMode, ConfinementReinforcementType, result.epsilon_t, result.epsilon_ty);
-            double phiM_n = phi* nominalResult.Moment;
-            result.phiM_n = phiM_n; result.FlexuralFailureModeClassification = failureMode;
-            return result;
-            
-        }
+
 
 
     }

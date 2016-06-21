@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace Wosad.Steel.AISC
 {
-    public enum HeadedAnchorDeckCondition
+    public enum DeckAtBeamCondition
     {
         NoDeck,
         Parallel,
