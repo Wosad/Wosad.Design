@@ -48,6 +48,15 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
+        [Test]
+        public void SectionIWithOneSidedReinfWebOpeningReturnsI_x()
+        {
+            SectionIWithReinfWebOpening shape = new SectionIWithReinfWebOpening(null, 18.11, 7.53, 0.63, 0.39, 11.0, 0, 1.75, 0.375,true);
+            double I_x = shape.I_x;
+            double refValue = 879.0; //Calculated in Autocad
+            double actualTolerance = EvaluateActualTolerance(I_x, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
 
         [Test]
         public void SectionIWithReinfWebOpeningReturnsI_y()

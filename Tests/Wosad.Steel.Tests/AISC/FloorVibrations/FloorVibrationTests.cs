@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Wosad.Steel.AISC.Entities.Enums.FloorVibrations;
 using Wosad.Steel.AISC.Entities.FloorVibrations;
-using Wosad.Steel.AISC.UFM;
+
 
 namespace Wosad.Steel.Tests.AISC
 {

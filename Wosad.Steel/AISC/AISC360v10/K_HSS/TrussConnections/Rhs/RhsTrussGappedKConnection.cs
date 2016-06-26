@@ -28,6 +28,7 @@ using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Entities;
+using Wosad.Steel.AISC.AISC360v10.Shear;
 
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
@@ -100,6 +101,10 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
             double phi = 0.9;
 
             double phiP_n = 0;
+
+            ShearMemberBox shearMember = new ShearMemberBox(this.Chord.Section, this.Chord.Material);
+            double phiV_nChord = shearMember.GetShearStrength();
+            phiP_n = phiV_nChord / sin_theta;
             return new SteelLimitStateValue(phiP_n, true);
 
         }

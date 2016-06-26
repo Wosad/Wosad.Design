@@ -25,6 +25,6 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
     public interface IWebOpening
     {
         double GetShearStrength();
-        double GetFlexuralStrength();
+        //double GetFlexuralStrength();
     }
 }
