@@ -44,6 +44,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Shear
                     IsTeeShape = true;
                     member = new ShearMemberWithoutStiffeners(h, t_w, material, IsTeeShape);
                     break;
+                case ShearNonCircularCase.Box:
+                    member = new ShearMemberBox(h, t_w, material);
+                    break;
                 default:
                     IsTeeShape = false;
                     member = new ShearMemberWithoutStiffeners(h, t_w, material, IsTeeShape);

@@ -37,7 +37,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         /// <param name="F_y">Steel shape yield stress</param>
         /// <param name="t_r"> Plate thickness of opening reinforcement (top or bottom)</param>
         /// <param name="b_r"> Plate width (horizontal dimension in cross-section) for reinforcement</param>
-        public WebOpeningBase(SectionI Section, double a_o, double h_o, double e, double F_y, double t_r, double b_r)
+        public WebOpeningBase(ISectionI Section, double a_o, double h_o, double e, double F_y, double t_r, double b_r,
+             bool IsSingleSideReinforcement , double PlateOffset)
         {
                 this.a_o =a_o;
                 this.h_o =h_o;
@@ -45,7 +46,16 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
                 this.F_y = F_y;
                 this.t_r = t_r;
                 this.b_r = b_r;
+                SectionI sec = new SectionI(null, Section.d, Section.b_fTop, Section.t_fTop, Section.t_w);
+
+                   this.Section = sec;
+
+                   this.PlateOffset = PlateOffset;
+                   this.IsSingleSideReinforcement = IsSingleSideReinforcement;
         }
+
+        public double PlateOffset              {get; set;}
+        public bool IsSingleSideReinforcement { get; set; }
 
         public double t_r { get; set; }
         public double b_r { get; set; }
@@ -61,7 +71,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         {
             get {
                 double d = Section.d;
-                double s_t = d / 2 - (e + h_o / 2);
+                double s_t = d / 2.0 - (e + h_o / 2.0);
                 return s_t;
             }
         }
@@ -71,13 +81,13 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
             get
             {
                 double d = Section.d;
-                double s_b = d / 2*(h_o / 2 - e);
+                double s_b = d / 2.0-(h_o / 2.0 - e);
                 return s_b;
             }
         }
         public SectionI Section { get; set; }
 
-        public  double GetShearStrength()
+        public  virtual double GetShearStrength()
         {
             double d = Section.d;
 
@@ -87,8 +97,8 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
             double mu_Bottom = Get_mu_Bottom();
             double nu_Bottom = Get_nu_Bottom();
 
-            double alphaTop = Get_alphaTop(mu_Top, nu_Top);
-            double alphaBottom = Get_alphaBottom(mu_Bottom, nu_Bottom);
+            double alphaTop = Get_alphaTop();
+            double alphaBottom = Get_alphaBottom();
 
 
             double V_pt = GetV_pt();
@@ -126,7 +136,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         {
              double t_w = Section.t_w;
 
-            double V_p = F_y * t_w * s / Math.Sqrt(3);
+            double V_p = F_y * t_w * s / Math.Sqrt(3.0);
 
             return V_p;
         }
@@ -137,20 +147,24 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
             return V_mt;
         }
 
-        protected virtual double Get_alphaTop(double mu, double nu)
-        {
-            double alphaTop = Get_alpha(mu, nu);
-            return alphaTop;
-        }
+        protected abstract double Get_alphaTop();
+        //{
+        //    double alphaTop = Get_alpha(mu, nu);
+        //    return alphaTop;
+        //}
 
-        protected virtual double Get_alphaBottom(double mu, double nu)
+        protected virtual double Get_alphaBottom()
         {
+            double mu = Get_mu_Bottom();
+            double nu = Get_nu_Bottom();
             double alphaBottom = Get_alpha(mu, nu);
             return alphaBottom;
         }
+
+
         protected double Get_alpha(double mu, double nu)
         {
-            double alpha  = ((Math.Sqrt(6) + mu) / (nu + Math.Sqrt(3)));
+            double alpha  = ((Math.Sqrt(6.0) + mu) / (nu + Math.Sqrt(3.0)));
             return alpha;
         }
 
@@ -164,7 +178,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections.WebOpenings
         
         public abstract double Get_mu_Bottom();
 
-        public abstract double GetFlexuralStrength();
+        //public abstract double GetFlexuralStrength();
 
     }
 }

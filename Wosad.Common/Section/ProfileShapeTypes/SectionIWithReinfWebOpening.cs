@@ -42,6 +42,7 @@ namespace Wosad.Common.Section.SectionTypes
             this.e   =e   ;
             this.b_r =b_r ;
             this.t_r = t_r;
+            this.IsOneSidedReinforcement = IsOneSidedReinforcement;
 
         }
 
@@ -68,20 +69,20 @@ namespace Wosad.Common.Section.SectionTypes
             double t_f = this.tf;
             double b_f = this.b_fTop;
 
-            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
-            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, t_f / 2));
+            CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2.0));
+            CompoundShapePart BottomFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, t_f / 2.0));
 
-            double h_webUpper = (d - 2 * t_f)/2.0 -(e+h_o/2.0+t_r);
+            double h_webUpper = (d - 2.0 * t_f)/2.0 -(e+h_o/2.0+t_r);
             double y_WebUpper = d - t_f - h_webUpper / 2.0;
             CompoundShapePart WebUpper = new CompoundShapePart(t_w, h_webUpper, new Point2D(0, y_WebUpper));
 
 
 
-            double h_webLower = (d - 2 * t_f) / 2.0 - (-e + h_o / 2.0 + t_r);
+            double h_webLower = (d - 2.0 * t_f) / 2.0 - (-e + h_o / 2.0 + t_r);
             double y_WebLower = t_f + h_webLower / 2.0;
             CompoundShapePart WebLower = new CompoundShapePart(t_w, h_webLower, new Point2D(0, y_WebLower));
 
-            double y_ReinfUpper = d - t_f - h_webUpper - t_r / 2; ;
+            double y_ReinfUpper = d - t_f - h_webUpper - t_r / 2.0; ;
             CompoundShapePart ReinfUpper;
             if (IsOneSidedReinforcement == true)
             {
@@ -93,7 +94,7 @@ namespace Wosad.Common.Section.SectionTypes
             }
             
 
-            double y_ReinfLower = t_f + h_webLower + t_r / 2; ;
+            double y_ReinfLower = t_f + h_webLower + t_r / 2.0; ;
             CompoundShapePart ReinfLower;
 
             if (IsOneSidedReinforcement == true)
@@ -105,7 +106,7 @@ namespace Wosad.Common.Section.SectionTypes
                 ReinfLower = new CompoundShapePart(2.0*b_r + t_w, t_r, new Point2D(0, y_ReinfLower));
             }
 
-            CompoundShapePart Hole = new CompoundShapePart(0, h_o, new Point2D(0, d / 2 + e));
+            CompoundShapePart Hole = new CompoundShapePart(0, h_o, new Point2D(0, d / 2.0 + e));
 
             List<CompoundShapePart> rectX = new List<CompoundShapePart>()
             {

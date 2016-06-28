@@ -27,6 +27,7 @@ namespace Wosad.Steel.AISC
     {
         MemberWithoutStiffeners,
         MemberWithStiffeners,
-        Tee
+        Tee,
+        Box
     }
 }

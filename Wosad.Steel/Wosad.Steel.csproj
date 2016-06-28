@@ -72,6 +72,7 @@
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\F9-Tee.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AISC\AISC360v10\G_Shear\ShearMemberBox.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\BasePlateEccentricallyLoaded.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\BasePlateTensionLoaded.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateCircularHss.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateIShape.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateRectangularHss.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\BasePlate\Types\BasePlateTypeBase.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Composite\CompositeIBeamWebOpeningIteration.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Steel\SteelIBeamWebOpening.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussBranchPunching.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussBranchConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\TrussConnections\Chs\Base\ChsTrussConnectionQf.cs" />
@@ -137,8 +140,7 @@
     <Compile Include="AISC\Entities\UFM\UFMGeneralMomentAtBeamGussetInterface.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Base\IWebOpening.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Base\WebOpeningBase.cs" />
-    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Composite\CompositeWebOpening.cs" />
-    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Steel\SteelWebOpening.cs" />
+    <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Composite\CompositeIBeamWebOpening.cs" />
     <Compile Include="AISC\Entities\Sections\ChannelSection.cs" />
     <Compile Include="AISC\Entities\Sections\DoubleAngleSection.cs" />
     <Compile Include="AISC\Entities\Sections\BoxSection.cs" />
