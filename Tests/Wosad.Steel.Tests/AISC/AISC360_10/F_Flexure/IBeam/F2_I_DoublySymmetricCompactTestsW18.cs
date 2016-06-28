@@ -16,7 +16,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
 {
 
     [TestFixture]
-    public class DoublySymmetricICompactTests : ToleranceTestBase
+    public partial class DoublySymmetricICompactTests : ToleranceTestBase
     {
         public DoublySymmetricICompactTests()
         {
