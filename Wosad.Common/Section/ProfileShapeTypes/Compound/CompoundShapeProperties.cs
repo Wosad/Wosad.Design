@@ -473,7 +473,10 @@ double distanceFromBottomToPNA = sectionHeight - PNACoordinate;
         {
             foreach (var r in RectanglesXAxis)
             {
-                _J = _J + r.b * Math.Pow(r.h, 3) / 3;
+                double t = Math.Min(r.b, r.h);
+                double b= Math.Max(r.b, r.h);
+
+                _J = _J + b * Math.Pow(t, 3.0) / 3.0;
             }
 
 

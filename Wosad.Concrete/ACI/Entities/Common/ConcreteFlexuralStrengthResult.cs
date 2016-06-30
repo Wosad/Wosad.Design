@@ -70,8 +70,9 @@ namespace Wosad.Concrete.ACI
                 epsilon_t = strainDistribution.TopFiberStrain;
             }
 
-            IRebarMaterial controllingBarMaterial = nominalResult.ControllingTensionBar.Point.Rebar.Material;
-            double epsilon_ty = controllingBarMaterial.YieldStrain;
+            //uncomment after updating
+            //IRebarMaterial controllingBarMaterial = nominalResult.ControllingTensionBar.Point.Rebar.Material;
+            //double epsilon_ty = controllingBarMaterial.YieldStrain;
         }
  
         public double a { get; set; }

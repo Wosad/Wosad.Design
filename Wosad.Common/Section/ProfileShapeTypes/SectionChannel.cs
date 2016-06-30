@@ -204,19 +204,20 @@ namespace Wosad.Common.Section.SectionTypes
             return rectY;
         }
 
-        /// <summary>
-        /// From:
-        /// TORSIONAL SECTION PROPERTIES OF STEEL SHAPES
-        ///Canadian Institute of Steel Construction, 2002
-        /// </summary>
+
         protected override void CalculateWarpingConstant()
         {
-            double d_prime = 0.0;
-            d_prime = d - _t_f;
-            double b_prime = 0.0;
-            b_prime = _b_f - ((_t_w) / (2));
-            double alpha = 1 / (2 + (d_prime * _t_w) / (3 * b_prime * _t_f));
-            _C_w=Math.Pow((d_prime), 3)*Math.Pow((b_prime), 3)*_t_f*((1-3*alpha)/6+((alpha*alpha) / (2))*(1+((d_prime*_t_w) / (6*b_prime*_t_f))));
+            ////AISC Design Guide 09 3.20
+            double h = d - t_f;
+
+            ////AISC Design Guide 09 3.21
+            double b_prime = b_f - ((t_w) / (2.0));
+
+            ////AISC Design Guide 09 3.19
+            double E_o = ((t_f * Math.Pow(b_prime, 2)) / (2.0 * b_prime * t_f + ((h * t_w) / (3.0))));
+
+            ////AISC Design Guide 09 3.18
+           _C_w = ((Math.Pow(h, 2) * Math.Pow(b_prime, 2) * t_f * (b_prime - 3.0 * E_o)) / (6.0)) + Math.Pow(E_o, 2) * I_x;
 
         }
     }

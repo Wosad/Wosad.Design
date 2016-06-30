@@ -28,7 +28,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Tension
     public partial class TensionMember : SteelDesignElement
     {
 
-        protected double GetDesignTensileCapacity(double YieldStress, double UltimateStress,
+        public double GetDesignTensileCapacity(double YieldStress, double UltimateStress,
            double GrossArea, double EffectiveNetArea)
         {
             double P1 = GetYieldingInGrossSectionStrength(YieldStress, GrossArea);
@@ -45,11 +45,11 @@ namespace Wosad.Steel.AISC.AISC360v10.Tension
         /// <returns></returns>
         public double GetYieldingInGrossSectionStrength(double Fy, double Ag)
         {
-            double P=0.0;
-            P = 0.9 * Ag * Fy;
+            double phiP_n=0.0;
+            phiP_n = 0.9 * Ag * Fy;
 
 
-            return P;
+            return phiP_n;
         }
 
         /// <summary>
@@ -58,12 +58,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Tension
         /// <returns></returns>
         public double GetRuptureInNetSectionStrength(double Fu, double Ae)
         {
-            double P = 0.0;
+            double phiP_n = 0.0;
 
-                P = 0.75* Ae * Fu;
+                phiP_n = 0.75* Ae * Fu;
 
 
-            return P;
+            return phiP_n;
         }
     }
 }

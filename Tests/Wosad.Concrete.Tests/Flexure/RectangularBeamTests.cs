@@ -14,7 +14,21 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
     {
 
         [Test]
-        public void GetSimpleBeamFlexuralCapacityTop()
+        public void SimpleBeamFlexuralCapacityTopReturnsValue()
+        {
+            ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1));
+            IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
+            double M_n = MResult.Moment;
+
+            double refValue = 615883;
+            double actualTolerance = EvaluateActualTolerance(M_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
+
+        [Test]
+        public void SimpleBeamFlexuralCapacityTopReturnsRebarStrainValue()
         {
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1));
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
@@ -28,7 +42,7 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
         }
 
          [Test]
-        public void GetSimpleBeamFlexuralCapacityBottom()
+        public void SimpleBeamFlexuralCapacityBottomReturnsValue()
         {
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 11));
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Bottom);
@@ -40,7 +54,7 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
-        public void Get2LayerBeamFlexuralCapacity()
+         public void TwoLayerBeamFlexuralCapacityReturnsValue()
         {
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1), new RebarInput(1, 3));
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
@@ -48,7 +62,7 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
             Assert.AreEqual(1023529, Math.Round(phiMn, 0));
         }
 
-        public void Get3LayerBeamFlexuralCapacity()
+         public void ThreeLayerBeamFlexuralCapacityReturnsValue()
         {
             ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1), new RebarInput(1, 3), new RebarInput(1, 7));
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);

@@ -28,7 +28,7 @@ namespace Wosad.Concrete.ACI
     {
         public ConcreteSectionFlexuralAnalysisResult(double Moment, LinearStrainDistribution StrainDistribution, RebarPointResult controllingTensionBar): base(Moment,StrainDistribution)
         {
-            this.ControllingTensionBar = ControllingTensionBar;
+            this.ControllingTensionBar = controllingTensionBar;
         }
 
         public RebarPointResult ControllingTensionBar { get; set; }

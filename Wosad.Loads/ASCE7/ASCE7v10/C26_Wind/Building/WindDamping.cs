@@ -32,7 +32,7 @@ namespace Wosad.Loads.ASCE.ASCE7_10.WindLoads
                 case WindMaterialDampingType.Steel:
                     return 0.01;
                 case WindMaterialDampingType.Concrete:
-                    return 0.01;
+                    return 0.02;
                 default:
                     return 0.01;
 

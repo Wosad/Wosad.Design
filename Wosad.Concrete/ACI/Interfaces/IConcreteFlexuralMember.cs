@@ -31,5 +31,6 @@ namespace Wosad.Concrete.ACI
         IStrainCompatibilityAnalysisResult GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition CompressionFiberPosition);
         ConcreteFlexuralStrengthResult GetDesignFlexuralStrength(FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition,
             ConfinementReinforcementType ConfinementReinforcementType);
+
     }
 }

@@ -36,7 +36,7 @@ namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
         {
             get {
                 _Q_f = GetQ_f();
-                _Q_f = _Q_f > 1.0 ? 1.0 : Q_f;
+                _Q_f = _Q_f > 1.0 ? 1.0 : _Q_f;
                 return _Q_f; }
             set { _Q_f = value; }
         }

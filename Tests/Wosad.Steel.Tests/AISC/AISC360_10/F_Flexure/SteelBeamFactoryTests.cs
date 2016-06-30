@@ -28,7 +28,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
 
                
         [Test]
-        public void DoublySymmetricIReturnsFlexuralYieldingStrength                 () 
+        public void DoublySymmetricIReturnsLateralTorsionalStrength () 
         {
 
             FlexuralMemberFactory factory = new FlexuralMemberFactory();

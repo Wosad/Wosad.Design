@@ -34,7 +34,7 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
 
          public SectionIRolledTests()
         {
-            tolerance = 0.05; //5% can differ from fillet areas and rounding in the manual
+            tolerance = 0.06; //6% can differ from fillet areas and rounding in the manual
         }
 
         double tolerance;
@@ -71,5 +71,23 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
              Assert.LessOrEqual(actualTolerance, tolerance);
          }
 
+         [Test]
+         public void SectionIRolledReturnsJ()
+         {
+             SectionI shape = new SectionI("", 12.2, 6.49, 0.38, 0.23);
+             double J = shape.J;
+             double refValue = 0.3;
+             double actualTolerance = EvaluateActualTolerance(J, refValue);
+             Assert.LessOrEqual(actualTolerance, tolerance);
+         }
+         [Test]
+         public void SectionIRolledReturnsC_w()
+         {
+             SectionI shape = new SectionI("", 12.2, 6.49, 0.38, 0.23);
+             double C_w = shape.C_w;
+             double refValue = 607.0;
+             double actualTolerance = EvaluateActualTolerance(C_w, refValue);
+             Assert.LessOrEqual(actualTolerance, tolerance);
+         }
     }
 }

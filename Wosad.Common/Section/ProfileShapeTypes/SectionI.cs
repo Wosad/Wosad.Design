@@ -188,7 +188,6 @@ namespace Wosad.Common.Section.SectionTypes
             double FlangeWidth = this.b_fTop;
 
 
-            //review this ....
 
             // I-shape converted to X-shape 
             double FlangeOverhang = (b_f - t_w) / 2.0;
@@ -205,31 +204,21 @@ namespace Wosad.Common.Section.SectionTypes
             return rectY;
         }
 
-        /// <summary>
-        /// From:
-        /// TORSIONAL SECTION PROPERTIES OF STEEL SHAPES
-        ///Canadian Institute of Steel Construction, 2002
-        /// </summary>
+
+
         protected override void CalculateWarpingConstant()
         {
-            double d = this.d;
-            double t_1 = tf;
-            double t_2 = t_fBot;
-            double b_1 = b_fTop;
-            double b_2 = b_fBot;
-
-            double d_p=d-((t_1+t_2) / 2);
-            double a =1/(Math.Pow(1+(b_1/b_2 ),3)*(t_1/t_2 ) );
-            this._C_w =(Math.Pow(d_p,2)*Math.Pow(b_1,3)* t_1*a)/12;
+            //AISC Design Guide 09 Eqn 3.5
+            double h = this.d - (this.t_fBot + t_fTop) / 2.0;
+            this._C_w = (((I_y * h * h)) / (4.0));
 
         }
-
 
         public double h_web
         {
             get 
             {
-                return d - (tf + t_fBot);
+                return d - (t_fTop + t_fBot);
             }
         }
     }
