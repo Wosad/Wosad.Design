@@ -12,15 +12,31 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
     [TestFixture]
     public partial class RectangularBeamTests: ToleranceTestBase
     {
-
+        /// <summary>
+        /// Wight. Reinforced concrete. 7th edition
+        /// </summary>
         [Test]
-        public void SimpleBeamFlexuralCapacityTopReturnsValue()
+        public void SimpleBeamFlexuralCapacityTopReturnsNominalValue()
         {
-            ConcreteSectionFlexure beam = GetConcreteBeam(12, 12, 4000, new RebarInput(1, 1));
+            ConcreteSectionFlexure beam = GetConcreteBeam(12, 20, 4000, new RebarInput(4, 2.5));
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
             double M_n = MResult.Moment;
 
-            double refValue = 615883;
+            double refValue = 291000*12.0;
+            double actualTolerance = EvaluateActualTolerance(M_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+
+        }
+
+        [Test]
+        public void SimpleBeamFlexuralCapacityTopReturnsDesignValue()
+        {
+            ConcreteSectionFlexure beam = GetConcreteBeam(12, 20, 4000, new RebarInput(4, 2.5));
+            ConcreteFlexuralStrengthResult MResult = beam.GetDesignFlexuralStrength(FlexuralCompressionFiberPosition.Top, ConfinementReinforcementType.Ties);
+            double M_n = MResult.phiM_n/1000/12.0;
+
+            double refValue = 253.0;
             double actualTolerance = EvaluateActualTolerance(M_n, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);
@@ -34,12 +50,14 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
             IStrainCompatibilityAnalysisResult MResult = beam.GetNominalFlexuralCapacity(FlexuralCompressionFiberPosition.Top);
             double M_n = MResult.Moment;
 
-            double refValue = 615883;
+            double refValue = 615883; 
             double actualTolerance = EvaluateActualTolerance(M_n, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);
 
         }
+
+
 
          [Test]
         public void SimpleBeamFlexuralCapacityBottomReturnsValue()

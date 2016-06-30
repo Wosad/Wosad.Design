@@ -56,23 +56,22 @@ namespace Wosad.Concrete.ACI
             FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition, double beta1)
         {
             LinearStrainDistribution strainDistribution = nominalResult.StrainDistribution;
-            double a;
+
             double d = strainDistribution.Height;
 
             if (FlexuralCompressionFiberPosition == FlexuralCompressionFiberPosition.Top)
             {
-                a = strainDistribution.NeutralAxisTopDistance * beta1;
+                this.a = strainDistribution.NeutralAxisTopDistance * beta1;
                 epsilon_t = strainDistribution.BottomFiberStrain;
             }
             else
             {
-                a = (d - strainDistribution.NeutralAxisTopDistance) * beta1;
+                this.a = (d - strainDistribution.NeutralAxisTopDistance) * beta1;
                 epsilon_t = strainDistribution.TopFiberStrain;
             }
 
-            //uncomment after updating
-            //IRebarMaterial controllingBarMaterial = nominalResult.ControllingTensionBar.Point.Rebar.Material;
-            //double epsilon_ty = controllingBarMaterial.YieldStrain;
+            IRebarMaterial controllingBarMaterial = nominalResult.ControllingTensionBar.Point.Rebar.Material;
+            epsilon_ty = controllingBarMaterial.YieldStrain;
         }
  
         public double a { get; set; }

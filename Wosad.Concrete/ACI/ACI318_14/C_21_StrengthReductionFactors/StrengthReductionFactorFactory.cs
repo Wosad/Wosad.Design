@@ -37,6 +37,7 @@ namespace Wosad.Concrete.ACI318_14
         public double Get_phiFlexureAndAxial(FlexuralFailureModeClassification failureMode,
             ConfinementReinforcementType ConfinementReinforcementType, double epsilon_t, double epsilon_ty)
         {
+            epsilon_t = Math.Abs(epsilon_t);
             switch (failureMode)
             {
                 case FlexuralFailureModeClassification.CompressionControlled:
@@ -77,11 +78,12 @@ namespace Wosad.Concrete.ACI318_14
         /// <returns></returns>
         public FlexuralFailureModeClassification GetFlexuralFailureMode(double epsilon_t, double epsilon_ty)
         {
-            if (epsilon_t <= epsilon_ty)
+            double epsilon_tAbs = Math.Abs(epsilon_t);
+            if (epsilon_tAbs <= epsilon_ty)
             {
                 return FlexuralFailureModeClassification.CompressionControlled;
             }
-            else if (epsilon_t > epsilon_ty && epsilon_t < 0.005)
+            else if (epsilon_tAbs > epsilon_ty && epsilon_tAbs < 0.005)
             {
                 return FlexuralFailureModeClassification.Transition;
             }
