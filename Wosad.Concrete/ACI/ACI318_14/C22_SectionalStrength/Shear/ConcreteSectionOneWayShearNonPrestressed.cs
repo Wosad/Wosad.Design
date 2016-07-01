@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Wosad.Common.Entities;
 using Wosad.Concrete.ACI;
+using Wosad.Concrete.ACI.Entities;
 
 namespace Wosad.Concrete.ACI318_14
 {
@@ -28,8 +29,9 @@ namespace Wosad.Concrete.ACI318_14
     /// </summary>
     public partial class ConcreteSectionOneWayShearNonPrestressed : AnalyticalElement
     {
-        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IRebarMaterial RebarMaterial)
-            : this(d, Section, RebarMaterial, 0, 0)
+
+        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section)
+            : this(d, Section, null, 0, 0)
         {
 
         }
@@ -70,13 +72,15 @@ namespace Wosad.Concrete.ACI318_14
                     set { section = value; }
                 }
                 
-         public double GetConcreteShearStrength()
-                {
-                    return this.GetConcreteShearStrength(0, 0, 0, 0, 0, 0);
-                }
-         public double GetConcreteShearStrength(double A_g, double N_u,double h, double rho_w, double M_u, double V_u)
+         //public double GetConcreteShearStrength()
+         //       {
+         //           return this.GetConcreteShearStrength(0, 0, 0, 0, 0, 0);
+         //       }
+                public double GetConcreteShearStrength( double N_u, double rho_w, double M_u, double V_u)
         {
-            this.A_g  =A_g  ;
+
+            double h = Section.SliceableShape.YMax - Section.SliceableShape.YMin;
+            this.A_g = Section.SliceableShape.A;
             this.N_u  =N_u  ;
             this.rho_w = rho_w;
             double V_c;
@@ -130,7 +134,7 @@ namespace Wosad.Concrete.ACI318_14
                 }
                 else //tension 
                 {
-                    V_c = 2 * (1 + ((N_u) / (500.0 * A_g))) * lambda * Section.Material.Sqrt_f_c_prime * b_w * d;  //(22.5.7.1)
+                    V_c = 2.0 * (1.0 + ((N_u) / (500.0 * A_g))) * lambda * Section.Material.Sqrt_f_c_prime * b_w * d;  //(22.5.7.1)
                 }
             }
 

@@ -29,9 +29,9 @@ namespace Wosad.Loads.Tests.ASCE7_10.SeismicLoads
 {
 
     [TestFixture]
-    public class SeismicApproximatePeriodTests : ToleranceTestBase
+    public class AsceSeismicApproximatePeriodTests : ToleranceTestBase
     {
-        public SeismicApproximatePeriodTests()
+        public AsceSeismicApproximatePeriodTests()
         {
             tolerance = 0.02; //2% can differ from rounding
         }

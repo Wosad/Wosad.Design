@@ -27,7 +27,7 @@ using Wosad.Loads.ASCE.ASCE7_10.DeadLoads.Components;
 namespace Wosad.Loads.Tests.ASCE7.ASCE7_10.C03_DeadLoads
 {
     [TestFixture]
-    public partial class ComponentDeadWeightTests
+    public partial class AsceComponentDeadWeightTests
     {
         [Test]
         public void UngroutedCMULWReturnsValue8In()

@@ -12,10 +12,10 @@ using Wosad.Concrete.ACI.Entities;
 namespace Wosad.Concrete.ACI318_14.Tests
 {
     [TestFixture]
-    public class SquareColumnTests : ConcreteTestBase
+    public class AciCompressionSquareColumnTests : ConcreteTestBase
     {
 
-        public SquareColumnTests()
+        public AciCompressionSquareColumnTests()
         {
             tolerance = 0.03; //3% can differ from rounding
         }

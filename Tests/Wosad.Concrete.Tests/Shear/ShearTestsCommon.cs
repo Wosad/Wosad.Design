@@ -12,10 +12,10 @@ using Wosad.Concrete.ACI.Entities;
 
 
 
-namespace Wosad.Concrete.ACI318_14.Tests.Flexure
+namespace Wosad.Concrete.ACI318_14.Tests.Shear
 {
     [TestFixture]
-    public partial class RectangularBeamTests
+    public partial class AciConcreteShearRectangularBeamTests
     {
         private ICalcLog log;
 
@@ -45,7 +45,7 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
 
         double tolerance; 
 
-        public RectangularBeamTests()
+        public AciConcreteShearRectangularBeamTests()
         {
             //ICalcLogEntry entryStub = mocks.Stub<ICalcLogEntry>();
             MockRepository mocks = new MockRepository();
@@ -53,33 +53,34 @@ namespace Wosad.Concrete.ACI318_14.Tests.Flexure
             tolerance = 0.02; //2% can differ from rounding
         }
 
-        public IConcreteMaterial GetConcreteMaterial(double fc)
+        public IConcreteMaterial GetConcreteMaterial(double fc, bool IsLightWeight)
         {
-            ConcreteMaterial concrete = new ConcreteMaterial(fc, ConcreteTypeByWeight.Normalweight, log);
+            ConcreteMaterial concrete;
+            if (IsLightWeight == true)
+            {
+                concrete = new ConcreteMaterial(fc, ConcreteTypeByWeight.Lightweight, log);
+            }
+            else
+            {
+                concrete = new ConcreteMaterial(fc, ConcreteTypeByWeight.Normalweight, log);
+            }
+
             return concrete;
         }
 
-        public IConcreteSection GetRectangularSection(double Width, double Height, double fc)
+        public IConcreteSection GetRectangularSection(double Width, double Height, double fc, bool IsLightWeight)
         {
-            IConcreteMaterial mat = GetConcreteMaterial(fc);
+            IConcreteMaterial mat = GetConcreteMaterial(fc, IsLightWeight);
             CrossSectionRectangularShape section = new CrossSectionRectangularShape(mat, null, Width, Height);
             return section;
         }
 
-        public ConcreteSectionFlexure GetConcreteBeam(double Width, double Height, double fc, params RebarInput[] rebarInput)
+        public ConcreteSectionOneWayShearNonPrestressed GetConcreteOneWayShearBeam(double Width, double Height, double fc, double d, bool IsLightWeight)
         {
 
-            IConcreteSection Section = GetRectangularSection(Width, Height, fc);
+            IConcreteSection Section = GetRectangularSection(Width, Height, fc,IsLightWeight);
 
-            List<RebarPoint> LongitudinalBars = new List<RebarPoint>();
-            foreach (var bar in rebarInput)
-            {
-                Rebar thisBar = new Rebar(bar.Area, new MaterialAstmA615(A615Grade.Grade60));
-                RebarPoint point = new RebarPoint(thisBar, new RebarCoordinate() { X = 0, Y = -Height / 2.0 + bar.Cover });
-                LongitudinalBars.Add(point);
-            }
-
-            ConcreteSectionFlexure beam = new ConcreteSectionFlexure(Section,LongitudinalBars, log);
+            ConcreteSectionOneWayShearNonPrestressed beam = new ConcreteSectionOneWayShearNonPrestressed(d,Section);
             return beam;
         }
     }
