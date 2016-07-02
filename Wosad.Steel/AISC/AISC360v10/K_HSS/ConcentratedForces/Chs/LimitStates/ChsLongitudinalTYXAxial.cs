@@ -22,8 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-////using Wosad.Analytics.Section;
- 
  
 using Wosad.Common.Mathematics;
 using Wosad.Common.CalculationLogger.Interfaces; 
@@ -31,12 +29,11 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
-
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class ChsTransversePlateTandXAxial : ChsToPlateConnection
+    public class ChsLongitudinalTYXAxial: ChsToPlateConnection
     {
-        private double angle;
+                private double angle;
 
         public double Angle
         {
@@ -44,61 +41,58 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             set { angle = value; }
         }
 
-        public ChsTransversePlateTandXAxial(SteelChsSection Hss, SteelPlateSection Plate, double Angle, ICalcLog CalcLog)
+        public ChsLongitudinalTYXAxial(SteelChsSection Hss, SteelPlateSection Plate, double Angle, ICalcLog CalcLog)
             : base(Hss, Plate, CalcLog)
         {
             this.angle = Angle;
         }
 
-        double GetAvailableStrength(bool ConnectingSurfaceInTension, double UtilizationRatio)
+        double GetAvailableStrength( bool ConnectingSurfaceInTension, double UtilizationRatio)
         {
             double R = 0.0;
-            R = HssLocalYieldingLS(UtilizationRatio, ConnectingSurfaceInTension);
+            //R = HssLocalYieldingLS(UtilizationRatio, ConnectingSurfaceInTension);
             return R;
         }
 
-        double GetAvailableStrength(bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        double GetAvailableStrength( bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
         {
             ISteelSection s = GetHssSteelSection();
             double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
             return this.GetAvailableStrength( ConnectingSurfaceInTension, U);
         }
 
-        double GetOutOfPlaneMomentForPlateBending(double UtilizationRatio,  bool ConnectingSurfaceInTension)
-        {
-            double M = 0.0;
-            double Bp = Plate.Section.H;
-            double R = HssLocalYieldingLS(UtilizationRatio,ConnectingSurfaceInTension);
-            M = 0.5 * Bp * R; //note R already contains reduction factors
-
-            return M;
-        }
-
-        double GetInPlaneMomentForPlateBending()
-        {
-            return 0.0;
-        }
-
-        internal double HssLocalYieldingLS(double UtilizationRatio, bool ConnectingSurfaceInTension )
+        double HssPlastification(double UtilizationRatio, bool ConnectingSurfaceInTension)
         {
             double R = 0.0;
+            double Rn = 0.0;
 
             double theta = this.angle;
             double sinTheta = Math.Sin(theta.ToRadians());
 
             double Fy = 0.0; double t = 0.0; double Bp = 0.0; double D = 0.0; double tp = 0.0;
-            this.GetTypicalParameters(ref Fy, ref t, ref Bp, ref D, ref tp);
-            
-            
-            double Qf = GetChordStressInteractionQf(UtilizationRatio, ConnectingSurfaceInTension);
-            //(K1-1)
-            double Rn = (Fy * Math.Pow(t, 2) * (5.5 / (1.0 - 0.81 * Bp / D)) * Qf)/sinTheta;
+            this.GetTypicalParameters(ref Fy, ref t, ref Bp, ref D,ref tp);
+            double lb = tp; //TODO: Add differentiation of tp and lb heere
 
-                R = 0.90 * Rn;
+            double Qf = GetStressInteractionQf(UtilizationRatio, ConnectingSurfaceInTension);
+
+            Rn = (5.5 * Fy * Math.Pow(t, 2) * (1.0 + 0.25 * lb / D) * Qf)/sinTheta; //(K1-2)
+
+                R = 0.9 * Rn;
 
 
             return R;
         }
 
+        double GetOutOfPlaneMomentForPlateBending()
+        {
+            return 0.0;
+        }
+
+        double GetInPlaneMomentForPlateBending( bool ConnectingSurfaceInTension, double UtilizationRatio)
+        {
+            double lb = Plate.Section.B;
+            double R = GetAvailableStrength(ConnectingSurfaceInTension, UtilizationRatio);
+            return 0.8 * lb * R;
+        }
     }
 }

@@ -39,19 +39,10 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             return s;
         }
 
-        public double GetChordStressInteractionQf(bool ConnectingSurfaceInTension)
-        {
-            return this.GetChordStressInteractionQf(0.0, ConnectingSurfaceInTension);
-        }
-
-        public double GetChordStressInteractionQf(double RequiredAxialStrenghPro, double RequiredMomentStrengthMro, bool ConnectingSurfaceInTension)
-        {
-            double U = GetUtilizationRatio(Hss, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetChordStressInteractionQf( U,  ConnectingSurfaceInTension);
-        }
 
 
-        internal double GetChordStressInteractionQf( double HssUtilizationRatio, bool ConnectingSurfaceInTension)
+        //K1-5
+        internal double GetStressInteractionQf( double HssUtilizationRatio, bool ConnectingSurfaceInTension)
         {
             double U = HssUtilizationRatio;
             double Qf = 0.0;

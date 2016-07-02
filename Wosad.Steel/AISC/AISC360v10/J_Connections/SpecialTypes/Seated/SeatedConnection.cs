@@ -44,7 +44,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Connections
             this.b_seat = b_seat;
             this.F_y = F_y;
             this.E = E;
-            theta = Math.Atan(a_seat / b_seat);
+            theta = Math.Atan(b_seat/a_seat );
         }
     }
 }
