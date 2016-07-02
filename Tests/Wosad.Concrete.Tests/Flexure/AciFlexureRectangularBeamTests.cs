@@ -10,7 +10,7 @@ using Wosad.Common.Section.Interfaces;
 namespace Wosad.Concrete.ACI318_14.Tests.Flexure
 {
     [TestFixture]
-    public partial class RectangularBeamTests: ToleranceTestBase
+    public partial class AciFlexureRectangularBeamTests: ToleranceTestBase
     {
         /// <summary>
         /// Wight. Reinforced concrete. 7th edition

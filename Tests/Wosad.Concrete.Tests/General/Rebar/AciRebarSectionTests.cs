@@ -9,7 +9,7 @@ using Wosad.Concrete.ACI;
 namespace Wosad.Concrete.Tests.General.Rebar
 {
     [TestFixture]
-    public class RebarSectionTests
+    public class AciRebarSectionTests
     {
         [Test]
         public void RebarSectionReturnsArea()
