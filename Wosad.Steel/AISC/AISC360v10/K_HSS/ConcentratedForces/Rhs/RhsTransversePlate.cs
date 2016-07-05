@@ -24,27 +24,74 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Entities;
+using Wosad.Steel.AISC.Steel.Entities;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsTransversePlate: RhsToPlateConnection
+    public partial class RhsTransversePlate: RhsToPlateConnection, IHssTransversePlateConnection
     {
-        public RhsTransversePlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+
+        public RhsTransversePlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss, TransversePlateType PlateType,
+            double P_uHss, double M_uHss)
+            : base(Hss, Plate, CalcLog, IsTensionHss,P_uHss,M_uHss)
         {
-           
+            this.PlateType = PlateType;
         }
 
-        double GetAvailableStrength()
+        TransversePlateType PlateType;
+        public SteelLimitStateValue GetLocalCripplingAndYieldingStrengthOfHss()
         {
-            double R = 0.0;
-                throw new NotImplementedException();
-            return R;
+
+            //(K1-9) (K1-10) (K1-11)
+            double phiR_n;
+            //= GetLocalYieldingOfPlate();
+            //double phiR_n1 = 
+
+            SteelLimitStateValue SideYieldingLimitState = GetHssSideYielding();
+            SteelLimitStateValue LocalCripplingLimitState;
+
+            if (PlateType == TransversePlateType.TConnection)
+            {
+                LocalCripplingLimitState = GetLocalCripplingOfSideWallsTee();
+            }
+            else
+            {
+                LocalCripplingLimitState = GetLocalCripplingOfSideWallsTee();
+            }
+            if (SideYieldingLimitState.IsApplicable == true)
+            {
+                if (SideYieldingLimitState.Value<LocalCripplingLimitState.Value)
+                {
+                    return SideYieldingLimitState;
+                }
+                else
+                {
+                   return LocalCripplingLimitState;
+                }
+            }
+            else
+            {
+                return LocalCripplingLimitState;
+            }
+
         }
 
+        public SteelLimitStateValue GetLocalPunchingStrengthOfPlate()
+        {
+            //(K1-8)
+            double phiR_n = GetHssPunching();
+            return new SteelLimitStateValue(phiR_n, false);
+        }
 
-    
+        public SteelLimitStateValue GetLocalYieldingStrengthOfPlate()
+        {
+            // (K1-7)
+            double phiR_n = GetLocalYieldingOfPlate();
+            return new SteelLimitStateValue(phiR_n, false);
+        }
     }
 }

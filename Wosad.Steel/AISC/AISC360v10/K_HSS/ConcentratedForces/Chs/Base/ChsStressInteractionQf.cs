@@ -22,27 +22,48 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-using Wosad.Common.Section.Interfaces;
-
+using Wosad.Steel.AISC.Interfaces;
  
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public abstract partial  class RhsToPlateConnection
+    public abstract partial class ChsToPlateConnection: HssToPlateConnection
     {
-        double GetBeta()
+        public ISteelSection GetHssSteelSection()
         {
-            double beta;
-            double Bp = Plate.Section.H;
-            ISectionTube tube = Hss.Section as ISectionTube;
-            if (tube == null)
+            ISteelSection s = Hss.Section as ISteelSection;
+            if (s==null)
             {
-                throw new Exception("Member must be of type SectionTube");
+                throw new Exception("Hss must implement ISteelSection interface");   
             }
+            return s;
+        }
 
-            double B = tube.B;
-            beta = Bp/B;
-            return beta;
+
+        public double Q_f
+        {
+            get {
+                double _Q_f = GetStressInteractionQf();
+                return _Q_f; }
+
+        }
+        
+
+
+        //K1-5
+        internal double GetStressInteractionQf()
+        {
+            double Qf = 0.0;
+
+            if (IsTensionHss == false)
+            {
+                Qf = 1.0 - 0.3 * U * (1 + U);
+            }
+            else
+            {
+                Qf = 1.0;
+            }
+            return Qf;
         }
     }
 }

@@ -24,6 +24,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 
 namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
@@ -47,9 +48,6 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             this.section = Section;
         }
 
-        //public override ISection Clone()
-        //{
-        //    return section.Clone();
-        //}
+
     }
 }

@@ -26,6 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 

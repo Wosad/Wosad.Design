@@ -28,13 +28,15 @@ using Wosad.Common.Section.Interfaces;
 
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsCapPlateAxial : RhsToPlateConnection
+    public partial class RhsCapPlate : RhsToPlateConnection
     {
-        public RhsCapPlateAxial(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+        public RhsCapPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss,
+            double P_uChord, double M_uChord)
+            : base(Hss, Plate, CalcLog, IsTensionHss,P_uChord,M_uChord)
         {
 
         }
@@ -53,7 +55,7 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
         internal double GetLocalYieldingOnSidewalls()
         {
             double R = 0;
-            double tp = Plate.Section.B;
+            
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
             {
@@ -62,22 +64,21 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 
             double B = tube.B;
             double Fy = Hss.Material.YieldStress;
-            double lb = tp; //TODO: add diferentiation between lb and tp
+            double tp = Plate.Section.B;
+            double lb = tp; 
             double A = tube.A;
 
             double Rn = 0.0;
-            if ((5.0*tp+lb)<B)
+            if ((5.0 * t_plCap + lb) < B)
             {
                 //(K1-14a)
-                Rn = 2.0 * Fy * tp * (5.0 * tp + lb);
+                Rn = 2.0 * Fy * t_plCap * (5.0 * t_plCap + lb);
             }
             else
             {
                 //(K1-14b)
                 Rn = Fy * A;
             }
-
-
                 R = 1.0 * Rn;
  
             return R;
@@ -101,10 +102,15 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             double E = SteelConstants.ModulusOfElasticity;
             double Fy = Hss.Material.YieldStress;
 
-            if (5.0*tp+lb<B)
+            if (5.0 * t_plCap + lb < B)
             {
                 //(K1-15)
-                Rn=1.6*Math.Pow(t,2)*(1.0+6.0*lb/B*Math.Pow(t/tp,1.5))*Math.Sqrt(E*Fy*tp/t);
+                Rn = 1.6 * Math.Pow(t, 2) * (1.0 + 6.0 * lb / B * Math.Pow(t / t_plCap, 1.5)) * Math.Sqrt(E * Fy * t_plCap / t);
+            }
+            else
+            {
+                double A = tube.A;
+                Rn = Fy * A;
             }
  
                 R = 0.75 * Rn;

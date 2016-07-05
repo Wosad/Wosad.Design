@@ -15,8 +15,9 @@
    */
 #endregion
 using System;
-using Wosad.Steel.AISC.SteelEntities;
-namespace Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections
+using Wosad.Steel.AISC.Steel.Entities;
+
+   namespace Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections
 
 
 

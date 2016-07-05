@@ -27,6 +27,7 @@ using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Members;
 
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Flexure

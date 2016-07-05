@@ -56,18 +56,18 @@ namespace Wosad.Common.Section.SectionTypes
             get { return b; }
         }
 
-        private double _t_f;
+        protected double _t_f;
 
         public double t_f
         {
             get { return _t_f; }
         }
 
-        private double tw;
+        protected double _t_w;
 
         public double t_w
         {
-            get { return tw; }
+            get { return _t_w; }
         }
 
         private double _h_web;
@@ -84,7 +84,7 @@ namespace Wosad.Common.Section.SectionTypes
             this.h = H;
             this.b = B;
             this._t_f = t_f;
-            this.tw = t_w;
+            this._t_w = t_w;
             this.h_o = H - _t_f;
             this._h_web = H - 2.0 * _t_f;
         }
@@ -128,7 +128,7 @@ namespace Wosad.Common.Section.SectionTypes
         public ISection GetWeakAxisClone()
         {
             string cloneName = this.Name + "_clone";
-            return new SectionBox(cloneName, b, h, tw, _t_f);
+            return new SectionBox(cloneName, b, h, _t_w, _t_f);
         }
 
 
@@ -144,9 +144,9 @@ namespace Wosad.Common.Section.SectionTypes
         /// </summary>
         protected override void CalculateTorsionalConstant()
         {
-            double p=2*((h-_t_f)+(b-tw));
-            double A_p=(h-_t_f)*(b-tw);
-            _J=((4*A_p*A_p*tw) / (p)); //need to confirm tw in this equation
+            double p=2*((h-_t_f)+(b-t_w));
+            double A_p=(h-_t_f)*(b-t_w);
+            _J=((4*A_p*A_p*t_w) / (p)); //need to confirm tw in this equation
         }
     }
 }

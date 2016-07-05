@@ -25,24 +25,40 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsLongitudinalThroughPlate: RhsToPlateConnection
+    public partial class RhsLongitudinalThroughPlate: RhsToPlateConnection, IHssLongitudinalPlateConnection
     {
-        public RhsLongitudinalThroughPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+        public RhsLongitudinalThroughPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss, double Angle,
+            double P_uHss, double M_uHss)
+            : base(Hss, Plate, CalcLog, IsTensionHss,P_uHss,M_uHss)
         {
-           
+            this.Angle = Angle;
         }
 
-        double GetAvailableStrength()
+        private double angle;
+
+        public double Angle
         {
-            double R = 0.0;
-                throw new NotImplementedException();
-            return R;
+            get { return angle; }
+            set { angle = value; }
         }
-    
+
+
+        public SteelLimitStateValue GetHssWallPlastificationStrengthUnderAxialLoad()
+        {
+            double phiR_n = GetHSSWallPlastification();
+            return new SteelLimitStateValue(phiR_n, false);
+        }
+
+        public SteelLimitStateValue GetHssMaximumPlateThicknessForShearLoad()
+        {
+            return new SteelLimitStateValue(-1, false);
+        }
     }
 }

@@ -8,6 +8,7 @@ using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections;
 using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
 using Wosad.Steel.AISC.Entities;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 

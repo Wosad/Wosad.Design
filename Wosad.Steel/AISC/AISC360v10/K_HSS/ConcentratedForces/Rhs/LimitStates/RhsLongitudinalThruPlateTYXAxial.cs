@@ -34,36 +34,11 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsLongitudinalThruPlateTYXAxial : RhsToPlateConnection
+    public partial class RhsLongitudinalThroughPlate : RhsToPlateConnection
     {
-        private double angle;
 
-        public double Angle
-        {
-            get { return angle; }
-            set { angle = value; }
-        }
 
-        public RhsLongitudinalThruPlateTYXAxial(SteelRhsSection Hss, SteelPlateSection Plate, double Angle,  ICalcLog CalcLog)
-            :base(Hss,Plate, CalcLog)
-        {
-            this.angle = Angle;
-        }
-
-        public double GetAvailableStrength(  double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
-        {
-            ISteelSection s = GetHssSteelSection();
-            double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength( U);
-        }
-
-        public double GetAvailableStrength( double UtilizationRatio)
-        {
-            
-            return LsHSSWallPlastification(UtilizationRatio);
-        }
-
-        internal double LsHSSWallPlastification(double UtilizationRatio)
+        internal double GetHSSWallPlastification()
         {
 
             //(K1-13)
@@ -85,7 +60,7 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
                 throw new Exception("Member must be of type IHollowMember");
             }
 
-            double tp = Plate.Section.H;
+            
             ISectionTube tube = Hss.Section as ISectionTube;
             if (tube == null)
             {
@@ -93,14 +68,14 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             }
 
             double B = tube.B;
-            double lb = tp; //Can add functionality to distinguish between lb and tp TODo:
-            double Qf = GetChordStressInteractionQf(PlateOrientation.Longitudinal, UtilizationRatio);
+            double tp = Plate.Section.B;
+            double lb = Plate.Section.H/sinTheta; 
+            double Qf = RhsStressInteractionQf(HssPlateOrientation.Longitudinal);
 
             //(K1-13)
-            Rn = 2.0*Fy*Math.Pow(t,2)/(1.0-(tp/B))*(2.0*lb/B+4.0*Math.Sqrt(1.0-tp/B)*Qf);
+            Rn = 2.0*Fy*Math.Pow(t,2)/(1.0-(tp/B))*(2.0*lb/B+4.0*Math.Sqrt(1.0-tp/B)*Qf)/sinTheta;
 
-
-                R = Rn * 1.0;
+            R = Rn * 1.0;
 
 
             return R;

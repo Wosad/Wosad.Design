@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 
-namespace Wosad.Steel.AISC.SteelEntities
+namespace Wosad.Steel.AISC.Steel.Entities
 {
     public class SteelLimitStateValue
     {

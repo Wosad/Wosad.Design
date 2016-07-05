@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.6.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.6.5\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.6.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.6.6\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -84,6 +84,14 @@
     <Compile Include="AISC\AISC360v10\J_Connections\WebOpenings\Steel\SteelIBeamWebOpening.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\ChsLongitudinalPlate.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\ChsTransversePlate.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsCapPlateYielding.cs" />
+    <Compile Include="AISC\Entities\Enums\HssPlateConnection\HssConcentratedForceType.cs" />
+    <Compile Include="AISC\Entities\Enums\HssPlateConnection\TransversePlateType.cs" />
+    <Compile Include="AISC\Interfaces\HssPlateConnection\IHssCapPlateConnection.cs" />
+    <Compile Include="AISC\Interfaces\HssPlateConnection\IHssTransversePlateConnection.cs" />
+    <Compile Include="AISC\Interfaces\HssPlateConnection\IHssLongitudinalPlateConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlatePunching.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateSideYielding.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsCapPlate.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsLongitudinalThroughPlate.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\RhsLongitudinalPlate.cs" />
@@ -396,26 +404,26 @@
     <Compile Include="AISC\AISC360v10\J_Connections\Weld\FilletWeldGroup.cs" />
     <Compile Include="AISC\AISC360v10\J_Connections\Weld\WeldFactory.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\ChsCapPlate.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsStressInteractionQf.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\Base\ChsStressInteractionQf.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsLongitudinalPlateShear.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsLongitudinalTYXAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsToPlateConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\Base\ChsToPlateConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Chs\LimitStates\ChsTransversePlateTandXAxial.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Base\HssToPlateConnection.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Base\HssUtilizationRatioU.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Base\IHssConcentratedForceConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Base\PlateOrientation.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsBeta.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsCapPlateAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsChordStressInteractionQf.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsEffectivePlateWidthBep.cs" />
+    <Compile Include="AISC\Interfaces\HssPlateConnection\IHssConcentratedForceConnection.cs" />
+    <Compile Include="AISC\Entities\Enums\HssPlateConnection\HssPlateOrientation.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\Base\RhsBeta.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsCapPlate.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\Base\RhsStressInteractionQf.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\Base\RhsEffectivePlateWidthBep.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsLongitudinalPlateShear.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsLongitudinalPlateTYXAxial.cs" />
     <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsLongitudinalThruPlateTYXAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsToPlateConnection.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateCrossAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateTandXAxial.cs" />
-    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateTeeAxial.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\Base\RhsToPlateConnection.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateCripplingCross.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlatePlateYielding.cs" />
+    <Compile Include="AISC\AISC360v10\K_HSS\ConcentratedForces\Rhs\LimitStates\RhsTransversePlateCripplingTee.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltGroupGeneral.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltHoleDeformationType.cs" />
     <Compile Include="AISC\Entities\Connections\Bolts\BoltPoint.cs" />

@@ -31,33 +31,15 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
     {
 
 
-        public double GetChordStressInteractionQf(bool ConnectingSurfaceInTension)
-        {
-            return this.GetChordStressInteractionQf(PlateOrientation.Transverse, 0.0, ConnectingSurfaceInTension);
-        }
-
-        public double GetChordStressInteractionQf(PlateOrientation PlateOrientation, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
-        {
-            ISteelSection s = GetHssSteelSection();
-            double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetChordStressInteractionQf(PlateOrientation, U, false);
-        }
-
-        public double GetChordStressInteractionQf(PlateOrientation PlateOrientation, double HssUtilizationRatio)
+        internal double RhsStressInteractionQf(HssPlateOrientation PlateOrientation)
         {
 
-            return this.GetChordStressInteractionQf(PlateOrientation, HssUtilizationRatio, false);
-        }
-
-        internal double GetChordStressInteractionQf(PlateOrientation PlateOrientation, double HssUtilizationRatio, bool ConnectingSurfaceInTension)
-        {
-            double U = HssUtilizationRatio;
             double Qf = 0.0;
             double Beta = GetBeta();
 
-            if (ConnectingSurfaceInTension==false)
+            if (IsTensionHss == false)
             {
-                if (PlateOrientation == PlateOrientation.Transverse)
+                if (PlateOrientation == HssPlateOrientation.Transverse)
                 {
                     //(K1-16)
                     Qf = 1.3 - 0.4 * U / Beta;

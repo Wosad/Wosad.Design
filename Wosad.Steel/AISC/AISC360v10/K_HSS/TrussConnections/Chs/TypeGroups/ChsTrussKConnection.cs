@@ -29,6 +29,7 @@ using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Entities;
 using Wosad.Common.Mathematics;
+using Wosad.Steel.AISC.Steel.Entities;
 
 namespace Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections
 {

@@ -32,6 +32,7 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Common.Section.Predefined;
 using Wosad.Steel.AISC.AISC360v10.B_General;
 using Wosad.Common;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
  
  
 

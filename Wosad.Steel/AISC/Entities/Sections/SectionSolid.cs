@@ -25,6 +25,7 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.AISC360v10.Flexure;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 
 namespace Wosad.Steel.AISC.SteelEntities.Sections
 {

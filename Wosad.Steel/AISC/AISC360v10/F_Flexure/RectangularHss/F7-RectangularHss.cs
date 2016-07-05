@@ -24,6 +24,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Steel.Entities;
 using Wosad.Steel.AISC.SteelEntities;
 
 

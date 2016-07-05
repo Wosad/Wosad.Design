@@ -33,7 +33,7 @@ using Wosad.Steel.AISC.Exceptions;
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public abstract partial class ChsToPlateConnection :HssToPlateConnection //: IHssConcentratedForceConnection
+    public abstract partial class ChsToPlateConnection :HssToPlateConnection, IHssConcentratedForceConnection
     {
 
         private SteelPlateSection plate;
@@ -53,8 +53,8 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
         }
 
 
-        public ChsToPlateConnection(SteelChsSection Hss, SteelPlateSection Plate,  ICalcLog CalcLog)
-            :base(CalcLog)
+        public ChsToPlateConnection(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss,double P_uHss, double M_uHss)
+            :base(IsTensionHss,P_uHss, M_uHss, CalcLog)
         {
             this.hss = Hss;
             this.plate = Plate;
@@ -74,6 +74,21 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             }
             D = pipe.D;
 
+        }
+
+        protected override double GetSectionModulus()
+        {
+            return hss.Section.S_xBot;
+        }
+
+        protected override double GetArea()
+        {
+            return hss.Section.A;
+        }
+
+        protected override double GetF_y()
+        {
+            return hss.Material.YieldStress;
         }
     }
 }

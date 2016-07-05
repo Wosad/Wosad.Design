@@ -28,6 +28,15 @@ namespace Wosad.Common.Tests.Section.ShapeTypes
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
+        [Test]
+        public void SteelRhsSectionReturnsArea()
+        {
+            SectionTube secChord = new SectionTube(null, 8, 8, 1 / 4.0, 0.93 * (1 / 4.0), 0.35);
+            double A = secChord.A;
+            double refValue = 7.1;
+            double actualTolerance = EvaluateActualTolerance(A, refValue);
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
         double tolerance;
     }
 }

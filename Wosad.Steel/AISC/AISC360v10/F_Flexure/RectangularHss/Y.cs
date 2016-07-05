@@ -33,6 +33,7 @@ using Wosad.Steel.AISC.AISC360v10.General.Compactness;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.Exceptions;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 

@@ -32,11 +32,26 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public partial class HssToPlateConnection : SteelDesignElement 
     {
-        
-        public HssToPlateConnection( ICalcLog CalcLog)
-            : base( CalcLog)
-        {
 
+        public HssToPlateConnection(bool IsTensionMember,
+    double P_uHss, double M_uHss, ICalcLog CalcLog)
+        {
+            this.IsTensionHss = IsTensionMember;
+            this.P_uHss = P_uHss;
+            this.M_uHss = M_uHss;
+        }
+
+        //public ISteelSection Section { get; set; }
+        double P_uHss { get; set; }
+        double M_uHss { get; set; }
+
+
+        private bool isTensionHss;
+
+        public bool IsTensionHss
+        {
+            get { return isTensionHss; }
+            set { isTensionHss = value; }
         }
     }
 }

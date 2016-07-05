@@ -25,53 +25,36 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
-namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
+namespace Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsTransversePlateTeeAxial: RhsTransversePlateTandXAxial
+    public partial class RhsTransversePlate : RhsToPlateConnection, IHssTransversePlateConnection
     //Note: the difference between RhsTransversePlateTeeAxial and RhsTransversePlateCrossAxial
     //Local Crippling of HSS Sidewalls limit state
     {
-        public RhsTransversePlateTeeAxial(SteelRhsSection Hss, SteelPlateSection Plate,  ICalcLog CalcLog)
-            : base(Hss, Plate,CalcLog)
-        {
 
-        }
 
-        public double GetAvailableStrength( )
-        {
-            double R = 0.0;
-            //TABLE K1.2 case 1
-            double Fy = Hss.Material.YieldStress;
-            ISectionTube tube = Hss.Section as ISectionTube;
-            if (tube == null)
-            {
-		        throw new Exception ("Rectangular Hss member must implement ISectionTube interface.");
-            }
-            double B = tube.B;
-            double Bp = Plate.Section.H;
-            double Fyp = Plate.Material.YieldStress;
-            double t = tube.t_des;
-            double tp = Plate.Section.B;
-            double beta = Bp/B;
-
-            //Limit States:
-            double LocalYieldingOfPlateLs = GetLocalYieldingOfPlateLs(B,Bp,t,tp,Fy,Fyp); //K1-7
-            double HssPunchingLs = GetHssPunchingLs(Fy,t,tp,B,Bp);
-
-            return R;
-        }
-       internal double GetLocalCripplingOfSideWallsLs(double t, double lb, double H, double E, double Fy, double Qf)
+        internal SteelLimitStateValue GetLocalCripplingOfSideWallsTee()
        {
            double R = 0.0;
            double Rn = 0.0;
+
+           double H = this.Hss.Section.H;
+           double E = this.Hss.Material.ModulusOfElasticity;
+           double Fy = Hss.Material.YieldStress;
+           double lb = Plate.Section.B;
+           double t = this.Hss.Section.t_des;
+
+           double Qf = RhsStressInteractionQf(HssPlateOrientation.Transverse);
+
            Rn=1.6* Math.Pow(t,2)*(1+3.0*lb/(H-3.0*t))*Math.Sqrt(E*Fy)*Qf;
 
                 R = Rn * 1.0;
 
 
-           return R;
+           return new SteelLimitStateValue(R,true);
        }
 
                 

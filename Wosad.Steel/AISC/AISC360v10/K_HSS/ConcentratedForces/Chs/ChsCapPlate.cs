@@ -25,37 +25,25 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
-namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
+namespace Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class ChsCapPlate: ChsToPlateConnection
+    public partial class ChsCapPlate : ChsToPlateConnection, IHssCapPlateConnection
     {
-        public ChsCapPlate(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+        public ChsCapPlate(SteelChsSection Hss, SteelPlateSection Plate, double t_plCap, ICalcLog CalcLog, bool IsTensionHss, double P_uHss, double M_uHss)
+            : base(Hss, Plate, CalcLog, IsTensionHss,P_uHss,M_uHss)
         {
-           
+            this.t_plCap = t_plCap;
         }
 
-        double GetAvailableStrength()
+        public SteelLimitStateValue GetHssYieldingOrCrippling()
         {
-            double R = 0.0;
-
-            double Fy = 0.0; double t = 0.0; double Bp = 0.0; double D = 0.0; double tp = 0.0;
-            this.GetTypicalParameters(ref Fy, ref t, ref Bp, ref D, ref tp);
-
-            double lb = tp; //TODO: differentiate between lb and tp here in the future
-
-            //(K1-4)
-            double Rn = 2.0 * Fy * t * (5.0 * tp + lb);
-            double A = Hss.Section.A;
-            Rn = Rn < Fy * A ? Rn : Fy * A;
-
-                R = 1.0 * Rn;
-
-
-            return R;
+            double phiR_n = GetCapPlateYielding(); //(K1-4)
+            return new SteelLimitStateValue(phiR_n, true);
         }
-    
+        public double t_plCap { get; set; }
     }
 }

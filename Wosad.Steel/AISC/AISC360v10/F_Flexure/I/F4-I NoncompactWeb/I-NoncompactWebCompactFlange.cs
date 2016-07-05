@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Steel.Entities;
 using Wosad.Steel.AISC.SteelEntities;
 
 namespace Wosad.Steel.AISC.AISC360v10.Flexure

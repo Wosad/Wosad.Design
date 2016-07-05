@@ -22,9 +22,6 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
-////using Wosad.Analytics.Section;
- 
- 
 using Wosad.Common.Mathematics;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
@@ -32,54 +29,16 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
 
-namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
+
+
+
+namespace Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class ChsTransversePlateTandXAxial : ChsToPlateConnection
+    public partial class ChsTransversePlate : ChsToPlateConnection, IHssTransversePlateConnection
     {
-        private double angle;
 
-        public double Angle
-        {
-            get { return angle; }
-            set { angle = value; }
-        }
 
-        public ChsTransversePlateTandXAxial(SteelChsSection Hss, SteelPlateSection Plate, double Angle, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
-        {
-            this.angle = Angle;
-        }
-
-        double GetAvailableStrength(bool ConnectingSurfaceInTension, double UtilizationRatio)
-        {
-            double R = 0.0;
-            R = HssLocalYieldingLS(UtilizationRatio, ConnectingSurfaceInTension);
-            return R;
-        }
-
-        double GetAvailableStrength(bool ConnectingSurfaceInTension, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
-        {
-            ISteelSection s = GetHssSteelSection();
-            double U = GetUtilizationRatio(s, RequiredAxialStrenghPro, RequiredMomentStrengthMro);
-            return this.GetAvailableStrength( ConnectingSurfaceInTension, U);
-        }
-
-        double GetOutOfPlaneMomentForPlateBending(double UtilizationRatio,  bool ConnectingSurfaceInTension)
-        {
-            double M = 0.0;
-            double Bp = Plate.Section.H;
-            double R = HssLocalYieldingLS(UtilizationRatio,ConnectingSurfaceInTension);
-            M = 0.5 * Bp * R; //note R already contains reduction factors
-
-            return M;
-        }
-
-        double GetInPlaneMomentForPlateBending()
-        {
-            return 0.0;
-        }
-
-        internal double HssLocalYieldingLS(double UtilizationRatio, bool ConnectingSurfaceInTension )
+        internal double HssLocalYielding( )
         {
             double R = 0.0;
 
@@ -90,9 +49,8 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             this.GetTypicalParameters(ref Fy, ref t, ref Bp, ref D, ref tp);
             
             
-            double Qf = GetStressInteractionQf(UtilizationRatio, ConnectingSurfaceInTension);
             //(K1-1)
-            double Rn = (Fy * Math.Pow(t, 2) * (5.5 / (1.0 - 0.81 * Bp / D)) * Qf)/sinTheta;
+            double Rn = (Fy * Math.Pow(t, 2) * (5.5 / (1.0 - 0.81 * Bp / D)) * Q_f)/sinTheta;
 
                 R = 0.90 * Rn;
 
@@ -100,5 +58,19 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             return R;
         }
 
+        //double GetOutOfPlaneMomentForPlateBending(double UtilizationRatio,  bool ConnectingSurfaceInTension)
+        //{
+        //    double M = 0.0;
+        //    double Bp = Plate.Section.H;
+        //    double R = HssLocalYieldingLS(UtilizationRatio,ConnectingSurfaceInTension);
+        //    M = 0.5 * Bp * R; //note R already contains reduction factors
+
+        //    return M;
+        //}
+
+        //double GetInPlaneMomentForPlateBending()
+        //{
+        //    return 0.0;
+        //}
     }
 }

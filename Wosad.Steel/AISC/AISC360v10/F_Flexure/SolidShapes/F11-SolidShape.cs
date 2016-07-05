@@ -29,6 +29,7 @@ using Wosad.Steel.AISC.AISC360v10.Flexure;
 using Wosad.Steel.AISC.Exceptions;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Common.Exceptions;
+using Wosad.Steel.AISC.Steel.Entities;
  
  
  

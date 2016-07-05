@@ -32,26 +32,73 @@ using Wosad.Steel.AISC.SteelEntities;
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
 
+ 
 
-    public partial class HssToPlateConnection : SteelDesignElement 
+
+
+    public abstract partial class HssToPlateConnection : SteelDesignElement 
     {
-        public double GetUtilizationRatio(ISteelSection Section, double RequiredAxialStrenghPro, double RequiredMomentStrengthMro)
+        //public double GetUtilizationRatio(ISteelSection Section, double P_uHss, double M_uHss)
+        //{
+        //    double U = 0;
+        //    double Fy = Section.Material.YieldStress;
+        //    double Fc = 0.0;
+
+        //    Fc = Fy;
+
+
+        //    ISection sec = Section.Shape;
+        //    double Ag = sec.A;
+        //    double S = Math.Min(sec.S_xBot, sec.S_xTop);
+        //    double Pro = RequiredAxialStrenghPro;
+        //    double Mro = RequiredMomentStrengthMro;
+        //    //(K1-6) from TABLE K1.2
+        //    U=Math.Abs(Pro/(Fc*Ag)+Mro/(Fc*S));
+        //    return U;
+        //}
+
+
+        private double _U;
+
+        public double U
         {
-            double U = 0;
-            double Fy = Section.Material.YieldStress;
-            double Fc = 0.0;
+            get
+            {
+                _U = GetU();
+                return _U;
+            }
+            set { _U = value; }
+        }
 
-                Fc = Fy;
-
-
-            ISection sec = Section.Shape;
-            double Ag = sec.A;
-            double S = Math.Min(sec.S_xBot, sec.S_xTop);
-            double Pro = RequiredAxialStrenghPro;
-            double Mro = RequiredMomentStrengthMro;
-            //(K1-6) from TABLE K1.2
-            U=Math.Abs(Pro/(Fc*Ag)+Mro/(Fc*S));
+        private double GetU()
+        {
+            double A_g = GetArea();
+            double S = GetSectionModulus();
+            double Axial = Math.Abs((P_uHss) / (F_y * A_g));
+            double Flexure = Math.Abs((M_uHss) / (F_y * S));
+            double U = (Axial + Flexure);
             return U;
+        }
+
+        protected abstract double GetSectionModulus();
+        protected abstract double GetArea();
+
+
+
+
+        protected abstract double GetF_y();
+
+       
+        private double _F_y;
+
+        protected double F_y
+        {
+            get
+            {
+                _F_y = GetF_y();
+                return _F_y;
+            }
+            set { _F_y = value; }
         }
 
     }

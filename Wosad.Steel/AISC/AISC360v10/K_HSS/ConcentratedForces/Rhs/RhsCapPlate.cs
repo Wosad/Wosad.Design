@@ -25,26 +25,28 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class RhsCapPlate: RhsToPlateConnection
+    public partial class RhsCapPlate : RhsToPlateConnection, IHssCapPlateConnection
     {
-        public RhsCapPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+        public RhsCapPlate(SteelRhsSection Hss, SteelPlateSection Plate, double t_plCap, ICalcLog CalcLog, bool IsTensionHss, double P_uHss, double M_uHss)
+            : base(Hss, Plate, CalcLog, IsTensionHss,P_uHss,M_uHss)
         {
-           
+            this.t_plCap = t_plCap;
         }
 
-        double GetAvailableStrength()
-        {
-            double R = 0.0;
+       public  double t_plCap { get; set; }
 
-                throw new NotImplementedException();
 
-            return R;
-        }
-    
+       public SteelLimitStateValue GetHssYieldingOrCrippling()
+       {
+           double phiR_n = GetAvailableStrength();
+           return new SteelLimitStateValue(phiR_n, true);
+       }
     }
 }

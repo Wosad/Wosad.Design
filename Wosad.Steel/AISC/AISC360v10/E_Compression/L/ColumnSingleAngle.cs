@@ -26,6 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.AISC360v10;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.AISC360v10.Compression;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
  

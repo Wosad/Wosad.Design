@@ -22,12 +22,27 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.Section.Interfaces;
+
+ 
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public enum PlateOrientation
+    public abstract partial  class RhsToPlateConnection :HssToPlateConnection
     {
-        Transverse,
-        Longitudinal
+        protected double GetBeta()
+        {
+            double beta;
+            double Bp = Plate.Section.H;
+            ISectionTube tube = Hss.Section as ISectionTube;
+            if (tube == null)
+            {
+                throw new Exception("Member must be of type SectionTube");
+            }
+
+            double B = tube.B;
+            beta = Bp/B;
+            return beta;
+        }
     }
 }

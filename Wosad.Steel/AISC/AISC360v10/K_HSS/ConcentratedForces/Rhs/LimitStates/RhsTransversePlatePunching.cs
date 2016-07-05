@@ -28,35 +28,24 @@ using Wosad.Steel.AISC.SteelEntities.Sections;
 
 
 
-namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
+
+namespace Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public abstract class RhsTransversePlateTandXAxial:RhsToPlateConnection
+    public partial class RhsTransversePlate : RhsToPlateConnection, IHssTransversePlateConnection
     {
-        public RhsTransversePlateTandXAxial(SteelRhsSection Hss, SteelPlateSection Plate,   ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
-        {
 
-        }
-
-
-        internal double GetLocalYieldingOfPlateLs(double B, double Bp, double t, double tp, double Fy, double Fyp)
-        {
-            //(K1-7)
-            double R;
-            double Rn = 0.0;
-            Rn = 10.0/(B/t)*Fy*Bp;
-            double RnMax = Fyp * tp * Bp;
-            Rn = Rn > RnMax ? RnMax : Rn;
-
-                R = Rn * 0.95;
-
-            return R;
-        }
-
-        internal double GetHssPunchingLs(double Fy, double t, double tp, double B, double Bp)
+        internal double GetHssPunching()
         {
             double R=0.0;
             double Rn = 0.0;
+            double B = this.Hss.Section.t_des;
+            double Bp = Plate.Section.H;
+            double Fy = Plate.Material.YieldStress;
+            double Fyp = Hss.Material.YieldStress;
+
+            double t = this.Hss.Section.t_des;
+            double tp = Plate.Section.B;
+            double beta = Bp / B;
 
             if (Bp<=(B-2.0*t)&& Bp>=0.85*B)
 	        {
@@ -74,27 +63,7 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
             return R;
         }
 
-        internal double GetHssSideYieldingLs(double beta,double Fy,double t, double lb)
-            {
-            double R=0.0;
-            double Rn =0.0;
-                //assume that Lb is bearing width, generally same as tp
-            if (beta == 1.0)
-	            {
-		            double k = 1.5*t; //outside radius
-                    Rn = 2.0*Fy*t*(5.0*k+lb);  //(K1-9)
-	            }
-            else
-	            {
-                 R=double.PositiveInfinity;
-	            }
-  
-	            R = Rn*1.0;
 
-
-            return R;
-
-            }
 
 
     }

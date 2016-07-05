@@ -31,7 +31,7 @@ namespace Wosad.Common.Section.SectionTypes
     {
 
 
-        public SectionTube(string Name, double H, double B, double t, double t_des=-1,
+        public SectionTube(string Name, double H, double B, double t, double t_des,
             double CornerRadiusOutside = -1)
             : base(Name, H, B, t_des, t_des)
         {
@@ -39,6 +39,9 @@ namespace Wosad.Common.Section.SectionTypes
             this.B = B;
             this.t_nom = t;
             this._t_des = t_des;
+            this._t_f = t_des;
+            this._t_w = t_des;
+
             if (CornerRadiusOutside == -1)
             {
                 this.r_c = 1.5 * t;

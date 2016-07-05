@@ -26,6 +26,7 @@ using Wosad.Common.Section.Predefined;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.AISC360v10.Compression;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 

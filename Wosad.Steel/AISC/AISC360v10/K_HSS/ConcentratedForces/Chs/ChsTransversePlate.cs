@@ -25,28 +25,44 @@ using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Steel.AISC.SteelEntities.Sections;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public class ChsTransversePlate: ChsToPlateConnection
+    public partial class ChsTransversePlate : ChsToPlateConnection, IHssTransversePlateConnection
     {
-        public ChsTransversePlate(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog)
-            : base(Hss, Plate, CalcLog)
+        public ChsTransversePlate(SteelChsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss,
+            double P_uHss, double M_uHss)
+            : base(Hss, Plate, CalcLog, IsTensionHss, P_uHss, M_uHss)
         {
-           
+           //assume 90 degrees for plate angle
+            Angle = 90.0;
         }
 
+        private double angle;
 
-        //Local Yielding of Plate
-
-
-        double GetAvailableStrength()
+        public double Angle
         {
-            double R = 0.0;
-                throw new NotImplementedException();
-            return R;
+            get { return angle; }
+            set { angle = value; }
         }
-    
+
+        public SteelLimitStateValue GetLocalCripplingAndYieldingStrengthOfHss()
+        {
+            return new SteelLimitStateValue(-1, false);
+        }
+
+        public SteelLimitStateValue GetLocalPunchingStrengthOfPlate()
+        {
+            return new SteelLimitStateValue(-1, false);
+        }
+
+        public SteelLimitStateValue GetLocalYieldingStrengthOfPlate()
+        {
+            //Limit State: HSS Local Yielding
+            double phiR_n = HssLocalYielding();
+            return new SteelLimitStateValue(phiR_n, true);
+        }
     }
 }

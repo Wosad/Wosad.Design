@@ -29,6 +29,6 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public interface IHssConcentratedForceConnection
     {
-        double GetAvailableStrength();
+        //double GetAvailableStrength();
     }
 }

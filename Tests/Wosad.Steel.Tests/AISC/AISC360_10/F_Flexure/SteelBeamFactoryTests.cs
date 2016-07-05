@@ -10,6 +10,7 @@ using Wosad.Common.Section.Predefined;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.AISC360v10.Flexure;
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Steel.AISC.Steel.Entities;
 using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Materials;
 

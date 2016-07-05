@@ -26,7 +26,7 @@ using Wosad.Common.Section.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 
 
-namespace Wosad.Steel.AISC.SteelEntities.Sections
+namespace Wosad.Steel.AISC.Steel.Entities.Sections
 {
    public abstract class SteelSectionBase : ISteelSection
     {

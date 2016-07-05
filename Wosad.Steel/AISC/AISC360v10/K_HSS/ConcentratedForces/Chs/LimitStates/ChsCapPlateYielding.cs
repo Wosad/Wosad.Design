@@ -22,40 +22,35 @@ using System.Text;
 using Wosad.Common.Entities; 
 using Wosad.Common.Section.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
+using Wosad.Common.CalculationLogger.Interfaces; 
 using Wosad.Steel.AISC.Interfaces;
- 
+
+
 
 namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
-    public abstract partial class ChsToPlateConnection: HssToPlateConnection
+    public partial class ChsCapPlate: ChsToPlateConnection, IHssCapPlateConnection
     {
-        public ISteelSection GetHssSteelSection()
+
+        public double GetCapPlateYielding()
         {
-            ISteelSection s = Hss.Section as ISteelSection;
-            if (s==null)
-            {
-                throw new Exception("Hss must implement ISteelSection interface");   
-            }
-            return s;
+            double R = 0.0;
+
+            double Fy = 0.0; double t = 0.0; double Bp = 0.0; double D = 0.0; double tp = 0.0;
+            this.GetTypicalParameters(ref Fy, ref t, ref Bp, ref D, ref tp);
+
+            double lb = tp;
+
+            //(K1-4)
+            double Rn = 2.0 * Fy * t * (5.0 * t_plCap + lb);
+            double A = Hss.Section.A;
+            Rn = Rn < Fy * A ? Rn : Fy * A;
+
+                R = 1.0 * Rn;
+
+
+            return R;
         }
 
-
-
-        //K1-5
-        internal double GetStressInteractionQf( double HssUtilizationRatio, bool ConnectingSurfaceInTension)
-        {
-            double U = HssUtilizationRatio;
-            double Qf = 0.0;
-
-            if (ConnectingSurfaceInTension==false)
-            {
-                    Qf =  1.0-0.3*U*(1 + U);
-            }
-            else
-            {
-                Qf = 1.0;
-            }
-            return Qf;
-        }
     }
 }

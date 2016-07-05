@@ -31,6 +31,8 @@ using Wosad.Steel.AISC.SteelEntities;
 using Wosad.Steel.AISC.SteelEntities.Sections;
 using Wosad.Steel.AISC.Entities;
 using Wosad.Steel.AISC.AISC360v10.K_HSS.TrussConnections;
+using Wosad.Steel.AISC.Steel.Entities.Sections;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 namespace  Wosad.Steel.AISC.AISC360v10.HSS.TrussConnections

@@ -26,6 +26,7 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Steel.AISC.Interfaces;
 using Wosad.Common.Section.SectionTypes;
 using Wosad.Steel.AISC.SteelEntities;
+using Wosad.Steel.AISC.Steel.Entities;
 
 
 namespace Wosad.Steel.AISC.AISC360v10.Compression
