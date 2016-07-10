@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -28,7 +29,7 @@ namespace Wosad.Common.Section.Predefined
     /// Predefined rectangular section is used for rectangular shapes having known properties 
     /// from catalog such as precast concrete shapes.
     /// </summary>
-    public class PredefinedSectionRectangle : SectionPredefinedBase, ISectionRectangular
+    public class PredefinedSectionRectangle : SectionPredefinedBase, ISectionRectangular, ISliceableShapeProvider
     {
         public PredefinedSectionRectangle(ISection section)
             : base(section)
@@ -55,5 +56,11 @@ namespace Wosad.Common.Section.Predefined
         //{
         //    throw new NotImplementedException();
         //}
+
+        public ISliceableSection GetSliceableShape()
+        {
+            SectionRectangular r = new SectionRectangular(this.B, this.H);
+            return r;
+        }
     }
 }

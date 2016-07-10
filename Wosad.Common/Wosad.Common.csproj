@@ -130,6 +130,7 @@
     <Compile Include="Reports\ReportElementAttribute.cs" />
     <Compile Include="Section\Interfaces\IMeasurableAreaSection.cs" />
     <Compile Include="Exceptions\FailedToCalculateSectionPropertiesException.cs" />
+    <Compile Include="Section\Interfaces\ISliceableShapeProvider.cs" />
     <Compile Include="Section\Interfaces\ISolidShape.cs" />
     <Compile Include="Section\ProfileShapeTypes\Angle\AnglePrincialAxisProperties.cs" />
     <Compile Include="Section\ProfileShapeTypes\Compound\CompoundShapeSlicing.cs" />

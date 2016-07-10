@@ -34,10 +34,10 @@ namespace  Wosad.Steel.AISC360v10.HSS.ConcentratedForces
 {
     public partial class RhsLongitudinalPlate: RhsToPlateConnection, IHssLongitudinalPlateConnection
     {
-        public RhsLongitudinalPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss,double P_uHss, double M_uHss)
+        public RhsLongitudinalPlate(SteelRhsSection Hss, SteelPlateSection Plate, ICalcLog CalcLog, bool IsTensionHss, double Angle, double P_uHss, double M_uHss)
             : base(Hss, Plate, CalcLog, IsTensionHss, P_uHss,M_uHss)
         {
-            Angle = 90.0;
+            this.Angle = Angle;
         }
 
         public SteelLimitStateValue GetHssWallPlastificationStrengthUnderAxialLoad()

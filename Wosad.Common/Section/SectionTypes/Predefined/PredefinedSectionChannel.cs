@@ -29,7 +29,7 @@ namespace Wosad.Common.Section.Predefined
     /// Predefined C-section is used for channel shapes having known properties 
     /// from catalog (such as AISC shapes)
     /// </summary>
-    public class PredefinedSectionChannel : SectionPredefinedBase, ISectionChannel
+    public class PredefinedSectionChannel : SectionPredefinedBase, ISectionChannel, ISliceableShapeProvider
     {
         AiscCatalogShape s;
         public PredefinedSectionChannel(AiscCatalogShape section)

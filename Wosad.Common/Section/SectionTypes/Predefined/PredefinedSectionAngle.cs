@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.Section.Interfaces;
+using Wosad.Common.Section.SectionTypes;
 
 
 namespace Wosad.Common.Section.Predefined
@@ -28,7 +29,7 @@ namespace Wosad.Common.Section.Predefined
     /// Predefined L-section is used for single angles having known properties 
     /// from catalog (such as AISC shapes)
     /// </summary>
-    public class PredefinedSectionAngle : SectionPredefinedBase, ISectionAngle
+    public class PredefinedSectionAngle : SectionPredefinedBase, ISectionAngle, ISliceableShapeProvider
     {
 
         public PredefinedSectionAngle(AiscCatalogShape section, AngleOrientation AngleOrientation, AngleRotation AngleRotation)
@@ -189,6 +190,12 @@ namespace Wosad.Common.Section.Predefined
         {
             get { return angleRotation; }
             set { angleRotation = value; }
+        }
+
+        public ISliceableSection GetSliceableShape()
+        {
+            SectionAngle L = new SectionAngle("", this.d, this.b, this.t, this.AngleRotation, this.AngleOrientation);
+            return L;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Wosad.Common.Section.Predefined
     /// Predefined I-section is used for I-shapes having known properties 
     /// from catalog (such as AISC shapes)
     /// </summary>
-    public class PredefinedSectionI : SectionPredefinedBase, ISectionI
+    public class PredefinedSectionI : SectionPredefinedBase, ISectionI, ISliceableShapeProvider
     {
         AiscCatalogShape s;
         public PredefinedSectionI(AiscCatalogShape section)

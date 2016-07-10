@@ -29,7 +29,7 @@ namespace Wosad.Common.Section.Predefined
     /// Predefined  rectangular HSS section is used for rectangular or square hollow sections (RHS) having known properties 
     /// from catalog (such as AISC shapes)
     /// </summary>
-    public class PredefinedSectionRHS : SectionPredefinedBase, ISectionTube
+    public class PredefinedSectionRHS : SectionPredefinedBase, ISectionTube, ISliceableShapeProvider
     {
         public PredefinedSectionRHS(AiscCatalogShape section)
             : base(section)
