@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Wood.NDS.Entities;
 
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public partial class SawnLumberMember : WoodMember
     {
@@ -36,7 +36,7 @@ namespace Wosad.Wood.NDS.NDS_2015
         /// <param name="C_F">Size factor</param>
         /// <param name="SawnLumberType">Defines the type of lumber</param>
         /// <returns></returns>
-        private double GetWetServiceFactor(ReferenceDesignValueType ValueType, double F_b,
+        protected  double GetWetServiceFactor(ReferenceDesignValueType ValueType, double F_b,
             double C_F, SawnLumberType SawnLumberType)
         {
             double Cm = 1.0;

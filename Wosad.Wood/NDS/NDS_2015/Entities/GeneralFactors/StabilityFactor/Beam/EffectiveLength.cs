@@ -23,11 +23,11 @@ using System.Text;
 using Wosad.Common.Data;
 using Wosad.Common.Entities;
 using Wosad.Common.Entities;
-using Wosad.Wood.NDS.NDS_2015;
+using Wosad.Wood.NDS.NDS2015;
 using Wosad.Wood.Properties;
 
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public abstract partial class WoodMember : AnalyticalElement
     {
@@ -47,7 +47,7 @@ namespace Wosad.Wood.NDS.NDS_2015
             }
             if (bc == SupportCondition.SingleSpan)
             {
-                if (LoadType ==  NDS_2015.LoadType.UniformlyDistributed)
+                if (LoadType ==  NDS2015.LoadType.UniformlyDistributed)
                 {
                     br = LateralBracingCondition.Unbraced;
                 }

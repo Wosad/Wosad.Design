@@ -19,12 +19,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Wosad.Common.Section.Interfaces;
+using System.Threading.Tasks;
 
-namespace Wosad.Analytics.Wood.NDS
+namespace Wosad.Wood.Tests
 {
-    public interface IWoodSolidSection: IWoodSection
+    public abstract class ToleranceTestBase
     {
-        IWoodSolidMaterial Material { get; }
+        public double EvaluateActualTolerance(double C, double refValue)
+        {
+            double smallerVal = C < refValue ? C : refValue;
+            double largerVal = C >= refValue ? C : refValue;
+            double thisTolerance = largerVal / smallerVal - 1;
+
+            return thisTolerance;
+        }
     }
 }

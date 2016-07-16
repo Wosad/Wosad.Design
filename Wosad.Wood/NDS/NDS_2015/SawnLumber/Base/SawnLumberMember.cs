@@ -23,9 +23,9 @@ using Wosad.Common.CalculationLogger;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.Entities;
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
-    public partial class SawnLumberMember : WoodMember
+    public abstract partial class SawnLumberMember : WoodMember
     {
 
         public SawnLumberMember(ICalcLog CalcLog)
@@ -46,5 +46,24 @@ namespace Wosad.Wood.NDS.NDS_2015
             //4.4.1 Stability of Bending Members
             throw new NotImplementedException();
         }
+
+        double d;
+        double F_b;
+        double F_c;
+        double E_min;
+        double l_e;
+        double C_M_Fb;
+        double C_M_Ft;
+        double C_M_Fv;
+        double C_M_Fc;
+        double C_M_E;
+        double C_t;
+        double C_F;
+        double C_i;
+        double C_r;
+        double C_P;
+        double C_b;
+        double C_T;
+        double lambda;
     }
 }

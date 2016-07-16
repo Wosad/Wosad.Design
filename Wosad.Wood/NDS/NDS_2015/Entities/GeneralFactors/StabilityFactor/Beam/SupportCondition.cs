@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public enum SupportCondition
     {

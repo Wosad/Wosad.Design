@@ -14,17 +14,18 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Wood.NDS.Entities;
+using Wosad.Wood.NDS.NDS2015.Material;
 using Wosad.Wood.Properties;
 
 
-namespace Wosad.Wood.NDS.NDS_2015.Material
+namespace Wosad.Wood.NDS.NDS2015.Material
 {
     public class SouthernPine : WoodSolidMaterial
     {

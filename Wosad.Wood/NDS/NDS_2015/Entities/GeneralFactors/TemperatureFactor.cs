@@ -23,7 +23,7 @@ using Wosad.Common.Entities;
 using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Wood.NDS.Entities;
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public abstract partial class WoodMember : AnalyticalElement
     {

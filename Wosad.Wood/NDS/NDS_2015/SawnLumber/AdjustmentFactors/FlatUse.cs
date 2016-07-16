@@ -18,7 +18,7 @@
 using System;
 using Wosad.Common.Entities;
 using Wosad.Wood.NDS.Entities;
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public partial class SawnLumberMember : WoodMember
     {

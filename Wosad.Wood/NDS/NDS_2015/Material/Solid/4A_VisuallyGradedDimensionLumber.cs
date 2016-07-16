@@ -26,8 +26,9 @@ using Wosad.Common.CalculationLogger.Interfaces;
 using Wosad.Common.CalculationLogger;
 using Wosad.Wood.NDS.Material;
 using Wosad.Wood.Properties;
+using Wosad.Wood.NDS.NDS2015.Material;
 
-namespace Wosad.Wood.NDS.NDS_2015.Material
+namespace Wosad.Wood.NDS.NDS2015.Material
 {
     public class VisuallyGradedDimensionLumber : WoodSolidMaterial
     {

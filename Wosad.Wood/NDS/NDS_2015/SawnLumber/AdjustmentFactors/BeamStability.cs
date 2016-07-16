@@ -21,7 +21,7 @@ using System.Linq;
 using System.Text;
 using Wosad.Common.Entities;
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public partial class SawnLumberMember : WoodMember
     {
@@ -32,7 +32,8 @@ namespace Wosad.Wood.NDS.NDS_2015
             double F_b,
             double E_min,
             double l_e,
-            double C_M ,
+            double C_M_Fb ,
+            double C_M_E,
             double C_t ,
             double C_F ,
             double C_i ,
@@ -45,14 +46,15 @@ namespace Wosad.Wood.NDS.NDS_2015
             this.F_b= F_b;
             this.E_min = E_min;
             this.l_e = l_e;
-            this.C_M= C_M;
+            this.C_M_Fb= C_M_Fb;
+            this.C_M_E = C_M_E;
             this.C_t= C_t;
             this.C_F= C_F;
             this.C_i= C_i;
             this.C_r= C_r;
             this.C_T= C_T;
             this.lambda = lambda;
-            double C_L = base.GetC_L(b, d, l_e);
+            double C_L = base.GetC_L(b, d, l_e,  E_min,  C_M_E,  C_t,  C_i,  C_T);
 
             return C_L;
         }
@@ -61,15 +63,9 @@ namespace Wosad.Wood.NDS.NDS_2015
         {
             double K_F = 2.54;
             double phi = 0.85;
-            return F_b * C_M * C_t * C_F * C_i * C_r*K_F*phi*lambda; //from Table 4.3.1
+            return F_b * C_M_Fb * C_t * C_F * C_i * C_r*K_F*phi*lambda; //from Table 4.3.1
             return F_b;
         }
 
-        protected override double GetModulusOfElasticityForBeamAndColumnStability()
-        {
-            double K_F = 1.76;
-            double phi = 0.85;
-            return E_min*C_M*C_t*C_i*C_T*1.76*0.85*lambda; //from Table 4.3.1
-        }
     }
 }

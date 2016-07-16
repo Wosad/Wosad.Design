@@ -22,7 +22,7 @@ using System.Text;
 using Wosad.Common.Entities;
 
 
-namespace Wosad.Wood.NDS.NDS_2015
+namespace Wosad.Wood.NDS.NDS2015
 {
     public abstract partial class WoodMember : AnalyticalElement
     {
@@ -32,8 +32,7 @@ namespace Wosad.Wood.NDS.NDS_2015
             double FcE = GetFc_E(E_minPrime, l_e, d);
             double c = Get_c();
             double alpha = FcE / FcStar;
-            double Cp = 1.0 + alpha / (2.0 * c) - Math.Sqrt(Math.Pow((1 + alpha) / 2 * c, 2.0) - alpha / c);
-
+            double Cp = (1.0 + alpha )/ (2.0 * c) - Math.Sqrt(Math.Pow((1 + alpha) / (2 * c), 2.0) - alpha / c);
             return Cp;
 
         }

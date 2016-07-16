@@ -27,7 +27,7 @@ using Wosad.Common.Data;
 using Wosad.Common.Entities;
 
 
-namespace Wosad.Wood.NDS.NDS_2015.Material
+namespace Wosad.Wood.NDS.NDS2015.Material
 {
     public abstract class WoodSolidMaterial :AnalyticalElement, IWoodSolidMaterial
     {

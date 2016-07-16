@@ -69,8 +69,8 @@
     <Compile Include="NDS\Entities\ServiceMoistureConditions.cs" />
     <Compile Include="NDS\Entities\SizeClassification.cs" />
     <Compile Include="NDS\Entities\WoodMemberType.cs" />
+    <Compile Include="NDS\Interfaces\ISawnLumberMember.cs" />
     <Compile Include="NDS\Interfaces\IWoodLaminatedMaterial.cs" />
-    <Compile Include="NDS\Interfaces\IWoodLaminatedSection.cs" />
     <Compile Include="NDS\Interfaces\IWoodSection.cs" />
     <Compile Include="NDS\Interfaces\IWoodSolidMaterial.cs" />
     <Compile Include="NDS\Interfaces\IWoodSolidSection.cs" />
@@ -98,13 +98,14 @@
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\Incising.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\RepetitiveMember.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\Resistance.cs" />
-    <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\SawnLumberMember.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\Size.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\Temperature.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\TimeEffect.cs" />
     <Compile Include="NDS\NDS_2015\SawnLumber\AdjustmentFactors\WetService.cs" />
-    <Compile Include="NDS\NDS_2015\SawnLumber\ColumnSawnLumber.cs" />
-    <Compile Include="NDS\NDS_2015\SawnLumber\SawnLumberMember.cs" />
+    <Compile Include="NDS\NDS_2015\SawnLumber\Base\AdjustedValues.cs" />
+    <Compile Include="NDS\NDS_2015\SawnLumber\DimensionalLumber.cs" />
+    <Compile Include="NDS\NDS_2015\SawnLumber\Base\SawnLumberMember.cs" />
+    <Compile Include="NDS\NDS_2015\SawnLumber\Timber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -129,7 +130,6 @@
     <Folder Include="NDS\NDS_2015\GluLam\" />
     <Folder Include="NDS\NDS_2015\Material\Laminated\" />
     <Folder Include="NDS\NDS_2015\RoundTimber\" />
-    <Folder Include="NDS\NDS_2015\SawnLumber\DesignValues\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
