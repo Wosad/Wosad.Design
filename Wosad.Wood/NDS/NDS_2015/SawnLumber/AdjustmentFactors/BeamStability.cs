@@ -34,9 +34,10 @@ namespace Wosad.Wood.NDS.NDS2015
             double l_e,
             double C_M_Fb ,
             double C_M_E,
-            double C_t ,
-            double C_F ,
-            double C_i ,
+            double C_t_Fb ,
+            double C_F_Fb ,
+            double C_i_Fb,
+            double C_i_E,
             double C_r ,
             double C_T,
             double lambda
@@ -48,13 +49,13 @@ namespace Wosad.Wood.NDS.NDS2015
             this.l_e = l_e;
             this.C_M_Fb= C_M_Fb;
             this.C_M_E = C_M_E;
-            this.C_t= C_t;
-            this.C_F= C_F;
-            this.C_i= C_i;
+            this.C_t_Fb= C_t_Fb;
+            this.C_F_Fb= C_F_Fb;
+            this.C_i_Fb= C_i_Fb;
             this.C_r= C_r;
             this.C_T= C_T;
             this.lambda = lambda;
-            double C_L = base.GetC_L(b, d, l_e,  E_min,  C_M_E,  C_t,  C_i,  C_T);
+            double C_L = base.GetC_L(b, d, l_e,  E_min,  C_M_E,  C_t_E,  C_i_E,  C_T);
 
             return C_L;
         }
@@ -63,7 +64,7 @@ namespace Wosad.Wood.NDS.NDS2015
         {
             double K_F = 2.54;
             double phi = 0.85;
-            return F_b * C_M_Fb * C_t * C_F * C_i * C_r*K_F*phi*lambda; //from Table 4.3.1
+            return F_b * C_M_Fb * C_t_Fb * C_F_Fb * C_i_Fb * C_r*K_F*phi*lambda; //from Table 4.3.1
             return F_b;
         }
 

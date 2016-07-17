@@ -29,9 +29,7 @@ namespace Wosad.Wood.NDS.NDS2015
         public double GetRepetitiveMemberFactor(bool IsRepetitive, 
             double Spacing,
              double Thickness,
-            SawnLumberType SawnLumberType,
-            ReferenceDesignValueType ReferenceValueType 
-            )
+            SawnLumberType SawnLumberType)
         {
             //NDS 2015 Section 4.3.9
             if (IsRepetitive == true)
@@ -43,7 +41,7 @@ namespace Wosad.Wood.NDS.NDS2015
                 else
                 {
                     //return 1.15;
-                    return GetRepetitiveCoefficientFromReferenceTable(Thickness, SawnLumberType, ReferenceValueType);
+                    return GetRepetitiveCoefficientFromReferenceTable(Thickness, SawnLumberType);
                 }
             }
             else
@@ -53,7 +51,7 @@ namespace Wosad.Wood.NDS.NDS2015
         }
 
     public double GetRepetitiveCoefficientFromReferenceTable(double Thickness,
-    SawnLumberType SawnLumberType, ReferenceDesignValueType ValueType)
+    SawnLumberType SawnLumberType)
         {
         
         double C_r;

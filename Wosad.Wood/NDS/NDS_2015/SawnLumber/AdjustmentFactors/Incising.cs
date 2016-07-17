@@ -27,7 +27,7 @@ namespace Wosad.Wood.NDS.NDS2015
     public partial class SawnLumberMember : WoodMember
     {
 
-        double GetInsizingFactor(
+        public double GetInsizingFactor(
         ReferenceDesignValueType ReferenceDesignValueType
         )
         {

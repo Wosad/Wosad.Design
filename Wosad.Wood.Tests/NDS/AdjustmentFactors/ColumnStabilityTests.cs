@@ -38,7 +38,7 @@ namespace Wosad.Wood.Tests.NDS.SawnLumber
             double F_c = 1.6;
             double l_e = 144.0;
             double lambda =0.8;
-            double C_P = m.GetColumnStabilityFactor(d,F_c,E_min,l_e,C_M,C_M,C_t,C_F,C_i,C_T,lambda);
+            double C_P = m.GetColumnStabilityFactor(d, F_c, E_min, l_e, C_M, C_M, C_t, C_t,C_F, C_i, C_i, C_T, lambda);
 
             double refValue = 0.342;
             double actualTolerance = EvaluateActualTolerance(C_P, refValue);
@@ -70,7 +70,7 @@ namespace Wosad.Wood.Tests.NDS.SawnLumber
             double F_c =0.85;
             double l_e = 15*12*0.5; //with K-factor
             double lambda = 0.8;
-            double C_P = m.GetColumnStabilityFactor(d, F_c, E_min, l_e,C_M_Fc,C_M_E, C_t, C_F, C_i, C_T, lambda);
+            double C_P = m.GetColumnStabilityFactor(d, F_c, E_min, l_e,C_M_Fc,C_M_E, C_t,C_t, C_F, C_i,C_i, C_T, lambda);
 
             double refValue = 0.827;
             double actualTolerance = EvaluateActualTolerance(C_P, refValue);

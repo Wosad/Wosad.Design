@@ -32,6 +32,7 @@ namespace Wosad.Wood.NDS.Entities
             SouthernPineDimensionLumber,
             MechanicallyGradedDimensionLumber,
             VisuallyGradedTimbers,
+            VisuallyGradedBeamOrStringer,
             VisuallyGradedDecking,
             NonNorthAmericanVisuallyGradedDimensionLumber,
      }

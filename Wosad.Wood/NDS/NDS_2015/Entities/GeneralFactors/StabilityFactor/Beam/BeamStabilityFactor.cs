@@ -31,7 +31,7 @@ namespace Wosad.Wood.NDS.NDS2015
 
         protected double GetC_L(double b, 
             double d,
-            double l_e, double E_min, double C_M_E, double C_t, double C_i, double C_T
+            double l_e, double E_min, double C_M_E, double C_t_E, double C_i_E, double C_T
             )
         {
 
@@ -49,7 +49,7 @@ namespace Wosad.Wood.NDS.NDS2015
                 }
                 else
                 {
-                    double F_bE = GetBendingCriticalBucklingDesignValue(l_e, b, d, E_min, C_M_E, C_t, C_i, C_T);
+                    double F_bE = GetBendingCriticalBucklingDesignValue(l_e, b, d, E_min, C_M_E, C_t_E, C_i_E, C_T);
                     double F_bStar = GetF_b_AdjustedForBeamStability();
                     double alpha = F_bE/F_bStar;
 
@@ -62,10 +62,10 @@ namespace Wosad.Wood.NDS.NDS2015
             return C_L;
         }
 
-        private double GetBendingCriticalBucklingDesignValue(double l_e, double b, double d, double E_min, double C_M_E, double C_t, double C_i, double C_T)
+        private double GetBendingCriticalBucklingDesignValue(double l_e, double b, double d, double E_min, double C_M_E, double C_t_E, double C_i_E, double C_T)
         {
            double R_b=Math.Min(Math.Sqrt(((l_e*d) / (b*b))),50); //NDS eq. (3.3-5)
-           double E_m_prime = GetAdjustedMinimumModulusOfElasticityForStability( E_min,  C_M_E,  C_t,  C_i,  C_T);
+           double E_m_prime = GetAdjustedMinimumModulusOfElasticityForStability( E_min,  C_M_E,  C_t_E,  C_i_E,  C_T);
            double F_bE=((1.20*E_m_prime) / (R_b*R_b)); //from section 3.3.3.6
            return F_bE;  
         }
@@ -73,7 +73,7 @@ namespace Wosad.Wood.NDS.NDS2015
 
         protected abstract double GetF_b_AdjustedForBeamStability();
 
-        protected abstract double GetAdjustedMinimumModulusOfElasticityForStability(double E_min, double C_M_E, double C_t, double  C_i, double C_T);
+        public abstract double GetAdjustedMinimumModulusOfElasticityForStability(double E_min, double C_M_E, double C_t, double  C_i, double C_T);
 
         protected abstract bool DetermineIfMemberIsLaterallyBraced();
 

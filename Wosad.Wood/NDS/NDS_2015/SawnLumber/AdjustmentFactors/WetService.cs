@@ -36,7 +36,7 @@ namespace Wosad.Wood.NDS.NDS2015
         /// <param name="C_F">Size factor</param>
         /// <param name="SawnLumberType">Defines the type of lumber</param>
         /// <returns></returns>
-        protected  double GetWetServiceFactor(ReferenceDesignValueType ValueType, double F_b,
+        public  double GetWetServiceFactor(ReferenceDesignValueType ValueType, double F_b,
             double C_F, SawnLumberType SawnLumberType)
         {
             double Cm = 1.0;

@@ -30,7 +30,7 @@ namespace Wosad.Wood.NDS.NDS2015
 {
     public partial class SawnLumberMember : WoodMember
     {
-        double GetSizeFactor(
+        public  double GetSizeFactor(
             double Depth, double Thickness,
             SawnLumberType SawnLumberType,
             CommercialGrade CommercialGrade,

@@ -1,13 +1,8 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
-    <dependencies>
-      <group targetFramework="net45">
-        <dependency id="Wosad.Common" version="0.0.1.5" />
-      </group>
-    </dependencies>
     <id>Wosad.Wood</id>
-    <version>0.0.1.2</version>
+    <version>0.0.7.2</version>
     <title>Wosad.Wood</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for wood member and connection design for buildings and other structures per NDS standard.</description>
@@ -16,15 +11,16 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
+    <releaseNotes>Updates to adjustment factors to distinguish between different variants for adjustment factors.</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="Wosad.Common" version="0.0.2.6" />
+        <dependency id="Wosad.Common" version="0.0.7.1" />
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="D:\Wosad\SourceDynamo2\Wosad.Design\Wosad.Wood\bin\Release\Wosad.Wood.dll" target="lib\net45" />
+    <file src="C:\Users\Konstantin\Documents\Wosad\GitHub\Wosad.Design\Wosad.Wood\bin\Debug\Wosad.Wood.dll" target="lib\net45" />
   </files>
 </package>

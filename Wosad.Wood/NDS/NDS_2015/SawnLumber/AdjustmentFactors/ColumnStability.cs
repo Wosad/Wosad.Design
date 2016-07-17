@@ -26,9 +26,11 @@ namespace Wosad.Wood.NDS.NDS2015
                                                 double l_e,
                                                 double C_M_Fc,
                                                 double C_M_E,
-                                                double C_t,
-                                                double C_F,
-                                                double C_i,                                                
+                                                double C_t_Fc,
+                                                double C_t_E,
+                                                double C_F_Fc,
+                                                double C_i_Fc,
+                                                double C_i_E,                                   
                                                 double C_T,
                                                 double lambda
                                                 )
@@ -39,13 +41,15 @@ namespace Wosad.Wood.NDS.NDS2015
             this.l_e = l_e;
             this.C_M_Fc = C_M_Fc;
             this.C_M_E = C_M_E;
-            this.C_t = C_t;
-            this.C_F = C_F;
-            this.C_i = C_i;
+            this.C_t_Fc = C_t_Fc;
+            this.C_t_E = C_t_E;
+            this.C_F_Fc = C_F_Fc;
+            this.C_i_Fc = C_i_Fc;
+            this.C_i_E = C_i_E;
             this.C_T = C_T;
             this.lambda = lambda;
             double FcStar = Get_FcStar();
-            double E_minPrime = GetAdjustedMinimumModulusOfElasticityForStability(E_min,C_M_E,C_t,C_i,C_T);
+            double E_minPrime = GetAdjustedMinimumModulusOfElasticityForStability(E_min,C_M_E,C_t_E,C_i_E,C_T);
             C_P = base.GetC_P(FcStar, E_minPrime, l_e,d);
 
             return C_P;
@@ -55,7 +59,7 @@ namespace Wosad.Wood.NDS.NDS2015
         {
             double K_F = 2.4;
             double phi = 0.9;
-            double FcStar = F_c * C_M_Fc * C_t * C_F * C_i *K_F * phi * lambda; //from Table 4.3.1
+            double FcStar = F_c * C_M_Fc * C_t_Fc * C_F_Fc * C_i_Fc *K_F * phi * lambda; //from Table 4.3.1
             return FcStar;
         }
 
