@@ -39,8 +39,9 @@ namespace Wosad.Wood.NDS.NDS2015.Material
 
 
         public VisuallyGradedDimensionLumber(string Species, CommercialGrade Grade, SizeClassification SizeClass, ICalcLog CalcLog)
-            :base(Resources.NDS2012_Table4A, Species,Grade.ToString(), CalcLog)
-        {
+            :base(null, Species,Grade.ToString(), CalcLog)
+        { 
+            //todo: change above to reference 2015 code.
              this.Species   =Species;
              this.Grade     =Grade;
              this.SizeClass =SizeClass;
@@ -57,7 +58,7 @@ namespace Wosad.Wood.NDS.NDS2015.Material
 
         protected override string GetResource()
         {
-            return Resources.NDS2012_Table4A;
+            return null; //change to 2015 NDS files
         }
 
 

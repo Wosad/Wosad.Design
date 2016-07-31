@@ -152,6 +152,9 @@ namespace Wosad.Wood.NDS.NDS2015
         private double GetDimensionalLumberC_F(double Depth, double Thickness, CommercialGrade Grade, ReferenceDesignValueType ReferenceDesignValueType)
         {
             double SizeFactor;
+            string GradeString = "Other";
+
+
             if (Grade == CommercialGrade.Standard || Grade == CommercialGrade.Construction)
             {
                 SizeFactor = 1.0; 
@@ -160,10 +163,25 @@ namespace Wosad.Wood.NDS.NDS2015
             {
                 double b = Math.Ceiling(Depth);
                 double t = Math.Ceiling(Thickness);
+
+                //Adjust thickness
+                if (t <= 3)
+                {
+                    t = 3.0;
+                }
+                else if (t > 3 && t <= 5)
+                {
+                    t = 4.0;
+                }
+                else
+                {
+                    throw new Exception("Use timber values for elements having over 5 inches in thickness.");
+                }
                 
-                //adjust the values for lookup
+                //adjust the values for lookup (for depth)
                 if (Grade == CommercialGrade.Utility)
                 {
+                    GradeString = Grade.ToString();
                     if (b<=3)
                     {
                         b = 3; 
@@ -175,6 +193,8 @@ namespace Wosad.Wood.NDS.NDS2015
                 }
                 else if (Grade == CommercialGrade.Stud)
                 {
+                    GradeString = Grade.ToString();
+
                     if (b <= 4)
                     {
                         b = 4;
@@ -187,6 +207,11 @@ namespace Wosad.Wood.NDS.NDS2015
                 }
                 else
                 {
+                    
+                    GradeString = "Other";
+
+
+                    //Adjust depth
                     if (b<=4)
                     {
                         b = 4;  
@@ -199,7 +224,7 @@ namespace Wosad.Wood.NDS.NDS2015
                     {
                         b = 10;
                     }
-                    else if (b>=14)
+                    else if (b>=10)
                     {
                         b = 14;
                     }
@@ -246,8 +271,8 @@ namespace Wosad.Wood.NDS.NDS2015
 
                 var RValues = from v in ResultList
                               where
-                                  (v.Grade == Grade.ToString() &&
-                                  v.Depth == b&&
+                                  (v.Grade == GradeString &&
+                                  v.Depth == b  &&
                                   v.Thickness ==t)
                               select v;
                 var foundValue = (RValues.ToList()).FirstOrDefault();

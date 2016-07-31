@@ -159,5 +159,36 @@ namespace  Wosad.Steel.AISC360v10
 
         }
 
+        public override double GetReductionFactorForStiffenedElementQa(double Fcr)
+        {
+            ISectionAngle ang = this.Section.Shape as ISectionAngle;
+            double E= this.Section.Material.ModulusOfElasticity;
+            double F_y = this.Section.Material.YieldStress;
+
+            double b = Math.Min(ang.b, ang.d);
+            double t = ang.t;
+
+            double Q_s = 1.0;
+
+            //AISC specification page 16.1–42 
+
+            if (((b) / (t))<=0.45*Math.Sqrt(((E) / (F_y))))
+            {
+                Q_s = 1.0;
+            }
+            else
+            {
+                if (((b) / (t))>0.91*Math.Sqrt(((E) / (F_y))))
+                {
+                    Q_s = ((0.53 * E) / (F_y * (((b) / (t))) * (((b) / (t)))));
+                }
+                else
+                {
+                    Q_s = 1.34 - 0.76 * (((b) / (t))) * Math.Sqrt(((F_y) / (E)));
+                }
+            }
+            return Q_s;
+        }
+
     }
 }

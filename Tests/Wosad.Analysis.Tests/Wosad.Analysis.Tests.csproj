@@ -47,10 +47,13 @@
   <ItemGroup>
     <Compile Include="BeamForces\C2A_2Tests.cs" />
     <Compile Include="BeamForces\C1B_1Tests.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase12.cs" />
+    <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase7.cs" />
     <Compile Include="BeamTorsion\TorsionalFunctionsTestsCommon.cs" />
     <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase3.cs" />
     <Compile Include="BeamTorsion\TorsionalFunctionsTestsCase6.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section\SectionTorsionTests.cs" />
     <Compile Include="ToleranceTestBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +69,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Section\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>

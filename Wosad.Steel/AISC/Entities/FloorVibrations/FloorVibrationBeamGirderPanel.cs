@@ -107,7 +107,7 @@ namespace Wosad.Steel.AISC.Entities.FloorVibrations
         public double GetAccelerationLimit(string FloorVibrationOccupancyId)
         {
             floorVibrationOccupancyId = FloorVibrationOccupancyId; //store value so that the retrieve function works 
-            return Limits.a_gRatio;
+            return Limits.a_gRatio/1000.0; //convert to kip units consistent with the rest of the library
         }
 
         public double GetAccelerationRatio(double f_n, double W, double beta, string FloorSeviceOccupancyId )

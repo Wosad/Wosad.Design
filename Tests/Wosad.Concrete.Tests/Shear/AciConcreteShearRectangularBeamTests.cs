@@ -10,7 +10,7 @@ using Wosad.Common.Section.Interfaces;
 namespace Wosad.Concrete.ACI318_14.Tests.Shear
 {
     [TestFixture]
-    public partial class AciConcreteShearRectangularBeamTests: ToleranceTestBase
+    public partial class AciConcreteShearRectangularBeamTests : AciConcreteShearTestsBase
     {
         /// <summary>
         /// MacGregor, Wight. Reinforced concrete. 6th edition

@@ -15,7 +15,7 @@ using Wosad.Concrete.ACI.Entities;
 namespace Wosad.Concrete.ACI318_14.Tests.Shear
 {
     [TestFixture]
-    public partial class AciConcreteShearRectangularBeamTests
+    public partial class AciConcreteShearTestsBase : ToleranceTestBase
     {
         private ICalcLog log;
 
@@ -43,9 +43,9 @@ namespace Wosad.Concrete.ACI318_14.Tests.Shear
 
 
 
-        double tolerance; 
+        protected double tolerance;
 
-        public AciConcreteShearRectangularBeamTests()
+        public AciConcreteShearTestsBase()
         {
             //ICalcLogEntry entryStub = mocks.Stub<ICalcLogEntry>();
             MockRepository mocks = new MockRepository();

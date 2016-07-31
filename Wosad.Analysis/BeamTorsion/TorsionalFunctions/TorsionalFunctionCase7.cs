@@ -34,7 +34,7 @@ namespace Wosad.Analysis.Torsion
 
         protected override double Get_c_1()
         {
-            double c_1 = ((t * L) / (2 * G * L));
+            double c_1 = ((t * L) / (2.0 * G * J));
             return c_1;
         }
 
@@ -52,13 +52,13 @@ namespace Wosad.Analysis.Torsion
 
         public override double Get_theta_1()
         {
-            double theta_1 = c_1 * (c_2*Math.Sinh(((z) / (a))) + 1 - ((2 * z) / (L)) - Math.Cosh(((z) / (a))));
+            double theta_1 = c_1 * (c_2*Math.Sinh(((z) / (a))) + 1 - ((2.0 * z) / (L)) - Math.Cosh(((z) / (a))));
             return theta_1;
         }
 
         public override double Get_theta_2()
         {
-            double theta_2 = ((c_1) / (a)) * (c_2*Math.Cosh(((z) / (a))) - ((2 * a) / (L)) - Math.Sinh(((z) / (a))));
+            double theta_2 = (c_1 /a) * ((c_2*Math.Cosh(z / a) - (2.0 * a) / L) - Math.Sinh((z / a)));
             return theta_2;
         }
 

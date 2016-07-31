@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Wosad.Wood</id>
-    <version>0.0.7.2</version>
+    <version>0.0.7.4</version>
     <title>Wosad.Wood</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for wood member and connection design for buildings and other structures per NDS standard.</description>
@@ -11,7 +11,7 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <releaseNotes>Updates to adjustment factors to distinguish between different variants for adjustment factors.</releaseNotes>
+    <releaseNotes>Update to size factor</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>

@@ -60,6 +60,7 @@
     <Compile Include="Prestressed\PrestressedGeneralTestsBase.cs" />
     <Compile Include="Prestressed\PrestressedRectangularTestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shear\AciTwoWayShearTests.cs" />
     <Compile Include="Shear\ShearTestsCommon.cs" />
     <Compile Include="Shear\AciConcreteShearRectangularBeamTests.cs" />
     <Compile Include="SplicesAndDevelopment\Tension\HookStub.cs" />

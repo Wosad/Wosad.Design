@@ -18,7 +18,6 @@ namespace Wosad.Analysis.Tests.BeamTorsion
             G = 11200;
             T_u = -90;
             J = 1.39;
-            t_el = 0.34;
             a = 62.1;
             C_w = 2070;
             W_no=23.6;
@@ -28,8 +27,31 @@ namespace Wosad.Analysis.Tests.BeamTorsion
             E = 29000;
             t=0;
             alpha = 0.5;
-            tolerance = 0.02; //2% can differ from rounding 
+            tolerance = 0.07; //7% can differ from imprecision of graphs
         }
+
+        private void SetAiscDG9Example5_5Parameters()
+        {
+
+            L = 144;
+            G = 11200;
+            T_u = 0;
+            J = 1.23;
+            a = 42.4;
+            C_w = 852;
+            W_no = 22.0;
+            W_n2 = 10.4;
+            S_w1 = 17.4;
+            S_w2 = 13.5;
+            S_w3 = 6.75;
+            Q_f = 19.7;
+            Q_w = 37.9;
+            E = 29000;
+            t = 6.66/12;
+            alpha = 0.5;
+            tolerance = 0.07; //7% can differ from graph approximation
+        }
+
             double L;
             double alpha;
             double t;
@@ -37,11 +59,13 @@ namespace Wosad.Analysis.Tests.BeamTorsion
             double E;
             double T_u;
             double J;
-            double t_el;
             double a;
             double C_w;
             double W_no;
+            double W_n2;
             double S_w1;
+            double S_w2;
+            double S_w3;
             double Q_f;
             double Q_w;
         double z;

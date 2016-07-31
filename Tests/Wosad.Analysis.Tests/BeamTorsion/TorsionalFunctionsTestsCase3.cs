@@ -116,5 +116,6 @@ namespace Wosad.Analysis.Tests.BeamTorsion
 
         }
 
+
     }
 }

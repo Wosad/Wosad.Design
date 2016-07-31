@@ -48,6 +48,7 @@
     <Compile Include="NDS\AdjustedValues\TensionAdjustedValue.cs" />
     <Compile Include="NDS\AdjustedValues\BendingAdjustedValueTests.cs" />
     <Compile Include="NDS\AdjustedValues\WoodAdjustedValueTests.cs" />
+    <Compile Include="NDS\AdjustmentFactors\SizeFactorTests.cs" />
     <Compile Include="NDS\AdjustmentFactors\WoodAdjustmentFactorTests.cs" />
     <Compile Include="NDS\AdjustmentFactors\BeamStabilityTests.cs" />
     <Compile Include="NDS\AdjustmentFactors\ColumnStabilityTests.cs" />

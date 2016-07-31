@@ -121,8 +121,6 @@
     <None Include="LICENSE" />
     <None Include="NOTICE" />
     <None Include="packages.config" />
-    <None Include="Resources\NDS2012_Table4B.txt" />
-    <None Include="Resources\NDS2012_Table4A.txt" />
     <None Include="Wosad.Wood.licenseheader" />
     <None Include="Wosad.Wood.nuspec" />
   </ItemGroup>
