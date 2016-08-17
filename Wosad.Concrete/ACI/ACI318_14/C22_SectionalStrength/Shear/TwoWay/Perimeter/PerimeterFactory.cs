@@ -12,31 +12,62 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
         /// <summary>
         /// Returns the list of lines for calculation of punching shear perimeter properties
         /// </summary>
-        /// <param name="ColumnType">Configuration of punching perimeter</param>
-        /// <param name="c_1">Column dimension perpendicular  to free edge</param>
-        /// <param name="c_2">Column dimension parallel to free edge</param>
+        /// <param name="Configuration">Configuration of punching perimeter</param>
+        /// <param name="c_x">Column dimension parallel to X-axis</param>
+        /// <param name="c_y">Column dimension  parallel to Y-axis</param>
         /// <param name="d"> Effective depth of punching shear perimeter</param>
         /// <returns></returns>
-        public List<PerimeterLineSegment> GetPerimeterSegments(PunchingPerimeterColumnType ColumnType, double c1, double c2, double d)
+        public List<PerimeterLineSegment> GetPerimeterSegments(PunchingPerimeterConfiguration Configuration, double c_x, double c_y, double d)
         {
-            double b1; // punching perimeter dimension perpendicular to free edge
-            double b2; // punching perimeter dimension parallel to free edge 
+            double b_x; // punching perimeter dimension perpendicular to free edge
+            double b_y; // punching perimeter dimension parallel to free edge 
             Point2D p1  =null;
             Point2D p2  =null;
             Point2D p3  =null;
             Point2D p4 = null;
 
-            switch (ColumnType)
-            {
-                case PunchingPerimeterColumnType.Interior:
-                   
-                    b1 = c1 + d;
-                    b2 = c2 + d;
 
-                    p1 = new Point2D(-b2/2.0,-b1/2.0 ) ;
-                    p2 = new Point2D(-b2/2.0,b1/2.0 ) ;
-                    p3 = new Point2D(b2/2.0,b1/2.0 ) ;
-                    p4 = new Point2D(b2/2.0,-b1/2.0 ) ;
+            if (Configuration == PunchingPerimeterConfiguration.Interior)
+	        {
+		        b_x = c_x + d;
+                b_y = c_y + d;
+
+                p1 = new Point2D(-b_x / 2.0, -b_y / 2.0);
+                p2 = new Point2D(-b_x / 2.0, b_y / 2.0);
+                p3 = new Point2D(b_x / 2.0, b_y / 2.0);
+                p4 = new Point2D(b_x / 2.0, -b_y / 2.0);
+	        }
+            else if (Configuration == PunchingPerimeterConfiguration.EdgeLeft || Configuration == PunchingPerimeterConfiguration.EdgeRight)
+            {
+                b_x = c_x + d / 2.0;
+                b_y = c_y + d;
+
+                p1 = new Point2D(-b_x / 2.0, -b_y / 2.0);
+                p2 = new Point2D(-b_x / 2.0, b_y / 2.0);
+                p3 = new Point2D(b_x / 2.0, b_y / 2.0);
+                p4 = new Point2D(b_x / 2.0, -b_y / 2.0);
+            }
+            else if (Configuration == PunchingPerimeterConfiguration.EdgeTop || Configuration == PunchingPerimeterConfiguration.EdgeBottom)
+            {
+                b_x = c_x + d;
+                b_y = c_y + d / 2.0;
+            }
+            else
+            {
+                b_x = c_x + d / 2.0;
+                b_y = c_y + d/2.0;
+            }
+
+
+            switch (Configuration)
+            {
+                case PunchingPerimeterConfiguration.Interior:
+                   
+
+                    p1 = new Point2D(-b_x/2.0,-b_y/2.0 ) ;
+                    p2 = new Point2D(-b_x/2.0, b_y/2.0 ) ;
+                    p3 = new Point2D( b_x/2.0, b_y/2.0 ) ;
+                    p4 = new Point2D( b_x/2.0,-b_y/2.0 ) ;
 
                     return new List<PerimeterLineSegment>()
                     {
@@ -47,15 +78,14 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
                     };
 
                     break;
-                case PunchingPerimeterColumnType.Edge:
+                case PunchingPerimeterConfiguration.EdgeLeft:
 
-                    b1 = c1 + d/2.0;
-                    b2 = c2 + d;
 
-                    p1 = new Point2D(-b2/2.0,b1/2.0 ) ;
-                    p2 = new Point2D(-b2/2.0,-b1/2.0 ) ;
-                    p3 = new Point2D(b2/2.0,-b1/2.0 ) ;
-                    p4 = new Point2D(b2 / 2.0, b1 / 2.0);
+
+                    p1 = new Point2D(-b_y/2.0,b_x/2.0 ) ;
+                    p2 = new Point2D(-b_y/2.0,-b_x/2.0 ) ;
+                    p3 = new Point2D(b_y/2.0,-b_x/2.0 ) ;
+                    p4 = new Point2D(b_y / 2.0, b_x / 2.0);
 
                     return new List<PerimeterLineSegment>()
                     {
@@ -66,14 +96,14 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
 
 
                     break;
-                case PunchingPerimeterColumnType.Corner:
+                case PunchingPerimeterConfiguration.Corner:
 
-                    b1 = c1 + d/2.0;
-                    b2 = c2 + d/2.0;
+                    b_x = c_x + d/2.0;
+                    b_y = c_y + d/2.0;
 
-                    p1 = new Point2D(-b2/2.0,-b1/2.0 ) ;
-                    p2 = new Point2D(b2/2.0,-b1/2.0 ) ;
-                    p3 = new Point2D(b2 / 2.0, b1 / 2.0);
+                    p1 = new Point2D(-b_y/2.0,-b_x/2.0 ) ;
+                    p2 = new Point2D(b_y/2.0,-b_x/2.0 ) ;
+                    p3 = new Point2D(b_y / 2.0, b_x / 2.0);
 
                     return new List<PerimeterLineSegment>()
                     {

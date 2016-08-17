@@ -26,8 +26,8 @@ namespace Wosad.Concrete.ACI318_14.Tests.Shear
             double d = 4.75;
             double b_1 = 26.0;
             double b_2 = 12.0;
-            List<PerimeterLineSegment> segments = f.GetPerimeterSegments(PunchingPerimeterColumnType.Interior, b_1, b_2, d);
-            ConcreteSectionTwoWayShear sec = new ConcreteSectionTwoWayShear(mat,segments,d,b_1,b_2,true, PunchingPerimeterColumnType.Interior);
+            List<PerimeterLineSegment> segments = f.GetPerimeterSegments(PunchingPerimeterConfiguration.Interior, b_1, b_2, d);
+            ConcreteSectionTwoWayShear sec = new ConcreteSectionTwoWayShear(mat,segments,d,b_1,b_2,true, PunchingPerimeterConfiguration.Interior);
             double phi_v_c = sec.GetTwoWayStrengthForUnreinforcedConcrete()/1000.0; //convert to kips
             
             double refValue = 71.3/d/95.0; //from example
