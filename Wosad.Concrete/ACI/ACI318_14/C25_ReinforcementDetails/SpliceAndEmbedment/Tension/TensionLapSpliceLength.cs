@@ -39,7 +39,7 @@ namespace Wosad.Concrete.ACI318_14
 
             if (Rebar1Diameter>11/8 ||Rebar2Diameter>11/8)
             {
-                throw new Exception("Lap splices not permittedn for sizes over #11");
+                throw new Exception("Lap splices not permitted  for sizes over #11");
             }
 
             double ld1 = Rebar1DevelopmentLength;

@@ -58,6 +58,8 @@ namespace Wosad.Common.Section
             }
         }
 
+
+
         double _Iy;
         public double I_y
         {

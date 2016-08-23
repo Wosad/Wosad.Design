@@ -28,6 +28,101 @@ namespace Wosad.Concrete.ACI318_14
     public partial class TensionLapSplice : Splice, ISplice
 
     {
+
+        //Basic calculation
+        public TensionLapSplice
+            (
+            IConcreteMaterial Concrete,
+            Rebar Bar1,
+            Rebar Bar2,
+            bool MeetsRebarSpacingAndEdgeDistance,
+            bool HasMinimumTransverseReinforcement,
+            bool IsTopRebar,
+            ICalcLog log
+            )
+            : base(log)
+        {
+            this.Concrete = Concrete;
+            this.Bar1 = Bar1;
+            this.Bar2 = Bar2;
+            this.MeetsRebarSpacingAndEdgeDistance=MeetsRebarSpacingAndEdgeDistance;
+            this.HasMinimumTransverseReinforcement=HasMinimumTransverseReinforcement;
+
+
+            this.IsTopRebar = IsTopRebar;
+            this.A_tr = A_tr;
+            this.s_tr = s_tr;
+            this.n = n;
+
+
+            CalculateValuesBasic();
+        }
+
+        private void CalculateValuesBasic()
+        {
+            this.Rebar1Diameter = Bar1.Diameter;
+            this.Rebar2Diameter = Bar2.Diameter;
+            DevelopmentTension td1 = new DevelopmentTension(Concrete, Bar1,MeetsRebarSpacingAndEdgeDistance,IsTopRebar,1.0,true, Log);
+            DevelopmentTension td2 = new DevelopmentTension(Concrete, Bar2, MeetsRebarSpacingAndEdgeDistance, IsTopRebar, 1.0, true, Log);
+
+            this.Rebar1DevelopmentLength = td1.GetTensionDevelopmentLength(HasMinimumTransverseReinforcement);
+            this.Rebar2DevelopmentLength = td2.GetTensionDevelopmentLength(HasMinimumTransverseReinforcement);
+        }
+
+        //Detailed calculation
+        public TensionLapSplice
+            (
+            IConcreteMaterial Concrete,
+            Rebar Bar1,
+            Rebar Bar2,
+            double ClearSpacing,
+            double ClearCover,
+            bool IsTopRebar,
+            double A_tr, 
+            double s_tr, 
+            double n,
+            ICalcLog log
+            )
+            : base(log)
+        {
+            this.Concrete    =Concrete    ;
+            this.Bar1        =Bar1        ;      
+            this.Bar2        =Bar2        ;      
+            this.ClearSpacing=ClearSpacing;     
+            this.ClearCover  =ClearCover  ;
+            this.IsTopRebar = IsTopRebar;
+            this.A_tr =A_tr  ;
+            this.s_tr =s_tr  ;
+            this.n = n;
+
+
+            CalculateValuesDetailed();
+        }
+
+        private void CalculateValuesDetailed()
+        {
+            this.Rebar1Diameter = Bar1.Diameter;
+            this.Rebar2Diameter = Bar2.Diameter;
+            DevelopmentTension td1 = new DevelopmentTension(Concrete, Bar1, ClearSpacing, ClearCover, IsTopRebar, 1.0, true, Log);
+            DevelopmentTension td2 = new DevelopmentTension(Concrete, Bar2, ClearSpacing, ClearCover, IsTopRebar, 1.0, true, Log);
+
+            this.Rebar1DevelopmentLength = td1.GetTensionDevelopmentLength(A_tr,s_tr,n);
+            this.Rebar2DevelopmentLength = td2.GetTensionDevelopmentLength(A_tr, s_tr, n);
+        }
+
+            double A_tr  {get; set;}
+            double s_tr  {get; set;}
+            double n    { get; set; }
+
+            bool MeetsRebarSpacingAndEdgeDistance  {get; set;}
+            bool HasMinimumTransverseReinforcement {get; set;}
+            IConcreteMaterial Concrete  {get; set;}
+            Rebar Bar1                  {get; set;}
+            Rebar Bar2                  {get; set;}
+            double ClearSpacing         {get; set;}
+            double ClearCover           {get; set;}
+            bool IsTopRebar             { get; set; }
+
         public TensionLapSplice(
             double rebar1Diameter, double rebar1DevelopmentLength,
             double rebar2Diameter, double rebar2DevelopmentLength,

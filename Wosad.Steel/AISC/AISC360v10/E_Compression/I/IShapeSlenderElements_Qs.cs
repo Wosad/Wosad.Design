@@ -42,7 +42,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Compression
                 {
                     if (lambdaFlange < 1.03 * SqrtE_Fy())
                     {
-                        Qs = 1.415 - 0.74 * lambdaFlange * SqrtE_Fy(); //(E7-5)
+                        Qs = 1.415 - 0.74 * lambdaFlange * Math.Sqrt(Fy/E); //(E7-5)
                     }
                     else
                     {

@@ -46,76 +46,23 @@ namespace Wosad.Concrete.ACI318_14
             db = Rebar.Diameter;
         }
 
-        
-
-
-        //        //Tension case (in flexure)
-        //    public DevelopmentTension(
-        //        IConcreteMaterial Concrete, 
-        //        Rebar Rebar, 
-        //        bool IsTopRebar, 
-        //        double clearSpacing, 
-        //        double ClearCover,
-        //        bool MinimumShearReinforcementProvided, 
-        //        bool CheckMinimumLength, 
-        //        ICalcLog log,
-        //        double ExcessFlexureReinforcementRatio = 1.0)
-        //    :this(Concrete,Rebar,clearSpacing,ClearCover,IsTopRebar,ExcessFlexureReinforcementRatio,CheckMinimumLength, log)
-        //{
-            
-        //    this.minimumShearReinforcementProvided = MinimumShearReinforcementProvided;
-        //    useRefinedFormula = false;
-        //}
-
-
-
-        ////Tension case (in flexure) for refined formula
-        //public DevelopmentTension(
-        //    IConcreteMaterial Concrete, 
-        //    Rebar Rebar,
-        //    bool IsTopRebar,
-        //    double clearSpacing, 
-        //    double ClearCover, 
-        //    double TransverseRebarArea, 
-        //    double TransverseRebarSpacing,
-        //    int NumberOfBarsBeingDeveloped, 
-        //    bool CheckMinimumLength,
-        //    ICalcLog log, double 
-        //    ExcessFlexureReinforcementRatio = 1.0)
-        //    : this(Concrete, Rebar, clearSpacing, ClearCover, IsTopRebar,ExcessFlexureReinforcementRatio,CheckMinimumLength, log)
-        //{
-
-        //    this.transverseRebarArea = TransverseRebarArea;
-        //    this.transverseRebarSpacing = TransverseRebarSpacing;
-        //    this.numberOfBarsAlongSplittingPlane = NumberOfBarsBeingDeveloped;
-        //    useRefinedFormula = true;
-        //}
+            public DevelopmentTension(
+            IConcreteMaterial Concrete,
+            Rebar Rebar,
+            bool MeetsSpacingCritera,
+            bool IsTopRebar,
+            double ExcessFlexureReinforcementRatio,
+            bool CheckMinimumLength,
+            ICalcLog log)
+            : base(Concrete, Rebar, ExcessFlexureReinforcementRatio, log)
+            {
+            this.isTopRebar = IsTopRebar;
+            this.MeetsSpacingCritera = MeetsSpacingCritera;
+            this.CheckMinimumLength = CheckMinimumLength;
+            db = Rebar.Diameter;
+            }
 
         double db;
-
-        //private double transverseRebarArea;
-
-        //public double TransverseRebarArea
-        //{
-        //    get { return transverseRebarArea; }
-        //    set { transverseRebarArea = value; }
-        //}
-
-        //private double transverseRebarSpacing;
-
-        //public double TransverseRebarSpacing
-        //{
-        //    get { return transverseRebarSpacing; }
-        //    set { transverseRebarSpacing = value; }
-        //}
-
-        //private bool minimumShearReinforcementProvided;
-
-        //public bool MinimumShearReinforcementProvided
-        //{
-        //    get { return minimumShearReinforcementProvided; }
-        //    set { minimumShearReinforcementProvided = value; }
-        //}
 
         private double clearSpacing;
 
@@ -133,8 +80,6 @@ namespace Wosad.Concrete.ACI318_14
             set { clearCover = value; }
         }
 
-
-
         private bool isTopRebar;
 
         public bool IsTopRebar
@@ -150,19 +95,6 @@ namespace Wosad.Concrete.ACI318_14
             get { return meetsSpacingCritera; }
             set { meetsSpacingCritera = value; }
         }
-
-        //bool useRefinedFormula;
-        ////distinguishes between 12.2.2 (simplified) and 
-        ////12.2.3 (refined) formula
-
-        //public double ksi_t { get; set; }
-        //public double ksi_e { get; set; }
-        //public double ksi_s { get; set; }
-
-        //public double cb { get; set; }
-        //public double Ktr { get; set; }
-
-        //public double ConfinementTerm { get; set; }
 
         public bool CheckMinimumLength { get; set; }
 

@@ -82,6 +82,9 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
         {
             double f_c = Material.SpecifiedCompressiveStrength;
             double v_cControlling = 0.0;
+
+            double lambda = Material.Lambda;
+
             if (AtColumnFace == true)
             {
 
@@ -89,7 +92,7 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
                 double beta = GetBeta();
                 double alpha_s = Get_alpha_s();
                 double b_o = Get_b_o();
-                double lambda = Material.Lambda;
+                
 
                 double v_c1 = lambda * 4.0 * Math.Sqrt(f_c);
                 double v_c2 = lambda * (2.0 + ((4.0) / (beta))) * Math.Sqrt(f_c);
@@ -147,7 +150,27 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
             double cyMin = Get_c_yMin(adjustedSegments,AllowSinglePointStressRedistribution);
 
             //Adjust Design moment as a function of the eccentricity of the section centroid to column centroid
-            
+            throw new NotImplementedException();
+        }
+
+        private double Get_c_yMin(List<PerimeterLineSegment> adjustedSegments, bool AllowSinglePointStressRedistribution)
+        {
+            throw new NotImplementedException();
+        }
+
+        private double Get_c_yMax(List<PerimeterLineSegment> adjustedSegments, bool AllowSinglePointStressRedistribution)
+        {
+            throw new NotImplementedException();
+        }
+
+        private double Get_c_xMin(List<PerimeterLineSegment> adjustedSegments, bool AllowSinglePointStressRedistribution)
+        {
+            throw new NotImplementedException();
+        }
+
+        private double Get_c_xMax(List<PerimeterLineSegment> adjustedSegments, bool AllowSinglePointStressRedistribution)
+        {
+            throw new NotImplementedException();
         }
 
         private List<PerimeterLineSegment> AdjustSegments(Point2D cen)
@@ -164,7 +187,11 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
             }
 
 
-            if (this.ColumnType== PunchingPerimeterConfiguration.Corner)
+            if (this.ColumnType== PunchingPerimeterConfiguration.CornerLeftBottom ||
+                this.ColumnType== PunchingPerimeterConfiguration.CornerLeftTop ||
+                this.ColumnType== PunchingPerimeterConfiguration.CornerRightBottom ||
+                this.ColumnType== PunchingPerimeterConfiguration.CornerRightTop
+                )
             {
                 double J_x_bar = GetJx  (movedSegments);
                 double J_y_bar = GetJy  (movedSegments);
@@ -250,10 +277,28 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
                 case PunchingPerimeterConfiguration.Interior:
                     return 40.0;
                     break;
-                case PunchingPerimeterConfiguration.Edge:
+                case PunchingPerimeterConfiguration.EdgeBottom:
                     return 30.0;
                     break;
-                case PunchingPerimeterConfiguration.Corner:
+                case PunchingPerimeterConfiguration.EdgeTop:
+                    return 30.0;
+                    break;
+                case PunchingPerimeterConfiguration.EdgeLeft:
+                    return 30.0;
+                    break;
+                case PunchingPerimeterConfiguration.EdgeRight:
+                    return 30.0;
+                    break;
+                case PunchingPerimeterConfiguration.CornerLeftBottom:
+                    return 20.0;
+                    break;
+                case PunchingPerimeterConfiguration.CornerLeftTop:
+                    return 20.0;
+                    break;
+                case PunchingPerimeterConfiguration.CornerRightBottom:
+                    return 20.0;
+                    break;
+                case PunchingPerimeterConfiguration.CornerRightTop:
                     return 20.0;
                     break;
                 default:

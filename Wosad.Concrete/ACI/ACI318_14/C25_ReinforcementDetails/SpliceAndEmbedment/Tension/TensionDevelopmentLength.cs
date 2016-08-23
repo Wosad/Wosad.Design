@@ -60,30 +60,13 @@ namespace Wosad.Concrete.ACI318_14
 
 
 
-     //double ksi_tAndKsi_eProduct = ksi_t * ksi_e;
-
-     //if (ksi_tAndKsi_eProduct > 1.7)
-     //{
-
-     //    ICalcLogEntry ent1 = Log.CreateNewEntry();
-     //    ent1.ValueName = "ksi_t*ksi_e";
-     //    ent1.AddDependencyValue("ksi_tAndKsi_eProduct", ksi_tAndKsi_eProduct);
-     //    ent1.Reference = "ACI Section 12.2.4 (b)";
-     //    ent1.DescriptionReference = "ksi_t*ksi_e";
-     //    ent1.FormulaID = "P-12.2.4-2";
-     //    ent1.VariableValue = ksi_tAndKsi_eProduct.ToString();
-     //    AddToLog(ent1);
-     //    ksi_tAndKsi_eProduct = 1.7;
-
-     //}
-
       ksi_tAndKsi_eProduct = Getksi_tAndKsi_eProduct(ksi_t, ksi_e);
    
 
 }
 
            
-        public double GetTensionDevelopmentLength(double transverseRebarArea, double transverseRebarSpacing, double NumberOfSplicedBars)
+        public double GetTensionDevelopmentLength(double A_tr, double s_tr, double n)
         {
 
             double ld;
@@ -101,7 +84,7 @@ namespace Wosad.Concrete.ACI318_14
 
 
             double cb = GetCb();
-            double Ktr = GetKtr(transverseRebarArea,transverseRebarSpacing,NumberOfSplicedBars);
+            double Ktr = GetKtr(A_tr,s_tr,n);
 
 
             double ConfinementTerm = GetConfinementTerm(cb, Ktr);
@@ -139,9 +122,26 @@ namespace Wosad.Concrete.ACI318_14
 
             GetDevelopmentLengthParameters(ref  lambda, ref  fc, ref  sqrt_fc, ref  fy, ref  db, ref ksi_t, ref ksi_e, ref ksi_s, ref ksi_tAndKsi_eProduct);
 
+            bool clearSpacingLimitsAreMet;
 
-            if (clearSpacing >= db ||
-                clearCover >= db ||
+            if (clearSpacing!= 0.0 && clearCover!=0)
+            {
+                            if (clearSpacing >= db ||
+                            clearCover >= db)
+                            {
+                                clearSpacingLimitsAreMet = true;
+                            }
+                            else
+                            {
+                                clearSpacingLimitsAreMet = false;
+                            }
+            }
+            else
+            {
+                clearSpacingLimitsAreMet = MeetsSpacingCritera;
+            }
+
+            if (clearSpacingLimitsAreMet &&
                 minimumShearReinforcementProvided == true)
             {
                 if (db < 7 / 8)

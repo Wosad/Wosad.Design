@@ -59,15 +59,15 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
             }
 
 
+            p1 = new Point2D(-b_x / 2.0, -b_y / 2.0);
+            p2 = new Point2D(-b_x / 2.0, b_y / 2.0);
+            p3 = new Point2D(b_x / 2.0, b_y / 2.0);
+            p4 = new Point2D(b_x / 2.0, -b_y / 2.0);
+
             switch (Configuration)
             {
                 case PunchingPerimeterConfiguration.Interior:
                    
-
-                    p1 = new Point2D(-b_x/2.0,-b_y/2.0 ) ;
-                    p2 = new Point2D(-b_x/2.0, b_y/2.0 ) ;
-                    p3 = new Point2D( b_x/2.0, b_y/2.0 ) ;
-                    p4 = new Point2D( b_x/2.0,-b_y/2.0 ) ;
 
                     return new List<PerimeterLineSegment>()
                     {
@@ -81,11 +81,37 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
                 case PunchingPerimeterConfiguration.EdgeLeft:
 
 
+                    return new List<PerimeterLineSegment>()
+                    {
+                        new PerimeterLineSegment(p1,p4 ),
+                        new PerimeterLineSegment(p4,p3 ),
+                        new PerimeterLineSegment(p3,p2 ),
+                    };
 
-                    p1 = new Point2D(-b_y/2.0,b_x/2.0 ) ;
-                    p2 = new Point2D(-b_y/2.0,-b_x/2.0 ) ;
-                    p3 = new Point2D(b_y/2.0,-b_x/2.0 ) ;
-                    p4 = new Point2D(b_y / 2.0, b_x / 2.0);
+                case PunchingPerimeterConfiguration.EdgeRight:
+
+
+                    return new List<PerimeterLineSegment>()
+                    {
+                        new PerimeterLineSegment(p4,p1 ),
+                        new PerimeterLineSegment(p1,p2 ),
+                        new PerimeterLineSegment(p2,p3 ),
+                    };
+                    break;
+
+                case PunchingPerimeterConfiguration.EdgeTop:
+
+
+                    return new List<PerimeterLineSegment>()
+                    {
+                        new PerimeterLineSegment(p2,p1 ),
+                        new PerimeterLineSegment(p1,p4 ),
+                        new PerimeterLineSegment(p4,p3 ),
+                    };
+                    break;
+
+                case PunchingPerimeterConfiguration.EdgeBottom:
+
 
                     return new List<PerimeterLineSegment>()
                     {
@@ -93,28 +119,15 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
                         new PerimeterLineSegment(p2,p3 ),
                         new PerimeterLineSegment(p3,p4 ),
                     };
-
-
                     break;
-                case PunchingPerimeterConfiguration.Corner:
 
-                    b_x = c_x + d/2.0;
-                    b_y = c_y + d/2.0;
 
-                    p1 = new Point2D(-b_y/2.0,-b_x/2.0 ) ;
-                    p2 = new Point2D(b_y/2.0,-b_x/2.0 ) ;
-                    p3 = new Point2D(b_y / 2.0, b_x / 2.0);
 
-                    return new List<PerimeterLineSegment>()
-                    {
-                        new PerimeterLineSegment(p1,p2 ),
-                        new PerimeterLineSegment(p2,p3 ),
-                    };
-
-                    break;
                 default:
                     throw new Exception("Unrecognized punching perimeter column type");
                     break;
+
+                    throw new Exception("Corner cases were not implemented");
             }
 
         }

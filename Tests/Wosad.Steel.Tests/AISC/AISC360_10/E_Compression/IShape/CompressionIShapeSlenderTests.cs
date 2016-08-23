@@ -29,11 +29,11 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Compression
 
 
         ISteelCompressionMember column { get; set; }
-        private void CreateColumn(double L_ex, double L_ey, double L_ez=0)
+        private void CreateColumn(double L_ex, double L_ey, double L_ez = 0, string Shape = "W14X82")
         {
             CompressionMemberFactory factory = new CompressionMemberFactory();
             AiscShapeFactory AiscShapeFactory = new AiscShapeFactory();
-            ISection section = AiscShapeFactory.GetShape("W14X82", ShapeTypeSteel.IShapeRolled);
+            ISection section = AiscShapeFactory.GetShape(Shape, ShapeTypeSteel.IShapeRolled);
             SteelMaterial mat = new SteelMaterial(50.0,29000);
             L_ez = L_ez == 0? L_ex : L_ez;
             column = factory.GetCompressionMember(section,mat, L_ex, L_ey, L_ez);
@@ -64,6 +64,20 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Compression
             SteelLimitStateValue colFlexure = column.GetFlexuralBucklingStrength();
             double phiP_n = colFlexure.Value;
             double refValue = 697.0;
+            double actualTolerance = EvaluateActualTolerance(phiP_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+
+
+        [Test]
+        public void IShapeW16X26Returns_16ft_LengthAxialStrength()
+        {
+            CreateColumn(14.0 * 12.0, 14.0 * 12.0, 0,"W16X26");
+            SteelLimitStateValue colFlexure = column.GetFlexuralBucklingStrength();
+            double phiP_n = colFlexure.Value;
+            double refValue = 1.0;
             double actualTolerance = EvaluateActualTolerance(phiP_n, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);

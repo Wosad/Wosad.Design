@@ -67,5 +67,11 @@ namespace Wosad.Common.Section
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public double I_x
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

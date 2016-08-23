@@ -286,5 +286,16 @@ namespace Wosad.Common.Section.General
         //{
         //    throw new NotImplementedException();
         //}
+
+
+        /// <summary>
+        /// Generic shape moment of inertia:
+        /// Calculate per equation listed here:
+        /// http://mathoverflow.net/questions/73556/calculating-moment-of-inertia-in-2d-planar-polygon
+        /// </summary>
+        public double I_x
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
