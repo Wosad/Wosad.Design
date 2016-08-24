@@ -27,8 +27,21 @@ namespace Wosad.Concrete.ACI318_14
     /// <summary>
     ///  This class encpsulates sectional shear provisions per ACI.
     /// </summary>
-    public partial class ConcreteSectionOneWayShearNonPrestressed : AnalyticalElement
+    public partial class OneWayShearReinforcedSectionNonPrestressed : AnalyticalElement
     {
+
+
+        public OneWayShearReinforcedSectionNonPrestressed(double d, IRebarMaterial TransverseRebarMaterial, double A_v, double s)
+        {
+            this.d = d;
+            this.A_v = A_v;
+            this.s = s;
+        }
+
+        
+                double d; 
+                double A_v; 
+                double s; 
 
         public double GetSteelShearStrength()
         {
@@ -37,6 +50,14 @@ namespace Wosad.Concrete.ACI318_14
             StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
             double phi = f.Get_phi_ShearReinforced();
             return phi * V_s;
+        }
+
+        private IRebarMaterial rebarMaterial;
+
+        public IRebarMaterial RebarMaterial
+        {
+            get { return rebarMaterial; }
+            set { rebarMaterial = value; }
         }
 
     }

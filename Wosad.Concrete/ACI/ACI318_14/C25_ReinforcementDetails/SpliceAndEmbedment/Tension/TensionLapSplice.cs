@@ -38,6 +38,7 @@ namespace Wosad.Concrete.ACI318_14
             bool MeetsRebarSpacingAndEdgeDistance,
             bool HasMinimumTransverseReinforcement,
             bool IsTopRebar,
+            TensionLapSpliceClass SpliceClass,
             ICalcLog log
             )
             : base(log)
@@ -48,7 +49,7 @@ namespace Wosad.Concrete.ACI318_14
             this.MeetsRebarSpacingAndEdgeDistance=MeetsRebarSpacingAndEdgeDistance;
             this.HasMinimumTransverseReinforcement=HasMinimumTransverseReinforcement;
 
-
+            this.SpliceClass = SpliceClass;
             this.IsTopRebar = IsTopRebar;
             this.A_tr = A_tr;
             this.s_tr = s_tr;
@@ -81,6 +82,7 @@ namespace Wosad.Concrete.ACI318_14
             double A_tr, 
             double s_tr, 
             double n,
+            TensionLapSpliceClass SpliceClass,
             ICalcLog log
             )
             : base(log)
@@ -94,7 +96,7 @@ namespace Wosad.Concrete.ACI318_14
             this.A_tr =A_tr  ;
             this.s_tr =s_tr  ;
             this.n = n;
-
+            this.SpliceClass = SpliceClass;
 
             CalculateValuesDetailed();
         }
@@ -147,7 +149,9 @@ namespace Wosad.Concrete.ACI318_14
         double length;
         public override double Length
         {
-            get { return length; }
+            get {
+                length = GetLs();
+                return length; }
         }
 
         public double Rebar1Diameter { get; set; }

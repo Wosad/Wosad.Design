@@ -31,37 +31,23 @@ namespace Wosad.Concrete.ACI318_14
     {
 
         public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section)
-            : this(d, Section, null, 0, 0)
+
         {
-
-        }
-
-        public ConcreteSectionOneWayShearNonPrestressed(double d, IConcreteSection Section, IRebarMaterial TransverseRebarMaterial, double A_v, double s)
-        {
-
-            this.section = Section;
             this.d = d;
+            this.Section = Section;
             this.b_w = Section.b_w;
-            this.A_v = A_v;
-            this.s = s;
         }
+
+
 
                 double d; 
                 double b_w; 
-                double A_v; 
-                double s; 
                 
                 double A_g; 
                 double N_u;
                 double rho_w;
 
-                private IRebarMaterial rebarMaterial;
 
-                public IRebarMaterial RebarMaterial
-                {
-                    get { return rebarMaterial; }
-                    set { rebarMaterial = value; }
-                }
                 
 
                 private IConcreteSection  section;

@@ -103,7 +103,7 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\ConcreteSectionOneWayShearNonPrestressed.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\SteelOneWayShearStrength.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\OneWayShearReinforcedSectionNonPrestressed.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\TotalOneWayShearStrength.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\TwoWay\ConcreteSectionTwoWayShear.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\TwoWay\Perimeter\PerimeterFactory.cs" />
