@@ -36,7 +36,16 @@ namespace Wosad.Concrete.ACI318_14
     public partial class DevelopmentCompression:Development
     {
 
-           
+        private double length;
+
+        public double Length
+        {
+            get {
+                length = GetCompressionDevelopmentLength();
+                return length; }
+
+        }
+        
         private double GetBasicCompressionDevelopmentLength()
         {
             double ldc;
@@ -61,14 +70,14 @@ namespace Wosad.Concrete.ACI318_14
             return ldc;
         }
 
-        internal double GetCompressionDevelopmentLength()
-        {
-            double ldc=GetBasicCompressionDevelopmentLength();
-            ldc = CheckExcessRatioAndMinimumLength(ldc);
-            return ldc;
-        }
+        //internal double GetCompressionDevelopmentLength()
+        //{
+        //    double ldc=GetBasicCompressionDevelopmentLength();
+        //    ldc = CheckExcessRatioAndMinimumLength(ldc);
+        //    return ldc;
+        //}
 
-        internal double GetCompressionDevelopmentLength(bool isConfinedCompressionRebar)
+        internal double GetCompressionDevelopmentLength(bool isConfinedCompressionRebar=false)
         {
             double ldc = GetBasicCompressionDevelopmentLength();
 

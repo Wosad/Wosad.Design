@@ -34,10 +34,10 @@ namespace Wosad.Concrete.ACI318_14
     public partial class DevelopmentCompression:Development
     {
         public DevelopmentCompression(IConcreteMaterial Concrete, Rebar Rebar, 
-        ICalcLog log, double ExcessReinforcementRatio = 1.0)
+        ICalcLog log, bool IsConfinedCompressionRebar, double ExcessReinforcementRatio = 1.0)
             : base(Concrete, Rebar, ExcessReinforcementRatio, log)
         {
-
+            this.IsConfinedCompressionRebar = IsConfinedCompressionRebar;
         }
 
         //12.3.3 (b) For reinforcement enclosed within spiral reinforcement
@@ -47,13 +47,13 @@ namespace Wosad.Concrete.ACI318_14
         //length ldc shall be permitted to be
         //multiplied by the factor 0.75
 
-        //private bool isConfinedCompressionRebar;
+        private bool isConfinedCompressionRebar;
 
-        //public bool IsConfinedCompressionRebar
-        //{
-        //    get { return isConfinedCompressionRebar; }
-        //    set { isConfinedCompressionRebar = value; }
-        //}
+        public bool IsConfinedCompressionRebar
+        {
+            get { return isConfinedCompressionRebar; }
+            set { isConfinedCompressionRebar = value; }
+        }
 
 
     }

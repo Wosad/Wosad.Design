@@ -34,10 +34,10 @@ namespace Wosad.Concrete.ACI318_14
             double clearSpacing, 
             double ClearCover,
             bool IsTopRebar, 
-            double ExcessFlexureReinforcementRatio, 
+            double ExcessReinforcementRatio, 
             bool CheckMinimumLength,  
             ICalcLog log)
-            : base (Concrete, Rebar, ExcessFlexureReinforcementRatio,log)
+            : base (Concrete, Rebar, ExcessReinforcementRatio,log)
         {
             this.isTopRebar = IsTopRebar;
             this.ClearCover = ClearCover;
@@ -51,10 +51,10 @@ namespace Wosad.Concrete.ACI318_14
             Rebar Rebar,
             bool MeetsSpacingCritera,
             bool IsTopRebar,
-            double ExcessFlexureReinforcementRatio,
+            double ExcessReinforcementRatio,
             bool CheckMinimumLength,
             ICalcLog log)
-            : base(Concrete, Rebar, ExcessFlexureReinforcementRatio, log)
+            : base(Concrete, Rebar, ExcessReinforcementRatio, log)
             {
             this.isTopRebar = IsTopRebar;
             this.MeetsSpacingCritera = MeetsSpacingCritera;
