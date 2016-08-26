@@ -32,9 +32,9 @@ namespace Wosad.Analysis.Section
         /// <param name="Q">Statical moment for the point in question</param>
         /// <param name="I">Moment of inertia (I_x or I_y where applicable)</param>
         /// <returns></returns>
-        public double GetShearStressDueToAppliedShear(double V, double Q, double I)
+        public double GetShearStressDueToAppliedShear(double V, double Q, double I, double b)
         {
-            double tau_b = V * Q / I;
+            double tau_b = V * Q / (I*b);
             return tau_b;
         }
     }
