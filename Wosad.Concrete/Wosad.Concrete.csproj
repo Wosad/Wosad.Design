@@ -99,6 +99,7 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\ConcreteSectionCompression.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\SectionFactory.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\CompressionMemberType.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\UpperLimitOnShearStrength.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\ConcreteOneWayShearStrength.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\ConcreteSectionOneWayShearNonPrestressed.cs">
       <SubType>Code</SubType>

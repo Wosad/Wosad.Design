@@ -1,5 +1,5 @@
 ﻿#region Copyright
-/*Copyright (C) 2015 Wosad Inc
+   /*Copyright (C) 2015 Wosad Inc
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
    limitations under the License.
    */
 #endregion
-
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,39 +27,29 @@ namespace Wosad.Concrete.ACI318_14
     /// <summary>
     ///  This class encpsulates sectional shear provisions per ACI.
     /// </summary>
-    public partial class OneWayShearReinforcedSectionNonPrestressed : AnalyticalElement
+    public partial class ConcreteSectionOneWayShearNonPrestressed : AnalyticalElement
     {
 
-
-        public OneWayShearReinforcedSectionNonPrestressed(double d, IRebarMaterial TransverseRebarMaterial, double A_v, double s)
+        public double GetUpperLimitShearStrength(double phiV_c)
         {
-            this.d = d;
-            this.A_v = A_v;
-            this.s = s;
-            this.RebarMaterial = TransverseRebarMaterial;
-        }
 
-        
-                double d; 
-                double A_v; 
-                double s; 
+            double h = Section.SliceableShape.YMax - Section.SliceableShape.YMin;
+            this.A_g = Section.SliceableShape.A;
+            this.N_u = N_u;
+            this.rho_w = rho_w;
+            double V_max;
+            double f_c = Section.Material.SpecifiedCompressiveStrength;
 
-        public double GetSteelShearStrength()
-        {
-            double f_yt = rebarMaterial.YieldStress;
-            double V_s = ((A_v * f_yt * d) / (s));
+            double lambda = Section.Material.Lambda;
             StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
             double phi = f.Get_phi_ShearReinforced();
-            return phi * V_s;
+
+            V_max = phiV_c + phi*(10.0 * lambda * Section.Material.Sqrt_f_c_prime * b_w * d); // (22.5.1.2)
+  
+
+            return V_max;
         }
 
-        private IRebarMaterial rebarMaterial;
-
-        public IRebarMaterial RebarMaterial
-        {
-            get { return rebarMaterial; }
-            set { rebarMaterial = value; }
-        }
 
     }
 }

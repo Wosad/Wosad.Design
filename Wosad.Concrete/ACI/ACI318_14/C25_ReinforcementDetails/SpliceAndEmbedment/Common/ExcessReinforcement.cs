@@ -30,14 +30,13 @@ namespace Wosad.Concrete.ACI318_14
 {
     public partial class Development : AnalyticalElement, IDevelopment
     {
-//          Reduction in ld may be permitted by the ratio [(As required)/(As provided)] when excess reinforcement is provided
-//          in a flexural member. Note that this reduction does not apply when the full fy development is required, as
-//          for tension lap splices in 7.13, 12.15.1, and 13.3.8.5, development of positive moment reinforcement at supports
-//          in 12.11.2, and for development of shrinkage and temperature reinforcement according to 7.12.2.3. Note also
-//          that this reduction in development length is not permitted for reinforcement in structures located in regions of
-//          high seismic risk or for structures assigned to high seismic performance or design categories (see 21.11.7.3 and
-//          R21.11.7.3).
-
+        //25.4.10.1 Reduction of development lengths defned 
+        //in 25.4.2.1(a), 25.4.3.1(a), 25.4.6.1(a), 25.4.7.1(a), and 
+        //25.4.9.1(a) shall be permitted by use of the ratio (As,required)/
+        //(As,provided), except where prohibited by 25.4.10.2. The modifed
+        //development lengths shall not be less than the respective 
+        //minimums specifed in 25.4.2.1(b), 25.4.3.1(b), 25.4.3.1(c), 
+        //25.4.6.1(b), 25.4.7.1(b), and 25.4.9.1(b).
 
            
         public double CheckExcessReinforcement(double ld, bool IsTensionReinforcement, bool IsHook)
