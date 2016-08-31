@@ -57,7 +57,7 @@ namespace Wosad.Common.Section.Predefined
 
         public ISliceableSection GetSliceableShape()
         {
-            SectionIRolled secI = new SectionIRolled("",this.d,this.bf,this.tf,this.t_w,this._k);
+            SectionIRolled secI = new SectionIRolled("",this.d,this.bf,this.t_f,this.t_w,this._k);
             return secI;
         }
 
@@ -71,7 +71,7 @@ namespace Wosad.Common.Section.Predefined
 
         double _tf;
 
-        public double tf
+        public double t_f
         {
             get { return _tf; }
         }
@@ -109,12 +109,12 @@ namespace Wosad.Common.Section.Predefined
 
         public double h_o
         {
-            get { return d - tf; }
+            get { return d - t_f; }
         }
 
         public double t_fBot
         {
-            get { return tf; }
+            get { return t_f; }
         }
 
         public double b_fBot
@@ -130,7 +130,7 @@ namespace Wosad.Common.Section.Predefined
 
         public double t_fTop
         {
-            get { return tf; }
+            get { return t_f; }
         }
     }
 }

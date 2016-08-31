@@ -84,7 +84,7 @@ namespace Wosad.Common.Section.SectionTypes
         public double h_o
         {
             get {
-                double df = _d - (this.tf / 2 + this.t_fBot / 2);
+                double df = _d - (this.t_f / 2 + this.t_fBot / 2);
                 return _h_o; }
         }
 
@@ -97,7 +97,7 @@ namespace Wosad.Common.Section.SectionTypes
 
         private double _t_f;
 
-        public double tf
+        public double t_f
         {
             get { return _t_f; }
         }
@@ -146,7 +146,7 @@ namespace Wosad.Common.Section.SectionTypes
         {
             get
             {
-                _T = _d - t_fBot - tf;
+                _T = _d - t_fBot - t_f;
                 return _T;
             }
         } 
@@ -160,7 +160,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double t_f = this.tf;
+            double t_f = this.t_f;
             double b_f = this.b_fTop;
 
             CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2));
@@ -184,15 +184,15 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.tf;
+            double FlangeThickness = this.t_f;
             double FlangeWidth = this.b_fTop;
 
 
 
             // I-shape converted to X-shape 
             double FlangeOverhang = (b_f - t_w) / 2.0;
-            CompoundShapePart LeftFlange = new CompoundShapePart(2* tf, FlangeOverhang, new Point2D(0, b_f - FlangeOverhang/2));
-            CompoundShapePart RightFlange = new CompoundShapePart(2*tf, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
+            CompoundShapePart LeftFlange = new CompoundShapePart(2* t_f, FlangeOverhang, new Point2D(0, b_f - FlangeOverhang/2));
+            CompoundShapePart RightFlange = new CompoundShapePart(2*t_f, FlangeOverhang, new Point2D(0, FlangeOverhang/2));
             CompoundShapePart Web = new CompoundShapePart(d, t_w, new Point2D(0, b_f / 2));
 
             List<CompoundShapePart> rectY = new List<CompoundShapePart>()

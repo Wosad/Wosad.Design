@@ -149,7 +149,7 @@ namespace Wosad.Common.Section.Predefined
             {
                 case ShapeTypeSteel.IShapeRolled:
                             PredefinedSectionI catI = section as PredefinedSectionI;
-                             sec = new SectionIRolled("", catI.d, catI.b_fTop, catI.tf, catI.t_w, catI.k);
+                             sec = new SectionIRolled("", catI.d, catI.b_fTop, catI.t_f, catI.t_w, catI.k);
                     break;
                 case ShapeTypeSteel.IShapeBuiltUp:
                     throw new ShapeTypeNotSupportedException("ISliceableSection property ");

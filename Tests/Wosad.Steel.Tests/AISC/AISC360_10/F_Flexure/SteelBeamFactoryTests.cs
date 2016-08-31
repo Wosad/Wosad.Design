@@ -49,6 +49,22 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
 
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
-         //ISection r = new ds.SectionI("", d, b_f, t_f, t_w);
+
+
+
+        [Test]
+        public void FactoryReturnsChannel()
+        {
+
+            FlexuralMemberFactory factory = new FlexuralMemberFactory();
+            AiscShapeFactory AiscShapeFactory = new AiscShapeFactory();
+            ISectionChannel r = new SectionChannel("", 12.0, 6, 0.4, 0.25);
+
+
+            SteelMaterial mat = new SteelMaterial(50.0, 29000);
+            ISteelBeamFlexure beam12 = factory.GetBeam(r, mat, null, MomentAxis.XAxis, FlexuralCompressionFiberPosition.Top);
+
+            Assert.IsTrue(true);
+        }
     }
 }

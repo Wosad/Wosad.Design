@@ -66,7 +66,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleXAxisList()
         {
-            double t_f = this.tf;
+            double t_f = this.t_f;
             double b_f = this.b_fTop;
 
             CompoundShapePart TopFlange = new CompoundShapePart(b_f, t_f, new Point2D(0, d - t_f / 2.0));
@@ -129,7 +129,7 @@ namespace Wosad.Common.Section.SectionTypes
         /// <returns>List of analysis rectangles</returns>
         public override List<CompoundShapePart> GetCompoundRectangleYAxisList()
         {
-            double FlangeThickness = this.tf;
+            double FlangeThickness = this.t_f;
             double FlangeWidth = this.b_fTop;
 
             List<CompoundShapePart> rectY;
@@ -139,9 +139,9 @@ namespace Wosad.Common.Section.SectionTypes
                 if (IsOneSidedReinforcement ==true)
                 {
                     CompoundShapePart Segment1 = new CompoundShapePart(2 * t_r, b_r - FlangeOverhang, new Point2D(0, b_f + (b_r - FlangeOverhang)/2.0));
-                    CompoundShapePart Segment2 = new CompoundShapePart(2 * tf+2*t_r, FlangeOverhang, new Point2D(0, b_f-FlangeOverhang / 2.0));
+                    CompoundShapePart Segment2 = new CompoundShapePart(2 * t_f+2*t_r, FlangeOverhang, new Point2D(0, b_f-FlangeOverhang / 2.0));
                     CompoundShapePart Web = new CompoundShapePart(d-h_o, t_w, new Point2D(0, b_f / 2.0));
-                    CompoundShapePart Segment3 = new CompoundShapePart(2 * tf, FlangeOverhang, new Point2D(0, FlangeOverhang / 2.0));
+                    CompoundShapePart Segment3 = new CompoundShapePart(2 * t_f, FlangeOverhang, new Point2D(0, FlangeOverhang / 2.0));
 
                         rectY = new List<CompoundShapePart>()
                             {
@@ -154,9 +154,9 @@ namespace Wosad.Common.Section.SectionTypes
                 else
                 {
                     CompoundShapePart Segment1 = new CompoundShapePart(2 * t_r, b_r - FlangeOverhang, new Point2D(0, b_f + (b_r - FlangeOverhang) + (b_r - FlangeOverhang) / 2.0));
-                    CompoundShapePart Segment2 = new CompoundShapePart(2 * tf + 2 * t_r, FlangeOverhang, new Point2D(0, b_f+ (b_r - FlangeOverhang)- (FlangeOverhang / 2.0)));
+                    CompoundShapePart Segment2 = new CompoundShapePart(2 * t_f + 2 * t_r, FlangeOverhang, new Point2D(0, b_f+ (b_r - FlangeOverhang)- (FlangeOverhang / 2.0)));
                     CompoundShapePart Web = new CompoundShapePart(d - h_o, t_w, new Point2D(0, (b_r - FlangeOverhang)+ b_f / 2.0));
-                    CompoundShapePart Segment3 = new CompoundShapePart(2 * tf + 2 * t_r, b_r - FlangeOverhang, new Point2D(0, (b_r - FlangeOverhang)+(FlangeOverhang / 2.0)));
+                    CompoundShapePart Segment3 = new CompoundShapePart(2 * t_f + 2 * t_r, b_r - FlangeOverhang, new Point2D(0, (b_r - FlangeOverhang)+(FlangeOverhang / 2.0)));
                     CompoundShapePart Segment4 = new CompoundShapePart(2 * t_r, b_r - FlangeOverhang, new Point2D(0,  (b_r - FlangeOverhang) / 2.0));
 
                     rectY = new List<CompoundShapePart>()
@@ -173,10 +173,10 @@ namespace Wosad.Common.Section.SectionTypes
             {
                 if (IsOneSidedReinforcement == true)
                 {
-                    CompoundShapePart Segment1 = new CompoundShapePart(2 * tf, FlangeOverhang - b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) / 2.0));
-                    CompoundShapePart Segment2 = new CompoundShapePart(2 * tf + 2 * t_r, FlangeOverhang, new Point2D(0, b_f - (FlangeOverhang - b_r) - (FlangeOverhang - b_r) / 2.0));
+                    CompoundShapePart Segment1 = new CompoundShapePart(2 * t_f, FlangeOverhang - b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) / 2.0));
+                    CompoundShapePart Segment2 = new CompoundShapePart(2 * t_f + 2 * t_r, FlangeOverhang, new Point2D(0, b_f - (FlangeOverhang - b_r) - (FlangeOverhang - b_r) / 2.0));
                     CompoundShapePart Web = new CompoundShapePart(d - h_o, t_w, new Point2D(0, b_f / 2.0));
-                    CompoundShapePart Segment3 = new CompoundShapePart(2 * tf, FlangeOverhang, new Point2D(0, FlangeOverhang / 2.0));
+                    CompoundShapePart Segment3 = new CompoundShapePart(2 * t_f, FlangeOverhang, new Point2D(0, FlangeOverhang / 2.0));
 
                     rectY = new List<CompoundShapePart>()
                             {
@@ -189,11 +189,11 @@ namespace Wosad.Common.Section.SectionTypes
                 }
                 else
                 {
-                    CompoundShapePart Segment1 = new CompoundShapePart(2 * tf, FlangeOverhang - b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) / 2.0));
-                    CompoundShapePart Segment2 = new CompoundShapePart(2 * tf + 2 * t_r, b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) - ( b_r) / 2.0));
+                    CompoundShapePart Segment1 = new CompoundShapePart(2 * t_f, FlangeOverhang - b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) / 2.0));
+                    CompoundShapePart Segment2 = new CompoundShapePart(2 * t_f + 2 * t_r, b_r, new Point2D(0, b_f - (FlangeOverhang - b_r) - ( b_r) / 2.0));
                     CompoundShapePart Web = new CompoundShapePart(d - h_o, t_w, new Point2D(0, b_f / 2.0));
-                    CompoundShapePart Segment3 = new CompoundShapePart(2 * tf+ 2 * t_r, b_r, new Point2D(0, (FlangeOverhang - b_r) + (b_r) / 2.0));
-                    CompoundShapePart Segment4 = new CompoundShapePart(2 * tf, FlangeOverhang - b_r, new Point2D(0, (FlangeOverhang - b_r) / 2.0));
+                    CompoundShapePart Segment3 = new CompoundShapePart(2 * t_f+ 2 * t_r, b_r, new Point2D(0, (FlangeOverhang - b_r) + (b_r) / 2.0));
+                    CompoundShapePart Segment4 = new CompoundShapePart(2 * t_f, FlangeOverhang - b_r, new Point2D(0, (FlangeOverhang - b_r) / 2.0));
 
                     rectY = new List<CompoundShapePart>()
                             {

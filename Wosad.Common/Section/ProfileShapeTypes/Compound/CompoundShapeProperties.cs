@@ -100,6 +100,64 @@ namespace Wosad.Common.Section
             momentsOfInertiaCalculated = true;
         }
 
+        double GetQ_xTop(double y_top)
+        {
+
+            if (y_top>this.YMax-Centroid.Y)
+	        {
+		         throw new Exception("Error. dimension y_top needs to be less or equal to the distance from top of shape to the neutral axis.");
+	        }
+            double _Q_x=0.0;
+            double Y_minLimit = this.YMax - y_top;
+
+            foreach (var r in RectanglesYAxis)
+            {
+                if (r.Ymin>=Y_minLimit)
+                {
+                    double A_this = r.GetArea();
+                    _Q_x = _Q_x + (r.Centroid.Y - this.Centroid.Y) * A_this;
+                }
+                else if (r.Ymin<Y_minLimit&& r.Ymax >Y_minLimit)
+                {
+                    double h1 = r.Ymax - Y_minLimit;
+                    double A = h1 * r.b;
+                    double y1 =( r.Ymin - Centroid.Y) + h1 / 2.0;
+                    _Q_x = _Q_x + A * y1;
+                }
+            }
+
+            return _Q_x;
+        }
+
+        double GetQ_xBottom(double y_bottom)
+        {
+            if (y_bottom >  Centroid.Y - this.YMin)
+            {
+                throw new Exception("Error. dimension y_bottom needs to be less or equal to the distance from bottom of shape to the neutral axis.");
+            }
+            double _Q_x=0.0;
+            double Y_maxLimit = this.YMin + y_bottom;
+
+            foreach (var r in RectanglesYAxis)
+            {
+                if (r.Ymax<= Y_maxLimit)
+                {
+                    double A_this = r.GetArea();
+                    _Q_x = _Q_x + (r.Centroid.Y - this.Centroid.Y) * A_this;
+                }
+                else if (r.Ymax > Y_maxLimit && r.Ymin < Y_maxLimit)
+                {
+                    double h1 = Y_maxLimit - r.Ymin;
+                    double A = h1 * r.b;
+                    double y1 = (Centroid.Y-r.Ymin) + h1 / 2.0;
+                    _Q_x = _Q_x + A * y1;
+                }
+            }
+
+            return _Q_x;
+
+        }
+
         double _S_xTop;
         public double S_xTop
         {

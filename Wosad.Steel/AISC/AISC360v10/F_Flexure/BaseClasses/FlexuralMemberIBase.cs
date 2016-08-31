@@ -41,6 +41,7 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             ISectionI s = Section.Shape as ISectionI;
             this.isRolledMember = IsRolledMember;
 
+            //Add flanged section interface
             if (s == null)
             {
                 throw new SectionWrongTypeException(typeof(ISectionI));

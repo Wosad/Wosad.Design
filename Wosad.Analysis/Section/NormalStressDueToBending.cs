@@ -36,5 +36,16 @@ namespace Wosad.Analysis.Section
             double sigma_b = M * y / I; //Mechanics of materials
             return sigma_b;
         }
+
+        /// <summary>
+        /// Normal stress due to flexure
+        /// </summary>
+        /// <param name="M">Bending moment</param>
+        /// <param name="S"> Section modulus</param>
+        public double GetNormalStressDueToBending(double M, double S)
+        {
+            double sigma_b = M /S; //Mechanics of materials
+            return sigma_b;
+        }
     }
 }

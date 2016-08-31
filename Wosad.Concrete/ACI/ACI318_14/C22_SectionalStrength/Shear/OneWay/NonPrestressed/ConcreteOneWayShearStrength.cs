@@ -44,7 +44,7 @@ namespace Wosad.Concrete.ACI318_14
 
             if (N_u == 0)
             {
-                if (rho_w == 0 || A_g == 0 || N_u == 0 || M_u == 0 || V_u == 0)
+                if (rho_w == 0  || M_u == 0 || V_u == 0)
                 {
                     V_c = 2 * lambda * Section.Material.Sqrt_f_c_prime * b_w * d; // (22.5.5.1)
                 }
