@@ -39,7 +39,7 @@ namespace Wosad.Wood.NDS.NDS2015.Material
 
 
         public VisuallyGradedDimensionLumber(string Species, CommercialGrade Grade, SizeClassification SizeClass, ICalcLog CalcLog)
-            :base(null, Species,Grade.ToString(), CalcLog)
+            :base(null, Species,Grade.ToString(),SizeClass.ToString(), CalcLog)
         { 
             //todo: change above to reference 2015 code.
              this.Species   =Species;
@@ -58,45 +58,27 @@ namespace Wosad.Wood.NDS.NDS2015.Material
 
         protected override string GetResource()
         {
-            return null; //change to 2015 NDS files
+            return "NDS2015_Suppl_Table4A"; 
         }
 
 
-
-        protected override void CreateReport()
-        {
+        /// <summary>
+        /// Example of how to extract reference values
+        /// </summary>
+        //protected void ReadReferenceValues()
+        //{
             
-              double Fb = Bending;
-              double Ft = TensionParallelToGrain;
-              double Fv = ShearParallelToGrain;
-              double FcPerp = CompresionPerpendicularToGrain;
-              double Fc = CompresionParallelToGrain;
-              double E = ModulusOfElasticity;
-              double Emin = ModulusOfElasticityMin;
-              string CommercialGradeString = CommercialGradeStringConverter.GetCommercialGradeString(Grade);
+        //      double Fb = F_b;
+        //      double Ft = F_t;
+        //      double Fv = F_v;
+        //      double FcPerp = F_cPerp;
+        //      double Fc = F_cParal;
+        //      double E = E;
+        //      double Emin = E_min;
+        //      string CommercialGradeString = CommercialGradeStringConverter.GetCommercialGradeString(Grade);
 
               
-              #region Fb
-              ICalcLogEntry FbEntry = new CalcLogEntry();
-              FbEntry.ValueName = "Fb";
-              FbEntry.AddDependencyValue("WoodSpecies", Species);
-              FbEntry.AddDependencyValue("ComGrade", CommercialGradeString);
-              FbEntry.AddDependencyValue("Fb", Math.Round(Fb, 3));
-              FbEntry.AddDependencyValue("Ft", Math.Round(Ft, 3));
-              FbEntry.AddDependencyValue("Fv", Math.Round(Fv, 3));
-              FbEntry.AddDependencyValue("Fc_Perp", Math.Round(FcPerp, 3));
-              FbEntry.AddDependencyValue("Fc", Math.Round(Fc, 3));
-              FbEntry.AddDependencyValue("E", Math.Round(E, 3));
-              FbEntry.AddDependencyValue("Emin", Math.Round(Emin, 3));
-              FbEntry.Reference = "";
-              FbEntry.DescriptionReference = "/Templates/Wood/NDS2015/ReferenceDesignValues.docx";
-              FbEntry.FormulaID = null; //reference to formula from code
-              FbEntry.VariableValue = Math.Round(Fb, 3).ToString();
-              #endregion
 
-
-              this.AddToLog(FbEntry);
-
-        }
+        //}
     }
 }

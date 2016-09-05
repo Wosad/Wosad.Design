@@ -33,7 +33,7 @@ namespace Wosad.Wood.NDS.NDS2015.Material
         CommercialGrade Grade;
         SizeClassification SizeClass;
         public SouthernPine(string Species, CommercialGrade Grade, SizeClassification SizeClass, ICalcLog CalcLog)
-            :base(null, Species,Grade.ToString(), CalcLog)
+            :base(null, Species,Grade.ToString(), SizeClass.ToString(), CalcLog)
         {
             ////todo: change above to reference 2015 code.
              this.Species   =Species;
@@ -47,9 +47,6 @@ namespace Wosad.Wood.NDS.NDS2015.Material
             throw new NotImplementedException();
         }
 
-        protected override void CreateReport()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

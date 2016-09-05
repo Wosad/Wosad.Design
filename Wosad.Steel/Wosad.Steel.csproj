@@ -53,8 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Wosad.Common, Version=0.0.6.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.6.6\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.8.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.8.2\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -508,7 +508,9 @@
     <None Include="LICENSE" />
     <None Include="NOTICE" />
     <None Include="packages.config" />
-    <None Include="Resources\AISC360_10_MaterialProperties.txt" />
+    <EmbeddedResource Include="Resources\AISC360_10_MaterialProperties.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="Wosad.Steel.nuspec" />
     <None Include="Wosad.Steel.licenseheader" />
   </ItemGroup>
@@ -527,16 +529,24 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AISC360_10TableJ3_4_Minimum Edge Distance.txt" />
+    <EmbeddedResource Include="Resources\AISC360_10TableJ3_4_Minimum Edge Distance.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AISC360_10TableJ3_3NominalHoleDimensions.txt" />
+    <EmbeddedResource Include="Resources\AISC360_10TableJ3_3NominalHoleDimensions.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AISC_DG11_VibrationLimits.txt" />
+    <EmbeddedResource Include="Resources\AISC_DG11_VibrationLimits.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AISC_DG11_ModalDamping.txt" />
+    <EmbeddedResource Include="Resources\AISC_DG11_ModalDamping.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

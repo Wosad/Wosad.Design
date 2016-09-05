@@ -37,18 +37,21 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
         public FlexuralMemberIBase(ISteelSection section, bool IsRolledMember,  ICalcLog CalcLog)
             : base(section, CalcLog)
         {
-            SectionI = null;
-            ISectionI s = Section.Shape as ISectionI;
+            
             this.isRolledMember = IsRolledMember;
 
-            //Add flanged section interface
-            if (s == null)
+
+            if (!(Section.Shape is IDoubleFlangeMember))
             {
-                throw new SectionWrongTypeException(typeof(ISectionI));
+                throw new SectionWrongTypeException("I-section or Channel");
+
             }
             else
             {
-                SectionI = s;
+                if (Section.Shape is ISectionI)
+                {
+                    ISectionI s = Section.Shape as ISectionI;
+                }
             }
         }
 

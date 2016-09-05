@@ -51,8 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Wosad.Common, Version=0.0.6.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.6.6\lib\net45\Wosad.Common.dll</HintPath>
+    <Reference Include="Wosad.Common, Version=0.0.8.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wosad.Common.0.0.8.2\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -116,8 +116,15 @@
   <ItemGroup>
     <Content Include="NDS\NDS_2015\Resources\ReferenceValuesTable4A.txt" />
     <Content Include="NDS\NDS_2015\Resources\ReferenceValuesTable4B.txt" />
-    <None Include="Resources\NDS2015_Table4A_SizeFactor.txt" />
-    <None Include="Resources\NDS2015_Table3_3_3Effective Length.txt" />
+    <EmbeddedResource Include="Resources\NDS2015_Suppl_Table4A.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\NDS2015_Table4A_SizeFactor.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\NDS2015_Table3_3_3Effective Length.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="LICENSE" />
     <None Include="NOTICE" />
     <None Include="packages.config" />

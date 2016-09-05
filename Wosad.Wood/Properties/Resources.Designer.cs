@@ -61,6 +61,29 @@ namespace Wosad.Wood.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ALASKA CEDAR,Select Structural,2&quot; &amp; wider
+        ///ALASKA CEDAR,No. 1,2&quot; &amp; wider
+        ///ALASKA CEDAR,No. 2,2&quot; &amp; wider
+        ///ALASKA CEDAR,No. 3,2&quot; &amp; wider
+        ///ALASKA CEDAR,Stud,2&quot; &amp; wider
+        ///ALASKA CEDAR,Construction,2&quot; - 4&quot; wide
+        ///ALASKA CEDAR,Standard,2&quot; - 4&quot; wide
+        ///ALASKA CEDAR,Utility,2&quot; - 4&quot; wide
+        ///ALASKA HEMLOCK,Select Structural,2&quot; &amp; wider
+        ///ALASKA HEMLOCK,No. 1,2&quot; &amp; wider
+        ///ALASKA HEMLOCK,No. 2,2&quot; &amp; wider
+        ///ALASKA HEMLOCK,No. 3,2&quot; &amp; wider
+        ///ALASKA HEMLOCK,Stud,2&quot; &amp; wider
+        ///ALASKA HEMLOCK,Construction,2&quot; - 4&quot; wide
+        ///ALASKA HEMLOCK,St [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string NDS2015_Suppl_Table4A {
+            get {
+                return ResourceManager.GetString("NDS2015_Suppl_Table4A", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to   &lt;&gt;  &lt;&gt;  &lt;&gt;  l_u/d &lt; 7   &lt;&gt;  &lt;7&lt;=l_u/d &lt;=14.3 &gt; &lt;&gt;  &lt;l_u/d &gt;14.3&gt;  &lt;&gt;
         ///&lt;BC&gt;  &lt;Load&gt;  &lt;Bracing&gt;  &lt;N of loads&gt;  &lt;lu_factor&gt;  &lt;dFactor&gt;  &lt;lu_factor&gt; &lt;dFactor&gt;  &lt;lu_factor&gt;  &lt;dFactor&gt;
         ///Cantilever,UniformlyDistributed,Unbraced,1,1.33,0,0.9,3,0.9,3

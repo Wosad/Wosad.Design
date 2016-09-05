@@ -24,12 +24,12 @@ namespace Wosad.Analytics.Wood.NDS
 {
     public interface IWoodSolidMaterial
     {
-        double Bending { get;  }
-        double CompresionParallelToGrain { get;  }
-        double CompresionPerpendicularToGrain { get;  }
-        double TensionParallelToGrain { get;  }
-        double ShearParallelToGrain { get;  }
-        double ModulusOfElasticity              {get; }
-        double ModulusOfElasticityMin           {get; }
+        double F_b { get;  }
+        double F_cParal { get;  }
+        double F_cPerp { get;  }
+        double F_t { get;  }
+        double F_v { get;  }
+        double E              {get; }
+        double E_min           {get; }
     }
 }

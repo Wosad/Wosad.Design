@@ -38,12 +38,12 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             : base( section, IsRolledMember, CalcLog)
         {
             SectionChannel = null;
-            ISectionChannel s = Section as ISectionChannel;
+            ISectionChannel s = Section.Shape as ISectionChannel;
             this.isRolledMember = IsRolledMember;
 
             if (s == null)
             {
-                throw new SectionWrongTypeException(typeof(ISectionI));
+                throw new SectionWrongTypeException(typeof(ISectionChannel));
             }
             else
             {

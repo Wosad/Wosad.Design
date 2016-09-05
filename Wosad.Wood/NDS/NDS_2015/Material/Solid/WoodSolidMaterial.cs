@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Wosad.Analytics.Wood.NDS;
 using Wosad.Common.CalculationLogger.Interfaces;
@@ -32,45 +33,61 @@ namespace Wosad.Wood.NDS.NDS2015.Material
     public abstract class WoodSolidMaterial :AnalyticalElement, IWoodSolidMaterial
     {
 
-        public WoodSolidMaterial(string ResourceString, string MaterialParameter1, string MaterialParameter2, ICalcLog CalcLog)
+        public WoodSolidMaterial(string ResourceString, string Species, string CommercialGrade, string SizeClass, ICalcLog CalcLog)
             : base(CalcLog)
         {
             this.ResourceString = ResourceString;
-            this.MaterialParameter1 = MaterialParameter1;
-            this.MaterialParameter2 = MaterialParameter2;
+            this.Species = Species;
+            this.CommercialGrade = CommercialGrade;
+            this.SizeClass = SizeClass;
         }
         public bool ValuesWereCalculated { get; set; }
 
         protected abstract string GetResource();
-        protected abstract void CreateReport();
 
-        public string MaterialParameter1 { get; set; }
-        public string MaterialParameter2 { get; set; }
-        public string ResourceString { get; set; }
+        public string Species { get; set; }
+        public string CommercialGrade { get; set; }
+        public string SizeClass { get; set; }
+
+        private string resourceString;
+
+        public string ResourceString
+        {
+            get {
+                resourceString = GetResource();
+                return resourceString; }
+            set { resourceString = value; }
+        }
+
         protected void CalculateValues()
         {
-            this.MaterialParameter1 = MaterialParameter1;
-            this.MaterialParameter2 = MaterialParameter2;
+            this.Species = Species;
+            this.CommercialGrade = CommercialGrade;
 
             if (ValuesWereCalculated == false)
             {
                 
                 #region Read Table Data
 
-                var Tv11 = new { MaterialParameter1 = "",  MaterialParameter2 = "", Fb = 0.0, Ft = 0.0, Fv = 0.0, FcPerp = 0.0, Fc = 0.0, E = 0.0, Emin = 0.0 }; // sample
+                var Tv11 = new { Species = "", Grade = "", SizeClass = "", Fb = 0.0, Ft = 0.0, Fv = 0.0, FcPerp = 0.0, Fc = 0.0, E = 0.0, Emin = 0.0, G=0.0 }; // sample
                 var ResultList = ListFactory.MakeList(Tv11);
 
-                using (StringReader reader = new StringReader(ResourceString))
+
+                string resourceName = string.Format("Wosad.Wood.Resources.{0}.txt", ResourceString);
+                var assembly = Assembly.GetExecutingAssembly();
+                Stream stream = assembly.GetManifestResourceStream(resourceName);
+
+                using (TextReader tr = new StreamReader(stream))
                 {
                     string line;
-                    while ((line = reader.ReadLine()) != null)
+                    while ((line = tr.ReadLine()) != null)
                     {
                         string[] Vals = line.Split(',');
-                        if (Vals.Count() == 10)
+                        if (Vals.Count() == 11)
                         {
-                            string _MaterialParameter1 = Vals[0];
-                            //string _Grade = Vals[1];
-                            string _MaterialParameter2 = Vals[2];
+                            string _Species = Vals[0];
+                            string _Grade = Vals[1];
+                            string _SizeClass = Vals[2];
                             double _Fb = double.Parse(Vals[3], CultureInfo.InvariantCulture);
                             double _Ft = double.Parse(Vals[4], CultureInfo.InvariantCulture);
                             double _Fv = double.Parse(Vals[5], CultureInfo.InvariantCulture);
@@ -78,19 +95,20 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                             double _Fc = double.Parse(Vals[7], CultureInfo.InvariantCulture);
                             double _E = double.Parse(Vals[8], CultureInfo.InvariantCulture);
                             double _Emin = double.Parse(Vals[9], CultureInfo.InvariantCulture);
-
+                            double _G =  double.Parse(Vals[10], CultureInfo.InvariantCulture);
                             ResultList.Add(new
                             {
-                                MaterialParameter1 = _MaterialParameter1,
-                                //Grade = _Grade,
-                                MaterialParameter2 = _MaterialParameter2,
+                                Species = _Species,
+                                Grade = _Grade,
+                                SizeClass = _SizeClass,
                                 Fb = _Fb,
                                 Ft = _Ft,
                                 Fv = _Fv,
                                 FcPerp = _FcPerp,
                                 Fc = _Fc,
                                 E = _E,
-                                Emin = _Emin
+                                Emin = _Emin,
+                                G = _G
                             });
                         }
                     }
@@ -101,29 +119,30 @@ namespace Wosad.Wood.NDS.NDS2015.Material
 
                 var RValues = from v in ResultList
                               where
-                                  (v.MaterialParameter1 == MaterialParameter1 &&
-                                  v.MaterialParameter2 == MaterialParameter2)
+                                  (v.Species == Species &&
+                                  v.Grade == CommercialGrade &&
+                                  v.SizeClass == SizeClass)
                               select v;
                 var foundValues = (RValues.ToList());
                 if (foundValues.Count > 0)
                 {
                     var ThisMaterialProps = foundValues.FirstOrDefault();
-                    this.Bending = ThisMaterialProps.Fb / 1000.0;     //convert to ksi
-                    this.TensionParallelToGrain = ThisMaterialProps.Ft / 1000.0;     //convert to ksi
-                    this.ShearParallelToGrain = ThisMaterialProps.Fv / 1000.0;     //convert to ksi
-                    this.CompresionPerpendicularToGrain = ThisMaterialProps.FcPerp / 1000.0;     //convert to ksi
-                    this.CompresionParallelToGrain = ThisMaterialProps.Fc / 1000.0;     //convert to ksi
-                    this.ModulusOfElasticity = ThisMaterialProps.E / 1000.0;     //convert to ksi
-                    this.ModulusOfElasticityMin = ThisMaterialProps.Emin / 1000.0;     //convert to ksi
+                    this.F_b = ThisMaterialProps.Fb;
+                    this.F_t = ThisMaterialProps.Ft;
+                    this.F_v = ThisMaterialProps.Fv;
+                    this.F_cPerp = ThisMaterialProps.FcPerp;
+                    this.F_cParal = ThisMaterialProps.Fc;
+                    this.E = ThisMaterialProps.E;
+                    this.E_min = ThisMaterialProps.Emin;
                 }
-                CreateReport();
+                
                 ValuesWereCalculated = true;
             }
         }
 
 
-               double Fb;
-        public double Bending
+               double _F_b;
+        public double F_b
         {
             get
             {
@@ -131,17 +150,17 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return Fb;
+                return _F_b;
             }
 
-            set { Fb = value; }
+            set { _F_b = value; }
 
         }
 
         
 
-        double Fc;
-        public double CompresionParallelToGrain
+        double _F_cParal;
+        public double F_cParal
         {
             get
             {
@@ -149,13 +168,13 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return Fc;
+                return _F_cParal;
             }
-            set { Fc = value; }
+            set { _F_cParal = value; }
         }
 
-        double FcPerp;
-        public double CompresionPerpendicularToGrain
+        double _F_cPerp;
+        public double F_cPerp
         {
             get
             {
@@ -163,14 +182,14 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return FcPerp;
+                return _F_cPerp;
             }
-            set { FcPerp = value; }
+            set { _F_cPerp = value; }
         }
 
 
-        double Ft;
-        public double TensionParallelToGrain
+        double _F_t;
+        public double F_t
         {
             get
             {
@@ -178,13 +197,13 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return Ft;
+                return _F_t;
             }
-            set { Ft = value; }
+            set { _F_t = value; }
         }
 
-        double Fv;
-        public double ShearParallelToGrain
+        double _F_v;
+        public double F_v
         {
             get
             {
@@ -192,13 +211,13 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return Fv;
+                return _F_v;
             }
-            set { Fv = value; }
+            set { _F_v = value; }
         }
 
-        double E;
-        public double ModulusOfElasticity
+        double _E;
+        public double E
         {
             get
             {
@@ -206,13 +225,13 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                 {
                     CalculateValues();
                 }
-                return E;
+                return _E;
             }
-            set { E = value; }
+            set { _E = value; }
         }
 
         double Emin;
-        public double ModulusOfElasticityMin
+        public double E_min
         {
             get
             {
@@ -224,5 +243,21 @@ namespace Wosad.Wood.NDS.NDS2015.Material
             }
             set { Emin = value; }
         }
+
+        double _G;
+        public double G
+        {
+            get
+            {
+                if (ValuesWereCalculated == false)
+                {
+                    CalculateValues();
+                }
+                return _G;
+            }
+            set { _G = value; }
+        }
+
+
     }
 }
