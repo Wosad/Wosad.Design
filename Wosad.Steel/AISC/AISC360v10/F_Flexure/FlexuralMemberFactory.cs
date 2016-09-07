@@ -65,9 +65,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                             beam = ssBeam.GetBeamCase();
                         }
                     }
-                    else if (Shape is ISectionSolid)
+                    else if (Shape is ISolidShape)
                     {
-                        ISectionSolid solidShape = Shape as ISectionSolid;
+                        ISolidShape solidShape = Shape as ISolidShape;
                         SteelSolidSection SectionSolid = new SteelSolidSection(solidShape, Material);
                         beam = new BeamSolid(SectionSolid, Log, MomentAxis);
                     }
@@ -125,9 +125,9 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
                         SteelAngleSection AngleSection = new SteelAngleSection(Angle,Material);
                         beam = new BeamAngle(AngleSection, Log, Angle.AngleRotation, MomentAxis, Angle.AngleOrientation);
                     }
-                    else if (Shape is ISectionSolid)
+                    else if (Shape is ISolidShape)
                     {
-                        ISectionSolid SolidShape = Shape as ISectionSolid;
+                        ISolidShape SolidShape = Shape as ISolidShape;
                         SteelSolidSection SolidSection = new SteelSolidSection(SolidShape, Material);
                         beam = new BeamSolid(SolidSection, Log,MomentAxis);
                         

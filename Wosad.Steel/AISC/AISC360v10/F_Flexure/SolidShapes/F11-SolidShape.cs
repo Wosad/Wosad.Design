@@ -45,17 +45,17 @@ namespace Wosad.Steel.AISC.AISC360v10.Flexure
             this.MomentAxis = MomentAxis;
                 GetSectionValues();
                 sectionSolid = null;
-                ISectionSolid s = Section.Shape as ISectionSolid;
+                ISolidShape s = Section.Shape as ISolidShape;
 
                 if (s == null)
                 {
-                    throw new SectionWrongTypeException(typeof(ISectionSolid));
+                    throw new SectionWrongTypeException(typeof(ISolidShape));
                 }
 
         }
 
 
-        ISectionSolid sectionSolid;
+        ISolidShape sectionSolid;
         MomentAxis MomentAxis;
 
         internal void GetSectionValues()

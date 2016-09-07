@@ -50,7 +50,48 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Flexure
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
+        [Test]
+        public void IShapeReturnsYieldStrength()
+        {
 
+            FlexuralMemberFactory factory = new FlexuralMemberFactory();
+            AiscShapeFactory AiscShapeFactory = new AiscShapeFactory();
+            ISection r = AiscShapeFactory.GetShape("W18X35");
+
+
+            SteelMaterial mat = new SteelMaterial(50.0, 29000);
+            ISteelBeamFlexure beam12 = factory.GetBeam(r, mat, null, MomentAxis.XAxis, FlexuralCompressionFiberPosition.Top);
+
+            SteelLimitStateValue Y =
+            beam12.GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition.Top);
+            double phiM_n = Y.Value;
+            double refValue = 249 * 12; // from AISC Steel Manual Table 3-2
+            double actualTolerance = EvaluateActualTolerance(phiM_n, refValue);
+
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
+        [Test]
+        public void RectangleShapeReturnsYieldStrength()
+        {
+
+            FlexuralMemberFactory factory = new FlexuralMemberFactory();
+            SectionRectangular r = new SectionRectangular(0.5, 12.0);
+
+
+            SteelMaterial mat = new SteelMaterial(50.0, 29000);
+            ISteelBeamFlexure beam12 = factory.GetBeam(r, mat, null, MomentAxis.XAxis, FlexuralCompressionFiberPosition.Top);
+
+            SteelLimitStateValue Y =
+            beam12.GetFlexuralYieldingStrength(FlexuralCompressionFiberPosition.Top);
+            double phiM_n = Y.Value;
+            double refValue = 67.5; 
+            double actualTolerance = EvaluateActualTolerance(phiM_n, refValue);
+
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
 
         [Test]
         public void FactoryReturnsChannel()

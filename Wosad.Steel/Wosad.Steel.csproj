@@ -346,7 +346,6 @@
     <Compile Include="AISC\AISC360v10\F_Flexure\RectangularHss\WLB.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\SolidShapes\LTB.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\SolidShapes\F11-SolidShape.cs" />
-    <Compile Include="AISC\Interfaces\ISectionSolid.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\FLB.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\LTB.cs" />
     <Compile Include="AISC\AISC360v10\F_Flexure\TeeAndDoubleAngle\LSLB.cs" />

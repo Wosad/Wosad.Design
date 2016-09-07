@@ -31,9 +31,9 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
 {
     public class SteelSolidSection: SteelSectionBase
     {
-        private ISectionSolid section;
+        private ISolidShape section;
 
-        public ISectionSolid Section
+        public ISolidShape Section
         {
             get { return section; }
         }
@@ -43,7 +43,7 @@ namespace Wosad.Steel.AISC.SteelEntities.Sections
             get { return section as ISection; }
         }
 
-        public SteelSolidSection(ISectionSolid Section, ISteelMaterial Material)
+        public SteelSolidSection(ISolidShape Section, ISteelMaterial Material)
             :base(Material)
         {
             this.section = Section;
