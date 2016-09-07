@@ -133,6 +133,7 @@ namespace Wosad.Wood.NDS.NDS2015.Material
                     this.F_cParal = ThisMaterialProps.Fc;
                     this.E = ThisMaterialProps.E;
                     this.E_min = ThisMaterialProps.Emin;
+                    this.G = ThisMaterialProps.G;
                 }
                 
                 ValuesWereCalculated = true;
