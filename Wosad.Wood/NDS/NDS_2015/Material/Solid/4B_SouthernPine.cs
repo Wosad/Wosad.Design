@@ -30,15 +30,12 @@ namespace Wosad.Wood.NDS.NDS2015.Material
     public class SouthernPine : WoodSolidMaterial
     {
         string Species;
-        CommercialGrade Grade;
+        CommercialGrade     Grade;
         SizeClassification SizeClass;
-        public SouthernPine(string Species, CommercialGrade Grade, SizeClassification SizeClass, ICalcLog CalcLog)
-            :base(null, Species,Grade.ToString(), SizeClass.ToString(), CalcLog)
+        public SouthernPine(string Species, string CommercialGrade, string SizeClass, ICalcLog CalcLog)
+            : base(Species, CommercialGrade, SizeClass, CalcLog)
         {
-            ////todo: change above to reference 2015 code.
-             this.Species   =Species;
-             this.Grade     =Grade;
-             this.SizeClass =SizeClass;
+
         }
 
 

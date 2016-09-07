@@ -34,12 +34,12 @@ namespace Wosad.Wood.NDS.NDS2015.Material
     {
 
         string Species;
-        CommercialGrade Grade;
-        SizeClassification SizeClass;
+        string  Grade;
+        string  SizeClass;
 
 
-        public VisuallyGradedDimensionLumber(string Species, CommercialGrade Grade, SizeClassification SizeClass, ICalcLog CalcLog)
-            :base(null, Species,Grade.ToString(),SizeClass.ToString(), CalcLog)
+        public VisuallyGradedDimensionLumber(string Species, string CommercialGrade, string SizeClass, ICalcLog CalcLog)
+            : base(Species, CommercialGrade, SizeClass, CalcLog)
         { 
             //todo: change above to reference 2015 code.
              this.Species   =Species;
@@ -47,12 +47,6 @@ namespace Wosad.Wood.NDS.NDS2015.Material
              this.SizeClass =SizeClass;
         }
 
-        public VisuallyGradedDimensionLumber(string Species, CommercialGrade Grade, ICalcLog CalcLog)
-            : this(Species, Grade, SizeClassification.None, CalcLog)
-        {
-            this.Species = Species;
-            this.Grade = Grade;
-        }
 
 
 

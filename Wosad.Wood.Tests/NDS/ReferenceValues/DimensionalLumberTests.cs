@@ -29,9 +29,8 @@ namespace Wosad.Wood.Tests.NDS.SawnLumber
         public void DougFirReturnsBendingReferenceValue()
         {
             CalcLog log = new CalcLog();
-            VisuallyGradedDimensionLumber dl = new VisuallyGradedDimensionLumber("DOUGLAS FIR-LARCH (NORTH)", 
-                Wood.NDS.Entities.CommercialGrade.Stud,
-                Wood.NDS.Entities.SizeClassification.T2inAndWider,log);
+            VisuallyGradedDimensionLumber dl = new VisuallyGradedDimensionLumber("DOUGLAS FIR-LARCH (NORTH)",
+                "Stud", "2 in. & wider", log);
 
             double F_b = dl.F_b;
 

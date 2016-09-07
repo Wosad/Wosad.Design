@@ -33,10 +33,9 @@ namespace Wosad.Wood.NDS.NDS2015.Material
     public abstract class WoodSolidMaterial :AnalyticalElement, IWoodSolidMaterial
     {
 
-        public WoodSolidMaterial(string ResourceString, string Species, string CommercialGrade, string SizeClass, ICalcLog CalcLog)
+        public WoodSolidMaterial( string Species, string CommercialGrade, string SizeClass, ICalcLog CalcLog)
             : base(CalcLog)
         {
-            this.ResourceString = ResourceString;
             this.Species = Species;
             this.CommercialGrade = CommercialGrade;
             this.SizeClass = SizeClass;
