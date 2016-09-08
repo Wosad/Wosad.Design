@@ -114,7 +114,7 @@ namespace Wosad.Steel.AISC.Entities.FloorVibrations
         {
             floorVibrationOccupancyId = FloorSeviceOccupancyId;   //store value so that the retrieve function works
             double P_o = GetP_oFromOccupancyId(FloorSeviceOccupancyId);
-            double apTo_g = P_o * Math.Exp((-0.35 * f_n) / (beta * W));
+            double apTo_g = P_o * Math.Exp(-0.35 * f_n) / (beta * W);
             return apTo_g;
         }
 
