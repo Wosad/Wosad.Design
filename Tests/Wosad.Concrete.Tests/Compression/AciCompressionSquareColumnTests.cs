@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
 using Wosad.Common.Section.Interfaces;
 using Wosad.Concrete.ACI;
+using Wosad.Concrete.ACI.ACI318_14;
 using Wosad.Concrete.ACI.Entities;
 
 namespace Wosad.Concrete.ACI318_14.Tests
@@ -60,6 +61,18 @@ namespace Wosad.Concrete.ACI318_14.Tests
             Assert.LessOrEqual(actualTolerance, tolerance);
         }
 
+        [Test]
+        public void ColumnDistributedInteractionReturnsM_n_Z_Neg4()
+        {
+            ConcreteSectionCompression col = GetConcreteExampleColumnWithDistributed();
+            double P_u = 43900.0;
+            double M_n = col.GetNominalMomentResult(P_u, FlexuralCompressionFiberPosition.Top).Moment;
+            double refValue = 257 * 12 * 1000; //from MacGregor
+            double actualTolerance = EvaluateActualTolerance(M_n, refValue);
+
+            Assert.LessOrEqual(actualTolerance, tolerance);
+        }
+
         public ConcreteSectionCompression GetConcreteExampleColumn()
         {
             double b = 16;
@@ -79,6 +92,26 @@ namespace Wosad.Concrete.ACI318_14.Tests
 
                 ConcreteSectionCompression column = GetConcreteCompressionMember(b, h, f_c, LongitudinalBars, CompressionMemberType.NonPrestressedWithTies);
                 return column;
+
+        }
+
+        public ConcreteSectionCompression GetConcreteExampleColumnWithDistributed()
+        {
+            double b = 16;
+            double h = 16;
+            double f_c = 5000;
+
+            List<RebarPoint> LongitudinalBars = new List<RebarPoint>();
+            FlexuralSectionFactory flexureFactory = new FlexuralSectionFactory();
+            CompressionSectionFactory compressionFactory = new CompressionSectionFactory();
+            IConcreteMaterial mat = GetConcreteMaterial(f_c);
+            IRebarMaterial rebarMat = new MaterialAstmA615(A615Grade.Grade60);
+
+            ConcreteSectionFlexure flexureMember = flexureFactory.GetRectangularSectionFourSidesDistributed(b, h, 4, 0, 2.5, 2.5, mat, rebarMat);
+
+            ConcreteSectionCompression column = compressionFactory.GetCompressionMember(flexureMember, CompressionMemberType.NonPrestressedWithTies);
+
+            return column;
 
         }
 

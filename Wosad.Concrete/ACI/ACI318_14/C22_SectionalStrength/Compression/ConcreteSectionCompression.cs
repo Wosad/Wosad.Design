@@ -18,6 +18,12 @@ namespace Wosad.Concrete.ACI318_14
             this.CompressionMemberType = CompressionMemberType;
         }
 
+        public ConcreteSectionCompression(ConcreteSectionFlexure FlexuralSection, CompressionMemberType CompressionMemberType, ICalcLog log)
+            : base(FlexuralSection.Section, FlexuralSection.LongitudinalBars, log)
+        {
+            this.CompressionMemberType = CompressionMemberType;
+        }
+
 
         private CompressionMemberType compressionMemberType;
 
@@ -31,6 +37,15 @@ namespace Wosad.Concrete.ACI318_14
             FlexuralCompressionFiberPosition FlexuralCompressionFiberPosition,
             ConfinementReinforcementType ConfinementReinforcementType)
         {
+            double P_o = GetMaximumForce();
+            StrengthReductionFactorFactory ff = new StrengthReductionFactorFactory();
+            double phiAxial = ff.Get_phiFlexureAndAxial(FlexuralFailureModeClassification.CompressionControlled, ConfinementReinforcementType, 0, 0);
+            double phiP_n = phiAxial * P_o;
+
+            if (P_u > phiP_n)
+            {
+                throw new Exception("Axial forces exceeds maximum axial force.");
+            }
             IStrainCompatibilityAnalysisResult nominalResult = this.GetNominalMomentResult(P_u,FlexuralCompressionFiberPosition);
             ConcreteCompressionStrengthResult result = new ConcreteCompressionStrengthResult(nominalResult, FlexuralCompressionFiberPosition, this.Section.Material.beta1);
             StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
