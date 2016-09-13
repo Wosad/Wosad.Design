@@ -51,6 +51,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="Wosad.Common, Version=0.0.8.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Wosad.Common.0.0.8.2\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
@@ -97,8 +98,9 @@
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorCastIn.cs" />
     <Compile Include="ACI\ACI318_14\C17_Anchorage\StrengthReductionFactor\StrengthReductionFactorPostInstalled.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\ConcreteSectionCompression.cs" />
-    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\SectionFactory.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\FlexuralSectionFactory.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Compression\CompressionMemberType.cs" />
+    <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Section\CompressionSectionFactory.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\UpperLimitOnShearStrength.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\ConcreteOneWayShearStrength.cs" />
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Shear\OneWay\NonPrestressed\ConcreteSectionOneWayShearNonPrestressed.cs">
@@ -113,6 +115,7 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Torsion\ConcreteSectionTorsion.cs" />
     <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Compression\CompressionLapSplice.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\RebarMaterialGeneral.cs" />
+    <Compile Include="ACI\Entities\Rebar\RebarLine.cs" />
     <Compile Include="ACI\Entities\ShearAndTorsion\ResultOfShearStressDueToMoment.cs" />
     <Compile Include="ACI\Entities\ShearAndTorsion\ShearPerimeterConfigurationType.cs" />
     <Compile Include="ACI\Entities\ShearAndTorsion\TorsionalPropertyCalculator.cs" />

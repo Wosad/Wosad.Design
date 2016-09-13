@@ -77,7 +77,7 @@ namespace Wosad.Steel.Tests.AISC.AISC360v10.Compression
             CreateColumn(14.0 * 12.0, 14.0 * 12.0, 0,"W16X26");
             SteelLimitStateValue colFlexure = column.GetFlexuralBucklingStrength();
             double phiP_n = colFlexure.Value;
-            double refValue = 1.0;
+            double refValue = 76.7; //to be confirmed
             double actualTolerance = EvaluateActualTolerance(phiP_n, refValue);
 
             Assert.LessOrEqual(actualTolerance, tolerance);

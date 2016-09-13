@@ -14,20 +14,57 @@
    limitations under the License.
    */
 #endregion
- 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wosad.Common.CalculationLogger;
+using Wosad.Common.Mathematics;
 using Wosad.Concrete.ACI;
 using Wosad.Concrete.ACI318_14.Materials;
 
 namespace Wosad.Concrete.ACI318_14
 {
-    public class SectionFactory
+    public partial class FlexuralSectionFactory
     {
+
+        public ConcreteSectionFlexure GetRectangularSectionFourSidesDistributed(double b, double h,
+    double A_sTopBottom, double A_sLeftRight, double c_centTopBottom, double c_centLeftRight, IConcreteMaterial mat, IRebarMaterial rebarMaterial)
+        {
+
+            double YTop = h / 2.0 - c_centTopBottom;
+            double YBottom = -h / 2.0 + c_centTopBottom;
+            double XLeft = -b / 2.0 + c_centLeftRight;
+            double XRight = b / 2.0 - c_centLeftRight;
+
+            Point2D P1 = new Point2D(XLeft, YTop);
+            Point2D P2 = new Point2D(XRight, YTop);
+            Point2D P3 = new Point2D(XRight, YBottom);
+            Point2D P4 = new Point2D(XLeft, YBottom);
+
+            RebarLine topLine = new RebarLine(A_sTopBottom, P1, P2, rebarMaterial, false);
+            RebarLine bottomLine = new RebarLine(A_sTopBottom, P3, P4, rebarMaterial, false);
+
+            RebarLine leftLine = new RebarLine(A_sLeftRight, P2, P3, rebarMaterial, true);
+            RebarLine rightLine = new RebarLine(A_sLeftRight, P4, P1, rebarMaterial, true);
+
+            List<RebarPoint> LongitudinalBars = new List<RebarPoint>();
+
+            LongitudinalBars.AddRange(topLine.RebarPoints);
+            LongitudinalBars.AddRange(bottomLine.RebarPoints);
+            LongitudinalBars.AddRange(leftLine.RebarPoints);
+            LongitudinalBars.AddRange(rightLine.RebarPoints);
+
+
+            CrossSectionRectangularShape section = new CrossSectionRectangularShape(mat, null, b, h);
+            CalcLog log = new CalcLog();
+
+            ConcreteSectionFlexure sectionFlexure = new ConcreteSectionFlexure(section, LongitudinalBars, log);
+            return sectionFlexure;
+        }
+
        public ConcreteSectionFlexure GetNonPrestressedDoublyReinforcedRectangularSection(double b, double h, 
             double A_s1,double A_s2,double c_cntr1,double c_cntr2, 
             ConcreteMaterial concreteMaterial, IRebarMaterial rebarMaterial)
