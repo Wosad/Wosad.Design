@@ -35,6 +35,7 @@ namespace Wosad.Wood.NDS.NDS2015
             double C_M_Fb ,
             double C_M_E,
             double C_t_Fb ,
+            double C_t_E,
             double C_F_Fb ,
             double C_i_Fb,
             double C_i_E,
@@ -50,8 +51,10 @@ namespace Wosad.Wood.NDS.NDS2015
             this.C_M_Fb= C_M_Fb;
             this.C_M_E = C_M_E;
             this.C_t_Fb= C_t_Fb;
+            this.C_t_E = C_t_E;
             this.C_F_Fb= C_F_Fb;
             this.C_i_Fb= C_i_Fb;
+            this.C_i_E = C_i_E;
             this.C_r= C_r;
             this.C_T= C_T;
             this.lambda = lambda;

@@ -118,7 +118,7 @@ namespace Wosad.Concrete.ACI
 
      
 
-        private IMoveableSection GetCompressedConcreteSection(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPos, double SlicingPlaneOffset)
+        protected IMoveableSection GetCompressedConcreteSection(LinearStrainDistribution StrainDistribution, FlexuralCompressionFiberPosition compFiberPos, double SlicingPlaneOffset)
         {
             IMoveableSection compressedPortion = null;
             ISliceableSection sec = this.Section.SliceableShape as ISliceableSection;

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Compression\AciCompressionSquareColumnTests.cs" />
     <Compile Include="ConcreteTestBase.cs" />
+    <Compile Include="Flexure\CrackedMomentOfInertiaTests.cs" />
     <Compile Include="Flexure\FlexuralTestsCommon.cs" />
     <Compile Include="Flexure\RebarInput.cs" />
     <Compile Include="Flexure\AciFlexureRectangularBeamTests.cs" />
