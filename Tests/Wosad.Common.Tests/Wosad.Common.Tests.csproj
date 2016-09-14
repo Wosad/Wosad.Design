@@ -62,6 +62,7 @@
     <Compile Include="Section\ShapeTypes\SectionDoubleStackedTests.cs" />
     <Compile Include="Section\ShapeTypes\SectionIRolledTests.cs" />
     <Compile Include="Section\ShapeTypes\SectionIWithReinfWebOpeningTests.cs" />
+    <Compile Include="Section\ShapeTypes\ShapeRectangularTests.cs" />
     <Compile Include="Section\ShapeTypes\ShapeTeeTests.cs" />
     <Compile Include="Section\ShapeTypes\SteelRhsSectionTests.cs" />
     <Compile Include="ToleranceTestBase.cs" />

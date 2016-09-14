@@ -2,7 +2,7 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata>
     <id>Wosad.Concrete</id>
-    <version>0.0.8.4</version>
+    <version>0.0.9.1</version>
     <title>Wosad.Concrete</title>
     <authors>Wosad Inc</authors>
     <description>Structural engineering automation library. Components for reinforced concrete element design for buildings and other structures per ACI 318 standard.</description>
@@ -11,7 +11,7 @@
     <projectUrl>http://www.wosad.com</projectUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <developmentDependency>false</developmentDependency>
-    <releaseNotes>Updates to One-Way shear provisions</releaseNotes>
+    <releaseNotes>Section factory and compression member provisions</releaseNotes>
     <copyright>Copyright Wosad Inc © 2015</copyright>
     <frameworkAssemblies />
     <dependencies>

@@ -87,11 +87,9 @@ namespace Wosad.Common.Section
         public Point2D Centroid
         {
             get {
-                if (basicPropertiesCalculated == false)
-                {
+                    basicPropertiesCalculated = false;
                     CalculateBasicProperties();
-                }
-                
+                 
                 return centroid; }
             set { centroid = value; }
         }
@@ -218,7 +216,7 @@ namespace Wosad.Common.Section
                 double thisArea = r.b * r.h;
                 sumOfAreasY += thisArea;
                 //we still use Y because the shape is symmetrical
-                sumOfAreaTimesX += thisArea * r.Centroid.Y;
+                sumOfAreaTimesX += thisArea * r.Centroid.X;
 
             }
             double cX = sumOfAreaTimesX / sumOfAreasY;

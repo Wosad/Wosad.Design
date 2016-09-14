@@ -71,7 +71,7 @@ namespace Wosad.Concrete.ACI
             currentCompressionFiberPosition = compFiberPosition; //store this off because it will be necessary during iteration
             double ConvergenceTolerance = 0.0001;
 
-            double kd = RootFinding.Brent(new FunctionOfOneVariable(DeltaTCCalculationFunction), CompressedBlockMin, CompressedBlockMax, ConvergenceTolerance, targetDelta);
+            double kd = RootFinding.Brent(new FunctionOfOneVariable(DeltaA_times_Y), CompressedBlockMin, CompressedBlockMax, ConvergenceTolerance, targetDelta);
             return kd;
         }
 
@@ -81,8 +81,32 @@ namespace Wosad.Concrete.ACI
 
             double YNeutral = GetYNeutral(kd);
 
-            double A_times_y_Compression = CrackedMomentOfInertiaCompressedShapes.Sum(sh => sh.A * Math.Abs(sh.GetElasticCentroidCoordinate().Y-YNeutral));
-            double A_times_y_Tension = CrackedMomentOfInertiaTensionShapes.Sum(sh => sh.A * Math.Abs(sh.GetElasticCentroidCoordinate().Y - YNeutral));
+            double A_times_y_Compression = CrackedMomentOfInertiaCompressedShapes.Sum(sh => 
+               { 
+                    if (sh.A ==0.0)
+	                {
+                        return 0.0;
+	                }
+                            else
+	                {
+                            return sh.A * Math.Abs(sh.GetElasticCentroidCoordinate().Y-YNeutral);
+	                }
+                   
+               }
+                );
+            //double A_times_y_Tension = CrackedMomentOfInertiaTensionShapes.Sum(sh => 
+            //    {
+            //       return sh.A * Math.Abs(sh.GetElasticCentroidCoordinate().Y - YNeutral);
+            //    })
+            //    ;
+
+            double A_times_y_Tension = 0.0;
+            foreach (var tensionBar in CrackedMomentOfInertiaTensionShapes)
+            {
+                double bar_d = Math.Abs(tensionBar.GetElasticCentroidCoordinate().Y - YNeutral);
+                double thisBarATimesY = tensionBar.A * bar_d;
+                A_times_y_Tension = A_times_y_Tension + thisBarATimesY;
+            }
 
             return A_times_y_Compression - A_times_y_Tension;
         }
@@ -185,8 +209,10 @@ namespace Wosad.Concrete.ACI
                 {
                     d_bar = (YMax - YMin) / 100.0;
                 }
-                SectionRectangular rect = new SectionRectangular(A_bar/d_bar,d_bar);
-                rect.Centroid = new Point2D(rbrPnt.Coordinate.X, rbrPnt.Coordinate.Y);
+                Point2D thisCentroid = new Point2D(rbrPnt.Coordinate.X, rbrPnt.Coordinate.Y);
+
+                SectionRectangular rect = new SectionRectangular(null, A_bar / d_bar, d_bar, thisCentroid);
+                //rect.Centroid = new Point2D(rbrPnt.Coordinate.X, rbrPnt.Coordinate.Y);
                 barSections.Add(rect);
             }
 
