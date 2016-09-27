@@ -36,7 +36,7 @@ namespace Wosad.Concrete.ACI
 
             IMoveableSection concreteShape = GetConcreteShape();
             List<IMoveableSection> allShapes = GetRebarShapes();
-            allShapes.Add(concreteShape);
+            //allShapes.Add(concreteShape);
 
             double Ix = 0.0;
             //Find centroid
@@ -52,7 +52,7 @@ namespace Wosad.Concrete.ACI
         private List<IMoveableSection> GetRebarShapes()
         {
             List<IMoveableSection> AllBars = new List<IMoveableSection>();
-            AllBars.AddRange(CompBarsTransformed);
+            AllBars.AddRange(CompShapeTransformed);
             AllBars.AddRange(TensBarsTransformed);
 
             return AllBars;
@@ -134,14 +134,14 @@ namespace Wosad.Concrete.ACI
         // variables to store shapes during iteration
         List<IMoveableSection> CrackedMomentOfInertiaCompressedShapes;
         List<IMoveableSection> CrackedMomentOfInertiaTensionShapes;
-         List<IMoveableSection> CompBarsTransformed;
+         List<IMoveableSection> CompShapeTransformed;
          List<IMoveableSection> TensBarsTransformed;
          IMoveableSection compressedConcretePortion;
 
         private void CalculateCrackedSectionTransformedShapes(double kd, FlexuralCompressionFiberPosition compFiber)
         {
             compressedConcretePortion = null;
-            CompBarsTransformed = new List<IMoveableSection>();
+            CompShapeTransformed = new List<IMoveableSection>();
             TensBarsTransformed = new List<IMoveableSection>();
             CrackedMomentOfInertiaCompressedShapes = new List<IMoveableSection>();
             CrackedMomentOfInertiaTensionShapes = new List<IMoveableSection>();
@@ -155,9 +155,9 @@ namespace Wosad.Concrete.ACI
                     //1. Concrete Shape (compression)
                     compressedConcretePortion = this.Section.SliceableShape.GetTopSliceSection(kd, SlicingPlaneOffsetType.Top);
                     //2. Steel bars (compression)
-                    CompBarsTransformed= GetTransformedRebarShapes( this.Section.SliceableShape.YMax,  YNeutral);
-                    CompBarsTransformed.Add(compressedConcretePortion);
-                    CrackedMomentOfInertiaCompressedShapes = CompBarsTransformed;
+                    CompShapeTransformed= GetTransformedRebarShapes( this.Section.SliceableShape.YMax,  YNeutral);
+                    CompShapeTransformed.Add(compressedConcretePortion);
+                    CrackedMomentOfInertiaCompressedShapes = CompShapeTransformed;
                     //3 Steel bars (tension)
                     TensBarsTransformed = GetTransformedRebarShapes(YNeutral, this.Section.SliceableShape.YMin);
                     CrackedMomentOfInertiaTensionShapes = TensBarsTransformed;
@@ -167,9 +167,9 @@ namespace Wosad.Concrete.ACI
                     //1. Concrete Shape (compression)
                     compressedConcretePortion = this.Section.SliceableShape.GetBottomSliceSection(kd, SlicingPlaneOffsetType.Bottom);
                     //2. Steel bars (compression)
-                    CompBarsTransformed = GetTransformedRebarShapes(YNeutral, this.Section.SliceableShape.YMin);
-                    CompBarsTransformed.Add(compressedConcretePortion);
-                    CrackedMomentOfInertiaCompressedShapes = CompBarsTransformed;
+                    CompShapeTransformed = GetTransformedRebarShapes(YNeutral, this.Section.SliceableShape.YMin);
+                    CompShapeTransformed.Add(compressedConcretePortion);
+                    CrackedMomentOfInertiaCompressedShapes = CompShapeTransformed;
                     //3 Steel bars (tension)
                     TensBarsTransformed = GetTransformedRebarShapes(this.Section.SliceableShape.YMax, YNeutral);
                     CrackedMomentOfInertiaTensionShapes = TensBarsTransformed;

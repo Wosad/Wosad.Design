@@ -91,8 +91,8 @@ namespace Wosad.Concrete.ACI318_14
     //Check minimum ldh length
     //ldh shall not be less than the larger of 8db and 6 in.
 
-    double ldhMinDia = 8 * db;
-    double ldhMinLen = 6;
+    double ldhMinDia = 8.0 * db;
+    double ldhMinLen = 6.0;
     double ldhMin = ldhMinDia > ldhMinLen ? ldhMinDia : ldhMinLen;
 
     if (ldhMin>ldh)

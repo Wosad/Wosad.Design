@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="Wosad.Common, Version=0.0.8.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Wosad.Common.0.0.8.2\lib\net45\Wosad.Common.dll</HintPath>
+      <HintPath>..\packages\Wosad.Common.0.0.9.1\lib\net45\Wosad.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -115,6 +115,7 @@
     <Compile Include="ACI\ACI318_14\C22_SectionalStrength\Torsion\ConcreteSectionTorsion.cs" />
     <Compile Include="ACI\ACI318_14\C25_ReinforcementDetails\SpliceAndEmbedment\Compression\CompressionLapSplice.cs" />
     <Compile Include="ACI\Entities\FlexuralMember\ConcreteFlexuralSectionBaseI_cracked.cs" />
+    <Compile Include="ACI\Entities\FlexuralMember\ConcreteFlexuralSectionBaseI_effective.cs" />
     <Compile Include="ACI\Entities\Rebar\Material\RebarMaterialGeneral.cs" />
     <Compile Include="ACI\Entities\Rebar\RebarLine.cs" />
     <Compile Include="ACI\Entities\ShearAndTorsion\ResultOfShearStressDueToMoment.cs" />
