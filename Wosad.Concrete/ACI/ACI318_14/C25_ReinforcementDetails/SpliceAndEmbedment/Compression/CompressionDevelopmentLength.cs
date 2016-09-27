@@ -53,7 +53,7 @@ namespace Wosad.Concrete.ACI318_14
             double fc = Concrete.SpecifiedCompressiveStrength;
             double db = Rebar.Diameter;
             double sqrt_fc = GetSqrt_fc();
-            double lambda = Concrete.Lambda;
+            double lambda = Concrete.lambda;
             lambda = CheckLambda(lambda);
 
             double ldc1;

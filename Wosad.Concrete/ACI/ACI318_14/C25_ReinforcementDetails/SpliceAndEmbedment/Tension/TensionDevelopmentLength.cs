@@ -43,7 +43,7 @@ namespace Wosad.Concrete.ACI318_14
      fy = Rebar.Material.YieldStress;
      fc = Concrete.SpecifiedCompressiveStrength;
      sqrt_fc = GetSqrt_fc();
-     lambda = Concrete.Lambda;
+     lambda = Concrete.lambda;
      lambda = CheckLambda(lambda);
      db = Rebar.Diameter;
 

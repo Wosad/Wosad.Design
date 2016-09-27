@@ -80,7 +80,7 @@ namespace Wosad.Concrete.ACI
 
         public abstract double ModulusOfRupture { get;  }
 
-        public abstract double Lambda { get; }
+        public abstract double lambda { get; }
 
         public abstract double beta1 { get; }
 

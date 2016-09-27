@@ -40,7 +40,7 @@ namespace Wosad.Concrete.ACI318_14
             double V_c;
             double f_c = Section.Material.SpecifiedCompressiveStrength;
 
-            double lambda = Section.Material.Lambda;
+            double lambda = Section.Material.lambda;
 
             if (N_u == 0)
             {

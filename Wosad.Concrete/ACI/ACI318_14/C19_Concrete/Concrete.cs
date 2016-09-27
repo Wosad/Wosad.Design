@@ -80,7 +80,8 @@ namespace Wosad.Concrete.ACI318_14.Materials
 		{
 			get
 			{
-				throw new NotImplementedException();
+                double f_r =GetModulusOfRupture();
+                return f_r;
 			}
 		}
 	
@@ -93,9 +94,9 @@ namespace Wosad.Concrete.ACI318_14.Materials
 
 			double E;
 
-			if (lambda == 0.0)
+			if (_lambda == 0.0)
 			{
-				lambda = GetLambda();
+				_lambda = GetLambda();
 			}
 
 			if (this.Density==0.0)
@@ -125,22 +126,21 @@ namespace Wosad.Concrete.ACI318_14.Materials
 		private double GetSqrtFc()
 		{
 			double fc = this.SpecifiedCompressiveStrength;
-			lambda = GetLambda();
 			double sqrt_fc = this.Sqrt_f_c_prime;
 			return sqrt_fc;
 		}
 
-		private double lambda;
+		private double _lambda;
 
-		public override double Lambda
+		public override double lambda
 		{
 			get 
 			{
-				if (lambda ==0.0)
+				if (_lambda ==0.0)
 				{
-					lambda = GetLambda(); 
+					_lambda = GetLambda(); 
 				}
-				return lambda; 
+				return _lambda; 
 			}
 		}
 

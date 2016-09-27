@@ -83,7 +83,7 @@ namespace Wosad.Concrete.ACI.ACI318_14.C22_SectionalStrength.Shear.TwoWay
             double f_c = Material.SpecifiedCompressiveStrength;
             double v_cControlling = 0.0;
 
-            double lambda = Material.Lambda;
+            double lambda = Material.lambda;
 
             if (AtColumnFace == true)
             {

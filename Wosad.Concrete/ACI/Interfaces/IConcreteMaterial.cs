@@ -26,7 +26,7 @@ namespace Wosad.Concrete.ACI
         double ModulusOfElasticity { get; }
         double ModulusOfRupture { get;  }
         double AverageSplittingTensileStrength { get; set; }
-        double Lambda { get; }
+        double lambda { get; }
         double SpecifiedCompressiveStrength { get; set; }
         double Sqrt_f_c_prime { get; }
         ConcreteTypeByWeight TypeByWeight { get; set; }

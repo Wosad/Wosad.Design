@@ -40,7 +40,7 @@ namespace Wosad.Concrete.ACI318_14
             double V_max;
             double f_c = Section.Material.SpecifiedCompressiveStrength;
 
-            double lambda = Section.Material.Lambda;
+            double lambda = Section.Material.lambda;
             StrengthReductionFactorFactory f = new StrengthReductionFactorFactory();
             double phi = f.Get_phi_ShearReinforced();
 

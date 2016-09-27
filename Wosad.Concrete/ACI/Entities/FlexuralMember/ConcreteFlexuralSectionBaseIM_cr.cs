@@ -29,9 +29,21 @@ namespace Wosad.Concrete.ACI
 {
     public abstract partial class ConcreteFlexuralSectionBase : ConcreteSectionLongitudinalReinforcedBase, IConcreteFlexuralMember
     {
-        public virtual double GetCrackedMomentOfInertia(FlexuralCompressionFiberPosition compFiberPosition, double I_cracked, double I_cracking, double M_service)
+        public double GetCrackingMoment( FlexuralCompressionFiberPosition compFiberPosition)
         {
+            double f_r = this.Section.Material.ModulusOfRupture;
+            //24.2.3.5b
 
+            if (compFiberPosition == FlexuralCompressionFiberPosition.Top)
+            {
+                return this.Section.SliceableShape.S_xBot * f_r;
+            }
+            else
+            {
+                return Section.SliceableShape.S_xTop * f_r;
+            }
         }
+
+
     }
 }
